@@ -20,6 +20,11 @@ public:
 	static void Init(HINSTANCE _hInst);
 	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
 
+	HDC GetWindowDC()
+	{
+		return hDC;
+	}
+
 protected:
 
 private:

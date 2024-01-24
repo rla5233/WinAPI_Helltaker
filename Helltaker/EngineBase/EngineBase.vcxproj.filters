@@ -7,6 +7,12 @@
     <ClInclude Include="EngineString.h">
       <Filter>String</Filter>
     </ClInclude>
+    <ClInclude Include="EngineMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="FTransform.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp">
@@ -15,6 +21,12 @@
     <ClCompile Include="EngineString.cpp">
       <Filter>String</Filter>
     </ClCompile>
+    <ClCompile Include="EngineMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="FTransform.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -22,6 +34,9 @@
     </Filter>
     <Filter Include="String">
       <UniqueIdentifier>{61567684-36c5-452c-bff5-78c91cbe9340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{ab0e022a-4506-4ae9-a4ea-e554c5f6acef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

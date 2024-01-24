@@ -159,7 +159,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineMath.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineString.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FTransform.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -169,7 +177,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineMath.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineString.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FTransform.cpp">
       <SubType>
       </SubType>
     </ClCompile>

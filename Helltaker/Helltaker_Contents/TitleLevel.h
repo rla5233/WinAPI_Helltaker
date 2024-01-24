@@ -16,6 +16,7 @@ public:
 	UTitleLevel& operator=(UTitleLevel&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
 
 private:
 

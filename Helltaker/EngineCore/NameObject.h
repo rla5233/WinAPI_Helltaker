@@ -7,7 +7,7 @@ class UNameObject
 public:
 	// constrcuter destructer
 	UNameObject();
-	~UNameObject();
+	virtual ~UNameObject();
 
 	// delete Function
 	UNameObject(const UNameObject& _Other) = delete;

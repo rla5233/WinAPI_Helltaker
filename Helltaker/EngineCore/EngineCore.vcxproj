@@ -171,7 +171,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="UpdateObject.h">
+    <ClInclude Include="TickObject.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -193,7 +193,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="UpdateObject.cpp">
+    <ClCompile Include="TickObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>

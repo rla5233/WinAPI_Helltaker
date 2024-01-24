@@ -24,7 +24,7 @@
     <ClInclude Include="NameObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="UpdateObject.h">
+    <ClInclude Include="TickObject.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClCompile Include="NameObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="UpdateObject.cpp">
+    <ClCompile Include="TickObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>

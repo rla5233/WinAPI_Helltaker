@@ -1,7 +1,9 @@
 #pragma once
 #include <EngineBase\EngineDebug.h>
 #include <EnginePlatform\EngineWindow.h>
+#include <EngineBase\EngineString.h>
 #include <map>
+
 
 class ULevel;
 // 설명 :
@@ -24,31 +26,40 @@ public:
 
 	void CoreInit(HINSTANCE _Init);
 
-	virtual void Start();
-	virtual void Update();
+	virtual void BeginPlay();
+	virtual void Tick(float _DeltaTime);
 	virtual void End();
 
 	template<typename LevelType>
 	void CreateLevel(std::string_view _Name)
 	{
-		if (true == AllLevel.contains(_Name.data()))
+		std::string UpperName = EngineString::ToUpper(_Name);
+
+		if (true == AllLevel.contains(UpperName))
 		{
 			MsgBoxAssert(std::string(_Name) + "이라는 이름의 Level을 또 만들려고 했습니다");
 		}
 
 		LevelType* NewLevel = new LevelType();
-		AllLevel.insert(std::pair<std::string, ULevel*>(_Name, NewLevel));
+		LevelInit(NewLevel);
+		AllLevel.insert(std::pair<std::string, ULevel*>(UpperName, NewLevel));
 	}
+
+	void ChangeLevel(std::string_view _Name);
 
 protected:
 	EngineCore();
 
 private:
 	bool EngineInit = false;
-	std::map<std::string, ULevel*> AllLevel;
 
-	static void EngineUpdate();
+	std::map<std::string, ULevel*> AllLevel;
+	ULevel* CurLevel = nullptr;
+
+	static void EngineTick();
 	static void EngineEnd();
+
+	void LevelInit(ULevel* _Level);
 };
 
 extern EngineCore* GEngine;

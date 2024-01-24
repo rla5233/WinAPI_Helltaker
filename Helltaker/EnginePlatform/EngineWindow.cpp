@@ -98,6 +98,7 @@ unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)()
 			DispatchMessage(&msg);
 		}
 
+		// 메세지 루프의 데드타임이라는 곳에서 실행됩니다.
 		if (nullptr != _Update)
 		{
 			_Update();
