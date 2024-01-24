@@ -2,8 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Helltaker_ContentsCore.h" />
+    <ClInclude Include="TitleLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp" />
+    <ClCompile Include="TitleLevel.cpp" />
   </ItemGroup>
 </Project>
