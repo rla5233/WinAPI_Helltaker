@@ -104,7 +104,7 @@ unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)()
 		}
 	}
 
-	if (nullptr != _Update)
+	if (nullptr != _End)
 	{
 		_End();
 	}
