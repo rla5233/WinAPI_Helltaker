@@ -2,10 +2,13 @@
 #include <EngineBase\FTransform.h>
 #include "TickObject.h"
 #include "NameObject.h"
+#include "Level.h"
 
 class ULevel;
 
 // 설명 : A가 붙은 오브젝트는 화면에 위치가 존재해야한다.
+// Level->SpawnActor를 통해서 만들면
+// 레벨이 자연스럽게 자신의 관리하에 두고 언제나 Tick을 실행해준다.
 class AActor : public UNameObject, public UTickObject
 {
 	friend ULevel;
@@ -29,6 +32,11 @@ public:
 	void SetActorLocation(FVector _Value)
 	{
 		Transform.SetPosition(_Value);
+	}
+
+	void AddActorLocation(FVector _Value)
+	{
+		Transform.AddPosition(_Value);
 	}
 
 	void SetActorScale(FVector _Value)

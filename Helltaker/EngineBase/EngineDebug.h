@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include <assert.h>
+#include <string>
+#include <string_view>
 
 namespace EngineDebug
 {

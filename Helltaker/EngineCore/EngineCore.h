@@ -1,7 +1,10 @@
 #pragma once
 #include <EngineBase\EngineDebug.h>
-#include <EnginePlatform\EngineWindow.h>
 #include <EngineBase\EngineString.h>
+#include <EngineBase\EngineTime.h>
+
+#include <EnginePlatform\EngineWindow.h>
+#include <EnginePlatform\EngineInput.h>
 #include <map>
 
 
@@ -21,6 +24,7 @@ public:
 	// 하나는 무조건 만들어지고 사라질일이 없을것이므ㅗ.
 	// 코어가 윈도우를 가지고
 	EngineWindow MainWindow;
+	EngineTime MainTimer;
 
 	static void EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore);
 
