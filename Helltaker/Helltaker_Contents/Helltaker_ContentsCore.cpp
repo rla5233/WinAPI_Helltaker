@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Helltaker_ContentsCore.h"
 #include "TitleLevel.h"
 #include "PlayLevel.h"

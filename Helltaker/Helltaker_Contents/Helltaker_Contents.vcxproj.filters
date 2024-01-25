@@ -5,11 +5,13 @@
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayLevel.h" />
+    <ClInclude Include="Monster.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
+    <ClCompile Include="Monster.cpp" />
   </ItemGroup>
 </Project>
