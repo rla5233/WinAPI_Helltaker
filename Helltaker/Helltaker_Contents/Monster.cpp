@@ -11,15 +11,11 @@ Monster::~Monster()
 
 void Monster::BeginPlay()
 {
-	SetActorLocation({ 200, 200 });
-	SetActorScale({ 45, 45 });
+	MonsterRenderer = CreateImageRenderer(1);
+	MonsterRenderer->SetPosition({ 200, 200 });
+	MonsterRenderer->SetScale({ 30, 30 });
 }
 
 void Monster::Tick(float _DeltaTime)
-{
-	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
-	FTransform Trans = GetTransform();
-	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
-
-
+{	
 }
