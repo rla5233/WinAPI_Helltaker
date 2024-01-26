@@ -10,6 +10,12 @@
     <Filter Include="Object\Actor">
       <UniqueIdentifier>{1b108465-5b31-4f3c-a282-bc622434a795}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{6b337b9b-1793-4e04-9201-60078a1dad3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Renderer">
+      <UniqueIdentifier>{f0f25396-1858-468a-8e29-c995fac2588b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -27,6 +33,15 @@
     <ClInclude Include="TickObject.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRenderer.h">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -43,6 +58,15 @@
     </ClCompile>
     <ClCompile Include="TickObject.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageRenderer.cpp">
+      <Filter>Object\Component\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

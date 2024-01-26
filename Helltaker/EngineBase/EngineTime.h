@@ -22,9 +22,15 @@ public:
 	// 지금까지 얼마 지났어?
 	float TimeCheck();
 
+	double GetDeltaTime()
+	{
+		return DeltaTime;
+	}
+
 protected:
 
 private:
+	__int64 Count64;
 	LARGE_INTEGER Count;
 	LARGE_INTEGER PrevTime;
 	LARGE_INTEGER CurTime;

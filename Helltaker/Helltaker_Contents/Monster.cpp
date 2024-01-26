@@ -20,4 +20,6 @@ void Monster::Tick(float _DeltaTime)
 	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
 	FTransform Trans = GetTransform();
 	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
+
+
 }

@@ -10,11 +10,11 @@
     <ClInclude Include="EngineMath.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="FTransform.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="EngineTime.h">
       <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -27,11 +27,11 @@
     <ClCompile Include="EngineMath.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="FTransform.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="EngineTime.cpp">
       <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

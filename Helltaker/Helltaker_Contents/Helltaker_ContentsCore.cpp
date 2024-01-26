@@ -15,6 +15,8 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 // 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
+	SetFrame(165);
+
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UPlayLevel>("PlayLevel");
 
@@ -23,10 +25,10 @@ void Helltaker_ContentsCore::BeginPlay()
 
 void Helltaker_ContentsCore::Tick(float _DeltaTime)
 {
-	int a = 0;
+
 }
 
 void Helltaker_ContentsCore::End()
 {
-	int a = 0;
+
 }
