@@ -17,24 +17,53 @@ void Player::BeginPlay()
 
 void Player::Tick(float _DeltaTime)
 {
-	if (true == EngineInput::IsPress('A'))
+	MoveCheck(_DeltaTime);
+}
+
+void Player::MoveCheck(float _DeltaTime)
+{
+	if (false == IsMoving)
 	{
-		AddActorLocation(FVector::Left * 500.0f * _DeltaTime);
+		if (true == EngineInput::IsPress('A'))
+		{
+			MoveDir = FVector::Left;
+			IsMoving = true;
+		}
+
+		if (true == EngineInput::IsPress('D'))
+		{
+			MoveDir = FVector::Right;
+			IsMoving = true;
+		}
+
+		if (true == EngineInput::IsPress('W'))
+		{
+			MoveDir = FVector::Up;
+			IsMoving = true;
+		}
+
+		if (true == EngineInput::IsPress('S'))
+		{
+			MoveDir = FVector::Down;
+			IsMoving = true;
+		}
 	}
-
-	if (true == EngineInput::IsPress('D'))
+	else
 	{
-		AddActorLocation(FVector::Right * 500.0f * _DeltaTime);
+		MoveOneBlock(_DeltaTime);
 	}
+}
 
-	if (true == EngineInput::IsPress('W'))
+void Player::MoveOneBlock(float _DeltaTime)
+{
+	if (0 <= MoveDistance)
 	{
-		AddActorLocation(FVector::Up * 500.0f * _DeltaTime);
+		AddActorLocation(MoveDir * Speed * _DeltaTime);
+		MoveDistance -= Speed * _DeltaTime;
 	}
-
-
-	if (true == EngineInput::IsPress('S'))
+	else
 	{
-		AddActorLocation(FVector::Down * 500.0f * _DeltaTime);
-	}		
+		MoveDistance = OneBlockDistance;
+		IsMoving = false;
+	}
 }

@@ -13,12 +13,24 @@ public:
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
+	
+public:
+	void MoveCheck(float _DeltaTime);
+	void MoveOneBlock(float _DeltaTime);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* PlayerRenderer;
+	UImageRenderer* PlayerRenderer = nullptr;
+
+	const float OneBlockDistance = 60.0f;
+	float MoveDistance = OneBlockDistance;
+	float Speed = 500.0f;
+	FVector MoveDir = FVector::Zero;
+
+	bool IsMoving = false;
+
 };
 
