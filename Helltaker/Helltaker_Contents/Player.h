@@ -25,8 +25,8 @@ protected:
 private:
 	UImageRenderer* PlayerRenderer = nullptr;
 
-	const float OneBlockDistance = 60.0f;
-	float MoveDistance = OneBlockDistance;
+	const float OneMoveDistance = 60.0f;
+	float MoveDistance = OneMoveDistance;
 	float Speed = 500.0f;
 	FVector MoveDir = FVector::Zero;
 

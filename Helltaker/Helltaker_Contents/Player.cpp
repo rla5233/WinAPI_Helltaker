@@ -63,7 +63,7 @@ void Player::MoveOneBlock(float _DeltaTime)
 	}
 	else
 	{
-		MoveDistance = OneBlockDistance;
+		MoveDistance = OneMoveDistance;
 		IsMoving = false;
 	}
 }
