@@ -23,7 +23,7 @@ void Helltaker_ContentsCore::BeginPlay()
 
 void Helltaker_ContentsCore::Tick(float _DeltaTime)
 {
-
+	
 }
 
 void Helltaker_ContentsCore::End()

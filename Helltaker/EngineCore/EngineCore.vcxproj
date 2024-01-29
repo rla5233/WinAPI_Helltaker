@@ -167,6 +167,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineResourcesManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ImageRenderer.h">
       <SubType>
       </SubType>
@@ -198,6 +206,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineCore.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineResourcesManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
       <SubType>
       </SubType>
     </ClCompile>

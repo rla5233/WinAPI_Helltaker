@@ -18,6 +18,7 @@ void Player::BeginPlay()
 void Player::Tick(float _DeltaTime)
 {
 	MoveCheck(_DeltaTime);
+	MoveOneBlock(_DeltaTime);
 }
 
 void Player::MoveCheck(float _DeltaTime)
@@ -47,23 +48,24 @@ void Player::MoveCheck(float _DeltaTime)
 			MoveDir = FVector::Down;
 			IsMoving = true;
 		}
-	}
-	else
-	{
-		MoveOneBlock(_DeltaTime);
+
+		
 	}
 }
 
 void Player::MoveOneBlock(float _DeltaTime)
 {
-	if (0 <= MoveDistance)
+	if (true == IsMoving)
 	{
-		AddActorLocation(MoveDir * Speed * _DeltaTime);
-		MoveDistance -= Speed * _DeltaTime;
-	}
-	else
-	{
-		MoveDistance = OneMoveDistance;
-		IsMoving = false;
+		if (0 <= MoveDistance)
+		{
+			AddActorLocation(MoveDir * Speed * _DeltaTime);
+			MoveDistance -= Speed * _DeltaTime;
+		}
+		else
+		{
+			MoveDistance = OneMoveDistance;
+			IsMoving = false;
+		}
 	}
 }

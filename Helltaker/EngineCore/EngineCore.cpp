@@ -148,7 +148,7 @@ void EngineCore::End()
 
 void EngineCore::ChangeLevel(std::string_view _Name)
 {
-	std::string UpperName = EngineString::ToUpper(_Name);
+	std::string UpperName = UEngineString::ToUpper(_Name);
 
 	if (false == AllLevel.contains(UpperName))
 	{

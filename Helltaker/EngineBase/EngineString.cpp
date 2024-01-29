@@ -1,12 +1,12 @@
 #include "EngineString.h"
 
-EngineString::EngineString()
+UEngineString::UEngineString()
 {}
 
-EngineString::~EngineString()
+UEngineString::~UEngineString()
 {}
 
-std::string EngineString::ToUpper(std::string_view View)
+std::string UEngineString::ToUpper(std::string_view View)
 {
 	std::string Name = View.data();
 

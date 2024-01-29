@@ -21,6 +21,7 @@ ULevel::~ULevel()
 			Actor = nullptr;
 		}
 	}
+	AllActor.clear();
 }
 
 void ULevel::LevelTick(float _DeltaTime)
@@ -70,6 +71,38 @@ void ULevel::LevelRelease(float _DeltaTime)
 	// Tick
 	// 랜더링
 	// 충돌 등등등이 다 끝나고.
+
+	// 여기서 지우는데.
+	// Render의 메모리의 결정권을 가진것은 액터입니다.
+	// 앞으로 포인터를 굉장히 여러개로 나눠서 사용하는 경우가 많습니다.
+	// 그러면 누가 이에 대한 삭제를 담당해야 하나요?
+	// 이건 정답이 없지만 선생님은 만든놈이 하자.
+	// new를 한 놈이 한다.
+
+
+	for (std::pair<const int, std::list<UImageRenderer*>>& OrderListPair : Renderers)
+	{
+		std::list<UImageRenderer*>& RendererList = OrderListPair.second;
+
+		std::list<UImageRenderer*>::iterator StartIter = RendererList.begin();
+		std::list<UImageRenderer*>::iterator EndIter = RendererList.end();
+
+		// 삭제는 절대로 Ranged for로 하면 안되다.
+		// for (UImageRenderer* Renderer : RendererList)
+		for (; StartIter != EndIter; )
+		{
+			UImageRenderer* Renderer = StartIter.operator*();
+
+			if (false == Renderer->IsDestroy())
+			{
+				++StartIter;
+				continue;
+			}
+
+			StartIter = RendererList.erase(StartIter);
+		}
+	}
+
 
 	// 선생님은 절대로 실행도중 삭제를 하지 않습니다.
 	for (std::pair<const int, std::list<AActor*>>& OrderListPair : AllActor)
