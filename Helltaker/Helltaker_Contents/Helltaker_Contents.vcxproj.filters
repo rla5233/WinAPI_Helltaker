@@ -1,17 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Helltaker_ContentsCore.h" />
-    <ClInclude Include="TitleLevel.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayLevel.h" />
-    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Monster.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Helltaker_ContentsCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Helltaker_ContentsCore.cpp" />
-    <ClCompile Include="TitleLevel.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayLevel.cpp" />
-    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Monster.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Helltaker_ContentsCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object">
+      <UniqueIdentifier>{6e639a67-4bf7-4c56-a8f5-dd3ab1049bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{f6910b19-70f9-4ad9-9538-27482e094d57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{eb463eb0-dbc1-46ff-b3cd-e63c67538331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{dd7b7d82-b844-41e3-a274-6ae871aefd92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

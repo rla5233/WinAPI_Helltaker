@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
+// 설명 : 플레이어 클래스
 class Player : public AActor
 {
 public:
@@ -31,6 +32,6 @@ private:
 	FVector MoveDir = FVector::Zero;
 
 	bool IsMoving = false;
-
+	int ActionPoint = 25;
 };
 
