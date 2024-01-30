@@ -163,11 +163,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MoveObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage1.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -189,11 +197,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MoveObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage1.cpp">
       <SubType>
       </SubType>
     </ClCompile>

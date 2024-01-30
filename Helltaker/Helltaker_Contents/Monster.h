@@ -1,8 +1,8 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "MoveObject.h"
 
 // Ό³Έν :
-class Monster : public AActor
+class Monster : public MoveObject
 {
 public:
 	// constructor destructor

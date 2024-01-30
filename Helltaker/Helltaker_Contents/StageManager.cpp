@@ -1,5 +1,7 @@
 #include "StageManager.h"
 
+const float StageManager::OneTileDistance = 60.0f;
+
 StageManager::StageManager()
 {
 }

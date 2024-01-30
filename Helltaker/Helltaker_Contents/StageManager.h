@@ -16,12 +16,17 @@ public:
 	StageManager& operator=(const StageManager& _Other) = delete;
 	StageManager& operator=(StageManager&& _Other) noexcept = delete;
 
+	static float GetOneTileDistance()
+	{ 
+		return OneTileDistance;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
 
 private:
-	const float OneBlockDistance = 60.0f;
-	std::vector<std::vector<bool>> IsEmptyTile;
+	static const float OneTileDistance;
 
+	std::vector<std::vector<bool>> IsEmptyTile;
 };

@@ -19,6 +19,12 @@
     <ClInclude Include="Helltaker_ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Stage1.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveObject.h">
+      <Filter>Object\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monster.cpp">
@@ -39,6 +45,12 @@
     <ClCompile Include="Helltaker_ContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Stage1.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveObject.cpp">
+      <Filter>Object\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -52,6 +64,9 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{dd7b7d82-b844-41e3-a274-6ae871aefd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Base">
+      <UniqueIdentifier>{99323e89-623e-4460-9a94-f1b48814b652}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
