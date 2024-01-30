@@ -1,8 +1,7 @@
 #include "MoveObject.h"
-#include <EnginePlatform/EngineInput.h>
-
 #include "StageManager.h"
 
+#include <EnginePlatform/EngineInput.h>
 
 MoveObject::MoveObject()
 {
@@ -47,14 +46,16 @@ void MoveObject::MoveOneBlock(float _DeltaTime)
 {
 	if (true == IsMoving)
 	{
-		if (0 <= MoveDistance)
+		
+		if (0 < MoveDistance)
 		{
 			AddActorLocation(MoveDir * Speed * _DeltaTime);
 			MoveDistance -= Speed * _DeltaTime;
 		}
 		else
 		{
-			MoveDistance = StageManager::GetOneTileDistance();
+			//AddActorLocation(MoveDir * MoveDistance);
+			MoveDistance += StageManager::GetOneTileDistance();
 			IsMoving = false;
 		}
 	}

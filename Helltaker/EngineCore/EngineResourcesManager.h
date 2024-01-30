@@ -3,14 +3,13 @@
 #include <string_view>
 #include <map>
 
-
 // class Monster 싱글톤이라면 메모리적으로 
 // class Monster가 딱 1개만 만들어질수 있어야 한다.
 
 // class UEngineResourcesManager 싱글톤이라면 메모리적으로 
 // class UEngineResourcesManager가 딱 1개만 만들어질수 있어야 한다.
 
-class UImage;
+class UWindowImage;
 // 설명 : 이미지 사운드 등등을 종합 관리할겁니다.
 //       게임에서 리소스라고 불리는 객체들을 전부다 이녀석이 관리할 예정.
 class UEngineResourcesManager
@@ -63,9 +62,11 @@ public:
 	// 인터페이스가 없으면 너무 추상적인 생각이다.
 	// 생각이 공상가식 프로그래밍.
 	// 하드디스크에 있는 이미지를 로드한다.
-	UImage* LoadImg(std::string_view _Path);
+	UWindowImage* LoadImg(std::string_view _Path);
 
-	UImage* FindImg(std::string_view _Name);
+	UWindowImage* LoadImg(std::string_view _Path, std::string_view _Name);
+
+	UWindowImage* FindImg(std::string_view _Name);
 
 
 
@@ -76,7 +77,7 @@ private:
 	UEngineResourcesManager();
 	~UEngineResourcesManager();
 
-	std::map<std::string, UImage*> Images;
+	std::map<std::string, UWindowImage*> Images;
 
 	// C++에서는 이렇게 static으로 자기자신을 자기가 내부에서 만듭니다.
 	// 자기자신이 내부에서 여러개 만들면 만들수 있죠.

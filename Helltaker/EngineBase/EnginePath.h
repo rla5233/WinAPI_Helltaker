@@ -26,8 +26,26 @@ public:
 
 	bool IsExists();
 
+	std::string GetFileName();
+	std::string GetExtension();
+
 	void MoveParent();
 	void Move(std::string_view _Path);
+
+	std::string GetFullPath()
+	{
+		// 문자열을 std에서는 char* char[100]
+		// std::string을 지원해준다.
+		// std::filesystem::path이 뭔지를 파악하고 경로와 관련된 편리한 기능들을 제공한다.
+		// 경로라는것은 근본적으로 보자면 "C:\\aaaa\bbb\\ccc" => 문자열에 가깝다.
+		// 이 경로를 담당하는 클래스는 분명히 내부에 std::string을 리턴해주는 함수가 있어야 한다.
+		// 없으면 욕한다. 그런데 없을리가 없다고 생각하고
+		// 못찾으면 나의 검색능력이 딸리거나 나의 센스가 부족한 경우가 많아서 잘못 생각하고 있는 경우가 많다.
+		// => 커뮤니케이션 혼자 끙끙알아봐야 도움될게 없어요.
+		// 그리고 회사에 저같이 까질한 사람만 대부분 착합니다.
+		// 간혹가다 싸이코가 있지만 정말 
+		return Path.string();
+	}
 
 protected:
 	// 문자열을 잘 삭제표현할수 있어야 했다.

@@ -19,11 +19,11 @@
     <ClInclude Include="Helltaker_ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Stage1.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="MoveObject.h">
       <Filter>Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayStage1.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -45,11 +45,11 @@
     <ClCompile Include="Helltaker_ContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Stage1.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="MoveObject.cpp">
       <Filter>Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayStage1.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,58 @@ public:
 	float Z;
 	float W;
 
+	// 생성자를 한번 만들게 되면 리스트 이니셜라이저가 동작하지 않아서
+	// 내가 생성하는 방식을 다 정의해야 합니다.
+	float4()
+		: X(0.0f), Y(0.0f), Z(0.0f), W(1.0f)
+	{
+
+	}
+
+	float4(long _X, long _Y)
+		: X(static_cast<float>(_X)), Y(static_cast<float>(_Y)), Z(0.0f), W(1.0f)
+	{
+
+	}
+
+
+	float4(int _X, int _Y)
+		: X(static_cast<float>(_X)), Y(static_cast<float>(_Y)), Z(0.0f), W(1.0f)
+	{
+
+	}
+
+	float4(float _X, float _Y)
+		: X(_X), Y(_Y), Z(0.0f), W(1.0f)
+	{
+
+	}
+
+	float4(int _X, int _Y, int _Z, int _W)
+		: X(static_cast<float>(_X)), Y(static_cast<float>(_Y)), Z(static_cast<float>(_Z)), W(static_cast<float>(_W))
+	{
+
+	}
+
+	float4(float _X, float _Y, float _Z, float _W)
+		: X(_X), Y(_Y), Z(_Z), W(_W)
+	{
+
+	}
+
+
 public:
+	int iX()
+	{
+		return static_cast<int>(X);
+	}
+
+	int iY()
+	{
+		return static_cast<int>(Y);
+	}
+
+
 	float hX()
 	{
 		return X * 0.5f;

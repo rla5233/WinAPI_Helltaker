@@ -21,6 +21,18 @@ UEnginePath::UEnginePath(std::filesystem::path _Path)
 UEnginePath::~UEnginePath()
 {}
 
+std::string UEnginePath::GetExtension()
+{
+	std::filesystem::path Text = Path.extension();
+	return Text.string();
+}
+
+std::string UEnginePath::GetFileName()
+{
+	std::filesystem::path Text = Path.filename();
+	return Text.string();
+}
+
 void UEnginePath::Move(std::string_view _Path)
 {
 	std::filesystem::path NextPath = Path;

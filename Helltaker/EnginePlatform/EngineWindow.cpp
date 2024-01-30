@@ -1,11 +1,12 @@
 #include "EngineWindow.h"
 #include <EngineBase\EngineDebug.h>
+#include "WindowImage.h"
 
-bool EngineWindow::WindowLive = true;
-HINSTANCE EngineWindow::hInstance;
+bool UEngineWindow::WindowLive = true;
+HINSTANCE UEngineWindow::hInstance;
 
 
-LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
@@ -26,19 +27,26 @@ LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, L
 	return 0;
 }
 
-void EngineWindow::Init(HINSTANCE _hInst)
+void UEngineWindow::Init(HINSTANCE _hInst)
 {
 	hInstance = _hInst;
 }
 
 
-EngineWindow::EngineWindow()
+UEngineWindow::UEngineWindow()
 {}
 
-EngineWindow::~EngineWindow()
-{}
+UEngineWindow::~UEngineWindow()
+{
+	if (nullptr != WindowImage)
+	{
+		delete WindowImage;
+		WindowImage = nullptr;
+	}
 
-void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
+}
+
+void UEngineWindow::Open(std::string_view _Title /*= "Title"*/)
 {
 	// 간혹가다가 앞쪽이이나 뒤쪽에 W가 붙거나 A가 붙어있는 함수들을 보게 될겁니다.
 	// A가 붙어있으면 멀티바이트 함수
@@ -77,14 +85,21 @@ void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 		return;
 	}
 
-	hDC = GetDC(hWnd);
+	HDC hDC = GetDC(hWnd);
+
+	if (nullptr == WindowImage)
+	{
+		WindowImage = new UWindowImage();
+		WindowImage->Create(hDC);
+	}
+
 
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
 
 }
 
-unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
+unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
 {
 	MSG msg = {};
 

@@ -171,19 +171,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Image.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="ImageRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="NameObject.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -213,19 +205,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="ImageRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="NameObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>

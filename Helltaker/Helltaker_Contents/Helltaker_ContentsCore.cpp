@@ -2,6 +2,8 @@
 #include "TitleLevel.h"
 #include "PlayLevel.h"
 
+#include "PlayStage1.h"
+
 Helltaker_ContentsCore::Helltaker_ContentsCore()
 {
 }
@@ -15,10 +17,11 @@ void Helltaker_ContentsCore::BeginPlay()
 {
 	SetFrame(165);
 
-	CreateLevel<UTitleLevel>("TitleLevel");
-	CreateLevel<UPlayLevel>("PlayLevel");
+	//CreateLevel<UTitleLevel>("TitleLevel");
+	//CreateLevel<UPlayLevel>("PlayLevel");
+	CreateLevel<UPlayStage1>("PlayStage1");
 
-	ChangeLevel("PlayLevel");
+	ChangeLevel("PlayStage1");
 }
 
 void Helltaker_ContentsCore::Tick(float _DeltaTime)

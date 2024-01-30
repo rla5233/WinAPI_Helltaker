@@ -113,7 +113,7 @@ void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
 	Ptr->MainTimer.TimeCheckStart();
 	Ptr->CoreInit(_hInstance);
 	Ptr->BeginPlay();
-	EngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
+	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
 }
 
 void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
@@ -123,7 +123,7 @@ void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
 		return;
 	}
 
-	EngineWindow::Init(_HINSTANCE);
+	UEngineWindow::Init(_HINSTANCE);
 	MainWindow.Open();
 
 	this->AllLevel;

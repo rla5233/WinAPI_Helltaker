@@ -1,5 +1,5 @@
 #pragma once
-#include "NameObject.h"
+#include <EngineBase\NameObject.h>
 #include <map>
 #include <list>
 
@@ -34,6 +34,8 @@ public:
 		AllActor[_Order].push_back(NewActor);
 		return NewActor;
 	}
+
+
 
 protected:
 
