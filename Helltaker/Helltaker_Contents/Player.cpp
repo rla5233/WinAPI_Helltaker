@@ -14,7 +14,6 @@ void Player::BeginPlay()
 {
 	PlayerRenderer = CreateImageRenderer(0);
 	PlayerRenderer->SetImageToScale("Hero0022.png");
-	//PlayerRenderer->SetScale({ 50, 50 });
 }
 
 void Player::Tick(float _DeltaTime)

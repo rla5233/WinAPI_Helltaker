@@ -10,9 +10,6 @@
     <ClInclude Include="StageManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -35,9 +32,6 @@
     </ClCompile>
     <ClCompile Include="StageManager.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
