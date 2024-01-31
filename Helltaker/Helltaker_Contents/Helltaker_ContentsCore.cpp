@@ -2,6 +2,7 @@
 #include "TitleLevel.h"
 
 #include "PlayStage1.h"
+#include <EnginePlatform/WindowImage.h>
 
 Helltaker_ContentsCore::Helltaker_ContentsCore()
 {
@@ -15,6 +16,7 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 void Helltaker_ContentsCore::BeginPlay()
 {
 	MainWindow.SetWindowScale({ 1920, 1080 });
+
 	UEngineCore::BeginPlay();
 
 	SetFrame(165);

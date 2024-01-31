@@ -15,6 +15,7 @@ void Hero::BeginPlay()
 
 	HeroRenderer = CreateImageRenderer(0);
 	HeroRenderer->SetImageToScale("Hero0022.bmp");
+	//HeroRenderer->SetImageCuttingTransform();
 }
 
 void Hero::Tick(float _DeltaTime)
