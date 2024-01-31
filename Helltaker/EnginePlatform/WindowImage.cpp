@@ -209,20 +209,30 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
 	}
 
+	int RenderLeft = _Trans.iLeft();
+	int RenderTop = _Trans.iTop();
+	int RenderScaleX = _Trans.GetScale().iX();
+	int RenderScaleY = _Trans.GetScale().iY();
+
+	int ImageLeft = _ImageTrans.GetPosition().iX();
+	int ImageTop = _ImageTrans.GetPosition().iY();
+	int ImageScaleX = _ImageTrans.GetScale().iX();
+	int ImageScaleY = _ImageTrans.GetScale().iY();
+
 	HDC hdc = ImageDC;
 	// 이미지
 	HDC hdcSrc = _CopyImage->ImageDC;
 	TransparentBlt(
 		hdc, 							  // HDC hdc, // 
-		_Trans.iLeft(), 				  // int x,   // 
-		_Trans.iTop(), 					  // int y,   // 
-		_Trans.GetScale().iX(), 		  // int cx,  // 
-		_Trans.GetScale().iY(),			  // int cy,  
+		RenderLeft, 		  // int x,   // 
+		RenderTop, 		  // int y,   // 
+		RenderScaleX,		  // int cx,  // 
+		RenderScaleY,		  // int cy,  
 		hdcSrc,							// HDC hdcSrc, 
-		_ImageTrans.GetPosition().iX(),								// int y1, 
-		_ImageTrans.GetPosition().iY(),								// int x1,  
-		_ImageTrans.GetScale().iX(),								// int y1, 
-		_ImageTrans.GetScale().iY(),								// int y1, 
+		ImageLeft,   							// int y1, 
+		ImageTop,   							// int x1,  
+		ImageScaleX, 							// int y1, 
+		ImageScaleY, 							// int y1, 
 		_Color.Color						// DWORD rop => 이미지 그대로 고속 복사를 해라.
 	);
 	// 이미지의 어떤 부위를 그릴지를 정해줄수가 있다.

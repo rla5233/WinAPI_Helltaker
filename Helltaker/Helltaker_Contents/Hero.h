@@ -21,7 +21,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* HeroRenderer = nullptr;
+	UImageRenderer* Renderer = nullptr;
 
 
 	int ActionPoint = 25;

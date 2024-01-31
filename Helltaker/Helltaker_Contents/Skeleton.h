@@ -20,5 +20,5 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* SkeletonRenderer = nullptr;
+	UImageRenderer* Renderer = nullptr;
 };

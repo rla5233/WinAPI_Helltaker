@@ -14,8 +14,9 @@ void Skeleton::BeginPlay()
 {
 	MoveActor::BeginPlay();
 
-	SkeletonRenderer = CreateImageRenderer(0);
-	SkeletonRenderer->SetImageToScale("Skeleton.bmp");
+	Renderer = CreateImageRenderer(0);
+
+	//SkeletonRenderer->SetImageToScale("Skeleton.bmp");
 	//SkeletonRenderer->SetScale({ 50, 50 });
 }
 

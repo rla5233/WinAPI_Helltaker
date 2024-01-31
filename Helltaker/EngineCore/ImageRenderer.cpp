@@ -33,7 +33,10 @@ void UImageRenderer::Render(float _DeltaTime)
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
 	}
 
+	// 위에서부터 읽어야 합니다.
 	FTransform ThisTrans = GetTransform();
+
+	// 액터인데 지금 의미가 없습니다.
 	FTransform OwnerTrans = GetOwner()->GetTransform();
 
 	// 컴포넌트의 위치는 부모에게서 상대적이기 때문에.
@@ -49,6 +52,9 @@ void UImageRenderer::Render(float _DeltaTime)
 	// Rectangle(WindowDC, ThisTrans.iLeft(), ThisTrans.iTop(), ThisTrans.iRight(), ThisTrans.iBottom());
 
 	// 1, 0, 0, 255
+
+	// 여기입니다.
+
 	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, ThisTrans, ImageCuttingTransform);
 
 }
@@ -59,12 +65,7 @@ void UImageRenderer::BeginPlay()
 	USceneComponent::BeginPlay();
 }
 
-void UImageRenderer::SetImageToScale(std::string_view _Name)
-{
-	SetImage(_Name, true);
-}
-
-void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale /*= false*/)
+void UImageRenderer::SetImage(std::string_view _Name)
 {
 	Image = UEngineResourcesManager::GetInst().FindImg(_Name);
 
@@ -73,14 +74,5 @@ void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale /*= fal
 		// 예외를 출력하게 하는것도 중요하다.
 		MsgBoxAssert(std::string(_Name) + "이미지가 존재하지 않습니다.");
 		return;
-	}
-
-	if (true == _IsImageScale)
-	{
-		FVector Scale = Image->GetScale();
-		SetScale(Scale);
-
-		ImageCuttingTransform.SetPosition({ 0,0 });
-		ImageCuttingTransform.SetScale(Scale);
 	}
 }

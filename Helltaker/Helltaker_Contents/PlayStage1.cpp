@@ -39,7 +39,7 @@ void UPlayStage1::BeginPlay()
 	NewHero->SetActorLocation(StagePointToLocation(6, 0));
 	NewHero->SetLocationPoint({ 6, 0 });
 	
-	Skeleton* NewSkeleton = SpawnActor<Skeleton>();
-	NewSkeleton->SetActorLocation(StagePointToLocation(2, 1));
-	NewSkeleton->SetLocationPoint({ 2, 1 });
+	//Skeleton* NewSkeleton = SpawnActor<Skeleton>();
+	//NewSkeleton->SetActorLocation(StagePointToLocation(2, 1));
+	//NewSkeleton->SetLocationPoint({ 2, 1 });
 }
