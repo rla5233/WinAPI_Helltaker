@@ -2,7 +2,7 @@
 #include <EngineCore\EngineCore.h>
 
 // Ό³Έν :
-class Helltaker_ContentsCore : public EngineCore
+class Helltaker_ContentsCore : public UEngineCore
 {
 public:
 	// constructor destructor

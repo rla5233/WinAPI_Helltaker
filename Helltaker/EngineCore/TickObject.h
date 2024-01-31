@@ -4,6 +4,7 @@
 // Ό³Έν :
 class UTickObject
 {
+
 public:
 	// constrcuter destructer
 	UTickObject();

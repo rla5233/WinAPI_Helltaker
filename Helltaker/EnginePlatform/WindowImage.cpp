@@ -110,6 +110,13 @@ bool UWindowImage::Load(UWindowImage* _Image)
 	// 그릴수 있는 권한이 자신이 뭘 그려야하는지를 알려줘야 합니다.
 	// ImageDC야 너는 BitMap그려야 해.
 	ImageDC = CreateCompatibleDC(_Image->ImageDC);
+
+	if (nullptr == ImageDC)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+
 	HBITMAP OldBitMap = reinterpret_cast<HBITMAP>(SelectObject(ImageDC, hBitMap));
 	DeleteObject(OldBitMap);
 
@@ -126,8 +133,45 @@ bool UWindowImage::Load(UWindowImage* _Image)
 	return true;
 }
 
-void UWindowImage::BitCopy(UWindowImage* _CopyImage, FTransform _Trans)
+bool UWindowImage::Create(UWindowImage* _Image, const FVector& _Scale)
 {
+	// 시작이 먼저 이미지를 만든다.
+
+
+	// HBITMAP 비트맵 이미지의 메모리권한
+	HANDLE ImageHandle = CreateCompatibleBitmap(_Image->ImageDC, _Scale.iX(), _Scale.iY());
+
+	if (nullptr == ImageHandle)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+
+	hBitMap = reinterpret_cast<HBITMAP>(ImageHandle);
+
+	ImageDC = CreateCompatibleDC(_Image->ImageDC);
+
+	if (nullptr == ImageDC)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+
+	HBITMAP OldBitMap = reinterpret_cast<HBITMAP>(SelectObject(ImageDC, hBitMap));
+	DeleteObject(OldBitMap);
+
+	// hBitMap에서 얻어오겠다.
+	GetObject(hBitMap, sizeof(BITMAP), &BitMapInfo);
+
+	return true;
+}
+
+void UWindowImage::BitCopy(UWindowImage* _CopyImage, const FTransform& _Trans)
+{
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
 	// 렉탱글이 아니고
 	// 이미지로 그려야합니다
 
@@ -156,4 +200,30 @@ void UWindowImage::BitCopy(UWindowImage* _CopyImage, FTransform _Trans)
 		0,								// int y1, 
 		SRCCOPY							// DWORD rop => 이미지 그대로 고속 복사를 해라.
 	);
+}
+
+void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans, const FTransform& _ImageTrans, Color8Bit _Color)
+{
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
+
+	HDC hdc = ImageDC;
+	// 이미지
+	HDC hdcSrc = _CopyImage->ImageDC;
+	TransparentBlt(
+		hdc, 							  // HDC hdc, // 
+		_Trans.iLeft(), 				  // int x,   // 
+		_Trans.iTop(), 					  // int y,   // 
+		_Trans.GetScale().iX(), 		  // int cx,  // 
+		_Trans.GetScale().iY(),			  // int cy,  
+		hdcSrc,							// HDC hdcSrc, 
+		_ImageTrans.GetPosition().iX(),								// int y1, 
+		_ImageTrans.GetPosition().iY(),								// int x1,  
+		_ImageTrans.GetScale().iX(),								// int y1, 
+		_ImageTrans.GetScale().iY(),								// int y1, 
+		_Color.Color						// DWORD rop => 이미지 그대로 고속 복사를 해라.
+	);
+	// 이미지의 어떤 부위를 그릴지를 정해줄수가 있다.
 }

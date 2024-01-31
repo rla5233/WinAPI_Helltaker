@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+
+#include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
 // 설명 : Stage 생성 클래스
@@ -16,16 +18,30 @@ public:
 	StageManager& operator=(const StageManager& _Other) = delete;
 	StageManager& operator=(StageManager&& _Other) noexcept = delete;
 
-	static float GetOneTileDistance()
+	static float GetOneTileWidth()
 	{ 
-		return OneTileDistance;
+		return OneTileWidth;
 	}
+
+	void SetStageStartLocation(FVector _Point)
+	{
+		StageStartLocation = _Point * OneTileWidth;
+	}
+
+	FVector StagePointToLocation(FVector _Point);
+	FVector StagePointToLocation(int _X, int _Y);
+
+	void CreateStageMap(int _X, int _Y);
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
 
 private:
-	static const float OneTileDistance;
+	static const float OneTileWidth;
 
+	FVector StageStartLocation = FVector::Zero;
+	
+	std::vector<std::vector<bool>> StageMap;
 	std::vector<std::vector<bool>> IsEmptyTile;
 };

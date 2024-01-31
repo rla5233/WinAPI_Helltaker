@@ -41,9 +41,16 @@ void UImageRenderer::Render(float _DeltaTime)
 	ThisTrans.AddPosition(OwnerTrans.GetPosition());
 
 
-	GEngine->MainWindow.GetWindowImage()->BitCopy(Image, ThisTrans);
+	// 이려면 윈도우 이미지에 그리면 화면의 갱신이 산발적으로 일어나므로
+	// GEngine->MainWindow.GetWindowImage()->BitCopy(Image, ThisTrans);
 
+	// 
+	// GEngine->MainWindow.GetBackBufferImage()->BitCopy(Image, ThisTrans);
 	// Rectangle(WindowDC, ThisTrans.iLeft(), ThisTrans.iTop(), ThisTrans.iRight(), ThisTrans.iBottom());
+
+	// 1, 0, 0, 255
+	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, ThisTrans, ImageCuttingTransform);
+
 }
 
 void UImageRenderer::BeginPlay()
@@ -72,5 +79,8 @@ void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale /*= fal
 	{
 		FVector Scale = Image->GetScale();
 		SetScale(Scale);
+
+		ImageCuttingTransform.SetPosition({ 0,0 });
+		ImageCuttingTransform.SetScale(Scale);
 	}
 }

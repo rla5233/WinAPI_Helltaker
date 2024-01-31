@@ -4,16 +4,16 @@
 #include "EnginePlatform\EngineInput.h"
 
 
-EngineCore* GEngine = nullptr;
+UEngineCore* GEngine = nullptr;
 
-EngineCore::EngineCore()
+UEngineCore::UEngineCore()
 	: MainWindow()
 {}
 
-EngineCore::~EngineCore()
+UEngineCore::~UEngineCore()
 {}
 
-void EngineCore::CoreTick()
+void UEngineCore::CoreTick()
 {
 	float DeltaTime = MainTimer.TimeCheck();
 	double dDeltaTime = MainTimer.GetDeltaTime();
@@ -66,7 +66,9 @@ void EngineCore::CoreTick()
 	// 액터와 부가적인 오브젝트들의 틱도 돌리고 => 행동하고
 	CurLevel->LevelTick(DeltaTime);
 	// 랜더러들의 랜더를 통해서 화면에 그림도 그린다 => 그리고
+	MainWindow.ScreenClear();
 	CurLevel->LevelRender(DeltaTime);
+	MainWindow.ScreenUpdate();
 	// 정리한다.(죽어야할 오브젝트들은 다 파괴한다)
 	CurLevel->LevelRelease(DeltaTime);
 
@@ -75,7 +77,7 @@ void EngineCore::CoreTick()
 	//Rectangle(WindowDC, -200, -200, 3000, 3000);
 }
 
-void EngineCore::EngineTick()
+void UEngineCore::EngineTick()
 {
 
 	// 렉이라는 현상은 프레임사이에 한번에 많은 시간을 소모하는 함수를 호출하면
@@ -88,7 +90,7 @@ void EngineCore::EngineTick()
 
 }
 
-void EngineCore::EngineEnd()
+void UEngineCore::EngineEnd()
 {
 	// std::map<std::string, ULevel*>::iterator StartI
 
@@ -106,9 +108,9 @@ void EngineCore::EngineEnd()
 	GEngine->AllLevel.clear();
 }
 
-void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
+void UEngineCore::EngineStart(HINSTANCE _hInstance, UEngineCore* _UserCore)
 {
-	EngineCore* Ptr = _UserCore;
+	UEngineCore* Ptr = _UserCore;
 	GEngine = Ptr;
 	Ptr->MainTimer.TimeCheckStart();
 	Ptr->CoreInit(_hInstance);
@@ -116,7 +118,7 @@ void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
 	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
 }
 
-void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
+void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)
 {
 	if (true == EngineInit)
 	{
@@ -131,22 +133,22 @@ void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
 	EngineInit = true;
 }
 
-void EngineCore::BeginPlay()
+void UEngineCore::BeginPlay()
 {
 
 }
 
-void EngineCore::Tick(float _DeltaTime)
+void UEngineCore::Tick(float _DeltaTime)
 {
 
 }
 
-void EngineCore::End()
+void UEngineCore::End()
 {
 
 }
 
-void EngineCore::ChangeLevel(std::string_view _Name)
+void UEngineCore::ChangeLevel(std::string_view _Name)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);
 
@@ -159,7 +161,7 @@ void EngineCore::ChangeLevel(std::string_view _Name)
 	CurLevel = AllLevel[UpperName];
 }
 
-void EngineCore::LevelInit(ULevel* _Level)
+void UEngineCore::LevelInit(ULevel* _Level)
 {
 	_Level->BeginPlay();
 }

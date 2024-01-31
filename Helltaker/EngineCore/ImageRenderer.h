@@ -25,10 +25,16 @@ public:
 	// 이미지를 세팅하면서 이미지의 크기로 랜더러의 스케일을 변경하는것도 함께하는 함수
 	void SetImageToScale(std::string_view _Name);
 
+	void SetImageCuttingTransform(const FTransform& _Value)
+	{
+		ImageCuttingTransform = _Value;
+	}
+
 protected:
 	void BeginPlay() override;
 
 private:
 	UWindowImage* Image;
+	FTransform ImageCuttingTransform;
 };
 

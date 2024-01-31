@@ -1,18 +1,17 @@
-#include "MoveObject.h"
+#include "MoveActor.h"
 #include "StageManager.h"
 
 #include <EnginePlatform/EngineInput.h>
 
-MoveObject::MoveObject()
+MoveActor::MoveActor()
 {
-	MoveDistance = StageManager::GetOneTileDistance();
+	MoveDistance = StageManager::GetOneTileWidth();
 }
 
-MoveObject::~MoveObject()
-{
-}
+MoveActor::~MoveActor()
+{}
 
-void MoveObject::MoveCheck(float _DeltaTime)
+void MoveActor::MoveCheck(float _DeltaTime)
 {
 	if (false == IsMoving)
 	{
@@ -42,11 +41,11 @@ void MoveObject::MoveCheck(float _DeltaTime)
 	}
 }
 
-void MoveObject::MoveOneBlock(float _DeltaTime)
+void MoveActor::MoveOneBlock(float _DeltaTime)
 {
 	if (true == IsMoving)
 	{
-		
+
 		if (0 < MoveDistance)
 		{
 			AddActorLocation(MoveDir * Speed * _DeltaTime);
@@ -54,8 +53,9 @@ void MoveObject::MoveOneBlock(float _DeltaTime)
 		}
 		else
 		{
-			//AddActorLocation(MoveDir * MoveDistance);
-			MoveDistance += StageManager::GetOneTileDistance();
+			StagePoint += MoveDir;
+			SetActorLocation(dynamic_cast<StageManager*>(GetWorld())->StagePointToLocation(StagePoint));			
+			MoveDistance = StageManager::GetOneTileWidth();
 			IsMoving = false;
 		}
 	}

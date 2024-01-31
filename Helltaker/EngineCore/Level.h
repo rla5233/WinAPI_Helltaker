@@ -4,12 +4,13 @@
 #include <list>
 
 class AActor;
-class EngineCore;
+class UEngineCore;
 class UImageRenderer;
 // 설명 : U는 그냥 엔진 속해있다는 것을 의미.
 class ULevel : public UNameObject
 {
-	friend EngineCore;
+
+	friend UEngineCore;
 	friend UImageRenderer;
 
 public:

@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Monster.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="StageManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -16,20 +10,20 @@
     <ClInclude Include="Helltaker_ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="MoveObject.h">
-      <Filter>Object\Base</Filter>
-    </ClInclude>
     <ClInclude Include="PlayStage1.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="MoveActor.h">
+      <Filter>Actor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="StageManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -39,17 +33,20 @@
     <ClCompile Include="Helltaker_ContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="MoveObject.cpp">
-      <Filter>Object\Base</Filter>
-    </ClCompile>
     <ClCompile Include="PlayStage1.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="MoveActor.cpp">
+      <Filter>Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Object">
-      <UniqueIdentifier>{6e639a67-4bf7-4c56-a8f5-dd3ab1049bdc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{f6910b19-70f9-4ad9-9538-27482e094d57}</UniqueIdentifier>
     </Filter>
@@ -59,7 +56,10 @@
     <Filter Include="Core">
       <UniqueIdentifier>{dd7b7d82-b844-41e3-a274-6ae871aefd92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Base">
+    <Filter Include="Actor">
+      <UniqueIdentifier>{6e639a67-4bf7-4c56-a8f5-dd3ab1049bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Base">
       <UniqueIdentifier>{99323e89-623e-4460-9a94-f1b48814b652}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

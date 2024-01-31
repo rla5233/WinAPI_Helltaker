@@ -1,6 +1,6 @@
 #include "PlayStage1.h"
-#include "Player.h"
-#include "Monster.h"
+#include "Hero.h"
+#include "Skeleton.h"
 
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineBase/EngineDirectory.h>
@@ -16,6 +16,12 @@ UPlayStage1::~UPlayStage1()
 
 void UPlayStage1::BeginPlay()
 {
+	StageManager::BeginPlay();
+
+	// 스테이지 생성
+	CreateStageMap(7, 7);
+	SetStageStartLocation({ 7, 7 });
+
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
 	ResourcesPath.Move("Resources");
@@ -29,12 +35,11 @@ void UPlayStage1::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 
-	FVector Location;
-	Player* NewPlayer = SpawnActor<Player>();
-	Location = FVector(5, 5) * StageManager::GetOneTileDistance();
-	NewPlayer->SetActorLocation(Location);
+	Hero* NewHero = SpawnActor<Hero>();
+	NewHero->SetActorLocation(StagePointToLocation(6, 0));
+	NewHero->SetLocationPoint({ 6, 0 });
 	
-	Monster* NewMonster = SpawnActor<Monster>();
-	Location = FVector(10, 10) * StageManager::GetOneTileDistance();
-	NewMonster->SetActorLocation(Location);
+	Skeleton* NewSkeleton = SpawnActor<Skeleton>();
+	NewSkeleton->SetActorLocation(StagePointToLocation(2, 1));
+	NewSkeleton->SetLocationPoint({ 2, 1 });
 }

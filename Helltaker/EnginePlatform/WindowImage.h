@@ -47,7 +47,14 @@ public:
 	// UWindowImage* _Copy 이 이미지를
 	// FTransform _Trans 이 위치와 크기로
 	// 나한테 카피해라.
-	void BitCopy(UWindowImage* _CopyImage, FTransform _Trans);
+	// 이미지를 이미지 크기대로만 그릴수 있다.
+	void BitCopy(UWindowImage* _CopyImage, const FTransform& _Trans);
+
+	// 이녀석은 이미지를 키울수도 있고 특정 색상을 안그릴수도 있다.
+	// EX) 검은색 화면에서 없애
+	void TransCopy(UWindowImage* _CopyImage, const FTransform& _CopyTrans, const FTransform& _ImageTrans, Color8Bit _Color = Color8Bit::Black);
+
+	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
 protected:
 

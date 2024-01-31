@@ -20,6 +20,12 @@ AActor::~AActor()
 	Renderers.clear();
 }
 
+void AActor::Tick(float _DeltaTime)
+{
+	UTickObject::Tick(_DeltaTime);
+	DestroyUpdate(_DeltaTime);
+}
+
 UImageRenderer* AActor::CreateImageRenderer(int Order /*= 0*/)
 {
 	UImageRenderer* NewRenderer = new UImageRenderer();

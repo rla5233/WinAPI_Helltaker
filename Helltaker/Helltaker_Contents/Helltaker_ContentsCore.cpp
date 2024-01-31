@@ -14,6 +14,9 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 // 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
+	MainWindow.SetWindowScale({ 1920, 1080 });
+	UEngineCore::BeginPlay();
+
 	SetFrame(165);
 
 	//CreateLevel<UTitleLevel>("TitleLevel");
@@ -25,10 +28,10 @@ void Helltaker_ContentsCore::BeginPlay()
 
 void Helltaker_ContentsCore::Tick(float _DeltaTime)
 {
-	
+	UEngineCore::Tick(_DeltaTime);
 }
 
 void Helltaker_ContentsCore::End()
 {
-
+	UEngineCore::End();
 }

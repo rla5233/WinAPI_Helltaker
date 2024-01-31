@@ -159,19 +159,19 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Monster.h">
+    <ClInclude Include="Hero.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MoveObject.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="MoveActor.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PlayStage1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -189,19 +189,19 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
+    <ClCompile Include="Hero.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="MoveObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="MoveActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="PlayStage1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
       <SubType>
       </SubType>
     </ClCompile>
