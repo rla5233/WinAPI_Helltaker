@@ -1,10 +1,11 @@
 #pragma once
+#include <string>
+#include <string_view>
 #include <vector>
 
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
-// 설명 : Stage 생성 클래스
 class StageManager : public ULevel
 {
 public:
@@ -33,6 +34,7 @@ public:
 
 	void CreateStageMap(int _X, int _Y);
 
+	
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;

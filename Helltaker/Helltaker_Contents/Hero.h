@@ -23,7 +23,6 @@ protected:
 private:
 	UImageRenderer* Renderer = nullptr;
 
-
 	int ActionPoint = 25;
 };
 

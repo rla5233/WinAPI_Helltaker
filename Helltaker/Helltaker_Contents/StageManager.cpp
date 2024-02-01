@@ -1,6 +1,11 @@
 #include "StageManager.h"
+
 #include "Hero.h"
 #include "Skeleton.h"
+
+#include <EngineCore/EngineResourcesManager.h>
+#include <EngineBase/EngineDirectory.h>
+
 
 const float StageManager::OneTileWidth = 60.0f;
 

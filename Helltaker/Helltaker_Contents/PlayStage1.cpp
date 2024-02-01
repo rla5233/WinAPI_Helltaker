@@ -1,4 +1,6 @@
 #include "PlayStage1.h"
+
+#include "BackGround.h"
 #include "Hero.h"
 #include "Skeleton.h"
 
@@ -21,6 +23,10 @@ void UPlayStage1::BeginPlay()
 	// 스테이지 생성
 	CreateStageMap(7, 7);
 	SetStageStartLocation({ 7, 7 });
+
+	BackGround* NewBG = SpawnActor<BackGround>();
+	//NewBG->SetActorLocation();
+
 
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();

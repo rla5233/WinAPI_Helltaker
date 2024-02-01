@@ -5,22 +5,25 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <Filter>Level</Filter>
+      <Filter>Object\Level</Filter>
     </ClInclude>
     <ClInclude Include="Helltaker_ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="PlayStage1.h">
-      <Filter>Level</Filter>
+      <Filter>Object\Level</Filter>
     </ClInclude>
     <ClInclude Include="MoveActor.h">
-      <Filter>Actor\Base</Filter>
+      <Filter>Object\Actor\Base</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
-      <Filter>Actor</Filter>
+      <Filter>Object\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Skeleton.h">
-      <Filter>Actor</Filter>
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>Object\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -28,38 +31,44 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level</Filter>
+      <Filter>Object\Level</Filter>
     </ClCompile>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="PlayStage1.cpp">
-      <Filter>Level</Filter>
+      <Filter>Object\Level</Filter>
     </ClCompile>
     <ClCompile Include="MoveActor.cpp">
-      <Filter>Actor\Base</Filter>
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
-      <Filter>Actor</Filter>
+      <Filter>Object\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
-      <Filter>Actor</Filter>
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Object\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Manager">
       <UniqueIdentifier>{f6910b19-70f9-4ad9-9538-27482e094d57}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level">
-      <UniqueIdentifier>{eb463eb0-dbc1-46ff-b3cd-e63c67538331}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{dd7b7d82-b844-41e3-a274-6ae871aefd92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor">
+    <Filter Include="Object">
+      <UniqueIdentifier>{0abe4130-4163-4122-8465-be5477d13de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Level">
+      <UniqueIdentifier>{eb463eb0-dbc1-46ff-b3cd-e63c67538331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
       <UniqueIdentifier>{6e639a67-4bf7-4c56-a8f5-dd3ab1049bdc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Base">
+    <Filter Include="Object\Actor\Base">
       <UniqueIdentifier>{99323e89-623e-4460-9a94-f1b48814b652}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
