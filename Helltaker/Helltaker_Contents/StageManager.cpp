@@ -1,5 +1,6 @@
 #include "StageManager.h"
 
+#include "Helltaker_ContentsCore.h"
 #include "Hero.h"
 #include "Skeleton.h"
 
@@ -7,7 +8,7 @@
 #include <EngineBase/EngineDirectory.h>
 
 
-const float StageManager::OneTileWidth = 70.0f;
+const float StageManager::OneTileWidth = Helltaker_ContentsCore::GetWindowScale().X / 19;
 
 StageManager::StageManager()
 {

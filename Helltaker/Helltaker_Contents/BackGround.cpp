@@ -1,5 +1,7 @@
 #include "BackGround.h"
 
+#include "Helltaker_ContentsCore.h"
+
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
 
@@ -24,9 +26,10 @@ void BackGround::LoadRenderImage(std::string_view _Name)
 void BackGround::SetRenderImage(std::string_view _Name)
 {
 	RenderActor::SetRenderImage(_Name);
+	FVector Scale = Helltaker_ContentsCore::GetWindowScale();
 
 	Renderer = CreateImageRenderer(0);
 	Renderer->SetImage(_Name);
-	Renderer->SetTransform({ {0, 0}, {1280, 720} });
+	Renderer->SetTransform({ {0, 0}, Scale });
 	Renderer->SetImageCuttingTransform({ {0, 0}, {1920, 1080} });
 }

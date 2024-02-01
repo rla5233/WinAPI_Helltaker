@@ -4,6 +4,8 @@
 #include "PlayStage1.h"
 #include <EnginePlatform/WindowImage.h>
 
+FVector Helltaker_ContentsCore::WindowScale = { 1280, 720 };
+
 Helltaker_ContentsCore::Helltaker_ContentsCore()
 {
 }
@@ -15,7 +17,7 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 // 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
-	MainWindow.SetWindowScale({ 1280, 720 });
+	MainWindow.SetWindowScale(WindowScale);
 
 	UEngineCore::BeginPlay();
 
