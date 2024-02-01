@@ -68,7 +68,14 @@ public:
 
 	UWindowImage* FindImg(std::string_view _Name);
 
+	// 그 이미지가 없었는데 새롭게 만드는 기능.
+	UWindowImage* LoadFolder(std::string_view _Path);
 
+	// 그 이미지가 없었는데 새롭게 만드는 기능.
+	UWindowImage* LoadFolder(std::string_view _Path, std::string_view _Name);
+
+	// 기존에 이미 로드한 이미지를 커팅하는 기능
+	void CuttingImage(std::string_view _Name, int _X, int _Y);
 
 protected:
 

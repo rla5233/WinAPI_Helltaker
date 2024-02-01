@@ -108,13 +108,12 @@ void UEngineCore::EngineEnd()
 	GEngine->AllLevel.clear();
 }
 
-void UEngineCore::EngineStart(HINSTANCE _hInstance, UEngineCore* _UserCore)
+void UEngineCore::EngineStart(HINSTANCE _hInstance)
 {
-	UEngineCore* Ptr = _UserCore;
-	GEngine = Ptr;
-	Ptr->MainTimer.TimeCheckStart();
-	Ptr->CoreInit(_hInstance);
-	Ptr->BeginPlay();
+	GEngine = this;
+	MainTimer.TimeCheckStart();
+	CoreInit(_hInstance);
+	BeginPlay();
 	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
 }
 
