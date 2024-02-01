@@ -26,13 +26,15 @@ public:
 
 	bool IsExists();
 
-	std::string GetFileName();
-	std::string GetExtension();
+	std::string GetFileName() const;
+	std::string GetExtension() const;
 
 	void MoveParent();
 	void Move(std::string_view _Path);
 
-	std::string GetFullPath()
+	std::string AppendPath(std::string_view _Path);
+
+	std::string GetFullPath() const
 	{
 		// 문자열을 std에서는 char* char[100]
 		// std::string을 지원해준다.

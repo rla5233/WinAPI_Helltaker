@@ -9,6 +9,7 @@ class UEngineDirectory : public UEnginePath
 public:
 	// constrcuter destructer
 	UEngineDirectory();
+	UEngineDirectory(const UEnginePath& _Path);
 	~UEngineDirectory();
 
 	// delete Function
