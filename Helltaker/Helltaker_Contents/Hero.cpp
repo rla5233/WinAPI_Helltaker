@@ -18,7 +18,19 @@ void Hero::BeginPlay()
 	MoveActor::BeginPlay();
 	RenderActor::BeginPlay();
 	
-	LoadAndSetRenderImage("Hero0022.bmp");
+	//LoadAndSetRenderImage("Hero0022.bmp"); 
+
+	// 여기 부터 Test
+	UEngineDirectory ResourcesPath = UEngineDirectory();
+	ResourcesPath.MoveParent();
+	ResourcesPath.Move("Resources\\Stage\\Hero");
+	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath("Right_Idle"));
+
+	Renderer = CreateImageRenderer(1);
+	Renderer->SetImage("Right_Idle");
+	Renderer->SetTransform({ {0,0}, {70, 70} });
+	Renderer->CreateAnimation("Right_Idle", "Right_Idle", 0, 11, 0.07f, true);
+	Renderer->ChangeAnimation("Right_Idle");
 }
 
 void Hero::LoadRenderImage(std::string_view _Name)
