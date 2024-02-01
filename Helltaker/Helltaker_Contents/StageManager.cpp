@@ -7,7 +7,7 @@
 #include <EngineBase/EngineDirectory.h>
 
 
-const float StageManager::OneTileWidth = 60.0f;
+const float StageManager::OneTileWidth = 70.0f;
 
 StageManager::StageManager()
 {

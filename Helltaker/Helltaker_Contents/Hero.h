@@ -1,7 +1,8 @@
 #pragma once
 #include "MoveActor.h"
+#include "RenderActor.h"
 
-class Hero : public MoveActor
+class Hero : public MoveActor, public RenderActor
 {
 public:
 	// constrcuter destructer
@@ -17,12 +18,14 @@ public:
 public:
 
 protected:
+	void LoadRenderImage(std::string_view _Name) override;
+	void SetRenderImage(std::string_view _Name) override;
+
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
-
 	int ActionPoint = 25;
+
 };
 

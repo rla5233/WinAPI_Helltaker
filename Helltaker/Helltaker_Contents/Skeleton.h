@@ -1,8 +1,9 @@
 #pragma once
 #include "MoveActor.h"
+#include "RenderActor.h"
 
 // Ό³Έν :
-class Skeleton : public MoveActor
+class Skeleton : public MoveActor, public RenderActor
 {
 public:
 	// constructor destructor
@@ -20,5 +21,5 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
+
 };

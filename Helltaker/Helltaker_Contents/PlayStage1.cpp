@@ -25,22 +25,13 @@ void UPlayStage1::BeginPlay()
 	SetStageStartLocation({ 7, 7 });
 
 	BackGround* NewBG = SpawnActor<BackGround>();
-	//NewBG->SetActorLocation();
+	NewBG->SetActorLocation({ 1280 / 2, 720 / 2 });
+	NewBG->LoadAndSetRenderImage("StageBG_001.bmp");
 
-
-	UEngineDirectory ResourcesPath = UEngineDirectory();
-	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources");
-
-	std::list<UEngineFile> AllFileList = ResourcesPath.AllFile({ ".png", ".bmp" }, true);
-
-	for (UEngineFile& File : AllFileList)
-	{
-		std::string FullPath = File.GetFullPath();
-		// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
-		UEngineResourcesManager::GetInst().LoadImg(FullPath);
-	}
-
+	//UEngineDirectory ResourcesPath = UEngineDirectory();
+	//ResourcesPath.MoveParent();
+	//ResourcesPath.Move("Resources");
+	
 	Hero* NewHero = SpawnActor<Hero>();
 	NewHero->SetActorLocation(StagePointToLocation(6, 0));
 	NewHero->SetLocationPoint({ 6, 0 });
