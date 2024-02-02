@@ -35,7 +35,8 @@ void UPlayStage1::BeginPlay()
 	//ResourcesPath.Move("Resources");
 	
 	Hero* NewHero = SpawnActor<Hero>();
-	NewHero->SetActorLocation(StagePointToLocation(6, 0));
+	float hTileWidth = StageManager::GetOneTileWidth() / 2;
+	NewHero->SetActorLocation(StagePointToLocation(6, 0) + FVector(hTileWidth, hTileWidth));
 	NewHero->SetLocationPoint({ 6, 0 });
 	
 	//Skeleton* NewSkeleton = SpawnActor<Skeleton>();

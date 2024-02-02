@@ -19,7 +19,7 @@ public:
 
 	void SetLocationPoint(FVector _Point)
 	{
-		StagePoint = _Point;
+		LocationPoint = _Point;
 	}
 
 protected:
@@ -28,7 +28,7 @@ private:
 	float MoveDistance = 0.0f;
 	float Speed = 500.0f;
 	FVector MoveDir = FVector::Zero;
-	FVector StagePoint = FVector::Zero;
+	FVector LocationPoint = FVector::Zero;
 
 	bool IsMoving = false;
 };

@@ -97,24 +97,27 @@ void UImageRenderer::Render(float _DeltaTime)
 	// 부모의 위치를 더해줘야 한다.
 	RendererTrans.AddPosition(ActorTrans.GetPosition());
 
-	std::string Out = std::to_string(InfoIndex);
+	// TransColor 원리 특정 색상과 1비트도 차이가 나지 않는 색상은 출력을 삭제한다.
+	// TransCopy 에서만 
+	// Png일 경우에 
 
-	Out += "\n";
-	OutputDebugStringA(Out.c_str());
+	EWIndowImageType ImageType = Image->GetImageType();
 
-	// 이려면 윈도우 이미지에 그리면 화면의 갱신이 산발적으로 일어나므로
-	// GEngine->MainWindow.GetWindowImage()->BitCopy(Image, ThisTrans);
 
-	// 
-	// GEngine->MainWindow.GetBackBufferImage()->BitCopy(Image, ThisTrans);
-	// Rectangle(WindowDC, ThisTrans.iLeft(), ThisTrans.iTop(), ThisTrans.iRight(), ThisTrans.iBottom());
 
-	// 1, 0, 0, 255
-
-	// 여기입니다.
-
-	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex);
-
+	switch (ImageType)
+	{
+	case EWIndowImageType::IMG_BMP:
+		GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex, TransColor);
+		// bmp일때는 일반적으로 Transcopy로 투명처리를 한다.
+		break;
+	case EWIndowImageType::IMG_PNG:
+		GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		break;
+	default:
+		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");
+		break;
+	}
 }
 
 void UImageRenderer::BeginPlay()

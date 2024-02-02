@@ -53,8 +53,10 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		}
 		else
 		{
-			StagePoint += MoveDir;
-			SetActorLocation(dynamic_cast<StageManager*>(GetWorld())->StagePointToLocation(StagePoint));			
+			LocationPoint += MoveDir;
+			float hTileWidth = StageManager::GetOneTileWidth() / 2;
+			FVector hTile = { hTileWidth , hTileWidth };
+			SetActorLocation(dynamic_cast<StageManager*>(GetWorld())->StagePointToLocation(LocationPoint) + hTile);
 			MoveDistance = StageManager::GetOneTileWidth();
 			IsMoving = false;
 		}
