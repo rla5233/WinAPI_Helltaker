@@ -69,11 +69,18 @@ public:
 
 	// 이녀석은 이미지를 키울수도 있고 특정 색상을 안그릴수도 있다.
 	// EX) 검은색 화면에서 없애
-	void TransCopy(UWindowImage* _CopyImage, const FTransform& _CopyTrans, int _Index, Color8Bit _Color = Color8Bit::Black);
+	void TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color = Color8Bit::Black);
+
+	void AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color = Color8Bit::Black);
 
 	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
 	void Cutting(int _X, int _Y);
+
+	EWIndowImageType GetImageType()
+	{
+		return ImageType;
+	}
 
 protected:
 

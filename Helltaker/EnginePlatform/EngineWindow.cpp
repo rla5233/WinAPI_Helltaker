@@ -33,6 +33,7 @@ void UEngineWindow::Init(HINSTANCE _hInst)
 }
 
 
+
 UEngineWindow::UEngineWindow()
 {}
 
@@ -147,19 +148,20 @@ unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)(
 }
 
 
+FVector UEngineWindow::GetMousePosition()
+{
+	POINT MousePoint;
+	GetCursorPos(&MousePoint);
+	ScreenToClient(hWnd, &MousePoint);
 
+	return FVector(MousePoint.x, MousePoint.y);
+}
 
 void UEngineWindow::SetWindowPosition(const FVector& _Pos)
 {
-	//HWND hWnd, 당연히 크기를 바꾸고 싶은 윈도우의 handle
-	//HWND hWndInsertAfter, ??????
-	//int X, 왼쪽위점
-	//int Y, 오른쫌 위점
-	//int cx, 크기 x
-	//int cy, 크기 y
-	//UINT uFlags
-	// 크기와 위치가 혼합되어 있습니다.
+	Position = _Pos;
 
+	::SetWindowPos(hWnd, nullptr, Position.iX(), Position.iY(), 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 }
 
 void UEngineWindow::SetWindowScale(const FVector& _Scale)
