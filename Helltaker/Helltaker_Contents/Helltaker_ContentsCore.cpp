@@ -4,7 +4,7 @@
 #include "PlayStage1.h"
 #include <EnginePlatform/WindowImage.h>
 
-FVector Helltaker_ContentsCore::WindowScale = { 1280, 720 };
+FVector Helltaker_ContentsCore::WindowScale = { 1920, 1080 };
 
 Helltaker_ContentsCore::Helltaker_ContentsCore()
 {
