@@ -28,6 +28,9 @@
     <ClInclude Include="RenderActor.h">
       <Filter>Object\Actor\Base</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsHelper.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StageManager.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="RenderActor.cpp">
       <Filter>Object\Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
