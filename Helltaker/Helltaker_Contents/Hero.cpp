@@ -28,7 +28,7 @@ void Hero::BeginPlay()
 
 	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage("Right_Idle");
-	Renderer->SetTransform({ {0,0}, {70, 70} });
+	Renderer->SetTransform({ {0,0}, {90, 90} });
 	Renderer->CreateAnimation("Right_Idle", "Right_Idle", 0, 11, 0.07f, true);
 	Renderer->ChangeAnimation("Right_Idle");
 }
