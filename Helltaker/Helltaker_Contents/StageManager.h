@@ -19,15 +19,7 @@ public:
 	StageManager& operator=(const StageManager& _Other) = delete;
 	StageManager& operator=(StageManager&& _Other) noexcept = delete;
 
-	static float GetOneTileWidth()
-	{ 
-		return OneTileWidth;
-	}
-
-	void SetStageStartLocation(FVector _Point)
-	{
-		StageStartLocation = _Point * OneTileWidth;
-	}
+	void SetStageStartLocation(FVector _Point);
 
 	FVector StagePointToLocation(FVector _Point);
 	FVector StagePointToLocation(int _X, int _Y);
@@ -40,8 +32,6 @@ protected:
 	virtual void Tick(float _DeltaTime) override;
 
 private:
-	static const float OneTileWidth;
-
 	FVector StageStartLocation = FVector::Zero;
 	
 	std::vector<std::vector<bool>> StageMap;

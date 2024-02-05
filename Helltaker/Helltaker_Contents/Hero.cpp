@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-#include "Helltaker_ContentsCore.h"
+#include "ContentsHelper.h"
 
 #include <EngineCore/EngineCore.h>
 #include <EngineBase/EngineDirectory.h>
@@ -16,14 +16,11 @@ Hero::~Hero()
 void Hero::BeginPlay()
 {
 	MoveActor::BeginPlay();
-	RenderActor::BeginPlay();
 	
-	//LoadAndSetRenderImage("Hero0022.bmp"); 
-
 	// 여기 부터 Test
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources\\Stage\\Hero");
+	ResourcesPath.Move("Resources\\Characters\\Chapter\\Hero");
 	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath("Right_Idle"));
 
 	Renderer = CreateImageRenderer(1);
@@ -35,8 +32,6 @@ void Hero::BeginPlay()
 
 void Hero::LoadRenderImage(std::string_view _Name)
 {
-	RenderActor::LoadRenderImage(_Name);
-
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
 	ResourcesPath.Move("Resources\\Stage\\Hero");
@@ -45,9 +40,7 @@ void Hero::LoadRenderImage(std::string_view _Name)
 
 void Hero::SetRenderImage(std::string_view _Name)
 {
-	RenderActor::SetRenderImage(_Name);
-
-	FVector Scale = Helltaker_ContentsCore::GetWindowScale();
+	FVector Scale = ContentsHelper::GetWindowScale();
 	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage(_Name);
 	Renderer->SetTransform({ {0, 0}, {Scale.X / 20, Scale.Y / 10 } });
@@ -57,7 +50,6 @@ void Hero::SetRenderImage(std::string_view _Name)
 void Hero::Tick(float _DeltaTime)
 {
 	MoveActor::Tick(_DeltaTime);
-	RenderActor::Tick(_DeltaTime);
 
 	MoveCheck(_DeltaTime);
 	MoveOneBlock(_DeltaTime);

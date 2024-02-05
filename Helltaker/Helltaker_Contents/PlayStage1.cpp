@@ -1,9 +1,9 @@
 #include "PlayStage1.h"
 
-#include "Helltaker_ContentsCore.h"
+#include "ContentsHelper.h"
 #include "BackGround.h"
-#include "Hero.h"
 #include "Skeleton.h"
+#include "Hero.h"
 
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineBase/EngineDirectory.h>
@@ -25,17 +25,19 @@ void UPlayStage1::BeginPlay()
 	CreateStageMap(7, 7);
 	SetStageStartLocation({ 7, 2 });
 
-	FVector WinScale = Helltaker_ContentsCore::GetWindowScale();
+	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* NewBG = SpawnActor<BackGround>();
 	NewBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
-	NewBG->LoadAndSetRenderImage("StageBG_001.bmp");
+	NewBG->LoadRenderImage("Chapter", "ChapterBG_001.png");
+	//NewBG->SetRenderImage("ChapterBG_001.png");
+
 
 	//UEngineDirectory ResourcesPath = UEngineDirectory();
 	//ResourcesPath.MoveParent();
 	//ResourcesPath.Move("Resources");
 	
 	Hero* NewHero = SpawnActor<Hero>();
-	float hTileWidth = StageManager::GetOneTileWidth() / 2;
+	float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
 	NewHero->SetActorLocation(StagePointToLocation(6, 0) + FVector(hTileWidth, hTileWidth));
 	NewHero->SetLocationPoint({ 6, 0 });
 	

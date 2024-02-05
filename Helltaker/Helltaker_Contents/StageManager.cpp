@@ -1,14 +1,11 @@
 #include "StageManager.h"
 
-#include "Helltaker_ContentsCore.h"
 #include "Hero.h"
 #include "Skeleton.h"
+#include "ContentsHelper.h"
 
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineBase/EngineDirectory.h>
-
-
-const float StageManager::OneTileWidth = Helltaker_ContentsCore::GetWindowScale().X / 19;
 
 StageManager::StageManager()
 {
@@ -16,6 +13,11 @@ StageManager::StageManager()
 
 StageManager::~StageManager()
 {
+}
+
+void StageManager::SetStageStartLocation(FVector _Point)
+{
+	StageStartLocation = _Point * ContentsHelper::GetOneTileWidth();
 }
 
 FVector StageManager::StagePointToLocation(FVector _Point)
@@ -26,7 +28,7 @@ FVector StageManager::StagePointToLocation(FVector _Point)
 FVector StageManager::StagePointToLocation(int _X, int _Y)
 {
 	FVector Location = StageStartLocation;
-	Location += FVector(_X, _Y) * OneTileWidth;
+	Location += FVector(_X, _Y) * ContentsHelper::GetOneTileWidth();
 	return Location;
 }
 

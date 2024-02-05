@@ -1,11 +1,13 @@
 #include "MoveActor.h"
+
 #include "StageManager.h"
+#include "ContentsHelper.h"
 
 #include <EnginePlatform/EngineInput.h>
 
 MoveActor::MoveActor()
 {
-	MoveDistance = StageManager::GetOneTileWidth();
+	MoveDistance = ContentsHelper::GetOneTileWidth();
 }
 
 MoveActor::~MoveActor()
@@ -54,10 +56,10 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		else
 		{
 			LocationPoint += MoveDir;
-			float hTileWidth = StageManager::GetOneTileWidth() / 2;
+			float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
 			FVector hTile = { hTileWidth , hTileWidth };
 			SetActorLocation(dynamic_cast<StageManager*>(GetWorld())->StagePointToLocation(LocationPoint) + hTile);
-			MoveDistance = StageManager::GetOneTileWidth();
+			MoveDistance = ContentsHelper::GetOneTileWidth();
 			IsMoving = false;
 		}
 	}

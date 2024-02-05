@@ -1,6 +1,6 @@
 #include "BackGround.h"
 
-#include "Helltaker_ContentsCore.h"
+#include "ContentsHelper.h"
 
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
@@ -13,22 +13,24 @@ BackGround::~BackGround()
 {
 }
 
-void BackGround::LoadRenderImage(std::string_view _Name)
+void BackGround::LoadRenderImage(std::string_view _Path, std::string_view _Name)
 {
-	RenderActor::LoadRenderImage(_Name);
-
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources\\Stage\\BackGround");
-	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.GetFullPath() + "\\" + _Name.data());
+	ResourcesPath.Move("Resources\\BackGround\\");
+	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.GetFullPath() + _Path.data() + "\\" + _Name.data());
 }
 
-void BackGround::SetRenderImage(std::string_view _Name)
+void BackGround::SetRenderImage(std::string_view _Name, RenderOrder _Order)
 {
-	RenderActor::SetRenderImage(_Name);
-	FVector Scale = Helltaker_ContentsCore::GetWindowScale();
+	SetRenderImage(_Name, static_cast<int>(_Order));
+}
 
-	Renderer = CreateImageRenderer(0);
+void BackGround::SetRenderImage(std::string_view _Name, int _Order)
+{
+	FVector Scale = ContentsHelper::GetWindowScale();
+
+	Renderer = CreateImageRenderer(_Order);
 	Renderer->SetImage(_Name);
 	Renderer->SetTransform({ {0, 0}, Scale });
 	Renderer->SetImageCuttingTransform({ {0, 0}, {1920, 1080} });

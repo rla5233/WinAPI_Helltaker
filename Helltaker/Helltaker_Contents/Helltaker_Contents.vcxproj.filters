@@ -4,9 +4,6 @@
     <ClInclude Include="StageManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>Object\Level</Filter>
-    </ClInclude>
     <ClInclude Include="Helltaker_ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -16,28 +13,31 @@
     <ClInclude Include="MoveActor.h">
       <Filter>Object\Actor\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Hero.h">
-      <Filter>Object\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Skeleton.h">
-      <Filter>Object\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Object\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="RenderActor.h">
-      <Filter>Object\Actor\Base</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsHelper.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogue.h">
+      <Filter>Object\Actor\Secene</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StageManager.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>Object\Level</Filter>
     </ClCompile>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
       <Filter>Core</Filter>
@@ -48,20 +48,23 @@
     <ClCompile Include="MoveActor.cpp">
       <Filter>Object\Actor\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Object\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>Object\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Object\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="RenderActor.cpp">
-      <Filter>Object\Actor\Base</Filter>
-    </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogue.cpp">
+      <Filter>Object\Actor\Secene</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +85,12 @@
     </Filter>
     <Filter Include="Object\Actor\Base">
       <UniqueIdentifier>{99323e89-623e-4460-9a94-f1b48814b652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Secene">
+      <UniqueIdentifier>{f6d60d8f-f757-4b67-836c-cf199e530f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Chapter">
+      <UniqueIdentifier>{e918e078-0f05-410e-9ed0-0e5d01b8b432}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

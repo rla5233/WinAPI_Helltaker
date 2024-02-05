@@ -1,7 +1,7 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
-class MoveActor : virtual public AActor
+class MoveActor : public AActor
 {
 public:
 	// constructor destructor

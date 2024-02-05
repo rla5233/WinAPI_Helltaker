@@ -1,9 +1,11 @@
 #pragma once
 
-#include "RenderActor.h"
+#include <EngineCore/Actor.h>
+#include "ContentsEnum.h"
+
 
 // Ό³Έν :
-class BackGround : public RenderActor
+class BackGround : public AActor
 {
 public:
 	// constructor destructor
@@ -16,11 +18,14 @@ public:
 	BackGround& operator=(const BackGround& _Other) = delete;
 	BackGround& operator=(BackGround&& _Other) noexcept = delete;
 	
-	void LoadRenderImage(std::string_view _Name) override;
-	void SetRenderImage(std::string_view _Name) override;
+	void LoadRenderImage(std::string_view _Path, std::string_view _Name);
+	
+	void SetRenderImage(std::string_view _Name, int _Order);
+	void SetRenderImage(std::string_view _Name, RenderOrder _Order);
 	
 protected:
 
 private:
+	UImageRenderer* Renderer = nullptr;
 
 };

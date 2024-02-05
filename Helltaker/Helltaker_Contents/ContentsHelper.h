@@ -1,4 +1,6 @@
 #pragma once
+#include <EngineBase\EngineMath.h>
+#include <EngineCore\EngineCore.h>
 
 // Ό³Έν :
 class ContentsHelper
@@ -13,6 +15,9 @@ public:
 	ContentsHelper(ContentsHelper&& _Other) noexcept = delete;
 	ContentsHelper& operator=(const ContentsHelper& _Other) = delete;
 	ContentsHelper& operator=(ContentsHelper&& _Other) noexcept = delete;
+
+	static FVector GetWindowScale();
+	static float GetOneTileWidth();
 
 protected:
 
