@@ -28,9 +28,6 @@ void UPlayStage1::BeginPlay()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* NewBG = SpawnActor<BackGround>();
 	NewBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
-	NewBG->LoadRenderImage("Chapter", "ChapterBG_001.png");
-	//NewBG->SetRenderImage("ChapterBG_001.png");
-
 
 	//UEngineDirectory ResourcesPath = UEngineDirectory();
 	//ResourcesPath.MoveParent();

@@ -18,12 +18,10 @@ public:
 	Dialogue& operator=(const Dialogue& _Other) = delete;
 	Dialogue& operator=(Dialogue&& _Other) noexcept = delete;
 
-	void LoadRenderImage(std::string_view _Path, std::string_view _Name);
 
-	void SetRenderImage(std::string_view _Name, int _Order);
-	void SetRenderImage(std::string_view _Name, RenderOrder _Order);
 
 protected:
+	void BeginPlay() override;
 
 private:
 	UImageRenderer* Renderer = nullptr;

@@ -3,6 +3,7 @@
 #include "ContentsEnum.h"
 #include "ContentsHelper.h"
 #include "BackGround.h"
+#include "Dialogue.h"
 
 #include <EnginePlatform/EngineWindow.h>
 
@@ -21,11 +22,7 @@ void Title::BeginPlay()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* OpeningBG = SpawnActor<BackGround>();
 	OpeningBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
-	OpeningBG->LoadRenderImage("Opening", "Opening.png");
-	OpeningBG->SetRenderImage("Opening.png", RenderOrder::BackGround);
 
-	BackGround* UnityLogo = SpawnActor<BackGround>();
-	OpeningBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
-	OpeningBG->LoadRenderImage("Opening", "UnityLogo.png");
-	OpeningBG->SetRenderImage("UnityLogo.png", RenderOrder::BackGround);
+	Dialogue* UnityLogo = SpawnActor<Dialogue>();
+	UnityLogo->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
 }
