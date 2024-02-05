@@ -47,7 +47,6 @@ public:
 		LevelType* NewLevel = new LevelType();
 		LevelInit(NewLevel);
 		AllLevel.insert(std::pair<std::string, ULevel*>(UpperName, NewLevel));
-		// AllLevel[UpperName] = NewLevel;
 	}
 
 	void ChangeLevel(std::string_view _Name);
@@ -69,6 +68,7 @@ private:
 	bool EngineInit = false;
 	std::map<std::string, ULevel*> AllLevel;
 	ULevel* CurLevel = nullptr;
+	ULevel* NextLevel = nullptr;
 
 	static void EngineTick();
 	void CoreTick();

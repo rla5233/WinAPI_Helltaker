@@ -24,6 +24,8 @@ void Title::BeginPlay()
 	OpeningBG->LoadRenderImage("Opening", "Opening.png");
 	OpeningBG->SetRenderImage("Opening.png", RenderOrder::BackGround);
 
-	
-
+	BackGround* UnityLogo = SpawnActor<BackGround>();
+	OpeningBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
+	OpeningBG->LoadRenderImage("Opening", "UnityLogo.png");
+	OpeningBG->SetRenderImage("Opening.png", RenderOrder::BackGround);
 }
