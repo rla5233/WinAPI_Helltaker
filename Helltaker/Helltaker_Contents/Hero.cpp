@@ -44,7 +44,7 @@ void Hero::SetRenderImage(std::string_view _Name)
 	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage(_Name);
 	Renderer->SetTransform({ {0, 0}, {Scale.X / 20, Scale.Y / 10 } });
-	Renderer->SetImageCuttingTransform({ {0, 0}, {89, 92} });
+	Renderer->SetImageCuttingTransform({ {0, 0}, Renderer->GetImage()->GetScale() });
 }
 
 void Hero::Tick(float _DeltaTime)

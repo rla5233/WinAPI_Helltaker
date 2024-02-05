@@ -34,6 +34,9 @@
     <ClInclude Include="Skeleton.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="RenderActor.h">
+      <Filter>Object\Actor\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StageManager.cpp">
@@ -65,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
       <Filter>Object\Actor\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderActor.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

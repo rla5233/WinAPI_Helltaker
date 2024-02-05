@@ -33,5 +33,5 @@ void BackGround::SetRenderImage(std::string_view _Name, int _Order)
 	Renderer = CreateImageRenderer(_Order);
 	Renderer->SetImage(_Name);
 	Renderer->SetTransform({ {0, 0}, Scale });
-	Renderer->SetImageCuttingTransform({ {0, 0}, {1920, 1080} });
+	Renderer->SetImageCuttingTransform({ {0, 0}, Renderer->GetImage()->GetScale() });
 }
