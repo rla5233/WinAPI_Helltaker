@@ -18,11 +18,6 @@ void Dialogue::LoadFolder()
 
 }
 
-void Dialogue::SetFolder()
-{
-
-}
-
 void Dialogue::LoadImg()
 {
 	UEngineDirectory ResourcesPath = UEngineDirectory();

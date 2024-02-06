@@ -16,9 +16,6 @@ Character::~Character()
 void Character::LoadFolder()
 {}
 
-void Character::SetFolder()
-{}
-
 void Character::LoadImg()
 {
 	UEngineDirectory ResourcesPath = UEngineDirectory();

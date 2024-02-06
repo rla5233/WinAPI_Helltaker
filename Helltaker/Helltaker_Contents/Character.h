@@ -17,9 +17,8 @@ public:
 	Character& operator=(Character&& _Other) noexcept = delete;
 
 	void LoadFolder();
-	void SetFolder();
-
 	void LoadImg();
+
 	void SetImg(bool _SetOrgScale);
 
 	void SetScale(const FVector& _Scale)
@@ -31,7 +30,7 @@ public:
 	{
 		if (nullptr != Renderer)
 		{
-			MsgBoxAssert("Dialogue Renderer is nullptr");
+			MsgBoxAssert("Renderer is nullptr");
 		}
 
 		return Renderer->GetImage()->GetScale();

@@ -32,18 +32,10 @@ void Chapter1::BeginPlay()
 	ChapterBG->LoadImg();
 	ChapterBG->SetImg();
 
-	//UEngineDirectory ResourcesPath = UEngineDirectory();
-	//ResourcesPath.MoveParent();
-	//ResourcesPath.Move("Resources");
-
 	Hero* NewHero = SpawnActor<Hero>();
 	float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
 	NewHero->SetActorLocation(ChapterPointToLocation(6, 0) + FVector(hTileWidth, hTileWidth));
 	NewHero->SetLocationPoint({ 6, 0 });
-
-	//Skeleton* NewSkeleton = SpawnActor<Skeleton>();
-	//NewSkeleton->SetActorLocation(StagePointToLocation(2, 1));
-	//NewSkeleton->SetLocationPoint({ 2, 1 });
 }
 
 

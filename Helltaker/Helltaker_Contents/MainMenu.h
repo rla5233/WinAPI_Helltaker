@@ -5,6 +5,7 @@
 #include <EngineCore/Level.h>
 
 class Character;
+class UI;
 
 // Ό³Έν :
 class MainMenu : public ULevel
@@ -24,7 +25,8 @@ public:
 	void StateChange(EMainMenuState _State);
 
 	void Enter(float _DeltaTime);
-
+	void SelectMenu(float _DeltaTime);
+	void Exit(float _DeltaTime);
 
 protected:
 	void BeginPlay() override;
@@ -32,6 +34,7 @@ protected:
 
 private:
 	Character* Beel = nullptr;
+	UI* Booper = nullptr;
 
 	EMainMenuState State = EMainMenuState::None;
 

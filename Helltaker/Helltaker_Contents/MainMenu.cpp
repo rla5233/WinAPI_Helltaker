@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "Dialogue.h"
 #include "Character.h"
+#include "UI.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
@@ -37,6 +38,15 @@ void MainMenu::BeginPlay()
 	Beel->SetName("Beel_Fly.png");
 	Beel->LoadImg();
 
+	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+	Booper->SetActorLocation({ WinScale.X / 2, WinScale.Y / 1.15f });
+	Booper->SetName("Booper");
+	Booper->LoadFolder();	
+	Booper->SetScale({ 30, 15 });
+	Booper->SetImg(false);
+	Booper->CreateUIAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	Booper->ChangeUIAnimation("Booper_Idle");
+
 	StateChange(EMainMenuState::Begin);
 }
 
@@ -52,6 +62,12 @@ void MainMenu::Enter(float _DeltaTime)
 	
 }
 
+void MainMenu::SelectMenu(float _DeltaTime)
+{}
+
+void MainMenu::Exit(float _DeltaTime)
+{}
+
 void MainMenu::StateUpdate(float _DeltaTime)
 {
 	switch (State)
@@ -59,7 +75,11 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	case EMainMenuState::Enter:
 		Enter(_DeltaTime);
 		break;
+	case EMainMenuState::SelectMenu:
+		SelectMenu(_DeltaTime);
+		break;
 	case EMainMenuState::Exit:
+		Exit(_DeltaTime);
 		break;
 	default:
 	{
