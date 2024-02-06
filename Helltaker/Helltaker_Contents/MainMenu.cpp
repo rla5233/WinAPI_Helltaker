@@ -5,6 +5,7 @@
 #include "BackGround.h"
 #include "Dialogue.h"
 
+#include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
 
 MainMenu::MainMenu()
@@ -36,5 +37,14 @@ void MainMenu::BeginPlay()
 void MainMenu::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);
+
+}
+
+void MainMenu::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
+
+	
+
 
 }

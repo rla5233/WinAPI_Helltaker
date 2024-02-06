@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="StageManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Helltaker_ContentsCore.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayStage1.h">
-      <Filter>Object\Level</Filter>
     </ClInclude>
     <ClInclude Include="MoveActor.h">
       <Filter>Object\Actor\Base</Filter>
@@ -37,16 +31,19 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Object\Level</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Chapter1.h">
+      <Filter>Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ChapterManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="StageManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayStage1.cpp">
-      <Filter>Object\Level</Filter>
     </ClCompile>
     <ClCompile Include="MoveActor.cpp">
       <Filter>Object\Actor\Base</Filter>
@@ -71,6 +68,15 @@
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter1.cpp">
+      <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ChapterManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #include "MoveActor.h"
 
-#include "StageManager.h"
 #include "ContentsHelper.h"
+#include "ChapterManager.h"
 
 #include <EnginePlatform/EngineInput.h>
 
@@ -58,7 +58,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			LocationPoint += MoveDir;
 			float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
 			FVector hTile = { hTileWidth , hTileWidth };
-			SetActorLocation(dynamic_cast<StageManager*>(GetWorld())->StagePointToLocation(LocationPoint) + hTile);
+			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTile);
 			MoveDistance = ContentsHelper::GetOneTileWidth();
 			IsMoving = false;
 		}

@@ -163,6 +163,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Chapter1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ChapterManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="ContentsHelper.h">
       <SubType>
@@ -192,21 +200,25 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayStage1.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Skeleton.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="StageManager.h">
+    <ClInclude Include="UI.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Chapter1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ChapterManager.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -238,15 +250,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayStage1.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Skeleton.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="StageManager.cpp">
+    <ClCompile Include="UI.cpp">
       <SubType>
       </SubType>
     </ClCompile>

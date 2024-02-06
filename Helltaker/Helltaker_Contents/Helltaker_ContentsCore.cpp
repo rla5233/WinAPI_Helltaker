@@ -1,7 +1,7 @@
 #include "Helltaker_ContentsCore.h"
 
 #include "Opening.h"
-#include "PlayStage1.h"
+#include "Chapter1.h"
 
 
 Helltaker_ContentsCore::Helltaker_ContentsCore()
@@ -22,4 +22,7 @@ void Helltaker_ContentsCore::BeginPlay()
 
 	CreateLevel<Opening>("Opening");
 	ChangeLevel("Opening");
+
+	//CreateLevel<Chapter1>("Chapter1");
+	//ChangeLevel("Chapter1");
 }
