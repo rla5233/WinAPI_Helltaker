@@ -4,6 +4,7 @@
 #include "ContentsHelper.h"
 #include "BackGround.h"
 #include "Dialogue.h"
+#include "MainMenu.h"
 
 #include <EnginePlatform/EngineWindow.h>
 
@@ -31,5 +32,17 @@ void Opening::BeginPlay()
 	UnityLogo->SetName("UnityLogo.png");
 	UnityLogo->SetScale({ WinScale.X / 5, WinScale.Y / 5 });
 	UnityLogo->LoadImgDialogue();
-	UnityLogo->SetImgDialogue();
+	UnityLogo->SetImgDialogue(false);
+}
+
+void Opening::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
+	TimeCount += _DeltaTime;
+
+	if (2 <= TimeCount)
+	{
+		GEngine->CreateLevel<MainMenu>("MainMenu");
+		GEngine->ChangeLevel("MainMenu");
+	}
 }

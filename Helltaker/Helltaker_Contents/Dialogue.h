@@ -3,6 +3,7 @@
 #include "ContentsEnum.h"
 
 #include <EngineCore/Actor.h>
+#include <EngineBase/EngineDebug.h>
 
 // Ό³Έν :
 class Dialogue : public AActor
@@ -22,11 +23,21 @@ public:
 	void SetFolderDialogue();
 
 	void LoadImgDialogue();
-	void SetImgDialogue();
+	void SetImgDialogue(bool _SetOrgScale);
 
 	void SetScale(const FVector& _Scale)
 	{
 		Scale = _Scale;
+	}
+
+	FVector GetImgScale()
+	{
+		if (nullptr != Renderer)
+		{
+			MsgBoxAssert("Dialogue Renderer is nullptr");
+		}
+
+		return Renderer->GetImage()->GetScale();
 	}
 
 protected:

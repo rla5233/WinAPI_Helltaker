@@ -34,6 +34,9 @@
     <ClInclude Include="Opening.h">
       <Filter>Object\Level</Filter>
     </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Object\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StageManager.cpp">
@@ -64,6 +67,9 @@
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Opening.cpp">
+      <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
       <Filter>Object\Level</Filter>
     </ClCompile>
   </ItemGroup>

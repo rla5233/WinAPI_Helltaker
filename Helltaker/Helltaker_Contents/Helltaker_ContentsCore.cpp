@@ -22,17 +22,4 @@ void Helltaker_ContentsCore::BeginPlay()
 
 	CreateLevel<Opening>("Opening");
 	ChangeLevel("Opening");
-
-	//CreateLevel<UPlayStage1>("PlayStage1");
-	//ChangeLevel("PlayStage1");
-}
-
-void Helltaker_ContentsCore::Tick(float _DeltaTime)
-{
-	UEngineCore::Tick(_DeltaTime);
-}
-
-void Helltaker_ContentsCore::End()
-{
-	UEngineCore::End();
 }
