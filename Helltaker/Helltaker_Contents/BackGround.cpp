@@ -1,7 +1,6 @@
 #include "BackGround.h"
 
 #include "ContentsHelper.h"
-#include "ContentsEnum.h"
 
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
@@ -14,7 +13,7 @@ BackGround::~BackGround()
 {
 }
 
-void BackGround::LoadBG()
+void BackGround::LoadImg()
 {
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
@@ -22,7 +21,7 @@ void BackGround::LoadBG()
 	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(GetName()));
 }
 
-void BackGround::SetBG()
+void BackGround::SetImg()
 {
 	Renderer = CreateImageRenderer(static_cast<int>(RenderOrder::BackGround));
 	Renderer->SetImage(GetName());

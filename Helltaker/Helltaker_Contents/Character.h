@@ -1,20 +1,20 @@
 #pragma once
+
 #include <EngineCore/Actor.h>
-#include <EngineBase/EngineDebug.h>
 
 // Ό³Έν :
-class Dialogue : public AActor
+class Character : public AActor
 {
 public:
 	// constructor destructor
-	Dialogue();
-	~Dialogue();
+	Character();
+	~Character();
 
 	// delete Function
-	Dialogue(const Dialogue& _Other) = delete;
-	Dialogue(Dialogue&& _Other) noexcept = delete;
-	Dialogue& operator=(const Dialogue& _Other) = delete;
-	Dialogue& operator=(Dialogue&& _Other) noexcept = delete;
+	Character(const Character& _Other) = delete;
+	Character(Character&& _Other) noexcept = delete;
+	Character& operator=(const Character& _Other) = delete;
+	Character& operator=(Character&& _Other) noexcept = delete;
 
 	void LoadFolder();
 	void SetFolder();

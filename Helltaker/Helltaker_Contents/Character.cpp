@@ -1,46 +1,41 @@
-#include "Dialogue.h"
+#include "Character.h"
 
 #include "ContentsEnum.h"
 
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
 
-Dialogue::Dialogue()
+Character::Character()
 {
 }
 
-Dialogue::~Dialogue()
+Character::~Character()
 {
 }
 
-void Dialogue::LoadFolder()
-{
+void Character::LoadFolder()
+{}
 
-}
+void Character::SetFolder()
+{}
 
-void Dialogue::SetFolder()
-{
-
-}
-
-void Dialogue::LoadImg()
+void Character::LoadImg()
 {
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources\\Secene\\Dialogue");
+	ResourcesPath.Move("Resources\\Secene\\Characters");
 	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(GetName()));
 }
 
-void Dialogue::SetImg(bool _SetOrgScale)
+void Character::SetImg(bool _SetOrgScale)
 {
-	Renderer = CreateImageRenderer(static_cast<int>(RenderOrder::Dialogue));
+	Renderer = CreateImageRenderer(static_cast<int>(RenderOrder::Character));
 	Renderer->SetImage(GetName());
 
 	if (true == _SetOrgScale)
 	{
 		// 수정필요
 		Scale = Renderer->GetImage()->GetScale();
-		Scale.Y /= 1.5f;
 	}
 
 	Renderer->SetTransform({ {0,0}, Scale });

@@ -6,15 +6,6 @@
 class ContentsHelper
 {
 public:
-	// constructor destructor
-	ContentsHelper();
-	~ContentsHelper();
-
-	// delete Function
-	ContentsHelper(const ContentsHelper& _Other) = delete;
-	ContentsHelper(ContentsHelper&& _Other) noexcept = delete;
-	ContentsHelper& operator=(const ContentsHelper& _Other) = delete;
-	ContentsHelper& operator=(ContentsHelper&& _Other) noexcept = delete;
 
 	static FVector GetWindowScale();
 	static float GetOneTileWidth();
@@ -22,5 +13,33 @@ public:
 protected:
 
 private:
+	// constructor destructor
+	ContentsHelper();
+	~ContentsHelper();
 
+};
+
+enum class UpdateOrder
+{
+	BackGround,
+	Dialogue,
+	Character,
+	Hero,
+	Skeleton
+};
+
+enum class RenderOrder
+{
+	BackGround,
+	Dialogue,
+	Character,
+	Hero,
+	Skeleton
+};
+
+enum class EMainMenuState
+{
+	Begin,
+	Enter,
+	Exit
 };

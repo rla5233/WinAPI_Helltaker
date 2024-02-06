@@ -1,7 +1,6 @@
 #pragma once
 
 #include <EngineCore/Actor.h>
-#include "ContentsEnum.h"
 
 
 // Ό³Έν :
@@ -18,8 +17,8 @@ public:
 	BackGround& operator=(const BackGround& _Other) = delete;
 	BackGround& operator=(BackGround&& _Other) noexcept = delete;
 	
-	void LoadBG();
-	void SetBG();
+	void LoadImg();
+	void SetImg();
 
 protected:
 

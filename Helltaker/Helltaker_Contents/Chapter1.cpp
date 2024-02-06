@@ -29,8 +29,8 @@ void Chapter1::BeginPlay()
 	BackGround* ChapterBG = SpawnActor<BackGround>();
 	ChapterBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
 	ChapterBG->SetName("ChapterBG_001.png");
-	ChapterBG->LoadBG();
-	ChapterBG->SetBG();
+	ChapterBG->LoadImg();
+	ChapterBG->SetImg();
 
 	//UEngineDirectory ResourcesPath = UEngineDirectory();
 	//ResourcesPath.MoveParent();
