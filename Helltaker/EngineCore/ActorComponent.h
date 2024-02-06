@@ -33,7 +33,5 @@ private:
 	{
 		Owner = _Owner;
 	}
-
-
 };
 

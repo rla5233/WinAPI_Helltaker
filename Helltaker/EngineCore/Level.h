@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineBase\NameObject.h>
+#include <EngineBase\EngineMath.h>
 #include <map>
 #include <list>
 
@@ -44,6 +45,21 @@ public:
 		return NewActor;
 	}
 
+	void SddCameraPos(FVector _CameraPos)
+	{
+		CameraPos = _CameraPos;
+	}
+
+
+	void AddCameraPos(FVector _CameraPos)
+	{
+		CameraPos += _CameraPos;
+	}
+
+	FVector GetCameraPos()
+	{
+		return CameraPos;
+	}
 
 
 protected:
@@ -57,5 +73,7 @@ private:
 	void LevelRelease(float _DeltaTime);
 
 	std::map<int, std::list<UImageRenderer*>> Renderers;
+
+	FVector CameraPos = FVector::Zero;
 };
 
