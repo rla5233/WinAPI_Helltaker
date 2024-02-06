@@ -45,7 +45,7 @@ public:
 		return NewActor;
 	}
 
-	void SddCameraPos(FVector _CameraPos)
+	void SetCameraPos(FVector _CameraPos)
 	{
 		CameraPos = _CameraPos;
 	}
