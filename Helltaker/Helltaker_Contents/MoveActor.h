@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineCore\Actor.h>
+#include "RenderActor.h"
 
-class MoveActor : public AActor
+class MoveActor : public RenderActor
 {
 public:
 	// constructor destructor

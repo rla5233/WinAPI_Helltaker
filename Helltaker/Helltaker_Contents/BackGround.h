@@ -1,10 +1,9 @@
 #pragma once
 
-#include <EngineCore/Actor.h>
-
+#include "RenderActor.h"
 
 // Ό³Έν :
-class BackGround : public AActor
+class BackGround : public RenderActor
 {
 public:
 	// constructor destructor
@@ -16,13 +15,9 @@ public:
 	BackGround(BackGround&& _Other) noexcept = delete;
 	BackGround& operator=(const BackGround& _Other) = delete;
 	BackGround& operator=(BackGround&& _Other) noexcept = delete;
-	
-	void LoadImg();
-	void SetImg();
 
 protected:
 
 private:
-	UImageRenderer* Renderer = nullptr;
 
 };

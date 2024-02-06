@@ -40,6 +40,9 @@
     <ClInclude Include="Character.h">
       <Filter>Object\Actor\Secene</Filter>
     </ClInclude>
+    <ClInclude Include="RenderActor.h">
+      <Filter>Object\Actor\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -80,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Object\Actor\Secene</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderActor.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

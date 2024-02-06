@@ -24,8 +24,8 @@ void MainMenu::BeginPlay()
 	BackGround* DefaultBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	DefaultBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
 	DefaultBG->SetName("DefaultBG.png");
-	DefaultBG->LoadImg();
-	DefaultBG->SetImg();
+	DefaultBG->LoadImg("BackGround");
+	//DefaultBG->SetImg();
 
 	Dialogue* MainMenuDialogue = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Dialogue));
 	MainMenuDialogue->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2.45f });
@@ -42,7 +42,7 @@ void MainMenu::BeginPlay()
 	Booper->SetActorLocation({ WinScale.X / 2, WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
 	Booper->LoadFolder();	
-	Booper->SetScale({ 30, 15 });
+	Booper->SetScale({ 35, 15 });
 	Booper->SetImg(false);
 	Booper->CreateUIAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
 	Booper->ChangeUIAnimation("Booper_Idle");

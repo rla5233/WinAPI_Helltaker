@@ -23,7 +23,7 @@ void Hero::BeginPlay()
 	ResourcesPath.Move("Resources\\Characters\\Chapter\\Hero");
 	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath("Right_Idle"));
 
-	Renderer = CreateImageRenderer(1);
+	CreateImageRenderer(1);
 	Renderer->SetImage("Right_Idle");
 	Renderer->SetTransform({ {0,0}, {90, 90} });
 	Renderer->CreateAnimation("Right_Idle", "Right_Idle", 0, 11, 0.07f, true);
@@ -41,7 +41,7 @@ void Hero::LoadRenderImage(std::string_view _Name)
 void Hero::SetRenderImage(std::string_view _Name)
 {
 	FVector Scale = ContentsHelper::GetWindowScale();
-	Renderer = CreateImageRenderer(1);
+	CreateImageRenderer(1);
 	Renderer->SetImage(_Name);
 	Renderer->SetTransform({ {0, 0}, {Scale.X / 20, Scale.Y / 10 } });
 	Renderer->SetImageCuttingTransform({ {0, 0}, Renderer->GetImage()->GetScale() });

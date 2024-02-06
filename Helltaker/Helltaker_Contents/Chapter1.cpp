@@ -29,8 +29,8 @@ void Chapter1::BeginPlay()
 	BackGround* ChapterBG = SpawnActor<BackGround>();
 	ChapterBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
 	ChapterBG->SetName("ChapterBG_001.png");
-	ChapterBG->LoadImg();
-	ChapterBG->SetImg();
+	//ChapterBG->LoadImg();
+	//ChapterBG->SetImg();
 
 	Hero* NewHero = SpawnActor<Hero>();
 	float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;

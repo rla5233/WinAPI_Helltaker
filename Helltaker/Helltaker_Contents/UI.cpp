@@ -33,8 +33,8 @@ void UI::SetImg(bool _SetOrgScale)
 	{
 		// 수정필요
 		Scale = Renderer->GetImage()->GetScale();
-		Scale.X /= 2;
-		Scale.Y /= 2;
+		//Scale.X /= 2;
+		//Scale.Y /= 2;
 	}
 
 	Renderer->SetTransform({ {0, 0}, Scale });
