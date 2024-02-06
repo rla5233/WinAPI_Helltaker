@@ -21,8 +21,11 @@ void Title::BeginPlay()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* OpeningBG = SpawnActor<BackGround>();
+	OpeningBG->SetName("OpeningBG.png");
 	OpeningBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
+	OpeningBG->LoadBG();
+	OpeningBG->SetBG();
 
-	Dialogue* UnityLogo = SpawnActor<Dialogue>();
-	UnityLogo->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
+	//Dialogue* UnityLogo = SpawnActor<Dialogue>();
+	//UnityLogo->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
 }
