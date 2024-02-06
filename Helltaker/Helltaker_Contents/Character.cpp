@@ -1,6 +1,6 @@
 #include "Character.h"
 
-#include "ContentsEnum.h"
+#include "ContentsHelper.h"
 
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
@@ -36,6 +36,8 @@ void Character::SetImg(bool _SetOrgScale)
 	{
 		// 수정필요
 		Scale = Renderer->GetImage()->GetScale();
+		Scale.X /= 2;
+		Scale.Y /= 2;
 	}
 
 	Renderer->SetTransform({ {0,0}, Scale });

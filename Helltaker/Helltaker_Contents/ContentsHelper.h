@@ -21,6 +21,7 @@ private:
 
 enum class UpdateOrder
 {
+	None,
 	BackGround,
 	Dialogue,
 	Character,
@@ -30,6 +31,7 @@ enum class UpdateOrder
 
 enum class RenderOrder
 {
+	None,
 	BackGround,
 	Dialogue,
 	Character,
@@ -39,6 +41,7 @@ enum class RenderOrder
 
 enum class EMainMenuState
 {
+	None,
 	Begin,
 	Enter,
 	Exit

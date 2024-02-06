@@ -1,6 +1,5 @@
 #include "Opening.h"
 
-#include "ContentsEnum.h"
 #include "ContentsHelper.h"
 #include "BackGround.h"
 #include "Dialogue.h"

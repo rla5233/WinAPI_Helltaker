@@ -1,6 +1,5 @@
 #include "MainMenu.h"
 
-#include "ContentsHelper.h"
 #include "BackGround.h"
 #include "Dialogue.h"
 #include "Character.h"
@@ -33,17 +32,12 @@ void MainMenu::BeginPlay()
 	MainMenuDialogue->LoadImg();
 	MainMenuDialogue->SetImg(true);
 
-	Character* Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Dialogue));
+	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
 	Beel->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2.45f });
 	Beel->SetName("Beel_Fly.png");
 	Beel->LoadImg();
-	Beel->SetImg(true);
-}
 
-void MainMenu::LevelStart(ULevel* _PrevLevel)
-{
-	ULevel::LevelStart(_PrevLevel);
-
+	StateChange(EMainMenuState::Begin);
 }
 
 void MainMenu::Tick(float _DeltaTime)
@@ -53,7 +47,33 @@ void MainMenu::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 }
 
-void MainMenu::StateUpdate(float _DeltaTime)
+void MainMenu::Enter(float _DeltaTime)
 {
 	
+}
+
+void MainMenu::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case EMainMenuState::Enter:
+		Enter(_DeltaTime);
+		break;
+	case EMainMenuState::Exit:
+		break;
+	default:
+	{
+		if (EngineInput::IsPress(VK_SPACE) || EngineInput::IsPress(VK_RETURN))
+		{
+			StateChange(EMainMenuState::Enter);
+			Beel->SetImg(true);
+		}
+		break;
+	}
+	}
+}
+
+void MainMenu::StateChange(EMainMenuState _State)
+{
+	State = _State;
 }

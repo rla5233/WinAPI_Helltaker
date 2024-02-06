@@ -1,6 +1,10 @@
 #pragma once
 
+#include "ContentsHelper.h"
+
 #include <EngineCore/Level.h>
+
+class Character;
 
 // Ό³Έν :
 class MainMenu : public ULevel
@@ -17,12 +21,18 @@ public:
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
 	void StateUpdate(float _DeltaTime);
+	void StateChange(EMainMenuState _State);
+
+	void Enter(float _DeltaTime);
+
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void LevelStart(ULevel* _PrevLevel) override;
 
 private:
+	Character* Beel = nullptr;
+
+	EMainMenuState State = EMainMenuState::None;
 
 };
