@@ -18,11 +18,21 @@ public:
 	Dialogue& operator=(const Dialogue& _Other) = delete;
 	Dialogue& operator=(Dialogue&& _Other) noexcept = delete;
 
+	void LoadFolderDialogue();
+	void SetFolderDialogue();
 
+	void LoadImgDialogue();
+	void SetImgDialogue();
+
+	void SetScale(const FVector& _Scale)
+	{
+		Scale = _Scale;
+	}
 
 protected:
-	void BeginPlay() override;
 
 private:
 	UImageRenderer* Renderer = nullptr;
+	FVector Scale = FVector::Zero;
+
 };

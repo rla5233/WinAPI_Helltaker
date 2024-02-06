@@ -184,6 +184,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Opening.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayStage1.h">
       <SubType>
       </SubType>
@@ -193,10 +197,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="StageManager.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Title.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -226,6 +226,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Opening.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayStage1.cpp">
       <SubType>
       </SubType>
@@ -235,10 +239,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="StageManager.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
       <SubType>
       </SubType>
     </ClCompile>

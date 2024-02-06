@@ -19,9 +19,6 @@
     <ClInclude Include="ContentsHelper.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>Object\Level</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -33,6 +30,9 @@
     </ClInclude>
     <ClInclude Include="Skeleton.h">
       <Filter>Object\Actor\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Opening.h">
+      <Filter>Object\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +54,6 @@
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>Object\Level</Filter>
-    </ClCompile>
     <ClCompile Include="Dialogue.cpp">
       <Filter>Object\Actor\Secene</Filter>
     </ClCompile>
@@ -65,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
       <Filter>Object\Actor\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Opening.cpp">
+      <Filter>Object\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

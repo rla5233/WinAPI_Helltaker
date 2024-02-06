@@ -1,6 +1,6 @@
 #include "Helltaker_ContentsCore.h"
 
-#include "Title.h"
+#include "Opening.h"
 #include "PlayStage1.h"
 
 
@@ -20,8 +20,8 @@ void Helltaker_ContentsCore::BeginPlay()
 
 	SetFrame(165);
 
-	CreateLevel<Title>("Title");
-	ChangeLevel("Title");
+	CreateLevel<Opening>("Opening");
+	ChangeLevel("Opening");
 
 	//CreateLevel<UPlayStage1>("PlayStage1");
 	//ChangeLevel("PlayStage1");
