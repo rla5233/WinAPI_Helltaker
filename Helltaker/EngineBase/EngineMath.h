@@ -168,6 +168,16 @@ public:
 		return *this;
 	}
 
+	float4 operator-()
+	{
+		float4 Result;
+		Result.X = -X;
+		Result.Y = -Y;
+		Result.Z = -Z;
+		return Result;
+	}
+
+
 	float4 operator-(const float4& _Other)
 	{
 		float4 Result = *this;
@@ -202,6 +212,15 @@ public:
 	static const Color8Bit Green;
 	static const Color8Bit Blue;
 	static const Color8Bit White;
+	static const Color8Bit Magenta;
+
+	static const Color8Bit BlackA;
+	static const Color8Bit RedA;
+	static const Color8Bit GreenA;
+	static const Color8Bit BlueA;
+	static const Color8Bit WhiteA;
+	static const Color8Bit MagentaA;
+
 
 	union
 	{
