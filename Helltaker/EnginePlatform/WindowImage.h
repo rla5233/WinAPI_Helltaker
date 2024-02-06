@@ -77,6 +77,8 @@ public:
 
 	void Cutting(int _X, int _Y);
 
+	Color8Bit GetColor(int _X, int _Y);
+
 	EWIndowImageType GetImageType()
 	{
 		return ImageType;

@@ -413,3 +413,12 @@ void UWindowImage::Cutting(int _X, int _Y)
 		CuttingPos.Y += CuttingScale.Y;
 	}
 }
+
+Color8Bit UWindowImage::GetColor(int _X, int _Y)
+{
+	Color8Bit Color;
+
+	Color.Color = ::GetPixel(ImageDC, _X, _Y);
+
+	return Color;
+}
