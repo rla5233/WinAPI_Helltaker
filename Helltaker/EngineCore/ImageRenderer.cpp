@@ -178,6 +178,7 @@ void UImageRenderer::CreateAnimation(
 	// AnimationInfos.operator[](Key)
 
 	UAnimationInfo& Info = AnimationInfos[UpperAniName];
+	Info.Name = UpperAniName;
 	Info.Image = FindImage;
 	Info.CurFrame = 0;
 	Info.Start = _Start;
@@ -200,13 +201,19 @@ void UImageRenderer::CreateAnimation(
 	}
 }
 
-void UImageRenderer::ChangeAnimation(std::string_view _AnimationName)
+void UImageRenderer::ChangeAnimation(std::string_view _AnimationName, bool _IsForce)
 {
 	std::string UpperAniName = UEngineString::ToUpper(_AnimationName);
 
 	if (false == AnimationInfos.contains(UpperAniName))
 	{
 		MsgBoxAssert(std::string(UpperAniName) + "라는 이름의 애니메이션이 존재하지 않습니다.");
+		return;
+	}
+
+	// 지금 진행중인 애니메이션과 완전히 똑같은 애니메이션을 실행하라고하면 그걸 실행하지 않는다.
+	if (false == _IsForce && nullptr != CurAnimation && CurAnimation->Name == UpperAniName)
+	{
 		return;
 	}
 

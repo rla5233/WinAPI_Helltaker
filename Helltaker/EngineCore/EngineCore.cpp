@@ -54,6 +54,12 @@ void UEngineCore::CoreTick()
 		DeltaTime = FrameTime;
 	}
 
+	// 이것도 옵션
+	if (1.0f / 60.0f <= DeltaTime)
+	{
+		DeltaTime = 1.0f / 60.0f;
+	}
+
 	EngineInput::KeyCheckTick(DeltaTime);
 
 

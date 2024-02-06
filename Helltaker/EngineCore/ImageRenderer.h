@@ -8,6 +8,7 @@ class UAnimationInfo
 public:
 	// 애니메이션을 구성할때 이미지는 1장
 	UWindowImage* Image = nullptr;
+	std::string Name;
 	int Start = -1;
 	int End = -1;
 	int CurFrame = 0;
@@ -64,7 +65,7 @@ public:
 		bool Loop = true
 	);
 
-	void ChangeAnimation(std::string_view _AnimationName);
+	void ChangeAnimation(std::string_view _AnimationName, bool _IsForce = false);
 	void AnimationReset();
 
 	void SetTransColor(Color8Bit _Color)
