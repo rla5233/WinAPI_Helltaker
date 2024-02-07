@@ -25,9 +25,14 @@ public:
 	void StateChange(EMainMenuState _State);
 
 	void Begin(float _DeltaTime);
+
 	void Enter(float _DeltaTime);
 	void EnterInit();
+
 	void SelectMenu(float _DeltaTime);
+	void SelectInit();
+	void SelectStart(float _DeltaTime);
+
 	void Exit(float _DeltaTime);
 
 protected:
@@ -37,7 +42,11 @@ protected:
 private:
 	Character* Beel = nullptr;
 	UI* Booper = nullptr;
-
+	
+	UI* MenuBar = nullptr;
+	
 	EMainMenuState State = EMainMenuState::None;
+	
 	bool IsEnterInit = false;
+	bool IsSelectInit = false;
 };

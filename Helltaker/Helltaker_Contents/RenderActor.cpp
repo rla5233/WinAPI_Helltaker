@@ -18,9 +18,8 @@ void RenderActor::LoadFolder(std::string_view _Path)
 	UEngineDirectory ResourcesPath = UEngineDirectory();
 	ResourcesPath.MoveParent();
 	ResourcesPath.Move("Resources");
-	ResourcesPath.AppendPath(_Path);
-	ResourcesPath.AppendPath(GetName());
-	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.GetFullPath());
+	ResourcesPath.Move(_Path);
+	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath(GetName()));
 }
 
 void RenderActor::LoadImg(std::string_view _Path)
@@ -70,4 +69,44 @@ FVector RenderActor::GetRendererImageScale()
 	}
 
 	return Renderer->GetImage()->GetScale();
+}
+
+void RenderActor::CreateAnimation(std::string_view _AnimationName, std::string_view _ImageName, int _Start, int _End, float _Inter, bool _Loop)
+{
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
+	Renderer->CreateAnimation(_AnimationName, _ImageName, _Start, _End, _Inter, _Loop);
+}
+
+void RenderActor::ChangeAnimation(std::string_view _AnimationName)
+{
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
+	Renderer->ChangeAnimation(_AnimationName);
+}
+
+void RenderActor::RenderActiveOn()
+{
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
+	Renderer->ActiveOn();
+}
+
+void RenderActor::RenderActiveOff()
+{
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
+	Renderer->ActiveOff();
 }

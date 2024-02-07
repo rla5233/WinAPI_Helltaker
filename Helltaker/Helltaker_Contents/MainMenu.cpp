@@ -40,11 +40,12 @@ void MainMenu::BeginPlay()
 	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
 	Booper->SetActorLocation({ WinScale.X / 2.0f, WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
-	Booper->LoadFolder();	
-	Booper->SetScale({ 35, 15 });
-	Booper->SetImg(false);
-	Booper->CreateUIAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
-	Booper->ChangeUIAnimation("Booper_Idle");
+	Booper->LoadFolder("UI");
+	Booper->CreateImageRenderer(RenderOrder::UI);
+	Booper->SetImg(Booper->GetName());
+	Booper->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
+	Booper->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	Booper->ChangeAnimation("Booper_Idle");
 
 	StateChange(EMainMenuState::Begin);
 }
@@ -70,6 +71,13 @@ void MainMenu::Enter(float _DeltaTime)
 	{
 		EnterInit();
 	}
+
+
+	if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
+	{
+		StateChange(EMainMenuState::SelectMenu);
+		return;
+	}
 }
 
 void MainMenu::EnterInit()
@@ -78,10 +86,29 @@ void MainMenu::EnterInit()
 	Beel->CreateImageRenderer(RenderOrder::Character);
 	Beel->SetImg(Beel->GetName());
 	Beel->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
+	IsEnterInit = true;
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
-{}
+{
+	if (false == IsSelectInit)
+	{
+		SelectInit();
+	}
+
+	SelectStart(_DeltaTime);
+}
+
+void MainMenu::SelectInit()
+{
+  	FVector WinScale = ContentsHelper::GetWindowScale();
+	IsSelectInit = true;
+}
+
+void MainMenu::SelectStart(float _DeltaTime)
+{
+	Booper->RenderActiveOff();
+}
 
 void MainMenu::Exit(float _DeltaTime)
 {}

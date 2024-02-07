@@ -29,8 +29,21 @@ public:
 	void CreateImageRenderer(RenderOrder _Order);
 	void CreateImageRenderer(int _Order);
 
+	void CreateAnimation(
+		std::string_view _AnimationName,
+		std::string_view _ImageName,
+		int _Start,
+		int _End,
+		float _Inter,
+		bool _Loop = true
+	);
+
+	void ChangeAnimation(std::string_view _AnimationName);
+
 	FVector GetRendererImageScale();
 
+	void RenderActiveOn();
+	void RenderActiveOff();
 
 protected:
 	UImageRenderer* Renderer = nullptr;
