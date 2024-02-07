@@ -30,8 +30,8 @@ public:
 	void EnterInit();
 
 	void SelectMenu(float _DeltaTime);
-	void SelectInit();
-	void SelectStart(float _DeltaTime);
+	void SelectMenuInit();
+	void SelectMenuStart(float _DeltaTime);
 
 	void Exit(float _DeltaTime);
 
@@ -48,5 +48,5 @@ private:
 	EMainMenuState State = EMainMenuState::None;
 	
 	bool IsEnterInit = false;
-	bool IsSelectInit = false;
+	bool IsSelectMenuInit = false;
 };

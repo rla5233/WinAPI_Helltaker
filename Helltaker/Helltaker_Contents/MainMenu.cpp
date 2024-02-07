@@ -91,21 +91,21 @@ void MainMenu::EnterInit()
 
 void MainMenu::SelectMenu(float _DeltaTime)
 {
-	if (false == IsSelectInit)
+	if (false == IsSelectMenuInit)
 	{
-		SelectInit();
+		SelectMenuInit();
 	}
 
-	SelectStart(_DeltaTime);
+	SelectMenuStart(_DeltaTime);
 }
 
-void MainMenu::SelectInit()
+void MainMenu::SelectMenuInit()
 {
   	FVector WinScale = ContentsHelper::GetWindowScale();
-	IsSelectInit = true;
+	IsSelectMenuInit = true;
 }
 
-void MainMenu::SelectStart(float _DeltaTime)
+void MainMenu::SelectMenuStart(float _DeltaTime)
 {
 	Booper->RenderActiveOff();
 }
