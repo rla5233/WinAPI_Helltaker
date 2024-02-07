@@ -28,11 +28,14 @@ public:
 	void Begin(float _DeltaTime);
 
 	void Enter(float _DeltaTime);
+	void EnterStart(float _DeltaTime);
 	void EnterInit();
 
 	void SelectMenu(float _DeltaTime);
 	void SelectMenuInit();
 	void SelectMenuStart(float _DeltaTime);
+
+	void EnterChapter(float _DeltaTime);
 
 	void SetFocusMenuIndex(int _Index)
 	{
@@ -40,20 +43,14 @@ public:
 
 		if (FocusMenuIndex < 0)
 		{
-			FocusMenuIndex = 0;
+			FocusMenuIndex = MenuBarCount - 1;
 		}
 
 		if (FocusMenuIndex >= MenuBarCount)
 		{
-			FocusMenuIndex = MenuBarCount - 1;
+			FocusMenuIndex = 0;
 		}
 	}
-
-	int GetFocusMenuIndex() const
-	{
-		return FocusMenuIndex;
-	}
-
 
 	void Exit(float _DeltaTime);
 
@@ -72,5 +69,6 @@ private:
 	bool IsEnterInit = false;
 	bool IsSelectMenuInit = false;
 	
+	int SelectChapterNum = -1;
 	EMainMenuState State = EMainMenuState::None;
 };

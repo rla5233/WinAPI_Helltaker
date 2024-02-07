@@ -48,5 +48,7 @@ enum class EMainMenuState
 	Begin,
 	Enter,
 	SelectMenu,
+	SelectChapter,
+	EnterChapter,
 	Exit
 };

@@ -4,6 +4,8 @@
 #include "Dialogue.h"
 #include "Character.h"
 #include "UI.h"
+#include "Chapter1.h"
+
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
@@ -62,22 +64,28 @@ void MainMenu::Begin(float _DeltaTime)
 	if (EngineInput::IsPress(VK_SPACE) || EngineInput::IsPress(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Enter);
+		EnterStart(_DeltaTime);
 	}
 }
 
 void MainMenu::Enter(float _DeltaTime)
 {
-	if (false == IsEnterInit)
-	{
-		EnterInit();
-	}
-
 	if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::SelectMenu);
 		SelectMenuStart(_DeltaTime);
 		return;
 	}
+}
+
+void MainMenu::EnterStart(float _DeltaTime)
+{
+	if (false == IsEnterInit)
+	{
+		EnterInit();
+	}
+
+	Beel->SetImg(Beel->GetName() + ".png");
 }
 
 void MainMenu::EnterInit()
@@ -93,15 +101,33 @@ void MainMenu::SelectMenu(float _DeltaTime)
 {
 	if (EngineInput::IsDown('W') || EngineInput::IsDown(VK_UP))
 	{
-		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_UnSelected.png");
-		SetFocusMenuIndex(GetFocusMenuIndex() - 1);
-		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_UnSelected.png");
+		SetFocusMenuIndex(FocusMenuIndex - 1);
+		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_Selected.png");
 	}
 	else if (EngineInput::IsDown('S') || EngineInput::IsDown(VK_DOWN))
 	{
-		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_UnSelected.png");
-		SetFocusMenuIndex(GetFocusMenuIndex() + 1);
-		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_UnSelected.png");
+		SetFocusMenuIndex(FocusMenuIndex + 1);
+		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_Selected.png");
+	}
+	else if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
+	{
+		switch (FocusMenuIndex)
+		{
+		case 0:
+			StateChange(EMainMenuState::EnterChapter);
+			SelectChapterNum = 1;
+			break;
+		case 1:
+			//StateChange(EMainMenuState::SelectChapter);
+			break;
+		case 2:
+			//StateChange(EMainMenuState::Exit);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -147,6 +173,26 @@ void MainMenu::SelectMenuStart(float _DeltaTime)
 	MenuBarVec[2]->SetImg("MenuBar_UnSelected.png");	
 }
 
+void MainMenu::EnterChapter(float _DeltaTime)
+{
+	if (1 == SelectChapterNum)
+	{
+		// 씬 추가
+	}
+
+	// 장면 전환 추가
+
+	// 수정 필요
+	switch (SelectChapterNum)
+	{
+	case 1:
+		GEngine->CreateLevel<Chapter1>("Chapter1");
+		GEngine->ChangeLevel("Chapter1");
+		break;
+	}
+	
+}
+
 void MainMenu::Exit(float _DeltaTime)
 {}
 
@@ -162,6 +208,11 @@ void MainMenu::StateUpdate(float _DeltaTime)
 		break;
 	case EMainMenuState::SelectMenu:
 		SelectMenu(_DeltaTime);
+		break;
+	case EMainMenuState::SelectChapter:
+		break;
+	case EMainMenuState::EnterChapter:
+		EnterChapter(_DeltaTime);
 		break;
 	case EMainMenuState::Exit:
 		Exit(_DeltaTime);

@@ -27,15 +27,12 @@ void Chapter1::BeginPlay()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* ChapterBG = SpawnActor<BackGround>();
-	ChapterBG->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2 });
-	ChapterBG->SetName("ChapterBG_001.png");
-	//ChapterBG->LoadImg();
-	//ChapterBG->SetImg();
+	ChapterBG->CreateBackGround("ChapterBG_001");
 
-	Hero* NewHero = SpawnActor<Hero>();
-	float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
-	NewHero->SetActorLocation(ChapterPointToLocation(6, 0) + FVector(hTileWidth, hTileWidth));
-	NewHero->SetLocationPoint({ 6, 0 });
+	//Hero* NewHero = SpawnActor<Hero>();
+	//float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
+	//NewHero->SetActorLocation(ChapterPointToLocation(6, 0) + FVector(hTileWidth, hTileWidth));
+	//NewHero->SetLocationPoint({ 6, 0 });
 }
 
 
