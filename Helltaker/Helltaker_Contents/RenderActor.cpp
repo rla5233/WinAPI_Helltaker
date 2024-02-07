@@ -34,11 +34,21 @@ void RenderActor::LoadImg(std::string_view _Path)
 
 void RenderActor::SetImg(std::string_view _Name)
 {
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
 	Renderer->SetImage(_Name);
 }
 
 void RenderActor::SetTransform(const FTransform& _Value)
 {
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
 	Renderer->SetTransform(_Value);
 }
 

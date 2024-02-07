@@ -1,9 +1,9 @@
 #pragma once
-#include <EngineCore/Actor.h>
-#include <EngineBase/EngineDebug.h>
+
+#include "RenderActor.h"
 
 // Ό³Έν :
-class Dialogue : public AActor
+class Dialogue : public RenderActor
 {
 public:
 	// constructor destructor
@@ -16,30 +16,9 @@ public:
 	Dialogue& operator=(const Dialogue& _Other) = delete;
 	Dialogue& operator=(Dialogue&& _Other) noexcept = delete;
 
-	void LoadFolder();
-	void LoadImg();
-
-	void SetImg(bool _SetOrgScale);
-
-	void SetScale(const FVector& _Scale)
-	{
-		Scale = _Scale;
-	}
-
-	FVector GetImgScale()
-	{
-		if (nullptr != Renderer)
-		{
-			MsgBoxAssert("Renderer is nullptr");
-		}
-
-		return Renderer->GetImage()->GetScale();
-	}
 
 protected:
 
 private:
-	UImageRenderer* Renderer = nullptr;
-	FVector Scale = FVector::Zero;
 
 };
