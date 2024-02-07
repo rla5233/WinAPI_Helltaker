@@ -24,7 +24,9 @@ public:
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EMainMenuState _State);
 
+	void Begin(float _DeltaTime);
 	void Enter(float _DeltaTime);
+	void EnterInit();
 	void SelectMenu(float _DeltaTime);
 	void Exit(float _DeltaTime);
 
@@ -37,5 +39,5 @@ private:
 	UI* Booper = nullptr;
 
 	EMainMenuState State = EMainMenuState::None;
-
+	bool IsEnterInit = false;
 };

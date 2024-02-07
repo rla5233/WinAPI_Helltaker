@@ -33,12 +33,12 @@ void MainMenu::BeginPlay()
 	MainMenuDialogue->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
 	
 	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	Beel->SetActorLocation({ WinScale.X / 2, WinScale.Y / 2.45f });
+	Beel->SetActorLocation({ WinScale.X / 2.0f, WinScale.Y / 2.9f });
 	Beel->SetName("Beel_Fly.png");
-	Beel->LoadImg();
-
+	Beel->LoadImg("Secene\\Characters");
+	
 	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-	Booper->SetActorLocation({ WinScale.X / 2, WinScale.Y / 1.15f });
+	Booper->SetActorLocation({ WinScale.X / 2.0f, WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
 	Booper->LoadFolder();	
 	Booper->SetScale({ 35, 15 });
@@ -56,9 +56,28 @@ void MainMenu::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 }
 
+void MainMenu::Begin(float _DeltaTime)
+{
+	if (EngineInput::IsPress(VK_SPACE) || EngineInput::IsPress(VK_RETURN))
+	{
+		StateChange(EMainMenuState::Enter);
+	}
+}
+
 void MainMenu::Enter(float _DeltaTime)
 {
-	
+	if (false == IsEnterInit)
+	{
+		EnterInit();
+	}
+}
+
+void MainMenu::EnterInit()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Beel->CreateImageRenderer(RenderOrder::Character);
+	Beel->SetImg(Beel->GetName());
+	Beel->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
@@ -71,6 +90,9 @@ void MainMenu::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
+	case EMainMenuState::Begin:
+		Begin(_DeltaTime);
+		break;
 	case EMainMenuState::Enter:
 		Enter(_DeltaTime);
 		break;
@@ -80,15 +102,6 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	case EMainMenuState::Exit:
 		Exit(_DeltaTime);
 		break;
-	default:
-	{
-		if (EngineInput::IsPress(VK_SPACE) || EngineInput::IsPress(VK_RETURN))
-		{
-			StateChange(EMainMenuState::Enter);
-			Beel->SetImg(true);
-		}
-		break;
-	}
 	}
 }
 

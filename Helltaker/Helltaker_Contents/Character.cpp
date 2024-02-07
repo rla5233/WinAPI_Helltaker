@@ -12,30 +12,3 @@ Character::Character()
 Character::~Character()
 {
 }
-
-void Character::LoadFolder()
-{}
-
-void Character::LoadImg()
-{
-	UEngineDirectory ResourcesPath = UEngineDirectory();
-	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources\\Secene\\Characters");
-	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(GetName()));
-}
-
-void Character::SetImg(bool _SetOrgScale)
-{
-	Renderer = CreateImageRenderer(static_cast<int>(RenderOrder::Character));
-	Renderer->SetImage(GetName());
-
-	if (true == _SetOrgScale)
-	{
-		// 수정필요
-		Scale = Renderer->GetImage()->GetScale();
-		Scale.X /= 2;
-		Scale.Y /= 2;
-	}
-
-	Renderer->SetTransform({ {0,0}, Scale });
-}

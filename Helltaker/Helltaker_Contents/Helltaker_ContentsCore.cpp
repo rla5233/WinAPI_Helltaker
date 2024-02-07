@@ -1,7 +1,10 @@
 #include "Helltaker_ContentsCore.h"
 
 #include "Opening.h"
+
+
 #include "Chapter1.h"
+#include "MainMenu.h"
 
 
 Helltaker_ContentsCore::Helltaker_ContentsCore()
@@ -20,8 +23,11 @@ void Helltaker_ContentsCore::BeginPlay()
 
 	SetFrame(165);
 
-	CreateLevel<Opening>("Opening");
-	ChangeLevel("Opening");
+	//CreateLevel<Opening>("Opening");
+	//ChangeLevel("Opening");
+
+	CreateLevel<MainMenu>("MainMenu");
+	ChangeLevel("MainMenu");
 
 	//CreateLevel<Chapter1>("Chapter1");
 	//ChangeLevel("Chapter1");
