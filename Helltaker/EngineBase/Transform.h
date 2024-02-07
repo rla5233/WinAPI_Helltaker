@@ -61,19 +61,19 @@ public:
 
 	int iLeft() const
 	{
-		return static_cast<int>(Left());
+		return std::lround(Left());
 	}
 	int iRight() const
 	{
-		return static_cast<int>(Right());
+		return std::lround(Right());
 	}
 	int iTop() const
 	{
-		return static_cast<int>(Top());
+		return std::lround(Top());
 	}
 	int iBottom() const
 	{
-		return static_cast<int>(Bottom());
+		return std::lround(Bottom());
 	}
 
 protected:
