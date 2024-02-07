@@ -9,6 +9,7 @@ public:
 
 	static FVector GetWindowScale();
 	static float GetOneTileWidth();
+	static void LoadImg(std::string_view _Path, std::string_view _Name);
 
 protected:
 

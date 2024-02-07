@@ -72,10 +72,10 @@ void MainMenu::Enter(float _DeltaTime)
 		EnterInit();
 	}
 
-
 	if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::SelectMenu);
+		SelectMenuStart(_DeltaTime);
 		return;
 	}
 }
@@ -91,32 +91,41 @@ void MainMenu::EnterInit()
 
 void MainMenu::SelectMenu(float _DeltaTime)
 {
-	if (false == IsSelectMenuInit)
+	if (EngineInput::IsDown('W') || EngineInput::IsDown(VK_UP))
 	{
-		SelectMenuInit();
+		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_UnSelected.png");
+		SetFocusMenuIndex(GetFocusMenuIndex() - 1);
+		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_Selected.png");
 	}
-
-	SelectMenuStart(_DeltaTime);
+	else if (EngineInput::IsDown('S') || EngineInput::IsDown(VK_DOWN))
+	{
+		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_UnSelected.png");
+		SetFocusMenuIndex(GetFocusMenuIndex() + 1);
+		MenuBarVec[GetFocusMenuIndex()]->SetImg("MenuBar_Selected.png");
+	}
 }
 
 void MainMenu::SelectMenuInit()
 {
    	FVector WinScale = ContentsHelper::GetWindowScale();
 	
-	MenuBarVec.reserve(3);
-	for (int i = 0; i < 3; i++)
+	MenuBarVec.reserve(MenuBarCount);
+	for (int i = 0; i < MenuBarCount; i++)
 	{
 		MenuBarVec.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
 	}
 
-	MenuBarVec[0]->LoadImg("UI", "MenuBar_Unselected.png");
+	ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
+	ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
 	float interval = 0.0f;
 	for (UI* MenuBar : MenuBarVec)
 	{
 		MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
 		MenuBar->SetName("MenuBar");
 		MenuBar->CreateImageRenderer(RenderOrder::UI);
-		MenuBar->SetImg("MenuBar_Unselected.png");
+		MenuBar->SetImg("MenuBar_Selected.png");
+		MenuBar->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
+		MenuBar->SetImg("MenuBar_UnSelected.png");
 		MenuBar->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
 		interval += WinScale.Y / 13.5f;
 	}	
@@ -126,8 +135,16 @@ void MainMenu::SelectMenuInit()
 
 void MainMenu::SelectMenuStart(float _DeltaTime)
 {
+	if (false == IsSelectMenuInit)
+	{
+		SelectMenuInit();
+	}
+
 	Booper->RenderActiveOff();
-	
+	FocusMenuIndex = 0;
+	MenuBarVec[0]->SetImg("MenuBar_Selected.png");	
+	MenuBarVec[1]->SetImg("MenuBar_UnSelected.png");	
+	MenuBarVec[2]->SetImg("MenuBar_UnSelected.png");	
 }
 
 void MainMenu::Exit(float _DeltaTime)

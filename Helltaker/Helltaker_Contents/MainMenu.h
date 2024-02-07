@@ -34,6 +34,27 @@ public:
 	void SelectMenuInit();
 	void SelectMenuStart(float _DeltaTime);
 
+	void SetFocusMenuIndex(int _Index)
+	{
+		FocusMenuIndex = _Index;
+
+		if (FocusMenuIndex < 0)
+		{
+			FocusMenuIndex = 0;
+		}
+
+		if (FocusMenuIndex >= MenuBarCount)
+		{
+			FocusMenuIndex = MenuBarCount - 1;
+		}
+	}
+
+	int GetFocusMenuIndex() const
+	{
+		return FocusMenuIndex;
+	}
+
+
 	void Exit(float _DeltaTime);
 
 protected:
@@ -42,12 +63,14 @@ protected:
 
 private:
 	Character* Beel = nullptr;
+	
 	UI* Booper = nullptr;
-	
 	std::vector<UI*> MenuBarVec;
-	
-	EMainMenuState State = EMainMenuState::None;
-	
+	int MenuBarCount = 3;
+	int FocusMenuIndex = 0;
+
 	bool IsEnterInit = false;
 	bool IsSelectMenuInit = false;
+	
+	EMainMenuState State = EMainMenuState::None;
 };
