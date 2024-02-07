@@ -134,7 +134,6 @@ void UImageRenderer::BeginPlay()
 
 void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex /*= 0*/)
 {
-	int a = 0;
 	Image = UEngineResourcesManager::GetInst().FindImg(_Name);
 
 	if (nullptr == Image)

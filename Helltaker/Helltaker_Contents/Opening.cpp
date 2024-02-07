@@ -24,7 +24,7 @@ void Opening::BeginPlay()
 	OpeningBG->CreateBackGround("OpeningBG.png");
 
 	Dialogue* UnityLogo = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Dialogue));
-	UnityLogo->SetActorLocation({ WinScale.X / 2.0f, WinScale.Y / 1.9f });
+	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.9f});
 	UnityLogo->SetName("UnityLogo.png");
 	UnityLogo->LoadImg("Secene\\Dialogue");
 	UnityLogo->CreateImageRenderer(RenderOrder::Dialogue);

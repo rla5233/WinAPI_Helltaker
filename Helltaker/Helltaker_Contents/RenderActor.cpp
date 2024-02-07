@@ -28,7 +28,16 @@ void RenderActor::LoadImg(std::string_view _Path)
 	ResourcesPath.MoveParent();
 	ResourcesPath.Move("Resources");
 	ResourcesPath.Move(_Path);
-	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(GetName()));
+	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(GetName()) + ".png");
+}
+
+void RenderActor::LoadImg(std::string_view _Path, std::string_view _Name)
+{
+	UEngineDirectory ResourcesPath = UEngineDirectory();
+	ResourcesPath.MoveParent();
+	ResourcesPath.Move("Resources");
+	ResourcesPath.Move(_Path);
+	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(_Name));
 }
 
 void RenderActor::SetImg(std::string_view _Name)

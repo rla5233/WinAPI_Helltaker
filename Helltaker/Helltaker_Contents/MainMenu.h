@@ -2,6 +2,7 @@
 
 #include "ContentsHelper.h"
 
+#include <vector>
 #include <EngineCore/Level.h>
 
 class Character;
@@ -43,7 +44,7 @@ private:
 	Character* Beel = nullptr;
 	UI* Booper = nullptr;
 	
-	UI* MenuBar = nullptr;
+	std::vector<UI*> MenuBarVec;
 	
 	EMainMenuState State = EMainMenuState::None;
 	

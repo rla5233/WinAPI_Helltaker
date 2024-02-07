@@ -22,6 +22,7 @@ public:
 
 	void LoadFolder(std::string_view _Path);
 	void LoadImg(std::string_view _Path);
+	void LoadImg(std::string_view _Path, std::string_view _Name);
 
 	void SetImg(std::string_view _Name);
 	void SetTransform(const FTransform& _Value);
