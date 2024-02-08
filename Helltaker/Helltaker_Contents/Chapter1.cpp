@@ -22,8 +22,18 @@ void Chapter1::BeginPlay()
 	ChapterManager::BeginPlay();
 
 	// 스테이지 생성
-	CreateChapterMap(9, 7);
-	SetChapterStartLocation({ 5, 2 });
+	std::vector<std::vector<bool>> Map =
+	{
+		{false, false, false, false, true, true, false},
+		{true, true, true, true, true, true, false},
+		{true, true, true, true, true, false, false},
+		{true, true, true, true, true, true, true},
+		{true, true, true, true, true, true, true},
+		{true, true, true, true, true, true, true}
+	};
+
+	CreateChapterMap(Map);
+	SetChapterStartLocation({ 6, 2 });
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
@@ -31,12 +41,13 @@ void Chapter1::BeginPlay()
 
 	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
 	FVector TileScale = ContentsHelper::GetTileScale();
-	NewHero->SetActorLocation(ChapterPointToLocation(6, 0) + FVector(TileScale.X / 2.0f, TileScale.Y / 2.0f));
-	NewHero->SetLocationPoint({ 6, 0 });
+	NewHero->SetActorLocation(ChapterPointToLocation(5, 0) + FVector(TileScale.X / 2.0f, TileScale.Y / 2.0f));
+	NewHero->SetLocationPoint({ 5, 0 });
 
 
 	// 디버그 용
 	ContentsHelper::LoadImg("Debug", "GreenPoint.png");
+	ContentsHelper::LoadImg("Debug", "RedPoint.png");
 	ShowLocationPoint();
 }
 

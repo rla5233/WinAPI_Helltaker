@@ -40,5 +40,3 @@ void ContentsHelper::LoadFolder(std::string_view _Path, std::string_view _Name)
 	ResourcesPath.Move(_Path);
 	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath(_Name));
 }
-
-

@@ -34,14 +34,23 @@ FVector ChapterManager::ChapterPointToLocation(int _X, int _Y)
 	return Location;
 }
 
-void ChapterManager::CreateChapterMap(int _X, int _Y)
+void ChapterManager::CreateChapterMap(const std::vector<std::vector<bool>>& _Map)
 {
-	Width = _X; Height = _Y;
-	//ChapterMap.reserve(Height);
-	//for (int i = 0; i < Height; i++)
-	//{
-	//	ChapterMap[i].reserve(Width);
-	//}
+	Width = static_cast<int>(_Map[0].size()); 
+	Height = static_cast<int>(_Map.size());
+	ChapterMap.resize(Height);
+	for (int i = 0; i < Height; i++)
+	{
+		ChapterMap[i].resize(Width);
+	}
+
+	for (int Y = 0; Y < _Map.size(); Y++)
+	{
+		for (int X = 0; X < _Map[Y].size(); X++)
+		{
+			ChapterMap[Y][X] = _Map[Y][X];
+		}
+	}
 }
 
 
@@ -63,7 +72,16 @@ void ChapterManager::ShowLocationPoint()
 			GreenPoint[Y][X] = SpawnActor<RenderActor>(static_cast<int>(UpdateOrder::UI));
 			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
 			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
-			GreenPoint[Y][X]->SetImg("GreenPoint.png");
+			
+			if (ChapterMap[Y][X])
+			{
+				GreenPoint[Y][X]->SetImg("GreenPoint.png");
+			}
+			else
+			{
+				GreenPoint[Y][X]->SetImg("RedPoint.png");
+			}
+			
 			GreenPoint[Y][X]->SetTransform({ { 0,0 }, {2, 2} });
 		}
 	}

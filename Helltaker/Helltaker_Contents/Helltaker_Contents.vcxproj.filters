@@ -43,6 +43,9 @@
     <ClInclude Include="Chapter1.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="ChapterMapHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">

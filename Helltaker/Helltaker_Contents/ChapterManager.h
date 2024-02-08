@@ -31,7 +31,7 @@ public:
 	FVector ChapterPointToLocation(FVector _Point);
 	FVector ChapterPointToLocation(int _X, int _Y);
 
-	void CreateChapterMap(int _X, int _Y);
+	void CreateChapterMap(const std::vector<std::vector<bool>>& _Map);
 
 	void ShowLocationPoint();
 
