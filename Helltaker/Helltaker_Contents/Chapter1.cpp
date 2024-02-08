@@ -35,16 +35,9 @@ void Chapter1::BeginPlay()
 	NewHero->SetLocationPoint({ 6, 0 });
 
 
-	// 디버그
+	// 디버그 용
 	ContentsHelper::LoadImg("Debug", "GreenPoint.png");
 	ShowLocationPoint();
-
-	//RenderActor* GreenPoint = SpawnActor<RenderActor>(static_cast<int>(UpdateOrder::UI));
-	//GreenPoint->SetActorLocation(GetChapterStartLocation());
-	//GreenPoint->CreateImageRenderer(RenderOrder::UI);
-	//GreenPoint->SetImg("GreenPoint.png");
-	//GreenPoint->SetTransform({{ 0,0 }, {1, 1}});
-
 }
 
 
