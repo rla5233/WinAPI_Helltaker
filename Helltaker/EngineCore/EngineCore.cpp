@@ -8,12 +8,10 @@ UEngineCore* GEngine = nullptr;
 
 UEngineCore::UEngineCore()
 	: MainWindow()
-{
-}
+{}
 
 UEngineCore::~UEngineCore()
-{
-}
+{}
 
 void UEngineCore::CoreTick()
 {

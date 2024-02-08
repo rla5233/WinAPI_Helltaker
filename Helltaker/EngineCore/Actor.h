@@ -57,6 +57,8 @@ public:
 	void Destroy(float _DestroyTime /*= 0.0f*/) override;
 	void DestroyUpdate(float _DeltaTime) override;
 
+	void ActiveUpdate(float _DeltaTime) override;
+
 protected:
 	void Tick(float _DeltaTime) override;
 
