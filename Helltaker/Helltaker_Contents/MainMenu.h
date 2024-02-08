@@ -28,12 +28,12 @@ public:
 	void Begin(float _DeltaTime);
 
 	void Enter(float _DeltaTime);
-	void EnterStart(float _DeltaTime);
 	void EnterInit();
+	void EnterStart();
 
 	void SelectMenu(float _DeltaTime);
 	void SelectMenuInit();
-	void SelectMenuStart(float _DeltaTime);
+	void SelectMenuStart();
 
 	void EnterChapter(float _DeltaTime);
 

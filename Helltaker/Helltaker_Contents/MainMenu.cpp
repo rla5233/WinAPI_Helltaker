@@ -64,7 +64,6 @@ void MainMenu::Begin(float _DeltaTime)
 	if (EngineInput::IsPress(VK_SPACE) || EngineInput::IsPress(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Enter);
-		EnterStart(_DeltaTime);
 	}
 }
 
@@ -73,12 +72,11 @@ void MainMenu::Enter(float _DeltaTime)
 	if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::SelectMenu);
-		SelectMenuStart(_DeltaTime);
 		return;
 	}
 }
 
-void MainMenu::EnterStart(float _DeltaTime)
+void MainMenu::EnterStart()
 {
 	if (false == IsEnterInit)
 	{
@@ -159,7 +157,7 @@ void MainMenu::SelectMenuInit()
 	IsSelectMenuInit = true;
 }
 
-void MainMenu::SelectMenuStart(float _DeltaTime)
+void MainMenu::SelectMenuStart()
 {
 	if (false == IsSelectMenuInit)
 	{
@@ -222,5 +220,26 @@ void MainMenu::StateUpdate(float _DeltaTime)
 
 void MainMenu::StateChange(EMainMenuState _State)
 {
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case EMainMenuState::Begin:
+			break;
+		case EMainMenuState::Enter:
+			EnterStart();
+			break;
+		case EMainMenuState::SelectMenu:
+			SelectMenuStart();
+			break;
+		case EMainMenuState::SelectChapter:
+			break;
+		case EMainMenuState::EnterChapter:
+			break;
+		case EMainMenuState::Exit:
+			break;
+		}
+	}
+
 	State = _State;
 }
