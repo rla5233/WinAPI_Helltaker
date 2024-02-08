@@ -245,8 +245,9 @@ void Hero::Death(float _DeltaTime)
 }
 
 void Hero::DeathStart()
-{}
+{
 
+}
 
 
 void Hero::Tick(float _DeltaTime)
