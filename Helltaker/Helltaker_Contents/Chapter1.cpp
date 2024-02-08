@@ -44,7 +44,6 @@ void Chapter1::BeginPlay()
 	NewHero->SetActorLocation(ChapterPointToLocation(5, 0) + FVector(TileScale.X / 2.0f, TileScale.Y / 2.0f));
 	NewHero->SetLocationPoint({ 5, 0 });
 
-
 	// 디버그 용
 	ContentsHelper::LoadImg("Debug", "GreenPoint.png");
 	ContentsHelper::LoadImg("Debug", "RedPoint.png");

@@ -101,36 +101,69 @@ void Hero::StateUpdate(float _DeltaTime)
 
 void Hero::ActionCheck(float _DeltaTime)
 {
+	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterMap();
+	FVector LocationPoint = GetLocationPoint();
 	
+	switch (MoveDir)
+	{
+	case EActorMoveDir::Left:
+		LocationPoint += FVector::Left;
+		break;
+	case EActorMoveDir::Right:
+		LocationPoint += FVector::Right;
+		break;
+	case EActorMoveDir::Up:
+		LocationPoint += FVector::Up;
+		break;
+	case EActorMoveDir::Down:
+		LocationPoint += FVector::Down;
+		break;
+	}
+
+	int Height = static_cast<int>(Map.size());
+	int Width = static_cast<int>(Map[0].size());
+	if (0 <= LocationPoint.iY() && LocationPoint.iY() < Height
+	&&  0 <= LocationPoint.iX() && LocationPoint.iX() < Width)
+	{
+		int a = 0;
+		if (Map[LocationPoint.iY()][LocationPoint.iX()])
+		{
+			switch (MoveDir)
+			{
+			case EActorMoveDir::Left:
+				SeeDirChange(EActorSeeDir::Left);
+				break;
+			case EActorMoveDir::Right:
+				SeeDirChange(EActorSeeDir::Right);
+				break;
+			}
+
+			StateChange(EHeroState::Move);
+		}
+	}
 }
 
 void Hero::Idle(float _DeltaTime)
 {
 	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
 	{
+		MoveDirChange(EActorMoveDir::Up);
 		ActionCheck(_DeltaTime);
-		//MoveDirChange(EActorMoveDir::Up);
-		//StateChange(EHeroState::Move);
 	}
 	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
 	{
+		MoveDirChange(EActorMoveDir::Left);
 		ActionCheck(_DeltaTime);
-		//MoveDirChange(EActorMoveDir::Left);
-		//SeeDirChange(EActorSeeDir::Left);
-		//StateChange(EHeroState::Move);
 	}
 	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
 	{
+		MoveDirChange(EActorMoveDir::Down);
 		ActionCheck(_DeltaTime);
-		//MoveDirChange(EActorMoveDir::Down);
-		//StateChange(EHeroState::Move);
 	}
 	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
 	{
+		MoveDirChange(EActorMoveDir::Right);
 		ActionCheck(_DeltaTime);
-		//MoveDirChange(EActorMoveDir::Right);
-		//SeeDirChange(EActorSeeDir::Right);
-		//StateChange(EHeroState::Move);
 	}
 }
 

@@ -29,7 +29,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			LocationPoint += FMoveDir;
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D()};
-			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTileScale);
+			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
 			MoveDistanceX = ContentsHelper::GetTileScale().X;
 			MoveOff();
 		}
@@ -46,7 +46,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			LocationPoint += FMoveDir;
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
-			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTileScale);
+			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
 			MoveDistanceY = ContentsHelper::GetTileScale().X;
 			MoveOff();
 		}
@@ -80,4 +80,9 @@ void MoveActor::FMoveDirCheck()
 void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 {
 	SeeDir = _Dir;
+}
+
+const ChapterManager* MoveActor::GetChapter()
+{
+	return dynamic_cast<ChapterManager*>(GetWorld());
 }

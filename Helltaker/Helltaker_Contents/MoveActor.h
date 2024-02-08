@@ -1,10 +1,11 @@
 #pragma once
 #include "RenderActor.h"
 
-class ChapterManger;
+class ChapterManager;
 
 class MoveActor : public RenderActor
 {
+	friend ChapterManager;
 public:
 	// constructor destructor
 	MoveActor();
@@ -41,6 +42,13 @@ public:
 	{
 		IsMoveValue = false;
 	}
+
+	FVector GetLocationPoint()
+	{
+		return LocationPoint;
+	}
+
+	const ChapterManager* GetChapter();
 
 protected:
 	EActorMoveDir MoveDir = EActorMoveDir::None;
