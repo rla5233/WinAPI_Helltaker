@@ -1,6 +1,8 @@
 #pragma once
 #include "RenderActor.h"
 
+class ChapterManger;
+
 class MoveActor : public RenderActor
 {
 public:
@@ -38,6 +40,16 @@ public:
 	void MoveOff()
 	{
 		IsMoveValue = false;
+	}
+
+	const ChapterManager* GetChapter()
+	{
+		if (nullptr == GetWorld())
+		{
+			MsgBoxAssert("ULevel is Nullptr");
+		}
+
+		return dynamic_cast<ChapterManager*>(GetWorld());
 	}
 
 protected:

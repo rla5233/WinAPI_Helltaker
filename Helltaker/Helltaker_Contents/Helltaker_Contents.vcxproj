@@ -179,7 +179,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ChapterMapHelper.h" />
     <ClInclude Include="Dialogue.h">
       <SubType>
       </SubType>

@@ -20,12 +20,12 @@ void ChapterManager::SetChapterStartLocation(FVector _Point)
 	ChapterStartLocation = _Point * ContentsHelper::GetTileScale();
 }
 
-FVector ChapterManager::ChapterPointToLocation(FVector _Point)
+FVector ChapterManager::ChapterPointToLocation(FVector _Point) const
 {
 	return ChapterPointToLocation(_Point.iX(), _Point.iY());
 }
 
-FVector ChapterManager::ChapterPointToLocation(int _X, int _Y)
+FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Location = ChapterStartLocation;
@@ -51,6 +51,8 @@ void ChapterManager::CreateChapterMap(const std::vector<std::vector<bool>>& _Map
 			ChapterMap[Y][X] = _Map[Y][X];
 		}
 	}
+
+	IsChapterMapInit = true;
 }
 
 

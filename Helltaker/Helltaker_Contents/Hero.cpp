@@ -1,6 +1,7 @@
 #include "Hero.h"
 
 #include "ContentsHelper.h"
+#include "ChapterManager.h"
 
 #include <EngineCore/EngineCore.h>
 #include <EngineBase/EngineDirectory.h>
@@ -100,7 +101,7 @@ void Hero::StateUpdate(float _DeltaTime)
 
 void Hero::ActionCheck(float _DeltaTime)
 {
-
+	
 }
 
 void Hero::Idle(float _DeltaTime)
@@ -108,25 +109,28 @@ void Hero::Idle(float _DeltaTime)
 	if (EngineInput::IsPress('W') || EngineInput::IsPress(VK_UP))
 	{
 		ActionCheck(_DeltaTime);
-		MoveDirChange(EActorMoveDir::Up);
-		StateChange(EHeroState::Move);
+		//MoveDirChange(EActorMoveDir::Up);
+		//StateChange(EHeroState::Move);
 	}
 	else if (EngineInput::IsPress('A') || EngineInput::IsPress(VK_LEFT))
 	{
-		MoveDirChange(EActorMoveDir::Left);
-		SeeDirChange(EActorSeeDir::Left);
-		StateChange(EHeroState::Move);
+		ActionCheck(_DeltaTime);
+		//MoveDirChange(EActorMoveDir::Left);
+		//SeeDirChange(EActorSeeDir::Left);
+		//StateChange(EHeroState::Move);
 	}
 	else if (EngineInput::IsPress('S') || EngineInput::IsPress(VK_DOWN))
 	{
-		MoveDirChange(EActorMoveDir::Down);
-		StateChange(EHeroState::Move);
+		ActionCheck(_DeltaTime);
+		//MoveDirChange(EActorMoveDir::Down);
+		//StateChange(EHeroState::Move);
 	}
 	else if (EngineInput::IsPress('D') || EngineInput::IsPress(VK_RIGHT))
 	{
-		MoveDirChange(EActorMoveDir::Right);
-		SeeDirChange(EActorSeeDir::Right);
-		StateChange(EHeroState::Move);
+		ActionCheck(_DeltaTime);
+		//MoveDirChange(EActorMoveDir::Right);
+		//SeeDirChange(EActorSeeDir::Right);
+		//StateChange(EHeroState::Move);
 	}
 }
 

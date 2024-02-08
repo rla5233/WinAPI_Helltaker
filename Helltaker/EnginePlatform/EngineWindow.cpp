@@ -196,8 +196,15 @@ void UEngineWindow::SetWindowScale(const FVector& _Scale)
 
 void UEngineWindow::ScreenClear()
 {
-	// 1280 720
+	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(ClearColor.Color);
+	HBRUSH oldBrush = (HBRUSH)SelectObject(BackBufferImage->ImageDC, myBrush);
 	Rectangle(BackBufferImage->ImageDC, -1, -1, Scale.iX() + 1, Scale.iY() + 1);
+	SelectObject(BackBufferImage->ImageDC, oldBrush);
+	DeleteObject(myBrush);
+
+
+	// 1280 720
+
 	// 1282 722
 	// Rectangle(BackBufferImage->ImageDC, -1, -1, 1281, 721);
 }

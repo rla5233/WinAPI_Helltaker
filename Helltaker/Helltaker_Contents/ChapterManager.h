@@ -4,6 +4,7 @@
 #include <string_view>
 #include <vector>
 
+#include <EngineBase/EngineDebug.h>
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
@@ -22,14 +23,24 @@ public:
 	ChapterManager& operator=(const ChapterManager& _Other) = delete;
 	ChapterManager& operator=(ChapterManager&& _Other) noexcept = delete;
 
+	FVector ChapterPointToLocation(FVector _Point) const;
+	FVector ChapterPointToLocation(int _X, int _Y) const;
+	
 	void SetChapterStartLocation(FVector _Point);
 	FVector GetChapterStartLocation() const
 	{
 		return ChapterStartLocation;
 	}
 
-	FVector ChapterPointToLocation(FVector _Point);
-	FVector ChapterPointToLocation(int _X, int _Y);
+	const std::vector<std::vector<bool>>& GetChapterMap() const
+	{
+		if (false == IsChapterMapInit)
+		{
+			MsgBoxAssert("ChapterMap Not Exist.");
+		}
+
+		return ChapterMap;
+	}
 
 	void CreateChapterMap(const std::vector<std::vector<bool>>& _Map);
 
@@ -45,4 +56,6 @@ private:
 
 	std::vector<std::vector<bool>> ChapterMap;
 	std::vector<std::vector<bool>> IsEmptyTile;
+
+	bool IsChapterMapInit = false;
 };

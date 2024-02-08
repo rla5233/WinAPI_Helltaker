@@ -60,7 +60,7 @@ void UEngineCore::CoreTick()
 		DeltaTime = 1.0f / 60.0f;
 	}
 
-	EngineInput::KeyCheckTick(DeltaTime);
+	UEngineInput::KeyCheckTick(DeltaTime);
 
 
 	// 한프레임동안 레벨이 절대로 변하지 않고
