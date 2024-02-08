@@ -16,35 +16,17 @@ Hero::~Hero()
 void Hero::BeginPlay()
 {
 	MoveActor::BeginPlay();
-	
-	// 여기 부터 Test
-	UEngineDirectory ResourcesPath = UEngineDirectory();
-	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources\\Characters\\Chapter\\Hero");
-	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath("Right_Idle"));
 
-	CreateImageRenderer(1);
-	Renderer->SetImage("Right_Idle");
-	Renderer->SetTransform({ {0,0}, {90, 90} });
-	Renderer->CreateAnimation("Right_Idle", "Right_Idle", 0, 11, 0.07f, true);
-	Renderer->ChangeAnimation("Right_Idle");
-}
+	SetName("Hero");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Left_Idle");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Right_Idle");
 
-void Hero::LoadRenderImage(std::string_view _Name)
-{
-	UEngineDirectory ResourcesPath = UEngineDirectory();
-	ResourcesPath.MoveParent();
-	ResourcesPath.Move("Resources\\Stage\\Hero");
-	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.GetFullPath() + "\\" + _Name.data());
-}
-
-void Hero::SetRenderImage(std::string_view _Name)
-{
-	FVector Scale = ContentsHelper::GetWindowScale();
-	CreateImageRenderer(1);
-	Renderer->SetImage(_Name);
-	Renderer->SetTransform({ {0, 0}, {Scale.X / 20, Scale.Y / 10 } });
-	Renderer->SetImageCuttingTransform({ {0, 0}, Renderer->GetImage()->GetScale() });
+	FVector TileScale = ContentsHelper::GetTileScale();
+	CreateImageRenderer(RenderOrder::Hero);
+	Renderer->SetImage("Left_Idle");
+	Renderer->SetTransform({ {0,0}, {TileWidth / 1.1f, TileWidth / 1.1f} });
+	Renderer->CreateAnimation("Left_Idle", "Left_Idle", 0, 11, 0.07f, true);
+	Renderer->ChangeAnimation("Left_Idle");
 }
 
 void Hero::Tick(float _DeltaTime)

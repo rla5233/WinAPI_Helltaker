@@ -17,15 +17,10 @@ public:
 public:
 
 protected:
-	void LoadRenderImage(std::string_view _Name);
-	void SetRenderImage(std::string_view _Name);
-
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
-
 	int ActionPoint = 25;
 
 };

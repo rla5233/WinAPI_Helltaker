@@ -8,8 +8,9 @@ class ContentsHelper
 public:
 
 	static FVector GetWindowScale();
-	static float GetOneTileWidth();
+	static FVector GetTileScale();
 	static void LoadImg(std::string_view _Path, std::string_view _Name);
+	static void LoadFolder(std::string_view _Path, std::string_view _Name);
 
 protected:
 

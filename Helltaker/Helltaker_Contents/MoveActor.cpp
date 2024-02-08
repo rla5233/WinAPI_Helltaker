@@ -17,25 +17,22 @@ void MoveActor::MoveCheck(float _DeltaTime)
 {
 	if (false == IsMoving)
 	{
-		if (true == EngineInput::IsPress('A'))
+		if (EngineInput::IsPress('A') || EngineInput::IsPress(VK_LEFT))
 		{
 			MoveDir = FVector::Left;
 			IsMoving = true;
 		}
-
-		if (true == EngineInput::IsPress('D'))
+		else if (EngineInput::IsPress('D') || EngineInput::IsPress(VK_RIGHT))
 		{
 			MoveDir = FVector::Right;
 			IsMoving = true;
 		}
-
-		if (true == EngineInput::IsPress('W'))
+		else if (EngineInput::IsPress('W') || EngineInput::IsPress(VK_UP))
 		{
 			MoveDir = FVector::Up;
 			IsMoving = true;
 		}
-
-		if (true == EngineInput::IsPress('S'))
+		else if (EngineInput::IsPress('S') || EngineInput::IsPress(VK_DOWN))
 		{
 			MoveDir = FVector::Down;
 			IsMoving = true;

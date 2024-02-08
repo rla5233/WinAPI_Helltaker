@@ -16,9 +16,11 @@ FVector ContentsHelper::GetWindowScale()
     return GEngine->MainWindow.GetWindowScale();
 }
 
-float ContentsHelper::GetOneTileWidth()
+FVector ContentsHelper::GetTileScale()
 {
-    return GEngine->MainWindow.GetWindowScale().X / 19;
+	FVector WinScale = GetWindowScale();
+	FVector TileScale = { WinScale.X / 20.0f, WinScale.Y / 11.0f};
+	return TileScale;
 }
 
 void ContentsHelper::LoadImg(std::string_view _Path, std::string_view _Name)
@@ -28,6 +30,15 @@ void ContentsHelper::LoadImg(std::string_view _Path, std::string_view _Name)
 	ResourcesPath.Move("Resources");
 	ResourcesPath.Move(_Path);
 	UEngineResourcesManager::GetInst().LoadImg(ResourcesPath.AppendPath(_Name));
+}
+
+void ContentsHelper::LoadFolder(std::string_view _Path, std::string_view _Name)
+{
+	UEngineDirectory ResourcesPath = UEngineDirectory();
+	ResourcesPath.MoveParent();
+	ResourcesPath.Move("Resources");
+	ResourcesPath.Move(_Path);
+	UEngineResourcesManager::GetInst().LoadFolder(ResourcesPath.AppendPath(_Name));
 }
 
 
