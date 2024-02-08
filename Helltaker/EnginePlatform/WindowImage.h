@@ -22,7 +22,7 @@ enum class EWIndowImageType
 	IMG_PNG
 };
 
-class ImageInfo
+class UImageInfo
 {
 public:
 	HBITMAP hBitMap;
@@ -96,7 +96,7 @@ private:
 	BITMAP BitMapInfo = BITMAP(); // 비트맵를 담는 구조체인데 이걸 얻어와야 합니다.
 	EWIndowImageType ImageType = EWIndowImageType::IMG_NONE;
 
-	std::vector<ImageInfo> Infos;
+	std::vector<UImageInfo> Infos;
 
 	bool Create(HDC _MainDC);
 };

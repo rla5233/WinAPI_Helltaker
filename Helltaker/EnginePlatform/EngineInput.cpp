@@ -2,6 +2,11 @@
 
 std::map<int, EngineInput::EngineKey> EngineInput::AllKeys;
 
+bool EngineInput::AnykeyDown = false;
+bool EngineInput::AnykeyPress = false;
+bool EngineInput::AnykeyUp = false;
+bool EngineInput::AnykeyFree = true;
+
 void EngineInput::EngineKey::KeyCheck()
 {
 	// 이 키가 눌렸다는 거죠?
@@ -70,9 +75,9 @@ void EngineInput::InputInit()
 	AllKeys[VK_MENU] = EngineKey(VK_MENU);
 	AllKeys[VK_PAUSE] = EngineKey(VK_PAUSE);
 	AllKeys[VK_CAPITAL] = EngineKey(VK_CAPITAL);
-	AllKeys[VK_KANA] = EngineKey(VK_KANA);
-	AllKeys[VK_HANGEUL] = EngineKey(VK_HANGEUL);
-	AllKeys[VK_HANGUL] = EngineKey(VK_HANGUL);
+	// AllKeys[VK_KANA] = EngineKey(VK_KANA);
+	//AllKeys[VK_HANGEUL] = EngineKey(VK_HANGEUL);
+	//AllKeys[VK_HANGUL] = EngineKey(VK_HANGUL);
 	AllKeys[VK_IME_ON] = EngineKey(VK_IME_ON);
 	AllKeys[VK_JUNJA] = EngineKey(VK_JUNJA);
 	AllKeys[VK_FINAL] = EngineKey(VK_FINAL);
@@ -163,11 +168,58 @@ void EngineInput::InputInit()
 
 void EngineInput::KeyCheckTick(float _DeltaTime)
 {
+	bool KeyCheck = false;
+
 	for (std::pair<const int, EngineKey>& Key : AllKeys)
 	{
 		EngineKey& CurKey = Key.second;
-
 		CurKey.KeyCheck();
+
+		if (true == CurKey.Press)
+		{
+			KeyCheck = true;
+		}
+	}
+
+	// 어떤키든 눌렸다는 이야기
+	if (true == KeyCheck)
+	{
+		if (true == AnykeyFree)
+		{
+			// 이전까지 이 키는 눌리고 있지 않았다
+			AnykeyDown = true;
+			AnykeyPress = true;
+			AnykeyUp = false;
+			AnykeyFree = false;
+		}
+		else if (true == AnykeyDown)
+		{
+			// 이전까지 이 키는 눌리고 있었다.
+			AnykeyDown = false;
+			AnykeyPress = true;
+			AnykeyUp = false;
+			AnykeyFree = false;
+		}
+	}
+	else
+	{
+		if (true == AnykeyPress)
+		{
+			// 이전까지 이 키는 눌리고 있었다.
+			AnykeyDown = false;
+			AnykeyPress = false;
+			AnykeyUp = true;
+			AnykeyFree = false;
+		}
+		else if (true == AnykeyUp)
+		{
+			// 이전까지 이 키는 안눌리고 있었고 앞으로도 안눌릴거다.
+			AnykeyDown = false;
+			AnykeyPress = false;
+			AnykeyUp = false;
+			AnykeyFree = true;
+		}
+
 	}
 }
 
