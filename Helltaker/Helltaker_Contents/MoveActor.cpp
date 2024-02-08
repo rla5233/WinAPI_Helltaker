@@ -8,56 +8,75 @@
 MoveActor::MoveActor()
 {
 	MoveDistanceX = ContentsHelper::GetTileScale().X;
+	MoveDistanceY = ContentsHelper::GetTileScale().Y;
 }
 
 MoveActor::~MoveActor()
 {}
 
-void MoveActor::MoveCheck(float _DeltaTime)
+void MoveActor::MoveOneBlock(float _DeltaTime)
 {
-	if (false == IsMoving)
+	if (MoveDir == EActorMoveDir::Left || MoveDir == EActorMoveDir::Right)
 	{
-		if (EngineInput::IsPress('A') || EngineInput::IsPress(VK_LEFT))
+		if (0 < MoveDistanceX)
 		{
-			MoveDir = FVector::Left;
-			IsMoving = true;
+			AddActorLocation(FMoveDir * Speed * _DeltaTime);
+			MoveDistanceX -= Speed * _DeltaTime;	
 		}
-		else if (EngineInput::IsPress('D') || EngineInput::IsPress(VK_RIGHT))
+		else
 		{
-			MoveDir = FVector::Right;
-			IsMoving = true;
+			LocationPoint += FMoveDir;
+
+			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D()};
+			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTileScale);
+			MoveDistanceX = ContentsHelper::GetTileScale().X;
+			MoveOff();
 		}
-		else if (EngineInput::IsPress('W') || EngineInput::IsPress(VK_UP))
+	}
+	else if (MoveDir == EActorMoveDir::Up || MoveDir == EActorMoveDir::Down)
+	{
+		if (0 < MoveDistanceY)
 		{
-			MoveDir = FVector::Up;
-			IsMoving = true;
+			AddActorLocation(FMoveDir * Speed * _DeltaTime);
+			MoveDistanceY -= Speed * _DeltaTime;
 		}
-		else if (EngineInput::IsPress('S') || EngineInput::IsPress(VK_DOWN))
+		else
 		{
-			MoveDir = FVector::Down;
-			IsMoving = true;
+			LocationPoint += FMoveDir;
+
+			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
+			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTileScale);
+			MoveDistanceY = ContentsHelper::GetTileScale().X;
+			MoveOff();
 		}
 	}
 }
 
-void MoveActor::MoveOneBlock(float _DeltaTime)
+void MoveActor::MoveDirChange(EActorMoveDir _Dir)
 {
-	if (true == IsMoving)
-	{
+	MoveDir = _Dir;
+}
 
-		if (0 < MoveDistanceX)
-		{
-			AddActorLocation(MoveDir * Speed * _DeltaTime);
-			MoveDistanceX -= Speed * _DeltaTime;
-		}
-		else
-		{
-			LocationPoint += MoveDir;
-			float hTileWidth = ContentsHelper::GetTileScale().X / 2;
-			FVector hTile = { hTileWidth , hTileWidth };
-			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTile);
-			MoveDistanceX = ContentsHelper::GetTileScale().X;
-			IsMoving = false;
-		}
+void MoveActor::FMoveDirCheck()
+{
+	switch (MoveDir)
+	{
+	case EActorMoveDir::Left:
+		FMoveDir = FVector::Left;
+		break;
+	case EActorMoveDir::Right:
+		FMoveDir = FVector::Right;
+		break;
+	case EActorMoveDir::Up:
+		FMoveDir = FVector::Up;
+		break;
+	case EActorMoveDir::Down:
+		FMoveDir = FVector::Down;
+		break;
 	}
+}
+
+void MoveActor::SeeDirChange(EActorSeeDir _Dir)
+{
+	SeeDir = _Dir;
 }

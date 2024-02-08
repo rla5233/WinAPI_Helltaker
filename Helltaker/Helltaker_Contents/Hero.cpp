@@ -72,7 +72,7 @@ void Hero::BeginPlay()
 
 	// Init
 	StateChange(EHeroState::Idle);
-	SeeDirChange(EHeroSeeDir::Right);
+	SeeDirChange(EActorSeeDir::Right);
 	IdleStart();
 }
 
@@ -100,17 +100,38 @@ void Hero::StateUpdate(float _DeltaTime)
 
 void Hero::Idle(float _DeltaTime)
 {
-	
+	if (EngineInput::IsPress('W') || EngineInput::IsPress(VK_UP))
+	{
+		MoveDirChange(EActorMoveDir::Up);
+		StateChange(EHeroState::Move);
+	}
+	else if (EngineInput::IsPress('A') || EngineInput::IsPress(VK_LEFT))
+	{
+		MoveDirChange(EActorMoveDir::Left);
+		SeeDirChange(EActorSeeDir::Left);
+		StateChange(EHeroState::Move);
+	}
+	else if (EngineInput::IsPress('S') || EngineInput::IsPress(VK_DOWN))
+	{
+		MoveDirChange(EActorMoveDir::Down);
+		StateChange(EHeroState::Move);
+	}
+	else if (EngineInput::IsPress('D') || EngineInput::IsPress(VK_RIGHT))
+	{
+		MoveDirChange(EActorMoveDir::Right);
+		SeeDirChange(EActorSeeDir::Right);
+		StateChange(EHeroState::Move);
+	}
 }
 
 void Hero::IdleStart()
 {
 	switch (SeeDir)
 	{
-	case EHeroSeeDir::Left:
+	case EActorSeeDir::Left:
 		Renderer->ChangeAnimation("Left_Idle");
 		break;
-	case EHeroSeeDir::Right:
+	case EActorSeeDir::Right:
 		Renderer->ChangeAnimation("Right_Idle");
 		break;
 	}
@@ -118,36 +139,70 @@ void Hero::IdleStart()
 
 void Hero::Move(float _DeltaTime)
 {
-	Renderer->ChangeAnimation("Left_Move");
+	MoveOneBlock(_DeltaTime);
+
+	if (false == IsMove())
+	{
+		StateChange(EHeroState::Idle);
+	}
 }
 
 void Hero::MoveStart()
 {
 	switch (SeeDir)
 	{
-	case EHeroSeeDir::Left:
+	case EActorSeeDir::Left:
 		Renderer->ChangeAnimation("Left_Move");
 		break;
-	case EHeroSeeDir::Right:
+	case EActorSeeDir::Right:
 		Renderer->ChangeAnimation("Right_Move");
 		break;
 	}
+
+	FMoveDirCheck();
+	MoveOn();
 }
 
 void Hero::Kick(float _DeltaTime)
 {
-	Renderer->ChangeAnimation("Left_Kick");
+}
+
+void Hero::KickStart()
+{
+	switch (SeeDir)
+	{
+	case EActorSeeDir::Left:
+		Renderer->ChangeAnimation("Left_Kick");
+		break;
+	case EActorSeeDir::Right:
+		Renderer->ChangeAnimation("Right_Kick");
+		break;
+	}
 }
 
 void Hero::Victory(float _DeltaTime)
 {
-	Renderer->ChangeAnimation("Left_Victory");
+}
+
+void Hero::VictoryStart()
+{
+	switch (SeeDir)
+	{
+	case EActorSeeDir::Left:
+		Renderer->ChangeAnimation("Left_Victory");
+		break;
+	case EActorSeeDir::Right:
+		Renderer->ChangeAnimation("Right_Victory");
+		break;
+	}
 }
 
 void Hero::Death(float _DeltaTime)
 {
-	Renderer->ChangeAnimation("Death");
 }
+
+void Hero::DeathStart()
+{}
 
 void Hero::Tick(float _DeltaTime)
 {
@@ -169,22 +224,16 @@ void Hero::StateChange(EHeroState _State)
 			MoveStart();
 			break;
 		case EHeroState::Kick:
-			//KickStart();
+			KickStart();
 			break;
 		case EHeroState::Victory:
-			//MoveStart();
+			VictoryStart();
 			break;
 		case EHeroState::Death:
-			//MoveStart();
+			DeathStart();
 			break;
 		}
 	}
 
 	State = _State;
 }
-
-void Hero::SeeDirChange(EHeroSeeDir _Dir)
-{
-	SeeDir = _Dir;
-}
-

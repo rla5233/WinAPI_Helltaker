@@ -64,9 +64,18 @@ enum class EHeroState
 	Death
 };
 
-enum class EHeroSeeDir
+enum class EActorSeeDir
 {
 	None,
 	Left,
 	Right
+};
+
+enum class EActorMoveDir
+{
+	None,
+	Left,
+	Right,
+	Up,
+	Down
 };

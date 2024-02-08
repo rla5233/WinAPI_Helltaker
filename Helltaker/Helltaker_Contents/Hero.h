@@ -19,14 +19,15 @@ public:
 	void Move(float _DeltaTime);
 	void MoveStart();
 	void Kick(float _DeltaTime);
+	void KickStart();
 	void Victory(float _DeltaTime);
+	void VictoryStart();
 	void Death(float _DeltaTime);
+	void DeathStart();
 	
 
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State);
-
-	void SeeDirChange(EHeroSeeDir _Dir);
 
 protected:
 	void BeginPlay() override;
@@ -36,5 +37,4 @@ private:
 	int ActionPoint = 25;
 
 	EHeroState State = EHeroState::None;
-	EHeroSeeDir SeeDir = EHeroSeeDir::None;
 };

@@ -14,23 +14,43 @@ public:
 	MoveActor& operator=(const MoveActor& _Other) = delete;
 	MoveActor& operator=(MoveActor&& _Other) noexcept = delete;
 
-	void MoveCheck(float _DeltaTime);
 	void MoveOneBlock(float _DeltaTime);
 
+	void MoveDirChange(EActorMoveDir _Dir);
+	void FMoveDirCheck();
+	void SeeDirChange(EActorSeeDir _Dir);
+	
 	void SetLocationPoint(FVector _Point)
 	{
 		LocationPoint = _Point;
 	}
 
+	bool IsMove() const
+	{
+		return IsMoveValue;
+	}
+
+	void MoveOn()
+	{
+		IsMoveValue = true;
+	}
+
+	void MoveOff()
+	{
+		IsMoveValue = false;
+	}
+
 protected:
+	EActorMoveDir MoveDir = EActorMoveDir::None;
+	EActorSeeDir SeeDir = EActorSeeDir::None;
 
 private:
 	float MoveDistanceX = 0.0f;
 	float MoveDistanceY = 0.0f;
 
 	float Speed = 500.0f;
-	FVector MoveDir = FVector::Zero;
-	FVector LocationPoint = FVector::Zero;
+	FVector FMoveDir = FVector::Zero;
+	bool IsMoveValue = false;
 
-	bool IsMoving = false;
+	FVector LocationPoint = FVector::Zero;
 };
