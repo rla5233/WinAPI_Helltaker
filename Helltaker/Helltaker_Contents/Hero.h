@@ -14,8 +14,19 @@ public:
 	Hero& operator=(const Hero& _Other) = delete;
 	Hero& operator=(Hero&& _Other) noexcept = delete;
 
+	void Idle(float _DeltaTime);
+	void IdleStart();
+	void Move(float _DeltaTime);
+	void MoveStart();
+	void Kick(float _DeltaTime);
+	void Victory(float _DeltaTime);
+	void Death(float _DeltaTime);
+	
+
+	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State);
 
+	void SeeDirChange(EHeroSeeDir _Dir);
 
 protected:
 	void BeginPlay() override;
@@ -25,4 +36,5 @@ private:
 	int ActionPoint = 25;
 
 	EHeroState State = EHeroState::None;
+	EHeroSeeDir SeeDir = EHeroSeeDir::None;
 };

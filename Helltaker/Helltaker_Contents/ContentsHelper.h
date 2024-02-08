@@ -57,13 +57,16 @@ enum class EMainMenuState
 enum class EHeroState
 {
 	None,
-	LIdle,
-	LMove,
-	LKick,
-	LVictory,
-	RIdle,
-	RMove,
-	RKick,
-	RVictory,
+	Idle,
+	Move,
+	Kick,
+	Victory,
 	Death
+};
+
+enum class EHeroSeeDir
+{
+	None,
+	Left,
+	Right
 };
