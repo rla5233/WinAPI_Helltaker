@@ -16,7 +16,7 @@ BackGround::~BackGround()
 void BackGround::CreateBackGround(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	SetActorLocation({ WinScale.hX(), WinScale.hY() });
+	SetActorLocation({ WinScale.Half2D()});
 	SetName(_Name);
 	LoadImg("BackGround");
 	CreateImageRenderer(RenderOrder::BackGround);
