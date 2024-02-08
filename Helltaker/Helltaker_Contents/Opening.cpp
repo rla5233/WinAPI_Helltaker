@@ -21,14 +21,14 @@ void Opening::BeginPlay()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* OpeningBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
-	OpeningBG->CreateBackGround("OpeningBG.png");
+	OpeningBG->CreateBackGround("OpeningBG");
 
 	Dialogue* UnityLogo = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Dialogue));
 	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.9f});
-	UnityLogo->SetName("UnityLogo.png");
+	UnityLogo->SetName("UnityLogo");
 	UnityLogo->LoadImg("Secene\\Dialogue");
 	UnityLogo->CreateImageRenderer(RenderOrder::Dialogue);
-	UnityLogo->SetImg(UnityLogo->GetName());
+	UnityLogo->SetImg(UnityLogo->GetName() + ".png");
 	UnityLogo->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
 }
 
