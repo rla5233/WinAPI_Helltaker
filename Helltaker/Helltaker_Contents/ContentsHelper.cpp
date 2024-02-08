@@ -19,7 +19,7 @@ FVector ContentsHelper::GetWindowScale()
 FVector ContentsHelper::GetTileScale()
 {
 	FVector WinScale = GetWindowScale();
-	FVector TileScale = { WinScale.X / 20.0f, WinScale.Y / 11.0f};
+	FVector TileScale = { WinScale.X / 19.2f, WinScale.Y / 10.8f};
 	return TileScale;
 }
 

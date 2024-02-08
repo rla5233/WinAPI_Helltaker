@@ -2,6 +2,10 @@
 
 #include "ContentsHelper.h"
 
+
+#include "RenderActor.h"
+#include <vector>
+
 ChapterManager::ChapterManager()
 {
 }
@@ -12,26 +16,50 @@ ChapterManager::~ChapterManager()
 
 void ChapterManager::SetChapterStartLocation(FVector _Point)
 {
-	ChapterStartLocation = _Point * ContentsHelper::GetOneTileWidth();
+	ChapterStartLocation = _Point * ContentsHelper::GetTileScale();
 }
 
 FVector ChapterManager::ChapterPointToLocation(FVector _Point)
 {
-	return ChapterPointToLocation(static_cast<int>(_Point.X), static_cast<int>(_Point.Y));
+	return ChapterPointToLocation(_Point.iX(), _Point.iY());
 }
 
 FVector ChapterManager::ChapterPointToLocation(int _X, int _Y)
 {
 	FVector Location = ChapterStartLocation;
-	Location += FVector(_X, _Y) * ContentsHelper::GetOneTileWidth();
+	Location += FVector(_X, _Y) * ContentsHelper::GetTileScale();
 	return Location;
 }
 
 void ChapterManager::CreateChapterMap(int _X, int _Y)
 {
-	ChapterMap.reserve(_Y);
-	for (int i = 0; i < ChapterMap.size(); i++)
-	{
-		ChapterMap[i].reserve(_X);
-	}
+	//Width = _X; Height = _Y;
+	//ChapterMap.reserve(Height);
+	//for (int i = 0; i < Height; i++)
+	//{
+	//	ChapterMap[i].reserve(Width);
+	//}
+}
+
+void ChapterManager::ShowLocationPoint()
+{
+	//std::vector<std::vector<RenderActor*>> GreenPoint;
+	//
+	//GreenPoint.resize(Height);
+	//for (int i = 0; i < Height; i++)
+	//{
+	//	GreenPoint[i].reserve(Width);
+	//}
+	//
+	//for (int Y = 0; Y < Height; Y++)
+	//{
+	//	for (int X = 0; X < Width; X++)
+	//	{
+	//		GreenPoint[Y][X] = SpawnActor<RenderActor>(static_cast<int>(UpdateOrder::UI));
+	//		GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
+	//		GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
+	//		GreenPoint[Y][X]->SetImg("GreenPoint.png");
+	//		GreenPoint[Y][X]->SetTransform({ { 0,0 }, {1, 1} });
+	//	}
+	//}
 }

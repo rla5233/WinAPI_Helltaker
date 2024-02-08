@@ -7,7 +7,7 @@
 
 MoveActor::MoveActor()
 {
-	MoveDistance = ContentsHelper::GetOneTileWidth();
+	MoveDistanceX = ContentsHelper::GetTileScale().X;
 }
 
 MoveActor::~MoveActor()
@@ -45,18 +45,18 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 	if (true == IsMoving)
 	{
 
-		if (0 < MoveDistance)
+		if (0 < MoveDistanceX)
 		{
 			AddActorLocation(MoveDir * Speed * _DeltaTime);
-			MoveDistance -= Speed * _DeltaTime;
+			MoveDistanceX -= Speed * _DeltaTime;
 		}
 		else
 		{
 			LocationPoint += MoveDir;
-			float hTileWidth = ContentsHelper::GetOneTileWidth() / 2;
+			float hTileWidth = ContentsHelper::GetTileScale().X / 2;
 			FVector hTile = { hTileWidth , hTileWidth };
 			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTile);
-			MoveDistance = ContentsHelper::GetOneTileWidth();
+			MoveDistanceX = ContentsHelper::GetTileScale().X;
 			IsMoving = false;
 		}
 	}

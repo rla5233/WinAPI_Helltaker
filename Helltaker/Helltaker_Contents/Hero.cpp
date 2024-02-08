@@ -24,7 +24,7 @@ void Hero::BeginPlay()
 	FVector TileScale = ContentsHelper::GetTileScale();
 	CreateImageRenderer(RenderOrder::Hero);
 	Renderer->SetImage("Left_Idle");
-	Renderer->SetTransform({ {0,0}, {TileWidth / 1.1f, TileWidth / 1.1f} });
+	Renderer->SetTransform({ {0,0}, {TileScale.X / 1.0f, TileScale.Y / 1.0f} });
 	Renderer->CreateAnimation("Left_Idle", "Left_Idle", 0, 11, 0.07f, true);
 	Renderer->ChangeAnimation("Left_Idle");
 }
