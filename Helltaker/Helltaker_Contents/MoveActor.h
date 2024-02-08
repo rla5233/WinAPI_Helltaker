@@ -42,16 +42,6 @@ public:
 		IsMoveValue = false;
 	}
 
-	const ChapterManager* GetChapter()
-	{
-		if (nullptr == GetWorld())
-		{
-			MsgBoxAssert("ULevel is Nullptr");
-		}
-
-		return dynamic_cast<ChapterManager*>(GetWorld());
-	}
-
 protected:
 	EActorMoveDir MoveDir = EActorMoveDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;

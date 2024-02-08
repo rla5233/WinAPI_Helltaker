@@ -61,7 +61,7 @@ void MainMenu::Tick(float _DeltaTime)
 
 void MainMenu::Begin(float _DeltaTime)
 {
-	if (EngineInput::IsPress(VK_SPACE) || EngineInput::IsPress(VK_RETURN))
+	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Enter);
 	}
@@ -69,7 +69,7 @@ void MainMenu::Begin(float _DeltaTime)
 
 void MainMenu::Enter(float _DeltaTime)
 {
-	if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::SelectMenu);
 		return;
@@ -97,19 +97,19 @@ void MainMenu::EnterInit()
 
 void MainMenu::SelectMenu(float _DeltaTime)
 {
-	if (EngineInput::IsDown('W') || EngineInput::IsDown(VK_UP))
+	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
 		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_UnSelected.png");
 		SetFocusMenuIndex(FocusMenuIndex - 1);
 		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_Selected.png");
 	}
-	else if (EngineInput::IsDown('S') || EngineInput::IsDown(VK_DOWN))
+	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
 		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_UnSelected.png");
 		SetFocusMenuIndex(FocusMenuIndex + 1);
 		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_Selected.png");
 	}
-	else if (EngineInput::IsDown(VK_SPACE) || EngineInput::IsDown(VK_RETURN))
+	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		switch (FocusMenuIndex)
 		{

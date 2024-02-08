@@ -106,26 +106,26 @@ void Hero::ActionCheck(float _DeltaTime)
 
 void Hero::Idle(float _DeltaTime)
 {
-	if (EngineInput::IsPress('W') || EngineInput::IsPress(VK_UP))
+	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
 	{
 		ActionCheck(_DeltaTime);
 		//MoveDirChange(EActorMoveDir::Up);
 		//StateChange(EHeroState::Move);
 	}
-	else if (EngineInput::IsPress('A') || EngineInput::IsPress(VK_LEFT))
+	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
 	{
 		ActionCheck(_DeltaTime);
 		//MoveDirChange(EActorMoveDir::Left);
 		//SeeDirChange(EActorSeeDir::Left);
 		//StateChange(EHeroState::Move);
 	}
-	else if (EngineInput::IsPress('S') || EngineInput::IsPress(VK_DOWN))
+	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
 	{
 		ActionCheck(_DeltaTime);
 		//MoveDirChange(EActorMoveDir::Down);
 		//StateChange(EHeroState::Move);
 	}
-	else if (EngineInput::IsPress('D') || EngineInput::IsPress(VK_RIGHT))
+	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
 	{
 		ActionCheck(_DeltaTime);
 		//MoveDirChange(EActorMoveDir::Right);

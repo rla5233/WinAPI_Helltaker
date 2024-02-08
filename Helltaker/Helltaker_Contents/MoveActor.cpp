@@ -45,8 +45,6 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		{
 			LocationPoint += FMoveDir;
 
-			GetChapter()->GetChapterStartLocation();
-
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
 			SetActorLocation(dynamic_cast<ChapterManager*>(GetWorld())->ChapterPointToLocation(LocationPoint) + hTileScale);
 			MoveDistanceY = ContentsHelper::GetTileScale().X;
