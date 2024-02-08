@@ -14,7 +14,8 @@ public:
 	Hero& operator=(const Hero& _Other) = delete;
 	Hero& operator=(Hero&& _Other) noexcept = delete;
 
-public:
+	void StateChange(EHeroState _State);
+
 
 protected:
 	void BeginPlay() override;
@@ -23,5 +24,5 @@ protected:
 private:
 	int ActionPoint = 25;
 
+	EHeroState State = EHeroState::None;
 };
-

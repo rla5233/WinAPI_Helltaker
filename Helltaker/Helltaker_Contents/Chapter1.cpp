@@ -22,7 +22,7 @@ void Chapter1::BeginPlay()
 	ChapterManager::BeginPlay();
 
 	// 스테이지 생성
-	CreateChapterMap(7, 7);
+	CreateChapterMap(9, 7);
 	SetChapterStartLocation({ 5, 2 });
 
 	FVector WinScale = ContentsHelper::GetWindowScale();

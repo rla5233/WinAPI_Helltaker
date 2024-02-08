@@ -53,3 +53,17 @@ enum class EMainMenuState
 	EnterChapter,
 	Exit
 };
+
+enum class EHeroState
+{
+	None,
+	LIdle,
+	LMove,
+	LKick,
+	LVictory,
+	RIdle,
+	RMove,
+	RKick,
+	RVictory,
+	Death
+};
