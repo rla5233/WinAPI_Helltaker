@@ -98,10 +98,16 @@ void Hero::StateUpdate(float _DeltaTime)
 	}
 }
 
+void Hero::ActionCheck(float _DeltaTime)
+{
+
+}
+
 void Hero::Idle(float _DeltaTime)
 {
 	if (EngineInput::IsPress('W') || EngineInput::IsPress(VK_UP))
 	{
+		ActionCheck(_DeltaTime);
 		MoveDirChange(EActorMoveDir::Up);
 		StateChange(EHeroState::Move);
 	}
@@ -204,8 +210,7 @@ void Hero::Death(float _DeltaTime)
 void Hero::DeathStart()
 {}
 
-void Hero::ActionCheck(float _DeltaTime)
-{}
+
 
 void Hero::Tick(float _DeltaTime)
 {

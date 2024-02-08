@@ -26,7 +26,6 @@ public:
 	void DeathStart();
 
 	void ActionCheck(float _DeltaTime);
-	
 
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State);

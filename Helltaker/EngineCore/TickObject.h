@@ -36,6 +36,7 @@ public:
 			return;
 		}
 
+		IsActiveUpdate = true;
 		IsActiveValue = false;
 	}
 
@@ -68,18 +69,16 @@ public:
 
 	virtual void ActiveUpdate(float _DeltaTime)
 	{
-		if (0.0f == ActiveTime)
-		{
-			IsActiveValue = true;
-			return;
-		}
-
 		ActiveTime -= _DeltaTime;
 
-		if (0.0f >= ActiveTime)
+		if (true == IsActiveUpdate)
 		{
-			ActiveTime = 0.0f;
-			IsActiveValue = true;
+			if (0.0f >= ActiveTime)
+			{
+				IsActiveUpdate = false;
+				IsActiveValue = true;
+				return;
+			}
 		}
 	}
 
@@ -109,11 +108,12 @@ protected:
 
 private:
 	int Order = 0;
-	bool IsDestroyUpdate = false;
 
+	bool IsDestroyUpdate = false;
 	float DestroyTime = 0.0f;
 	bool IsDestroyValue = false;
 
+	bool IsActiveUpdate = false;
 	float ActiveTime = 0.0f;
 	bool IsActiveValue = true;
 };
