@@ -48,7 +48,7 @@ private:
 	float MoveDistanceX = 0.0f;
 	float MoveDistanceY = 0.0f;
 
-	float Speed = 600.0f;
+	float Speed = 0.0f;
 	FVector FMoveDir = FVector::Zero;
 	bool IsMoveValue = false;
 

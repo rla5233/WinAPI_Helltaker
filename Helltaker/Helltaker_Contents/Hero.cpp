@@ -204,6 +204,9 @@ void Hero::Death(float _DeltaTime)
 void Hero::DeathStart()
 {}
 
+void Hero::ActionCheck(float _DeltaTime)
+{}
+
 void Hero::Tick(float _DeltaTime)
 {
 	MoveActor::Tick(_DeltaTime);

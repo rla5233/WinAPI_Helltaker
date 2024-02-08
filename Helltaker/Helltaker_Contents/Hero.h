@@ -24,6 +24,8 @@ public:
 	void VictoryStart();
 	void Death(float _DeltaTime);
 	void DeathStart();
+
+	void ActionCheck(float _DeltaTime);
 	
 
 	void StateUpdate(float _DeltaTime);

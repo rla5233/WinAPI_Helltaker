@@ -9,6 +9,7 @@ MoveActor::MoveActor()
 {
 	MoveDistanceX = ContentsHelper::GetTileScale().X;
 	MoveDistanceY = ContentsHelper::GetTileScale().Y;
+	Speed = ContentsHelper::GetWindowScale().X / 3.0f;
 }
 
 MoveActor::~MoveActor()
