@@ -37,5 +37,21 @@ protected:
 private:
 	int ActionPoint = 25;
 
+	const FVector IdleScale = { 0.9f, 0.9f };
+	const float IdleInter = 0.07f;
+
+	const FVector MoveScale = { 0.9f, 0.9f };
+	const float MoveInter = 0.07f;
+
+	const FVector KickScale = { 0.95f, 0.95f };
+	const float KickInter = 0.07f;
+	const float KickTime = KickInter * 13;
+	float KickTimeCount = KickTime;
+
+	const FVector VictoryScale = { 0.9f, 1.2f };
+	const float VictoryInter = 0.15f;
+	const float VictoryTime = VictoryInter * 17;
+	float VictoryTimeCount = VictoryTime;
+
 	EHeroState State = EHeroState::None;
 };

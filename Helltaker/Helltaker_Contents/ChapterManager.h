@@ -43,7 +43,10 @@ public:
 	}
 
 	void CreateChapterMap(const std::vector<std::vector<bool>>& _Map);
+	
+	void CreateChapterUI();
 
+	// 디버그 용
 	void ShowLocationPoint();
 
 protected:

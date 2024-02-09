@@ -1,7 +1,7 @@
 #include "ChapterManager.h"
 
 #include "ContentsHelper.h"
-
+#include "UI.h"
 
 #include "RenderActor.h"
 #include <math.h>
@@ -53,6 +53,18 @@ void ChapterManager::CreateChapterMap(const std::vector<std::vector<bool>>& _Map
 	}
 
 	IsChapterMapInit = true;
+}
+
+void ChapterManager::CreateChapterUI()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	UI* ChapterUI = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+	ChapterUI->SetActorLocation(WinScale.Half2D());
+	ChapterUI->SetName("ChapterUI");
+	ChapterUI->LoadImg("UI");
+	ChapterUI->CreateImageRenderer(RenderOrder::UI);
+	ChapterUI->SetImg(ChapterUI->GetName() + ".png");
+	ChapterUI->SetTransform({ {0,0}, WinScale });
 }
 
 
