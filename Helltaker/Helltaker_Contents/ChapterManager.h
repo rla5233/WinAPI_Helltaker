@@ -8,6 +8,7 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
+class MoveActor;
 
 // 설명 :
 class ChapterManager : public ULevel
@@ -32,22 +33,36 @@ public:
 		return ChapterStartLocation;
 	}
 
-	const std::vector<std::vector<bool>>& GetChapterMap() const
+	const std::vector<std::vector<bool>>& GetChapterVec() const
 	{
-		if (false == IsChapterMapInit)
+		if (false == IsChapterVecInit)
 		{
 			MsgBoxAssert("ChapterMap Not Exist.");
 		}
 
-		return ChapterMap;
+		return ChapterVec;
 	}
 
-	void CreateChapterMap(const std::vector<std::vector<bool>>& _Map);
+	std::vector<std::vector<MoveActor*>>& GetMoveActorVec()
+	{
+		if (false == IsChapterVecInit)
+		{
+			MsgBoxAssert("ChapterMap Not Exist.");
+		}
+
+		return MoveActorVec;
+	}
+
+	void CreateChapterVec(const std::vector<std::vector<bool>>& _Map);
+	void CreateMoveActorVec();
 	
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
 	void CreateHero(int _X, int _Y);
 	void CreateSkeleton(int _X, int _Y);
+
+	MoveActor* GetMoveActor(FVector _Point);
+	MoveActor* GetMoveActor(int _X, int _Y);
 
 	// 디버그 용
 	void ShowLocationPoint();
@@ -60,8 +75,10 @@ private:
 	int Width = -1;
 	int Height = -1;
 
-	std::vector<std::vector<bool>> ChapterMap;
-	std::vector<std::vector<bool>> IsEmptyTile;
+	std::vector<std::vector<bool>> ChapterVec;
+	std::vector<std::vector<MoveActor*>> MoveActorVec;
 
-	bool IsChapterMapInit = false;
+
+
+	bool IsChapterVecInit = false;
 };

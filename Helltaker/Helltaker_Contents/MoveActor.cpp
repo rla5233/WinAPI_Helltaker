@@ -82,7 +82,7 @@ void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 	SeeDir = _Dir;
 }
 
-const ChapterManager* MoveActor::GetChapter()
+ChapterManager* MoveActor::GetChapter()
 {
 	return dynamic_cast<ChapterManager*>(GetWorld());
 }

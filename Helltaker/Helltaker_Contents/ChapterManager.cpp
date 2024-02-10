@@ -1,6 +1,7 @@
 #include "ChapterManager.h"
 
 #include "ContentsHelper.h"
+#include "MoveActor.h"
 #include "BackGround.h"
 #include "Skeleton.h"
 #include "Hero.h"
@@ -23,6 +24,7 @@ void ChapterManager::SetChapterStartLocation(FVector _Point)
 	ChapterStartLocation = _Point * ContentsHelper::GetTileScale();
 }
 
+// 맵좌표를 윈도우 위치로 변환하는 함수
 FVector ChapterManager::ChapterPointToLocation(FVector _Point) const
 {
 	return ChapterPointToLocation(_Point.iX(), _Point.iY());
@@ -33,29 +35,52 @@ FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Location = ChapterStartLocation;
 	Location += FVector(_X, _Y) * ContentsHelper::GetTileScale();
+	// 오차 보정
 	Location += {fmod(WinScale.X, 19.0f), fmod(WinScale.Y, 10.8f)};
 	return Location;
 }
 
-void ChapterManager::CreateChapterMap(const std::vector<std::vector<bool>>& _Map)
+void ChapterManager::CreateChapterVec(const std::vector<std::vector<bool>>& _Map)
 {
 	Width = static_cast<int>(_Map[0].size()); 
 	Height = static_cast<int>(_Map.size());
-	ChapterMap.resize(Height);
+	ChapterVec.resize(Height);
 	for (int i = 0; i < Height; i++)
 	{
-		ChapterMap[i].resize(Width);
+		ChapterVec[i].resize(Width);
 	}
 
 	for (int Y = 0; Y < _Map.size(); Y++)
 	{
 		for (int X = 0; X < _Map[Y].size(); X++)
 		{
-			ChapterMap[Y][X] = _Map[Y][X];
+			ChapterVec[Y][X] = _Map[Y][X];
 		}
 	}
 
-	IsChapterMapInit = true;
+	IsChapterVecInit = true;
+}
+
+void ChapterManager::CreateMoveActorVec()
+{
+	if (false == IsChapterVecInit)
+	{
+		MsgBoxAssert("ChapterMap is Not Exist");
+	}
+
+	MoveActorVec.resize(Height);
+	for (int i = 0; i < Height; i++)
+	{
+		MoveActorVec[i].resize(Width);
+	}
+
+	for (int Y = 0; Y < Height; Y++)
+	{
+		for (int X = 0; X < Width; X++)
+		{
+			MoveActorVec[Y][X] = nullptr;
+		}
+	}
 }
 
 void ChapterManager::CreateBG(std::string_view _Name)
@@ -91,8 +116,18 @@ void ChapterManager::CreateSkeleton(int _X, int _Y)
 	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
+	MoveActorVec[_Y][_X] = NewSkeleton;
 }
 
+MoveActor* ChapterManager::GetMoveActor(FVector _Point)
+{
+	return GetMoveActor(_Point.iX(), _Point.iY());
+}
+
+MoveActor* ChapterManager::GetMoveActor(int _X, int _Y)
+{
+	return MoveActorVec[_Y][_X];
+}
 
 // 디버그용
 void ChapterManager::ShowLocationPoint()
@@ -113,7 +148,7 @@ void ChapterManager::ShowLocationPoint()
 			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
 			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
 			
-			if (ChapterMap[Y][X])
+			if (ChapterVec[Y][X])
 			{
 				GreenPoint[Y][X]->SetImg("GreenPoint.png");
 			}

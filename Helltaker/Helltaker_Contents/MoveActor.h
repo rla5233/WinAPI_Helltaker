@@ -5,7 +5,6 @@ class ChapterManager;
 
 class MoveActor : public RenderActor
 {
-	friend ChapterManager;
 public:
 	// constructor destructor
 	MoveActor();
@@ -43,12 +42,12 @@ public:
 		IsMoveValue = false;
 	}
 
-	FVector GetLocationPoint()
+	FVector GetLocationPoint() const
 	{
 		return LocationPoint;
 	}
 
-	const ChapterManager* GetChapter();
+	ChapterManager* GetChapter();
 
 protected:
 	EActorMoveDir MoveDir = EActorMoveDir::None;

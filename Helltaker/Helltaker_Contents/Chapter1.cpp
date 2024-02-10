@@ -25,17 +25,14 @@ void Chapter1::BeginPlay()
 		{ true , true , true , true , true , true , true  }
 	};
 
-	CreateChapterMap(Map);
+	CreateChapterVec(Map);
+	CreateMoveActorVec();
 	SetChapterStartLocation({ 6, 2 });
 
 	CreateBG("ChapterBG_001");
 	CreateChapterUI();
 	CreateHero(5, 0);
 	CreateSkeleton(3, 1);
-
-
-
-
 
 
 	// 디버그 용

@@ -68,7 +68,7 @@ void Hero::BeginPlay()
 
 void Hero::ActionCheck(float _DeltaTime)
 {
-	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterMap();
+	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
 	FVector LocationPoint = GetLocationPoint();
 
 	switch (MoveDir)
@@ -133,10 +133,6 @@ void Hero::Idle(float _DeltaTime)
 		SeeDirChange(EActorSeeDir::Right);
 		ActionCheck(_DeltaTime);
 	}
-	//else if (UEngineInput::IsPress('Q'))
-	//{
-	//	StateChange(EHeroState::Kick);
-	//}
 }
 
 void Hero::IdleStart()

@@ -1,8 +1,8 @@
 #include "Skeleton.h"
 
+#include "ChapterManager.h"
+
 #include <EngineCore/EngineCore.h>
-
-
 
 Skeleton::Skeleton()
 {}
