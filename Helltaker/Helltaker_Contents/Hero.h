@@ -31,6 +31,11 @@ public:
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State);
 
+	bool GetCanActionCheck() const
+	{
+		return CanActionCheck;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -42,10 +47,10 @@ private:
 	const float IdleInter = 0.07f;
 
 	const FVector MoveScale = { 0.9f, 0.9f };
-	const float MoveInter = 0.07f;
+	const float MoveInter = 0.02f;
 
 	const FVector KickScale = { 0.95f, 0.95f };
-	const float KickInter = 0.07f;
+	const float KickInter = 0.05f;
 	const float KickTime = KickInter * 13;
 	float KickTimeCount = KickTime;
 
@@ -54,5 +59,6 @@ private:
 	const float VictoryTime = VictoryInter * 17;
 	float VictoryTimeCount = VictoryTime;
 
+	bool CanActionCheck = false;
 	EHeroState State = EHeroState::None;
 };

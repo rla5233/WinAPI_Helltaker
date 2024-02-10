@@ -10,6 +10,7 @@
 
 
 Hero::Hero()
+	: MoveActor(ContentsHelper::GetWindowScale().X * 0.3f)
 {}
 
 Hero::~Hero()
@@ -62,7 +63,6 @@ void Hero::BeginPlay()
 	//SetImg("Death");
 	CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
 
-
 	// Init
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHeroState::Idle);
@@ -100,16 +100,11 @@ void Hero::ActionCheck()
 		if (Map[Next_Y][Next_X])
 		{
 			NextTileCheck(Next_X, Next_Y);			
-		}
-		else
-		{
-			IdleStart();
+			return;
 		}
 	}
-	else
-	{
-		IdleStart();
-	}
+	
+	StateChange(EHeroState::Idle);
 }
 
 void Hero::NextTileCheck(int _X, int _Y)
@@ -126,34 +121,13 @@ void Hero::NextTileCheck(int _X, int _Y)
 
 void Hero::Idle(float _DeltaTime)
 {
-	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
-	{
-		MoveDirChange(EMoveActorDir::Up);
-		ActionCheck();
-	}
-	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
-	{
-		MoveDirChange(EMoveActorDir::Left);
-		SeeDirChange(EActorSeeDir::Left);
-		ActionCheck();
-	}
-	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
-	{
-		MoveDirChange(EMoveActorDir::Down);
-		ActionCheck();
-	}
-	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
-	{
-		MoveDirChange(EMoveActorDir::Right);
-		SeeDirChange(EActorSeeDir::Right);
-		ActionCheck();
-	}
 }
 
 void Hero::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * IdleScale} });
+	CanActionCheck = true;
 
 	switch (SeeDir)
 	{
@@ -173,6 +147,7 @@ void Hero::Move(float _DeltaTime)
 	if (false == IsMove())
 	{
 		StateChange(EHeroState::Idle);
+		return;
 	}
 }
 
@@ -180,6 +155,7 @@ void Hero::MoveStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * MoveScale} });
+	CanActionCheck = false;
 
 	switch (SeeDir)
 	{
@@ -202,6 +178,11 @@ void Hero::Kick(float _DeltaTime)
 		KickTimeCount = KickTime;
 		return;
 	}
+	
+	if (KickTime * 0.75f > KickTimeCount)
+	{
+		CanActionCheck = true;
+	}
 
 	KickTimeCount -= _DeltaTime;
 }
@@ -210,6 +191,8 @@ void Hero::KickStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * KickScale} });
+	CanActionCheck = false;
+	KickTimeCount = KickTime;
 
 	// Skeleton, Stone 업 캐스팅
 	FVector NextLocationPoint = GetNextLocationPoint();

@@ -8,6 +8,7 @@ class MoveActor : public RenderActor
 public:
 	// constructor destructor
 	MoveActor();
+	MoveActor(float _Speed);
 	~MoveActor();
 
 	// delete Function

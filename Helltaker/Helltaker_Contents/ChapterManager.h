@@ -9,6 +9,7 @@
 #include <EngineCore/Level.h>
 
 class HitActor;
+class Hero;
 
 // 설명 :
 class ChapterManager : public ULevel
@@ -61,11 +62,15 @@ public:
 	void CreateHero(int _X, int _Y);
 	void CreateSkeleton(int _X, int _Y);
 
+	//void RestartChatper();
+
 	HitActor* GetMoveActor(FVector _Point);
 	HitActor* GetMoveActor(int _X, int _Y);
 
 	// 디버그 용
 	void ShowLocationPoint();
+
+	void Tick(float _DeltaTime) override;
 
 protected:
 
@@ -79,6 +84,7 @@ private:
 	std::vector<std::vector<HitActor*>> HitActorVec;
 
 	//std::list<RenderActor*> AllActors;
+	Hero* PlayerHero = nullptr;
 
 	bool IsChapterVecInit = false;
 };

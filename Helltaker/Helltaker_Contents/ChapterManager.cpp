@@ -108,6 +108,7 @@ void ChapterManager::CreateHero(int _X, int _Y)
 	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
 	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewHero->SetLocationPoint({ _X, _Y });
+	PlayerHero = NewHero;
 }
 
 void ChapterManager::CreateSkeleton(int _X, int _Y)
@@ -161,3 +162,39 @@ void ChapterManager::ShowLocationPoint()
 		}
 	}
 }
+
+void ChapterManager::Tick(float _DeltaTime)
+{
+	if (true == PlayerHero->GetCanActionCheck())
+	{
+		if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
+		{
+			PlayerHero->MoveDirChange(EMoveActorDir::Up);
+			PlayerHero->ActionCheck();
+		}
+		else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
+		{
+			PlayerHero->MoveDirChange(EMoveActorDir::Left);
+			PlayerHero->SeeDirChange(EActorSeeDir::Left);
+			PlayerHero->ActionCheck();
+		}
+		else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
+		{
+			PlayerHero->MoveDirChange(EMoveActorDir::Down);
+			PlayerHero->ActionCheck();
+		}
+		else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
+		{
+			PlayerHero->MoveDirChange(EMoveActorDir::Right);
+			PlayerHero->SeeDirChange(EActorSeeDir::Right);
+			PlayerHero->ActionCheck();
+		}
+	}
+
+	if (UEngineInput::IsPress('R'))
+	{
+		//RestartChatper();
+	}
+}
+
+

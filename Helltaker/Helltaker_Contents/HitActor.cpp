@@ -6,6 +6,11 @@ HitActor::HitActor()
 {
 }
 
+HitActor::HitActor(float _Speed)
+	: MoveActor(_Speed)
+{
+}
+
 HitActor::~HitActor()
 {
 }
