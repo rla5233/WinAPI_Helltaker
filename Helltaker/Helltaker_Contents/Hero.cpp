@@ -18,76 +18,52 @@ void Hero::BeginPlay()
 {
 	MoveActor::BeginPlay();
 
-	
-	
 	SetName("Hero");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Left_Idle");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Left_Move");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Left_Kick");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Left_Victory");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Right_Idle");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Right_Move");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Right_Kick");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Right_Victory");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Death");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Idle");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Move");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Kick");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Victory");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Idle");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Move");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Kick");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Victory");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Death");
 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	CreateImageRenderer(RenderOrder::Hero);
-	SetTransform({ {0,0}, {TileScale.X * 0.9f, TileScale.Y * 0.9f} });
+	SetTransform({ {0,0}, {TileScale * IdleScale} });
 	
-	SetImg("Left_Idle");
-	CreateAnimation("Left_Idle", "Left_Idle", 0, 11, IdleInter, true);
+	SetImg("Hero_Left_Idle");
+	CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
 	
 	//SetImg("Left_Move");
-	CreateAnimation("Left_Move", "Left_Move", 0, 5, MoveInter, false);
+	CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);
 	
 	//SetImg("Left_Kick");
-	CreateAnimation("Left_Kick", "Left_Kick", 0, 12, KickInter, false);
+	CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);
 	
 	//SetImg("Left_Victory");
-	CreateAnimation("Left_Victory", "Left_Victory", 0, 20, VictoryInter, false);
+	CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
 	
 	//SetImg("Right_Idle");
-	CreateAnimation("Right_Idle", "Right_Idle", 0, 11, IdleInter, true);
+	CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);
 	
 	//SetImg("Right_Move");
-	CreateAnimation("Right_Move", "Right_Move", 0, 5, MoveInter, false);
+	CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);
 	
 	//SetImg("Right_Kick");
-	CreateAnimation("Right_Kick", "Right_Kick", 0, 12, KickInter, false);
+	CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);
 	
 	//SetImg("Right_Victory");
-	CreateAnimation("Right_Victory", "Right_Victory", 0, 20, VictoryInter, false);
+	CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
 	
 	//SetImg("Death");
-	CreateAnimation("Death", "Death", 0, 17, 0.07f, false);
+	CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
 
 
 	// Init
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHeroState::Idle);
-}
-
-void Hero::StateUpdate(float _DeltaTime)
-{
-	switch (State)
-	{
-	case EHeroState::Idle:
-		Idle(_DeltaTime);
-		break;
-	case EHeroState::Move:
-		Move(_DeltaTime);
-		break;
-	case EHeroState::Kick:
-		Kick(_DeltaTime);
-		break;
-	case EHeroState::Victory:
-		Victory(_DeltaTime);
-		break;
-	case EHeroState::Death:
-		Death(_DeltaTime);
-		break;
-	}
 }
 
 void Hero::ActionCheck(float _DeltaTime)
@@ -120,7 +96,7 @@ void Hero::ActionCheck(float _DeltaTime)
 	{
 		if (Map[LocationPoint.iY()][LocationPoint.iX()])
 		{
-			StateChange(EHeroState::Victory);
+			StateChange(EHeroState::Move);
 		}
 		else
 		{
@@ -156,11 +132,11 @@ void Hero::Idle(float _DeltaTime)
 		MoveDirChange(EActorMoveDir::Right);
 		SeeDirChange(EActorSeeDir::Right);
 		ActionCheck(_DeltaTime);
-	}////////////
-	else if (UEngineInput::IsPress('Q'))
-	{
-		StateChange(EHeroState::Kick);
 	}
+	//else if (UEngineInput::IsPress('Q'))
+	//{
+	//	StateChange(EHeroState::Kick);
+	//}
 }
 
 void Hero::IdleStart()
@@ -171,10 +147,10 @@ void Hero::IdleStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Left_Idle");
+		ChangeAnimation("Hero_LIdle");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Right_Idle");
+		ChangeAnimation("Hero_RIdle");
 		break;
 	}
 }
@@ -197,10 +173,10 @@ void Hero::MoveStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Left_Move");
+		ChangeAnimation("Hero_LMove");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Right_Move");
+		ChangeAnimation("Hero_RMove");
 		break;
 	}
 
@@ -228,10 +204,10 @@ void Hero::KickStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Left_Kick");
+		ChangeAnimation("Hero_LKick");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Right_Kick");
+		ChangeAnimation("Hero_RKick");
 		break;
 	}
 }
@@ -256,10 +232,10 @@ void Hero::VictoryStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Left_Victory");
+		ChangeAnimation("Hero_LVictory");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Right_Victory");
+		ChangeAnimation("Hero_RVictory");
 		break;
 	}
 }
@@ -273,12 +249,33 @@ void Hero::DeathStart()
 
 }
 
-
 void Hero::Tick(float _DeltaTime)
 {
 	MoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+}
+
+void Hero::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case EHeroState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case EHeroState::Move:
+		Move(_DeltaTime);
+		break;
+	case EHeroState::Kick:
+		Kick(_DeltaTime);
+		break;
+	case EHeroState::Victory:
+		Victory(_DeltaTime);
+		break;
+	case EHeroState::Death:
+		Death(_DeltaTime);
+		break;
+	}
 }
 
 void Hero::StateChange(EHeroState _State)

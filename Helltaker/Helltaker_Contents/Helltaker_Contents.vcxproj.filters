@@ -16,9 +16,6 @@
     <ClInclude Include="Hero.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="Skeleton.h">
-      <Filter>Object\Actor\Chapter</Filter>
-    </ClInclude>
     <ClInclude Include="Opening.h">
       <Filter>Object\Level</Filter>
     </ClInclude>
@@ -42,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="Chapter1.h">
       <Filter>Object\Level\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

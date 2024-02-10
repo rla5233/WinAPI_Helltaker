@@ -64,6 +64,14 @@ enum class EHeroState
 	Death
 };
 
+enum class ESkeletonState
+{
+	None,
+	Idle,
+	Hit,
+	Death
+};
+
 enum class EActorSeeDir
 {
 	None,

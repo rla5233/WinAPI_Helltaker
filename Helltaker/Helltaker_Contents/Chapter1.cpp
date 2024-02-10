@@ -45,10 +45,12 @@ void Chapter1::BeginPlay()
 	NewHero->SetActorLocation(ChapterPointToLocation(5, 0) + FVector(TileScale.X / 2.0f, TileScale.Y / 2.0f));
 	NewHero->SetLocationPoint({ 5, 0 });
 
+	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
+	NewSkeleton->SetActorLocation(ChapterPointToLocation(3, 1) + FVector(TileScale.X / 2.0f, TileScale.Y / 2.0f));
+	NewSkeleton->SetLocationPoint({ 3, 1 });
+
 	// 디버그 용
 	ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 	ContentsHelper::LoadImg("Debuging", "RedPoint.png");
 	ShowLocationPoint();
 }
-
-
