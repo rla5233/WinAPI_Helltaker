@@ -8,7 +8,7 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
-class MoveActor;
+class HitActor;
 
 // 설명 :
 class ChapterManager : public ULevel
@@ -43,14 +43,14 @@ public:
 		return ChapterVec;
 	}
 
-	std::vector<std::vector<MoveActor*>>& GetMoveActorVec()
+	std::vector<std::vector<HitActor*>>& GetMoveActorVec()
 	{
 		if (false == IsChapterVecInit)
 		{
 			MsgBoxAssert("ChapterMap Not Exist.");
 		}
 
-		return MoveActorVec;
+		return HitActorVec;
 	}
 
 	void CreateChapterVec(const std::vector<std::vector<bool>>& _Map);
@@ -61,8 +61,8 @@ public:
 	void CreateHero(int _X, int _Y);
 	void CreateSkeleton(int _X, int _Y);
 
-	MoveActor* GetMoveActor(FVector _Point);
-	MoveActor* GetMoveActor(int _X, int _Y);
+	HitActor* GetMoveActor(FVector _Point);
+	HitActor* GetMoveActor(int _X, int _Y);
 
 	// 디버그 용
 	void ShowLocationPoint();
@@ -76,9 +76,9 @@ private:
 	int Height = -1;
 
 	std::vector<std::vector<bool>> ChapterVec;
-	std::vector<std::vector<MoveActor*>> MoveActorVec;
+	std::vector<std::vector<HitActor*>> HitActorVec;
 
-
+	//std::list<RenderActor*> AllActors;
 
 	bool IsChapterVecInit = false;
 };

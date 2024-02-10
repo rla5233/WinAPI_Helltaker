@@ -191,7 +191,6 @@ void Hero::MoveStart()
 		break;
 	}
 
-	FMoveDirCheck();
 	MoveOn();
 }
 
@@ -212,25 +211,10 @@ void Hero::KickStart()
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * KickScale} });
 
+	// Skeleton, Stone 업 캐스팅
 	FVector NextLocationPoint = GetNextLocationPoint();
-	MoveActor* Other = GetChapter()->GetMoveActor(NextLocationPoint.iX(), NextLocationPoint.iY());
-	
-
-	switch (Other->GetMoveActorType())
-	{
-	case EMoveActorType::Skeleton:
-	{
-		Skeleton* OtherSkeleton = dynamic_cast<Skeleton*>(Other);
-		OtherSkeleton->StateChange(ESkeletonState::Hit, MoveDir);
-		break;
-	}
-	case EMoveActorType::Stone:
-	{
-		// 추가
-		break;
-	}
-	}
-	
+	HitActor* Other = GetChapter()->GetMoveActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+	Other->StateChange(EHitActorState::Hit, MoveDir);
 
 	switch (SeeDir)
 	{

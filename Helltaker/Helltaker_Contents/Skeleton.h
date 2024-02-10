@@ -1,8 +1,8 @@
 #pragma once
-#include "MoveActor.h"
+#include "HitActor.h"
 
 // Ό³Έν :
-class Skeleton : public MoveActor
+class Skeleton : public HitActor
 {
 public:
 	// constructor destructor
@@ -15,18 +15,18 @@ public:
 	Skeleton& operator=(const Skeleton& _Other) = delete;
 	Skeleton& operator=(Skeleton&& _Other) noexcept = delete;
 
-	void Idle(float _DeltaTime);
-	void IdleStart();
-	void Hit(float _DeltaTime);
-	void HitStart(EActorMoveDir _OtherMoveDir);
-	void Death(float _DeltaTime);
-	void DeathStart();
+	void Idle(float _DeltaTime) ;
+	void IdleStart() ;
+	void Hit(float _DeltaTime) ;
+	void HitStart(EActorMoveDir _OtherMoveDir) ;
+	void Death(float _DeltaTime) ;
+	void DeathStart() ;
 
 	void DeathCheck();
-	void NextTileCheck(int _X, int _Y);
+	void NextTileCheck(int _X, int _Y) override;
 
-	void StateUpdate(float _DeltaTime);
-	void StateChange(ESkeletonState _State, EActorMoveDir _OtherMoveDir = EActorMoveDir::None);
+	void StateUpdate(float _DeltaTime) override;
+    void StateChange(EHitActorState _State, EActorMoveDir _OtherMoveDir = EActorMoveDir::None) override;
 
 protected:
 	void BeginPlay() override;
@@ -37,7 +37,9 @@ private:
 	const float IdleInter = 0.07f;
 
 	const FVector HitScale = { 0.9f, 0.9f };
-	const float HitInter = 0.07f;
+	const float HitInter = 0.04f;
+	const float HitTime = HitInter * 9;
+	float HitTimeCount = HitTime;
 
-	ESkeletonState State = ESkeletonState::None;
+	static bool IsLoad;
 };

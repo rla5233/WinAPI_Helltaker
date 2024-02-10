@@ -4,6 +4,8 @@
 
 #include <EngineCore/EngineCore.h>
 
+bool Skeleton::IsLoad = false;
+
 Skeleton::Skeleton()
 {}
 
@@ -12,14 +14,20 @@ Skeleton::~Skeleton()
 
 void Skeleton::BeginPlay()
 {
-	MoveActor::BeginPlay();
+	HitActor::BeginPlay();
 
 	SetName("Skeleton"); 
 	SetMoveActorType(EMoveActorType::Skeleton);
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Left_Idle");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Right_Idle");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Left_Hit");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Right_Hit");
+	
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Left_Idle");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Right_Idle");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Left_Hit");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Right_Hit");
+		
+		IsLoad = true;
+	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	CreateImageRenderer(RenderOrder::Skeleton);
@@ -28,11 +36,11 @@ void Skeleton::BeginPlay()
 	SetImg("Skeleton_Left_Idle");
 	CreateAnimation("Skeleton_LIdle", "Skeleton_Left_Idle", 0, 11, IdleInter, true);
 	CreateAnimation("Skeleton_RIdle", "Skeleton_Right_Idle", 0, 11, IdleInter, true);
-	CreateAnimation("Skeleton_LHit", "Skeleton_Left_Hit", 0, 5, HitInter, false);
-	CreateAnimation("Skeleton_RHit", "Skeleton_Right_Hit", 0, 5, HitInter, false);
+	CreateAnimation("Skeleton_LHit", "Skeleton_Left_Hit", 0, 8, HitInter, false);
+	CreateAnimation("Skeleton_RHit", "Skeleton_Right_Hit", 0, 8, HitInter, false);
 
 	SeeDirChange(EActorSeeDir::Right);
-	StateChange(ESkeletonState::Idle);
+	StateChange(EHitActorState::Idle);
 }
 
 
@@ -65,23 +73,32 @@ void Skeleton::DeathCheck()
 	{
 		if (Map[Next_Y][Next_X])
 		{
-			FMoveDirCheck();
-			MoveOn();
-			//NextTileCheck(Next_X, Next_Y);
+			NextTileCheck(Next_X, Next_Y);
 		}
 		else
 		{
-			StateChange(ESkeletonState::Idle);
+			StateChange(EHitActorState::Death);
 		}
 	}
 	else
 	{
-		StateChange(ESkeletonState::Idle);
+		StateChange(EHitActorState::Death);
 	}
 }
 
 void Skeleton::NextTileCheck(int _X, int _Y)
 {
+	HitActor::NextTileCheck(_X, _Y);
+
+	if (nullptr == GetChapter()->GetMoveActor(_X, _Y))
+	{
+		MoveOn();
+		
+	}
+	else
+	{
+		StateChange(EHitActorState::Death);
+	}
 }
 
 void Skeleton::Idle(float _DeltaTime)
@@ -106,28 +123,25 @@ void Skeleton::IdleStart()
 
 void Skeleton::Hit(float _DeltaTime)
 {
-	MoveOneBlock(_DeltaTime);
-
-	if (false == IsMove())
+	if (true == IsMove())
 	{
-		StateChange(ESkeletonState::Idle);
+		MoveOneBlock(_DeltaTime);
 	}
+
+	if (0 > HitTimeCount)
+	{
+		StateChange(EHitActorState::Idle);
+		HitTimeCount = HitTime;
+		return;
+	}
+
+	HitTimeCount -= _DeltaTime;
 }
 
 void Skeleton::HitStart(EActorMoveDir _OtherMoveDir)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * HitScale} });
-
-	switch (SeeDir)
-	{
-	case EActorSeeDir::Left:
-		ChangeAnimation("Skeleton_LHit");
-		break;
-	case EActorSeeDir::Right:
-		ChangeAnimation("Skeleton_RHit");
-		break;
-	}
 
 	switch (_OtherMoveDir)
 	{
@@ -147,6 +161,16 @@ void Skeleton::HitStart(EActorMoveDir _OtherMoveDir)
 		break;
 	}
 
+	switch (SeeDir)
+	{
+	case EActorSeeDir::Left:
+		ChangeAnimation("Skeleton_LHit");
+		break;
+	case EActorSeeDir::Right:
+		ChangeAnimation("Skeleton_RHit");
+		break;
+	}
+
 	DeathCheck();	
 }
 
@@ -156,49 +180,54 @@ void Skeleton::Death(float _DeltaTime)
 
 void Skeleton::DeathStart()
 {
+	Destroy(0.0f);
 }
 
 
 void Skeleton::Tick(float _DeltaTime)
 {
-	MoveActor::Tick(_DeltaTime);
+	HitActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
 
 void Skeleton::StateUpdate(float _DeltaTime)
 {
-	switch (State)
+	HitActor::StateUpdate(_DeltaTime);
+
+	switch (GetHitActorState())
 	{
-	case ESkeletonState::Idle:
+	case EHitActorState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case ESkeletonState::Hit:
+	case EHitActorState::Hit:
 		Hit(_DeltaTime);
 		break;
-	case ESkeletonState::Death:
+	case EHitActorState::Death:
 		Death(_DeltaTime);
 		break;
 	}
 }
 
-void Skeleton::StateChange(ESkeletonState _State, EActorMoveDir _OtherMoveDir)
+void Skeleton::StateChange(EHitActorState _State, EActorMoveDir _OtherMoveDir)
 {
-	if (State != _State)
+	HitActor::StateChange(_State, _OtherMoveDir);
+
+	if (GetHitActorState() != _State)
 	{
 		switch (_State)
 		{
-		case ESkeletonState::Idle:
+		case EHitActorState::Idle:
 			IdleStart();
 			break;
-		case ESkeletonState::Hit:
+		case EHitActorState::Hit:
 			HitStart(_OtherMoveDir);
 			break;
-		case ESkeletonState::Death:
+		case EHitActorState::Death:
 			DeathStart();
 			break;
 		}
 	}
 
-	State = _State;
+	SetHitActorState(_State);
 }

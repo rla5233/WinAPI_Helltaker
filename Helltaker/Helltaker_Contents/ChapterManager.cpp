@@ -1,7 +1,7 @@
 #include "ChapterManager.h"
 
 #include "ContentsHelper.h"
-#include "MoveActor.h"
+#include "HitActor.h"
 #include "BackGround.h"
 #include "Skeleton.h"
 #include "Hero.h"
@@ -68,17 +68,17 @@ void ChapterManager::CreateMoveActorVec()
 		MsgBoxAssert("ChapterMap is Not Exist");
 	}
 
-	MoveActorVec.resize(Height);
+	HitActorVec.resize(Height);
 	for (int i = 0; i < Height; i++)
 	{
-		MoveActorVec[i].resize(Width);
+		HitActorVec[i].resize(Width);
 	}
 
 	for (int Y = 0; Y < Height; Y++)
 	{
 		for (int X = 0; X < Width; X++)
 		{
-			MoveActorVec[Y][X] = nullptr;
+			HitActorVec[Y][X] = nullptr;
 		}
 	}
 }
@@ -116,17 +116,17 @@ void ChapterManager::CreateSkeleton(int _X, int _Y)
 	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
-	MoveActorVec[_Y][_X] = NewSkeleton;
+	HitActorVec[_Y][_X] = NewSkeleton;
 }
 
-MoveActor* ChapterManager::GetMoveActor(FVector _Point)
+HitActor* ChapterManager::GetMoveActor(FVector _Point)
 {
 	return GetMoveActor(_Point.iX(), _Point.iY());
 }
 
-MoveActor* ChapterManager::GetMoveActor(int _X, int _Y)
+HitActor* ChapterManager::GetMoveActor(int _X, int _Y)
 {
-	return MoveActorVec[_Y][_X];
+	return HitActorVec[_Y][_X];
 }
 
 // 디버그용

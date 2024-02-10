@@ -64,7 +64,7 @@ enum class EHeroState
 	Death
 };
 
-enum class ESkeletonState
+enum class EHitActorState
 {
 	None,
 	Idle,

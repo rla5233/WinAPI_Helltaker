@@ -46,6 +46,9 @@
     <ClInclude Include="Chapter2.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="HitActor.h">
+      <Filter>Object\Actor\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Chapter2.cpp">
       <Filter>Object\Level\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="HitActor.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

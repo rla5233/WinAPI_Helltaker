@@ -17,6 +17,8 @@ MoveActor::~MoveActor()
 
 void MoveActor::MoveOneBlock(float _DeltaTime)
 {
+	FMoveDirCheck();
+
 	if (MoveDir == EActorMoveDir::Left || MoveDir == EActorMoveDir::Right)
 	{
 		if (0 < MoveDistanceX)
