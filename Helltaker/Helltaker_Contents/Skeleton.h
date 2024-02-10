@@ -18,15 +18,15 @@ public:
 	void Idle(float _DeltaTime) ;
 	void IdleStart() ;
 	void Hit(float _DeltaTime) ;
-	void HitStart(EActorMoveDir _OtherMoveDir) ;
+	void HitStart(EMoveActorDir _OtherMoveDir) ;
 	void Death(float _DeltaTime) ;
 	void DeathStart() ;
 
-	void DeathCheck();
+	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
 	void NextTileCheck(int _X, int _Y) override;
 
 	void StateUpdate(float _DeltaTime) override;
-    void StateChange(EHitActorState _State, EActorMoveDir _OtherMoveDir = EActorMoveDir::None) override;
+    void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) override;
 
 protected:
 	void BeginPlay() override;

@@ -75,18 +75,18 @@ void Hero::ActionCheck()
 
 	switch (MoveDir)
 	{
-	case EActorMoveDir::Left:
+	case EMoveActorDir::Left:
 		SetNextLocationPoint(CurLocationPoint + FVector::Left);
 		SeeDirChange(EActorSeeDir::Left);
 		break;
-	case EActorMoveDir::Right:
+	case EMoveActorDir::Right:
 		SetNextLocationPoint(CurLocationPoint + FVector::Right);
 		SeeDirChange(EActorSeeDir::Right);
 		break;
-	case EActorMoveDir::Up:
+	case EMoveActorDir::Up:
 		SetNextLocationPoint(CurLocationPoint + FVector::Up);
 		break;
-	case EActorMoveDir::Down:
+	case EMoveActorDir::Down:
 		SetNextLocationPoint(CurLocationPoint + FVector::Down);
 		break;
 	}
@@ -128,23 +128,23 @@ void Hero::Idle(float _DeltaTime)
 {
 	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
 	{
-		MoveDirChange(EActorMoveDir::Up);
+		MoveDirChange(EMoveActorDir::Up);
 		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
 	{
-		MoveDirChange(EActorMoveDir::Left);
+		MoveDirChange(EMoveActorDir::Left);
 		SeeDirChange(EActorSeeDir::Left);
 		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
 	{
-		MoveDirChange(EActorMoveDir::Down);
+		MoveDirChange(EMoveActorDir::Down);
 		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
 	{
-		MoveDirChange(EActorMoveDir::Right);
+		MoveDirChange(EMoveActorDir::Right);
 		SeeDirChange(EActorSeeDir::Right);
 		ActionCheck();
 	}
@@ -214,7 +214,7 @@ void Hero::KickStart()
 	// Skeleton, Stone 업 캐스팅
 	FVector NextLocationPoint = GetNextLocationPoint();
 	HitActor* Other = GetChapter()->GetMoveActor(NextLocationPoint.iX(), NextLocationPoint.iY());
-	Other->StateChange(EHitActorState::Hit, MoveDir);
+	Other->NextStateCheck(MoveDir);	
 
 	switch (SeeDir)
 	{

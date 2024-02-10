@@ -44,23 +44,41 @@ void Skeleton::BeginPlay()
 }
 
 
-void Skeleton::DeathCheck()
+void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
 	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
 	FVector CurLocationPoint = GetLocationPoint();
 
+	switch (_OtherMoveDir)
+	{
+	case EMoveActorDir::Left:
+		SeeDirChange(EActorSeeDir::Right);
+		MoveDirChange(EMoveActorDir::Left);
+		break;
+	case EMoveActorDir::Right:
+		SeeDirChange(EActorSeeDir::Left);
+		MoveDirChange(EMoveActorDir::Right);
+		break;
+	case EMoveActorDir::Up:
+		MoveDirChange(EMoveActorDir::Up);
+		break;
+	case EMoveActorDir::Down:
+		MoveDirChange(EMoveActorDir::Down);
+		break;
+	}
+
 	switch (MoveDir)
 	{
-	case EActorMoveDir::Left:
+	case EMoveActorDir::Left:
 		SetNextLocationPoint(CurLocationPoint + FVector::Left);
 		break;
-	case EActorMoveDir::Right:
+	case EMoveActorDir::Right:
 		SetNextLocationPoint(CurLocationPoint + FVector::Right);
 		break;
-	case EActorMoveDir::Up:
+	case EMoveActorDir::Up:
 		SetNextLocationPoint(CurLocationPoint + FVector::Up);
 		break;
-	case EActorMoveDir::Down:
+	case EMoveActorDir::Down:
 		SetNextLocationPoint(CurLocationPoint + FVector::Down);
 		break;
 	}
@@ -74,16 +92,11 @@ void Skeleton::DeathCheck()
 		if (Map[Next_Y][Next_X])
 		{
 			NextTileCheck(Next_X, Next_Y);
-		}
-		else
-		{
-			StateChange(EHitActorState::Death);
+			return;
 		}
 	}
-	else
-	{
-		StateChange(EHitActorState::Death);
-	}
+
+	StateChange(EHitActorState::Death);
 }
 
 void Skeleton::NextTileCheck(int _X, int _Y)
@@ -92,13 +105,12 @@ void Skeleton::NextTileCheck(int _X, int _Y)
 
 	if (nullptr == GetChapter()->GetMoveActor(_X, _Y))
 	{
-		MoveOn();
-		
+		StateChange(EHitActorState::Hit);
 	}
 	else
 	{
 		StateChange(EHitActorState::Death);
-	}
+	}	
 }
 
 void Skeleton::Idle(float _DeltaTime)
@@ -138,28 +150,10 @@ void Skeleton::Hit(float _DeltaTime)
 	HitTimeCount -= _DeltaTime;
 }
 
-void Skeleton::HitStart(EActorMoveDir _OtherMoveDir)
+void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * HitScale} });
-
-	switch (_OtherMoveDir)
-	{
-	case EActorMoveDir::Left:
-		SeeDirChange(EActorSeeDir::Right);
-		MoveDirChange(EActorMoveDir::Left);
-		break;
-	case EActorMoveDir::Right:
-		SeeDirChange(EActorSeeDir::Left);
-		MoveDirChange(EActorMoveDir::Right);
-		break;
-	case EActorMoveDir::Up:
-		MoveDirChange(EActorMoveDir::Up);
-		break;
-	case EActorMoveDir::Down:
-		MoveDirChange(EActorMoveDir::Down);
-		break;
-	}
 
 	switch (SeeDir)
 	{
@@ -171,16 +165,18 @@ void Skeleton::HitStart(EActorMoveDir _OtherMoveDir)
 		break;
 	}
 
-	DeathCheck();	
+	MoveOn();
+	HitActorVecUpdate(EHitActorState::Hit);
 }
 
 void Skeleton::Death(float _DeltaTime)
 {
+	Destroy(0.0f);
 }
 
 void Skeleton::DeathStart()
 {
-	Destroy(0.0f);
+	HitActorVecUpdate(EHitActorState::Death);
 }
 
 
@@ -209,7 +205,7 @@ void Skeleton::StateUpdate(float _DeltaTime)
 	}
 }
 
-void Skeleton::StateChange(EHitActorState _State, EActorMoveDir _OtherMoveDir)
+void Skeleton::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
 {
 	HitActor::StateChange(_State, _OtherMoveDir);
 

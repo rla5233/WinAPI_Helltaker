@@ -79,7 +79,7 @@ enum class EActorSeeDir
 	Right
 };
 
-enum class EActorMoveDir
+enum class EMoveActorDir
 {
 	None,
 	Left,

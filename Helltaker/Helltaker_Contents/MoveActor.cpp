@@ -19,7 +19,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 {
 	FMoveDirCheck();
 
-	if (MoveDir == EActorMoveDir::Left || MoveDir == EActorMoveDir::Right)
+	if (MoveDir == EMoveActorDir::Left || MoveDir == EMoveActorDir::Right)
 	{
 		if (0 < MoveDistanceX)
 		{
@@ -36,7 +36,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			MoveOff();
 		}
 	}
-	else if (MoveDir == EActorMoveDir::Up || MoveDir == EActorMoveDir::Down)
+	else if (MoveDir == EMoveActorDir::Up || MoveDir == EMoveActorDir::Down)
 	{
 		if (0 < MoveDistanceY)
 		{
@@ -55,7 +55,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 	}
 }
 
-void MoveActor::MoveDirChange(EActorMoveDir _Dir)
+void MoveActor::MoveDirChange(EMoveActorDir _Dir)
 {
 	MoveDir = _Dir;
 }
@@ -64,16 +64,16 @@ void MoveActor::FMoveDirCheck()
 {
 	switch (MoveDir)
 	{
-	case EActorMoveDir::Left:
+	case EMoveActorDir::Left:
 		FMoveDir = FVector::Left;
 		break;
-	case EActorMoveDir::Right:
+	case EMoveActorDir::Right:
 		FMoveDir = FVector::Right;
 		break;
-	case EActorMoveDir::Up:
+	case EMoveActorDir::Up:
 		FMoveDir = FVector::Up;
 		break;
-	case EActorMoveDir::Down:
+	case EMoveActorDir::Down:
 		FMoveDir = FVector::Down;
 		break;
 	}

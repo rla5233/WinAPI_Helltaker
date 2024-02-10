@@ -18,7 +18,7 @@ public:
 
 	void MoveOneBlock(float _DeltaTime);
 
-	void MoveDirChange(EActorMoveDir _Dir);
+	void MoveDirChange(EMoveActorDir _Dir);
 	void FMoveDirCheck();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
@@ -72,7 +72,7 @@ public:
 	ChapterManager* GetChapter();
 
 protected:
-	EActorMoveDir MoveDir = EActorMoveDir::None;
+	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
 
 private:
