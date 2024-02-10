@@ -22,10 +22,7 @@ public:
 	void FMoveDirCheck();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
-	void SetLocationPoint(FVector _Point)
-	{
-		LocationPoint = _Point;
-	}
+
 
 	bool IsMove() const
 	{
@@ -42,9 +39,34 @@ public:
 		IsMoveValue = false;
 	}
 
+	EMoveActorType GetMoveActorType() const
+	{
+		return MoveActorType;
+	}
+
+	void SetMoveActorType(EMoveActorType _MoveActorType)
+	{
+		MoveActorType = _MoveActorType;
+	}
+
 	FVector GetLocationPoint() const
 	{
 		return LocationPoint;
+	}
+
+	void SetLocationPoint(FVector _Point)
+	{
+		LocationPoint = _Point;
+	}
+
+	FVector GetNextLocationPoint() const
+	{
+		return NextLocationPoint;
+	}
+
+	void SetNextLocationPoint(FVector _Point)
+	{
+		NextLocationPoint = _Point;
 	}
 
 	ChapterManager* GetChapter();
@@ -62,4 +84,7 @@ private:
 	bool IsMoveValue = false;
 
 	FVector LocationPoint = FVector::Zero;
+	FVector NextLocationPoint = FVector::Zero;
+
+	EMoveActorType MoveActorType = EMoveActorType::None;
 };

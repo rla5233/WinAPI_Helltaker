@@ -25,7 +25,8 @@ public:
 	void Death(float _DeltaTime);
 	void DeathStart();
 
-	void ActionCheck(float _DeltaTime);
+	void ActionCheck();
+	void NextTileCheck(int _X, int _Y);
 
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State);

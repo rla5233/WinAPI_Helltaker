@@ -87,3 +87,11 @@ enum class EActorMoveDir
 	Up,
 	Down
 };
+
+enum class EMoveActorType
+{
+	None,
+	Hero,
+	Skeleton,
+	Stone
+};

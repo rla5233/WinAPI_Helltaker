@@ -2,6 +2,7 @@
 
 #include "ContentsHelper.h"
 #include "ChapterManager.h"
+#include "Skeleton.h"
 
 #include <EngineCore/EngineCore.h>
 #include <EngineBase/EngineDirectory.h>
@@ -19,6 +20,7 @@ void Hero::BeginPlay()
 	MoveActor::BeginPlay();
 
 	SetName("Hero");
+	SetMoveActorType(EMoveActorType::Hero);
 	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Idle");
 	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Move");
 	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Kick");
@@ -66,37 +68,38 @@ void Hero::BeginPlay()
 	StateChange(EHeroState::Idle);
 }
 
-void Hero::ActionCheck(float _DeltaTime)
+void Hero::ActionCheck()
 {
 	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
-	FVector LocationPoint = GetLocationPoint();
+	FVector CurLocationPoint = GetLocationPoint();
 
 	switch (MoveDir)
 	{
 	case EActorMoveDir::Left:
-		LocationPoint += FVector::Left;
+		SetNextLocationPoint(CurLocationPoint + FVector::Left);
 		SeeDirChange(EActorSeeDir::Left);
 		break;
 	case EActorMoveDir::Right:
-		LocationPoint += FVector::Right;
+		SetNextLocationPoint(CurLocationPoint + FVector::Right);
 		SeeDirChange(EActorSeeDir::Right);
 		break;
 	case EActorMoveDir::Up:
-		LocationPoint += FVector::Up;
+		SetNextLocationPoint(CurLocationPoint + FVector::Up);
 		break;
 	case EActorMoveDir::Down:
-		LocationPoint += FVector::Down;
+		SetNextLocationPoint(CurLocationPoint + FVector::Down);
 		break;
 	}
 
 	int Height = static_cast<int>(Map.size());
 	int Width = static_cast<int>(Map[0].size());
-	if (0 <= LocationPoint.iY() && LocationPoint.iY() < Height
-		&& 0 <= LocationPoint.iX() && LocationPoint.iX() < Width)
+	int Next_X = GetNextLocationPoint().iX();
+	int Next_Y = GetNextLocationPoint().iY();
+	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
 	{
-		if (Map[LocationPoint.iY()][LocationPoint.iX()])
+		if (Map[Next_Y][Next_X])
 		{
-			StateChange(EHeroState::Move);
+			NextTileCheck(Next_X, Next_Y);			
 		}
 		else
 		{
@@ -109,29 +112,41 @@ void Hero::ActionCheck(float _DeltaTime)
 	}
 }
 
+void Hero::NextTileCheck(int _X, int _Y)
+{
+	if (nullptr == GetChapter()->GetMoveActor(_X, _Y))
+	{
+		StateChange(EHeroState::Move);
+	}
+	else
+	{
+		StateChange(EHeroState::Kick);
+	}
+}
+
 void Hero::Idle(float _DeltaTime)
 {
 	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
 	{
 		MoveDirChange(EActorMoveDir::Up);
-		ActionCheck(_DeltaTime);
+		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
 	{
 		MoveDirChange(EActorMoveDir::Left);
 		SeeDirChange(EActorSeeDir::Left);
-		ActionCheck(_DeltaTime);
+		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
 	{
 		MoveDirChange(EActorMoveDir::Down);
-		ActionCheck(_DeltaTime);
+		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
 	{
 		MoveDirChange(EActorMoveDir::Right);
 		SeeDirChange(EActorSeeDir::Right);
-		ActionCheck(_DeltaTime);
+		ActionCheck();
 	}
 }
 
@@ -196,6 +211,26 @@ void Hero::KickStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * KickScale} });
+
+	FVector NextLocationPoint = GetNextLocationPoint();
+	MoveActor* Other = GetChapter()->GetMoveActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+	
+
+	switch (Other->GetMoveActorType())
+	{
+	case EMoveActorType::Skeleton:
+	{
+		Skeleton* OtherSkeleton = dynamic_cast<Skeleton*>(Other);
+		OtherSkeleton->StateChange(ESkeletonState::Hit, MoveDir);
+		break;
+	}
+	case EMoveActorType::Stone:
+	{
+		// Ãß°¡
+		break;
+	}
+	}
+	
 
 	switch (SeeDir)
 	{
