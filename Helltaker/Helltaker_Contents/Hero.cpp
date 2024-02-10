@@ -8,6 +8,7 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
 
+bool Hero::IsLoad = false;
 
 Hero::Hero()
 	: MoveActor(ContentsHelper::GetWindowScale().X * 0.3f)
@@ -22,15 +23,21 @@ void Hero::BeginPlay()
 
 	SetName("Hero");
 	SetMoveActorType(EMoveActorType::Hero);
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Idle");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Move");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Kick");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Victory");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Idle");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Move");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Kick");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Victory");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Death");
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Idle");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Move");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Kick");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Victory");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Idle");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Move");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Kick");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Victory");
+		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Death");
+		
+		IsLoad = true;
+	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	CreateImageRenderer(RenderOrder::Hero);

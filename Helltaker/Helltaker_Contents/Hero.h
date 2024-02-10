@@ -61,4 +61,5 @@ private:
 
 	bool CanActionCheck = false;
 	EHeroState State = EHeroState::None;
+	static bool IsLoad;
 };
