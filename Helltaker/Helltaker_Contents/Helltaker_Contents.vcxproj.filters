@@ -43,6 +43,9 @@
     <ClInclude Include="Skeleton.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="Chapter2.h">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -85,6 +88,9 @@
       <Filter>Helper</Filter>
     </ClCompile>
     <ClCompile Include="Chapter1.cpp">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter2.cpp">
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
   </ItemGroup>

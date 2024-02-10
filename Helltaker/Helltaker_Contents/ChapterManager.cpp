@@ -1,6 +1,9 @@
 #include "ChapterManager.h"
 
 #include "ContentsHelper.h"
+#include "BackGround.h"
+#include "Skeleton.h"
+#include "Hero.h"
 #include "UI.h"
 
 #include "RenderActor.h"
@@ -55,6 +58,13 @@ void ChapterManager::CreateChapterMap(const std::vector<std::vector<bool>>& _Map
 	IsChapterMapInit = true;
 }
 
+void ChapterManager::CreateBG(std::string_view _Name)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	BackGround* ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	ChapterBG->CreateBackGround(_Name);
+}
+
 void ChapterManager::CreateChapterUI()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -65,6 +75,22 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
 	ChapterUI->SetImg(ChapterUI->GetName() + ".png");
 	ChapterUI->SetTransform({ {0,0}, WinScale });
+}
+
+void ChapterManager::CreateHero(int _X, int _Y)
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
+	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewHero->SetLocationPoint({ _X, _Y });
+}
+
+void ChapterManager::CreateSkeleton(int _X, int _Y)
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
+	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewSkeleton->SetLocationPoint({ _X, _Y });
 }
 
 

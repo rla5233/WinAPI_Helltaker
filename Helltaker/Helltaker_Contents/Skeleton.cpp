@@ -106,6 +106,6 @@ void Skeleton::StateChange(ESkeletonState _State)
 			break;
 		}
 	}
-
+	     
 	State = _State;
 }

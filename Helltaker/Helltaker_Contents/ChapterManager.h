@@ -44,7 +44,10 @@ public:
 
 	void CreateChapterMap(const std::vector<std::vector<bool>>& _Map);
 	
+	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
+	void CreateHero(int _X, int _Y);
+	void CreateSkeleton(int _X, int _Y);
 
 	// 디버그 용
 	void ShowLocationPoint();
