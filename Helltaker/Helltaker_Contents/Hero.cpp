@@ -11,7 +11,7 @@
 bool Hero::IsLoad = false;
 
 Hero::Hero()
-	: MoveActor(ContentsHelper::GetWindowScale().X * 0.3f)
+	: MoveActor(ContentsHelper::GetWindowScale().X * 0.05f, ContentsHelper::GetWindowScale().X * 5.0f)
 {}
 
 Hero::~Hero()
@@ -79,7 +79,7 @@ void Hero::ActionCheck()
 {
 	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
 	FVector CurLocationPoint = GetLocationPoint();
-
+	
 	switch (MoveDir)
 	{
 	case EMoveActorDir::Left:
@@ -186,7 +186,7 @@ void Hero::Kick(float _DeltaTime)
 		return;
 	}
 	
-	if (KickTime * 0.75f > KickTimeCount)
+	if (KickTime * 0.8f > KickTimeCount)
 	{
 		CanActionCheck = true;
 	}

@@ -40,6 +40,7 @@ public:
 	);
 
 	void ChangeAnimation(std::string_view _AnimationName);
+	void AnimationReset();
 
 	FVector GetRendererImageScale();
 

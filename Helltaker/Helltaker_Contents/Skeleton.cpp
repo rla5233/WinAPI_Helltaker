@@ -7,7 +7,7 @@
 bool Skeleton::IsLoad = false;
 
 Skeleton::Skeleton()
-	: HitActor(ContentsHelper::GetWindowScale().X * 0.5f)
+	: HitActor(ContentsHelper::GetWindowScale().X * (0.6f), ContentsHelper::GetWindowScale().X* (-1.5f))
 {}
 
 Skeleton::~Skeleton()
@@ -47,6 +47,8 @@ void Skeleton::BeginPlay()
 
 void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
+	HitActor::NextStateCheck(_OtherMoveDir);
+
 	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
 	FVector CurLocationPoint = GetLocationPoint();
 
@@ -116,6 +118,7 @@ void Skeleton::NextTileCheck(int _X, int _Y)
 
 void Skeleton::Idle(float _DeltaTime)
 {
+
 }
 
 void Skeleton::IdleStart()
@@ -141,6 +144,23 @@ void Skeleton::Hit(float _DeltaTime)
 		MoveOneBlock(_DeltaTime);
 	}
 
+	if (false == IsMove())
+	{
+		StateChange(EHitActorState::HitMoveEnd);
+	}
+
+	if (0 > HitTimeCount)
+	{
+		StateChange(EHitActorState::Idle);
+		HitTimeCount = HitTime;
+		return;
+	}
+	
+	HitTimeCount -= _DeltaTime;
+}
+
+void Skeleton::HitMoveEnd(float _DeltaTime)
+{
 	if (0 > HitTimeCount)
 	{
 		StateChange(EHitActorState::Idle);
@@ -155,13 +175,16 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * HitScale} });
+	HitTimeCount = HitTime;
 
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
+		AnimationReset();
 		ChangeAnimation("Skeleton_LHit");
 		break;
 	case EActorSeeDir::Right:
+		AnimationReset();
 		ChangeAnimation("Skeleton_RHit");
 		break;
 	}
@@ -199,6 +222,9 @@ void Skeleton::StateUpdate(float _DeltaTime)
 		break;
 	case EHitActorState::Hit:
 		Hit(_DeltaTime);
+		break;
+	case EHitActorState::HitMoveEnd:
+		HitMoveEnd(_DeltaTime);
 		break;
 	case EHitActorState::Death:
 		Death(_DeltaTime);

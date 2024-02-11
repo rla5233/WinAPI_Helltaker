@@ -10,13 +10,16 @@ MoveActor::MoveActor()
 	MoveDistanceX = ContentsHelper::GetTileScale().X;
 	MoveDistanceY = ContentsHelper::GetTileScale().Y;
 	Speed = ContentsHelper::GetWindowScale().X / 3.0f;
+	FirstSpeed = ContentsHelper::GetWindowScale().X / 3.0f;
+	Acceleration = ContentsHelper::GetWindowScale().X * 4.0f;
 }
 
-MoveActor::MoveActor(float _Speed)
-	: Speed(_Speed)
+MoveActor::MoveActor(float _Speed, float _Acceleration)
+	: Speed(_Speed), Acceleration(_Acceleration)
 {
 	MoveDistanceX = ContentsHelper::GetTileScale().X;
 	MoveDistanceY = ContentsHelper::GetTileScale().Y;
+	FirstSpeed = _Speed;
 }
 
 MoveActor::~MoveActor()
@@ -32,10 +35,12 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		{
 			AddActorLocation(FMoveDir * Speed * _DeltaTime);
 			MoveDistanceX -= Speed * _DeltaTime;	
+			Speed += Acceleration * _DeltaTime;
 		}
 		else
 		{
 			LocationPoint += FMoveDir;
+			Speed = FirstSpeed;
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D()};
 			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
@@ -49,10 +54,12 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		{
 			AddActorLocation(FMoveDir * Speed * _DeltaTime);
 			MoveDistanceY -= Speed * _DeltaTime;
+			Speed += Acceleration * _DeltaTime;
 		}
 		else
 		{
 			LocationPoint += FMoveDir;
+			Speed = FirstSpeed;
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
 			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);

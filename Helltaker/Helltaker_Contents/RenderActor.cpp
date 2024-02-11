@@ -100,6 +100,16 @@ void RenderActor::ChangeAnimation(std::string_view _AnimationName)
 	Renderer->ChangeAnimation(_AnimationName);
 }
 
+void RenderActor::AnimationReset()
+{
+	if (nullptr == Renderer)
+	{
+		MsgBoxAssert("Renderer is nullptr.");
+	}
+
+	Renderer->AnimationReset();
+}
+
 void RenderActor::RenderActiveOn()
 {
 	if (nullptr == Renderer)

@@ -6,8 +6,8 @@ HitActor::HitActor()
 {
 }
 
-HitActor::HitActor(float _Speed)
-	: MoveActor(_Speed)
+HitActor::HitActor(float _Speed, float _Acceleration)
+	: MoveActor(_Speed, _Acceleration)
 {
 }
 

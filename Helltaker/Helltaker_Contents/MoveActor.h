@@ -8,7 +8,7 @@ class MoveActor : public RenderActor
 public:
 	// constructor destructor
 	MoveActor();
-	MoveActor(float _Speed);
+	MoveActor(float _Speed, float _Acceleration);
 	~MoveActor();
 
 	// delete Function
@@ -80,7 +80,9 @@ private:
 	float MoveDistanceX = 0.0f;
 	float MoveDistanceY = 0.0f;
 
+	float FirstSpeed = 0.0f;
 	float Speed = 0.0f;
+	float Acceleration = 0.0f;
 	FVector FMoveDir = FVector::Zero;
 	bool IsMoveValue = false;
 

@@ -15,12 +15,13 @@ public:
 	Skeleton& operator=(const Skeleton& _Other) = delete;
 	Skeleton& operator=(Skeleton&& _Other) noexcept = delete;
 
-	void Idle(float _DeltaTime) ;
 	void IdleStart() ;
-	void Hit(float _DeltaTime) ;
+	void Idle(float _DeltaTime) ;
 	void HitStart(EMoveActorDir _OtherMoveDir) ;
+	void Hit(float _DeltaTime) ;
+	void HitMoveEnd(float _DeltaTime);
+	void DeathStart();
 	void Death(float _DeltaTime) ;
-	void DeathStart() ;
 
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
 	void NextTileCheck(int _X, int _Y) override;
@@ -38,7 +39,7 @@ private:
 
 	const FVector HitScale = { 0.9f, 0.9f };
 	const float HitInter = 0.04f;
-	const float HitTime = HitInter * 9;
+	const float HitTime = HitInter * 8;
 	float HitTimeCount = HitTime;
 
 	static bool IsLoad;
