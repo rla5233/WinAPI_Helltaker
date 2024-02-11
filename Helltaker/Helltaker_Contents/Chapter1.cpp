@@ -13,6 +13,16 @@ Chapter1::~Chapter1()
 void Chapter1::BeginPlay()
 {
 	ChapterManager::BeginPlay();
+	ContentsHelper::LoadImg("BackGround", "ChapterBG_001.png");
+
+	// 디버그 용
+	ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
+	ContentsHelper::LoadImg("Debuging", "RedPoint.png");
+}
+
+void Chapter1::LevelStart(ULevel* _PrevLevel)
+{
+	ChapterManager::LevelStart(_PrevLevel);
 
 	// 스테이지 생성
 	std::vector<std::vector<bool>> Map =
@@ -24,7 +34,7 @@ void Chapter1::BeginPlay()
 		{ true , true , true , true , true , true , false },
 		{ true , true , true , true , true , true , true  }
 	};
-	
+
 	CreateChapterVec(Map);
 	CreateMoveActorVec();
 	SetChapterStartLocation({ 6, 2 });
@@ -36,8 +46,7 @@ void Chapter1::BeginPlay()
 	CreateSkeleton(1, 1);
 
 
-	// 디버그 용
-	ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
-	ContentsHelper::LoadImg("Debuging", "RedPoint.png");
+
+	// 디버그용
 	ShowLocationPoint();
 }

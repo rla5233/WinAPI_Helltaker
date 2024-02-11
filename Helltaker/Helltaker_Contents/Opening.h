@@ -20,7 +20,11 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-private:
-	float TimeCount = 0;
+	void LevelStart(ULevel* _PrevLevel) override;
+	void LevelEnd(ULevel* _NextLevel) override;
 
+private:
+	std::list<AActor*> AllActors;
+
+	float TimeCount = 0;
 };

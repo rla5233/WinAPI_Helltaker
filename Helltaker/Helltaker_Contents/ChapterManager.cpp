@@ -88,6 +88,7 @@ void ChapterManager::CreateBG(std::string_view _Name)
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	ChapterBG->CreateBackGround(_Name);
+	AllActors.push_back(ChapterBG);
 }
 
 void ChapterManager::CreateChapterUI()
@@ -100,6 +101,7 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
 	ChapterUI->SetImg(ChapterUI->GetName() + ".png");
 	ChapterUI->SetTransform({ {0,0}, WinScale });
+	AllActors.push_back(ChapterUI);
 }
 
 void ChapterManager::CreateHero(int _X, int _Y)
@@ -109,6 +111,7 @@ void ChapterManager::CreateHero(int _X, int _Y)
 	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewHero->SetLocationPoint({ _X, _Y });
 	PlayerHero = NewHero;
+	AllActors.push_back(PlayerHero);
 }
 
 void ChapterManager::CreateSkeleton(int _X, int _Y)
@@ -118,6 +121,7 @@ void ChapterManager::CreateSkeleton(int _X, int _Y)
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
 	HitActorVec[_Y][_X] = NewSkeleton;
+	AllActors.push_back(NewSkeleton);
 }
 
 HitActor* ChapterManager::GetMoveActor(FVector _Point)
@@ -197,4 +201,27 @@ void ChapterManager::Tick(float _DeltaTime)
 	}
 }
 
+void ChapterManager::LevelStart(ULevel* _PrevLevel)
+{
+	ULevel::LevelStart(_PrevLevel);
+}
 
+void ChapterManager::LevelEnd(ULevel* _NextLevel)
+{
+	ULevel::LevelEnd(_NextLevel);
+
+	for (AActor* Actor : AllActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy(0.0f);
+		Actor = nullptr;
+	}
+
+	ChapterVec.clear();
+	HitActorVec.clear();
+	AllActors.clear();
+}

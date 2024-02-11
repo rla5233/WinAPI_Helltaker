@@ -58,11 +58,17 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void LevelStart(ULevel* _PrevLevel) override;
+	void LevelEnd(ULevel* _NextLevel) override;
+
 private:
-	Character* Beel = nullptr;
+	std::list<AActor*> AllActors;
+	
+	Character* Beel = nullptr;	
 	
 	UI* Booper = nullptr;
 	std::vector<UI*> MenuBarVec;
+	
 	int MenuBarCount = 3;
 	int FocusMenuIndex = 0;
 

@@ -73,8 +73,12 @@ public:
 	void Tick(float _DeltaTime) override;
 
 protected:
+	void LevelStart(ULevel* _PrevLevel) override;
+	void LevelEnd(ULevel* _NextLevel) override;
 
 private:
+	std::list<AActor*> AllActors;
+
 	FVector ChapterStartLocation = FVector::Zero;
 
 	int Width = -1;
@@ -83,7 +87,6 @@ private:
 	std::vector<std::vector<bool>> ChapterVec;
 	std::vector<std::vector<HitActor*>> HitActorVec;
 
-	//std::list<RenderActor*> AllActors;
 	Hero* PlayerHero = nullptr;
 
 	bool IsChapterVecInit = false;

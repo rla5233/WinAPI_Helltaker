@@ -22,32 +22,43 @@ void MainMenu::BeginPlay()
 {
 	ULevel::BeginPlay();
 
+	ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+	ContentsHelper::LoadImg("Secene\\Dialogue", "MainMenuDialogue_001.png");
+	ContentsHelper::LoadImg("Secene\\Characters", "Beel_Fly.png");
+	ContentsHelper::LoadFolder("UI", "Booper");
+}
+
+void MainMenu::LevelStart(ULevel* _PrevLevel)
+{
+	ULevel::LevelStart(_PrevLevel);
+
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* DefaultBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	DefaultBG->CreateBackGround("DefaultBG");
+	AllActors.push_back(DefaultBG);
 
 	Dialogue* MainMenuDialogue = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Dialogue));
 	MainMenuDialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
 	MainMenuDialogue->SetName("MainMenuDialogue_001");
-	MainMenuDialogue->LoadImg("Secene\\Dialogue");
 	MainMenuDialogue->CreateImageRenderer(RenderOrder::Dialogue);
 	MainMenuDialogue->SetImg(MainMenuDialogue->GetName() + ".png");
 	MainMenuDialogue->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
-	
+	AllActors.push_back(MainMenuDialogue);
+
 	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
 	Beel->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
-	Beel->SetName("Beel_Fly");
-	Beel->LoadImg("Secene\\Characters");
-	
+	Beel->SetName("Beel_Fly");	
+	AllActors.push_back(Beel);
+
 	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f});
+	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
-	Booper->LoadFolder("UI");
 	Booper->CreateImageRenderer(RenderOrder::UI);
 	Booper->SetImg(Booper->GetName());
 	Booper->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
 	Booper->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
 	Booper->ChangeAnimation("Booper_Idle");
+	AllActors.push_back(Booper);
 
 	StateChange(EMainMenuState::Begin);
 }
@@ -58,6 +69,7 @@ void MainMenu::Tick(float _DeltaTime)
 
 	StateUpdate(_DeltaTime);
 }
+
 
 void MainMenu::Begin(float _DeltaTime)
 {
@@ -242,4 +254,22 @@ void MainMenu::StateChange(EMainMenuState _State)
 	}
 
 	State = _State;
+}
+
+void MainMenu::LevelEnd(ULevel* _NextLevel)
+{
+	ULevel::LevelEnd(_NextLevel);
+
+	for (AActor* Actor : AllActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy(0.0f);
+		Actor = nullptr;
+	}
+
+	AllActors.clear();
 }
