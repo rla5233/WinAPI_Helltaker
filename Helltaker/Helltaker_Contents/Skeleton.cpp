@@ -106,7 +106,7 @@ void Skeleton::NextTileCheck(int _X, int _Y)
 {
 	HitActor::NextTileCheck(_X, _Y);
 
-	if (nullptr == GetChapter()->GetMoveActor(_X, _Y))
+	if (nullptr == GetChapter()->GetHitActor(_X, _Y))
 	{
 		StateChange(EHitActorState::Hit);
 	}
@@ -201,8 +201,8 @@ void Skeleton::Death(float _DeltaTime)
 void Skeleton::DeathStart()
 {
 	HitActorVecUpdate(EHitActorState::Death);
+	CallDestroy();
 }
-
 
 void Skeleton::Tick(float _DeltaTime)
 {

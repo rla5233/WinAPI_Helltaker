@@ -55,29 +55,31 @@ public:
 	}
 
 	void CreateChapterVec(const std::vector<std::vector<bool>>& _Map);
-	void CreateMoveActorVec();
+	void CreateHitActorVec();
 	
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
 	void CreateHero(int _X, int _Y);
 	void CreateSkeleton(int _X, int _Y);
 
-	//void RestartChatper();
+	void RestartChatper();
 
-	HitActor* GetMoveActor(FVector _Point);
-	HitActor* GetMoveActor(int _X, int _Y);
+	HitActor* GetHitActor(FVector _Point);
+	HitActor* GetHitActor(int _X, int _Y);
+	void DestroyHitActor(__int64 _HitActor);
 
 	// 디버그 용
 	void ShowLocationPoint();
-
-	void Tick(float _DeltaTime) override;
-
 protected:
-	void LevelStart(ULevel* _PrevLevel) override;
-	void LevelEnd(ULevel* _NextLevel) override;
+	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
+
+	virtual void LevelStart(ULevel* _PrevLevel) override;
+	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 private:
-	std::list<AActor*> AllActors;
+	std::map<__int64, AActor*> AllActors;
+	//std::list<AActor*> AllActors;
 
 	FVector ChapterStartLocation = FVector::Zero;
 
@@ -89,5 +91,6 @@ private:
 
 	Hero* PlayerHero = nullptr;
 
+	static bool IsLoad;
 	bool IsChapterVecInit = false;
 };

@@ -116,7 +116,7 @@ void Hero::ActionCheck()
 
 void Hero::NextTileCheck(int _X, int _Y)
 {
-	if (nullptr == GetChapter()->GetMoveActor(_X, _Y))
+	if (nullptr == GetChapter()->GetHitActor(_X, _Y))
 	{
 		StateChange(EHeroState::Move);
 	}
@@ -203,7 +203,7 @@ void Hero::KickStart()
 
 	// Skeleton, Stone 업 캐스팅
 	FVector NextLocationPoint = GetNextLocationPoint();
-	HitActor* Other = GetChapter()->GetMoveActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+	HitActor* Other = GetChapter()->GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
 	Other->NextStateCheck(MoveDir);	
 
 	switch (SeeDir)

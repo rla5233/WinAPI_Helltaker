@@ -27,9 +27,9 @@ enum class UpdateOrder
 	BackGround,
 	Dialogue,
 	Character,
-	UI,
 	Hero,
-	Skeleton
+	Skeleton,
+	UI
 };
 
 enum class RenderOrder
@@ -38,9 +38,9 @@ enum class RenderOrder
 	BackGround,
 	Dialogue,
 	Character,
-	UI,
 	Hero,
-	Skeleton
+	Skeleton,
+	UI
 };
 
 enum class EMainMenuState

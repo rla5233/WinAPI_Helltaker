@@ -36,7 +36,7 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	};
 
 	CreateChapterVec(Map);
-	CreateMoveActorVec();
+	CreateHitActorVec();
 	SetChapterStartLocation({ 6, 2 });
 
 	CreateBG("ChapterBG_001");

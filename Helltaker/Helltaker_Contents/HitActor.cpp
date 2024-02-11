@@ -33,3 +33,8 @@ void HitActor::HitActorVecUpdate(EHitActorState _NextState)
 		break;
 	}	
 }
+
+void HitActor::CallDestroy()
+{
+	GetChapter()->DestroyHitActor(reinterpret_cast<__int64>(this));
+}

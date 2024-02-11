@@ -29,15 +29,18 @@ public:
 		return State;
 	}
 
-	virtual void NextTileCheck(int _X, int _Y) {};
+	void CallDestroy();
+
+
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
+
+protected:
+	virtual void NextTileCheck(int _X, int _Y) {};
 	virtual void StateUpdate(float _DeltaTime) {};
 	virtual void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) {};
 
 	virtual void BeginPlay() {};
 	virtual void Tick(float _DeltaTime) {};
-
-protected:
 
 private:
 	EHitActorState State = EHitActorState::None;
