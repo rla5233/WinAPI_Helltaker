@@ -79,7 +79,6 @@ protected:
 
 private:
 	std::map<__int64, AActor*> AllActors;
-	//std::list<AActor*> AllActors;
 
 	FVector ChapterStartLocation = FVector::Zero;
 

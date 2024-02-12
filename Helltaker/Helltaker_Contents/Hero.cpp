@@ -44,30 +44,16 @@ void Hero::BeginPlay()
 	SetTransform({ {0,0}, {TileScale * IdleScale} });
 	
 	SetImg("Hero_Left_Idle");
-	CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
-	
-	//SetImg("Left_Move");
-	CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);
-	
-	//SetImg("Left_Kick");
-	CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);
-	
-	//SetImg("Left_Victory");
+	CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);	
+	CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);	
+	CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);	
 	CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
 	
-	//SetImg("Right_Idle");
-	CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);
-	
-	//SetImg("Right_Move");
-	CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);
-	
-	//SetImg("Right_Kick");
-	CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);
-	
-	//SetImg("Right_Victory");
+	CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);	
+	CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);	
+	CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);	
 	CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
 	
-	//SetImg("Death");
 	CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
 
 	// Init
