@@ -29,6 +29,7 @@ enum class UpdateOrder
 	Character,
 	Hero,
 	Skeleton,
+	Stone,
 	UI
 };
 
@@ -40,6 +41,7 @@ enum class RenderOrder
 	Character,
 	Hero,
 	Skeleton,
+	Stone,
 	UI
 };
 
@@ -87,12 +89,4 @@ enum class EMoveActorDir
 	Right,
 	Up,
 	Down
-};
-
-enum class EMoveActorType
-{
-	None,
-	Hero,
-	Skeleton,
-	Stone
 };

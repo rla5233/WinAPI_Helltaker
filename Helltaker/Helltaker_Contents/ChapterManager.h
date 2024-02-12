@@ -61,6 +61,7 @@ public:
 	void CreateChapterUI();
 	void CreateHero(int _X, int _Y);
 	void CreateSkeleton(int _X, int _Y);
+	void CreateStone(int _X, int _Y, int _Type);
 
 	void RestartChatper();
 

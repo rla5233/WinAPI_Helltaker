@@ -22,7 +22,6 @@ void Hero::BeginPlay()
 	MoveActor::BeginPlay();
 
 	SetName("Hero");
-	SetMoveActorType(EMoveActorType::Hero);
 
 	if (false == IsLoad)
 	{

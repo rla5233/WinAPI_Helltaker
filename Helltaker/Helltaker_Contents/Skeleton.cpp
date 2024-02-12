@@ -2,8 +2,6 @@
 
 #include "ChapterManager.h"
 
-#include <EngineCore/EngineCore.h>
-
 bool Skeleton::IsLoad = false;
 
 Skeleton::Skeleton()
@@ -18,7 +16,6 @@ void Skeleton::BeginPlay()
 	HitActor::BeginPlay();
 
 	SetName("Skeleton"); 
-	SetMoveActorType(EMoveActorType::Skeleton);
 	
 	if (false == IsLoad)
 	{

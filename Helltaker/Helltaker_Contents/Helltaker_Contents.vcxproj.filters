@@ -49,6 +49,9 @@
     <ClInclude Include="HitActor.h">
       <Filter>Object\Actor\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Stone.h">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -98,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="HitActor.cpp">
       <Filter>Object\Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

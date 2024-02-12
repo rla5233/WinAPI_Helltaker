@@ -4,6 +4,7 @@
 #include "HitActor.h"
 #include "BackGround.h"
 #include "Skeleton.h"
+#include "Stone.h"
 #include "Hero.h"
 #include "UI.h"
 
@@ -132,6 +133,17 @@ void ChapterManager::CreateSkeleton(int _X, int _Y)
 	NewSkeleton->SetLocationPoint({ _X, _Y });
 	HitActorVec[_Y][_X] = NewSkeleton;
 	AllActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
+}
+
+void ChapterManager::CreateStone(int _X, int _Y, int _Type)
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	Stone* Newstone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
+	Newstone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	Newstone->SetLocationPoint({ _X, _Y });
+	Newstone->SetStoneType(_Type);
+	HitActorVec[_Y][_X] = Newstone;
+	AllActors[reinterpret_cast<__int64>(Newstone)] = Newstone;
 }
 
 HitActor* ChapterManager::GetHitActor(FVector _Point)

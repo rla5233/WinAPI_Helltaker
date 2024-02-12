@@ -44,7 +44,7 @@ private:
 	int ActionPoint = 25;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
-	const float IdleInter = 0.07f;
+	const float IdleInter = 0.06f;
 
 	const FVector MoveScale = { 0.9f, 0.9f };
 	const float MoveInter = 0.02f;

@@ -40,16 +40,6 @@ public:
 		IsMoveValue = false;
 	}
 
-	EMoveActorType GetMoveActorType() const
-	{
-		return MoveActorType;
-	}
-
-	void SetMoveActorType(EMoveActorType _MoveActorType)
-	{
-		MoveActorType = _MoveActorType;
-	}
-
 	FVector GetLocationPoint() const
 	{
 		return LocationPoint;
@@ -88,6 +78,4 @@ private:
 
 	FVector LocationPoint = FVector::Zero;
 	FVector NextLocationPoint = FVector::Zero;
-
-	EMoveActorType MoveActorType = EMoveActorType::None;
 };

@@ -23,13 +23,13 @@ public:
 	void DeathStart();
 	void Death(float _DeltaTime) ;
 
+protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
 	void NextTileCheck(int _X, int _Y) override;
 
-	void StateUpdate(float _DeltaTime) override;
     void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) override;
+	void StateUpdate(float _DeltaTime) override;
 
-protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
