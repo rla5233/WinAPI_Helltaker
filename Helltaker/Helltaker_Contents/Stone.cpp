@@ -61,10 +61,52 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 		MoveDirChange(EMoveActorDir::Down);
 		break;
 	}
+
+	switch (MoveDir)
+	{
+	case EMoveActorDir::Left:
+		SetNextLocationPoint(CurLocationPoint + FVector::Left);
+		break;
+	case EMoveActorDir::Right:
+		SetNextLocationPoint(CurLocationPoint + FVector::Right);
+		break;
+	case EMoveActorDir::Up:
+		SetNextLocationPoint(CurLocationPoint + FVector::Up);
+		break;
+	case EMoveActorDir::Down:
+		SetNextLocationPoint(CurLocationPoint + FVector::Down);
+		break;
+	}
+
+	int Height = static_cast<int>(Map.size());
+	int Width = static_cast<int>(Map[0].size());
+	int Next_X = GetNextLocationPoint().iX();
+	int Next_Y = GetNextLocationPoint().iY();
+	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
+	{
+		if (Map[Next_Y][Next_X])
+		{
+			NextTileCheck(Next_X, Next_Y);
+			return;
+		}
+	}
+
+	StateChange(EHitActorState::Idle);
 }
 
 void Stone::NextTileCheck(int _X, int _Y)
 {
+	HitActor::NextTileCheck(_X, _Y);
+
+	if (nullptr == GetChapter()->GetHitActor(_X, _Y))
+	{
+		StateChange(EHitActorState::Hit);
+	}
+	else
+	{
+		// Block : ½ºÅæ Áøµ¿
+		StateChange(EHitActorState::Idle);
+	}
 }
 
 void Stone::IdleStart()
