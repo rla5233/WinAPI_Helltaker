@@ -43,11 +43,13 @@ void Devil::SetDevil(std::string_view _Name)
 void Devil::LoveSignAnimation(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
+	float Y_Weight = 0.45f, Y_MaxWeight = 0.7f;
+
 	if (true == IsUp)
 	{
 		LoveSignMove -= LoveSignSpeed * _DeltaTime;
-		LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * 0.45f) + LoveSignMove }, {TileScale * LoveSignScale} });
-		if (TileScale.hY() * 0.7f < (TileScale.hY() * 0.45f) - LoveSignMove)
+		LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * Y_Weight) + LoveSignMove }, {TileScale * LoveSignScale} });
+		if (TileScale.hY() * Y_MaxWeight < (TileScale.hY() * Y_Weight) - LoveSignMove)
 		{
 			IsUp = false;
 		}
@@ -55,8 +57,8 @@ void Devil::LoveSignAnimation(float _DeltaTime)
 	else
 	{
 		LoveSignMove += LoveSignSpeed * _DeltaTime;
-		LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * 0.45f) + LoveSignMove }, {TileScale * LoveSignScale} });
-		if (TileScale.hY() * 0.45f > (TileScale.hY() * 0.45f) - LoveSignMove)
+		LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * Y_Weight) + LoveSignMove }, {TileScale * LoveSignScale} });
+		if (TileScale.hY() * Y_Weight > (TileScale.hY() * Y_Weight) - LoveSignMove)
 		{
 			IsUp = true;
 		}
