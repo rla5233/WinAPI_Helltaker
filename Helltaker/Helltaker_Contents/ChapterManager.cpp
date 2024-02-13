@@ -153,14 +153,14 @@ void ChapterManager::SpawnSkeleton(int _X, int _Y)
 	AllActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
-void ChapterManager::SpawnStone(int _X, int _Y, int _Type)
+void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Stone* NewStone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
 	NewStone->SetName("Stone");
 	NewStone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewStone->SetLocationPoint({ _X, _Y });
-	NewStone->SetStoneType(_Type);
+	NewStone->SetStoneImg(_Name);
 	HitActorVec[_Y][_X] = NewStone;
 	AllActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }

@@ -46,10 +46,10 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	SpawnSkeleton(3, 1);
 	SpawnSkeleton(2, 2);
 	SpawnSkeleton(4, 2);
-	SpawnStone(1, 4, 2);
-	SpawnStone(1, 5, 4);
-	SpawnStone(4, 4, 9);	
-	SpawnStone(3, 5, 5);
+	SpawnStone(1, 4, "Stone_002.png");
+	SpawnStone(1, 5, "Stone_004.png");
+	SpawnStone(4, 4, "Stone_009.png");
+	SpawnStone(3, 5, "Stone_005.png");
 	SpawnDevil(6, 5, "PandeMonica");
 
 	// 디버그용

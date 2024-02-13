@@ -141,48 +141,9 @@ void Stone::HitMoveEnd(float _DeltaTime)
 
 }
 
-void Stone::SetStoneType(int _Type)
+void Stone::SetStoneImg(std::string_view _Name)
 {
-	switch (_Type)
-	{
-	case 1:
-		SetImg("Stone_001.png");
-		break;
-	case 2:
-		SetImg("Stone_002.png");
-		break;
-	case 3:
-		SetImg("Stone_003.png");
-		break;
-	case 4:
-		SetImg("Stone_004.png");
-		break;
-	case 5:
-		SetImg("Stone_005.png");
-		break;
-	case 6:
-		SetImg("Stone_006.png");
-		break;
-	case 7:
-		SetImg("Stone_007.png");
-		break;
-	case 8:
-		SetImg("Stone_008.png");
-		break;
-	case 9:
-		SetImg("Stone_009.png");
-		break;
-	case 10:
-		SetImg("Stone_010.png");
-		break;
-	case 11:
-		SetImg("Stone_011.png");
-		break;
-	case 12:
-		SetImg("Stone_012.png");
-		break;
-	}
-
+	SetImg(_Name);
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0,0}, {TileScale * StoneScale} });
 }

@@ -22,7 +22,7 @@ public:
 	void Hit(float _DeltaTime);
 	void HitMoveEnd(float _DeltaTime);
 
-	void SetStoneType(int _Type);
+	void SetStoneImg(std::string_view _Name);
 
 protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
