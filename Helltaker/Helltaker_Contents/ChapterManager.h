@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ContentsHelper.h"
+
 #include <string>
 #include <string_view>
 #include <vector>
@@ -28,13 +30,13 @@ public:
 	FVector ChapterPointToLocation(FVector _Point) const;
 	FVector ChapterPointToLocation(int _X, int _Y) const;
 	
-	void SetChapterStartLocation(FVector _Point);
+	void SetChapterStartLocation(int _X, int _Y);
 	FVector GetChapterStartLocation() const
 	{
 		return ChapterStartLocation;
 	}
 
-	void SetChapterEndLocation(FVector _Point);
+	void SetChapterEndPoint(int _X, int _Y);
 
 	const std::vector<std::vector<bool>>& GetChapterVec() const
 	{
@@ -66,8 +68,6 @@ public:
 	void SpawnSkeleton(int _X, int _Y);
 	void SpawnStone(int _X, int _Y, std::string_view _Name);
 
-	void RestartChatper();
-
 	HitActor* GetHitActor(FVector _Point);
 	HitActor* GetHitActor(int _X, int _Y);
 	void DestroyHitActor(__int64 _HitActor);
@@ -75,17 +75,32 @@ public:
 	// 디버그 용
 	void ShowLocationPoint();
 protected:
+
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
 
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
+	void Idle(float _DeltaTime);
+	void IdleStart();
+
+	void Reset(float _DeltaTime);
+	void ResetStart();
+
+	void Secene(float _DeltaTime);
+	void SeceneStart();
+
+	void StateUpdate(float _DeltaTime);
+	void StateChange(EChapterState _State);
+
 private:
 	std::map<__int64, AActor*> AllActors;
 
+	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;
-	FVector ChapterEndLocation = FVector::Zero;
+	int EndPoint_X = -1;
+	int EndPoint_Y = -1;
 
 	int ChapterWidth = -1;
 	int ChapterHeight = -1;
@@ -93,7 +108,6 @@ private:
 	std::vector<std::vector<bool>> ChapterVec;
 	std::vector<std::vector<HitActor*>> HitActorVec;
 
-	
 	Hero* PlayerHero = nullptr;
 
 	bool IsChapterVecInit = false;

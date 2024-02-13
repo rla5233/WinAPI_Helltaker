@@ -64,8 +64,8 @@ enum class EChapterState
 {
 	None,
 	Idle,
-	Restart,
-	EnterSecene,
+	Secene,
+	Reset,
 	End
 };
 

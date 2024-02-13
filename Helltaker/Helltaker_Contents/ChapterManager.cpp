@@ -30,16 +30,20 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
 		IsLoad = true;
 	}
+
+	StateChange(EChapterState::Idle);
 }
 
-void ChapterManager::SetChapterStartLocation(FVector _Point)
+void ChapterManager::SetChapterStartLocation(int _X, int _Y)
 {
-	ChapterStartLocation = _Point * ContentsHelper::GetTileScale();
+	FVector Point = { _X, _Y };
+	ChapterStartLocation = Point * ContentsHelper::GetTileScale();
 }
 
-void ChapterManager::SetChapterEndLocation(FVector _Point)
+void ChapterManager::SetChapterEndPoint(int _X, int _Y)
 {
-	ChapterEndLocation = _Point * ContentsHelper::GetTileScale();
+	EndPoint_X = _X;
+	EndPoint_Y = _Y;
 }
 
 // 맵좌표를 윈도우 위치로 변환하는 함수
@@ -180,6 +184,7 @@ void ChapterManager::DestroyHitActor(__int64 _HitActor)
 	AllActors.erase(_HitActor);
 }
 
+
 // 디버그용
 void ChapterManager::ShowLocationPoint()
 {
@@ -214,7 +219,32 @@ void ChapterManager::ShowLocationPoint()
 	}
 }
 
-void ChapterManager::Tick(float _DeltaTime)
+void ChapterManager::LevelStart(ULevel* _PrevLevel)
+{
+	ULevel::LevelStart(_PrevLevel);
+}
+
+void ChapterManager::LevelEnd(ULevel* _NextLevel)
+{
+	ULevel::LevelEnd(_NextLevel);
+
+	for (std::pair<const __int64, AActor*>& Actor : AllActors)
+	{
+		if (nullptr == Actor.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor.second->Destroy(0.0f);
+		Actor.second = nullptr;
+	}
+
+	ChapterVec.clear();
+	HitActorVec.clear();
+	AllActors.clear();
+}
+
+void ChapterManager::Idle(float _DeltaTime)
 {
 	if (true == PlayerHero->GetCanActionCheck())
 	{
@@ -244,37 +274,86 @@ void ChapterManager::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsPress('R'))
 	{
-		RestartChatper();
+		StateChange(EChapterState::Reset);
 	}
-}
 
-void ChapterManager::LevelStart(ULevel* _PrevLevel)
-{
-	ULevel::LevelStart(_PrevLevel);
-}
-
-void ChapterManager::LevelEnd(ULevel* _NextLevel)
-{
-	ULevel::LevelEnd(_NextLevel);
-
-	for (std::pair<const __int64, AActor*>& Actor : AllActors)
+	FVector HeroLocationPoint = PlayerHero->GetLocationPoint();
+	if (HeroLocationPoint.iX() == EndPoint_X && HeroLocationPoint.iY() == EndPoint_Y)
 	{
-		if (nullptr == Actor.second)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Actor.second->Destroy(0.0f);
-		Actor.second = nullptr;
+		StateChange(EChapterState::Secene);
 	}
-
-	ChapterVec.clear();
-	HitActorVec.clear();
-	AllActors.clear();
 }
 
-void ChapterManager::RestartChatper()
+void ChapterManager::IdleStart()
+{
+	
+}
+
+void ChapterManager::Reset(float _DeltaTime)
+{
+	StateChange(EChapterState::Idle);
+}
+
+void ChapterManager::ResetStart()
 {
 	LevelEnd(nullptr);
 	LevelStart(nullptr);
+}
+
+void ChapterManager::Secene(float _DeltaTime)
+{
+}
+
+void ChapterManager::SeceneStart()
+{
+	int a = 0;
+}
+
+void ChapterManager::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
+}
+
+
+void ChapterManager::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case EChapterState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case EChapterState::Reset:
+		Reset(_DeltaTime);
+		break;
+	case EChapterState::Secene:
+		Secene(_DeltaTime);
+		break;
+	case EChapterState::End:
+		break;
+	}
+}
+
+void ChapterManager::StateChange(EChapterState _State)
+{
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case EChapterState::Idle:
+			IdleStart();
+			break;
+		case EChapterState::Reset:
+			ResetStart();
+			break;
+		case EChapterState::Secene:
+			SeceneStart();
+			break;
+		case EChapterState::End:
+			break;
+		}
+	}
+
+	State = _State;
 }
