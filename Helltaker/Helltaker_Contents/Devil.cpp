@@ -19,9 +19,12 @@ void Devil::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadFolder("Characters\\Chapter\\Devil", "PandeMonica");
-
+		ContentsHelper::LoadImg("Effect", "LoveSign.png");
 		IsLoad = true;
 	}
+
+	LoveSignRenderer = AActor::CreateImageRenderer(static_cast<int>(RenderOrder::Effect));
+	LoveSignRenderer->SetImage("LoveSign.png");
 }
 
 void Devil::SetDevil(std::string_view _Name)
@@ -38,11 +41,24 @@ void Devil::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ { 0, 0 }, {TileScale * IdleScale} });
+	LoveSignRenderer->SetTransform({ {0, 0}, {TileScale * LoveSignScale} });
 	ChangeAnimation(GetName() + "_Idle");
 }
 
 void Devil::Idle(float _DeltaTime)
-{}
+{
+
+}
+
+void Devil::VictoryStart()
+{
+	if (nullptr == LoveSignRenderer)
+	{
+		MsgBoxAssert("Renderer is nullptr");
+	}
+
+	LoveSignRenderer->Destroy();
+}
 
 void Devil::Tick(float _DeltaTime)
 {
@@ -73,6 +89,7 @@ void Devil::StateChange(EDevilState _State)
 			IdleStart();
 			break;
 		case EDevilState::Victory:
+			VictoryStart();
 			break;
 		}
 	}

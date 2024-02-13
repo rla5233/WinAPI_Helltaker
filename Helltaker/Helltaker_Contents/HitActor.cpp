@@ -34,7 +34,7 @@ void HitActor::HitActorVecUpdate(EHitActorState _NextState)
 	}	
 }
 
-void HitActor::CallDestroy()
+void HitActor::CallDestroytoChapter()
 {
 	GetChapter()->DestroyHitActor(reinterpret_cast<__int64>(this));
 }

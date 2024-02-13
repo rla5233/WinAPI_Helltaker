@@ -19,6 +19,9 @@ public:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
+	void VictoryStart();
+
+
 	void StateChange(EDevilState _State);
 	void StateUpdate(float _DeltaTime);	
 
@@ -29,6 +32,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	UImageRenderer* LoveSignRenderer = nullptr;
+	const FVector LoveSignScale = { 0.3f, 0.3f };
+
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.082f;
 	

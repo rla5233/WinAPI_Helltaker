@@ -46,13 +46,13 @@ public:
 	{
 		return Position.X - Scale.hX();
 	}
-	float Right() const
-	{
-		return Position.X + Scale.hX();
-	}
 	float Top() const
 	{
 		return Position.Y - Scale.hY();
+	}
+	float Right() const
+	{
+		return Position.X + Scale.hX();
 	}
 	float Bottom() const
 	{

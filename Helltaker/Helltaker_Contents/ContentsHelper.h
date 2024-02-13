@@ -31,6 +31,7 @@ enum class UpdateOrder
 	Stone,
 	Devil,
 	Hero,
+	Effect,
 	UI
 };
 
@@ -44,6 +45,7 @@ enum class RenderOrder
 	Stone,
 	Devil,
 	Hero,
+	Effect,
 	UI
 };
 

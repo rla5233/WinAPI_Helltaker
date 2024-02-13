@@ -194,7 +194,7 @@ void Skeleton::Death(float _DeltaTime)
 void Skeleton::DeathStart()
 {
 	HitActorVecUpdate(EHitActorState::Death);
-	CallDestroy();
+	CallDestroytoChapter();
 }
 
 void Skeleton::Tick(float _DeltaTime)
