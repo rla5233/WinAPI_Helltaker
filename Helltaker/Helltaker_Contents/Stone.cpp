@@ -119,14 +119,26 @@ void Stone::Idle(float _DeltaTime)
 
 void Stone::HitStart(EMoveActorDir _OtherMoveDir)
 {
+	MoveOn();
+	HitActorVecUpdate(EHitActorState::Hit);
 }
 
 void Stone::Hit(float _DeltaTime)
 {
+	if (true == IsMove())
+	{
+		MoveOneBlock(_DeltaTime);
+	}
+
+	if (false == IsMove())
+	{
+		StateChange(EHitActorState::Idle);
+	}
 }
 
 void Stone::HitMoveEnd(float _DeltaTime)
 {
+
 }
 
 void Stone::SetStoneType(int _Type)

@@ -107,6 +107,7 @@ void Hero::NextTileCheck(int _X, int _Y)
 	}
 	else
 	{
+		StateChange(EHeroState::None);
 		StateChange(EHeroState::Kick);
 	}
 }
@@ -171,7 +172,7 @@ void Hero::Kick(float _DeltaTime)
 		return;
 	}
 	
-	if (KickTime * 0.8f > KickTimeCount)
+	if (KickTime * 0.75f > KickTimeCount)
 	{
 		CanActionCheck = true;
 	}
@@ -194,9 +195,11 @@ void Hero::KickStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
+		AnimationReset();
 		ChangeAnimation("Hero_LKick");
 		break;
 	case EActorSeeDir::Right:
+		AnimationReset();
 		ChangeAnimation("Hero_RKick");
 		break;
 	}

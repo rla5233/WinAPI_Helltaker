@@ -44,7 +44,8 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	CreateHero(5, 0);
 	CreateSkeleton(3, 1);
 	CreateSkeleton(1, 1);
-
+	CreateStone(1, 4, 2);
+	CreateStone(1, 5, 4);
 
 
 	// 디버그용

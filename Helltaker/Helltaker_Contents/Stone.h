@@ -35,7 +35,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	const FVector StoneScale = { 0.9f, 0.9f };
+	const FVector StoneScale = { 0.825f, 0.9f };
 
 	static bool IsLoad;
 };
