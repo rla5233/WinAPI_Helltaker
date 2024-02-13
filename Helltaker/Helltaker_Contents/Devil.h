@@ -34,7 +34,7 @@ private:
 	UImageRenderer* LoveSignRenderer = nullptr;
 	const FVector LoveSignScale = { 0.3f, 0.4f };
 	float LoveSignMove = 0.0f;
-	float LoveSignSpeed = 28.0f;
+	float LoveSignSpeed = 0.0f;
 	bool IsUp = true;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
