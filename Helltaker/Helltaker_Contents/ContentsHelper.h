@@ -60,6 +60,15 @@ enum class EMainMenuState
 	Exit
 };
 
+enum class EChapterState
+{
+	None,
+	Idle,
+	Restart,
+	EnterSecene,
+	End
+};
+
 enum class EHeroState
 {
 	None,

@@ -37,6 +37,11 @@ void ChapterManager::SetChapterStartLocation(FVector _Point)
 	ChapterStartLocation = _Point * ContentsHelper::GetTileScale();
 }
 
+void ChapterManager::SetChapterEndLocation(FVector _Point)
+{
+	ChapterEndLocation = _Point * ContentsHelper::GetTileScale();
+}
+
 // 맵좌표를 윈도우 위치로 변환하는 함수
 FVector ChapterManager::ChapterPointToLocation(FVector _Point) const
 {
@@ -55,12 +60,12 @@ FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
 
 void ChapterManager::CreateChapterVec(const std::vector<std::vector<bool>>& _Map)
 {
-	Width = static_cast<int>(_Map[0].size()); 
-	Height = static_cast<int>(_Map.size());
-	ChapterVec.resize(Height);
-	for (int i = 0; i < Height; i++)
+	ChapterWidth = static_cast<int>(_Map[0].size());
+	ChapterHeight = static_cast<int>(_Map.size());
+	ChapterVec.resize(ChapterHeight);
+	for (int i = 0; i < ChapterHeight; i++)
 	{
-		ChapterVec[i].resize(Width);
+		ChapterVec[i].resize(ChapterWidth);
 	}
 
 	for (int Y = 0; Y < _Map.size(); Y++)
@@ -81,15 +86,15 @@ void ChapterManager::CreateHitActorVec()
 		MsgBoxAssert("ChapterMap is Not Exist");
 	}
 
-	HitActorVec.resize(Height);
-	for (int i = 0; i < Height; i++)
+	HitActorVec.resize(ChapterHeight);
+	for (int i = 0; i < ChapterHeight; i++)
 	{
-		HitActorVec[i].resize(Width);
+		HitActorVec[i].resize(ChapterWidth);
 	}
 
-	for (int Y = 0; Y < Height; Y++)
+	for (int Y = 0; Y < ChapterHeight; Y++)
 	{
-		for (int X = 0; X < Width; X++)
+		for (int X = 0; X < ChapterWidth; X++)
 		{
 			HitActorVec[Y][X] = nullptr;
 		}
@@ -180,15 +185,15 @@ void ChapterManager::ShowLocationPoint()
 {
 	std::vector<std::vector<RenderActor*>> GreenPoint;
 	
-	GreenPoint.resize(Height);
-	for (int i = 0; i < Height; i++)
+	GreenPoint.resize(ChapterHeight);
+	for (int i = 0; i < ChapterHeight; i++)
 	{
-		GreenPoint[i].resize(Width);
+		GreenPoint[i].resize(ChapterWidth);
 	}
 	
-	for (int Y = 0; Y < Height; Y++)
+	for (int Y = 0; Y < ChapterHeight; Y++)
 	{
-		for (int X = 0; X < Width; X++)
+		for (int X = 0; X < ChapterWidth; X++)
 		{
 			GreenPoint[Y][X] = SpawnActor<RenderActor>(static_cast<int>(UpdateOrder::UI));
 			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));

@@ -34,6 +34,8 @@ public:
 		return ChapterStartLocation;
 	}
 
+	void SetChapterEndLocation(FVector _Point);
+
 	const std::vector<std::vector<bool>>& GetChapterVec() const
 	{
 		if (false == IsChapterVecInit)
@@ -83,15 +85,17 @@ private:
 	std::map<__int64, AActor*> AllActors;
 
 	FVector ChapterStartLocation = FVector::Zero;
+	FVector ChapterEndLocation = FVector::Zero;
 
-	int Width = -1;
-	int Height = -1;
+	int ChapterWidth = -1;
+	int ChapterHeight = -1;
 
 	std::vector<std::vector<bool>> ChapterVec;
 	std::vector<std::vector<HitActor*>> HitActorVec;
 
+	
 	Hero* PlayerHero = nullptr;
 
-	static bool IsLoad;
 	bool IsChapterVecInit = false;
+	static bool IsLoad;
 };
