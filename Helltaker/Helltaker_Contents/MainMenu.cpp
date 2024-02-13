@@ -23,8 +23,8 @@ void MainMenu::BeginPlay()
 	ULevel::BeginPlay();
 
 	ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
-	ContentsHelper::LoadImg("Secene\\Dialogue", "MainMenuDialogue_001.png");
-	ContentsHelper::LoadImg("Secene\\Characters", "Beel_Fly.png");
+	ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
+	ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
 	ContentsHelper::LoadFolder("UI", "Booper");
 }
 

@@ -20,7 +20,7 @@ void Opening::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	ContentsHelper::LoadImg("Secene\\Dialogue", "UnityLogo.png");
+	ContentsHelper::LoadImg("Scene\\Dialogue", "UnityLogo.png");
 	ContentsHelper::LoadImg("Background", "OpeningBG.png");
 }
 
