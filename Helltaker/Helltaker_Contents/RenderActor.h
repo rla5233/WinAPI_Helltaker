@@ -24,32 +24,31 @@ public:
 	void LoadImg(std::string_view _Path);
 	void LoadImg(std::string_view _Path, std::string_view _Name);
 
-	void SetImg(std::string_view _Name);
-	void SetTransform(const FTransform& _Value);
+	//void SetImg(std::string_view _Name);
+	//void SetTransform(const FTransform& _Value);
 
-	void CreateImageRenderer(RenderOrder _Order);
-	void CreateImageRenderer(int _Order);
+	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
 
-	void CreateAnimation(
-		std::string_view _AnimationName,
-		std::string_view _ImageName,
-		int _Start,
-		int _End,
-		float _Inter,
-		bool _Loop = true
-	);
+	//void CreateAnimation(
+	//	std::string_view _AnimationName,
+	//	std::string_view _ImageName,
+	//	int _Start,
+	//	int _End,
+	//	float _Inter,
+	//	bool _Loop = true
+	//);
 
-	void ChangeAnimation(std::string_view _AnimationName);
-	void AnimationReset();
+	//void ChangeAnimation(std::string_view _AnimationName);
+	//void AnimationReset();
 
-	FVector GetRendererImageScale();
+	//FVector GetRendererImageScale();
 
-	void RenderActiveOn();
-	void RenderActiveOff();
+	//void RenderActiveOn();
+	//void RenderActiveOff();
 
 protected:
-	UImageRenderer* Renderer = nullptr;
-
+	
 private:
+
 };
 

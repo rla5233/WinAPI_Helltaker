@@ -28,14 +28,14 @@ void Skeleton::BeginPlay()
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	CreateImageRenderer(RenderOrder::Skeleton);
-	SetTransform({ {0,0}, {TileScale * IdleScale} });
+	Renderer = CreateImageRenderer(RenderOrder::Skeleton);
+	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });
 
-	SetImg("Skeleton_Left_Idle");
-	CreateAnimation("Skeleton_LIdle", "Skeleton_Left_Idle", 0, 11, IdleInter, true);
-	CreateAnimation("Skeleton_RIdle", "Skeleton_Right_Idle", 0, 11, IdleInter, true);
-	CreateAnimation("Skeleton_LHit", "Skeleton_Left_Hit", 0, 8, HitInter, false);
-	CreateAnimation("Skeleton_RHit", "Skeleton_Right_Hit", 0, 8, HitInter, false);
+	Renderer->SetImage("Skeleton_Left_Idle");
+	Renderer->CreateAnimation("Skeleton_LIdle", "Skeleton_Left_Idle", 0, 11, IdleInter, true);
+	Renderer->CreateAnimation("Skeleton_RIdle", "Skeleton_Right_Idle", 0, 11, IdleInter, true);
+	Renderer->CreateAnimation("Skeleton_LHit", "Skeleton_Left_Hit", 0, 8, HitInter, false);
+	Renderer->CreateAnimation("Skeleton_RHit", "Skeleton_Right_Hit", 0, 8, HitInter, false);
 
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHitActorState::Idle);
@@ -121,15 +121,15 @@ void Skeleton::Idle(float _DeltaTime)
 void Skeleton::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ {0, 0}, {TileScale * IdleScale} });
+	Renderer->SetTransform({ {0, 0}, {TileScale * IdleScale} });
 
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Skeleton_LIdle");
+		Renderer->ChangeAnimation("Skeleton_LIdle");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Skeleton_RIdle");
+		Renderer->ChangeAnimation("Skeleton_RIdle");
 		break;
 	}
 }
@@ -146,39 +146,34 @@ void Skeleton::Hit(float _DeltaTime)
 		StateChange(EHitActorState::HitMoveEnd);
 	}
 
-	if (0 > HitTimeCount)
+	if (true == Renderer->IsCurAnimationEnd())
 	{
 		StateChange(EHitActorState::Idle);
-	}
-	
-	HitTimeCount -= _DeltaTime;
+	}	
 }
 
 void Skeleton::HitMoveEnd(float _DeltaTime)
 {
-	if (0 > HitTimeCount)
+	if (true == Renderer->IsCurAnimationEnd())
 	{
 		StateChange(EHitActorState::Idle);
 	}
-
-	HitTimeCount -= _DeltaTime;
 }
 
 void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ {0, 0}, {TileScale * HitScale} });
-	HitTimeCount = HitTime;
+	Renderer->SetTransform({ {0, 0}, {TileScale * HitScale} });
 
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		AnimationReset();
-		ChangeAnimation("Skeleton_LHit");
+		Renderer->AnimationReset();
+		Renderer->ChangeAnimation("Skeleton_LHit");
 		break;
 	case EActorSeeDir::Right:
-		AnimationReset();
-		ChangeAnimation("Skeleton_RHit");
+		Renderer->AnimationReset();
+		Renderer->ChangeAnimation("Skeleton_RHit");
 		break;
 	}
 

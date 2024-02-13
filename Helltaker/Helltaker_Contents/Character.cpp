@@ -12,3 +12,8 @@ Character::Character()
 Character::~Character()
 {
 }
+
+void Character::CreateImageRenderer(RenderOrder _Order)
+{
+	Renderer = RenderActor::CreateImageRenderer(_Order);
+}

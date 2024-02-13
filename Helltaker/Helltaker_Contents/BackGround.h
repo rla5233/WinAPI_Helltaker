@@ -21,5 +21,5 @@ public:
 protected:
 
 private:
-
+	UImageRenderer* Renderer = nullptr;
 };

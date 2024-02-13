@@ -35,6 +35,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	UImageRenderer* Renderer = nullptr;
+
 	const FVector StoneScale = { 0.825f, 0.9f };
 
 	static bool IsLoad;

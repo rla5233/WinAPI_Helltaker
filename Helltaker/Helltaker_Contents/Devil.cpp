@@ -23,7 +23,6 @@ void Devil::BeginPlay()
 		IsLoad = true;
 	}
 
-
 	LoveSignRenderer = AActor::CreateImageRenderer(static_cast<int>(RenderOrder::Effect));
 	LoveSignRenderer->SetImage("LoveSign.png");
 	LoveSignSpeed = ContentsHelper::GetTileScale().Y * 0.45f;
@@ -33,9 +32,9 @@ void Devil::SetDevil(std::string_view _Name)
 {
 	std::string AnimationName = _Name.data();
 	AnimationName += "_Idle";
-	CreateImageRenderer(RenderOrder::Devil);
-	SetImg(_Name);
-	CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
+	Renderer = CreateImageRenderer(RenderOrder::Devil);
+	Renderer->SetImage(_Name);
+	Renderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
 	StateChange(EDevilState::Idle);
 }
 
@@ -68,9 +67,9 @@ void Devil::LoveSignAnimation(float _DeltaTime)
 void Devil::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ { 0, 0 }, { TileScale * IdleScale }});
 	LoveSignRenderer->SetTransform({ { -TileScale.hX(), - (TileScale.hY() * LoveSignY_Location) }, {TileScale * LoveSignScale}});
-	ChangeAnimation(GetName() + "_Idle");
+	Renderer->SetTransform({ { 0, 0 }, { TileScale * IdleScale }});
+	Renderer->ChangeAnimation(GetName() + "_Idle");
 }
 
 void Devil::Idle(float _DeltaTime)

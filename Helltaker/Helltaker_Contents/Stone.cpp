@@ -36,7 +36,7 @@ void Stone::BeginPlay()
 		IsLoad = true;
 	}
 
-	CreateImageRenderer(RenderOrder::Stone);
+	Renderer = CreateImageRenderer(RenderOrder::Stone);
 
 	StateChange(EHitActorState::Idle);
 }
@@ -143,9 +143,9 @@ void Stone::HitMoveEnd(float _DeltaTime)
 
 void Stone::SetStoneImg(std::string_view _Name)
 {
-	SetImg(_Name);
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ {0,0}, {TileScale * StoneScale} });
+	Renderer->SetImage(_Name);
+	Renderer->SetTransform({ {0,0}, {TileScale * StoneScale} });
 }
 
 

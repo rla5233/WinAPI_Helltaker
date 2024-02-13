@@ -12,3 +12,8 @@ UI::UI()
 UI::~UI()
 {
 }
+
+void UI::CreateImageRenderer(RenderOrder _Order)
+{
+	Renderer = RenderActor::CreateImageRenderer(_Order);
+}

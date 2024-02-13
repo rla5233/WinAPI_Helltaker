@@ -16,9 +16,15 @@ public:
 	Dialogue& operator=(const Dialogue& _Other) = delete;
 	Dialogue& operator=(Dialogue&& _Other) noexcept = delete;
 
+	void CreateImageRenderer(RenderOrder _Order);
+
+	UImageRenderer* GetRenderer()
+	{
+		return Renderer;
+	}
 
 protected:
 
 private:
-
+	UImageRenderer* Renderer = nullptr;
 };

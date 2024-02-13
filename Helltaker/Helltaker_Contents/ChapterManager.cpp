@@ -116,8 +116,8 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->SetActorLocation(WinScale.Half2D());
 	ChapterUI->SetName("ChapterUI");
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
-	ChapterUI->SetImg(ChapterUI->GetName() + ".png");
-	ChapterUI->SetTransform({ {0,0}, WinScale });
+	ChapterUI->GetRenderer()->SetImage(ChapterUI->GetName() + ".png");
+	ChapterUI->GetRenderer()->SetTransform({ {0,0}, WinScale });
 	AllActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
 }
 
@@ -183,7 +183,7 @@ void ChapterManager::DestroyHitActor(__int64 _HitActor)
 // 디버그용
 void ChapterManager::ShowLocationPoint()
 {
-	std::vector<std::vector<RenderActor*>> GreenPoint;
+	std::vector<std::vector<UI*>> GreenPoint;
 	
 	GreenPoint.resize(ChapterHeight);
 	for (int i = 0; i < ChapterHeight; i++)
@@ -195,20 +195,20 @@ void ChapterManager::ShowLocationPoint()
 	{
 		for (int X = 0; X < ChapterWidth; X++)
 		{
-			GreenPoint[Y][X] = SpawnActor<RenderActor>(static_cast<int>(UpdateOrder::UI));
+			GreenPoint[Y][X] = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
 			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
 			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
 			
 			if (ChapterVec[Y][X])
 			{
-				GreenPoint[Y][X]->SetImg("GreenPoint.png");
+				GreenPoint[Y][X]->GetRenderer()->SetImage("GreenPoint.png");
 			}
 			else
 			{
-				GreenPoint[Y][X]->SetImg("RedPoint.png");
+				GreenPoint[Y][X]->GetRenderer()->SetImage("RedPoint.png");
 			}
 			
-			GreenPoint[Y][X]->SetTransform({ { 0,0 }, {2, 2} });
+			GreenPoint[Y][X]->GetRenderer()->SetTransform({ { 0,0 }, {2, 2} });
 			AllActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
 		}
 	}

@@ -34,13 +34,13 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	UImageRenderer* Renderer = nullptr;
+
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.07f;
 
 	const FVector HitScale = { 0.9f, 0.9f };
 	const float HitInter = 0.04f;
-	const float HitTime = HitInter * 8;
-	float HitTimeCount = HitTime;
 
 	static bool IsLoad;
 };

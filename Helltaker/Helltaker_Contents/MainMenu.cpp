@@ -41,8 +41,8 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	MainMenuDialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
 	MainMenuDialogue->SetName("MainMenuDialogue_001");
 	MainMenuDialogue->CreateImageRenderer(RenderOrder::Dialogue);
-	MainMenuDialogue->SetImg(MainMenuDialogue->GetName() + ".png");
-	MainMenuDialogue->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
+	MainMenuDialogue->GetRenderer()->SetImage(MainMenuDialogue->GetName() + ".png");
+	MainMenuDialogue->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
 	AllActors.push_back(MainMenuDialogue);
 
 	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
@@ -54,10 +54,10 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
 	Booper->CreateImageRenderer(RenderOrder::UI);
-	Booper->SetImg(Booper->GetName());
-	Booper->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
-	Booper->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
-	Booper->ChangeAnimation("Booper_Idle");
+	Booper->GetRenderer()->SetImage(Booper->GetName());
+	Booper->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
+	Booper->GetRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	Booper->GetRenderer()->ChangeAnimation("Booper_Idle");
 	AllActors.push_back(Booper);
 
 	StateChange(EMainMenuState::Begin);
@@ -95,15 +95,15 @@ void MainMenu::EnterStart()
 		EnterInit();
 	}
 
-	Beel->SetImg(Beel->GetName() + ".png");
+	Beel->GetRenderer()->SetImage(Beel->GetName() + ".png");
 }
 
 void MainMenu::EnterInit()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Beel->CreateImageRenderer(RenderOrder::Character);
-	Beel->SetImg(Beel->GetName() + ".png");
-	Beel->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
+	Beel->GetRenderer()->SetImage(Beel->GetName() + ".png");
+	Beel->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
 	IsEnterInit = true;
 }
 
@@ -111,15 +111,15 @@ void MainMenu::SelectMenu(float _DeltaTime)
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
-		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_UnSelected.png");
+		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_UnSelected.png");
 		SetFocusMenuIndex(FocusMenuIndex - 1);
-		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_Selected.png");
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
-		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_UnSelected.png");
+		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_UnSelected.png");
 		SetFocusMenuIndex(FocusMenuIndex + 1);
-		MenuBarVec[FocusMenuIndex]->SetImg("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_Selected.png");
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -159,10 +159,10 @@ void MainMenu::SelectMenuInit()
 		MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
 		MenuBar->SetName("MenuBar");
 		MenuBar->CreateImageRenderer(RenderOrder::UI);
-		MenuBar->SetImg("MenuBar_Selected.png");
-		MenuBar->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
-		MenuBar->SetImg("MenuBar_UnSelected.png");
-		MenuBar->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
+		MenuBar->GetRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
+		MenuBar->GetRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
 		interval += WinScale.Y / 13.5f;
 	}	
 
@@ -176,11 +176,11 @@ void MainMenu::SelectMenuStart()
 		SelectMenuInit();
 	}
 
-	Booper->RenderActiveOff();
+	Booper->GetRenderer()->ActiveOff();
 	FocusMenuIndex = 0;
-	MenuBarVec[0]->SetImg("MenuBar_Selected.png");	
-	MenuBarVec[1]->SetImg("MenuBar_UnSelected.png");	
-	MenuBarVec[2]->SetImg("MenuBar_UnSelected.png");	
+	MenuBarVec[0]->GetRenderer()->SetImage("MenuBar_Selected.png");	
+	MenuBarVec[1]->GetRenderer()->SetImage("MenuBar_UnSelected.png");	
+	MenuBarVec[2]->GetRenderer()->SetImage("MenuBar_UnSelected.png");	
 }
 
 void MainMenu::EnterChapter(float _DeltaTime)

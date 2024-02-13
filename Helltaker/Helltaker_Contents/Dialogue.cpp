@@ -12,3 +12,8 @@ Dialogue::Dialogue()
 Dialogue::~Dialogue()
 {
 }
+
+void Dialogue::CreateImageRenderer(RenderOrder _Order)
+{
+	Renderer = RenderActor::CreateImageRenderer(_Order);
+}

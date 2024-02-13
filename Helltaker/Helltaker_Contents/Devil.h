@@ -31,6 +31,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	UImageRenderer* Renderer = nullptr;
+	
 	UImageRenderer* LoveSignRenderer = nullptr;
 	const FVector LoveSignScale = { 0.3f, 0.4f };
 	float LoveSignMove = 0.0f;

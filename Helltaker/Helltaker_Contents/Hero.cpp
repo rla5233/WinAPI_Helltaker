@@ -39,21 +39,21 @@ void Hero::BeginPlay()
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	CreateImageRenderer(RenderOrder::Hero);
-	SetTransform({ {0,0}, {TileScale * IdleScale} });
+	Renderer = CreateImageRenderer(RenderOrder::Hero);
+	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });
 	
-	SetImg("Hero_Left_Idle");
-	CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);	
-	CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);	
-	CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);	
-	CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
+	Renderer->SetImage("Hero_Left_Idle");
+	Renderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
+	Renderer->CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);	
+	Renderer->CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);	
+	Renderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
 	
-	CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);	
-	CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);	
-	CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);	
-	CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
+	Renderer->CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);	
+	Renderer->CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);	
+	Renderer->CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);	
+	Renderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
 	
-	CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
+	Renderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
 
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHeroState::Idle);
@@ -120,16 +120,16 @@ void Hero::Idle(float _DeltaTime)
 void Hero::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ {0, 0}, {TileScale * IdleScale} });
+	Renderer->SetTransform({ {0, 0}, {TileScale * IdleScale} });
 	CanActionCheck = true;
 
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Hero_LIdle");
+		Renderer->ChangeAnimation("Hero_LIdle");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Hero_RIdle");
+		Renderer->ChangeAnimation("Hero_RIdle");
 		break;
 	}
 }
@@ -156,17 +156,17 @@ void Hero::MoveStart(float _DeltaTime)
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ {0, 0}, {TileScale * MoveScale} });
+	Renderer->SetTransform({ {0, 0}, {TileScale * MoveScale} });
 	MoveDelayTimeCount = MoveDelayTime;
 	CanActionCheck = false;
 
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Hero_LMove");
+		Renderer->ChangeAnimation("Hero_LMove");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Hero_RMove");
+		Renderer->ChangeAnimation("Hero_RMove");
 		break;
 	}
 
@@ -198,7 +198,7 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		}
 
 		FVector TileScale = ContentsHelper::GetTileScale();
-		SetTransform({ {0, 0}, {TileScale * KickScale} });
+		Renderer->SetTransform({ {0, 0}, {TileScale * KickScale} });
 		CanActionCheck = false;
 		KickDelayTimeCount = KickDelayTime;
 
@@ -210,12 +210,12 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		switch (SeeDir)
 		{
 		case EActorSeeDir::Left:
-			AnimationReset();
-			ChangeAnimation("Hero_LKick");
+			Renderer->AnimationReset();
+			Renderer->ChangeAnimation("Hero_LKick");
 			break;
 		case EActorSeeDir::Right:
-			AnimationReset();
-			ChangeAnimation("Hero_RKick");
+			Renderer->AnimationReset();
+			Renderer->ChangeAnimation("Hero_RKick");
 			break;
 		}
 	}
@@ -225,7 +225,7 @@ void Hero::Victory(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	float Diff_Y = TileScale.Y * (IdleScale.Y - VictoryScale.Y) / 2.0f;
-	SetTransform({ {0.0f, Diff_Y}, {TileScale * VictoryScale} });
+	Renderer->SetTransform({ {0.0f, Diff_Y}, {TileScale * VictoryScale} });
 
 	if (0 > VictoryTimeCount)
 	{
@@ -241,10 +241,10 @@ void Hero::VictoryStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		ChangeAnimation("Hero_LVictory");
+		Renderer->ChangeAnimation("Hero_LVictory");
 		break;
 	case EActorSeeDir::Right:
-		ChangeAnimation("Hero_RVictory");
+		Renderer->ChangeAnimation("Hero_RVictory");
 		break;
 	}
 }

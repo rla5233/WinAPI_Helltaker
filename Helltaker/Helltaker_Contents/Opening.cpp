@@ -49,8 +49,8 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.9f });
 	UnityLogo->SetName("UnityLogo");
 	UnityLogo->CreateImageRenderer(RenderOrder::Dialogue);
-	UnityLogo->SetImg(UnityLogo->GetName() + ".png");
-	UnityLogo->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
+	UnityLogo->GetRenderer()->SetImage(UnityLogo->GetName() + ".png");
+	UnityLogo->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
 	AllActors.push_back(UnityLogo);
 }
 
