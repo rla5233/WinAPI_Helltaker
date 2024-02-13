@@ -37,17 +37,41 @@ void Devil::SetDevil(std::string_view _Name)
 	StateChange(EDevilState::Idle);
 }
 
+void Devil::LoveSignAnimation(float _DeltaTime)
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	if (true == IsUp)
+	{
+		LoveSignMove -= LoveSignSpeed * _DeltaTime;
+		LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * 0.45f) + LoveSignMove }, {TileScale * LoveSignScale} });
+		if (TileScale.hY() * 0.65f < (TileScale.hY() * 0.45f) - LoveSignMove)
+		{
+			IsUp = false;
+		}
+	}
+	else
+	{
+		LoveSignMove += LoveSignSpeed * _DeltaTime;
+		LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * 0.45f) + LoveSignMove }, {TileScale * LoveSignScale} });
+		if (TileScale.hY() * 0.45f > (TileScale.hY() * 0.45f) - LoveSignMove)
+		{
+			IsUp = true;
+		}
+	}
+
+}
+
 void Devil::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ { 0, 0 }, {TileScale * IdleScale} });
-	LoveSignRenderer->SetTransform({ {0, 0}, {TileScale * LoveSignScale} });
+	SetTransform({ { 0, 0 }, { TileScale * IdleScale }});
+	LoveSignRenderer->SetTransform({ { -TileScale.hX(), - (TileScale.hY() * 0.45f) }, {TileScale * LoveSignScale}});
 	ChangeAnimation(GetName() + "_Idle");
 }
 
 void Devil::Idle(float _DeltaTime)
 {
-
+	LoveSignAnimation(_DeltaTime);
 }
 
 void Devil::VictoryStart()
@@ -93,4 +117,6 @@ void Devil::StateChange(EDevilState _State)
 			break;
 		}
 	}
+
+	State = _State;
 }
