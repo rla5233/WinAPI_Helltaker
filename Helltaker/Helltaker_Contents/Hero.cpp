@@ -175,19 +175,16 @@ void Hero::MoveStart(float _DeltaTime)
 
 void Hero::Kick(float _DeltaTime)
 {
-	if (0 > KickTimeCount)
+	if (true == Renderer->IsCurAnimationEnd())
 	{
 		StateChange(EHeroState::Idle);
-		KickTimeCount = KickTime;
 		return;
 	}
 	
-	if (KickTime * 0.8f > KickTimeCount)
+	if (6 == Renderer->GetCurAnimationImageFrame())
 	{
 		CanActionCheck = true;
 	}
-
-	KickTimeCount -= _DeltaTime;
 }
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
@@ -195,7 +192,7 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	if (UEngineInput::IsPress(_Key1) || UEngineInput::IsPress(_Key2))
 	{
 		if (0 < KickDelayTimeCount)
-		{
+		{ 
 			KickDelayTimeCount -= _DeltaTime;
 			return;
 		}
@@ -204,7 +201,6 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		SetTransform({ {0, 0}, {TileScale * KickScale} });
 		CanActionCheck = false;
 		KickDelayTimeCount = KickDelayTime;
-		KickTimeCount = KickTime;
 
 		// Skeleton, Stone 업 캐스팅
 		FVector NextLocationPoint = GetNextLocationPoint();
