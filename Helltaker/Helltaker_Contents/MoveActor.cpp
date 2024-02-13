@@ -63,7 +63,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
 			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
-			MoveDistanceY = ContentsHelper::GetTileScale().X;
+			MoveDistanceY = ContentsHelper::GetTileScale().Y;
 			MoveOff();
 		}
 	}

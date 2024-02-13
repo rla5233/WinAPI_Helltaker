@@ -41,12 +41,16 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 
 	CreateBG("ChapterBG_001");
 	CreateChapterUI();
-	CreateHero(5, 0);
-	CreateSkeleton(3, 1);
-	CreateSkeleton(1, 1);
-	CreateStone(1, 4, 2);
-	CreateStone(1, 5, 4);
-
+	
+	SpawnHero(5, 0);
+	SpawnSkeleton(3, 1);
+	SpawnSkeleton(2, 2);
+	SpawnSkeleton(4, 2);
+	SpawnStone(1, 4, 2);
+	SpawnStone(1, 5, 4);
+	SpawnStone(4, 4, 9);	
+	SpawnStone(3, 5, 5);
+	SpawnDevil(6, 5, "PandeMonica");
 
 	// 디버그용
 	ShowLocationPoint();

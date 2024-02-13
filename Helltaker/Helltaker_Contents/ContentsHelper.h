@@ -27,9 +27,10 @@ enum class UpdateOrder
 	BackGround,
 	Dialogue,
 	Character,
-	Hero,
 	Skeleton,
 	Stone,
+	Devil,
+	Hero,
 	UI
 };
 
@@ -39,9 +40,10 @@ enum class RenderOrder
 	BackGround,
 	Dialogue,
 	Character,
-	Hero,
 	Skeleton,
 	Stone,
+	Devil,
+	Hero,
 	UI
 };
 
@@ -64,6 +66,13 @@ enum class EHeroState
 	Kick,
 	Victory,
 	Death
+};
+
+enum class EDevilState
+{
+	None,
+	Idle,
+	Victory
 };
 
 enum class EHitActorState

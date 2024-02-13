@@ -52,6 +52,9 @@
     <ClInclude Include="Stone.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="Devil.h">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -103,6 +106,9 @@
       <Filter>Object\Actor\Base</Filter>
     </ClCompile>
     <ClCompile Include="Stone.cpp">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Devil.cpp">
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
   </ItemGroup>

@@ -17,20 +17,19 @@ public:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Move(float _DeltaTime);
-	void MoveStart();
+	void MoveStart(float _DeltaTime);
 	void Kick(float _DeltaTime);
-	void KickStart();
-	void KickEnd(float _DeltaTime);
+	void KickStart(float _DeltaTime, int _Key1, int _Key2);
 	void Victory(float _DeltaTime);
 	void VictoryStart();
 	void Death(float _DeltaTime);
 	void DeathStart();
 
-	void ActionCheck();
-	void NextTileCheck(int _X, int _Y);
+	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
+	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
 
 	void StateUpdate(float _DeltaTime);
-	void StateChange(EHeroState _State);
+	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
 
 	bool GetCanActionCheck() const
 	{
@@ -49,11 +48,19 @@ private:
 
 	const FVector MoveScale = { 0.9f, 0.9f };
 	const float MoveInter = 0.02f;
+	const float MoveTime = MoveInter * 6;
+	float MoveTimeCount = MoveTime;
+
+	const float MoveDelayTime = 0.03f;
+	float MoveDelayTimeCount = 0.0f;
 
 	const FVector KickScale = { 0.95f, 0.95f };
 	const float KickInter = 0.05f;
 	const float KickTime = KickInter * 13;
 	float KickTimeCount = KickTime;
+
+	const float KickDelayTime = 0.02f;
+	float KickDelayTimeCount = 0.0f;
 
 	const FVector VictoryScale = { 0.9f, 1.2f };
 	const float VictoryInter = 0.15f;

@@ -149,8 +149,6 @@ void Skeleton::Hit(float _DeltaTime)
 	if (0 > HitTimeCount)
 	{
 		StateChange(EHitActorState::Idle);
-		HitTimeCount = HitTime;
-		return;
 	}
 	
 	HitTimeCount -= _DeltaTime;
@@ -161,8 +159,6 @@ void Skeleton::HitMoveEnd(float _DeltaTime)
 	if (0 > HitTimeCount)
 	{
 		StateChange(EHitActorState::Idle);
-		HitTimeCount = HitTime;
-		return;
 	}
 
 	HitTimeCount -= _DeltaTime;

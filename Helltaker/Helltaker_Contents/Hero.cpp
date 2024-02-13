@@ -11,7 +11,7 @@
 bool Hero::IsLoad = false;
 
 Hero::Hero()
-	: MoveActor(ContentsHelper::GetWindowScale().X * 0.05f, ContentsHelper::GetWindowScale().X * 4.0f)
+	: MoveActor(ContentsHelper::GetWindowScale().X * 0.09f, ContentsHelper::GetWindowScale().X * 4.0f)
 {}
 
 Hero::~Hero()
@@ -59,7 +59,7 @@ void Hero::BeginPlay()
 	StateChange(EHeroState::Idle);
 }
 
-void Hero::ActionCheck()
+void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 {
 	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
 	FVector CurLocationPoint = GetLocationPoint();
@@ -90,7 +90,7 @@ void Hero::ActionCheck()
 	{
 		if (Map[Next_Y][Next_X])
 		{
-			NextTileCheck(Next_X, Next_Y);			
+			NextTileCheck(Next_X, Next_Y, _DeltaTime, _Key1, _Key2);
 			return;
 		}
 	}
@@ -99,16 +99,17 @@ void Hero::ActionCheck()
 	StateChange(EHeroState::Idle);
 }
 
-void Hero::NextTileCheck(int _X, int _Y)
+void Hero::NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2)
 {
 	if (nullptr == GetChapter()->GetHitActor(_X, _Y))
 	{
-		StateChange(EHeroState::Move);
+		StateChange(EHeroState::None);
+		StateChange(EHeroState::Move, _DeltaTime);
 	}
 	else
 	{
 		StateChange(EHeroState::None);
-		StateChange(EHeroState::Kick);
+		StateChange(EHeroState::Kick, _DeltaTime, _Key1, _Key2);
 	}
 }
 
@@ -135,19 +136,28 @@ void Hero::IdleStart()
 
 void Hero::Move(float _DeltaTime)
 {
-	MoveOneBlock(_DeltaTime);
+	if (true == IsMove())
+	{
+		MoveOneBlock(_DeltaTime);
+	}
 
 	if (false == IsMove())
 	{
 		StateChange(EHeroState::Idle);
-		return;
 	}
 }
 
-void Hero::MoveStart()
+void Hero::MoveStart(float _DeltaTime)
 {
+	if (0 < MoveDelayTimeCount)
+	{
+		MoveDelayTimeCount -= _DeltaTime;
+		return;
+	}
+
 	FVector TileScale = ContentsHelper::GetTileScale();
 	SetTransform({ {0, 0}, {TileScale * MoveScale} });
+	MoveDelayTimeCount = MoveDelayTime;
 	CanActionCheck = false;
 
 	switch (SeeDir)
@@ -172,7 +182,7 @@ void Hero::Kick(float _DeltaTime)
 		return;
 	}
 	
-	if (KickTime * 0.75f > KickTimeCount)
+	if (KickTime * 0.8f > KickTimeCount)
 	{
 		CanActionCheck = true;
 	}
@@ -180,28 +190,38 @@ void Hero::Kick(float _DeltaTime)
 	KickTimeCount -= _DeltaTime;
 }
 
-void Hero::KickStart()
+void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	SetTransform({ {0, 0}, {TileScale * KickScale} });
-	CanActionCheck = false;
-	KickTimeCount = KickTime;
-
-	// Skeleton, Stone 업 캐스팅
-	FVector NextLocationPoint = GetNextLocationPoint();
-	HitActor* Other = GetChapter()->GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
-	Other->NextStateCheck(MoveDir);	
-
-	switch (SeeDir)
+	if (UEngineInput::IsPress(_Key1) || UEngineInput::IsPress(_Key2))
 	{
-	case EActorSeeDir::Left:
-		AnimationReset();
-		ChangeAnimation("Hero_LKick");
-		break;
-	case EActorSeeDir::Right:
-		AnimationReset();
-		ChangeAnimation("Hero_RKick");
-		break;
+		if (0 < KickDelayTimeCount)
+		{
+			KickDelayTimeCount -= _DeltaTime;
+			return;
+		}
+
+		FVector TileScale = ContentsHelper::GetTileScale();
+		SetTransform({ {0, 0}, {TileScale * KickScale} });
+		CanActionCheck = false;
+		KickDelayTimeCount = KickDelayTime;
+		KickTimeCount = KickTime;
+
+		// Skeleton, Stone 업 캐스팅
+		FVector NextLocationPoint = GetNextLocationPoint();
+		HitActor* Other = GetChapter()->GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+		Other->NextStateCheck(MoveDir);	
+
+		switch (SeeDir)
+		{
+		case EActorSeeDir::Left:
+			AnimationReset();
+			ChangeAnimation("Hero_LKick");
+			break;
+		case EActorSeeDir::Right:
+			AnimationReset();
+			ChangeAnimation("Hero_RKick");
+			break;
+		}
 	}
 }
 
@@ -271,7 +291,7 @@ void Hero::StateUpdate(float _DeltaTime)
 	}
 }
 
-void Hero::StateChange(EHeroState _State)
+void Hero::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _Key2)
 {
 	if (State != _State)
 	{
@@ -281,10 +301,10 @@ void Hero::StateChange(EHeroState _State)
 			IdleStart();
 			break;
 		case EHeroState::Move:
-			MoveStart();
+			MoveStart(_DeltaTime);
 			break;
 		case EHeroState::Kick:
-			KickStart();
+			KickStart(_DeltaTime, _Key1, _Key2);
 			break;
 		case EHeroState::Victory:
 			VictoryStart();

@@ -5,6 +5,7 @@
 #include "BackGround.h"
 #include "Skeleton.h"
 #include "Stone.h"
+#include "Devil.h"
 #include "Hero.h"
 #include "UI.h"
 
@@ -115,35 +116,48 @@ void ChapterManager::CreateChapterUI()
 	AllActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
 }
 
-void ChapterManager::CreateHero(int _X, int _Y)
+void ChapterManager::SpawnHero(int _X, int _Y)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
+	NewHero->SetName("Hero");
 	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewHero->SetLocationPoint({ _X, _Y });
 	PlayerHero = NewHero;
 	AllActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
-void ChapterManager::CreateSkeleton(int _X, int _Y)
+void ChapterManager::SpawnDevil(int _X, int _Y, std::string_view _Name)
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	Devil* NewDevil =  SpawnActor<Devil>(static_cast<int>(UpdateOrder::Devil));
+	NewDevil->SetName(_Name);
+	NewDevil->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewDevil->SetDevil(_Name);
+	AllActors[reinterpret_cast<__int64>(NewDevil)] = NewDevil;
+}
+
+void ChapterManager::SpawnSkeleton(int _X, int _Y)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
+	NewSkeleton->SetName("Skeleton");
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
 	HitActorVec[_Y][_X] = NewSkeleton;
 	AllActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
-void ChapterManager::CreateStone(int _X, int _Y, int _Type)
+void ChapterManager::SpawnStone(int _X, int _Y, int _Type)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Stone* Newstone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
-	Newstone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	Newstone->SetLocationPoint({ _X, _Y });
-	Newstone->SetStoneType(_Type);
-	HitActorVec[_Y][_X] = Newstone;
-	AllActors[reinterpret_cast<__int64>(Newstone)] = Newstone;
+	Stone* NewStone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
+	NewStone->SetName("Stone");
+	NewStone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewStone->SetLocationPoint({ _X, _Y });
+	NewStone->SetStoneType(_Type);
+	HitActorVec[_Y][_X] = NewStone;
+	AllActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
 HitActor* ChapterManager::GetHitActor(FVector _Point)
@@ -202,24 +216,24 @@ void ChapterManager::Tick(float _DeltaTime)
 		if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
 		{
 			PlayerHero->MoveDirChange(EMoveActorDir::Up);
-			PlayerHero->ActionCheck();
+			PlayerHero->ActionCheck(_DeltaTime, 'W', VK_UP);
 		}
 		else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
 		{
 			PlayerHero->MoveDirChange(EMoveActorDir::Left);
 			PlayerHero->SeeDirChange(EActorSeeDir::Left);
-			PlayerHero->ActionCheck();
+			PlayerHero->ActionCheck(_DeltaTime, 'A', VK_LEFT);
 		}
 		else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
 		{
 			PlayerHero->MoveDirChange(EMoveActorDir::Down);
-			PlayerHero->ActionCheck();
+			PlayerHero->ActionCheck(_DeltaTime, 'S', VK_DOWN);
 		}
 		else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
 		{
 			PlayerHero->MoveDirChange(EMoveActorDir::Right);
 			PlayerHero->SeeDirChange(EActorSeeDir::Right);
-			PlayerHero->ActionCheck();
+			PlayerHero->ActionCheck(_DeltaTime, 'D', VK_RIGHT);
 		}
 	}
 
