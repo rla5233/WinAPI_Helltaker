@@ -11,7 +11,7 @@
 bool Hero::IsLoad = false;
 
 Hero::Hero()
-	: MoveActor(ContentsHelper::GetWindowScale().X * 0.05f, ContentsHelper::GetWindowScale().X * 5.0f)
+	: MoveActor(ContentsHelper::GetWindowScale().X * 0.05f, ContentsHelper::GetWindowScale().X * 4.0f)
 {}
 
 Hero::~Hero()
@@ -55,7 +55,6 @@ void Hero::BeginPlay()
 	
 	CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
 
-	// Init
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHeroState::Idle);
 }
@@ -96,6 +95,7 @@ void Hero::ActionCheck()
 		}
 	}
 	
+	StateChange(EHeroState::None);
 	StateChange(EHeroState::Idle);
 }
 
