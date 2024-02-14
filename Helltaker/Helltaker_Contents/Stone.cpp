@@ -143,7 +143,7 @@ void Stone::SetStoneImg(std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer->SetImage(_Name);
-	Renderer->SetTransform({ {0,0}, {TileScale * StoneScale} });
+	Renderer->SetTransform({ {0.0f, TileScale.Y * (-0.125f)}, {TileScale * StoneScale} });
 }
 
 
