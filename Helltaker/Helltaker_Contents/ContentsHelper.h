@@ -67,6 +67,7 @@ enum class EChapterState
 {
 	None,
 	Idle,
+	Transition,
 	CutScene,
 	Reset,
 	End

@@ -130,13 +130,13 @@ void ChapterManager::CreateChapterUI()
 void ChapterManager::CreateTransition()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Transition = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Transition));
-	Transition->CreateImageRenderer(RenderOrder::Transition);
-	Transition->SetActorLocation(WinScale.Half2D());
-	Transition->GetRenderer()->SetTransform({ { 0, 0 }, WinScale });
-	Transition->GetRenderer()->SetImage("Transition");
-	Transition->GetRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
-	AllActors[reinterpret_cast<__int64>(Transition)] = Transition;
+	TransitionActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Transition));
+	TransitionActor->CreateImageRenderer(RenderOrder::Transition);
+	TransitionActor->SetActorLocation(WinScale.Half2D());
+	TransitionActor->GetRenderer()->SetTransform({ { 0, 0 }, WinScale });
+	TransitionActor->GetRenderer()->SetImage("Transition");
+	TransitionActor->GetRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
+	AllActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
 void ChapterManager::SpawnHero(int _X, int _Y)
@@ -306,10 +306,25 @@ void ChapterManager::IdleStart()
 	
 }
 
+void ChapterManager::Transition(float _DeltaTime)
+{
+	if (true == TransitionActor->GetRenderer()->IsCurAnimationEnd())
+	{
+		TransitionActor->GetRenderer()->ActiveOff();
+		StateChange(EChapterState::Idle);
+	}
+}
+
+void ChapterManager::TransitionStart(float _DeltaTime)
+{
+	
+}
+
 void ChapterManager::Reset(float _DeltaTime)
 {
-	if (true == Transition->GetRenderer()->IsCurAnimationEnd())
+	if (true == TransitionActor->GetRenderer()->IsCurAnimationEnd())
 	{
+		TransitionActor->GetRenderer()->ActiveOff();
 		StateChange(EChapterState::Idle);
 	}
 }
@@ -320,11 +335,11 @@ void ChapterManager::ResetStart()
 	LevelStart(nullptr);
 }
 
-void ChapterManager::Secene(float _DeltaTime)
+void ChapterManager::CutSecene(float _DeltaTime)
 {
 }
 
-void ChapterManager::SeceneStart()
+void ChapterManager::CutSeceneStart()
 {
 	int a = 0;
 }
@@ -344,11 +359,13 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 	case EChapterState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case EChapterState::Reset:
-		Reset(_DeltaTime);
+	case EChapterState::Transition:
 		break;
 	case EChapterState::CutScene:
-		Secene(_DeltaTime);
+		CutSecene(_DeltaTime);
+		break;
+	case EChapterState::Reset:
+		Reset(_DeltaTime);
 		break;
 	case EChapterState::End:
 		break;
@@ -364,11 +381,13 @@ void ChapterManager::StateChange(EChapterState _State)
 		case EChapterState::Idle:
 			IdleStart();
 			break;
-		case EChapterState::Reset:
-			ResetStart();
+		case EChapterState::Transition:
 			break;
 		case EChapterState::CutScene:
-			SeceneStart();
+			CutSeceneStart();
+			break;
+		case EChapterState::Reset:
+			ResetStart();
 			break;
 		case EChapterState::End:
 			break;
@@ -380,5 +399,6 @@ void ChapterManager::StateChange(EChapterState _State)
 
 void ChapterManager::PlayTransition()
 {
-	Transition->GetRenderer()->ChangeAnimation("Transition");
+	TransitionActor->GetRenderer()->AnimationReset();
+	TransitionActor->GetRenderer()->ChangeAnimation("Transition");
 }

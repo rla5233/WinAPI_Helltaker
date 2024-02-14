@@ -88,11 +88,15 @@ protected:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 
+	void Transition(float _DeltaTime);
+	void TransitionStart(float _DeltaTime);
+
+	void CutSecene(float _DeltaTime);
+	void CutSeceneStart();
+
 	void Reset(float _DeltaTime);
 	void ResetStart();
 
-	void Secene(float _DeltaTime);
-	void SeceneStart();
 
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EChapterState _State);
@@ -112,7 +116,7 @@ private:
 	std::vector<std::vector<HitActor*>> HitActorVec;
 
 	Hero* PlayerHero = nullptr;
-	Scene* Transition = nullptr;
+	Scene* TransitionActor = nullptr;
 	const float TransitionInter = 0.0435f;
 
 	bool IsChapterVecInit = false;
