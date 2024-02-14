@@ -18,7 +18,6 @@ void Devil::BeginPlay()
 		
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Devil", "PandeMonica");
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
 		IsLoad = true;
 	}

@@ -17,7 +17,7 @@ public:
 	Chapter1& operator=(Chapter1&& _Other) noexcept = delete;
 
 protected:
-	virtual void BeginPlay() override;
+	void BeginPlay() override;
 
 	void LevelStart(ULevel* _PrevLevel) override;
 

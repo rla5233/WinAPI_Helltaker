@@ -18,7 +18,9 @@ public:
 
 
 protected:
-	virtual void BeginPlay() override;
+	void BeginPlay() override;
+
+	void LevelStart(ULevel* _PrevLevel) override;
 
 private:
 

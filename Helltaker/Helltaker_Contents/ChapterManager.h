@@ -96,7 +96,6 @@ protected:
 	void Reset(float _DeltaTime);
 	void ResetStart();
 
-
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EChapterState _State);
 

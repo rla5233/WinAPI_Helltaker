@@ -30,6 +30,11 @@ void ChapterManager::BeginPlay()
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
 		ContentsHelper::LoadFolder("Scene", "Transition");
+
+		// 디버그 용
+		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
+		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
+
 		IsLoad = true;
 	}
 }
@@ -261,6 +266,12 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 
 void ChapterManager::Idle(float _DeltaTime)
 {
+	// 디버깅 용
+	if (nullptr == PlayerHero)
+	{
+		return;
+	}
+
 	if (true == PlayerHero->GetCanActionCheck())
 	{
 		if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))

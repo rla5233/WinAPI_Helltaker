@@ -14,10 +14,7 @@ void Chapter1::BeginPlay()
 {
 	ChapterManager::BeginPlay();
 	ContentsHelper::LoadImg("BackGround", "ChapterBG_001.png");
-
-	// 디버그 용
-	ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
-	ContentsHelper::LoadImg("Debuging", "RedPoint.png");
+	ContentsHelper::LoadFolder("Characters\\Chapter\\Devil", "PandeMonica");
 }
 
 void Chapter1::LevelStart(ULevel* _PrevLevel)
