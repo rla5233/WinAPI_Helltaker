@@ -71,6 +71,7 @@ private:
 	
 	UI* Booper = nullptr;
 	std::vector<UI*> MenuBarVec;
+	//std::vector<> CutSceneVec;
 	
 	int MenuBarCount = 3;
 	int FocusMenuIndex = 0;
