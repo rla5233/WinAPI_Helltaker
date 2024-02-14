@@ -21,23 +21,22 @@ void Hero::BeginPlay()
 {
 	MoveActor::BeginPlay();
 
-	SetName("Hero");
-
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Idle");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Move");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Kick");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Left_Victory");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Idle");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Move");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Kick");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Right_Victory");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Hero", "Hero_Death");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Left_Idle");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Left_Move");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Left_Kick");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Left_Victory");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Idle");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Move");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Kick");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Victory");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Death");
 		
 		IsLoad = true;
 	}
 
+	SetName("Hero");
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer = CreateImageRenderer(RenderOrder::Hero);
 	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });

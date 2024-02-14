@@ -5,12 +5,15 @@
 #include "BackGround.h"
 #include "Skeleton.h"
 #include "Stone.h"
+#include "Thorn.h"
 #include "Scene.h"
 #include "Devil.h"
 #include "Hero.h"
 #include "UI.h"
 
+#include "Chapter2.h"
 #include "RenderActor.h"
+
 #include <math.h>
 #include <vector>
 
@@ -186,6 +189,9 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 	AllActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
+void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
+{}
+
 HitActor* ChapterManager::GetHitActor(FVector _Point)
 {
 	return GetHitActor(_Point.iX(), _Point.iY());
@@ -351,7 +357,8 @@ void ChapterManager::CutSecene(float _DeltaTime)
 
 void ChapterManager::CutSeceneStart()
 {
-	int a = 0;
+	GEngine->CreateLevel<Chapter2>("Chapter2");
+	GEngine->ChangeLevel("Chapter2");
 }
 
 void ChapterManager::Tick(float _DeltaTime)

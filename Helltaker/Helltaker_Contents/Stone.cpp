@@ -16,26 +16,25 @@ void Stone::BeginPlay()
 {
 	HitActor::BeginPlay();
 
-	SetName("Stone");
-
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_001.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_002.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_003.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_004.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_005.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_006.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_007.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_008.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_009.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_010.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_011.png");
-		ContentsHelper::LoadImg("Characters\\Chapter\\Stone", "Stone_012.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_001.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_002.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_003.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_004.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_005.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_006.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_007.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_008.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_009.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_010.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_011.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Stone", "Stone_012.png");
 
 		IsLoad = true;
 	}
 
+	SetName("Stone");
 	Renderer = CreateImageRenderer(RenderOrder::Stone);
 
 	StateChange(EHitActorState::Idle);

@@ -22,6 +22,7 @@ void Devil::BeginPlay()
 		IsLoad = true;
 	}
 
+	SetName("Devil");
 	LoveSignRenderer = AActor::CreateImageRenderer(static_cast<int>(RenderOrder::Effect));
 	LoveSignRenderer->SetImage("LoveSign.png");
 	LoveSignSpeed = ContentsHelper::GetTileScale().Y * 0.45f;

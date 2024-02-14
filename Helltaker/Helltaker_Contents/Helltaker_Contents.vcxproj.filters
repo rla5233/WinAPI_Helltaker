@@ -58,6 +58,9 @@
     <ClInclude Include="Scene.h">
       <Filter>Object\Actor\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Thorn.h">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Object\Actor\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Thorn.cpp">
+      <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

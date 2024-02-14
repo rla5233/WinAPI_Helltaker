@@ -12,7 +12,7 @@ void Chapter2::BeginPlay()
 {
 	ChapterManager::BeginPlay();
 	ContentsHelper::LoadImg("BackGround", "ChapterBG_002.png");
-	ContentsHelper::LoadFolder("Characters\\Chapter\\Devil", "Modeus");
+	ContentsHelper::LoadFolder("Chapter\\Devil", "Modeus");
 }
 
 void Chapter2::LevelStart(ULevel* _PrevLevel)

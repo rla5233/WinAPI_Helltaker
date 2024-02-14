@@ -28,6 +28,7 @@ enum class UpdateOrder
 	Scene,
 	Character,
 	Skeleton,
+	Thorn,
 	Stone,
 	Devil,
 	Hero,
@@ -43,6 +44,7 @@ enum class RenderOrder
 	Scene,
 	Character,
 	Skeleton,
+	Thorn,
 	Stone,
 	Devil,
 	Hero,
@@ -97,6 +99,14 @@ enum class EHitActorState
 	Hit,
 	HitMoveEnd,
 	Death
+};
+
+enum class EThornState
+{
+	None,
+	Idle,
+	Up,
+	Down
 };
 
 enum class EActorSeeDir

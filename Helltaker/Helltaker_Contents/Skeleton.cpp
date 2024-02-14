@@ -15,18 +15,17 @@ void Skeleton::BeginPlay()
 {
 	HitActor::BeginPlay();
 
-	SetName("Skeleton"); 
-	
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Left_Idle");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Right_Idle");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Left_Hit");
-		ContentsHelper::LoadFolder("Characters\\Chapter\\Skeleton", "Skeleton_Right_Hit");
+		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Left_Idle");
+		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Right_Idle");
+		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Left_Hit");
+		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Right_Hit");
 		
 		IsLoad = true;
 	}
 
+	SetName("Skeleton"); 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer = CreateImageRenderer(RenderOrder::Skeleton);
 	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });
