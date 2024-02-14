@@ -308,7 +308,10 @@ void ChapterManager::IdleStart()
 
 void ChapterManager::Reset(float _DeltaTime)
 {
-	StateChange(EChapterState::Idle);
+	if (true == Transition->GetRenderer()->IsCurAnimationEnd())
+	{
+		StateChange(EChapterState::Idle);
+	}
 }
 
 void ChapterManager::ResetStart()
