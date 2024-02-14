@@ -203,11 +203,17 @@ void MainMenu::CutScene(float _DeltaTime)
 			break;
 		case 2:
 			SceneActor->CreateImageRenderer(RenderOrder::Scene);
+			SceneActor->GetRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
 			SceneActor->GetRenderer()->SetImage("CutScene1_001.png");
-			SceneActor->GetRenderer()->SetTransform({ {0, 0}, WinScale.Half2D() });
 			break;
 		case 3:
-				
+			SceneActor->GetRenderer()->SetImage("CutScene1_002.png");
+			break;
+		case 4:
+			SceneActor->GetRenderer()->SetImage("CutScene1_003.png");
+			break;
+		case 5:
+			StateChange(EMainMenuState::EnterChapter);
 			break;
 		}
 
@@ -227,7 +233,7 @@ void MainMenu::CutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	SceneActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	SceneActor->SetActorLocation(WinScale.Half2D());
+	SceneActor->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.385f });
 	AllActors.push_back(SceneActor);
 }
 
