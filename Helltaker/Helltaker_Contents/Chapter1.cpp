@@ -53,6 +53,8 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	SpawnStone(3, 5, "Stone_005.png");
 	SpawnDevil(6, 5, "PandeMonica");
 
+
+
 	// 디버그용
 	ShowLocationPoint();
 }

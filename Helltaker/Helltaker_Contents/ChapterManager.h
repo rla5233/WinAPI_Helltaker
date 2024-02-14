@@ -65,7 +65,6 @@ public:
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
 	void CreateTransition();
-	void PlayTransition();
 	void SpawnHero(int _X, int _Y);
 	void SpawnDevil(int _X, int _Y, std::string_view _Name);
 	void SpawnSkeleton(int _X, int _Y);
@@ -89,7 +88,7 @@ protected:
 	void IdleStart();
 
 	void Transition(float _DeltaTime);
-	void TransitionStart(float _DeltaTime);
+	void TransitionStart();
 
 	void CutSecene(float _DeltaTime);
 	void CutSeceneStart();

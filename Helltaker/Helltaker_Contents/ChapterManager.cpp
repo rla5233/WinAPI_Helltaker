@@ -32,8 +32,6 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadFolder("Scene", "Transition");
 		IsLoad = true;
 	}
-
-	StateChange(EChapterState::Idle);
 }
 
 void ChapterManager::SetChapterStartLocation(int _X, int _Y)
@@ -238,7 +236,7 @@ void ChapterManager::LevelStart(ULevel* _PrevLevel)
 	ULevel::LevelStart(_PrevLevel);
 	
 	CreateTransition();
-	PlayTransition();
+	StateChange(EChapterState::Transition);
 }
 
 void ChapterManager::LevelEnd(ULevel* _NextLevel)
@@ -315,9 +313,10 @@ void ChapterManager::Transition(float _DeltaTime)
 	}
 }
 
-void ChapterManager::TransitionStart(float _DeltaTime)
+void ChapterManager::TransitionStart()
 {
-	
+	TransitionActor->GetRenderer()->AnimationReset();
+	TransitionActor->GetRenderer()->ChangeAnimation("Transition");
 }
 
 void ChapterManager::Reset(float _DeltaTime)
@@ -360,6 +359,7 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 		Idle(_DeltaTime);
 		break;
 	case EChapterState::Transition:
+		Transition(_DeltaTime);
 		break;
 	case EChapterState::CutScene:
 		CutSecene(_DeltaTime);
@@ -382,6 +382,7 @@ void ChapterManager::StateChange(EChapterState _State)
 			IdleStart();
 			break;
 		case EChapterState::Transition:
+			TransitionStart();
 			break;
 		case EChapterState::CutScene:
 			CutSeceneStart();
@@ -395,10 +396,4 @@ void ChapterManager::StateChange(EChapterState _State)
 	}
 
 	State = _State;
-}
-
-void ChapterManager::PlayTransition()
-{
-	TransitionActor->GetRenderer()->AnimationReset();
-	TransitionActor->GetRenderer()->ChangeAnimation("Transition");
 }
