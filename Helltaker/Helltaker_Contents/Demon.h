@@ -38,8 +38,8 @@ private:
 	const FVector LoveSignScale = { 0.3f, 0.4f };
 	float LoveSignMove = 0.0f;
 	float LoveSignSpeed = 0.0f;
-	const float LoveSignY_Location = 0.45f;
-	const float LoveSignY_MaxLocation = 0.7f;
+	const float LoveSignY_Location = 0.9f;
+	const float LoveSignY_MaxLocation = 1.1f;
 	bool IsUp = true;
 
 	const FVector IdleScale = { 0.9f, 0.9f };

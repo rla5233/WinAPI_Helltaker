@@ -67,7 +67,7 @@ void Demon::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * LoveSignY_Location) }, {TileScale * LoveSignScale} });
-	Renderer->SetTransform({ { 0, 0 }, { TileScale * IdleScale } });
+	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f) }, { TileScale * IdleScale } });
 	Renderer->ChangeAnimation(GetName() + "_Idle");
 }
 
