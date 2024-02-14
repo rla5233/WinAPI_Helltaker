@@ -38,7 +38,6 @@ void Hero::BeginPlay()
 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer = CreateImageRenderer(RenderOrder::Hero);
-	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });
 	
 	Renderer->SetImage("Hero_Left_Idle");
 	Renderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
@@ -118,7 +117,7 @@ void Hero::Idle(float _DeltaTime)
 void Hero::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer->SetTransform({ {0, 0}, {TileScale * IdleScale} });
+	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale } });
 	CanActionCheck = true;
 
 	switch (SeeDir)
@@ -154,7 +153,7 @@ void Hero::MoveStart(float _DeltaTime)
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer->SetTransform({ {0, 0}, {TileScale * MoveScale} });
+	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
 	MoveDelayTimeCount = MoveDelayTime;
 	CanActionCheck = false;
 
@@ -196,7 +195,7 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		}
 
 		FVector TileScale = ContentsHelper::GetTileScale();
-		Renderer->SetTransform({ {0, 0}, {TileScale * KickScale} });
+		Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
 		CanActionCheck = false;
 		KickDelayTimeCount = KickDelayTime;
 
