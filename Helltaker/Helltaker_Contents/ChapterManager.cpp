@@ -7,7 +7,7 @@
 #include "Stone.h"
 #include "Thorn.h"
 #include "Scene.h"
-#include "Devil.h"
+#include "Demon.h"
 #include "Hero.h"
 #include "UI.h"
 
@@ -158,14 +158,14 @@ void ChapterManager::SpawnHero(int _X, int _Y)
 	AllActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
-void ChapterManager::SpawnDevil(int _X, int _Y, std::string_view _Name)
+void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Devil* NewDevil =  SpawnActor<Devil>(static_cast<int>(UpdateOrder::Devil));
-	NewDevil->SetName(_Name);
-	NewDevil->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewDevil->SetDevil(_Name);
-	AllActors[reinterpret_cast<__int64>(NewDevil)] = NewDevil;
+	Demon* NewDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
+	NewDemon->SetName(_Name);
+	NewDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewDemon->SetDemon(_Name);
+	AllActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
 }
 
 void ChapterManager::SpawnSkeleton(int _X, int _Y)

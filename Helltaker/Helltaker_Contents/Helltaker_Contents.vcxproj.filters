@@ -52,13 +52,13 @@
     <ClInclude Include="Stone.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="Devil.h">
-      <Filter>Object\Actor\Chapter</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Object\Actor\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Thorn.h">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Demon.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,13 +114,13 @@
     <ClCompile Include="Stone.cpp">
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
-    <ClCompile Include="Devil.cpp">
-      <Filter>Object\Actor\Chapter</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Object\Actor\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Thorn.cpp">
+      <Filter>Object\Actor\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Demon.cpp">
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
   </ItemGroup>

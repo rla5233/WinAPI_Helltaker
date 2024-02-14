@@ -12,7 +12,7 @@ void Chapter2::BeginPlay()
 {
 	ChapterManager::BeginPlay();
 	ContentsHelper::LoadImg("BackGround", "ChapterBG_002.png");
-	ContentsHelper::LoadFolder("Chapter\\Devil", "Modeus");
+	ContentsHelper::LoadFolder("Chapter\\Demon", "Modeus");
 }
 
 void Chapter2::LevelStart(ULevel* _PrevLevel)
@@ -51,7 +51,7 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	SpawnThorn(4, 2, EThornState::Idle);
 	SpawnThorn(5, 2, EThornState::Idle);
 	SpawnThorn(5, 3, EThornState::Idle);
-	SpawnDevil(4, 5, "Modeus");
+	SpawnDemon(4, 5, "Modeus");
 
 	// 디버그용
 	ShowLocationPoint();

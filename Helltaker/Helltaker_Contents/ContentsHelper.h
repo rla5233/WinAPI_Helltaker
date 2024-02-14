@@ -27,10 +27,10 @@ enum class UpdateOrder
 	BackGround,
 	Scene,
 	Character,
-	Skeleton,
 	Thorn,
+	Skeleton,
 	Stone,
-	Devil,
+	Demon,
 	Hero,
 	Effect,
 	UI,
@@ -43,10 +43,10 @@ enum class RenderOrder
 	BackGround,
 	Scene,
 	Character,
-	Skeleton,
 	Thorn,
+	Skeleton,
 	Stone,
-	Devil,
+	Demon,
 	Hero,
 	Effect,
 	UI,
@@ -85,7 +85,7 @@ enum class EHeroState
 	Death
 };
 
-enum class EDevilState
+enum class EDemonState
 {
 	None,
 	Idle,
