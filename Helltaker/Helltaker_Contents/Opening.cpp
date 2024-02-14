@@ -45,10 +45,10 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	OpeningBG->CreateBackGround("OpeningBG");
 	AllActors.push_back(OpeningBG);
 
-	Dialogue* UnityLogo = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Dialogue));
+	Dialogue* UnityLogo = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Scene));
 	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.9f });
 	UnityLogo->SetName("UnityLogo");
-	UnityLogo->CreateImageRenderer(RenderOrder::Dialogue);
+	UnityLogo->CreateImageRenderer(RenderOrder::Scene);
 	UnityLogo->GetRenderer()->SetImage(UnityLogo->GetName() + ".png");
 	UnityLogo->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
 	AllActors.push_back(UnityLogo);

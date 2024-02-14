@@ -280,7 +280,7 @@ void ChapterManager::Idle(float _DeltaTime)
 	FVector HeroLocationPoint = PlayerHero->GetLocationPoint();
 	if (HeroLocationPoint.iX() == EndPoint_X && HeroLocationPoint.iY() == EndPoint_Y)
 	{
-		StateChange(EChapterState::Secene);
+		StateChange(EChapterState::CutScene);
 	}
 }
 
@@ -327,7 +327,7 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 	case EChapterState::Reset:
 		Reset(_DeltaTime);
 		break;
-	case EChapterState::Secene:
+	case EChapterState::CutScene:
 		Secene(_DeltaTime);
 		break;
 	case EChapterState::End:
@@ -347,7 +347,7 @@ void ChapterManager::StateChange(EChapterState _State)
 		case EChapterState::Reset:
 			ResetStart();
 			break;
-		case EChapterState::Secene:
+		case EChapterState::CutScene:
 			SeceneStart();
 			break;
 		case EChapterState::End:

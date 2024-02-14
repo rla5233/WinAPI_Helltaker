@@ -22,3 +22,8 @@ void BackGround::CreateBackGround(std::string_view _Name)
 	Renderer->SetImage(GetName() + ".png");
 	Renderer->SetTransform({ {0, 0}, WinScale });
 }
+
+void BackGround::BackGroundChange(std::string_view _Name)
+{
+	Renderer->SetImage(_Name);
+}

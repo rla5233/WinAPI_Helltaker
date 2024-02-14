@@ -17,6 +17,7 @@ public:
 	BackGround& operator=(BackGround&& _Other) noexcept = delete;
 
 	void CreateBackGround(std::string_view _Name);
+	void BackGroundChange(std::string_view _Name);
 
 protected:
 

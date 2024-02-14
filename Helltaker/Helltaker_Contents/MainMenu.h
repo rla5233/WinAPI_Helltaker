@@ -6,6 +6,7 @@
 #include <EngineCore/Level.h>
 
 class Character;
+class Scene;
 class UI;
 
 // Ό³Έν :
@@ -33,6 +34,9 @@ public:
 	void SelectMenu(float _DeltaTime);
 	void SelectMenuInit();
 	void SelectMenuStart();
+
+	void CutScene(float _DeltaTime);
+	void CutSceneStart();
 
 	void EnterChapter(float _DeltaTime);
 	void EnterChapterStart();
@@ -68,13 +72,16 @@ private:
 	std::list<AActor*> AllActors;
 	
 	Character* Beel = nullptr;	
+	Scene* Dialogue = nullptr;
+	Scene* SceneActor = nullptr;
+	int SceneIndex = -1;
+	bool SceneInput = false;
 	
 	UI* Booper = nullptr;
 	std::vector<UI*> MenuBarVec;
-	//std::vector<> CutSceneVec;
 	
-	int MenuBarCount = 3;
-	int FocusMenuIndex = 0;
+	const int MenuBarCount = 3;
+	int FocusMenuIndex = -1;
 
 	bool IsSelectMenuInit = false;
 	

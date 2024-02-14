@@ -25,7 +25,7 @@ enum class UpdateOrder
 {
 	None,
 	BackGround,
-	Dialogue,
+	Scene,
 	Character,
 	Skeleton,
 	Stone,
@@ -39,7 +39,7 @@ enum class RenderOrder
 {
 	None,
 	BackGround,
-	Dialogue,
+	Scene,
 	Character,
 	Skeleton,
 	Stone,
@@ -56,6 +56,7 @@ enum class EMainMenuState
 	Enter,
 	SelectMenu,
 	SelectChapter,
+	CutScene,
 	EnterChapter,
 	Exit
 };
@@ -64,7 +65,7 @@ enum class EChapterState
 {
 	None,
 	Idle,
-	Secene,
+	CutScene,
 	Reset,
 	End
 };

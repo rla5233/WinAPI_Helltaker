@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "Dialogue.h"
 #include "Character.h"
+#include "Scene.h"
 #include "UI.h"
 #include "Chapter1.h"
 
@@ -25,6 +26,11 @@ void MainMenu::BeginPlay()
 	ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
 	ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
 	ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
+	ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
+	ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
+	ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
+	ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
+	ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
 	ContentsHelper::LoadFolder("UI", "Booper");
 }
 
@@ -33,17 +39,17 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	ULevel::LevelStart(_PrevLevel);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	BackGround* DefaultBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
-	DefaultBG->CreateBackGround("DefaultBG");
-	AllActors.push_back(DefaultBG);
+	BackGround* BG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	BG->CreateBackGround("DefaultBG");
+	AllActors.push_back(BG);
 
-	Dialogue* MainMenuDialogue = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Dialogue));
-	MainMenuDialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
-	MainMenuDialogue->SetName("MainMenuDialogue_001");
-	MainMenuDialogue->CreateImageRenderer(RenderOrder::Dialogue);
-	MainMenuDialogue->GetRenderer()->SetImage(MainMenuDialogue->GetName() + ".png");
-	MainMenuDialogue->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
-	AllActors.push_back(MainMenuDialogue);
+	Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
+	Dialogue->SetName("MainMenuDialogue_001");
+	Dialogue->CreateImageRenderer(RenderOrder::Scene);
+	Dialogue->GetRenderer()->SetImage(Dialogue->GetName() + ".png");
+	Dialogue->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
+	AllActors.push_back(Dialogue);
 
 	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
 	Beel->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
@@ -122,8 +128,7 @@ void MainMenu::SelectMenu(float _DeltaTime)
 		switch (FocusMenuIndex)
 		{
 		case 0:
-			StateChange(EMainMenuState::EnterChapter);
-			SelectChapterNum = 1;
+			StateChange(EMainMenuState::CutScene);
 			break;
 		case 1:
 			//StateChange(EMainMenuState::SelectChapter);
@@ -147,17 +152,12 @@ void MainMenu::SelectMenuInit()
 		MenuBarVec.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
 	}
 
-	ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
-	ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
 	float interval = 0.0f;
 	for (UI* MenuBar : MenuBarVec)
 	{
 		MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
 		MenuBar->SetName("MenuBar");
 		MenuBar->CreateImageRenderer(RenderOrder::UI);
-		MenuBar->GetRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBar->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
-		MenuBar->GetRenderer()->SetImage("MenuBar_UnSelected.png");
 		MenuBar->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
 		interval += WinScale.Y / 13.5f;
 	}	
@@ -167,16 +167,68 @@ void MainMenu::SelectMenuInit()
 
 void MainMenu::SelectMenuStart()
 {
+	Booper->GetRenderer()->ActiveOff();
+
 	if (false == IsSelectMenuInit)
 	{
 		SelectMenuInit();
 	}
 
-	Booper->GetRenderer()->ActiveOff();
 	FocusMenuIndex = 0;
 	MenuBarVec[0]->GetRenderer()->SetImage("MenuBar_Selected.png");	
 	MenuBarVec[1]->GetRenderer()->SetImage("MenuBar_UnSelected.png");	
 	MenuBarVec[2]->GetRenderer()->SetImage("MenuBar_UnSelected.png");	
+}
+
+void MainMenu::CutScene(float _DeltaTime)
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		++SceneIndex;
+		SceneInput = true;
+	}
+	
+	if (true == SceneInput)
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+
+		switch (SceneIndex)
+		{
+		case 0:
+
+			break;
+		case 1:
+			Dialogue->GetRenderer()->ActiveOff();
+			Beel->GetRenderer()->ActiveOff();
+			break;
+		case 2:
+			SceneActor->CreateImageRenderer(RenderOrder::Scene);
+			SceneActor->GetRenderer()->SetImage("CutScene1_001.png");
+			SceneActor->GetRenderer()->SetTransform({ {0, 0}, WinScale.Half2D() });
+			break;
+		case 3:
+				
+			break;
+		}
+
+		SceneInput = false;
+	}
+}
+
+void MainMenu::CutSceneStart()
+{
+	for (UI* MenuBar : MenuBarVec)
+	{
+		MenuBar->GetRenderer()->ActiveOff();
+	}
+
+	Booper->GetRenderer()->ActiveOn();
+	SelectChapterNum = 1;
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	SceneActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	SceneActor->SetActorLocation(WinScale.Half2D());
+	AllActors.push_back(SceneActor);
 }
 
 void MainMenu::EnterChapter(float _DeltaTime)
@@ -192,10 +244,6 @@ void MainMenu::EnterChapter(float _DeltaTime)
 
 void MainMenu::EnterChapterStart()
 {
-	if (1 == SelectChapterNum)
-	{
-		
-	}
 }
 
 void MainMenu::Exit(float _DeltaTime)
@@ -215,6 +263,9 @@ void MainMenu::StateUpdate(float _DeltaTime)
 		SelectMenu(_DeltaTime);
 		break;
 	case EMainMenuState::SelectChapter:
+		break;
+	case EMainMenuState::CutScene:
+		CutScene(_DeltaTime);
 		break;
 	case EMainMenuState::EnterChapter:
 		EnterChapter(_DeltaTime);
@@ -240,6 +291,9 @@ void MainMenu::StateChange(EMainMenuState _State)
 			SelectMenuStart();
 			break;
 		case EMainMenuState::SelectChapter:
+			break;
+		case EMainMenuState::CutScene:
+			CutSceneStart();
 			break;
 		case EMainMenuState::EnterChapter:
 			EnterChapterStart();
