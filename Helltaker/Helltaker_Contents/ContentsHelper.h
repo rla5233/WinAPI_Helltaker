@@ -32,7 +32,8 @@ enum class UpdateOrder
 	Devil,
 	Hero,
 	Effect,
-	UI
+	UI,
+	Transition
 };
 
 enum class RenderOrder
@@ -46,7 +47,8 @@ enum class RenderOrder
 	Devil,
 	Hero,
 	Effect,
-	UI
+	UI,
+	Transition
 };
 
 enum class EMainMenuState

@@ -11,6 +11,7 @@
 #include <EngineCore/Level.h>
 
 class HitActor;
+class Scene;
 class Hero;
 
 // Ό³Έν :
@@ -63,6 +64,8 @@ public:
 	
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
+	void CreateTransition();
+	void PlayTransition();
 	void SpawnHero(int _X, int _Y);
 	void SpawnDevil(int _X, int _Y, std::string_view _Name);
 	void SpawnSkeleton(int _X, int _Y);
@@ -109,6 +112,8 @@ private:
 	std::vector<std::vector<HitActor*>> HitActorVec;
 
 	Hero* PlayerHero = nullptr;
+	Scene* Transition = nullptr;
+	const float TransitionInter = 0.0435f;
 
 	bool IsChapterVecInit = false;
 	static bool IsLoad;

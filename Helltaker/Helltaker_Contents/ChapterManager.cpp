@@ -5,6 +5,7 @@
 #include "BackGround.h"
 #include "Skeleton.h"
 #include "Stone.h"
+#include "Scene.h"
 #include "Devil.h"
 #include "Hero.h"
 #include "UI.h"
@@ -28,6 +29,7 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
+		ContentsHelper::LoadFolder("Scene", "Transition");
 		IsLoad = true;
 	}
 
@@ -123,6 +125,18 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->GetRenderer()->SetImage(ChapterUI->GetName() + ".png");
 	ChapterUI->GetRenderer()->SetTransform({ {0,0}, WinScale });
 	AllActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
+}
+
+void ChapterManager::CreateTransition()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Transition = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Transition));
+	Transition->CreateImageRenderer(RenderOrder::Transition);
+	Transition->SetActorLocation(WinScale.Half2D());
+	Transition->GetRenderer()->SetTransform({ { 0, 0 }, WinScale });
+	Transition->GetRenderer()->SetImage("Transition");
+	Transition->GetRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
+	AllActors[reinterpret_cast<__int64>(Transition)] = Transition;
 }
 
 void ChapterManager::SpawnHero(int _X, int _Y)
@@ -222,6 +236,9 @@ void ChapterManager::ShowLocationPoint()
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);
+	
+	CreateTransition();
+	PlayTransition();
 }
 
 void ChapterManager::LevelEnd(ULevel* _NextLevel)
@@ -356,4 +373,9 @@ void ChapterManager::StateChange(EChapterState _State)
 	}
 
 	State = _State;
+}
+
+void ChapterManager::PlayTransition()
+{
+	Transition->GetRenderer()->ChangeAnimation("Transition");
 }
