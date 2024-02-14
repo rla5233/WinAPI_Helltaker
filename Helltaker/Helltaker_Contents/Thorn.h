@@ -24,8 +24,8 @@ public:
 	void Down(float _DeltaTime);
 	void DownStart();
 
-protected:
 	void StateChange(EThornState _State);
+protected:
 	void StateUpdate(float _DeltaTime);
 
 	void BeginPlay() override;

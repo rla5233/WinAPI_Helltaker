@@ -137,6 +137,7 @@ void ChapterManager::CreateTransition()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	TransitionActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Transition));
+	TransitionActor->SetName("Transition");
 	TransitionActor->CreateImageRenderer(RenderOrder::Transition);
 	TransitionActor->SetActorLocation(WinScale.Half2D());
 	TransitionActor->GetRenderer()->SetTransform({ { 0, 0 }, WinScale });
@@ -190,7 +191,14 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 }
 
 void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
-{}
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::Thorn));
+	NewThorn->SetName("Thorn");
+	NewThorn->SetActorLocation(ChapterPointToLocation(_X, _Y) + FVector(TileScale.hX(), TileScale.Y * 0.835f));
+	NewThorn->StateChange(_State);
+	AllActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
+}
 
 HitActor* ChapterManager::GetHitActor(FVector _Point)
 {

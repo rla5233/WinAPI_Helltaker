@@ -36,7 +36,6 @@ void Hero::BeginPlay()
 		IsLoad = true;
 	}
 
-	SetName("Hero");
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer = CreateImageRenderer(RenderOrder::Hero);
 	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });

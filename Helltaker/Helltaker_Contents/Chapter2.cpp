@@ -45,6 +45,13 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	SpawnStone(4, 2, "Stone_003.png");
 	SpawnStone(5, 2, "Stone_005.png");
 	SpawnStone(6, 2, "Stone_007.png");
+	SpawnStone(6, 2, "Stone_007.png");
+	SpawnThorn(1, 2, EThornState::Idle);
+	SpawnThorn(3, 1, EThornState::Idle);
+	SpawnThorn(4, 1, EThornState::Idle);
+	SpawnThorn(4, 2, EThornState::Idle);
+	SpawnThorn(5, 2, EThornState::Idle);
+	SpawnThorn(5, 3, EThornState::Idle);
 	SpawnDevil(4, 5, "Modeus");
 
 	// 디버그용

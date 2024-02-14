@@ -25,7 +25,6 @@ void Thorn::BeginPlay()
 		IsLoad = true;
 	}
 
-	SetName("Thorn");
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer = CreateImageRenderer(RenderOrder::Thorn);
 	Renderer->SetTransform({ {0, 0}, {TileScale * IdleScale } });
@@ -38,7 +37,7 @@ void Thorn::Idle(float _DeltaTime)
 
 void Thorn::IdleStart()
 {
-	Renderer->SetImage("Thorn_Idle");
+	Renderer->SetImage("Thorn_Idle.png");
 }
 
 void Thorn::Up(float _DeltaTime)
@@ -80,7 +79,7 @@ void Thorn::StateChange(EThornState _State)
 {
 	if (State != _State)
 	{
-		switch (State)
+		switch (_State)
 		{
 		case EThornState::Idle:
 			IdleStart();
@@ -93,4 +92,6 @@ void Thorn::StateChange(EThornState _State)
 			break;
 		}
 	}
+
+	State = _State;
 }
