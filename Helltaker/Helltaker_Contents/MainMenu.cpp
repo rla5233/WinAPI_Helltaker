@@ -6,7 +6,7 @@
 #include "UI.h"
 #include "Chapter1.h"
 
-
+#include <string>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
 
@@ -79,6 +79,9 @@ void MainMenu::Begin(float _DeltaTime)
 	}
 }
 
+void MainMenu::BeginStart()
+{}
+
 void MainMenu::Enter(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
@@ -90,21 +93,14 @@ void MainMenu::Enter(float _DeltaTime)
 
 void MainMenu::EnterStart()
 {
-	if (false == IsEnterInit)
+	if (nullptr == Beel->GetRenderer())
 	{
-		EnterInit();
-	}
+		Beel->CreateImageRenderer(RenderOrder::Character);
+	}	
 
-	Beel->GetRenderer()->SetImage(Beel->GetName() + ".png");
-}
-
-void MainMenu::EnterInit()
-{
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Beel->CreateImageRenderer(RenderOrder::Character);
 	Beel->GetRenderer()->SetImage(Beel->GetName() + ".png");
 	Beel->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
-	IsEnterInit = true;
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
@@ -185,14 +181,6 @@ void MainMenu::SelectMenuStart()
 
 void MainMenu::EnterChapter(float _DeltaTime)
 {
-	if (1 == SelectChapterNum)
-	{
-		// 씬 추가
-	}
-
-	// 장면 전환 추가
-
-	// 수정 필요
 	switch (SelectChapterNum)
 	{
 	case 1:
@@ -200,7 +188,14 @@ void MainMenu::EnterChapter(float _DeltaTime)
 		GEngine->ChangeLevel("Chapter1");
 		break;
 	}
-	
+}
+
+void MainMenu::EnterChapterStart()
+{
+	if (1 == SelectChapterNum)
+	{
+		
+	}
 }
 
 void MainMenu::Exit(float _DeltaTime)
@@ -247,6 +242,7 @@ void MainMenu::StateChange(EMainMenuState _State)
 		case EMainMenuState::SelectChapter:
 			break;
 		case EMainMenuState::EnterChapter:
+			EnterChapterStart();
 			break;
 		case EMainMenuState::Exit:
 			break;
