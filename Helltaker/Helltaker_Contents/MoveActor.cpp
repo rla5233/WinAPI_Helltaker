@@ -100,5 +100,10 @@ void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 
 ChapterManager* MoveActor::GetChapter()
 {
-	return dynamic_cast<ChapterManager*>(GetWorld());
+	ChapterManager* Ptr = dynamic_cast<ChapterManager*>(GetWorld());
+	if (nullptr == Ptr)
+	{
+		MsgBoxAssert("Chapter is nullptr");
+	}
+	return Ptr;
 }

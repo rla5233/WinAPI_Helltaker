@@ -139,7 +139,17 @@ public:
 		return std::lround(hX());
 	}
 
-	float4 operator+(const float4& _Other)
+	float4& operator=(const float4& _Other)
+	{
+		X = _Other.X;
+		Y = _Other.Y;
+		Z = _Other.Z;
+		W = _Other.W;
+		return *this;
+	}
+
+
+	float4 operator+(const float4& _Other) const
 	{
 		float4 Result = *this;
 		Result.X += _Other.X;
@@ -202,8 +212,7 @@ public:
 		return Result;
 	}
 
-
-	float4 operator-(const float4& _Other)
+	float4 operator-(const float4& _Other) const
 	{
 		float4 Result = *this;
 		Result.X -= _Other.X;
