@@ -151,6 +151,8 @@ void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
 	NewDemon->SetName(_Name);
 	NewDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewDemon->SetDemon(_Name);
+
+	ChapterInfoVec[_Y][_X].IsVaild = false;
 	AllActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
 }
 
