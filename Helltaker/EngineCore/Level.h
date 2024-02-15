@@ -64,9 +64,11 @@ public:
 	}
 
 
+
 protected:
 
 private:
+
 	std::map<int, std::list<AActor*>> AllActor;
 
 	void ActorInit(AActor* _NewActor);

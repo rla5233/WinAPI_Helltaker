@@ -57,10 +57,21 @@ public:
 		FrameTime = 1 / static_cast<float>(Frame);
 	}
 
+	static bool IsDebug()
+	{
+		return IsDebugValue;
+	}
+	static void EngineDebugSwitch()
+	{
+		IsDebugValue = !IsDebugValue;
+	}
+
 protected:
 	UEngineCore();
 
 private:
+	static bool IsDebugValue;
+
 	int Frame = -1;
 	float FrameTime = 0.0f;
 	float CurFrameTime = 0.0f;

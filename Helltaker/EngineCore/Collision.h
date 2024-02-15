@@ -16,6 +16,11 @@ public:
 	UCollision& operator=(const UCollision& _Other) = delete;
 	UCollision& operator=(UCollision&& _Other) noexcept = delete;
 
+	void SetColType(ECollisionType _Type)
+	{
+		ColType = _Type;
+	}
+
 	void SetOrder(int _Order) override;
 
 	template<typename EnumType>
@@ -25,11 +30,13 @@ public:
 	}
 
 	bool CollisionCheck(int _Order, std::vector<UCollision*>& _Result);
+	void DebugRender(FVector _CameraPos);
 
 protected:
 	void BeginPlay() override;
 
+
 private:
-	ECollisionType ColType = ECollisionType::CirCle;
+	ECollisionType ColType = ECollisionType::Rect;
 };
 

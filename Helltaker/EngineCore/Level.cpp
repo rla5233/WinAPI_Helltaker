@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Actor.h"
 #include <EngineBase\EngineDebug.h>
+#include "EngineCore.h"
 
 ULevel::ULevel()
 {}
@@ -65,6 +66,25 @@ void ULevel::LevelRender(float _DeltaTime)
 		}
 	}
 
+	if (true == GEngine->IsDebug())
+	{
+		for (std::pair<const int, std::list<UCollision*>>& OrderListPair : Collisions)
+		{
+			std::list<UCollision*>& RendererList = OrderListPair.second;
+			for (UCollision* Collision : RendererList)
+			{
+				// Ranged for는 중간에 리스트의 원소의 개수가 변경되면 굉장히 불안정해지고
+				// 치명적인 오류가 발생할 가능성이 높아진다.
+				// 절대로 파괴하지 
+				if (false == Collision->IsActive())
+				{
+					continue;
+				}
+
+				Collision->DebugRender(CameraPos);
+			}
+		}
+	}
 }
 
 void ULevel::LevelRelease(float _DeltaTime)
