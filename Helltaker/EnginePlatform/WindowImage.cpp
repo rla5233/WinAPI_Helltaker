@@ -338,6 +338,19 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 	// 이미지의 어떤 부위를 그릴지를 정해줄수가 있다.
 }
 
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color/* = Color8Bit::Black*/)
+{
+	Gdiplus::Graphics graphics(ImageDC);
+	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
+	Gdiplus::Font fnt(WFont.c_str(), _Size, /*Gdiplus::FontStyleBold | Gdiplus::FontStyleItalic*/0, Gdiplus::UnitPixel);
+	// Gdiplus::HatchBrush hB(HatchStyle::HatchStyle05Percent, Gdiplus::Color(_Color.R, _Color.G, _Color.B), Gdiplus::Color::Transparent);
+	Gdiplus::SolidBrush hB(Gdiplus::Color(_Color.R, _Color.G, _Color.B));
+	FVector Pos = _Trans.GetPosition();
+	Gdiplus::PointF ptf(Pos.X, Pos.Y);
+	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
+	graphics.DrawString(WText.c_str(), -1, &fnt, ptf, &hB);  //출력
+}
+
 void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color /*= Color8Bit::Black*/)
 {
 	if (nullptr == _CopyImage)

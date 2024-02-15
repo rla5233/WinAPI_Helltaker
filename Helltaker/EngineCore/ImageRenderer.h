@@ -23,6 +23,7 @@ class UWindowImage;
 // ¼³¸í :
 class UImageRenderer : public USceneComponent
 {
+public:
 
 public:
 	// constrcuter destructer
@@ -127,6 +128,27 @@ public:
 		return CurAnimation->CurTime;
 	}
 
+	void TextRender(float _DeltaTime);
+	void ImageRender(float _DeltaTime);
+
+	void SetText(std::string_view _Text)
+	{
+		Text = _Text;
+	}
+	void SetFont(std::string_view _Font)
+	{
+		Font = _Font;
+	}
+	void SetTextSize(float _Value)
+	{
+		Size = _Value;
+	}
+	void SetTextColor(Color8Bit _Color)
+	{
+		TextColor = _Color;
+	}
+
+	FTransform GetRenderTransForm();
 
 protected:
 	void BeginPlay() override;
@@ -141,5 +163,12 @@ private:
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
 	UAnimationInfo* CurAnimation = nullptr;
+
+
+	// const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color = Color8Bit::Black
+	std::string Text = "";
+	std::string Font = "±Ã¼­";
+	float Size = 10.0f;
+	Color8Bit TextColor = Color8Bit::BlackA;
 };
 
