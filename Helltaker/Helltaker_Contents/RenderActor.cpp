@@ -1,6 +1,7 @@
 #include "RenderActor.h"
 
 #include "ContentsHelper.h"
+#include "ChapterManager.h"
 
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
@@ -43,4 +44,14 @@ void RenderActor::LoadImg(std::string_view _Path, std::string_view _Name)
 UImageRenderer* RenderActor::CreateImageRenderer(RenderOrder _Order)
 {
 	return AActor::CreateImageRenderer(static_cast<int>(_Order));
+}
+
+ChapterManager* RenderActor::GetChapter()
+{
+	ChapterManager* Ptr = dynamic_cast<ChapterManager*>(GetWorld());
+	if (nullptr == Ptr)
+	{
+		MsgBoxAssert("Chapter is nullptr");
+	}
+	return Ptr;
 }

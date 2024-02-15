@@ -1,10 +1,10 @@
 #pragma once
-
 #include "ContentsHelper.h"
 
 #include <EngineBase/Transform.h>
 #include <EngineCore/Actor.h>
 
+class ChapterManager;
 
 // Ό³Έν :
 class RenderActor : public AActor
@@ -23,6 +23,8 @@ public:
 	void LoadFolder(std::string_view _Path);
 	void LoadImg(std::string_view _Path);
 	void LoadImg(std::string_view _Path, std::string_view _Name);
+
+	ChapterManager* GetChapter();
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
 protected:

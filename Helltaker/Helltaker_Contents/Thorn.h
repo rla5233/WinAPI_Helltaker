@@ -24,6 +24,17 @@ public:
 	void Down(float _DeltaTime);
 	void DownStart();
 
+	void SetPoint(int _X, int _Y)
+	{
+		Point_X = _X;
+		Point_Y = _Y;
+	}
+
+	EThornState GetState() const
+	{
+		return State;
+	}
+
 	void StateChange(EThornState _State);
 protected:
 	void StateUpdate(float _DeltaTime);
@@ -35,8 +46,10 @@ private:
 	UImageRenderer* Renderer = nullptr;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
-	const float UpDownInter = 0.5f;
+	const float UpDownInter = 0.05f;
 
+	int Point_X = -1;
+	int Point_Y = -1;
 	EThornState State = EThornState::None;
 	static bool IsLoad;
 };

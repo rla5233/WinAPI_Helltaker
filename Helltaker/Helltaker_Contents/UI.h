@@ -17,14 +17,21 @@ public:
 	UI& operator=(UI&& _Other) noexcept = delete;
 	
 	void CreateImageRenderer(RenderOrder _Order);
+	void CreateTextRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetRenderer()
+	UImageRenderer* GetImageRenderer()
 	{
-		return Renderer;
+		return ImageRenderer;
+	}
+
+	UImageRenderer* GetTextRenderer()
+	{
+		return TextRenderer;
 	}
 
 protected:
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
+	UImageRenderer* TextRenderer = nullptr;
 };

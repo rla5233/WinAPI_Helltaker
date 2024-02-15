@@ -156,6 +156,7 @@ void Hero::MoveStart(float _DeltaTime)
 	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
 	MoveDelayTimeCount = MoveDelayTime;
 	CanActionCheck = false;
+	GetChapter()->ChangeThornState();
 
 	switch (SeeDir)
 	{
@@ -198,6 +199,7 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
 		CanActionCheck = false;
 		KickDelayTimeCount = KickDelayTime;
+		GetChapter()->ChangeThornState();
 
 		// Skeleton, Stone 업 캐스팅
 		FVector NextLocationPoint = GetNextLocationPoint();

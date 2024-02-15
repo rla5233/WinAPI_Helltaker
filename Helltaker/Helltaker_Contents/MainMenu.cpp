@@ -11,6 +11,8 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
 
+#include <wingdi.h>
+
 MainMenu::MainMenu()
 {
 }
@@ -60,10 +62,10 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
 	Booper->CreateImageRenderer(RenderOrder::UI);
-	Booper->GetRenderer()->SetImage(Booper->GetName());
-	Booper->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
-	Booper->GetRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
-	Booper->GetRenderer()->ChangeAnimation("Booper_Idle");
+	Booper->GetImageRenderer()->SetImage(Booper->GetName());
+	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
+	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
 	AllActors.push_back(Booper);
 
 	StateChange(EMainMenuState::Begin);
@@ -113,15 +115,15 @@ void MainMenu::SelectMenu(float _DeltaTime)
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
-		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
 		SetFocusMenuIndex(FocusMenuIndex - 1);
-		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
-		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
 		SetFocusMenuIndex(FocusMenuIndex + 1);
-		MenuBarVec[FocusMenuIndex]->GetRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -158,7 +160,11 @@ void MainMenu::SelectMenuInit()
 		MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
 		MenuBar->SetName("MenuBar");
 		MenuBar->CreateImageRenderer(RenderOrder::UI);
-		MenuBar->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
+		MenuBar->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
+		MenuBar->CreateTextRenderer(RenderOrder::Text);
+		MenuBar->GetTextRenderer()->SetTransform({ {0,0}, {0,0} });
+		//MenuBar->GetTextRenderer()->SetTransform({ {WinScale.X * (-0.03f), WinScale.Y * (-0.025f)}, {0, 0} });
+		MenuBar->GetTextRenderer()->SetFont("Crimson Pro Medium");
 		interval += WinScale.Y / 13.5f;
 	}	
 
@@ -167,7 +173,7 @@ void MainMenu::SelectMenuInit()
 
 void MainMenu::SelectMenuStart()
 {
-	Booper->GetRenderer()->ActiveOff();
+	Booper->GetImageRenderer()->ActiveOff();
 
 	if (false == IsSelectMenuInit)
 	{
@@ -175,9 +181,24 @@ void MainMenu::SelectMenuStart()
 	}
 
 	FocusMenuIndex = 0;
-	MenuBarVec[0]->GetRenderer()->SetImage("MenuBar_Selected.png");	
-	MenuBarVec[1]->GetRenderer()->SetImage("MenuBar_UnSelected.png");	
-	MenuBarVec[2]->GetRenderer()->SetImage("MenuBar_UnSelected.png");	
+	FTransform Tf = MenuBarVec[0]->GetTextRenderer()->GetRenderTransForm();
+
+	MenuBarVec[0]->GetImageRenderer()->SetImage("MenuBar_Selected.png");	
+	MenuBarVec[0]->GetTextRenderer()->SetText("1234");
+	MenuBarVec[0]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	MenuBarVec[0]->GetTextRenderer()->SetTextSize(24);
+
+	Tf = MenuBarVec[0]->GetTextRenderer()->GetRenderTransForm();
+
+	MenuBarVec[1]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");	
+	MenuBarVec[1]->GetTextRenderer()->SetText("CHAPTER SELECT");
+	MenuBarVec[1]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	MenuBarVec[1]->GetTextRenderer()->SetTextSize(24);
+
+	MenuBarVec[2]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");	
+	MenuBarVec[2]->GetTextRenderer()->SetText("EXIT");
+	MenuBarVec[2]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	MenuBarVec[2]->GetTextRenderer()->SetTextSize(24);
 }
 
 void MainMenu::CutScene(float _DeltaTime)
@@ -225,10 +246,10 @@ void MainMenu::CutSceneStart()
 {
 	for (UI* MenuBar : MenuBarVec)
 	{
-		MenuBar->GetRenderer()->ActiveOff();
+		MenuBar->GetImageRenderer()->ActiveOff();
 	}
 
-	Booper->GetRenderer()->ActiveOn();
+	Booper->GetImageRenderer()->ActiveOn();
 	SelectChapterNum = 1;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();

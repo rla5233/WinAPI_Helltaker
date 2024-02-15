@@ -95,6 +95,11 @@ void ChapterManager::SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _Hit
 	ChapterInfoVec[_Y][_X].Other = _HitActor;
 }
 
+void ChapterManager::SetChapterThornInfo(int _X, int _Y, bool _IsUp)
+{
+	ChapterInfoVec[_Y][_X].IsThorn = _IsUp;
+}
+
 void ChapterManager::CreateBG(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -110,8 +115,8 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->SetActorLocation(WinScale.Half2D());
 	ChapterUI->SetName("ChapterUI");
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
-	ChapterUI->GetRenderer()->SetImage(ChapterUI->GetName() + ".png");
-	ChapterUI->GetRenderer()->SetTransform({ {0,0}, WinScale });
+	ChapterUI->GetImageRenderer()->SetImage(ChapterUI->GetName() + ".png");
+	ChapterUI->GetImageRenderer()->SetTransform({ {0,0}, WinScale });
 	AllActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
 }
 
@@ -190,7 +195,11 @@ void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
 	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::Thorn));
 	NewThorn->SetName("Thorn");
 	NewThorn->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewThorn->SetPoint(_X, _Y);
 	NewThorn->StateChange(_State);
+
+	//ChapterInfoVec[_Y][_X].IsThorn = true;
+	AllThorn.push_back(NewThorn);
 	AllActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }
 
@@ -207,6 +216,39 @@ HitActor* ChapterManager::GetHitActor(int _X, int _Y)
 void ChapterManager::DestroyHitActor(__int64 _HitActor)
 {
 	AllActors.erase(_HitActor);
+}
+
+void ChapterManager::ChangeThornState()
+{
+	if (true == AllThorn.empty())
+	{
+		return;
+	}
+
+	if (EThornState::Up == AllThorn[0]->GetState())
+	{
+		for (Thorn* Thorn : AllThorn)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Thorn is nullptr");
+			}
+
+			Thorn->StateChange(EThornState::Down);
+		}
+	}
+	else if (EThornState::Down == AllThorn[0]->GetState())
+	{
+		for (Thorn* Thorn : AllThorn)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Thorn is nullptr");
+			}
+
+			Thorn->StateChange(EThornState::Up);
+		}
+	}
 }
 
 
@@ -231,14 +273,14 @@ void ChapterManager::ShowLocationPoint()
 			
 			if (true == ChapterInfoVec[Y][X].IsVaild)
 			{
-				GreenPoint[Y][X]->GetRenderer()->SetImage("GreenPoint.png");
+				GreenPoint[Y][X]->GetImageRenderer()->SetImage("GreenPoint.png");
 			}
 			else
 			{
-				GreenPoint[Y][X]->GetRenderer()->SetImage("RedPoint.png");
+				GreenPoint[Y][X]->GetImageRenderer()->SetImage("RedPoint.png");
 			}
 			
-			GreenPoint[Y][X]->GetRenderer()->SetTransform({ { 0,0 }, {2, 2} });
+			GreenPoint[Y][X]->GetImageRenderer()->SetTransform({ { 0,0 }, {2, 2} });
 			AllActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
 		}
 	}
@@ -267,6 +309,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 		Actor.second = nullptr;
 	}
 
+	AllThorn.clear();
 	ChapterInfoVec.clear();
 	AllActors.clear();
 }

@@ -34,6 +34,7 @@ enum class UpdateOrder
 	Hero,
 	Effect,
 	UI,
+	Text,
 	Transition
 };
 
@@ -50,6 +51,7 @@ enum class RenderOrder
 	Hero,
 	Effect,
 	UI,
+	Text,
 	Transition
 };
 

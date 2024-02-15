@@ -12,6 +12,7 @@
 
 class HitActor;
 class Scene;
+class Thorn;
 class Hero;
 
 class TileInfo
@@ -54,6 +55,7 @@ public:
 
 	void CreateChapterInfoVec(const std::vector<std::vector<bool>>& _Map);
 	void SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor);
+	void SetChapterThornInfo(int _X, int _Y, bool _IsUp);
 
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
@@ -67,6 +69,7 @@ public:
 	HitActor* GetHitActor(FVector _Point);
 	HitActor* GetHitActor(int _X, int _Y);
 	void DestroyHitActor(__int64 _HitActor);
+	void ChangeThornState();
 
 	// 디버그 용
 	void ShowLocationPoint();
@@ -96,6 +99,7 @@ protected:
 private:
 	std::vector<std::vector<TileInfo>> ChapterInfoVec;
 	std::map<__int64, AActor*> AllActors;
+	std::vector<Thorn*> AllThorn;
 
 	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;

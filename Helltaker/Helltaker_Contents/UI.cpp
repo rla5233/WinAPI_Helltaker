@@ -15,5 +15,10 @@ UI::~UI()
 
 void UI::CreateImageRenderer(RenderOrder _Order)
 {
-	Renderer = RenderActor::CreateImageRenderer(_Order);
+	ImageRenderer = RenderActor::CreateImageRenderer(_Order);
+}
+
+void UI::CreateTextRenderer(RenderOrder _Order)
+{
+	TextRenderer = RenderActor::CreateImageRenderer(_Order);
 }

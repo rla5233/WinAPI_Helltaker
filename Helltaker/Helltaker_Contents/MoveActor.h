@@ -1,8 +1,6 @@
 #pragma once
 #include "RenderActor.h"
 
-class ChapterManager;
-
 class MoveActor : public RenderActor
 {
 public:
@@ -23,8 +21,6 @@ public:
 	void FMoveDirCheck();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
-
-
 	bool IsMove() const
 	{
 		return IsMoveValue;
@@ -59,8 +55,6 @@ public:
 	{
 		NextLocationPoint = _Point;
 	}
-
-	ChapterManager* GetChapter();
 
 protected:
 	EMoveActorDir MoveDir = EMoveActorDir::None;
