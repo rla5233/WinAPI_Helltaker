@@ -53,11 +53,6 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	Dialogue->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
 	AllActors.push_back(Dialogue);
 
-	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	Beel->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
-	Beel->SetName("Beel_Fly");	
-	AllActors.push_back(Beel);
-
 	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
 	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
 	Booper->SetName("Booper");
@@ -109,15 +104,21 @@ void MainMenu::Enter(float _DeltaTime)
 
 void MainMenu::EnterStart()
 {
-	if (nullptr == Beel->GetRenderer())
-	{
-		Beel->CreateImageRenderer(RenderOrder::Character);
-		//Beel->CreateTextRenderer(RenderOrder::Character);
-	}	
-
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Beel->GetRenderer()->SetImage(Beel->GetName() + ".png");
-	Beel->GetRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
+
+	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
+	Beel->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
+	Beel->SetName("Beel_Fly");
+	Beel->CreateImageRenderer(RenderOrder::Character);
+	Beel->CreateNameRenderer(RenderOrder::Text);
+	AllActors.push_back(Beel);
+
+	Beel->GetImageRenderer()->SetImage(Beel->GetName() + ".png");
+	Beel->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
+	Beel->GetNameRenderer()->SetText("Name");
+	Beel->GetNameRenderer()->SetTextSize(23);
+	Beel->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0}});
+	Beel->GetNameRenderer()->SetTextColor(Color8Bit(255, 0, 0, 0));
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
@@ -232,7 +233,7 @@ void MainMenu::CutScene(float _DeltaTime)
 			break;
 		case 1:
 			Dialogue->GetRenderer()->ActiveOff();
-			Beel->GetRenderer()->ActiveOff();
+			Beel->GetImageRenderer()->ActiveOff();
 			break;
 		case 2:
 			SceneActor->CreateImageRenderer(RenderOrder::Scene);

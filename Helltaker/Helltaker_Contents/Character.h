@@ -17,15 +17,21 @@ public:
 	Character& operator=(Character&& _Other) noexcept = delete;
 
 	void CreateImageRenderer(RenderOrder _Order);
+	void CreateNameRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetRenderer()
+	UImageRenderer* GetImageRenderer()
 	{
-		return Renderer;
+		return ImageRenderer;
+	}
+
+	UImageRenderer* GetNameRenderer()
+	{
+		return NameRenderer;
 	}
 
 protected:
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
 	UImageRenderer* NameRenderer = nullptr;
 };

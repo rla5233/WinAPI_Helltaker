@@ -15,5 +15,10 @@ Character::~Character()
 
 void Character::CreateImageRenderer(RenderOrder _Order)
 {
-	Renderer = RenderActor::CreateImageRenderer(_Order);
+	ImageRenderer = RenderActor::CreateImageRenderer(_Order);
+}
+
+void Character::CreateNameRenderer(RenderOrder _Order)
+{
+	NameRenderer = RenderActor::CreateImageRenderer(_Order);
 }
