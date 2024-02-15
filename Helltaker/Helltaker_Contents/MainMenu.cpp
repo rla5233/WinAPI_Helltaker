@@ -162,9 +162,9 @@ void MainMenu::SelectMenuInit()
 		MenuBar->CreateImageRenderer(RenderOrder::UI);
 		MenuBar->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
 		MenuBar->CreateTextRenderer(RenderOrder::Text);
-		MenuBar->GetTextRenderer()->SetTransform({ {0,0}, {0,0} });
-		//MenuBar->GetTextRenderer()->SetTransform({ {WinScale.X * (-0.03f), WinScale.Y * (-0.025f)}, {0, 0} });
-		MenuBar->GetTextRenderer()->SetFont("Crimson Pro Medium");
+		MenuBar->GetTextRenderer()->SetTransform({ {0, 2}, {0, 0} });
+		MenuBar->GetTextRenderer()->SetFont("Amiri");
+		MenuBar->GetTextRenderer()->SetTextSize(20);
 		interval += WinScale.Y / 13.5f;
 	}	
 
@@ -180,25 +180,23 @@ void MainMenu::SelectMenuStart()
 		SelectMenuInit();
 	}
 
-	FocusMenuIndex = 0;
-	FTransform Tf = MenuBarVec[0]->GetTextRenderer()->GetRenderTransForm();
+	SetFocusMenuIndex(0);
+	std::vector<std::string> MenuBarText = { "NEW GAME", "CHAPTER SELECT", "EXIT" };
+	for (int i = 0; i < MenuBarCount; i++)
+	{
+		if (i == FocusMenuIndex)
+		{
+			MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+			MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+		}
+		else
+		{
+			MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+			MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
+		}
 
-	MenuBarVec[0]->GetImageRenderer()->SetImage("MenuBar_Selected.png");	
-	MenuBarVec[0]->GetTextRenderer()->SetText("1234");
-	MenuBarVec[0]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-	MenuBarVec[0]->GetTextRenderer()->SetTextSize(24);
-
-	Tf = MenuBarVec[0]->GetTextRenderer()->GetRenderTransForm();
-
-	MenuBarVec[1]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");	
-	MenuBarVec[1]->GetTextRenderer()->SetText("CHAPTER SELECT");
-	MenuBarVec[1]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-	MenuBarVec[1]->GetTextRenderer()->SetTextSize(24);
-
-	MenuBarVec[2]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");	
-	MenuBarVec[2]->GetTextRenderer()->SetText("EXIT");
-	MenuBarVec[2]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-	MenuBarVec[2]->GetTextRenderer()->SetTextSize(24);
+		MenuBarVec[i]->GetTextRenderer()->SetText(MenuBarText[i]);
+	}
 }
 
 void MainMenu::CutScene(float _DeltaTime)

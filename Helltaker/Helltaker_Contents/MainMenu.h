@@ -23,8 +23,6 @@ public:
 	MainMenu& operator=(const MainMenu& _Other) = delete;
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
-
-
 	void Begin(float _DeltaTime);
 	void BeginStart();
 
