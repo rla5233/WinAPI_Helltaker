@@ -11,7 +11,7 @@
 bool Hero::IsLoad = false;
 
 Hero::Hero()
-	: MoveActor(ContentsHelper::GetWindowScale().X * 0.09f, ContentsHelper::GetWindowScale().X * 4.0f)
+	: MoveActor(ContentsHelper::GetWindowScale().X * 0.01f, ContentsHelper::GetWindowScale().X * 5.0f)
 {}
 
 Hero::~Hero()
@@ -165,6 +165,8 @@ void Hero::IdleStart()
 
 void Hero::Move(float _DeltaTime)
 {
+	//InputCheck(_DeltaTime);
+
 	if (true == IsMove())
 	{
 		MoveOneBlock(_DeltaTime);
@@ -172,17 +174,18 @@ void Hero::Move(float _DeltaTime)
 
 	if (false == IsMove())
 	{
+		//CanActionCheck = true;
 		StateChange(EHeroState::Idle);
 	}
 }
 
 void Hero::MoveStart(float _DeltaTime)
 {
-	if (0 < MoveDelayTimeCount)
-	{
-		MoveDelayTimeCount -= _DeltaTime;
-		return;
-	}
+	//if (0 < MoveDelayTimeCount)
+	//{
+	//	MoveDelayTimeCount -= _DeltaTime;
+	//	return;
+	//}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });

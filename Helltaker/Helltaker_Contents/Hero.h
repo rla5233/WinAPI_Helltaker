@@ -52,9 +52,9 @@ private:
 	float MoveDelayTimeCount = 0.0f;
 
 	const FVector KickScale = { 0.95f, 0.95f };
-	const float KickInter = 0.035f;
+	const float KickInter = 0.016f;
 
-	const float KickDelayTime = 0.0175f;
+	const float KickDelayTime = 0.01f;
 	float KickDelayTimeCount = 0.0f;
 
 	const FVector VictoryScale = { 0.9f, 1.2f };
