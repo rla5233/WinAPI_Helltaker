@@ -316,38 +316,6 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 
 void ChapterManager::Idle(float _DeltaTime)
 {
-	// µð¹ö±ë ¿ë
-	if (nullptr == PlayerHero)
-	{
-		return;
-	}
-
-	if (true == PlayerHero->GetCanActionCheck())
-	{
-		if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
-		{
-			PlayerHero->MoveDirChange(EMoveActorDir::Up);
-			PlayerHero->ActionCheck(_DeltaTime, 'W', VK_UP);
-		}
-		else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
-		{
-			PlayerHero->MoveDirChange(EMoveActorDir::Left);
-			PlayerHero->SeeDirChange(EActorSeeDir::Left);
-			PlayerHero->ActionCheck(_DeltaTime, 'A', VK_LEFT);
-		}
-		else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
-		{
-			PlayerHero->MoveDirChange(EMoveActorDir::Down);
-			PlayerHero->ActionCheck(_DeltaTime, 'S', VK_DOWN);
-		}
-		else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
-		{
-			PlayerHero->MoveDirChange(EMoveActorDir::Right);
-			PlayerHero->SeeDirChange(EActorSeeDir::Right);
-			PlayerHero->ActionCheck(_DeltaTime, 'D', VK_RIGHT);
-		}
-	}
-
 	if (UEngineInput::IsPress('R'))
 	{
 		StateChange(EChapterState::Reset);

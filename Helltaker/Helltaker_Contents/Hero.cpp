@@ -56,6 +56,37 @@ void Hero::BeginPlay()
 	StateChange(EHeroState::Idle);
 }
 
+void Hero::InputCheck(float _DeltaTime)
+{
+	if (false == CanActionCheck)
+	{
+		return;
+	}
+
+	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
+	{
+		MoveDirChange(EMoveActorDir::Up);
+		ActionCheck(_DeltaTime, 'W', VK_UP);
+	}
+	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
+	{
+		MoveDirChange(EMoveActorDir::Left);
+		SeeDirChange(EActorSeeDir::Left);
+		ActionCheck(_DeltaTime, 'A', VK_LEFT);
+	}
+	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
+	{
+		MoveDirChange(EMoveActorDir::Down);
+		ActionCheck(_DeltaTime, 'S', VK_DOWN);
+	}
+	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
+	{
+		MoveDirChange(EMoveActorDir::Right);
+		SeeDirChange(EActorSeeDir::Right);
+		ActionCheck(_DeltaTime, 'D', VK_RIGHT);
+	}
+}
+
 void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 {
 	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetChapterInfoVec();
@@ -112,28 +143,7 @@ void Hero::NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2)
 
 void Hero::Idle(float _DeltaTime)
 {
-	//if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
-	//{
-	//	MoveDirChange(EMoveActorDir::Up);
-	//	ActionCheck(_DeltaTime, 'W', VK_UP);
-	//}
-	//else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
-	//{
-	//	MoveDirChange(EMoveActorDir::Left);
-	//	SeeDirChange(EActorSeeDir::Left);
-	//	ActionCheck(_DeltaTime, 'A', VK_LEFT);
-	//}
-	//else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
-	//{
-	//	MoveDirChange(EMoveActorDir::Down);
-	//	ActionCheck(_DeltaTime, 'S', VK_DOWN);
-	//}
-	//else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
-	//{
-	//	MoveDirChange(EMoveActorDir::Right);
-	//	SeeDirChange(EActorSeeDir::Right);
-	//	ActionCheck(_DeltaTime, 'D', VK_RIGHT);
-	//}
+	InputCheck(_DeltaTime);
 }
 
 void Hero::IdleStart()
@@ -195,6 +205,8 @@ void Hero::MoveStart(float _DeltaTime)
 
 void Hero::Kick(float _DeltaTime)
 {
+	InputCheck(_DeltaTime);
+
 	if (true == Renderer->IsCurAnimationEnd())
 	{
 		StateChange(EHeroState::Idle);
@@ -209,7 +221,7 @@ void Hero::Kick(float _DeltaTime)
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
-	if (UEngineInput::IsPress(_Key1) || UEngineInput::IsPress(_Key2))
+	//if (UEngineInput::IsPress(_Key1) || UEngineInput::IsPress(_Key2))
 	{
 		if (0 < KickDelayTimeCount)
 		{ 

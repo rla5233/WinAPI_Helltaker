@@ -25,16 +25,12 @@ public:
 	void Death(float _DeltaTime);
 	void DeathStart();
 
+	void InputCheck(float _DeltaTime);
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
 	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
 
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
-
-	bool GetCanActionCheck() const
-	{
-		return CanActionCheck;
-	}
 
 protected:
 	void BeginPlay() override;
