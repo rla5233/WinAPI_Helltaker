@@ -395,15 +395,6 @@ void ChapterManager::ResetStart()
 	LevelStart(nullptr);
 }
 
-void ChapterManager::CutSecene(float _DeltaTime)
-{
-}
-
-void ChapterManager::CutSeceneStart()
-{
-
-}
-
 void ChapterManager::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);

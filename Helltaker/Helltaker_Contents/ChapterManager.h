@@ -87,8 +87,8 @@ protected:
 	void Transition(float _DeltaTime);
 	void TransitionStart();
 
-	void CutSecene(float _DeltaTime);
-	void CutSeceneStart();
+	virtual void CutSecene(float _DeltaTime) {};
+	virtual void CutSeceneStart() {};
 
 	void Reset(float _DeltaTime);
 	void ResetStart();

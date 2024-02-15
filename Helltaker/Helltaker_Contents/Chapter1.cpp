@@ -53,3 +53,13 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	// 디버그용
 	ShowLocationPoint();
 }
+
+void Chapter1::CutSecene(float _DeltaTime)
+{
+
+}
+
+void Chapter1::CutSeceneStart()
+{
+
+}
