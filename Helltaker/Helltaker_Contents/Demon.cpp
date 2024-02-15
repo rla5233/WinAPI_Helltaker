@@ -1,21 +1,21 @@
-#include "Devil.h"
+#include "Demon.h"
 
 #include "ContentsHelper.h"
 
-bool Devil::IsLoad = false;
+bool Demon::IsLoad = false;
 
-Devil::Devil()
+Demon::Demon()
 {
 }
 
-Devil::~Devil()
+Demon::~Demon()
 {
 }
 
-void Devil::BeginPlay()
+void Demon::BeginPlay()
 {
 	RenderActor::BeginPlay();
-		
+
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
@@ -27,18 +27,18 @@ void Devil::BeginPlay()
 	LoveSignSpeed = ContentsHelper::GetTileScale().Y * 0.45f;
 }
 
-void Devil::SetDevil(std::string_view _Name)
+void Demon::SetDemon(std::string_view _Name)
 {
 	std::string AnimationName = _Name.data();
 	AnimationName += "_Idle";
-	Renderer = CreateImageRenderer(RenderOrder::Devil);
+	Renderer = CreateImageRenderer(RenderOrder::Demon);
 	Renderer->SetImage(_Name);
 	Renderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
-	StateChange(EDevilState::Idle);
+	StateChange(EDemonState::Idle);
 }
 
 // LoveSign 상하이동 애니메이션
-void Devil::LoveSignAnimation(float _DeltaTime)
+void Demon::LoveSignAnimation(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 
@@ -63,20 +63,20 @@ void Devil::LoveSignAnimation(float _DeltaTime)
 
 }
 
-void Devil::IdleStart()
+void Demon::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	LoveSignRenderer->SetTransform({ { -TileScale.hX(), - (TileScale.hY() * LoveSignY_Location) }, {TileScale * LoveSignScale}});
-	Renderer->SetTransform({ { 0, 0 }, { TileScale * IdleScale }});
+	LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * LoveSignY_Location) }, {TileScale * LoveSignScale} });
+	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f) }, { TileScale * IdleScale } });
 	Renderer->ChangeAnimation(GetName() + "_Idle");
 }
 
-void Devil::Idle(float _DeltaTime)
+void Demon::Idle(float _DeltaTime)
 {
 	LoveSignAnimation(_DeltaTime);
 }
 
-void Devil::VictoryStart()
+void Demon::VictoryStart()
 {
 	if (nullptr == LoveSignRenderer)
 	{
@@ -86,35 +86,35 @@ void Devil::VictoryStart()
 	LoveSignRenderer->Destroy();
 }
 
-void Devil::Tick(float _DeltaTime)
+void Demon::Tick(float _DeltaTime)
 {
 	RenderActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
 
-void Devil::StateUpdate(float _DeltaTime)
+void Demon::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case EDevilState::Idle:
+	case EDemonState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case EDevilState::Victory:
+	case EDemonState::Victory:
 		break;
 	}
 }
 
-void Devil::StateChange(EDevilState _State)
+void Demon::StateChange(EDemonState _State)
 {
 	if (State != _State)
 	{
 		switch (_State)
 		{
-		case EDevilState::Idle:
+		case EDemonState::Idle:
 			IdleStart();
 			break;
-		case EDevilState::Victory:
+		case EDemonState::Victory:
 			VictoryStart();
 			break;
 		}

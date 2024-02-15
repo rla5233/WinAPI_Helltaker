@@ -37,7 +37,7 @@ protected:
 private:
 	UImageRenderer* Renderer = nullptr;
 
-	const FVector StoneScale = { 0.825f, 0.9f };
+	const FVector StoneScale = { 0.825f, 0.85f };
 
 	static bool IsLoad;
 };

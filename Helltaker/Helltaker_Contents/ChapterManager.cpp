@@ -7,7 +7,7 @@
 #include "Stone.h"
 #include "Thorn.h"
 #include "Scene.h"
-#include "Devil.h"
+#include "Demon.h"
 #include "Hero.h"
 #include "UI.h"
 
@@ -44,8 +44,9 @@ void ChapterManager::BeginPlay()
 
 void ChapterManager::SetChapterStartLocation(int _X, int _Y)
 {
-	FVector Point = { _X, _Y };
-	ChapterStartLocation = Point * ContentsHelper::GetTileScale();
+	FVector TileScale = ContentsHelper::GetTileScale();
+	FVector Point = FVector(_X, _Y) * TileScale;
+	ChapterStartLocation = Point + FVector(TileScale.X * 0.1f, TileScale.Y * 0.25f);
 }
 
 void ChapterManager::SetChapterEndPoint(int _X, int _Y)
@@ -133,14 +134,14 @@ void ChapterManager::SpawnHero(int _X, int _Y)
 	AllActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
-void ChapterManager::SpawnDevil(int _X, int _Y, std::string_view _Name)
+void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Devil* NewDevil =  SpawnActor<Devil>(static_cast<int>(UpdateOrder::Devil));
-	NewDevil->SetName(_Name);
-	NewDevil->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewDevil->SetDevil(_Name);
-	AllActors[reinterpret_cast<__int64>(NewDevil)] = NewDevil;
+	Demon* NewDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
+	NewDemon->SetName(_Name);
+	NewDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	NewDemon->SetDemon(_Name);
+	AllActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
 }
 
 void ChapterManager::SpawnSkeleton(int _X, int _Y)
@@ -171,7 +172,7 @@ void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::Thorn));
 	NewThorn->SetName("Thorn");
-	NewThorn->SetActorLocation(ChapterPointToLocation(_X, _Y) + FVector(TileScale.hX(), TileScale.Y * 0.835f));
+	NewThorn->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewThorn->StateChange(_State);
 	AllActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }

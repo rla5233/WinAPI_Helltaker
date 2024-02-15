@@ -3,47 +3,49 @@
 #include "RenderActor.h"
 
 // Ό³Έν :
-class Devil : public RenderActor
+class Demon : public RenderActor
 {
 public:
 	// constructor destructor
-	Devil();
-	~Devil();
-
-	// delete Function
-	Devil(const Devil& _Other) = delete;
-	Devil(Devil&& _Other) noexcept = delete;
-	Devil& operator=(const Devil& _Other) = delete;
-	Devil& operator=(Devil&& _Other) noexcept = delete;
+	Demon();
+	~Demon();
 	
+	// delete Function
+	Demon(const Demon& _Other) = delete;
+	Demon(Demon&& _Other) noexcept = delete;
+	Demon& operator=(const Demon& _Other) = delete;
+	Demon& operator=(Demon&& _Other) noexcept = delete;
+
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
 	void VictoryStart();
 
-	void StateChange(EDevilState _State);
-	void StateUpdate(float _DeltaTime);	
+	void StateChange(EDemonState _State);
+	void StateUpdate(float _DeltaTime);
 
-	void SetDevil(std::string_view _Name);
+	void SetDemon(std::string_view _Name);
 	void LoveSignAnimation(float _DeltaTime);
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
 	UImageRenderer* Renderer = nullptr;
-	
+
 	UImageRenderer* LoveSignRenderer = nullptr;
 	const FVector LoveSignScale = { 0.3f, 0.4f };
 	float LoveSignMove = 0.0f;
 	float LoveSignSpeed = 0.0f;
-	const float LoveSignY_Location = 0.45f;
-	const float LoveSignY_MaxLocation = 0.7f;
+	const float LoveSignY_Location = 0.9f;
+	const float LoveSignY_MaxLocation = 1.1f;
 	bool IsUp = true;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.082f;
-	
-	EDevilState State = EDevilState::None;
+
+	EDemonState State = EDemonState::None;
 	static bool IsLoad;
 };
+

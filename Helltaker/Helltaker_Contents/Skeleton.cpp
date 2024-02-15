@@ -119,7 +119,7 @@ void Skeleton::Idle(float _DeltaTime)
 void Skeleton::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer->SetTransform({ {0, 0}, {TileScale * IdleScale} });
+	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale }});
 
 	switch (SeeDir)
 	{
@@ -161,7 +161,7 @@ void Skeleton::HitMoveEnd(float _DeltaTime)
 void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer->SetTransform({ {0, 0}, {TileScale * HitScale} });
+	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * HitScale } });
 
 	switch (SeeDir)
 	{

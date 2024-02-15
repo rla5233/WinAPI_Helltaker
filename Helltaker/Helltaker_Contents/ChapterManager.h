@@ -58,7 +58,7 @@ public:
 	void CreateChapterUI();
 	void CreateTransition();
 	void SpawnHero(int _X, int _Y);
-	void SpawnDevil(int _X, int _Y, std::string_view _Name);
+	void SpawnDemon(int _X, int _Y, std::string_view _Name);
 	void SpawnSkeleton(int _X, int _Y);
 	void SpawnStone(int _X, int _Y, std::string_view _Name);
 	void SpawnThorn(int _X, int _Y, EThornState _State);
