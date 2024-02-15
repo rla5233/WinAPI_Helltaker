@@ -32,8 +32,7 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 		{ true , true , true , true , true , true , true  }
 	};
 
-	CreateChapterVec(Map);
-	CreateHitActorVec();
+	CreateChapterInfoVec(Map);
 	SetChapterStartLocation(6, 2);
 	SetChapterEndPoint(5, 5);
 

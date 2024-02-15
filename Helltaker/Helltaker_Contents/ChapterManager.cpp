@@ -90,6 +90,11 @@ void ChapterManager::CreateChapterInfoVec(const std::vector<std::vector<bool>>& 
 	}
 }
 
+void ChapterManager::SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor)
+{
+	ChapterInfoVec[_Y][_X].Other = _HitActor;
+}
+
 void ChapterManager::CreateBG(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -151,6 +156,12 @@ void ChapterManager::SpawnSkeleton(int _X, int _Y)
 	NewSkeleton->SetName("Skeleton");
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
+
+	if (nullptr != ChapterInfoVec[_Y][_X].Other)
+	{
+		MsgBoxAssert("HitActor Already Exist");
+	}
+
 	ChapterInfoVec[_Y][_X].Other = NewSkeleton;
 	AllActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
@@ -163,6 +174,12 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 	NewStone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewStone->SetLocationPoint({ _X, _Y });
 	NewStone->SetStoneImg(_Name);
+
+	if (nullptr != ChapterInfoVec[_Y][_X].Other)
+	{
+		MsgBoxAssert("HitActor Already Exist");
+	}
+
 	ChapterInfoVec[_Y][_X].Other = NewStone;
 	AllActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
@@ -212,7 +229,7 @@ void ChapterManager::ShowLocationPoint()
 			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
 			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
 			
-			if (ChapterVec[Y][X])
+			if (true == ChapterInfoVec[Y][X].IsVaild)
 			{
 				GreenPoint[Y][X]->GetRenderer()->SetImage("GreenPoint.png");
 			}
@@ -250,8 +267,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 		Actor.second = nullptr;
 	}
 
-	ChapterVec.clear();
-	HitActorVec.clear();
+	ChapterInfoVec.clear();
 	AllActors.clear();
 }
 

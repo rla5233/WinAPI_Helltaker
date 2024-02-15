@@ -44,7 +44,7 @@ void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
 	HitActor::NextStateCheck(_OtherMoveDir);
 
-	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
+	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetChapterInfoVec();
 	FVector CurLocationPoint = GetLocationPoint();
 
 	switch (_OtherMoveDir)
@@ -87,7 +87,7 @@ void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 	int Next_Y = GetNextLocationPoint().iY();
 	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
 	{
-		if (Map[Next_Y][Next_X])
+		if (true == Map[Next_Y][Next_X].IsVaild)
 		{
 			NextTileCheck(Next_X, Next_Y);
 			return;
@@ -176,7 +176,7 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 	}
 
 	MoveOn();
-	HitActorVecUpdate(EHitActorState::Hit);
+	HitActorInfoUpdate(EHitActorState::Hit);
 }
 
 void Skeleton::Death(float _DeltaTime)
@@ -186,7 +186,7 @@ void Skeleton::Death(float _DeltaTime)
 
 void Skeleton::DeathStart()
 {
-	HitActorVecUpdate(EHitActorState::Death);
+	HitActorInfoUpdate(EHitActorState::Death);
 	CallDestroytoChapter();
 }
 

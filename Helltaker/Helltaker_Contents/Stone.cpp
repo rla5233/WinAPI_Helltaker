@@ -41,7 +41,7 @@ void Stone::BeginPlay()
 
 void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
-	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
+	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetChapterInfoVec();
 	FVector CurLocationPoint = GetLocationPoint();
 
 	switch (_OtherMoveDir)
@@ -82,7 +82,7 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 	int Next_Y = GetNextLocationPoint().iY();
 	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
 	{
-		if (Map[Next_Y][Next_X])
+		if (true == Map[Next_Y][Next_X].IsVaild)
 		{
 			NextTileCheck(Next_X, Next_Y);
 			return;
@@ -118,7 +118,7 @@ void Stone::Idle(float _DeltaTime)
 void Stone::HitStart(EMoveActorDir _OtherMoveDir)
 {
 	MoveOn();
-	HitActorVecUpdate(EHitActorState::Hit);
+	HitActorInfoUpdate(EHitActorState::Hit);
 }
 
 void Stone::Hit(float _DeltaTime)

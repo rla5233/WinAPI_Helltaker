@@ -17,7 +17,7 @@ public:
 	HitActor& operator=(const HitActor& _Other) = delete;
 	HitActor& operator=(HitActor&& _Other) noexcept = delete;
 
-	void HitActorVecUpdate(EHitActorState _NextState);
+	void HitActorInfoUpdate(EHitActorState _NextState);
 
 	void SetHitActorState(EHitActorState _State)
 	{

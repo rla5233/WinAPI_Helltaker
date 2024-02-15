@@ -58,7 +58,7 @@ void Hero::BeginPlay()
 
 void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 {
-	const std::vector<std::vector<bool>>& Map = GetChapter()->GetChapterVec();
+	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetChapterInfoVec();
 	FVector CurLocationPoint = GetLocationPoint();
 	
 	switch (MoveDir)
@@ -85,7 +85,7 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 	int Next_Y = GetNextLocationPoint().iY();
 	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
 	{
-		if (Map[Next_Y][Next_X])
+		if (true == Map[Next_Y][Next_X].IsVaild)
 		{
 			NextTileCheck(Next_X, Next_Y, _DeltaTime, _Key1, _Key2);
 			return;

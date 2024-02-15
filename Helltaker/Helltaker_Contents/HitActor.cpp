@@ -15,7 +15,7 @@ HitActor::~HitActor()
 {
 }
 
-void HitActor::HitActorVecUpdate(EHitActorState _NextState)
+void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 {
 	FVector CurPoint = GetLocationPoint();
 	FVector NextPoint = GetNextLocationPoint();
@@ -23,11 +23,11 @@ void HitActor::HitActorVecUpdate(EHitActorState _NextState)
 	switch (_NextState)
 	{
 	case EHitActorState::Hit:
-		GetChapter()->GetMoveActorVec()[CurPoint.iY()][CurPoint.iX()] = nullptr;
-		GetChapter()->GetMoveActorVec()[NextPoint.iY()][NextPoint.iX()] = this;
+		GetChapter()->SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
+		GetChapter()->SetChapterHitAcotrInfo(NextPoint.iX(), NextPoint.iY(), this);
 		break;
 	case EHitActorState::Death:
-		GetChapter()->GetMoveActorVec()[CurPoint.iY()][CurPoint.iX()] = nullptr;
+		GetChapter()->SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
 		break;
 	default:
 		break;

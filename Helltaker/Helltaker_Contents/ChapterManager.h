@@ -53,7 +53,8 @@ public:
 	}
 
 	void CreateChapterInfoVec(const std::vector<std::vector<bool>>& _Map);
-	
+	void SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor);
+
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
 	void CreateTransition();
@@ -93,8 +94,8 @@ protected:
 	void StateChange(EChapterState _State);
 
 private:
-	std::map<__int64, AActor*> AllActors;
 	std::vector<std::vector<TileInfo>> ChapterInfoVec;
+	std::map<__int64, AActor*> AllActors;
 
 	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;
