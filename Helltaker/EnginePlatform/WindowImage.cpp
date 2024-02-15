@@ -458,3 +458,13 @@ Color8Bit UWindowImage::GetColor(int _X, int _Y, Color8Bit _DefaultColor)
 
 	return Color;
 }
+
+void UWindowImage::DrawRectangle(const FTransform& _Trans)
+{
+	Rectangle(ImageDC, _Trans.iLeft(), _Trans.iTop(), _Trans.iRight(), _Trans.iBottom());
+}
+
+void UWindowImage::DrawEllipse(const FTransform& _Trans)
+{
+	Ellipse(ImageDC, _Trans.iLeft(), _Trans.iTop(), _Trans.iRight(), _Trans.iBottom());
+}

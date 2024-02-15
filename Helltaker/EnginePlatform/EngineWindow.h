@@ -50,6 +50,7 @@ public:
 		ClearColor = _Color;
 	}
 
+
 	FVector GetMousePosition();
 
 protected:

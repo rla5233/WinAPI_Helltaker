@@ -79,6 +79,9 @@ public:
 
 	void Cutting(int _X, int _Y);
 
+	void DrawRectangle(const FTransform& _Trans);
+	void DrawEllipse(const FTransform& _Trans);
+
 	Color8Bit GetColor(int _X, int _Y, Color8Bit _DefaultColor);
 
 	EWIndowImageType GetImageType()
