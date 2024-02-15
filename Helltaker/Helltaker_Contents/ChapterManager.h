@@ -14,6 +14,14 @@ class HitActor;
 class Scene;
 class Hero;
 
+class TileInfo
+{
+public:
+	bool IsVaild = false;
+	bool IsThorn = false;
+	HitActor* Other = nullptr;
+};
+
 // Ό³Έν :
 class ChapterManager : public ULevel
 {
@@ -39,28 +47,12 @@ public:
 
 	void SetChapterEndPoint(int _X, int _Y);
 
-	const std::vector<std::vector<bool>>& GetChapterVec() const
+	const std::vector<std::vector<TileInfo>>& GetChapterInfoVec() const
 	{
-		if (false == IsChapterVecInit)
-		{
-			MsgBoxAssert("ChapterMap Not Exist.");
-		}
-
-		return ChapterVec;
+		return ChapterInfoVec;
 	}
 
-	std::vector<std::vector<HitActor*>>& GetMoveActorVec()
-	{
-		if (false == IsChapterVecInit)
-		{
-			MsgBoxAssert("ChapterMap Not Exist.");
-		}
-
-		return HitActorVec;
-	}
-
-	void CreateChapterVec(const std::vector<std::vector<bool>>& _Map);
-	void CreateHitActorVec();
+	void CreateChapterInfoVec(const std::vector<std::vector<bool>>& _Map);
 	
 	void CreateBG(std::string_view _Name);
 	void CreateChapterUI();
@@ -102,6 +94,7 @@ protected:
 
 private:
 	std::map<__int64, AActor*> AllActors;
+	std::vector<std::vector<TileInfo>> ChapterInfoVec;
 
 	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;
@@ -111,13 +104,9 @@ private:
 	int ChapterWidth = -1;
 	int ChapterHeight = -1;
 
-	std::vector<std::vector<bool>> ChapterVec;
-	std::vector<std::vector<HitActor*>> HitActorVec;
-
 	Hero* PlayerHero = nullptr;
 	Scene* TransitionActor = nullptr;
 	const float TransitionInter = 0.0435f;
 
-	bool IsChapterVecInit = false;
 	static bool IsLoad;
 };

@@ -70,45 +70,21 @@ FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
 	return Location;
 }
 
-void ChapterManager::CreateChapterVec(const std::vector<std::vector<bool>>& _Map)
+void ChapterManager::CreateChapterInfoVec(const std::vector<std::vector<bool>>& _Map)
 {
 	ChapterWidth = static_cast<int>(_Map[0].size());
 	ChapterHeight = static_cast<int>(_Map.size());
-	ChapterVec.resize(ChapterHeight);
+	ChapterInfoVec.resize(ChapterHeight);
 	for (int i = 0; i < ChapterHeight; i++)
 	{
-		ChapterVec[i].resize(ChapterWidth);
+		ChapterInfoVec[i].resize(ChapterWidth);
 	}
 
 	for (int Y = 0; Y < _Map.size(); Y++)
 	{
 		for (int X = 0; X < _Map[Y].size(); X++)
 		{
-			ChapterVec[Y][X] = _Map[Y][X];
-		}
-	}
-
-	IsChapterVecInit = true;
-}
-
-void ChapterManager::CreateHitActorVec()
-{
-	if (false == IsChapterVecInit)
-	{
-		MsgBoxAssert("ChapterMap is Not Exist");
-	}
-
-	HitActorVec.resize(ChapterHeight);
-	for (int i = 0; i < ChapterHeight; i++)
-	{
-		HitActorVec[i].resize(ChapterWidth);
-	}
-
-	for (int Y = 0; Y < ChapterHeight; Y++)
-	{
-		for (int X = 0; X < ChapterWidth; X++)
-		{
-			HitActorVec[Y][X] = nullptr;
+			ChapterInfoVec[Y][X].IsVaild = _Map[Y][X];
 		}
 	}
 }
@@ -174,7 +150,7 @@ void ChapterManager::SpawnSkeleton(int _X, int _Y)
 	NewSkeleton->SetName("Skeleton");
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
-	HitActorVec[_Y][_X] = NewSkeleton;
+	ChapterInfoVec[_Y][_X].Other = NewSkeleton;
 	AllActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
@@ -186,7 +162,7 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 	NewStone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewStone->SetLocationPoint({ _X, _Y });
 	NewStone->SetStoneImg(_Name);
-	HitActorVec[_Y][_X] = NewStone;
+	ChapterInfoVec[_Y][_X].Other = NewStone;
 	AllActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
@@ -207,7 +183,7 @@ HitActor* ChapterManager::GetHitActor(FVector _Point)
 
 HitActor* ChapterManager::GetHitActor(int _X, int _Y)
 {
-	return HitActorVec[_Y][_X];
+	return ChapterInfoVec[_Y][_X].Other;
 }
 
 void ChapterManager::DestroyHitActor(__int64 _HitActor)
