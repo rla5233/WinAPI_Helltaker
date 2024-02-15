@@ -107,6 +107,12 @@ public:
 		return { hX(), hY() };
 	}
 
+	bool IsZeroVector2D() const
+	{
+		return X == 0.0f && Y == 0.0f;
+	}
+
+
 	int iX() const
 	{
 		return std::lround(X);
