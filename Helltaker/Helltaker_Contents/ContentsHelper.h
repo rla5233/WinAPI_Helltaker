@@ -2,6 +2,8 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineCore\EngineCore.h>
 
+#define HELLTAKER_RED Color8Bit(230, 77, 81, 0)
+
 // Ό³Έν :
 class ContentsHelper
 {

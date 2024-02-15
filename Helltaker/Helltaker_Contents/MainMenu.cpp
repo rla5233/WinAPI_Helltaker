@@ -1,4 +1,4 @@
-#include "MainMenu.h"
+﻿#include "MainMenu.h"
 
 #include "BackGround.h"
 #include "Dialogue.h"
@@ -115,10 +115,12 @@ void MainMenu::EnterStart()
 
 	Beel->GetImageRenderer()->SetImage(Beel->GetName() + ".png");
 	Beel->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
-	Beel->GetNameRenderer()->SetText("Name");
+	Beel->GetNameRenderer()->SetText("Beelzebub, The Great Fly");
 	Beel->GetNameRenderer()->SetTextSize(23);
 	Beel->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0}});
-	Beel->GetNameRenderer()->SetTextColor(Color8Bit(255, 0, 0, 0));
+	Beel->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+
+	Booper->GetTextRenderer()->SetText("Greetings little one. Please don't mind me.\nIt is just I, good old Beelzebub.");
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
@@ -229,22 +231,27 @@ void MainMenu::CutScene(float _DeltaTime)
 		switch (SceneIndex)
 		{
 		case 0:
-
+			Booper->GetTextRenderer()->SetText("Do you, by any chance, need a narrator?\n ");
 			break;
 		case 1:
 			Dialogue->GetRenderer()->ActiveOff();
 			Beel->GetImageRenderer()->ActiveOff();
+			Beel->GetNameRenderer()->ActiveOff();
+			Booper->GetTextRenderer()->SetText("Why please, allow me. It will be a pleasure.\n ");
 			break;
 		case 2:
 			SceneActor->CreateImageRenderer(RenderOrder::Scene);
 			SceneActor->GetRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
 			SceneActor->GetRenderer()->SetImage("CutScene1_001.png");
+			Booper->GetTextRenderer()->SetText("You woke up one day with a dream.\nHarem full of demon girls.");
 			break;
 		case 3:
 			SceneActor->GetRenderer()->SetImage("CutScene1_002.png");
+			Booper->GetTextRenderer()->SetText("It was, however, not an easy dream to achieve.\nIt could cost you your life.");
 			break;
 		case 4:
 			SceneActor->GetRenderer()->SetImage("CutScene1_003.png");
+			Booper->GetTextRenderer()->SetText("\"When demon girls are involved, no price is high enough.\"\nYou said, as you ventured down to hell.");
 			break;
 		case 5:
 			StateChange(EMainMenuState::EnterChapter);
@@ -260,9 +267,12 @@ void MainMenu::CutSceneStart()
 	for (UI* MenuBar : MenuBarVec)
 	{
 		MenuBar->GetImageRenderer()->ActiveOff();
+		MenuBar->GetTextRenderer()->ActiveOff();
 	}
 
 	Booper->GetImageRenderer()->ActiveOn();
+	Booper->GetTextRenderer()->ActiveOn();
+	Booper->GetTextRenderer()->SetText("Story of the Helltaker again? Interesting...\n ");
 	SelectChapterNum = 1;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
