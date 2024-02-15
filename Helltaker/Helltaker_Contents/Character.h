@@ -27,4 +27,5 @@ protected:
 
 private:
 	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* NameRenderer = nullptr;
 };

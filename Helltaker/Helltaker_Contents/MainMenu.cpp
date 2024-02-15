@@ -66,6 +66,12 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
 	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
 	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
+	Booper->CreateTextRenderer(RenderOrder::Text);
+	Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.085f) }, { 0, 0 } });
+	Booper->GetTextRenderer()->SetFont("Amiri");
+	Booper->GetTextRenderer()->SetTextSize(22);
+	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+
 	AllActors.push_back(Booper);
 
 	StateChange(EMainMenuState::Begin);
@@ -81,6 +87,8 @@ void MainMenu::Tick(float _DeltaTime)
 
 void MainMenu::Begin(float _DeltaTime)
 {
+	Booper->GetTextRenderer()->SetText("You find yourself surrounded by the void.\nPress [ENTER or A] to continue.");
+
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Enter);
@@ -104,6 +112,7 @@ void MainMenu::EnterStart()
 	if (nullptr == Beel->GetRenderer())
 	{
 		Beel->CreateImageRenderer(RenderOrder::Character);
+		//Beel->CreateTextRenderer(RenderOrder::Character);
 	}	
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -116,14 +125,18 @@ void MainMenu::SelectMenu(float _DeltaTime)
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
 		SetFocusMenuIndex(FocusMenuIndex - 1);
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
 		SetFocusMenuIndex(FocusMenuIndex + 1);
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -146,8 +159,6 @@ void MainMenu::SelectMenu(float _DeltaTime)
 
 void MainMenu::SelectMenuInit()
 {
-   	FVector WinScale = ContentsHelper::GetWindowScale();
-	
 	MenuBarVec.reserve(MenuBarCount);
 	for (int i = 0; i < MenuBarCount; i++)
 	{
@@ -155,6 +166,8 @@ void MainMenu::SelectMenuInit()
 	}
 
 	float interval = 0.0f;
+   	FVector WinScale = ContentsHelper::GetWindowScale();
+	
 	for (UI* MenuBar : MenuBarVec)
 	{
 		MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
@@ -174,6 +187,7 @@ void MainMenu::SelectMenuInit()
 void MainMenu::SelectMenuStart()
 {
 	Booper->GetImageRenderer()->ActiveOff();
+	Booper->GetTextRenderer()->ActiveOff();
 
 	if (false == IsSelectMenuInit)
 	{
