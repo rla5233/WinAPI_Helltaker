@@ -210,6 +210,12 @@ void UImageRenderer::TextRender(float _DeltaTime)
 {
 	FTransform RendererTrans = GetRenderTransForm();
 
+	// ±ÛÀÚ ¼ö
+	float TextCount = static_cast<float>(Text.size());
+
+	//RendererTrans.AddPosition(float4::Up * Size * 0.5f);
+	// RendererTrans.AddPosition(float4::Left * (Size * 0.5f) * (TextCount * 0.5f));
+
 	GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
 }
 
