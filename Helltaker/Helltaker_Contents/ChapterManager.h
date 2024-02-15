@@ -73,8 +73,8 @@ public:
 
 	// 디버그 용
 	void ShowLocationPoint();
-protected:
 
+protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
 

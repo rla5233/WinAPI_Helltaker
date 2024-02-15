@@ -401,8 +401,7 @@ void ChapterManager::CutSecene(float _DeltaTime)
 
 void ChapterManager::CutSeceneStart()
 {
-	GEngine->CreateLevel<Chapter2>("Chapter2");
-	GEngine->ChangeLevel("Chapter2");
+
 }
 
 void ChapterManager::Tick(float _DeltaTime)

@@ -61,6 +61,9 @@
     <ClInclude Include="Demon.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Demon.cpp">
       <Filter>Object\Actor\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Object\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

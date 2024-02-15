@@ -63,7 +63,7 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
 	Booper->CreateTextRenderer(RenderOrder::Text);
 	Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.085f) }, { 0, 0 } });
-	Booper->GetTextRenderer()->SetFont("Amiri");
+	Booper->GetTextRenderer()->SetFont("맑은 고딕");
 	Booper->GetTextRenderer()->SetTextSize(22);
 	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 
@@ -82,7 +82,7 @@ void MainMenu::Tick(float _DeltaTime)
 
 void MainMenu::Begin(float _DeltaTime)
 {
-	Booper->GetTextRenderer()->SetText("You find yourself surrounded by the void.\nPress [ENTER or A] to continue.");
+	Booper->GetTextRenderer()->SetText("당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.");
 
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
@@ -115,12 +115,13 @@ void MainMenu::EnterStart()
 
 	Beel->GetImageRenderer()->SetImage(Beel->GetName() + ".png");
 	Beel->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
-	Beel->GetNameRenderer()->SetText("Beelzebub, The Great Fly");
+	Beel->GetNameRenderer()->SetText("위대한 파리 베엘제붑");
+	Beel->GetNameRenderer()->SetFont("맑은 고딕");
 	Beel->GetNameRenderer()->SetTextSize(23);
 	Beel->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0}});
 	Beel->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
 
-	Booper->GetTextRenderer()->SetText("Greetings little one. Please don't mind me.\nIt is just I, good old Beelzebub.");
+	Booper->GetTextRenderer()->SetText("반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.");
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
@@ -179,7 +180,7 @@ void MainMenu::SelectMenuInit()
 		MenuBar->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
 		MenuBar->CreateTextRenderer(RenderOrder::Text);
 		MenuBar->GetTextRenderer()->SetTransform({ {0, 2}, {0, 0} });
-		MenuBar->GetTextRenderer()->SetFont("Amiri");
+		MenuBar->GetTextRenderer()->SetFont("맑은 고딕");
 		MenuBar->GetTextRenderer()->SetTextSize(20);
 		interval += WinScale.Y / 13.5f;
 	}	
@@ -198,7 +199,7 @@ void MainMenu::SelectMenuStart()
 	}
 
 	SetFocusMenuIndex(0);
-	std::vector<std::string> MenuBarText = { "NEW GAME", "CHAPTER SELECT", "EXIT" };
+	std::vector<std::string> MenuBarText = { "새 게임", "챕터 선택", "나가기" };
 	for (int i = 0; i < MenuBarCount; i++)
 	{
 		if (i == FocusMenuIndex)
@@ -231,27 +232,27 @@ void MainMenu::CutScene(float _DeltaTime)
 		switch (SceneIndex)
 		{
 		case 0:
-			Booper->GetTextRenderer()->SetText("Do you, by any chance, need a narrator?\n ");
+			Booper->GetTextRenderer()->SetText("혹시 해설자가 필요하진 않은가?\n ");
 			break;
 		case 1:
 			Dialogue->GetRenderer()->ActiveOff();
 			Beel->GetImageRenderer()->ActiveOff();
 			Beel->GetNameRenderer()->ActiveOff();
-			Booper->GetTextRenderer()->SetText("Why please, allow me. It will be a pleasure.\n ");
+			Booper->GetTextRenderer()->SetText("허락해준다면 참 고맙겠어.\n ");
 			break;
 		case 2:
 			SceneActor->CreateImageRenderer(RenderOrder::Scene);
 			SceneActor->GetRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
 			SceneActor->GetRenderer()->SetImage("CutScene1_001.png");
-			Booper->GetTextRenderer()->SetText("You woke up one day with a dream.\nHarem full of demon girls.");
+			Booper->GetTextRenderer()->SetText("어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.");
 			break;
 		case 3:
 			SceneActor->GetRenderer()->SetImage("CutScene1_002.png");
-			Booper->GetTextRenderer()->SetText("It was, however, not an easy dream to achieve.\nIt could cost you your life.");
+			Booper->GetTextRenderer()->SetText("하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.");
 			break;
 		case 4:
 			SceneActor->GetRenderer()->SetImage("CutScene1_003.png");
-			Booper->GetTextRenderer()->SetText("\"When demon girls are involved, no price is high enough.\"\nYou said, as you ventured down to hell.");
+			Booper->GetTextRenderer()->SetText("\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.");
 			break;
 		case 5:
 			StateChange(EMainMenuState::EnterChapter);
@@ -272,7 +273,7 @@ void MainMenu::CutSceneStart()
 
 	Booper->GetImageRenderer()->ActiveOn();
 	Booper->GetTextRenderer()->ActiveOn();
-	Booper->GetTextRenderer()->SetText("Story of the Helltaker again? Interesting...\n ");
+	Booper->GetTextRenderer()->SetText("또 헬테이커의 이야기를 들려달라고? 재미있군...\n ");
 	SelectChapterNum = 1;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
