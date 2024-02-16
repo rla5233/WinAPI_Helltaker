@@ -16,7 +16,7 @@ public:
 	Text& operator=(const Text& _Other) = delete;
 	Text& operator=(Text&& _Other) noexcept = delete;
 
-	void TextSetting(std::string_view _Font = "¸¼Àº °íµñ", int _Size, Color8Bit _Color);
+	void TextSetting(float _Size, Color8Bit _Color, std::string_view _Font = "¸¼Àº °íµñ");
 	void SetTransForm(FTransform _FTransform);
 	void SetText(std::string_view _Text);
 

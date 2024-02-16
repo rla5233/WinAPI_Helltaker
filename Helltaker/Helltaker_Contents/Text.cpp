@@ -15,11 +15,11 @@ void Text::CreateTextRenderer(RenderOrder _Order)
 
 
 
-void Text::TextSetting(std::string_view _Font, int _Size, Color8Bit _Color)
+void Text::TextSetting(float _Size, Color8Bit _Color, std::string_view _Font)
 {
-	TextRenderer->SetFont(_Font);
 	TextRenderer->SetTextSize(_Size);
 	TextRenderer->SetTextColor(_Color);
+	TextRenderer->SetFont(_Font);
 }
 
 void Text::SetTransForm(FTransform _FTransform)

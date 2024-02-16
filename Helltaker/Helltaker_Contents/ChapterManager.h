@@ -58,7 +58,7 @@ public:
 	void SetChapterThornInfo(int _X, int _Y, bool _IsUp);
 
 	void CreateBG(std::string_view _Name);
-	void CreateChapterUI(int _ChapterNum);
+	void CreateChapterUI();
 	void CreateTransition();
 	void SpawnHero(int _X, int _Y);
 	void SpawnDemon(int _X, int _Y, std::string_view _Name);

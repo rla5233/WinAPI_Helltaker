@@ -108,7 +108,7 @@ void ChapterManager::CreateBG(std::string_view _Name)
 	AllMapActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
 }
 
-void ChapterManager::CreateChapterUI(int _ChapterNum)
+void ChapterManager::CreateChapterUI()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	UI* ChapterUI = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
