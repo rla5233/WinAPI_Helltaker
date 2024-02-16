@@ -44,14 +44,14 @@ void ChapterManager::BeginPlay()
 	}
 }
 
-void ChapterManager::SetChapterStartLocation(int _X, int _Y)
+void ChapterManager::M_SetChapterStartLocation(int _X, int _Y)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	FVector Point = FVector(_X, _Y) * TileScale;
 	ChapterStartLocation = Point + FVector(TileScale.X * 0.1f, TileScale.Y * 0.25f);
 }
 
-void ChapterManager::SetChapterEndPoint(int _X, int _Y)
+void ChapterManager::M_SetChapterEndPoint(int _X, int _Y)
 {
 	EndPoint_X = _X;
 	EndPoint_Y = _Y;
@@ -73,7 +73,7 @@ FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
 	return Location;
 }
 
-void ChapterManager::CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map)
+void ChapterManager::M_CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map)
 {
 	ChapterWidth = static_cast<int>(_Map[0].size());
 	ChapterHeight = static_cast<int>(_Map.size());
@@ -92,12 +92,12 @@ void ChapterManager::CreateTileInfoVec(const std::vector<std::vector<bool>>& _Ma
 	}
 }
 
-void ChapterManager::SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor)
+void ChapterManager::M_SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor)
 {
 	TileInfoVec[_Y][_X].Other = _HitActor;
 }
 
-void ChapterManager::SetChapterThornInfo(int _X, int _Y, bool _IsUp)
+void ChapterManager::M_SetChapterThornInfo(int _X, int _Y, bool _IsUp)
 {
 	TileInfoVec[_Y][_X].IsThorn = _IsUp;
 }
@@ -111,7 +111,7 @@ void ChapterManager::CreateBG(std::string_view _Name)
 	AllMapActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
 }
 
-void ChapterManager::CreateChapterUI(int _ChapterNumber)
+void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	UI* ChapterUI = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
@@ -153,7 +153,7 @@ void ChapterManager::CreateTransition()
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
-void ChapterManager::SpawnHero(int _X, int _Y, int _ActionPoint)
+void ChapterManager::M_SpawnHero(int _X, int _Y, int _ActionPoint)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
@@ -166,7 +166,7 @@ void ChapterManager::SpawnHero(int _X, int _Y, int _ActionPoint)
 	AllMapActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
-void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
+void ChapterManager::M_SpawnDemon(int _X, int _Y, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Demon* NewDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
@@ -178,7 +178,7 @@ void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
 	AllMapActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
 }
 
-void ChapterManager::SpawnSkeleton(int _X, int _Y)
+void ChapterManager::M_SpawnSkeleton(int _X, int _Y)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
@@ -195,7 +195,7 @@ void ChapterManager::SpawnSkeleton(int _X, int _Y)
 	AllMapActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
-void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
+void ChapterManager::M_SpawnStone(int _X, int _Y, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Stone* NewStone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
@@ -213,7 +213,7 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 	AllMapActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
-void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
+void ChapterManager::M_SpawnThorn(int _X, int _Y, EThornState _State)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::Thorn));
@@ -284,6 +284,11 @@ void ChapterManager::UpdateHeroActionPoint()
 	}
 
 	HeroActionPoint->SetText(PointStr);
+}
+
+void ChapterManager::C_SpawnDialogue()
+{
+
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
@@ -385,8 +390,6 @@ void ChapterManager::CutSeceneStart()
 
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
-
-
 }
 
 void ChapterManager::Reset(float _DeltaTime)

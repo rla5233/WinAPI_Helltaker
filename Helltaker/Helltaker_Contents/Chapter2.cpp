@@ -30,27 +30,27 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 		{ false, false , false , false , true , true , true  }
 	};
 
-	CreateTileInfoVec(Map);
-	SetChapterStartLocation(6, 2);
-	SetChapterEndPoint(4, 4);
+	M_CreateTileInfoVec(Map);
+	M_SetChapterStartLocation(6, 2);
+	M_SetChapterEndPoint(4, 4);
 
 	CreateBG("ChapterBG_002");
-	CreateChapterUI(2);
+	M_CreateChapterUI(2);
 
-	SpawnHero(0, 4, 26);
-	SpawnSkeleton(1, 1);
-	SpawnSkeleton(5, 4);
-	SpawnSkeleton(6, 5);
-	SpawnStone(4, 2, "Stone_003.png");
-	SpawnStone(5, 2, "Stone_005.png");
-	SpawnStone(6, 2, "Stone_007.png");
-	SpawnThorn(1, 2, EThornState::Down);
-	SpawnThorn(3, 1, EThornState::Down);
-	SpawnThorn(4, 1, EThornState::Down);
-	SpawnThorn(4, 2, EThornState::Down);
-	SpawnThorn(5, 2, EThornState::Down);
-	SpawnThorn(5, 3, EThornState::Down);
-	SpawnDemon(4, 5, "Modeus");
+	M_SpawnHero(0, 4, 26);
+	M_SpawnSkeleton(1, 1);
+	M_SpawnSkeleton(5, 4);
+	M_SpawnSkeleton(6, 5);
+	M_SpawnStone(4, 2, "Stone_003.png");
+	M_SpawnStone(5, 2, "Stone_005.png");
+	M_SpawnStone(6, 2, "Stone_007.png");
+	M_SpawnThorn(1, 2, EThornState::Down);
+	M_SpawnThorn(3, 1, EThornState::Down);
+	M_SpawnThorn(4, 1, EThornState::Down);
+	M_SpawnThorn(4, 2, EThornState::Down);
+	M_SpawnThorn(5, 2, EThornState::Down);
+	M_SpawnThorn(5, 3, EThornState::Down);
+	M_SpawnDemon(4, 5, "Modeus");
 
 	// 디버그용
 	ShowLocationPoint();

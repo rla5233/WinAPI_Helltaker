@@ -39,40 +39,45 @@ public:
 	ChapterManager& operator=(const ChapterManager& _Other) = delete;
 	ChapterManager& operator=(ChapterManager&& _Other) noexcept = delete;
 
+	void CreateBG(std::string_view _Name);
+	void CreateTransition();
+
 	FVector ChapterPointToLocation(FVector _Point) const;
 	FVector ChapterPointToLocation(int _X, int _Y) const;
 	
-	void SetChapterStartLocation(int _X, int _Y);
-	FVector GetChapterStartLocation() const
-	{
-		return ChapterStartLocation;
-	}
-
-	void SetChapterEndPoint(int _X, int _Y);
-
 	const std::vector<std::vector<TileInfo>>& GetTileInfoVec() const
 	{
 		return TileInfoVec;
-	}
+	}	
 
-	void CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map);
-	void SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor);
-	void SetChapterThornInfo(int _X, int _Y, bool _IsUp);
+	// Map
+	void M_CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map);
+	void M_SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor);
+	void M_SetChapterThornInfo(int _X, int _Y, bool _IsUp);
 
-	void CreateBG(std::string_view _Name);
-	void CreateChapterUI(int _ChapterNumber);
-	void CreateTransition();
-	void SpawnHero(int _X, int _Y, int _ActionPoint);
-	void SpawnDemon(int _X, int _Y, std::string_view _Name);
-	void SpawnSkeleton(int _X, int _Y);
-	void SpawnStone(int _X, int _Y, std::string_view _Name);
-	void SpawnThorn(int _X, int _Y, EThornState _State);
+	void M_CreateChapterUI(int _ChapterNumber);
+	void M_SpawnHero(int _X, int _Y, int _ActionPoint);
+	void M_SpawnDemon(int _X, int _Y, std::string_view _Name);
+	void M_SpawnSkeleton(int _X, int _Y);
+	void M_SpawnStone(int _X, int _Y, std::string_view _Name);
+	void M_SpawnThorn(int _X, int _Y, EThornState _State);
 
 	HitActor* GetHitActor(FVector _Point);
 	HitActor* GetHitActor(int _X, int _Y);
 	void DestroyHitActor(__int64 _HitActor);
 	void ChangeThornState();
 	void UpdateHeroActionPoint();
+
+	void M_SetChapterStartLocation(int _X, int _Y);
+	FVector M_GetChapterStartLocation() const
+	{
+		return ChapterStartLocation;
+	}
+
+	void M_SetChapterEndPoint(int _X, int _Y);
+
+	// CutScene
+	void C_SpawnDialogue();
 
 	// Debug
 	void ShowLocationPoint();
@@ -91,7 +96,7 @@ protected:
 	void HeroDeathStart();
 
 	virtual void CutSecene(float _DeltaTime) {};
-	void CutSeceneStart();
+	virtual void CutSeceneStart();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();

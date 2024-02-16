@@ -21,8 +21,12 @@ protected:
 
 	void LevelStart(ULevel* _PrevLevel) override;
 
-	void CutSecene(float _DeltaTime) override;
+	void CutSecene(float _DeltaTime) override; 
+	void CutSeceneStart() override;
 
 private:
+	
 
+
+	static bool IsLoad;
 };

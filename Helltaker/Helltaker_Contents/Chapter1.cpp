@@ -2,6 +2,8 @@
 
 #include "ContentsHelper.h"
 
+bool Chapter1::IsLoad = false;
+
 Chapter1::Chapter1()
 {
 }
@@ -13,8 +15,16 @@ Chapter1::~Chapter1()
 void Chapter1::BeginPlay()
 {
 	ChapterManager::BeginPlay();
-	ContentsHelper::LoadImg("BackGround", "ChapterBG_001.png");
-	ContentsHelper::LoadFolder("Chapter\\Demon", "PandeMonica");
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("BackGround", "ChapterBG_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Pand_Idle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Pand_Flust.png");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "PandeMonica");
+
+		IsLoad = true;
+	}	
 }
 
 void Chapter1::LevelStart(ULevel* _PrevLevel)
@@ -32,22 +42,22 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 		{ true , true , true , true , true , true , true  }
 	};
 
-	CreateTileInfoVec(Map);
-	SetChapterStartLocation(6, 2);
-	SetChapterEndPoint(5, 5);
+	M_CreateTileInfoVec(Map);
+	M_SetChapterStartLocation(6, 2);
+	M_SetChapterEndPoint(5, 5);
 
 	CreateBG("ChapterBG_001");
-	CreateChapterUI(1);
+	M_CreateChapterUI(1);
 	
-	SpawnHero(5, 0, 23);
-	SpawnSkeleton(3, 1);
-	SpawnSkeleton(2, 2);
-	SpawnSkeleton(4, 2);
-	SpawnStone(1, 4, "Stone_002.png");
-	SpawnStone(1, 5, "Stone_004.png");
-	SpawnStone(4, 4, "Stone_009.png");
-	SpawnStone(3, 5, "Stone_005.png");
-	SpawnDemon(6, 5, "PandeMonica");
+	M_SpawnHero(5, 0, 23);
+	M_SpawnSkeleton(3, 1);
+	M_SpawnSkeleton(2, 2);
+	M_SpawnSkeleton(4, 2);
+	M_SpawnStone(1, 4, "Stone_002.png");
+	M_SpawnStone(1, 5, "Stone_004.png");
+	M_SpawnStone(4, 4, "Stone_009.png");
+	M_SpawnStone(3, 5, "Stone_005.png");
+	M_SpawnDemon(6, 5, "PandeMonica");
 
 	StateChange(EChapterState::Idle);
 
@@ -57,6 +67,13 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 
 void Chapter1::CutSecene(float _DeltaTime)
 {
+	
 
+}
 
+void Chapter1::CutSeceneStart()
+{
+	ChapterManager::CutSeceneStart();
+
+	int a = 0;
 }

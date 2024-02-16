@@ -23,11 +23,11 @@ void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 	switch (_NextState)
 	{
 	case EHitActorState::Hit:
-		GetChapter()->SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
-		GetChapter()->SetChapterHitAcotrInfo(NextPoint.iX(), NextPoint.iY(), this);
+		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
+		GetChapter()->M_SetChapterHitAcotrInfo(NextPoint.iX(), NextPoint.iY(), this);
 		break;
 	case EHitActorState::Death:
-		GetChapter()->SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
+		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
 		break;
 	default:
 		break;

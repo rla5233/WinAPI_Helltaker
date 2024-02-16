@@ -50,7 +50,7 @@ void Thorn::Up(float _DeltaTime)
 void Thorn::UpStart()
 {
 	Renderer->ChangeAnimation("Thorn_Up");
-	GetChapter()->SetChapterThornInfo(Point_X, Point_Y, true);
+	GetChapter()->M_SetChapterThornInfo(Point_X, Point_Y, true);
 }
 
 void Thorn::Down(float _DeltaTime)
@@ -61,7 +61,7 @@ void Thorn::Down(float _DeltaTime)
 void Thorn::DownStart()
 {
 	Renderer->ChangeAnimation("Thorn_Down");
-	GetChapter()->SetChapterThornInfo(Point_X, Point_Y, false);
+	GetChapter()->M_SetChapterThornInfo(Point_X, Point_Y, false);
 }
 
 void Thorn::Tick(float _DeltaTime)
