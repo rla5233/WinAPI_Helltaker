@@ -38,6 +38,7 @@ void ChapterManager::BeginPlay()
 		// 디버그 용
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
+		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
 
 		IsLoad = true;
 	}
@@ -104,7 +105,7 @@ void ChapterManager::SetChapterThornInfo(int _X, int _Y, bool _IsUp)
 void ChapterManager::CreateBG(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	BackGround* ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	ChapterBG->CreateBackGround(_Name);
 	AllMapActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
 }
@@ -220,7 +221,6 @@ void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
 	NewThorn->SetPoint(_X, _Y);
 	NewThorn->StateChange(_State);
 
-	//ChapterInfoVec[_Y][_X].IsThorn = true;
 	AllThorn.push_back(NewThorn);
 	AllMapActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }
@@ -320,6 +320,11 @@ void ChapterManager::Idle(float _DeltaTime)
 		StateChange(EChapterState::Reset);
 	}
 
+	if (EHeroState::Death == PlayerHero->GetHeroState())
+	{
+		StateChange(EChapterState::HeroDeath);
+	}	
+
 	FVector HeroLocationPoint = PlayerHero->GetLocationPoint();
 	if (HeroLocationPoint.iX() == EndPoint_X && HeroLocationPoint.iY() == EndPoint_Y)
 	{
@@ -329,7 +334,20 @@ void ChapterManager::Idle(float _DeltaTime)
 
 void ChapterManager::IdleStart()
 {
-	
+	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
+	{
+		if (nullptr == MapActors.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		MapActors.second->AllRenderersActiveOn();
+	}
+
+	TransitionActor->GetRenderer()->ActiveOff();
+	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
+	PlayerHero->SeeDirChange(EActorSeeDir::Right);
+	PlayerHero->StateChange(EHeroState::Idle);
 }
 
 void ChapterManager::Transition(float _DeltaTime)
@@ -347,11 +365,35 @@ void ChapterManager::TransitionStart()
 	TransitionActor->GetRenderer()->ChangeAnimation("Transition");
 }
 
+void ChapterManager::HeroDeath(float _DeltaTime)
+{
+	if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		StateChange(EChapterState::Reset);
+	}
+}
+
+void ChapterManager::HeroDeathStart()
+{
+	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
+	{
+		if (nullptr == MapActors.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		MapActors.second->AllRenderersActiveOff();
+	}
+
+	PlayerHero->AllRenderersActiveOn();
+	ChapterBG->AllRenderersActiveOn();
+	ChapterBG->BackGroundChange("DefaultBG.png");
+}
+
 void ChapterManager::Reset(float _DeltaTime)
 {
 	if (true == TransitionActor->GetRenderer()->IsCurAnimationEnd())
 	{
-		TransitionActor->GetRenderer()->ActiveOff();
 		StateChange(EChapterState::Idle);
 	}
 }
@@ -380,6 +422,9 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 	case EChapterState::Transition:
 		Transition(_DeltaTime);
 		break;
+	case EChapterState::HeroDeath:
+		HeroDeath(_DeltaTime);
+		break;
 	case EChapterState::CutScene:
 		CutSecene(_DeltaTime);
 		break;
@@ -402,6 +447,9 @@ void ChapterManager::StateChange(EChapterState _State)
 			break;
 		case EChapterState::Transition:
 			TransitionStart();
+			break;
+		case EChapterState::HeroDeath:
+			HeroDeathStart();
 			break;
 		case EChapterState::CutScene:
 			CutSeceneStart();

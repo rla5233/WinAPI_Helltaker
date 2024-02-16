@@ -55,3 +55,12 @@ ChapterManager* RenderActor::GetChapter()
 	}
 	return Ptr;
 }
+
+void RenderActor::VibrationEffect(UImageRenderer* _Renderer)
+{
+	FTransform OrgTransform = _Renderer->GetTransform();
+
+
+	_Renderer->SetTransform(OrgTransform);
+}
+

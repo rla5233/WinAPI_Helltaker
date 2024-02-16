@@ -37,20 +37,20 @@ void Hero::BeginPlay()
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer = CreateImageRenderer(RenderOrder::Hero);
+	ImageRenderer = CreateImageRenderer(RenderOrder::Hero);
 	
-	Renderer->SetImage("Hero_Left_Idle");
-	Renderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
-	Renderer->CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);	
-	Renderer->CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);	
-	Renderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
+	ImageRenderer->SetImage("Hero_Left_Idle");
+	ImageRenderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
+	ImageRenderer->CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);	
+	ImageRenderer->CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);	
+	ImageRenderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
 	
-	Renderer->CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);	
-	Renderer->CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);	
-	Renderer->CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);	
-	Renderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
+	ImageRenderer->CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);
+	ImageRenderer->CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);
+	ImageRenderer->CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);
+	ImageRenderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
 	
-	Renderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, 0.07f, false);
+	ImageRenderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, DeathInter, false);
 
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHeroState::Idle);
@@ -85,6 +85,11 @@ void Hero::InputCheck(float _DeltaTime)
 		SeeDirChange(EActorSeeDir::Right);
 		ActionCheck(_DeltaTime, 'D', VK_RIGHT);
 	}
+	// Debug
+	else if (UEngineInput::IsPress('K'))
+	{
+		StateChange(EHeroState::Death);
+	}
 }
 
 void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
@@ -118,6 +123,12 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 	{
 		if (true == Map[Next_Y][Next_X].IsVaild)
 		{
+			if (0 >= ActionPoint)
+			{
+				StateChange(EHeroState::Death);
+				return;
+			}
+
 			NextTileCheck(Next_X, Next_Y, _DeltaTime, _Key1, _Key2);
 			return;
 		}
@@ -149,16 +160,16 @@ void Hero::Idle(float _DeltaTime)
 void Hero::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale } });
+	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale } });
 	CanActionCheck = true;
 
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		Renderer->ChangeAnimation("Hero_LIdle");
+		ImageRenderer->ChangeAnimation("Hero_LIdle");
 		break;
 	case EActorSeeDir::Right:
-		Renderer->ChangeAnimation("Hero_RIdle");
+		ImageRenderer->ChangeAnimation("Hero_RIdle");
 		break;
 	}
 }
@@ -179,7 +190,7 @@ void Hero::Move(float _DeltaTime)
 void Hero::MoveStart(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
+	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
 	//MoveDelayTimeCount = MoveDelayTime;
 
 	--ActionPoint;
@@ -191,10 +202,10 @@ void Hero::MoveStart(float _DeltaTime)
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		Renderer->ChangeAnimation("Hero_LMove");
+		ImageRenderer->ChangeAnimation("Hero_LMove");
 		break;
 	case EActorSeeDir::Right:
-		Renderer->ChangeAnimation("Hero_RMove");
+		ImageRenderer->ChangeAnimation("Hero_RMove");
 		break;
 	}
 
@@ -205,13 +216,13 @@ void Hero::Kick(float _DeltaTime)
 {
 	InputCheck(_DeltaTime);
 
-	if (true == Renderer->IsCurAnimationEnd())
+	if (true == ImageRenderer->IsCurAnimationEnd())
 	{
 		StateChange(EHeroState::Idle);
 		return;
 	}
 	
-	if (6 == Renderer->GetCurAnimationImageFrame())
+	if (6 == ImageRenderer->GetCurAnimationImageFrame())
 	{
 		CanActionCheck = true;
 	}
@@ -228,7 +239,7 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		}
 
 		FVector TileScale = ContentsHelper::GetTileScale();
-		Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
+		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
 		CanActionCheck = false;
 		--ActionPoint;
 		KickDelayTimeCount = KickDelayTime;
@@ -244,12 +255,12 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		switch (SeeDir)
 		{
 		case EActorSeeDir::Left:
-			Renderer->AnimationReset();
-			Renderer->ChangeAnimation("Hero_LKick");
+			ImageRenderer->AnimationReset();
+			ImageRenderer->ChangeAnimation("Hero_LKick");
 			break;
 		case EActorSeeDir::Right:
-			Renderer->AnimationReset();
-			Renderer->ChangeAnimation("Hero_RKick");
+			ImageRenderer->AnimationReset();
+			ImageRenderer->ChangeAnimation("Hero_RKick");
 			break;
 		}
 	}
@@ -259,7 +270,7 @@ void Hero::Victory(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	float Diff_Y = TileScale.Y * (IdleScale.Y - VictoryScale.Y) / 2.0f;
-	Renderer->SetTransform({ {0.0f, Diff_Y}, {TileScale * VictoryScale} });
+	ImageRenderer->SetTransform({ {0.0f, Diff_Y}, {TileScale * VictoryScale} });
 
 	if (0 > VictoryTimeCount)
 	{
@@ -275,21 +286,24 @@ void Hero::VictoryStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
-		Renderer->ChangeAnimation("Hero_LVictory");
+		ImageRenderer->ChangeAnimation("Hero_LVictory");
 		break;
 	case EActorSeeDir::Right:
-		Renderer->ChangeAnimation("Hero_RVictory");
+		ImageRenderer->ChangeAnimation("Hero_RVictory");
 		break;
 	}
 }
 
 void Hero::Death(float _DeltaTime)
 {
+
 }
 
 void Hero::DeathStart()
 {
-
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer->SetTransform({ {0.0f, (WinScale.Y * 1.15f) * (-0.25f)}, {WinScale.X * 0.375f, WinScale.Y * 1.15f} });
+	ImageRenderer->ChangeAnimation("Hero_Death");
 }
 
 void Hero::Tick(float _DeltaTime)

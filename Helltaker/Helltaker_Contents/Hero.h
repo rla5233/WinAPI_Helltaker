@@ -39,6 +39,16 @@ public:
 		ActionPoint = _Value;
 	}
 
+	EHeroState GetHeroState() const
+	{
+		return State;
+	}
+
+	UImageRenderer* GetImageRenderer()
+	{
+		return ImageRenderer;
+	}
+
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
 
@@ -47,7 +57,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
 	int ActionPoint = -1;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
@@ -58,14 +68,13 @@ private:
 	const float MoveTime = MoveInter * 6;
 	float MoveTimeCount = MoveTime;
 
-	//const float MoveDelayTime = 0.02f;
-	//float MoveDelayTimeCount = 0.0f;
-
 	const FVector KickScale = { 0.95f, 0.95f };
 	const float KickInter = 0.016f;
 
 	const float KickDelayTime = 0.01f;
 	float KickDelayTimeCount = 0.0f;
+
+	const float DeathInter = 0.05f;
 
 	const FVector VictoryScale = { 0.9f, 1.2f };
 	const float VictoryInter = 0.15f;

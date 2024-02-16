@@ -111,3 +111,19 @@ void AActor::ActiveUpdate(float _DeltaTime)
 		Collision->ActiveUpdate(_DeltaTime);
 	}
 }
+
+void AActor::AllRenderersActiveOff()
+{
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->ActiveOff();
+	}
+}
+
+void AActor::AllRenderersActiveOn()
+{
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->ActiveOn();
+	}
+}

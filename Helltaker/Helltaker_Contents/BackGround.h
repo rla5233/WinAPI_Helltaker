@@ -19,8 +19,13 @@ public:
 	void CreateBackGround(std::string_view _Name);
 	void BackGroundChange(std::string_view _Name);
 
+	UImageRenderer* GetImageRenderer()
+	{
+		return ImageRenderer;
+	}
+
 protected:
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
 };

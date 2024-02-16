@@ -73,6 +73,7 @@ enum class EChapterState
 {
 	None,
 	Idle,
+	HeroDeath,
 	Transition,
 	CutScene,
 	Reset,

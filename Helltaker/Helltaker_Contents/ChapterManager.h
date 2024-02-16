@@ -10,6 +10,7 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
+class BackGround;
 class HitActor;
 class Scene;
 class Thorn;
@@ -89,6 +90,9 @@ protected:
 	void Transition(float _DeltaTime);
 	void TransitionStart();
 
+	void HeroDeath(float _DeltaTime);
+	void HeroDeathStart();
+
 	virtual void CutSecene(float _DeltaTime) {};
 	virtual void CutSeceneStart() {};
 
@@ -112,10 +116,11 @@ private:
 	int ChapterWidth = -1;
 	int ChapterHeight = -1;
 
+	const float TransitionInter = 0.0435f;
+	BackGround* ChapterBG = nullptr;
+	Scene* TransitionActor = nullptr;
 	Text* HeroActionPoint = nullptr;
 	Hero* PlayerHero = nullptr;
-	Scene* TransitionActor = nullptr;
-	const float TransitionInter = 0.0435f;
 
 	static bool IsLoad;
 };

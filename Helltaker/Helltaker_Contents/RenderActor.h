@@ -27,6 +27,9 @@ public:
 	ChapterManager* GetChapter();
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
+
+	void VibrationEffect(UImageRenderer* _Renderer);
+
 protected:
 	
 private:
