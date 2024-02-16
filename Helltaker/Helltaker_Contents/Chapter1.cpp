@@ -75,5 +75,7 @@ void Chapter1::CutSeceneStart()
 {
 	ChapterManager::CutSeceneStart();
 
+	C_SpawnDialogue("DialogueBG_Hell.png");
+	C_SpawnBooper();
 	int a = 0;
 }

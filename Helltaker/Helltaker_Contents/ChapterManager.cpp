@@ -33,12 +33,16 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
 
 		// µð¹ö±× ¿ë
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
+
 		ContentsHelper::LoadFolder("Scene", "Transition");
+		ContentsHelper::LoadFolder("UI", "Booper");
 		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+
 
 		IsLoad = true;
 	}
@@ -286,9 +290,35 @@ void ChapterManager::UpdateHeroActionPoint()
 	HeroActionPoint->SetText(PointStr);
 }
 
-void ChapterManager::C_SpawnDialogue()
+void ChapterManager::C_SpawnDialogue(std::string_view _ImageName)
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Scene* Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
+	Dialogue->SetName("Dialogue");
+	Dialogue->CreateImageRenderer(RenderOrder::Scene);
+	Dialogue->GetImageRenderer()->SetImage(_ImageName);
+	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
+	AllCutSceneActors.push_back(Dialogue);
+}
 
+void ChapterManager::C_SpawnBooper()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+	C_Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
+	C_Booper->SetName("Booper");
+	C_Booper->CreateImageRenderer(RenderOrder::UI);
+	C_Booper->GetImageRenderer()->SetImage(C_Booper->GetName());
+	C_Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
+	C_Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	C_Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
+	C_Booper->CreateTextRenderer(RenderOrder::Text);
+	C_Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.085f) }, { 0, 0 } });
+	C_Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
+	C_Booper->GetTextRenderer()->SetTextSize(22);
+	C_Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	AllCutSceneActors.push_back(C_Booper);
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)

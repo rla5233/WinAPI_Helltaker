@@ -16,6 +16,7 @@ class Scene;
 class Thorn;
 class Hero;
 class Text;
+class UI;
 
 class TileInfo
 {
@@ -77,7 +78,11 @@ public:
 	void M_SetChapterEndPoint(int _X, int _Y);
 
 	// CutScene
-	void C_SpawnDialogue();
+	void C_SpawnDialogue(std::string_view _ImageName);
+	void C_SpawnBooper();
+
+
+
 
 	// Debug
 	void ShowLocationPoint();
@@ -125,6 +130,10 @@ private:
 	Scene* TransitionActor = nullptr;
 	Text* HeroActionPoint = nullptr;
 	Hero* PlayerHero = nullptr;
+
+	// CutScene
+	UI* C_Booper = nullptr;
+
 
 	static bool IsLoad;
 };
