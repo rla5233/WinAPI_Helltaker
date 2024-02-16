@@ -85,6 +85,7 @@ enum class EHeroState
 	Idle,
 	Move,
 	Kick,
+	Hit,
 	Victory,
 	Death
 };

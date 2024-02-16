@@ -14,6 +14,7 @@ class HitActor;
 class Scene;
 class Thorn;
 class Hero;
+class Text;
 
 class TileInfo
 {
@@ -58,9 +59,9 @@ public:
 	void SetChapterThornInfo(int _X, int _Y, bool _IsUp);
 
 	void CreateBG(std::string_view _Name);
-	void CreateChapterUI();
+	void CreateChapterUI(int _ChapterNumber);
 	void CreateTransition();
-	void SpawnHero(int _X, int _Y);
+	void SpawnHero(int _X, int _Y, int _ActionPoint);
 	void SpawnDemon(int _X, int _Y, std::string_view _Name);
 	void SpawnSkeleton(int _X, int _Y);
 	void SpawnStone(int _X, int _Y, std::string_view _Name);
@@ -70,6 +71,7 @@ public:
 	HitActor* GetHitActor(int _X, int _Y);
 	void DestroyHitActor(__int64 _HitActor);
 	void ChangeThornState();
+	void UpdateHeroActionPoint();
 
 	// 디버그 용
 	void ShowLocationPoint();
@@ -106,9 +108,11 @@ private:
 	int EndPoint_X = -1;
 	int EndPoint_Y = -1;
 
+	int ChapterNumber = -1;
 	int ChapterWidth = -1;
 	int ChapterHeight = -1;
 
+	Text* HeroActionPoint = nullptr;
 	Hero* PlayerHero = nullptr;
 	Scene* TransitionActor = nullptr;
 	const float TransitionInter = 0.0435f;

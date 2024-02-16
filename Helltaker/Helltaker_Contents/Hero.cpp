@@ -165,8 +165,6 @@ void Hero::IdleStart()
 
 void Hero::Move(float _DeltaTime)
 {
-	//InputCheck(_DeltaTime);
-
 	if (true == IsMove())
 	{
 		MoveOneBlock(_DeltaTime);
@@ -174,24 +172,21 @@ void Hero::Move(float _DeltaTime)
 
 	if (false == IsMove())
 	{
-		//CanActionCheck = true;
 		StateChange(EHeroState::Idle);
 	}
 }
 
 void Hero::MoveStart(float _DeltaTime)
 {
-	//if (0 < MoveDelayTimeCount)
-	//{
-	//	MoveDelayTimeCount -= _DeltaTime;
-	//	return;
-	//}
-
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
-	MoveDelayTimeCount = MoveDelayTime;
+	//MoveDelayTimeCount = MoveDelayTime;
+
+	--ActionPoint;
 	CanActionCheck = false;
+
 	GetChapter()->ChangeThornState();
+	GetChapter()->UpdateHeroActionPoint();
 
 	switch (SeeDir)
 	{
@@ -235,8 +230,11 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		FVector TileScale = ContentsHelper::GetTileScale();
 		Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
 		CanActionCheck = false;
+		--ActionPoint;
 		KickDelayTimeCount = KickDelayTime;
+
 		GetChapter()->ChangeThornState();
+		GetChapter()->UpdateHeroActionPoint();
 
 		// Skeleton, Stone 업 캐스팅
 		FVector NextLocationPoint = GetNextLocationPoint();

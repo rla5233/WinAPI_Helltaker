@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "Demon.h"
 #include "Hero.h"
+#include "Text.h"
 #include "UI.h"
 
 #include "Chapter2.h"
@@ -108,7 +109,7 @@ void ChapterManager::CreateBG(std::string_view _Name)
 	AllMapActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
 }
 
-void ChapterManager::CreateChapterUI()
+void ChapterManager::CreateChapterUI(int _ChapterNumber)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	UI* ChapterUI = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
@@ -117,8 +118,24 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
 	ChapterUI->GetImageRenderer()->SetImage(ChapterUI->GetName() + ".png");
 	ChapterUI->GetImageRenderer()->SetTransform({ {0,0}, WinScale });
-
+	ChapterNumber = _ChapterNumber;
 	AllMapActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
+
+	Text* ChapterNum = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
+	ChapterNum->SetActorLocation({ WinScale.X * 0.89f, WinScale.Y * 0.775f });
+	ChapterNum->SetName("ChapterNum");
+	ChapterNum->CreateTextRenderer(RenderOrder::Text);
+	ChapterNum->SetTextTransForm({ {0,0}, {0,0} });
+	ChapterNum->TextSetting(90, Color8Bit::White);
+	ChapterNum->SetText(std::to_string(ChapterNumber));  
+	AllMapActors[reinterpret_cast<__int64>(ChapterNum)] = ChapterNum;
+
+	HeroActionPoint = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
+	HeroActionPoint->SetActorLocation({ WinScale.X * 0.11f, WinScale.Y * 0.775f });
+	HeroActionPoint->CreateTextRenderer(RenderOrder::Text);
+	HeroActionPoint->SetTextTransForm({ {0,0},{0,0} });
+	HeroActionPoint->TextSetting(90, Color8Bit::White);
+	AllMapActors[reinterpret_cast<__int64>(HeroActionPoint)] = HeroActionPoint;
 }
 
 void ChapterManager::CreateTransition()
@@ -134,14 +151,16 @@ void ChapterManager::CreateTransition()
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
-void ChapterManager::SpawnHero(int _X, int _Y)
+void ChapterManager::SpawnHero(int _X, int _Y, int _ActionPoint)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
 	NewHero->SetName("Hero");
 	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewHero->SetLocationPoint({ _X, _Y });
+	NewHero->SetActionPoint(_ActionPoint);
 	PlayerHero = NewHero;
+	HeroActionPoint->SetText(std::to_string(PlayerHero->GetActionPoint()));
 	AllMapActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
@@ -254,39 +273,16 @@ void ChapterManager::ChangeThornState()
 	}
 }
 
-
-// 디버그용
-void ChapterManager::ShowLocationPoint()
+void ChapterManager::UpdateHeroActionPoint()
 {
-	std::vector<std::vector<UI*>> GreenPoint;
+	std::string PointStr = std::to_string(PlayerHero->GetActionPoint());
 	
-	GreenPoint.resize(ChapterHeight);
-	for (int i = 0; i < ChapterHeight; i++)
+	if ("0" == PointStr)
 	{
-		GreenPoint[i].resize(ChapterWidth);
+		PointStr = "X";
 	}
-	
-	for (int Y = 0; Y < ChapterHeight; Y++)
-	{
-		for (int X = 0; X < ChapterWidth; X++)
-		{
-			GreenPoint[Y][X] = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
-			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
-			
-			if (true == ChapterInfoVec[Y][X].IsVaild)
-			{
-				GreenPoint[Y][X]->GetImageRenderer()->SetImage("GreenPoint.png");
-			}
-			else
-			{
-				GreenPoint[Y][X]->GetImageRenderer()->SetImage("RedPoint.png");
-			}
-			
-			GreenPoint[Y][X]->GetImageRenderer()->SetTransform({ { 0,0 }, {2, 2} });
-			AllMapActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
-		}
-	}
+
+	HeroActionPoint->SetText(PointStr);
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
@@ -419,4 +415,38 @@ void ChapterManager::StateChange(EChapterState _State)
 	}
 
 	State = _State;
+}
+
+// 디버그용
+void ChapterManager::ShowLocationPoint()
+{
+	std::vector<std::vector<UI*>> GreenPoint;
+
+	GreenPoint.resize(ChapterHeight);
+	for (int i = 0; i < ChapterHeight; i++)
+	{
+		GreenPoint[i].resize(ChapterWidth);
+	}
+
+	for (int Y = 0; Y < ChapterHeight; Y++)
+	{
+		for (int X = 0; X < ChapterWidth; X++)
+		{
+			GreenPoint[Y][X] = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
+			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
+
+			if (true == ChapterInfoVec[Y][X].IsVaild)
+			{
+				GreenPoint[Y][X]->GetImageRenderer()->SetImage("GreenPoint.png");
+			}
+			else
+			{
+				GreenPoint[Y][X]->GetImageRenderer()->SetImage("RedPoint.png");
+			}
+
+			GreenPoint[Y][X]->GetImageRenderer()->SetTransform({ { 0,0 }, {2, 2} });
+			AllMapActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
+		}
+	}
 }

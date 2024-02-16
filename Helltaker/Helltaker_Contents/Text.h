@@ -17,10 +17,20 @@ public:
 	Text& operator=(Text&& _Other) noexcept = delete;
 
 	void TextSetting(float _Size, Color8Bit _Color, std::string_view _Font = "¸¼Àº °íµñ");
-	void SetTransForm(FTransform _FTransform);
+	void SetTextTransForm(FTransform _FTransform);
 	void SetText(std::string_view _Text);
 
 	void CreateTextRenderer(RenderOrder _Order);
+
+	UImageRenderer* GetTextRenderer()
+	{
+		if (nullptr == TextRenderer)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		return TextRenderer;
+	}
 
 protected:
 

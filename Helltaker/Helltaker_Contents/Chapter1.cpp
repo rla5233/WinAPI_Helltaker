@@ -37,9 +37,9 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	SetChapterEndPoint(5, 5);
 
 	CreateBG("ChapterBG_001");
-	CreateChapterUI();
+	CreateChapterUI(1);
 	
-	SpawnHero(5, 0);
+	SpawnHero(5, 0, 23);
 	SpawnSkeleton(3, 1);
 	SpawnSkeleton(2, 2);
 	SpawnSkeleton(4, 2);

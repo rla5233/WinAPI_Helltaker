@@ -29,6 +29,16 @@ public:
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
 	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
 
+	int GetActionPoint() const
+	{
+		return ActionPoint;
+	}
+
+	void SetActionPoint(int _Value)
+	{
+		ActionPoint = _Value;
+	}
+
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
 
@@ -38,7 +48,7 @@ protected:
 
 private:
 	UImageRenderer* Renderer = nullptr;
-	int ActionPoint = 25;
+	int ActionPoint = -1;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.07f;
@@ -48,8 +58,8 @@ private:
 	const float MoveTime = MoveInter * 6;
 	float MoveTimeCount = MoveTime;
 
-	const float MoveDelayTime = 0.02f;
-	float MoveDelayTimeCount = 0.0f;
+	//const float MoveDelayTime = 0.02f;
+	//float MoveDelayTimeCount = 0.0f;
 
 	const FVector KickScale = { 0.95f, 0.95f };
 	const float KickInter = 0.016f;
