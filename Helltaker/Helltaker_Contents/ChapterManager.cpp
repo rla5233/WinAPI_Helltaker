@@ -105,10 +105,10 @@ void ChapterManager::CreateBG(std::string_view _Name)
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	BackGround* ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	ChapterBG->CreateBackGround(_Name);
-	AllActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
+	AllMapActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
 }
 
-void ChapterManager::CreateChapterUI()
+void ChapterManager::CreateChapterUI(int _ChapterNum)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	UI* ChapterUI = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
@@ -117,7 +117,8 @@ void ChapterManager::CreateChapterUI()
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
 	ChapterUI->GetImageRenderer()->SetImage(ChapterUI->GetName() + ".png");
 	ChapterUI->GetImageRenderer()->SetTransform({ {0,0}, WinScale });
-	AllActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
+
+	AllMapActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
 }
 
 void ChapterManager::CreateTransition()
@@ -130,7 +131,7 @@ void ChapterManager::CreateTransition()
 	TransitionActor->GetRenderer()->SetTransform({ { 0, 0 }, WinScale });
 	TransitionActor->GetRenderer()->SetImage("Transition");
 	TransitionActor->GetRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
-	AllActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
+	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
 void ChapterManager::SpawnHero(int _X, int _Y)
@@ -141,7 +142,7 @@ void ChapterManager::SpawnHero(int _X, int _Y)
 	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewHero->SetLocationPoint({ _X, _Y });
 	PlayerHero = NewHero;
-	AllActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
+	AllMapActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
 void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
@@ -153,7 +154,7 @@ void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
 	NewDemon->SetDemon(_Name);
 
 	ChapterInfoVec[_Y][_X].IsVaild = false;
-	AllActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
+	AllMapActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
 }
 
 void ChapterManager::SpawnSkeleton(int _X, int _Y)
@@ -170,7 +171,7 @@ void ChapterManager::SpawnSkeleton(int _X, int _Y)
 	}
 
 	ChapterInfoVec[_Y][_X].Other = NewSkeleton;
-	AllActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
+	AllMapActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
 void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
@@ -188,7 +189,7 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 	}
 
 	ChapterInfoVec[_Y][_X].Other = NewStone;
-	AllActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
+	AllMapActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
 void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
@@ -202,7 +203,7 @@ void ChapterManager::SpawnThorn(int _X, int _Y, EThornState _State)
 
 	//ChapterInfoVec[_Y][_X].IsThorn = true;
 	AllThorn.push_back(NewThorn);
-	AllActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
+	AllMapActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }
 
 HitActor* ChapterManager::GetHitActor(FVector _Point)
@@ -217,7 +218,7 @@ HitActor* ChapterManager::GetHitActor(int _X, int _Y)
 
 void ChapterManager::DestroyHitActor(__int64 _HitActor)
 {
-	AllActors.erase(_HitActor);
+	AllMapActors.erase(_HitActor);
 }
 
 void ChapterManager::ChangeThornState()
@@ -283,7 +284,7 @@ void ChapterManager::ShowLocationPoint()
 			}
 			
 			GreenPoint[Y][X]->GetImageRenderer()->SetTransform({ { 0,0 }, {2, 2} });
-			AllActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
+			AllMapActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
 		}
 	}
 }
@@ -300,7 +301,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
 
-	for (std::pair<const __int64, AActor*>& Actor : AllActors)
+	for (std::pair<const __int64, AActor*>& Actor : AllMapActors)
 	{
 		if (nullptr == Actor.second)
 		{
@@ -313,7 +314,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 
 	AllThorn.clear();
 	ChapterInfoVec.clear();
-	AllActors.clear();
+	AllMapActors.clear();
 }
 
 void ChapterManager::Idle(float _DeltaTime)

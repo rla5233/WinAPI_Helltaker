@@ -58,7 +58,7 @@ public:
 	void SetChapterThornInfo(int _X, int _Y, bool _IsUp);
 
 	void CreateBG(std::string_view _Name);
-	void CreateChapterUI();
+	void CreateChapterUI(int _ChapterNum);
 	void CreateTransition();
 	void SpawnHero(int _X, int _Y);
 	void SpawnDemon(int _X, int _Y, std::string_view _Name);
@@ -98,7 +98,7 @@ protected:
 
 private:
 	std::vector<std::vector<TileInfo>> ChapterInfoVec;
-	std::map<__int64, AActor*> AllActors;
+	std::map<__int64, AActor*> AllMapActors;
 	std::vector<Thorn*> AllThorn;
 
 	EChapterState State = EChapterState::None;
