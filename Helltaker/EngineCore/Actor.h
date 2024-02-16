@@ -74,8 +74,9 @@ public:
 
 	void ActiveUpdate(float _DeltaTime) override;
 
-	void AllRenderersActiveOff();
+	void CheckReleaseChild();
 
+	void AllRenderersActiveOff();
 	void AllRenderersActiveOn();
 
 protected:

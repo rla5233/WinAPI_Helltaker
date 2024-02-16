@@ -411,7 +411,6 @@ void ChapterManager::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 }
 
-
 void ChapterManager::StateUpdate(float _DeltaTime)
 {
 	switch (State)
