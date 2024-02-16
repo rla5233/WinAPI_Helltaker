@@ -11,7 +11,7 @@
 bool Hero::IsLoad = false;
 
 Hero::Hero()
-	: MoveActor(ContentsHelper::GetWindowScale().X * 0.01f, ContentsHelper::GetWindowScale().X * 5.0f)
+	: MoveActor(ContentsHelper::GetWindowScale().X * 0.25f, ContentsHelper::GetWindowScale().X * 3.0f)
 {}
 
 Hero::~Hero()
