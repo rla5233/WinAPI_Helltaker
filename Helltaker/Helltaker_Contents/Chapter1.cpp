@@ -32,7 +32,7 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 		{ true , true , true , true , true , true , true  }
 	};
 
-	CreateChapterInfoVec(Map);
+	CreateTileInfoVec(Map);
 	SetChapterStartLocation(6, 2);
 	SetChapterEndPoint(5, 5);
 
@@ -58,9 +58,5 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 void Chapter1::CutSecene(float _DeltaTime)
 {
 
-}
-
-void Chapter1::CutSeceneStart()
-{
 
 }

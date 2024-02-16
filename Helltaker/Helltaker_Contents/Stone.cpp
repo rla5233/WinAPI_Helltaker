@@ -41,7 +41,7 @@ void Stone::BeginPlay()
 
 void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
-	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetChapterInfoVec();
+	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
 	FVector CurLocationPoint = GetLocationPoint();
 
 	switch (_OtherMoveDir)

@@ -52,6 +52,9 @@ public:
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
 
+	// Debug
+	void UpdateActionPoint();
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -84,4 +87,7 @@ private:
 	bool CanActionCheck = false;
 	EHeroState State = EHeroState::None;
 	static bool IsLoad;
+
+
+	bool CheatMode = false;
 };

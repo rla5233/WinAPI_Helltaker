@@ -90,11 +90,15 @@ void Hero::InputCheck(float _DeltaTime)
 	{
 		StateChange(EHeroState::Death);
 	}
+	else if (UEngineInput::IsDown('C'))
+	{
+		CheatMode = !CheatMode;
+	}
 }
 
 void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 {
-	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetChapterInfoVec();
+	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
 	FVector CurLocationPoint = GetLocationPoint();
 	
 	switch (MoveDir)
@@ -191,10 +195,10 @@ void Hero::MoveStart(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
-	//MoveDelayTimeCount = MoveDelayTime;
-
-	--ActionPoint;
 	CanActionCheck = false;
+
+	// Debug
+	UpdateActionPoint();
 
 	GetChapter()->ChangeThornState();
 	GetChapter()->UpdateHeroActionPoint();
@@ -241,8 +245,10 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		FVector TileScale = ContentsHelper::GetTileScale();
 		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
 		CanActionCheck = false;
-		--ActionPoint;
 		KickDelayTimeCount = KickDelayTime;
+
+		// Debug
+		UpdateActionPoint();
 
 		GetChapter()->ChangeThornState();
 		GetChapter()->UpdateHeroActionPoint();
@@ -360,4 +366,18 @@ void Hero::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _Key2
 	}
 
 	State = _State;
+}
+
+
+// Debug
+void Hero::UpdateActionPoint()
+{
+	if (false == CheatMode)
+	{
+		--ActionPoint;
+	}
+	else
+	{
+		return;
+	}
 }

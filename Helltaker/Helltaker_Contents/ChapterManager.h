@@ -50,12 +50,12 @@ public:
 
 	void SetChapterEndPoint(int _X, int _Y);
 
-	const std::vector<std::vector<TileInfo>>& GetChapterInfoVec() const
+	const std::vector<std::vector<TileInfo>>& GetTileInfoVec() const
 	{
-		return ChapterInfoVec;
+		return TileInfoVec;
 	}
 
-	void CreateChapterInfoVec(const std::vector<std::vector<bool>>& _Map);
+	void CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map);
 	void SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor);
 	void SetChapterThornInfo(int _X, int _Y, bool _IsUp);
 
@@ -74,7 +74,7 @@ public:
 	void ChangeThornState();
 	void UpdateHeroActionPoint();
 
-	// 디버그 용
+	// Debug
 	void ShowLocationPoint();
 
 protected:
@@ -91,7 +91,7 @@ protected:
 	void HeroDeathStart();
 
 	virtual void CutSecene(float _DeltaTime) {};
-	virtual void CutSeceneStart() {};
+	void CutSeceneStart();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();
@@ -100,9 +100,11 @@ protected:
 	void StateChange(EChapterState _State);
 
 private:
-	std::vector<std::vector<TileInfo>> ChapterInfoVec;
+	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::map<__int64, AActor*> AllMapActors;
 	std::vector<Thorn*> AllThorn;
+
+	std::vector<AActor*> AllCutSceneActors;
 
 	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;

@@ -37,8 +37,8 @@ void ChapterManager::BeginPlay()
 		// 디버그 용
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
-		//ContentsHelper::LoadFolder("Scene", "Transition");
-		//ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		ContentsHelper::LoadFolder("Scene", "Transition");
+		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
 
 		IsLoad = true;
 	}
@@ -73,34 +73,35 @@ FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
 	return Location;
 }
 
-void ChapterManager::CreateChapterInfoVec(const std::vector<std::vector<bool>>& _Map)
+void ChapterManager::CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map)
 {
 	ChapterWidth = static_cast<int>(_Map[0].size());
 	ChapterHeight = static_cast<int>(_Map.size());
-	ChapterInfoVec.resize(ChapterHeight);
+	TileInfoVec.resize(ChapterHeight);
 	for (int i = 0; i < ChapterHeight; i++)
 	{
-		ChapterInfoVec[i].resize(ChapterWidth);
+		TileInfoVec[i].resize(ChapterWidth);
 	}
 
 	for (int Y = 0; Y < _Map.size(); Y++)
 	{
 		for (int X = 0; X < _Map[Y].size(); X++)
 		{
-			ChapterInfoVec[Y][X].IsVaild = _Map[Y][X];
+			TileInfoVec[Y][X].IsVaild = _Map[Y][X];
 		}
 	}
 }
 
 void ChapterManager::SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor)
 {
-	ChapterInfoVec[_Y][_X].Other = _HitActor;
+	TileInfoVec[_Y][_X].Other = _HitActor;
 }
 
 void ChapterManager::SetChapterThornInfo(int _X, int _Y, bool _IsUp)
 {
-	ChapterInfoVec[_Y][_X].IsThorn = _IsUp;
+	TileInfoVec[_Y][_X].IsThorn = _IsUp;
 }
+
 
 void ChapterManager::CreateBG(std::string_view _Name)
 {
@@ -173,7 +174,7 @@ void ChapterManager::SpawnDemon(int _X, int _Y, std::string_view _Name)
 	NewDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewDemon->SetDemon(_Name);
 
-	ChapterInfoVec[_Y][_X].IsVaild = false;
+	TileInfoVec[_Y][_X].IsVaild = false;
 	AllMapActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
 }
 
@@ -185,12 +186,12 @@ void ChapterManager::SpawnSkeleton(int _X, int _Y)
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _X, _Y });
 
-	if (nullptr != ChapterInfoVec[_Y][_X].Other)
+	if (nullptr != TileInfoVec[_Y][_X].Other)
 	{
 		MsgBoxAssert("HitActor Already Exist");
 	}
 
-	ChapterInfoVec[_Y][_X].Other = NewSkeleton;
+	TileInfoVec[_Y][_X].Other = NewSkeleton;
 	AllMapActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
@@ -203,12 +204,12 @@ void ChapterManager::SpawnStone(int _X, int _Y, std::string_view _Name)
 	NewStone->SetLocationPoint({ _X, _Y });
 	NewStone->SetStoneImg(_Name);
 
-	if (nullptr != ChapterInfoVec[_Y][_X].Other)
+	if (nullptr != TileInfoVec[_Y][_X].Other)
 	{
 		MsgBoxAssert("HitActor Already Exist");
 	}
 
-	ChapterInfoVec[_Y][_X].Other = NewStone;
+	TileInfoVec[_Y][_X].Other = NewStone;
 	AllMapActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
@@ -232,7 +233,7 @@ HitActor* ChapterManager::GetHitActor(FVector _Point)
 
 HitActor* ChapterManager::GetHitActor(int _X, int _Y)
 {
-	return ChapterInfoVec[_Y][_X].Other;
+	return TileInfoVec[_Y][_X].Other;
 }
 
 void ChapterManager::DestroyHitActor(__int64 _HitActor)
@@ -308,7 +309,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 	}
 
 	AllThorn.clear();
-	ChapterInfoVec.clear();
+	TileInfoVec.clear();
 	AllMapActors.clear();
 }
 
@@ -368,6 +369,24 @@ void ChapterManager::HeroDeathStart()
 	PlayerHero->AllRenderersActiveOn();
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
+}
+
+void ChapterManager::CutSeceneStart()
+{
+	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
+	{
+		if (nullptr == MapActors.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		MapActors.second->AllRenderersActiveOff();
+	}
+
+	ChapterBG->AllRenderersActiveOn();
+	ChapterBG->BackGroundChange("DefaultBG.png");
+
+
 }
 
 void ChapterManager::Reset(float _DeltaTime)
@@ -459,7 +478,7 @@ void ChapterManager::ShowLocationPoint()
 			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
 			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
 
-			if (true == ChapterInfoVec[Y][X].IsVaild)
+			if (true == TileInfoVec[Y][X].IsVaild)
 			{
 				GreenPoint[Y][X]->GetImageRenderer()->SetImage("GreenPoint.png");
 			}
