@@ -49,6 +49,7 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	SpawnStone(3, 5, "Stone_005.png");
 	SpawnDemon(6, 5, "PandeMonica");
 
+	StateChange(EChapterState::Idle);
 
 	// 디버그용
 	ShowLocationPoint();

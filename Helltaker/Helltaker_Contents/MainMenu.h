@@ -41,9 +41,10 @@ public:
 
 	void Exit(float _DeltaTime);
 
-	void StateUpdate(float _DeltaTime);
-	void StateChange(EMainMenuState _State);	
-	
+	void CreateTransition();
+	void SpawnDialogue();
+	void SpawnBooper();
+
 	void SetFocusMenuIndex(int _Index)
 	{
 		FocusMenuIndex = _Index;
@@ -59,6 +60,9 @@ public:
 		}
 	}
 
+	void StateUpdate(float _DeltaTime);
+	void StateChange(EMainMenuState _State);
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -69,6 +73,8 @@ protected:
 private:
 	std::list<AActor*> AllActors;
 	
+	const float TransitionInter = 0.0435f;
+	Scene* TransitionActor = nullptr;
 	Character* Beel = nullptr;	
 	Scene* Dialogue = nullptr;
 	Scene* SceneActor = nullptr;

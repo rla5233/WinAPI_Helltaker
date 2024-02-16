@@ -33,12 +33,12 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
-		ContentsHelper::LoadFolder("Scene", "Transition");
 
 		// 디버그 용
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
-		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		//ContentsHelper::LoadFolder("Scene", "Transition");
+		//ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
 
 		IsLoad = true;
 	}
@@ -146,9 +146,9 @@ void ChapterManager::CreateTransition()
 	TransitionActor->SetName("Transition");
 	TransitionActor->CreateImageRenderer(RenderOrder::Transition);
 	TransitionActor->SetActorLocation(WinScale.Half2D());
-	TransitionActor->GetRenderer()->SetTransform({ { 0, 0 }, WinScale });
-	TransitionActor->GetRenderer()->SetImage("Transition");
-	TransitionActor->GetRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
+	TransitionActor->GetImageRenderer()->SetTransform({ { 0, 0 }, WinScale });
+	TransitionActor->GetImageRenderer()->SetImage("Transition");
+	TransitionActor->GetImageRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
@@ -289,8 +289,7 @@ void ChapterManager::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);
 	
-	CreateTransition();
-	StateChange(EChapterState::Transition);
+	CreateTransition();	
 }
 
 void ChapterManager::LevelEnd(ULevel* _NextLevel)
@@ -315,6 +314,11 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 
 void ChapterManager::Idle(float _DeltaTime)
 {
+	if (true == TransitionActor->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		TransitionActor->GetImageRenderer()->ActiveOff();
+	}
+
 	if (UEngineInput::IsPress('R'))
 	{
 		StateChange(EChapterState::Reset);
@@ -334,35 +338,11 @@ void ChapterManager::Idle(float _DeltaTime)
 
 void ChapterManager::IdleStart()
 {
-	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
-	{
-		if (nullptr == MapActors.second)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		MapActors.second->AllRenderersActiveOn();
-	}
-
-	TransitionActor->GetRenderer()->ActiveOff();
+	TransitionActor->GetImageRenderer()->ActiveOn();
+	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->SeeDirChange(EActorSeeDir::Right);
 	PlayerHero->StateChange(EHeroState::Idle);
-}
-
-void ChapterManager::Transition(float _DeltaTime)
-{
-	if (true == TransitionActor->GetRenderer()->IsCurAnimationEnd())
-	{
-		TransitionActor->GetRenderer()->ActiveOff();
-		StateChange(EChapterState::Idle);
-	}
-}
-
-void ChapterManager::TransitionStart()
-{
-	TransitionActor->GetRenderer()->AnimationReset();
-	TransitionActor->GetRenderer()->ChangeAnimation("Transition");
 }
 
 void ChapterManager::HeroDeath(float _DeltaTime)
@@ -392,16 +372,18 @@ void ChapterManager::HeroDeathStart()
 
 void ChapterManager::Reset(float _DeltaTime)
 {
-	if (true == TransitionActor->GetRenderer()->IsCurAnimationEnd())
+	if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
 	{
-		StateChange(EChapterState::Idle);
+		LevelEnd(nullptr);
+		LevelStart(nullptr);
 	}
 }
 
 void ChapterManager::ResetStart()
 {
-	LevelEnd(nullptr);
-	LevelStart(nullptr);
+	TransitionActor->GetImageRenderer()->ActiveOn();
+	TransitionActor->GetImageRenderer()->AnimationReset();
+	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
 }
 
 void ChapterManager::Tick(float _DeltaTime)
@@ -417,9 +399,6 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 	{
 	case EChapterState::Idle:
 		Idle(_DeltaTime);
-		break;
-	case EChapterState::Transition:
-		Transition(_DeltaTime);
 		break;
 	case EChapterState::HeroDeath:
 		HeroDeath(_DeltaTime);
@@ -443,9 +422,6 @@ void ChapterManager::StateChange(EChapterState _State)
 		{
 		case EChapterState::Idle:
 			IdleStart();
-			break;
-		case EChapterState::Transition:
-			TransitionStart();
 			break;
 		case EChapterState::HeroDeath:
 			HeroDeathStart();

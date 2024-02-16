@@ -18,13 +18,13 @@ public:
 
 	void CreateImageRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetRenderer()
+	UImageRenderer* GetImageRenderer()
 	{
-		return Renderer;
+		return ImageRenderer;
 	}
 
 protected:
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
 };

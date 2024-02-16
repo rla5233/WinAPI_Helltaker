@@ -87,9 +87,6 @@ protected:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 
-	void Transition(float _DeltaTime);
-	void TransitionStart();
-
 	void HeroDeath(float _DeltaTime);
 	void HeroDeathStart();
 
