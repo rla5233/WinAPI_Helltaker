@@ -36,6 +36,8 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
 
+
+#ifdef DEBUG
 		// 디버그 용
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
@@ -43,6 +45,8 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadFolder("Scene", "Transition");
 		ContentsHelper::LoadFolder("UI", "Booper");
 		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+#endif 
+
 
 
 		IsLoad = true;
@@ -106,7 +110,6 @@ void ChapterManager::M_SetChapterThornInfo(int _X, int _Y, bool _IsUp)
 {
 	TileInfoVec[_Y][_X].IsThorn = _IsUp;
 }
-
 
 void ChapterManager::CreateBG(std::string_view _Name)
 {
@@ -231,22 +234,22 @@ void ChapterManager::M_SpawnThorn(int _X, int _Y, EThornState _State)
 	AllMapActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }
 
-HitActor* ChapterManager::GetHitActor(FVector _Point)
+HitActor* ChapterManager::M_GetHitActor(FVector _Point)
 {
-	return GetHitActor(_Point.iX(), _Point.iY());
+	return M_GetHitActor(_Point.iX(), _Point.iY());
 }
 
-HitActor* ChapterManager::GetHitActor(int _X, int _Y)
+HitActor* ChapterManager::M_GetHitActor(int _X, int _Y)
 {
 	return TileInfoVec[_Y][_X].Other;
 }
 
-void ChapterManager::DestroyHitActor(__int64 _HitActor)
+void ChapterManager::M_DestroyHitActor(__int64 _HitActor)
 {
 	AllMapActors.erase(_HitActor);
 }
 
-void ChapterManager::ChangeThornState()
+void ChapterManager::M_ChangeThornState()
 {
 	for (Thorn* Thorn : AllThorn)
 	{
@@ -267,7 +270,7 @@ void ChapterManager::ChangeThornState()
 	}
 }
 
-void ChapterManager::UpdateHeroActionPoint()
+void ChapterManager::M_UpdateHeroActionPoint()
 {
 	std::string PointStr = std::to_string(PlayerHero->GetActionPoint());
 	

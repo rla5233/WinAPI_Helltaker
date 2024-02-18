@@ -61,8 +61,10 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 
 	StateChange(EChapterState::Idle);
 
-	// 디버그용
+
+#ifdef DEBUG
 	ShowLocationPoint();
+#endif
 }
 
 void Chapter1::CutSecene(float _DeltaTime)

@@ -11,8 +11,6 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
 
-#include <wingdi.h>
-
 MainMenu::MainMenu()
 {
 }

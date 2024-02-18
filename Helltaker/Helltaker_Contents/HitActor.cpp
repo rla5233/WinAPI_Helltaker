@@ -34,7 +34,7 @@ void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 	}	
 }
 
-void HitActor::CallDestroytoChapter()
+void HitActor::InformDestroytoChapter()
 {
-	GetChapter()->DestroyHitActor(reinterpret_cast<__int64>(this));
+	GetChapter()->M_DestroyHitActor(reinterpret_cast<__int64>(this));
 }

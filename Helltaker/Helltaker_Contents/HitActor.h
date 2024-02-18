@@ -29,7 +29,7 @@ public:
 		return State;
 	}
 
-	void CallDestroytoChapter();
+	void InformDestroytoChapter();
 
 
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};

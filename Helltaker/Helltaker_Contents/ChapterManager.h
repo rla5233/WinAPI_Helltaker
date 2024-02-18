@@ -64,11 +64,11 @@ public:
 	void M_SpawnStone(int _X, int _Y, std::string_view _Name);
 	void M_SpawnThorn(int _X, int _Y, EThornState _State);
 
-	HitActor* GetHitActor(FVector _Point);
-	HitActor* GetHitActor(int _X, int _Y);
-	void DestroyHitActor(__int64 _HitActor);
-	void ChangeThornState();
-	void UpdateHeroActionPoint();
+	HitActor* M_GetHitActor(FVector _Point);
+	HitActor* M_GetHitActor(int _X, int _Y);
+	void M_DestroyHitActor(__int64 _HitActor);
+	void M_ChangeThornState();
+	void M_UpdateHeroActionPoint();
 
 	void M_SetChapterStartLocation(int _X, int _Y);
 	FVector M_GetChapterStartLocation() const
@@ -82,7 +82,6 @@ public:
 	void C_SpawnDialogue(std::string_view _Name);
 	void C_SpawnCharacter(std::string_view _Name);
 	void C_SpawnBooper();
-
 
 
 

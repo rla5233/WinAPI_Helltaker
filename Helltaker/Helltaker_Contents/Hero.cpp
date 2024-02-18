@@ -144,7 +144,7 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 
 void Hero::NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2)
 {
-	if (nullptr == GetChapter()->GetHitActor(_X, _Y))
+	if (nullptr == GetChapter()->M_GetHitActor(_X, _Y))
 	{
 		StateChange(EHeroState::None);
 		StateChange(EHeroState::Move, _DeltaTime);
@@ -200,8 +200,8 @@ void Hero::MoveStart(float _DeltaTime)
 	// Debug
 	UpdateActionPoint();
 
-	GetChapter()->ChangeThornState();
-	GetChapter()->UpdateHeroActionPoint();
+	GetChapter()->M_ChangeThornState();
+	GetChapter()->M_UpdateHeroActionPoint();
 
 	switch (SeeDir)
 	{
@@ -250,12 +250,12 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 		// Debug
 		UpdateActionPoint();
 
-		GetChapter()->ChangeThornState();
-		GetChapter()->UpdateHeroActionPoint();
+		GetChapter()->M_ChangeThornState();
+		GetChapter()->M_UpdateHeroActionPoint();
 
 		// Skeleton, Stone 업 캐스팅
 		FVector NextLocationPoint = GetNextLocationPoint();
-		HitActor* Other = GetChapter()->GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+		HitActor* Other = GetChapter()->M_GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
 		Other->NextStateCheck(MoveDir);	
 
 		switch (SeeDir)
