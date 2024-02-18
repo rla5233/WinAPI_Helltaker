@@ -2,6 +2,10 @@
 
 #include "ContentsHelper.h"
 
+
+/////////// Test
+#include "UI.h"
+
 bool Chapter1::IsLoad = false;
 
 const std::vector<const char*> Chap1_Script
@@ -75,18 +79,39 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 #endif
 }
 
-void Chapter1::CutSecene(float _DeltaTime)
+void Chapter1::CutScene(float _DeltaTime)
 {
-	
-
+	switch (C_Phase)
+	{
+	case ECutScenePhase::Start:
+		EnterChooseMenuCheck();
+		break;
+	case ECutScenePhase::Enter:
+		ChooseMenuBar();
+		break;
+	}
 }
 
-void Chapter1::CutSeceneStart()
+void Chapter1::CutSceneStart()
 {
-	ChapterManager::CutSeceneStart();
+	ChapterManager::CutSceneStart();
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
 	C_SpawnCharacter("Pand", "Pand_Idle.png", Chap1_Script[0]);
 	C_SpawnBooper();
 	C_BooperTextSet(Chap1_Script[1]);
+}
+
+void Chapter1::ChooseMenuBar()
+{
+}
+
+void Chapter1::EnterChooseMenuCheck()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_Phase = ECutScenePhase::Enter;
+
+		C_Booper->GetImageRenderer()->ActiveOff();
+	}
 }

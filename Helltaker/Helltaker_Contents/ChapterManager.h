@@ -103,8 +103,8 @@ protected:
 	void HeroDeath(float _DeltaTime);
 	void HeroDeathStart();
 
-	virtual void CutSecene(float _DeltaTime) {};
-	virtual void CutSeceneStart();
+	virtual void CutScene(float _DeltaTime) {};
+	virtual void CutSceneStart();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();
@@ -112,6 +112,9 @@ protected:
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EChapterState _State);
 
+	// ม๘วเ ม฿
+	ECutScenePhase C_Phase = ECutScenePhase::None;
+	UI* C_Booper = nullptr;
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::map<__int64, AActor*> AllMapActors;
@@ -137,7 +140,6 @@ private:
 	std::list<AActor*> AllCutSceneActors;
 
 	Character* C_Character = nullptr;
-	UI* C_Booper = nullptr;
 	
 
 

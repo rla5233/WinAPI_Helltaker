@@ -431,7 +431,7 @@ void ChapterManager::HeroDeathStart()
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
 
-void ChapterManager::CutSeceneStart()
+void ChapterManager::CutSceneStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
 	{
@@ -443,6 +443,7 @@ void ChapterManager::CutSeceneStart()
 		MapActors.second->AllRenderersActiveOff();
 	}
 
+	C_Phase = ECutScenePhase::Start;
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
@@ -481,7 +482,7 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 		HeroDeath(_DeltaTime);
 		break;
 	case EChapterState::CutScene:
-		CutSecene(_DeltaTime);
+		CutScene(_DeltaTime);
 		break;
 	case EChapterState::Reset:
 		Reset(_DeltaTime);
@@ -504,7 +505,7 @@ void ChapterManager::StateChange(EChapterState _State)
 			HeroDeathStart();
 			break;
 		case EChapterState::CutScene:
-			CutSeceneStart();
+			CutSceneStart();
 			break;
 		case EChapterState::Reset:
 			ResetStart();
