@@ -4,6 +4,14 @@
 
 bool Chapter1::IsLoad = false;
 
+const std::vector<const char*> Chap1_Script
+{
+	"피곤한 악마 판데모니카", // Demon 이름
+	"지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?", // 대사 1
+	"우리 집에 가면 알 수 있겠지.", // MenuBar 1
+	"글쎄, 내가 널 도와줘야겠는데?"// MenuBar 2
+};
+
 Chapter1::Chapter1()
 {
 }
@@ -78,7 +86,7 @@ void Chapter1::CutSeceneStart()
 	ChapterManager::CutSeceneStart();
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
+	C_SpawnCharacter("Pand", "Pand_Idle.png", Chap1_Script[0]);
 	C_SpawnBooper();
-	C_BooperTextSet("지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?");
-	C_SpawnCharacter("Pand", "Pand_Idle.png", "피곤한 악마 판데모니카");
+	C_BooperTextSet(Chap1_Script[1]);
 }

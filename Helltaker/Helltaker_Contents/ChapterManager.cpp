@@ -290,7 +290,7 @@ void ChapterManager::C_SpawnDialogue(std::string_view _Name)
 	Dialogue->SetName("Dialogue");
 	Dialogue->CreateImageRenderer(RenderOrder::Scene);
 	Dialogue->GetImageRenderer()->SetImage(_Name);
-	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
+	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y * 0.5045f } });
 	AllCutSceneActors.push_back(Dialogue);
 }
 
@@ -306,9 +306,9 @@ void ChapterManager::C_SpawnBooper()
 	C_Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
 	C_Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
 	C_Booper->CreateTextRenderer(RenderOrder::Text);
-	C_Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.085f) }, { 0, 0 } });
+	C_Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.0995f) }, { 0, 0 } });
 	C_Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
-	C_Booper->GetTextRenderer()->SetTextSize(25);
+	C_Booper->GetTextRenderer()->SetTextSize(35);
 	C_Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	C_Booper->GetTextRenderer()->SetText(" ");
 	AllCutSceneActors.push_back(C_Booper);
@@ -319,7 +319,7 @@ void ChapterManager::C_SpawnCharacter(std::string_view _Name, std::string_view _
 	FVector WinScale = ContentsHelper::GetWindowScale();
 
 	C_Character = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	C_Character->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.375f });
+	C_Character->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
 	C_Character->SetName(_Name);
 	C_Character->CreateImageRenderer(RenderOrder::Character);
 	C_Character->CreateNameRenderer(RenderOrder::Text);
@@ -330,8 +330,8 @@ void ChapterManager::C_SpawnCharacter(std::string_view _Name, std::string_view _
 
 	C_Character->GetNameRenderer()->SetText(_Text);
 	C_Character->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
-	C_Character->GetNameRenderer()->SetTextSize(30);
-	C_Character->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * (0.36f) }, { 0, 0 } });
+	C_Character->GetNameRenderer()->SetTextSize(40);
+	C_Character->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
 	C_Character->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
 }
 
@@ -386,6 +386,12 @@ void ChapterManager::Idle(float _DeltaTime)
 
 	FVector HeroLocationPoint = PlayerHero->GetLocationPoint();
 	if (HeroLocationPoint.iX() == EndPoint_X && HeroLocationPoint.iY() == EndPoint_Y)
+	{
+		StateChange(EChapterState::CutScene);
+	}
+
+	// Debug
+	if (UEngineInput::IsPress('P'))
 	{
 		StateChange(EChapterState::CutScene);
 	}
