@@ -279,14 +279,14 @@ void ChapterManager::UpdateHeroActionPoint()
 	HeroActionPoint->SetText(PointStr);
 }
 
-void ChapterManager::C_SpawnDialogue(std::string_view _ImageName)
+void ChapterManager::C_SpawnDialogue(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Scene* Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
 	Dialogue->SetName("Dialogue");
 	Dialogue->CreateImageRenderer(RenderOrder::Scene);
-	Dialogue->GetImageRenderer()->SetImage(_ImageName);
+	Dialogue->GetImageRenderer()->SetImage(_Name);
 	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
 	AllCutSceneActors.push_back(Dialogue);
 }
@@ -311,24 +311,26 @@ void ChapterManager::C_SpawnBooper()
 	AllCutSceneActors.push_back(C_Booper);
 }
 
-void ChapterManager::C_SpawnCharacter()
+void ChapterManager::C_SpawnCharacter(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 
 	C_Character = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
 	C_Character->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
-	C_Character->SetName("Beel_Fly");
+	C_Character->SetName("_Name");
 	C_Character->CreateImageRenderer(RenderOrder::Character);
 	C_Character->CreateNameRenderer(RenderOrder::Text);
-	//AllCutSceneActors.push_back(Beel);
+	AllCutSceneActors.push_back(C_Character);
 
-	//Beel->GetImageRenderer()->SetImage(Beel->GetName() + ".png");
-	//Beel->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
-	//Beel->GetNameRenderer()->SetText("À§´ëÇÑ ÆÄ¸® º£¿¤Á¦ºÖ");
-	//Beel->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
-	//Beel->GetNameRenderer()->SetTextSize(23);
-	//Beel->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0} });
-	//Beel->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+	C_Character->GetImageRenderer()->SetImage(C_Character->GetName() + ".png");
+	C_Character->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
+
+	//
+	C_Character->GetNameRenderer()->SetText("À§´ëÇÑ ÆÄ¸® º£¿¤Á¦ºÖ");
+	C_Character->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
+	C_Character->GetNameRenderer()->SetTextSize(23);
+	C_Character->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0} });
+	C_Character->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)

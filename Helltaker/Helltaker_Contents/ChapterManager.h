@@ -79,9 +79,9 @@ public:
 	void M_SetChapterEndPoint(int _X, int _Y);
 
 	// CutScene
-	void C_SpawnDialogue(std::string_view _ImageName);
+	void C_SpawnDialogue(std::string_view _Name);
+	void C_SpawnCharacter(std::string_view _Name);
 	void C_SpawnBooper();
-	void C_SpawnCharacter();
 
 
 
