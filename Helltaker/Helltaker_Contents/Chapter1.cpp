@@ -79,5 +79,5 @@ void Chapter1::CutSeceneStart()
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
 	C_SpawnBooper();
-	int a = 0;
+	C_SpawnCharacter("Pand", "Pand_Idle.png", "피곤한 악마 판데모니카");
 }

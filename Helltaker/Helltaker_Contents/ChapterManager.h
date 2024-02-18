@@ -80,7 +80,7 @@ public:
 
 	// CutScene
 	void C_SpawnDialogue(std::string_view _Name);
-	void C_SpawnCharacter(std::string_view _Name);
+	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text);
 	void C_SpawnBooper();
 
 
