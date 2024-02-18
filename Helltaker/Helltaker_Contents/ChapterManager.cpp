@@ -318,6 +318,7 @@ void ChapterManager::C_SpawnBooper()
 	C_Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 	C_Booper->GetTextRenderer()->SetTextSize(22);
 	C_Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	C_Booper->GetTextRenderer()->SetText(" ");
 	AllCutSceneActors.push_back(C_Booper);
 }
 

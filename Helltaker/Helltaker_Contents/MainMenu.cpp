@@ -113,6 +113,7 @@ void MainMenu::SpawnBooper()
 	Booper->GetTextRenderer()->SetFont("맑은 고딕");
 	Booper->GetTextRenderer()->SetTextSize(22);
 	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	Booper->GetTextRenderer()->SetText(" ");
 	AllActors.push_back(Booper);
 }
 
