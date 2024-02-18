@@ -11,6 +11,7 @@
 #include <EngineCore/Level.h>
 
 class BackGround;
+class Character;
 class HitActor;
 class Scene;
 class Thorn;
@@ -80,6 +81,7 @@ public:
 	// CutScene
 	void C_SpawnDialogue(std::string_view _ImageName);
 	void C_SpawnBooper();
+	void C_SpawnCharacter();
 
 
 
@@ -112,9 +114,8 @@ protected:
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::map<__int64, AActor*> AllMapActors;
-	std::vector<Thorn*> AllThorn;
+	std::list <Thorn*> AllThorn;
 
-	std::vector<AActor*> AllCutSceneActors;
 
 	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;
@@ -132,7 +133,11 @@ private:
 	Hero* PlayerHero = nullptr;
 
 	// CutScene
+	std::list<AActor*> AllCutSceneActors;
+
+	Character* C_Character = nullptr;
 	UI* C_Booper = nullptr;
+	
 
 
 	static bool IsLoad;

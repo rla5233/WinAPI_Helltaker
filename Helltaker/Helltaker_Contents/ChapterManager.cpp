@@ -1,8 +1,9 @@
 #include "ChapterManager.h"
 
 #include "ContentsHelper.h"
-#include "HitActor.h"
 #include "BackGround.h"
+#include "Character.h"
+#include "HitActor.h"
 #include "Skeleton.h"
 #include "Stone.h"
 #include "Thorn.h"
@@ -247,33 +248,21 @@ void ChapterManager::DestroyHitActor(__int64 _HitActor)
 
 void ChapterManager::ChangeThornState()
 {
-	if (true == AllThorn.empty())
+	for (Thorn* Thorn : AllThorn)
 	{
-		return;
-	}
-
-	if (EThornState::Up == AllThorn[0]->GetState())
-	{
-		for (Thorn* Thorn : AllThorn)
+		if (nullptr == Thorn)
 		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Thorn is nullptr");
-			}
-
-			Thorn->StateChange(EThornState::Down);
+			MsgBoxAssert("Thorn is nullptr");
 		}
-	}
-	else if (EThornState::Down == AllThorn[0]->GetState())
-	{
-		for (Thorn* Thorn : AllThorn)
-		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Thorn is nullptr");
-			}
-
+	
+		switch (Thorn->GetState())
+		{ 
+		case EThornState::Up:
+			Thorn->StateChange(EThornState::Down);
+			break;
+		case EThornState::Down:
 			Thorn->StateChange(EThornState::Up);
+			break;
 		}
 	}
 }
@@ -320,6 +309,26 @@ void ChapterManager::C_SpawnBooper()
 	C_Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	C_Booper->GetTextRenderer()->SetText(" ");
 	AllCutSceneActors.push_back(C_Booper);
+}
+
+void ChapterManager::C_SpawnCharacter()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+
+	C_Character = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
+	C_Character->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
+	C_Character->SetName("Beel_Fly");
+	C_Character->CreateImageRenderer(RenderOrder::Character);
+	C_Character->CreateNameRenderer(RenderOrder::Text);
+	//AllCutSceneActors.push_back(Beel);
+
+	//Beel->GetImageRenderer()->SetImage(Beel->GetName() + ".png");
+	//Beel->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
+	//Beel->GetNameRenderer()->SetText("À§´ëÇÑ ÆÄ¸® º£¿¤Á¦ºÖ");
+	//Beel->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
+	//Beel->GetNameRenderer()->SetTextSize(23);
+	//Beel->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0} });
+	//Beel->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
