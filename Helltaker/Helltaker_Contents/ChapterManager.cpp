@@ -308,7 +308,7 @@ void ChapterManager::C_SpawnBooper()
 	C_Booper->CreateTextRenderer(RenderOrder::Text);
 	C_Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.085f) }, { 0, 0 } });
 	C_Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
-	C_Booper->GetTextRenderer()->SetTextSize(22);
+	C_Booper->GetTextRenderer()->SetTextSize(25);
 	C_Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	C_Booper->GetTextRenderer()->SetText(" ");
 	AllCutSceneActors.push_back(C_Booper);
@@ -333,6 +333,11 @@ void ChapterManager::C_SpawnCharacter(std::string_view _Name, std::string_view _
 	C_Character->GetNameRenderer()->SetTextSize(30);
 	C_Character->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * (0.36f) }, { 0, 0 } });
 	C_Character->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+}
+
+void ChapterManager::C_BooperTextSet(std::string_view _Text)
+{
+	C_Booper->GetTextRenderer()->SetText(_Text);
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
