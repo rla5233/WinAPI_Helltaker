@@ -26,7 +26,14 @@ public:
 	void C_SetFocusMenuIndex(int _Index);
 	void C_SelectMenuBar();
 
+	void CutSceneStart() override;
+
+	void PhaseUpdate(float _DeltaTime);
+	void PhaseChange(ECutScenePhase _Phase);
+
 protected:
+	virtual void Tick(float _DeltaTime) override;
+
 	// ม๘วเ ม฿
 	UI* C_Booper = nullptr;
 	std::vector<UI*> MenuBar;
@@ -38,6 +45,8 @@ private:
 	std::list<AActor*> AllCutSceneActors;
 
 	Character* C_Character = nullptr;
+	
+	ECutScenePhase Phase = ECutScenePhase::None;
 };
 
 using HellTakerManager = CutSceneManager;

@@ -157,3 +157,46 @@ void CutSceneManager::C_SelectMenuBar()
 
 	}
 }
+
+void CutSceneManager::CutSceneStart()
+{
+	ChapterManager::CutSceneStart();
+
+	Phase = ECutScenePhase::Start;
+}
+
+
+
+void CutSceneManager::PhaseUpdate(float _DeltaTime)
+{
+	switch (Phase)
+	{
+	case ECutScenePhase::Start:
+		break;
+	case ECutScenePhase::Enter:
+		break;
+	}
+}
+
+void CutSceneManager::PhaseChange(ECutScenePhase _Phase)
+{
+	if (Phase != _Phase)
+	{
+		switch (_Phase)
+		{
+		case ECutScenePhase::Start:
+			break;
+		case ECutScenePhase::Enter:
+			break;
+		}
+	}
+
+	Phase = _Phase;
+}
+
+void CutSceneManager::Tick(float _DeltaTime)
+{
+	ChapterManager::Tick(_DeltaTime);
+
+	PhaseUpdate(_DeltaTime);
+}

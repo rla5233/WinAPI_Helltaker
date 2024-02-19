@@ -388,7 +388,6 @@ void ChapterManager::CutSceneStart()
 		MapActors.second->AllRenderersActiveOff();
 	}
 
-	C_Phase = ECutScenePhase::Start;
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }

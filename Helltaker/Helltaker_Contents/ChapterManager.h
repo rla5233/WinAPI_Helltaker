@@ -78,11 +78,8 @@ public:
 
 	void M_SetChapterEndPoint(int _X, int _Y);
 
-
-
 	// Debug
 	void ShowLocationPoint();
-
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
@@ -105,8 +102,6 @@ protected:
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EChapterState _State);
 
-	//
-	ECutScenePhase C_Phase = ECutScenePhase::None;
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::map<__int64, AActor*> AllMapActors;
