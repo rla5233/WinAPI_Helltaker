@@ -96,3 +96,16 @@ void Chapter1::SelectStart()
 	C_MenubarTextSet(0, Chap1_Script[2]);
 	C_MenubarTextSet(1, Chap1_Script[3]);
 }
+
+void Chapter1::SelectMenu()
+{
+	switch (C_GetFocusMenuIndex())
+	{
+	case 1:
+		
+		break;
+	case 2:
+
+		break;
+	}
+}

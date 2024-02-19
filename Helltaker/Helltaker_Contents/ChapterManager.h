@@ -78,6 +78,8 @@ public:
 
 	void M_SetChapterEndPoint(int _X, int _Y);
 
+	void M_StateChange(EChapterState _State);
+	
 	// Debug
 	void ShowLocationPoint();
 protected:
@@ -88,7 +90,6 @@ protected:
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart();
-	void M_StateChange(EChapterState _State);
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();

@@ -22,6 +22,7 @@ protected:
 
 	void CutSceneStart() override;
 	void SelectStart() override;
+	void SelectMenu() override;
 private:
 	
 	static bool IsLoad;

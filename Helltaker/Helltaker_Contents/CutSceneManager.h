@@ -25,7 +25,12 @@ public:
 	void C_BooperTextSet(std::string_view _Text);
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
 
+	int C_GetFocusMenuIndex() const
+	{
+		return FocusMenuIndex;
+	}
 
+	void C_StateChange(ECutSceneState _State);
 protected:
 	virtual void Tick(float _DeltaTime) override;
 
@@ -33,10 +38,10 @@ protected:
 
 	virtual void CutSceneStart() override;
 	virtual void SelectStart();
+	virtual void SelectMenu() {};
 
 private:
 	void C_StateUpdate(float _DeltaTime);
-	void C_StateChange(ECutSceneState _State);
 
 	void Enter(float _DeltaTime);
 	void EnterStart() {};

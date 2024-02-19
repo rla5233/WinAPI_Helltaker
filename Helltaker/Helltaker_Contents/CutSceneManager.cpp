@@ -152,7 +152,7 @@ void CutSceneManager::Select(float _DeltaTime)
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-
+		SelectMenu();
 	}
 }
 
