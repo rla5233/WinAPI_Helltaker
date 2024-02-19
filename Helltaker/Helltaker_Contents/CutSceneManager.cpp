@@ -108,9 +108,14 @@ void CutSceneManager::C_MenubarTextSet(int _Index, std::string_view _Text)
 	MenuBar[_Index]->GetTextRenderer()->SetText(_Text);
 }
 
-void CutSceneManager::C_SceneCharacterSetImage(std::string_view _Name)
+void CutSceneManager::C_CharacterSetImage(std::string_view _Name)
 {
-	SceneCharacter->GetImageRenderer()->SetImage("Pand_Flust.png");
+	SceneCharacter->GetImageRenderer()->SetImage(_Name);
+}
+
+void CutSceneManager::C_CharacterSetTransform(FTransform _FTransform)
+{
+	SceneCharacter->GetImageRenderer()->SetTransform(_FTransform);
 }
 
 void CutSceneManager::C_SpawnMenubar()

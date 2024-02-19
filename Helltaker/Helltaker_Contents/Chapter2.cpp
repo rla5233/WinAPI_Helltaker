@@ -6,13 +6,13 @@ bool Chapter2::IsLoad = false;
 
 const std::vector<const char*> Chap2_Script
 {
-	/* 0 Demon	  */ "피곤한 악마 판데모니카",
-	/* 1 Script 1 */ "지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?",
-	/* 2 MenuBar1 */ "우리 집에 가면 알 수 있겠지.",
-	/* 3 MenuBar2 */ "글쎄, 내가 널 도와줘야겠는데?",
-	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.",
-	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
-	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
+	/* 0 Demon	  */ "음란한 악마 모데우스",
+	/* 1 Script 1 */ "너랑 나랑.지금 바로.",
+	/* 2 MenuBar1 */ "좋아. 이의 없어.",
+	/* 3 MenuBar2 */ "시간 없어.여자애들 모으기 바빠",
+	/* 4 Failed	  */ "다들 그렇게 말하곤... 나중에 도망가려 하더라.\n 혹시 모르니 무릎을 부숴 놔야지.",
+	/* 5 Bad End  */ "모데우스는 커다란 망치를 꺼냈다. 좋은 꼴은 못 볼 것 같다.",
+	/* 6 Success  */ "악마 하렘? 불쌍한 멍청이... 악마들이 너를 갈가리 찢어 버릴 텐데,\n그걸 놓칠 수 없지."
 };
 
 Chapter2::Chapter2()
@@ -138,6 +138,7 @@ void Chapter2::SuccessStart()
 {
 	CutSceneManager::SuccessStart();
 
+	C_CharacterSetImage("Mod_Close.png");
 	C_BooperTextSet(Chap2_Script[6]);
 }
 

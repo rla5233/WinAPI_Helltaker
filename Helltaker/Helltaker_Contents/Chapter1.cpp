@@ -91,6 +91,8 @@ void Chapter1::CutSceneStart()
 	C_SpawnCharacter("Pand", "Pand_Idle.png", Chap1_Script[0]);
 	C_SpawnBooper();
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.255f, WinScale.Y * 0.611f } });
 	C_BooperTextSet(Chap1_Script[1]);
 }
 
@@ -133,7 +135,9 @@ void Chapter1::SuccessStart()
 {
 	CutSceneManager::SuccessStart();
 
-	C_SceneCharacterSetImage("Pand_Flust.png");
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.255f, WinScale.Y * 0.611f } });
+	C_CharacterSetImage("Pand_Flust.png");
 	C_BooperTextSet(Chap1_Script[6]);
 }
 

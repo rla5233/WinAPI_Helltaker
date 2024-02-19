@@ -2,6 +2,8 @@
 
 #include "ChapterManager.h"
 
+#include "EngineBase/Transform.h"
+
 // Ό³Έν :
 class CutSceneManager : public ChapterManager
 {
@@ -24,7 +26,8 @@ public:
 
 	void C_BooperTextSet(std::string_view _Text);
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
-	void C_SceneCharacterSetImage(std::string_view _Name);
+	void C_CharacterSetImage(std::string_view _Name);
+	void C_CharacterSetTransform(FTransform _FTransform);
 
 	int C_GetFocusMenuIndex() const
 	{
