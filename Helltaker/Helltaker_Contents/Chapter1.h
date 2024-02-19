@@ -16,7 +16,6 @@ public:
 	Chapter1& operator=(const Chapter1& _Other) = delete;
 	Chapter1& operator=(Chapter1&& _Other) noexcept = delete;
 
-	void ChooseMenuBar();
 	void EnterChooseMenuCheck();
 
 protected:

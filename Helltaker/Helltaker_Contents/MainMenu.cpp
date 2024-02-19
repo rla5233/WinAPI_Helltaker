@@ -164,18 +164,18 @@ void MainMenu::SelectMenu(float _DeltaTime)
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
 		SetFocusMenuIndex(FocusMenuIndex - 1);
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
 		SetFocusMenuIndex(FocusMenuIndex + 1);
 		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{

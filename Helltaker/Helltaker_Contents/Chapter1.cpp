@@ -87,7 +87,7 @@ void Chapter1::CutScene(float _DeltaTime)
 		EnterChooseMenuCheck();
 		break;
 	case ECutScenePhase::Enter:
-		ChooseMenuBar();
+		C_SelectMenuBar();
 		break;
 	}
 }
@@ -102,16 +102,13 @@ void Chapter1::CutSceneStart()
 	C_BooperTextSet(Chap1_Script[1]);
 }
 
-void Chapter1::ChooseMenuBar()
-{
-}
-
 void Chapter1::EnterChooseMenuCheck()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_Phase = ECutScenePhase::Enter;
-
 		C_Booper->GetImageRenderer()->ActiveOff();
+		C_SpawnMenubar();		
+
+		C_Phase = ECutScenePhase::Enter;
 	}
 }

@@ -82,10 +82,11 @@ public:
 	void C_SpawnDialogue(std::string_view _Name);
 	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text);
 	void C_SpawnBooper();
+	void C_SpawnMenubar();
 	
 	void C_BooperTextSet(std::string_view _Text);
-
-
+	void C_SetFocusMenuIndex(int _Index);
+	void C_SelectMenuBar();
 
 	// Debug
 	void ShowLocationPoint();
@@ -115,6 +116,9 @@ protected:
 	// ม๘วเ ม฿
 	ECutScenePhase C_Phase = ECutScenePhase::None;
 	UI* C_Booper = nullptr;
+	std::vector<UI*> MenuBar;
+	int MenuBarCount = 2;
+	int FocusMenuIndex = -1;
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::map<__int64, AActor*> AllMapActors;
