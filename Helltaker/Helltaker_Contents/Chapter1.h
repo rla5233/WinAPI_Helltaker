@@ -25,7 +25,8 @@ protected:
 	void SelectStart() override;
 	void SelectMenu() override;
 
-	void FailStart() override;
+	void BadEndStart() override;
+	void BadEndSetting() override;
 private:
 	
 	static bool IsLoad;

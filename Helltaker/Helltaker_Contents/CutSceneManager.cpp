@@ -26,6 +26,8 @@ CutSceneManager::~CutSceneManager()
 
 void CutSceneManager::BeginPlay()
 {
+	ChapterManager::BeginPlay();
+
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
@@ -107,7 +109,7 @@ void CutSceneManager::C_MenubarTextSet(int _Index, std::string_view _Text)
 
 void CutSceneManager::C_SpawnMenubar()
 {
-	float interval = 0.0f;
+ 	float interval = 0.0f;
 	FVector WinScale = ContentsHelper::GetWindowScale();
 
 	MenuBar.reserve(MenuBarCount);
@@ -177,25 +179,48 @@ void CutSceneManager::Select(float _DeltaTime)
 	}
 }
 
-void CutSceneManager::Fail(float _DeltaTime)
+void CutSceneManager::BadEnd(float _DeltaTime)
 {
+	switch (FailOrder)
+	{
+	case 1:
+		BadEndSetting();
+		break;
+	case 2:
+		BadEnding();
+		return;
+	}
+
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		++FailOrder;
 	}
-
-	switch (FailOrder)
-	{
-	case 0:
-		
-		break;
-	case 1:
-
-		break;
-	}
 }
 
-void CutSceneManager::FailStart()
+void CutSceneManager::BadEndSetting()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Dialogue->GetImageRenderer()->CreateAnimation("Scene_Death", "Death", 0, 8, 0.05f, false);
+	Dialogue->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.816f, WinScale.Y * 0.444f } });
+	Dialogue->GetImageRenderer()->ChangeAnimation("Scene_Death");
+	SceneCharacter->AllRenderersActiveOff();
+	Booper->GetTextRenderer()->SetTextColor(HELLTAKER_RED);
+	Booper->GetImageRenderer()->ActiveOff();
+	
+	ChapterManager::M_StateChange(EChapterState::None);
+	++FailOrder;
+}
+
+void CutSceneManager::BadEnding()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		ChapterManager::M_StateChange(EChapterState::Reset);
+		C_StateChange(ECutSceneState::None);
+	}	
+}
+
+void CutSceneManager::BadEndStart()
 {
 	Booper->GetImageRenderer()->ActiveOn();
 
@@ -203,6 +228,8 @@ void CutSceneManager::FailStart()
 	{
 		Menu->AllRenderersActiveOff();
 	}
+
+	FailOrder = 0;
 }
 
 void CutSceneManager::Success(float _DeltaTime)
@@ -261,6 +288,7 @@ void CutSceneManager::LevelEnd(ULevel* _NextLevel)
 		Actor = nullptr;
 	}
 
+	MenuBar.clear();
 	AllCutSceneActors.clear();
 }
 
@@ -273,6 +301,12 @@ void CutSceneManager::C_StateUpdate(float _DeltaTime)
 		break;
 	case ECutSceneState::Select:
 		Select(_DeltaTime);
+		break;
+	case ECutSceneState::BadEnd:
+		BadEnd(_DeltaTime);
+		break;
+	case ECutSceneState::Success:
+		Success(_DeltaTime);
 		break;
 	}
 }
@@ -289,8 +323,8 @@ void CutSceneManager::C_StateChange(ECutSceneState _State)
 		case ECutSceneState::Select:
 			SelectStart();
 			break;
-		case ECutSceneState::Fail:
-			FailStart();
+		case ECutSceneState::BadEnd:
+			BadEndStart();
 			break;
 		case ECutSceneState::Success:
 			SuccessStart();

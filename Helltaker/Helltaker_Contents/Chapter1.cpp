@@ -14,7 +14,8 @@ const std::vector<const char*> Chap1_Script
 	"지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?", // 대사 1
 	"우리 집에 가면 알 수 있겠지.", // MenuBar 1
 	"글쎄, 내가 널 도와줘야겠는데?",// MenuBar 2
-	"지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라." // Failed
+	"지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.", // Failed
+	"판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다."// Bad End
 };
 
 Chapter1::Chapter1()
@@ -27,7 +28,7 @@ Chapter1::~Chapter1()
 
 void Chapter1::BeginPlay()
 {
-	ChapterManager::BeginPlay();
+	HellTakerManager::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -103,7 +104,7 @@ void Chapter1::SelectMenu()
 	switch (C_GetFocusMenuIndex())
 	{
 	case 0:
-		C_StateChange(ECutSceneState::Fail);
+		C_StateChange(ECutSceneState::BadEnd);
 		break;
 	case 1:
 		C_StateChange(ECutSceneState::Success);
@@ -111,9 +112,16 @@ void Chapter1::SelectMenu()
 	}
 }
 
-void Chapter1::FailStart()
+void Chapter1::BadEndStart()
 {
-	CutSceneManager::FailStart();
+	CutSceneManager::BadEndStart();
 
 	C_BooperTextSet(Chap1_Script[4]);
+}
+
+void Chapter1::BadEndSetting()
+{
+	CutSceneManager::BadEndSetting();
+
+	C_BooperTextSet(Chap1_Script[5]);
 }

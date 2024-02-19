@@ -139,6 +139,6 @@ enum class ECutSceneState
 	None,
 	Enter,
 	Select,
-	Fail,
+	BadEnd,
 	Success
 };

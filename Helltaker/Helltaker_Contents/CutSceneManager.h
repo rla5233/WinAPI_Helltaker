@@ -41,7 +41,8 @@ protected:
 	virtual void SelectStart();
 	virtual void SelectMenu() {};
 
-	virtual void FailStart();
+	virtual void BadEndStart();
+	virtual void BadEndSetting();
 private:
 	void C_StateUpdate(float _DeltaTime);
 
@@ -50,7 +51,8 @@ private:
 
 	void Select(float _DeltaTime);
 
-	void Fail(float _DeltaTime);
+	void BadEnd(float _DeltaTime);
+	void BadEnding();
 
 	void Success(float _DeltaTime);
 	void SuccessStart();
