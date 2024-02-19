@@ -5,6 +5,7 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <set>
 
 #include <EngineBase/EngineDebug.h>
 #include <EngineBase/EngineMath.h>
@@ -80,6 +81,31 @@ public:
 	void M_SetChapterEndPoint(int _X, int _Y);
 
 	void M_StateChange(EChapterState _State);
+
+
+	template<typename Chapter>
+	void CreateChapter(std::string_view _Name)
+	{
+		if (false == ChapterSet.contains(_Name.data()))
+		{
+			GEngine->CreateLevel<Chapter>(_Name);
+		}
+	}
+
+	void AddChapterSet(std::string _Name)
+	{
+		if (true == ChapterSet.contains(_Name))
+		{
+			MsgBoxAssert("Chapter Already Exist");
+		}
+
+		ChapterSet.insert(_Name);
+	}
+
+	Hero* GetPlayerHero()
+	{
+		return PlayerHero;
+	}
 	
 	// Debug
 	void ShowLocationPoint();
@@ -91,6 +117,7 @@ protected:
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart();
+	virtual void End(float _DeltaTime) {};
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
@@ -104,7 +131,6 @@ private:
 	void ResetStart();
 	void ResetCheck();
 
-	void End(float _DeltaTime);
 	void EndStart();
 
 	void M_StateUpdate(float _DeltaTime);
@@ -132,4 +158,5 @@ private:
 	Demon* ChapterDemon = nullptr;
 
 	static bool IsLoad;
+	static std::set<std::string> ChapterSet;
 };

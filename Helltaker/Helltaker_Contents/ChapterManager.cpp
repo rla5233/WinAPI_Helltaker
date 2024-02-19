@@ -20,6 +20,7 @@
 #include <vector>
 
 bool ChapterManager::IsLoad = false;
+std::set<std::string> ChapterManager::ChapterSet;
 
 ChapterManager::ChapterManager()
 {
@@ -410,11 +411,6 @@ void ChapterManager::ResetCheck()
 	{
 		M_StateChange(EChapterState::Reset);
 	}
-}
-
-void ChapterManager::End(float _DeltaTime)
-{
-
 }
 
 void ChapterManager::EndStart()

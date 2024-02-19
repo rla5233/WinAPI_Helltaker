@@ -20,8 +20,11 @@ protected:
 	void BeginPlay() override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
+	// Chapter
 	void CutSceneStart() override;
+	void End(float _DeltaTime) override;
 	
+	// CutScene
 	void SelectStart() override;
 	void SelectMenu() override;
 

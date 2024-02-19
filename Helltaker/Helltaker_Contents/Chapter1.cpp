@@ -1,6 +1,8 @@
 #include "Chapter1.h"
 
 #include "ContentsHelper.h"
+#include "Chapter2.h"
+#include "Hero.h"
 
 bool Chapter1::IsLoad = false;
 
@@ -34,6 +36,7 @@ void Chapter1::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Pand_Flust.png");
 		ContentsHelper::LoadFolder("Chapter\\Demon", "PandeMonica");
 
+		AddChapterSet("Chapter1");
 		IsLoad = true;
 	}	
 }
@@ -128,4 +131,15 @@ void Chapter1::SuccessStart()
 	CutSceneManager::SuccessStart();
 	
 	C_BooperTextSet(Chap1_Script[6]);
+}
+
+void Chapter1::End(float _DeltaTime)
+{
+	ChapterManager::End(_DeltaTime);
+	
+	if (true == GetPlayerHero()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		CreateChapter<Chapter2>("Chapter2");
+		GEngine->ChangeLevel("Chapter2");
+	}
 }

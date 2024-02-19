@@ -271,10 +271,6 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 
 void Hero::Victory(float _DeltaTime)
 {
-	if (true == ImageRenderer->IsCurAnimationEnd())
-	{
-		
-	}
 }
 
 void Hero::VictoryStart()
