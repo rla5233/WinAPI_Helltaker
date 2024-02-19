@@ -34,8 +34,6 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
-		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
-
 
 #ifdef DEBUG
 		// 디버그 용
@@ -43,14 +41,7 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
 
 		ContentsHelper::LoadFolder("Scene", "Transition");
-		ContentsHelper::LoadFolder("UI", "Booper");
-		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
-		ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
-		ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
 #endif 
-
-
-
 		IsLoad = true;
 	}
 }

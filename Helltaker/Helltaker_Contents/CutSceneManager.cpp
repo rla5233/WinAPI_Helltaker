@@ -13,6 +13,8 @@
 #include "Text.h"
 #include "UI.h"
 
+bool CutSceneManager::IsLoad = false;
+
 CutSceneManager::CutSceneManager()
 {
 }
@@ -21,10 +23,29 @@ CutSceneManager::~CutSceneManager()
 {
 }
 
+
+void CutSceneManager::BeginPlay()
+{
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
+		ContentsHelper::LoadFolder("Scene\\Dialogue", "Death");
+
+#ifdef DEBUG
+		// 디버그 용
+		ContentsHelper::LoadFolder("UI", "Booper");
+		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
+		ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
+#endif 
+		IsLoad = true;
+	}
+}
+
 void CutSceneManager::C_SpawnDialogue(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Scene* Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
 	Dialogue->SetName("Dialogue");
 	Dialogue->CreateImageRenderer(RenderOrder::Scene);

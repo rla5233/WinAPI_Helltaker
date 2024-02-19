@@ -32,6 +32,7 @@ public:
 
 	void C_StateChange(ECutSceneState _State);
 protected:
+	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
@@ -60,6 +61,7 @@ private:
 	std::list<AActor*> AllCutSceneActors;
 
 	Character* SceneCharacter = nullptr;
+	Scene* Dialogue = nullptr;
 	UI* Booper = nullptr;
 	std::vector<UI*> MenuBar;
 	int MenuBarCount = 2;
@@ -68,6 +70,8 @@ private:
 	int FailOrder = -1;
 	
 	ECutSceneState State = ECutSceneState::None;
+
+	static bool IsLoad;
 };
 
 using HellTakerManager = CutSceneManager;
