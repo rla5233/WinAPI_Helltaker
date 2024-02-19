@@ -123,7 +123,6 @@ void CutSceneManager::EnterChooseMenuCheck()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		
 		C_Booper->GetImageRenderer()->ActiveOff();
 		C_SpawnMenubar();
 

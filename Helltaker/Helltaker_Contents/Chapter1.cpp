@@ -85,5 +85,6 @@ void Chapter1::CutSceneStart()
 	C_SpawnDialogue("DialogueBG_Hell.png");
 	C_SpawnCharacter("Pand", "Pand_Idle.png", Chap1_Script[0]);
 	C_SpawnBooper();
+
 	C_BooperTextSet(Chap1_Script[1]);
 }

@@ -87,6 +87,9 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
+	virtual void CutSceneStart();
+	void M_StateChange(EChapterState _State);
+private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 
@@ -94,14 +97,12 @@ protected:
 	void HeroDeathStart();
 
 	void CutScene(float _DeltaTime);
-	virtual void CutSceneStart();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();
 	void ResetCheck();
 
 	void M_StateUpdate(float _DeltaTime);
-	void M_StateChange(EChapterState _State);
 
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;

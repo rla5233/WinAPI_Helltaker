@@ -24,31 +24,31 @@ public:
 
 	void C_BooperTextSet(std::string_view _Text);
 
-	virtual void CutSceneStart() override;
-
-	void C_StateUpdate(float _DeltaTime);
-	void C_StateChange(ECutScenePhase _State);
 
 protected:
 	virtual void Tick(float _DeltaTime) override;
 
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
-	// ม๘วเ ม฿
-	UI* C_Booper = nullptr;
-	std::vector<UI*> MenuBar;
-	int MenuBarCount = 2;
-	int FocusMenuIndex = -1;
+	virtual void CutSceneStart() override;
 
 private:
+	void C_StateUpdate(float _DeltaTime);
+	void C_StateChange(ECutScenePhase _State);
+
 	void EnterChooseMenuCheck();
 	void SetFocusMenuIndex(int _Index);
 	void SelectMenuBar();
 
-	// CutScene
+
+private:
 	std::list<AActor*> AllCutSceneActors;
 
 	Character* C_Character = nullptr;
+	UI* C_Booper = nullptr;
+	std::vector<UI*> MenuBar;
+	int MenuBarCount = 2;
+	int FocusMenuIndex = -1;
 	
 	ECutScenePhase State = ECutScenePhase::None;
 };
