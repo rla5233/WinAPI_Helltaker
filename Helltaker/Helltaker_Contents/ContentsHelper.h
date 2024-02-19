@@ -137,6 +137,6 @@ enum class EMoveActorDir
 enum class ECutScenePhase
 {
 	None,
-	Start,
-	Enter
+	Enter,
+	Select
 };

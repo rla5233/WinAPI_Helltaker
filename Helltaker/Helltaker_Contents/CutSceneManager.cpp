@@ -123,10 +123,11 @@ void CutSceneManager::EnterChooseMenuCheck()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		
 		C_Booper->GetImageRenderer()->ActiveOff();
 		C_SpawnMenubar();
 
-		Phase = ECutScenePhase::Enter;
+		State = ECutScenePhase::Select;
 	}
 }
 
@@ -173,41 +174,41 @@ void CutSceneManager::CutSceneStart()
 {
 	ChapterManager::CutSceneStart();
 
-	Phase = ECutScenePhase::Start;
+	State = ECutScenePhase::Enter;
 }
 
 void CutSceneManager::Tick(float _DeltaTime)
 {
 	ChapterManager::Tick(_DeltaTime);
 
-	PhaseUpdate(_DeltaTime);
+	C_StateUpdate(_DeltaTime);
 }
 
-void CutSceneManager::PhaseUpdate(float _DeltaTime)
+void CutSceneManager::C_StateUpdate(float _DeltaTime)
 {
-	switch (Phase)
+	switch (State)
 	{
-	case ECutScenePhase::Start:
+	case ECutScenePhase::Enter:
 		EnterChooseMenuCheck();
 		break;
-	case ECutScenePhase::Enter:
+	case ECutScenePhase::Select:
 		SelectMenuBar();
 		break;
 	}
 }
 
-void CutSceneManager::PhaseChange(ECutScenePhase _Phase)
+void CutSceneManager::C_StateChange(ECutScenePhase _State)
 {
-	if (Phase != _Phase)
+	if (State != _State)
 	{
-		switch (_Phase)
+		switch (_State)
 		{
-		case ECutScenePhase::Start:
-			break;
 		case ECutScenePhase::Enter:
+			break;
+		case ECutScenePhase::Select:
 			break;
 		}
 	}
 
-	Phase = _Phase;
+	State = _State;
 }

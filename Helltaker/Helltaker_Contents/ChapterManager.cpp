@@ -321,24 +321,24 @@ void ChapterManager::Idle(float _DeltaTime)
 
 	if (UEngineInput::IsPress('R'))
 	{
-		StateChange(EChapterState::Reset);
+		M_StateChange(EChapterState::Reset);
 	}
 
 	if (EHeroState::Death == PlayerHero->GetHeroState())
 	{
-		StateChange(EChapterState::HeroDeath);
+		M_StateChange(EChapterState::HeroDeath);
 	}	
 
 	FVector HeroLocationPoint = PlayerHero->GetLocationPoint();
 	if (HeroLocationPoint.iX() == EndPoint_X && HeroLocationPoint.iY() == EndPoint_Y)
 	{
-		StateChange(EChapterState::CutScene);
+		M_StateChange(EChapterState::CutScene);
 	}
 
 	// Debug
 	if (UEngineInput::IsPress('P'))
 	{
-		StateChange(EChapterState::CutScene);
+		M_StateChange(EChapterState::CutScene);
 	}
 }
 
@@ -355,7 +355,7 @@ void ChapterManager::HeroDeath(float _DeltaTime)
 {
 	if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		StateChange(EChapterState::Reset);
+		M_StateChange(EChapterState::Reset);
 	}
 }
 
@@ -412,10 +412,10 @@ void ChapterManager::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	StateUpdate(_DeltaTime);
+	M_StateUpdate(_DeltaTime);
 }
 
-void ChapterManager::StateUpdate(float _DeltaTime)
+void ChapterManager::M_StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
@@ -436,7 +436,7 @@ void ChapterManager::StateUpdate(float _DeltaTime)
 	}
 }
 
-void ChapterManager::StateChange(EChapterState _State)
+void ChapterManager::M_StateChange(EChapterState _State)
 {
 	if (State != _State)
 	{

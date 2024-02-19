@@ -71,7 +71,7 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	M_SpawnStone(3, 5, "Stone_005.png");
 	M_SpawnDemon(6, 5, "PandeMonica");
 
-	StateChange(EChapterState::Idle);
+	M_StateChange(EChapterState::Idle);
 
 
 #ifdef DEBUG

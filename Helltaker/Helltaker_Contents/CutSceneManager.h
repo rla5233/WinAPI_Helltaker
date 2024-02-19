@@ -26,8 +26,8 @@ public:
 
 	void CutSceneStart() override;
 
-	void PhaseUpdate(float _DeltaTime);
-	void PhaseChange(ECutScenePhase _Phase);
+	void C_StateUpdate(float _DeltaTime);
+	void C_StateChange(ECutScenePhase _State);
 
 protected:
 	virtual void Tick(float _DeltaTime) override;
@@ -48,7 +48,7 @@ private:
 
 	Character* C_Character = nullptr;
 	
-	ECutScenePhase Phase = ECutScenePhase::None;
+	ECutScenePhase State = ECutScenePhase::None;
 };
 
 using HellTakerManager = CutSceneManager;
