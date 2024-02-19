@@ -96,6 +96,8 @@ void Chapter2::CutSceneStart()
 	C_SpawnCharacter("Mod", "Mod_Idle.png", Chap2_Script[0]);
 	C_SpawnBooper();
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.194f, WinScale.Y * 0.605f } });
 	C_BooperTextSet(Chap2_Script[1]);
 }
 
@@ -138,6 +140,8 @@ void Chapter2::SuccessStart()
 {
 	CutSceneManager::SuccessStart();
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.252f, WinScale.Y * 0.613f } });
 	C_CharacterSetImage("Mod_Close.png");
 	C_BooperTextSet(Chap2_Script[6]);
 }

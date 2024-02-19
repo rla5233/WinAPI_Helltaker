@@ -280,7 +280,7 @@ void ChapterManager::M_UpdateHeroActionPoint()
 {
 	std::string PointStr = std::to_string(PlayerHero->GetActionPoint());
 	
-	if ("0" == PointStr)
+	if (0 >= std::stoi(PointStr))
 	{
 		PointStr = "X";
 	}
