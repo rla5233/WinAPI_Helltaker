@@ -64,6 +64,9 @@
     <ClInclude Include="Text.h">
       <Filter>Object\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="CutSceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CutSceneManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

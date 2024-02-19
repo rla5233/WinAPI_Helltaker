@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ChapterManager.h"
+#include "CutSceneManager.h"
 
 // Ό³Έν :
-class Chapter1 : public ChapterManager
+class Chapter1 : public HellTakerManager
 {
 public:
 	// constructor destructor
