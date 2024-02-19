@@ -1,8 +1,6 @@
 #include "Chapter1.h"
 
-#include "ContentsHelper.h"
 #include "Chapter2.h"
-#include "Hero.h"
 
 bool Chapter1::IsLoad = false;
 
@@ -64,14 +62,18 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	M_CreateChapterUI(1);
 	
 	M_SpawnHero(5, 0, 23);
+
 	M_SpawnSkeleton(3, 1);
 	M_SpawnSkeleton(2, 2);
 	M_SpawnSkeleton(4, 2);
+
 	M_SpawnStone(1, 4, "Stone_002.png");
 	M_SpawnStone(1, 5, "Stone_004.png");
 	M_SpawnStone(4, 4, "Stone_009.png");
 	M_SpawnStone(3, 5, "Stone_005.png");
+
 	M_SetIsThornChange(false);
+
 	M_SpawnDemon(6, 5, "PandeMonica");
 
 	M_StateChange(EChapterState::Idle);	
@@ -130,7 +132,8 @@ void Chapter1::BadEndSetting()
 void Chapter1::SuccessStart()
 {
 	CutSceneManager::SuccessStart();
-	
+
+	C_SceneCharacterSetImage("Pand_Flust.png");
 	C_BooperTextSet(Chap1_Script[6]);
 }
 

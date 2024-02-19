@@ -24,6 +24,7 @@ public:
 
 	void C_BooperTextSet(std::string_view _Text);
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
+	void C_SceneCharacterSetImage(std::string_view _Name);
 
 	int C_GetFocusMenuIndex() const
 	{

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ChapterManager.h"
+#include "CutSceneManager.h"
 
 // Ό³Έν :
-class Chapter2 : public ChapterManager
+class Chapter2 : public HellTakerManager
 {
 public:
 	// constructor destructor
@@ -19,10 +19,22 @@ public:
 
 protected:
 	void BeginPlay() override;
-
 	void LevelStart(ULevel* _PrevLevel) override;
 
+	// Chapter
+	void CutSceneStart() override;
+	void ChangeChapter() override;
+
+	// CutScene
+	void SelectStart() override;
+	void SelectMenu() override;
+
+	void BadEndStart() override;
+	void BadEndSetting() override;
+
+	void SuccessStart() override;
 private:
 
+	static bool IsLoad;
 };
 

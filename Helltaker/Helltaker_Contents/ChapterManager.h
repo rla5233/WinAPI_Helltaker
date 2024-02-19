@@ -2,13 +2,9 @@
 
 #include "ContentsHelper.h"
 
-#include <string>
-#include <string_view>
 #include <vector>
 #include <set>
 
-#include <EngineBase/EngineDebug.h>
-#include <EngineBase/EngineMath.h>
 #include <EngineCore/Level.h>
 
 class BackGround;
