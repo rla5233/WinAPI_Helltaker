@@ -88,3 +88,11 @@ void Chapter1::CutSceneStart()
 
 	C_BooperTextSet(Chap1_Script[1]);
 }
+
+void Chapter1::SelectStart()
+{
+	CutSceneManager::SelectStart();
+
+	C_MenubarTextSet(0, Chap1_Script[2]);
+	C_MenubarTextSet(1, Chap1_Script[3]);
+}

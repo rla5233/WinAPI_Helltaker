@@ -21,6 +21,7 @@ protected:
 	void LevelStart(ULevel* _PrevLevel) override;
 
 	void CutSceneStart() override;
+	void SelectStart() override;
 private:
 	
 	static bool IsLoad;

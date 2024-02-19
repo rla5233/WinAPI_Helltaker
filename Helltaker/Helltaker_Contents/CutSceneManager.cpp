@@ -37,46 +37,51 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 
-	C_Character = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	C_Character->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
-	C_Character->SetName(_Name);
-	C_Character->CreateImageRenderer(RenderOrder::Character);
-	C_Character->CreateNameRenderer(RenderOrder::Text);
-	AllCutSceneActors.push_back(C_Character);
+	SceneCharacter = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
+	SceneCharacter->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
+	SceneCharacter->SetName(_Name);
+	SceneCharacter->CreateImageRenderer(RenderOrder::Character);
+	SceneCharacter->CreateNameRenderer(RenderOrder::Text);
+	AllCutSceneActors.push_back(SceneCharacter);
 
-	C_Character->GetImageRenderer()->SetImage(_ImgName);
-	C_Character->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.255f, WinScale.Y * 0.611f} });
+	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
+	SceneCharacter->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.255f, WinScale.Y * 0.611f} });
 
-	C_Character->GetNameRenderer()->SetText(_Text);
-	C_Character->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
-	C_Character->GetNameRenderer()->SetTextSize(40);
-	C_Character->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
-	C_Character->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+	SceneCharacter->GetNameRenderer()->SetText(_Text);
+	SceneCharacter->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
+	SceneCharacter->GetNameRenderer()->SetTextSize(40);
+	SceneCharacter->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
+	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
 }
 
 void CutSceneManager::C_SpawnBooper()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-	C_Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
-	C_Booper->SetName("Booper");
-	C_Booper->CreateImageRenderer(RenderOrder::UI);
-	C_Booper->GetImageRenderer()->SetImage(C_Booper->GetName());
-	C_Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
-	C_Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
-	C_Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
-	C_Booper->CreateTextRenderer(RenderOrder::Text);
-	C_Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.0995f) }, { 0, 0 } });
-	C_Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
-	C_Booper->GetTextRenderer()->SetTextSize(35);
-	C_Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-	C_Booper->GetTextRenderer()->SetText(" ");
-	AllCutSceneActors.push_back(C_Booper);
+	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
+	Booper->SetName("Booper");
+	Booper->CreateImageRenderer(RenderOrder::UI);
+	Booper->GetImageRenderer()->SetImage(Booper->GetName());
+	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
+	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
+	Booper->CreateTextRenderer(RenderOrder::Text);
+	Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.0995f) }, { 0, 0 } });
+	Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
+	Booper->GetTextRenderer()->SetTextSize(35);
+	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	Booper->GetTextRenderer()->SetText(" ");
+	AllCutSceneActors.push_back(Booper);
 }
 
 void CutSceneManager::C_BooperTextSet(std::string_view _Text)
 {
-	C_Booper->GetTextRenderer()->SetText(_Text);
+	Booper->GetTextRenderer()->SetText(_Text);
+}
+
+void CutSceneManager::C_MenubarTextSet(int _Index, std::string_view _Text)
+{
+	MenuBar[_Index]->GetTextRenderer()->SetText(_Text);
 }
 
 void CutSceneManager::C_SpawnMenubar()
@@ -119,33 +124,15 @@ void CutSceneManager::C_SpawnMenubar()
 	SetFocusMenuIndex(0);
 }
 
-void CutSceneManager::EnterChooseMenuCheck()
+void CutSceneManager::Enter(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_Booper->GetImageRenderer()->ActiveOff();
-		C_SpawnMenubar();
-
-		State = ECutScenePhase::Select;
+		C_StateChange(ECutSceneState::Select);
 	}
 }
 
-void CutSceneManager::SetFocusMenuIndex(int _Index)
-{
-	FocusMenuIndex = _Index;
-
-	if (FocusMenuIndex < 0)
-	{
-		FocusMenuIndex = MenuBarCount - 1;
-	}
-
-	if (FocusMenuIndex >= MenuBarCount)
-	{
-		FocusMenuIndex = 0;
-	}
-}
-
-void CutSceneManager::SelectMenuBar()
+void CutSceneManager::Select(float _DeltaTime)
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
@@ -169,11 +156,32 @@ void CutSceneManager::SelectMenuBar()
 	}
 }
 
+void CutSceneManager::SelectStart()
+{
+	Booper->GetImageRenderer()->ActiveOff();
+	C_SpawnMenubar();
+}
+
+void CutSceneManager::SetFocusMenuIndex(int _Index)
+{
+	FocusMenuIndex = _Index;
+
+	if (FocusMenuIndex < 0)
+	{
+		FocusMenuIndex = MenuBarCount - 1;
+	}
+
+	if (FocusMenuIndex >= MenuBarCount)
+	{
+		FocusMenuIndex = 0;
+	}
+}
+
 void CutSceneManager::CutSceneStart()
 {
 	ChapterManager::CutSceneStart();
 
-	State = ECutScenePhase::Enter;
+	C_StateChange(ECutSceneState::Enter);
 }
 
 void CutSceneManager::Tick(float _DeltaTime)
@@ -205,24 +213,26 @@ void CutSceneManager::C_StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case ECutScenePhase::Enter:
-		EnterChooseMenuCheck();
+	case ECutSceneState::Enter:
+		Enter(_DeltaTime);
 		break;
-	case ECutScenePhase::Select:
-		SelectMenuBar();
+	case ECutSceneState::Select:
+		Select(_DeltaTime);
 		break;
 	}
 }
 
-void CutSceneManager::C_StateChange(ECutScenePhase _State)
+void CutSceneManager::C_StateChange(ECutSceneState _State)
 {
 	if (State != _State)
 	{
 		switch (_State)
 		{
-		case ECutScenePhase::Enter:
+		case ECutSceneState::Enter:
+			EnterStart();
 			break;
-		case ECutScenePhase::Select:
+		case ECutSceneState::Select:
+			SelectStart();
 			break;
 		}
 	}

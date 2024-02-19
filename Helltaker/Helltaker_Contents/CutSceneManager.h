@@ -23,6 +23,7 @@ public:
 	void C_SpawnMenubar();
 
 	void C_BooperTextSet(std::string_view _Text);
+	void C_MenubarTextSet(int _Index, std::string_view _Text);
 
 
 protected:
@@ -31,26 +32,29 @@ protected:
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart() override;
+	virtual void SelectStart();
 
 private:
 	void C_StateUpdate(float _DeltaTime);
-	void C_StateChange(ECutScenePhase _State);
+	void C_StateChange(ECutSceneState _State);
 
-	void EnterChooseMenuCheck();
+	void Enter(float _DeltaTime);
+	void EnterStart() {};
+
+	void Select(float _DeltaTime);
+
 	void SetFocusMenuIndex(int _Index);
-	void SelectMenuBar();
-
 
 private:
 	std::list<AActor*> AllCutSceneActors;
 
-	Character* C_Character = nullptr;
-	UI* C_Booper = nullptr;
+	Character* SceneCharacter = nullptr;
+	UI* Booper = nullptr;
 	std::vector<UI*> MenuBar;
 	int MenuBarCount = 2;
 	int FocusMenuIndex = -1;
 	
-	ECutScenePhase State = ECutScenePhase::None;
+	ECutSceneState State = ECutSceneState::None;
 };
 
 using HellTakerManager = CutSceneManager;
