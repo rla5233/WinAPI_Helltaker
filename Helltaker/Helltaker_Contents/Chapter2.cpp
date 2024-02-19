@@ -150,6 +150,6 @@ void Chapter2::ChangeChapter()
 {
 	ChapterManager::ChangeChapter();
 
-	//CreateChapter<Chapter3>("Chapter3");
-	//GEngine->ChangeLevel("Chapter3");
+	CreateChapter<Chapter3>("Chapter3");
+	GEngine->ChangeLevel("Chapter3");
 }
