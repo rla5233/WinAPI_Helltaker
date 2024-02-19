@@ -233,10 +233,21 @@ void CutSceneManager::BadEndStart()
 }
 
 void CutSceneManager::Success(float _DeltaTime)
-{}
+{
+
+}
 
 void CutSceneManager::SuccessStart()
-{}
+{
+	SceneCharacter->GetImageRenderer()->SetImage("Pand_Flust.png");
+
+	for (UI* Menu : MenuBar)
+	{
+		Menu->AllRenderersActiveOff();
+	}
+
+
+}
 
 void CutSceneManager::SelectStart()
 {
@@ -271,25 +282,6 @@ void CutSceneManager::Tick(float _DeltaTime)
 	ChapterManager::Tick(_DeltaTime);
 
 	C_StateUpdate(_DeltaTime);
-}
-
-void CutSceneManager::LevelEnd(ULevel* _NextLevel)
-{
-	ChapterManager::LevelEnd(_NextLevel);
-
-	for (AActor* Actor : AllCutSceneActors)
-	{
-		if (nullptr == Actor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Actor->Destroy(0.0f);
-		Actor = nullptr;
-	}
-
-	MenuBar.clear();
-	AllCutSceneActors.clear();
 }
 
 void CutSceneManager::C_StateUpdate(float _DeltaTime)
@@ -333,4 +325,23 @@ void CutSceneManager::C_StateChange(ECutSceneState _State)
 	}
 
 	State = _State;
+}
+
+void CutSceneManager::LevelEnd(ULevel* _NextLevel)
+{
+	ChapterManager::LevelEnd(_NextLevel);
+
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy(0.0f);
+		Actor = nullptr;
+	}
+
+	MenuBar.clear();
+	AllCutSceneActors.clear();
 }

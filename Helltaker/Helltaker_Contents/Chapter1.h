@@ -27,6 +27,8 @@ protected:
 
 	void BadEndStart() override;
 	void BadEndSetting() override;
+
+	void SuccessStart() override;
 private:
 	
 	static bool IsLoad;

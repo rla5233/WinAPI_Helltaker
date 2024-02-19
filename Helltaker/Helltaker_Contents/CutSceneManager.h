@@ -43,6 +43,9 @@ protected:
 
 	virtual void BadEndStart();
 	virtual void BadEndSetting();
+
+	virtual void SuccessStart();
+
 private:
 	void C_StateUpdate(float _DeltaTime);
 
@@ -55,7 +58,6 @@ private:
 	void BadEnding();
 
 	void Success(float _DeltaTime);
-	void SuccessStart();
 
 	void SetFocusMenuIndex(int _Index);
 

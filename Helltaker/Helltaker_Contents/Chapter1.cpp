@@ -2,20 +2,17 @@
 
 #include "ContentsHelper.h"
 
-
-/////////// Test
-#include "UI.h"
-
 bool Chapter1::IsLoad = false;
 
 const std::vector<const char*> Chap1_Script
 {
-	"피곤한 악마 판데모니카", // Demon 이름
-	"지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?", // 대사 1
-	"우리 집에 가면 알 수 있겠지.", // MenuBar 1
-	"글쎄, 내가 널 도와줘야겠는데?",// MenuBar 2
-	"지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.", // Failed
-	"판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다."// Bad End
+	/* 0 Demon	  */ "피곤한 악마 판데모니카",
+	/* 1 Script 1 */ "지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?",
+	/* 2 MenuBar1 */ "우리 집에 가면 알 수 있겠지.", 
+	/* 3 MenuBar2 */ "글쎄, 내가 널 도와줘야겠는데?",
+	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.", 
+	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.", 
+	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요." 
 };
 
 Chapter1::Chapter1()
@@ -124,4 +121,11 @@ void Chapter1::BadEndSetting()
 	CutSceneManager::BadEndSetting();
 
 	C_BooperTextSet(Chap1_Script[5]);
+}
+
+void Chapter1::SuccessStart()
+{
+	CutSceneManager::SuccessStart();
+	
+	C_BooperTextSet(Chap1_Script[6]);
 }
