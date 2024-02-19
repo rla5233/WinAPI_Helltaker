@@ -31,9 +31,9 @@ void Demon::SetDemon(std::string_view _Name)
 {
 	std::string AnimationName = _Name.data();
 	AnimationName += "_Idle";
-	Renderer = CreateImageRenderer(RenderOrder::Demon);
-	Renderer->SetImage(_Name);
-	Renderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
+	ImageRenderer = CreateImageRenderer(RenderOrder::Demon);
+	ImageRenderer->SetImage(_Name);
+	ImageRenderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
 	StateChange(EDemonState::Idle);
 }
 
@@ -67,8 +67,8 @@ void Demon::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * LoveSignY_Location) }, {TileScale * LoveSignScale} });
-	Renderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f) }, { TileScale * IdleScale } });
-	Renderer->ChangeAnimation(GetName() + "_Idle");
+	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f) }, { TileScale * IdleScale } });
+	ImageRenderer->ChangeAnimation(GetName() + "_Idle");
 }
 
 void Demon::Idle(float _DeltaTime)
@@ -83,7 +83,7 @@ void Demon::VictoryStart()
 		MsgBoxAssert("Renderer is nullptr");
 	}
 
-	LoveSignRenderer->Destroy();
+	LoveSignRenderer->ActiveOff();
 }
 
 void Demon::Tick(float _DeltaTime)

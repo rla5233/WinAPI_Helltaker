@@ -15,6 +15,7 @@ class Character;
 class HitActor;
 class Scene;
 class Thorn;
+class Demon;
 class Hero;
 class Text;
 class UI;
@@ -128,6 +129,7 @@ private:
 	Scene* TransitionActor = nullptr;
 	Text* HeroActionPoint = nullptr;
 	Hero* PlayerHero = nullptr;
+	Demon* ChapterDemon = nullptr;
 
 	static bool IsLoad;
 };

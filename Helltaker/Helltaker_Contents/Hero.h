@@ -68,8 +68,6 @@ private:
 
 	const FVector MoveScale = { 0.9f, 0.9f };
 	const float MoveInter = 0.02f;
-	const float MoveTime = MoveInter * 6;
-	float MoveTimeCount = MoveTime;
 
 	const FVector KickScale = { 0.95f, 0.95f };
 	const float KickInter = 0.016f;
@@ -80,10 +78,8 @@ private:
 	const float DeathInter = 0.05f;
 
 	const FVector VictoryScale = { 0.9f, 1.2f };
-	const float VictoryInter = 0.15f;
-	const float VictoryTime = VictoryInter * 17;
-	float VictoryTimeCount = VictoryTime;
-
+	const float VictoryInter = 0.1f;
+	
 	bool CanActionCheck = false;
 	EHeroState State = EHeroState::None;
 	static bool IsLoad;

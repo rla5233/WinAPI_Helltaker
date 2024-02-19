@@ -43,12 +43,12 @@ void Hero::BeginPlay()
 	ImageRenderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
 	ImageRenderer->CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);	
 	ImageRenderer->CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);	
-	ImageRenderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 20, VictoryInter, false);
+	ImageRenderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 31, VictoryInter, false);
 	
 	ImageRenderer->CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);
 	ImageRenderer->CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);
 	ImageRenderer->CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);
-	ImageRenderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 20, VictoryInter, false);
+	ImageRenderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 31, VictoryInter, false);
 	
 	ImageRenderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, DeathInter, false);
 
@@ -234,61 +234,54 @@ void Hero::Kick(float _DeltaTime)
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
-	//if (UEngineInput::IsPress(_Key1) || UEngineInput::IsPress(_Key2))
+	if (0 < KickDelayTimeCount)
+	{ 
+		KickDelayTimeCount -= _DeltaTime;
+		return;
+	}
+
+	FVector TileScale = ContentsHelper::GetTileScale();
+	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
+	CanActionCheck = false;
+	KickDelayTimeCount = KickDelayTime;
+
+	// Debug
+	UpdateActionPoint();
+
+	GetChapter()->M_ChangeThornState();
+	GetChapter()->M_UpdateHeroActionPoint();
+
+	// Skeleton, Stone 업 캐스팅
+	FVector NextLocationPoint = GetNextLocationPoint();
+	HitActor* Other = GetChapter()->M_GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+	Other->NextStateCheck(MoveDir);	
+
+	switch (SeeDir)
 	{
-		if (0 < KickDelayTimeCount)
-		{ 
-			KickDelayTimeCount -= _DeltaTime;
-			return;
-		}
-
-		FVector TileScale = ContentsHelper::GetTileScale();
-		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
-		CanActionCheck = false;
-		KickDelayTimeCount = KickDelayTime;
-
-		// Debug
-		UpdateActionPoint();
-
-		GetChapter()->M_ChangeThornState();
-		GetChapter()->M_UpdateHeroActionPoint();
-
-		// Skeleton, Stone 업 캐스팅
-		FVector NextLocationPoint = GetNextLocationPoint();
-		HitActor* Other = GetChapter()->M_GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
-		Other->NextStateCheck(MoveDir);	
-
-		switch (SeeDir)
-		{
-		case EActorSeeDir::Left:
-			ImageRenderer->AnimationReset();
-			ImageRenderer->ChangeAnimation("Hero_LKick");
-			break;
-		case EActorSeeDir::Right:
-			ImageRenderer->AnimationReset();
-			ImageRenderer->ChangeAnimation("Hero_RKick");
-			break;
-		}
+	case EActorSeeDir::Left:
+		ImageRenderer->AnimationReset();
+		ImageRenderer->ChangeAnimation("Hero_LKick");
+		break;
+	case EActorSeeDir::Right:
+		ImageRenderer->AnimationReset();
+		ImageRenderer->ChangeAnimation("Hero_RKick");
+		break;
 	}
 }
 
 void Hero::Victory(float _DeltaTime)
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	float Diff_Y = TileScale.Y * (IdleScale.Y - VictoryScale.Y) / 2.0f;
-	ImageRenderer->SetTransform({ {0.0f, Diff_Y}, {TileScale * VictoryScale} });
-
-	if (0 > VictoryTimeCount)
+	if (true == ImageRenderer->IsCurAnimationEnd())
 	{
-		VictoryTimeCount = VictoryTime;
-		return;
+		
 	}
-
-	VictoryTimeCount -= _DeltaTime;
 }
 
 void Hero::VictoryStart()
 {
+	FVector TileScale = ContentsHelper::GetTileScale();
+	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.375f) }, { TileScale * VictoryScale } });
+
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:

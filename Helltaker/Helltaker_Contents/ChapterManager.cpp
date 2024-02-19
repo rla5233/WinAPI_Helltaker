@@ -170,13 +170,13 @@ void ChapterManager::M_SpawnHero(int _X, int _Y, int _ActionPoint)
 void ChapterManager::M_SpawnDemon(int _X, int _Y, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Demon* NewDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
-	NewDemon->SetName(_Name);
-	NewDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewDemon->SetDemon(_Name);
+	ChapterDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
+	ChapterDemon->SetName(_Name);
+	ChapterDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	ChapterDemon->SetDemon(_Name);
 
 	TileInfoVec[_Y][_X].IsVaild = false;
-	AllMapActors[reinterpret_cast<__int64>(NewDemon)] = NewDemon;
+	AllMapActors[reinterpret_cast<__int64>(ChapterDemon)] = ChapterDemon;
 }
 
 void ChapterManager::M_SpawnSkeleton(int _X, int _Y)
@@ -379,9 +379,11 @@ void ChapterManager::CutSceneStart()
 			MsgBoxAssert("Actor is nullptr");
 		}
 
+		MapActors.second->ActiveOff();
 		MapActors.second->AllRenderersActiveOff();
 	}
 
+	ChapterBG->ActiveOn();
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
@@ -412,6 +414,7 @@ void ChapterManager::ResetCheck()
 
 void ChapterManager::End(float _DeltaTime)
 {
+
 }
 
 void ChapterManager::EndStart()
@@ -423,12 +426,14 @@ void ChapterManager::EndStart()
 			MsgBoxAssert("Actor is nullptr");
 		}
 
+		MapActors.second->ActiveOn();		
 		MapActors.second->AllRenderersActiveOn();
 	}
 
 	TransitionActor->GetImageRenderer()->ActiveOff();
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->StateChange(EHeroState::Victory);
+	ChapterDemon->StateChange(EDemonState::Victory);
 }
 
 void ChapterManager::Tick(float _DeltaTime)
