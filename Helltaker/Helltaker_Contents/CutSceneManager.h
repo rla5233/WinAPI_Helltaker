@@ -23,8 +23,6 @@ public:
 	void C_SpawnMenubar();
 
 	void C_BooperTextSet(std::string_view _Text);
-	void C_SetFocusMenuIndex(int _Index);
-	void C_SelectMenuBar();
 
 	void CutSceneStart() override;
 
@@ -41,6 +39,10 @@ protected:
 	int FocusMenuIndex = -1;
 
 private:
+	void EnterChooseMenuCheck();
+	void SetFocusMenuIndex(int _Index);
+	void SelectMenuBar();
+
 	// CutScene
 	std::list<AActor*> AllCutSceneActors;
 

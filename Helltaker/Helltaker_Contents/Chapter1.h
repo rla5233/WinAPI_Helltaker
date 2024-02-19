@@ -16,19 +16,12 @@ public:
 	Chapter1& operator=(const Chapter1& _Other) = delete;
 	Chapter1& operator=(Chapter1&& _Other) noexcept = delete;
 
-	void EnterChooseMenuCheck();
-
 protected:
 	void BeginPlay() override;
-
 	void LevelStart(ULevel* _PrevLevel) override;
 
-	void CutScene(float _DeltaTime) override; 
 	void CutSceneStart() override;
-
 private:
 	
-
-
 	static bool IsLoad;
 };

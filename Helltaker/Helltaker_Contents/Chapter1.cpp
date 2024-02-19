@@ -79,36 +79,12 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 #endif
 }
 
-void Chapter1::CutScene(float _DeltaTime)
-{
-	switch (C_Phase)
-	{
-	case ECutScenePhase::Start:
-		EnterChooseMenuCheck();
-		break;
-	case ECutScenePhase::Enter:
-		C_SelectMenuBar();
-		break;
-	}
-}
-
 void Chapter1::CutSceneStart()
 {
-	ChapterManager::CutSceneStart();
+	HellTakerManager::CutSceneStart();
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
 	C_SpawnCharacter("Pand", "Pand_Idle.png", Chap1_Script[0]);
 	C_SpawnBooper();
 	C_BooperTextSet(Chap1_Script[1]);
-}
-
-void Chapter1::EnterChooseMenuCheck()
-{
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		C_Booper->GetImageRenderer()->ActiveOff();
-		C_SpawnMenubar();		
-
-		C_Phase = ECutScenePhase::Enter;
-	}
 }

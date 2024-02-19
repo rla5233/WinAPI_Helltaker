@@ -116,10 +116,21 @@ void CutSceneManager::C_SpawnMenubar()
 		AllCutSceneActors.push_back(MenuBar[i]);
 	}
 
-	C_SetFocusMenuIndex(0);
+	SetFocusMenuIndex(0);
 }
 
-void CutSceneManager::C_SetFocusMenuIndex(int _Index)
+void CutSceneManager::EnterChooseMenuCheck()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_Booper->GetImageRenderer()->ActiveOff();
+		C_SpawnMenubar();
+
+		Phase = ECutScenePhase::Enter;
+	}
+}
+
+void CutSceneManager::SetFocusMenuIndex(int _Index)
 {
 	FocusMenuIndex = _Index;
 
@@ -134,13 +145,13 @@ void CutSceneManager::C_SetFocusMenuIndex(int _Index)
 	}
 }
 
-void CutSceneManager::C_SelectMenuBar()
+void CutSceneManager::SelectMenuBar()
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		C_SetFocusMenuIndex(FocusMenuIndex - 1);
+		SetFocusMenuIndex(FocusMenuIndex - 1);
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
 	}
@@ -148,7 +159,7 @@ void CutSceneManager::C_SelectMenuBar()
 	{
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		C_SetFocusMenuIndex(FocusMenuIndex + 1);
+		SetFocusMenuIndex(FocusMenuIndex + 1);
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
 	}
@@ -165,15 +176,22 @@ void CutSceneManager::CutSceneStart()
 	Phase = ECutScenePhase::Start;
 }
 
+void CutSceneManager::Tick(float _DeltaTime)
+{
+	ChapterManager::Tick(_DeltaTime);
 
+	PhaseUpdate(_DeltaTime);
+}
 
 void CutSceneManager::PhaseUpdate(float _DeltaTime)
 {
 	switch (Phase)
 	{
 	case ECutScenePhase::Start:
+		EnterChooseMenuCheck();
 		break;
 	case ECutScenePhase::Enter:
+		SelectMenuBar();
 		break;
 	}
 }
@@ -192,11 +210,4 @@ void CutSceneManager::PhaseChange(ECutScenePhase _Phase)
 	}
 
 	Phase = _Phase;
-}
-
-void CutSceneManager::Tick(float _DeltaTime)
-{
-	ChapterManager::Tick(_DeltaTime);
-
-	PhaseUpdate(_DeltaTime);
 }
