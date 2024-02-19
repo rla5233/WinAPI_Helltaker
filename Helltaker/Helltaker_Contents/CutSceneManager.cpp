@@ -184,6 +184,24 @@ void CutSceneManager::Tick(float _DeltaTime)
 	C_StateUpdate(_DeltaTime);
 }
 
+void CutSceneManager::LevelEnd(ULevel* _NextLevel)
+{
+	ChapterManager::LevelEnd(_NextLevel);
+
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy(0.0f);
+		Actor = nullptr;
+	}
+
+	AllCutSceneActors.clear();
+}
+
 void CutSceneManager::C_StateUpdate(float _DeltaTime)
 {
 	switch (State)

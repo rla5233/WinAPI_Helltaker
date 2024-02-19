@@ -24,13 +24,15 @@ public:
 
 	void C_BooperTextSet(std::string_view _Text);
 
-	void CutSceneStart() override;
+	virtual void CutSceneStart() override;
 
 	void C_StateUpdate(float _DeltaTime);
 	void C_StateChange(ECutScenePhase _State);
 
 protected:
 	virtual void Tick(float _DeltaTime) override;
+
+	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	// ม๘วเ ม฿
 	UI* C_Booper = nullptr;

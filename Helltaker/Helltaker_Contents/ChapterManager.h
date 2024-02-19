@@ -93,11 +93,12 @@ protected:
 	void HeroDeath(float _DeltaTime);
 	void HeroDeathStart();
 
-	void CutScene(float _DeltaTime) {};
+	void CutScene(float _DeltaTime);
 	virtual void CutSceneStart();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();
+	void ResetCheck();
 
 	void M_StateUpdate(float _DeltaTime);
 	void M_StateChange(EChapterState _State);

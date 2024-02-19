@@ -296,6 +296,9 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
 
+	TileInfoVec.clear();
+	AllThorn.clear();
+
 	for (std::pair<const __int64, AActor*>& Actor : AllMapActors)
 	{
 		if (nullptr == Actor.second)
@@ -307,8 +310,6 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 		Actor.second = nullptr;
 	}
 
-	AllThorn.clear();
-	TileInfoVec.clear();
 	AllMapActors.clear();
 }
 
@@ -319,10 +320,7 @@ void ChapterManager::Idle(float _DeltaTime)
 		TransitionActor->GetImageRenderer()->ActiveOff();
 	}
 
-	if (UEngineInput::IsPress('R'))
-	{
-		M_StateChange(EChapterState::Reset);
-	}
+	ResetCheck();
 
 	if (EHeroState::Death == PlayerHero->GetHeroState())
 	{
@@ -376,6 +374,11 @@ void ChapterManager::HeroDeathStart()
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
 
+void ChapterManager::CutScene(float _DeltaTime)
+{
+	ResetCheck();
+}
+
 void ChapterManager::CutSceneStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
@@ -406,6 +409,14 @@ void ChapterManager::ResetStart()
 	TransitionActor->GetImageRenderer()->ActiveOn();
 	TransitionActor->GetImageRenderer()->AnimationReset();
 	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+}
+
+void ChapterManager::ResetCheck()
+{
+	if (UEngineInput::IsPress('R'))
+	{
+		M_StateChange(EChapterState::Reset);
+	}
 }
 
 void ChapterManager::Tick(float _DeltaTime)
