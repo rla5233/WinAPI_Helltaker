@@ -52,6 +52,8 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	M_SpawnThorn(5, 3, EThornState::Down);
 	M_SpawnDemon(4, 5, "Modeus");
 
+	M_StateChange(EChapterState::Idle);
+
 	// 디버그용
 	ShowLocationPoint();
 }

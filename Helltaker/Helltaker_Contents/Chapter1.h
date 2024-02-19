@@ -22,7 +22,7 @@ protected:
 
 	// Chapter
 	void CutSceneStart() override;
-	void End(float _DeltaTime) override;
+	void ChangeChapter() override;
 	
 	// CutScene
 	void SelectStart() override;

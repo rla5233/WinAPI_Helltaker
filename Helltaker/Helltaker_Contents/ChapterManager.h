@@ -117,7 +117,7 @@ protected:
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart();
-	virtual void End(float _DeltaTime) {};
+	virtual void ChangeChapter() {};
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
@@ -132,6 +132,7 @@ private:
 	void ResetCheck();
 
 	void EndStart();
+	void End(float _DeltaTime);
 
 	void M_StateUpdate(float _DeltaTime);
 
@@ -145,6 +146,7 @@ private:
 	FVector ChapterStartLocation = FVector::Zero;
 	int EndPoint_X = -1;
 	int EndPoint_Y = -1;
+	int EndOrder = -1;
 
 	int ChapterNumber = -1;
 	int ChapterWidth = -1;

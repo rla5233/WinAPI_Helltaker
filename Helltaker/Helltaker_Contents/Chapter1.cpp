@@ -133,13 +133,10 @@ void Chapter1::SuccessStart()
 	C_BooperTextSet(Chap1_Script[6]);
 }
 
-void Chapter1::End(float _DeltaTime)
+void Chapter1::ChangeChapter()
 {
-	ChapterManager::End(_DeltaTime);
-	
-	if (true == GetPlayerHero()->GetImageRenderer()->IsCurAnimationEnd())
-	{
-		CreateChapter<Chapter2>("Chapter2");
-		GEngine->ChangeLevel("Chapter2");
-	}
+	ChapterManager::ChangeChapter();
+
+	CreateChapter<Chapter2>("Chapter2");
+	GEngine->ChangeLevel("Chapter2");
 }

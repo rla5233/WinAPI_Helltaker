@@ -413,6 +413,29 @@ void ChapterManager::ResetCheck()
 	}
 }
 
+void ChapterManager::End(float _DeltaTime)
+{
+	switch (EndOrder)
+	{
+	case 0:
+		if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
+		{
+			TransitionActor->GetImageRenderer()->ActiveOn();
+			TransitionActor->GetImageRenderer()->AnimationReset();
+			TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+			++EndOrder;
+		}
+		break;
+	case 1:
+		if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
+		{
+			ChangeChapter();
+		}
+		break;
+	}
+
+}
+
 void ChapterManager::EndStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
@@ -430,6 +453,7 @@ void ChapterManager::EndStart()
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->StateChange(EHeroState::Victory);
 	ChapterDemon->StateChange(EDemonState::Victory);
+	EndOrder = 0;
 }
 
 void ChapterManager::Tick(float _DeltaTime)
