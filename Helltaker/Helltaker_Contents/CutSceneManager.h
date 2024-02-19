@@ -64,6 +64,8 @@ private:
 	std::vector<UI*> MenuBar;
 	int MenuBarCount = 2;
 	int FocusMenuIndex = -1;
+
+	int FailOrder = -1;
 	
 	ECutSceneState State = ECutSceneState::None;
 };

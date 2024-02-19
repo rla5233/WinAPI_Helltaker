@@ -157,7 +157,22 @@ void CutSceneManager::Select(float _DeltaTime)
 }
 
 void CutSceneManager::Fail(float _DeltaTime)
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		++FailOrder;
+	}
+
+	switch (FailOrder)
+	{
+	case 0:
+
+		break;
+	case 1:
+
+		break;
+	}
+}
 
 void CutSceneManager::FailStart()
 {
