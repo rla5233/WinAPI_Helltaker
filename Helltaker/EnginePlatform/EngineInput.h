@@ -23,6 +23,7 @@ private:
 		bool Free = true; // 누리지 않으면
 
 		float PressTime = 0.0f;
+		float UpTime = 0.0f;
 
 		int Key = -1; // VK_LBUTTON
 
@@ -50,6 +51,24 @@ public:
 	UEngineInput(UEngineInput&& _Other) noexcept = delete;
 	UEngineInput& operator=(const UEngineInput& _Other) = delete;
 	UEngineInput& operator=(UEngineInput&& _Other) noexcept = delete;
+
+	static bool IsDoubleClick(int _Key, float _ClickTime)
+	{
+		if (false == AllKeys.contains(_Key))
+		{
+			MsgBoxAssert("입력설정이 존재하지 않는 키 입니다");
+		}
+
+		bool Value = AllKeys[_Key].Down;
+		float Time = AllKeys[_Key].UpTime;
+
+		if (true == AllKeys[_Key].Down && AllKeys[_Key].UpTime < _ClickTime)
+		{
+			return true;
+		}
+
+		return false;
+	}
 
 	static bool IsDown(int _Key)
 	{
