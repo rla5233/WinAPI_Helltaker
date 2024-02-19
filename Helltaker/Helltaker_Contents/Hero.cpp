@@ -357,7 +357,6 @@ void Hero::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _Key2
 	State = _State;
 }
 
-
 // Debug
 void Hero::UpdateActionPoint()
 {

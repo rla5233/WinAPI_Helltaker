@@ -65,6 +65,10 @@ public:
 	void M_SpawnSkeleton(int _X, int _Y);
 	void M_SpawnStone(int _X, int _Y, std::string_view _Name);
 	void M_SpawnThorn(int _X, int _Y, EThornState _State);
+	void M_SetIsThornChange(bool _Value)
+	{
+		IsThornChange = _Value;
+	}
 
 	HitActor* M_GetHitActor(FVector _Point);
 	HitActor* M_GetHitActor(int _X, int _Y);
@@ -81,7 +85,6 @@ public:
 	void M_SetChapterEndPoint(int _X, int _Y);
 
 	void M_StateChange(EChapterState _State);
-
 
 	template<typename Chapter>
 	void CreateChapter(std::string_view _Name)
@@ -100,11 +103,6 @@ public:
 		}
 
 		ChapterSet.insert(_Name);
-	}
-
-	Hero* GetPlayerHero()
-	{
-		return PlayerHero;
 	}
 	
 	// Debug
@@ -131,8 +129,8 @@ private:
 	void ResetStart();
 	void ResetCheck();
 
-	void EndStart();
 	void End(float _DeltaTime);
+	void EndStart();
 
 	void M_StateUpdate(float _DeltaTime);
 
@@ -141,8 +139,6 @@ private:
 	std::map<__int64, AActor*> AllMapActors;
 	std::list <Thorn*> AllThorn;
 
-
-	EChapterState State = EChapterState::None;
 	FVector ChapterStartLocation = FVector::Zero;
 	int EndPoint_X = -1;
 	int EndPoint_Y = -1;
@@ -151,6 +147,7 @@ private:
 	int ChapterNumber = -1;
 	int ChapterWidth = -1;
 	int ChapterHeight = -1;
+	bool IsThornChange = false;
 
 	const float TransitionInter = 0.0435f;
 	BackGround* ChapterBG = nullptr;
@@ -158,6 +155,9 @@ private:
 	Text* HeroActionPoint = nullptr;
 	Hero* PlayerHero = nullptr;
 	Demon* ChapterDemon = nullptr;
+	Text* BottomText = nullptr;
+
+	EChapterState State = EChapterState::None;
 
 	static bool IsLoad;
 	static std::set<std::string> ChapterSet;

@@ -134,6 +134,15 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	ChapterNum->SetText(std::to_string(ChapterNumber));  
 	AllMapActors[reinterpret_cast<__int64>(ChapterNum)] = ChapterNum;
 
+	BottomText = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
+	BottomText->SetActorLocation({ WinScale.X * 0.612f, WinScale.Y * 0.953f });
+	BottomText->SetName("BottomText");
+	BottomText->CreateTextRenderer(RenderOrder::Text);
+	BottomText->SetTextTransForm({ {0,0}, {0,0} });
+	BottomText->TextSetting(38, Color8Bit::White);
+	BottomText->SetText("재시작 [R키]");
+	AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;
+
 	HeroActionPoint = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
 	HeroActionPoint->SetActorLocation({ WinScale.X * 0.11f, WinScale.Y * 0.775f });
 	HeroActionPoint->CreateTextRenderer(RenderOrder::Text);
@@ -245,21 +254,24 @@ void ChapterManager::M_DestroyHitActor(__int64 _HitActor)
 
 void ChapterManager::M_ChangeThornState()
 {
-	for (Thorn* Thorn : AllThorn)
+	if (true == IsThornChange)
 	{
-		if (nullptr == Thorn)
+		for (Thorn* Thorn : AllThorn)
 		{
-			MsgBoxAssert("Thorn is nullptr");
-		}
-	
-		switch (Thorn->GetState())
-		{ 
-		case EThornState::Up:
-			Thorn->StateChange(EThornState::Down);
-			break;
-		case EThornState::Down:
-			Thorn->StateChange(EThornState::Up);
-			break;
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Thorn is nullptr");
+			}
+
+			switch (Thorn->GetState())
+			{
+			case EThornState::Up:
+				Thorn->StateChange(EThornState::Down);
+				break;
+			case EThornState::Down:
+				Thorn->StateChange(EThornState::Up);
+				break;
+			}
 		}
 	}
 }
@@ -450,6 +462,7 @@ void ChapterManager::EndStart()
 	}
 
 	TransitionActor->GetImageRenderer()->ActiveOff();
+	BottomText->GetTextRenderer()->ActiveOff();
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->StateChange(EHeroState::Victory);
 	ChapterDemon->StateChange(EDemonState::Victory);

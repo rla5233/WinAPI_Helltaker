@@ -14,21 +14,6 @@ public:
 	Hero& operator=(const Hero& _Other) = delete;
 	Hero& operator=(Hero&& _Other) noexcept = delete;
 
-	void Idle(float _DeltaTime);
-	void IdleStart();
-	void Move(float _DeltaTime);
-	void MoveStart(float _DeltaTime);
-	void Kick(float _DeltaTime);
-	void KickStart(float _DeltaTime, int _Key1, int _Key2);
-	void Victory(float _DeltaTime);
-	void VictoryStart();
-	void Death(float _DeltaTime);
-	void DeathStart();
-
-	void InputCheck(float _DeltaTime);
-	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
-	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
-
 	int GetActionPoint() const
 	{
 		return ActionPoint;
@@ -49,15 +34,32 @@ public:
 		return ImageRenderer;
 	}
 
-	void StateUpdate(float _DeltaTime);
+	
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
 
 	// Debug
 	void UpdateActionPoint();
-
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+private:
+	void Idle(float _DeltaTime);
+	void IdleStart();
+	void Move(float _DeltaTime);
+	void MoveStart(float _DeltaTime);
+	void Kick(float _DeltaTime);
+	void KickStart(float _DeltaTime, int _Key1, int _Key2);
+	void Victory(float _DeltaTime);
+	void VictoryStart();
+	void Death(float _DeltaTime);
+	void DeathStart();
+
+	void InputCheck(float _DeltaTime);
+	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
+	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;

@@ -44,16 +44,19 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	M_SpawnStone(4, 2, "Stone_003.png");
 	M_SpawnStone(5, 2, "Stone_005.png");
 	M_SpawnStone(6, 2, "Stone_007.png");
-	M_SpawnThorn(1, 2, EThornState::Down);
-	M_SpawnThorn(3, 1, EThornState::Down);
-	M_SpawnThorn(4, 1, EThornState::Down);
-	M_SpawnThorn(4, 2, EThornState::Down);
-	M_SpawnThorn(5, 2, EThornState::Down);
-	M_SpawnThorn(5, 3, EThornState::Down);
+	M_SetIsThornChange(false);
+	M_SpawnThorn(1, 2, EThornState::Up);
+	M_SpawnThorn(3, 1, EThornState::Up);
+	M_SpawnThorn(4, 1, EThornState::Up);
+	M_SpawnThorn(4, 2, EThornState::Up);
+	M_SpawnThorn(5, 2, EThornState::Up);
+	M_SpawnThorn(5, 3, EThornState::Up);
 	M_SpawnDemon(4, 5, "Modeus");
 
 	M_StateChange(EChapterState::Idle);
 
-	// 디버그용
+
+#ifdef DEBUG
 	ShowLocationPoint();
+#endif
 }
