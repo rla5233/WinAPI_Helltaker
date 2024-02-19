@@ -47,11 +47,10 @@ void ChapterManager::BeginPlay()
 	}
 }
 
-void ChapterManager::M_SetChapterStartLocation(int _X, int _Y)
+void ChapterManager::M_SetChapterStartLocation(FVector _Value)
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	FVector Point = FVector(_X, _Y) * TileScale;
-	ChapterStartLocation = Point + FVector(TileScale.X * 0.1f, TileScale.Y * 0.25f);
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ChapterStartLocation = _Value * WinScale;
 }
 
 void ChapterManager::M_SetChapterEndPoint(int _X, int _Y)

@@ -72,7 +72,7 @@ public:
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
 
-	void M_SetChapterStartLocation(int _X, int _Y);
+	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const
 	{
 		return ChapterStartLocation;

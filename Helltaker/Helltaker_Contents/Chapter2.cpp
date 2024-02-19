@@ -1,6 +1,6 @@
 #include "Chapter2.h"
 
-//#include "Chapter3.h"
+#include "Chapter3.h"
 
 bool Chapter2::IsLoad = false;
 
@@ -46,16 +46,16 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	// 스테이지 생성
 	std::vector<std::vector<bool>> Map =
 	{
-		{ false, true  , true  , true  , true , false, false },
-		{ false, true  , false , true  , true , true , true  },
-		{ true , true  , false , false , true , true , true  },
-		{ true , true  , false , false , true , true , true  },
-		{ true , true  , false , false , true , true , true  },
-		{ false, false , false , false , true , true , true  }
+		{ false, true , true , true , true, false, false },
+		{ false, true , false, true , true, true , true  },
+		{ true , true , false, false, true, true , true  },
+		{ true , true , false, false, true, true , true  },
+		{ true , true , false, false, true, true , true  },
+		{ false, false, false, false, true, true , true  }
 	};
 
 	M_CreateTileInfoVec(Map);
-	M_SetChapterStartLocation(6, 2);
+	M_SetChapterStartLocation({ 0.318f, 0.208f });
 	M_SetChapterEndPoint(4, 4);
 
 	CreateBG("ChapterBG_002");
