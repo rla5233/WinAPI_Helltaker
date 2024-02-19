@@ -156,6 +156,25 @@ void CutSceneManager::Select(float _DeltaTime)
 	}
 }
 
+void CutSceneManager::Fail(float _DeltaTime)
+{}
+
+void CutSceneManager::FailStart()
+{
+	Booper->GetImageRenderer()->ActiveOn();
+
+	for (UI* Menu : MenuBar)
+	{
+		Menu->AllRenderersActiveOff();
+	}
+}
+
+void CutSceneManager::Success(float _DeltaTime)
+{}
+
+void CutSceneManager::SuccessStart()
+{}
+
 void CutSceneManager::SelectStart()
 {
 	Booper->GetImageRenderer()->ActiveOff();
@@ -233,6 +252,12 @@ void CutSceneManager::C_StateChange(ECutSceneState _State)
 			break;
 		case ECutSceneState::Select:
 			SelectStart();
+			break;
+		case ECutSceneState::Fail:
+			FailStart();
+			break;
+		case ECutSceneState::Success:
+			SuccessStart();
 			break;
 		}
 	}

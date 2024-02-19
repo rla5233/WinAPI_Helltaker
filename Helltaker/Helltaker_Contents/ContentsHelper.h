@@ -138,5 +138,7 @@ enum class ECutSceneState
 {
 	None,
 	Enter,
-	Select
+	Select,
+	Fail,
+	Success
 };

@@ -13,7 +13,8 @@ const std::vector<const char*> Chap1_Script
 	"피곤한 악마 판데모니카", // Demon 이름
 	"지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?", // 대사 1
 	"우리 집에 가면 알 수 있겠지.", // MenuBar 1
-	"글쎄, 내가 널 도와줘야겠는데?"// MenuBar 2
+	"글쎄, 내가 널 도와줘야겠는데?",// MenuBar 2
+	"지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라." // Failed
 };
 
 Chapter1::Chapter1()
@@ -80,7 +81,7 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 
 void Chapter1::CutSceneStart()
 {
-	HellTakerManager::CutSceneStart();
+	CutSceneManager::CutSceneStart();
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
 	C_SpawnCharacter("Pand", "Pand_Idle.png", Chap1_Script[0]);
@@ -101,11 +102,18 @@ void Chapter1::SelectMenu()
 {
 	switch (C_GetFocusMenuIndex())
 	{
-	case 1:
-		
+	case 0:
+		C_StateChange(ECutSceneState::Fail);
 		break;
-	case 2:
-
+	case 1:
+		C_StateChange(ECutSceneState::Success);
 		break;
 	}
+}
+
+void Chapter1::FailStart()
+{
+	CutSceneManager::FailStart();
+
+	C_BooperTextSet(Chap1_Script[4]);
 }

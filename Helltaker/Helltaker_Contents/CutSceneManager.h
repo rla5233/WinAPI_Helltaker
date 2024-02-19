@@ -33,13 +33,14 @@ public:
 	void C_StateChange(ECutSceneState _State);
 protected:
 	virtual void Tick(float _DeltaTime) override;
-
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart() override;
+	
 	virtual void SelectStart();
 	virtual void SelectMenu() {};
 
+	virtual void FailStart();
 private:
 	void C_StateUpdate(float _DeltaTime);
 
@@ -47,6 +48,11 @@ private:
 	void EnterStart() {};
 
 	void Select(float _DeltaTime);
+
+	void Fail(float _DeltaTime);
+
+	void Success(float _DeltaTime);
+	void SuccessStart();
 
 	void SetFocusMenuIndex(int _Index);
 
