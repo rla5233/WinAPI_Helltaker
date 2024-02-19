@@ -166,7 +166,7 @@ void CutSceneManager::Fail(float _DeltaTime)
 	switch (FailOrder)
 	{
 	case 0:
-
+		
 		break;
 	case 1:
 
