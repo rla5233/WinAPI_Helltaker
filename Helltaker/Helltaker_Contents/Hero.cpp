@@ -156,6 +156,37 @@ void Hero::NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2)
 	}
 }
 
+void Hero::ThornHitCheck(EHeroState _State)
+{
+	// Dubug
+	if (true == CheatMode)
+	{
+		return;
+	}
+
+	FVector CurLocationPoint = GetLocationPoint();
+	int Cur_X = CurLocationPoint.iX();
+	int Cur_Y = CurLocationPoint.iY();
+
+	int Next_X = GetNextLocationPoint().iX();
+	int Next_Y = GetNextLocationPoint().iY();
+	switch (_State)
+	{
+	case EHeroState::Move:
+		if (true == GetChapter()->GetTileInfoVec()[Next_Y][Next_X].IsThorn)
+		{
+			--ActionPoint;
+		}
+		break;
+	case EHeroState::Kick:
+		if (true == GetChapter()->GetTileInfoVec()[Cur_Y][Cur_X].IsThorn)
+		{
+			--ActionPoint;
+		}
+		break;
+	}
+}
+
 void Hero::Idle(float _DeltaTime)
 {
 	InputCheck(_DeltaTime);
@@ -197,10 +228,10 @@ void Hero::MoveStart(float _DeltaTime)
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
 	CanActionCheck = false;
 
-	// Debug
-	UpdateActionPoint();
-
 	GetChapter()->M_ChangeThornState();
+	ThornHitCheck(EHeroState::Move);
+
+	UpdateActionPoint();
 	GetChapter()->M_UpdateHeroActionPoint();
 
 	switch (SeeDir)
@@ -234,6 +265,7 @@ void Hero::Kick(float _DeltaTime)
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
+
 	if (0 < KickDelayTimeCount)
 	{ 
 		KickDelayTimeCount -= _DeltaTime;
@@ -245,10 +277,11 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	CanActionCheck = false;
 	KickDelayTimeCount = KickDelayTime;
 
-	// Debug
-	UpdateActionPoint();
 
 	GetChapter()->M_ChangeThornState();
+	ThornHitCheck(EHeroState::Kick);
+
+	UpdateActionPoint();
 	GetChapter()->M_UpdateHeroActionPoint();
 
 	// Skeleton, Stone 업 캐스팅
@@ -360,12 +393,11 @@ void Hero::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _Key2
 // Debug
 void Hero::UpdateActionPoint()
 {
-	if (false == CheatMode)
-	{
-		--ActionPoint;
-	}
-	else
+	// Debug
+	if (true == CheatMode)
 	{
 		return;
 	}
+
+	--ActionPoint;
 }

@@ -56,6 +56,7 @@ private:
 	void DeathStart();
 
 	void InputCheck(float _DeltaTime);
+	void ThornHitCheck(EHeroState _State);
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
 	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
 
