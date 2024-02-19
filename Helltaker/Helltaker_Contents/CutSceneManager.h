@@ -58,6 +58,7 @@ private:
 	void BadEnding();
 
 	void Success(float _DeltaTime);
+	void SuccessEnd();
 
 	void SetFocusMenuIndex(int _Index);
 

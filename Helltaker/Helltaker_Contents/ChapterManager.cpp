@@ -410,6 +410,27 @@ void ChapterManager::ResetCheck()
 	}
 }
 
+void ChapterManager::End(float _DeltaTime)
+{
+}
+
+void ChapterManager::EndStart()
+{
+	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
+	{
+		if (nullptr == MapActors.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		MapActors.second->AllRenderersActiveOn();
+	}
+
+	TransitionActor->GetImageRenderer()->ActiveOff();
+	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
+	PlayerHero->StateChange(EHeroState::Victory);
+}
+
 void ChapterManager::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
@@ -434,6 +455,7 @@ void ChapterManager::M_StateUpdate(float _DeltaTime)
 		Reset(_DeltaTime);
 		break;
 	case EChapterState::End:
+		End(_DeltaTime);
 		break;
 	}
 }
@@ -457,6 +479,7 @@ void ChapterManager::M_StateChange(EChapterState _State)
 			ResetStart();
 			break;
 		case EChapterState::End:
+			EndStart();
 			break;
 		}
 	}

@@ -32,6 +32,7 @@ void CutSceneManager::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
 		ContentsHelper::LoadFolder("Scene\\Dialogue", "Death");
+		ContentsHelper::LoadFolder("Scene\\Dialogue", "Success");
 
 #ifdef DEBUG
 		// 디버그 용
@@ -234,7 +235,10 @@ void CutSceneManager::BadEndStart()
 
 void CutSceneManager::Success(float _DeltaTime)
 {
-
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		SuccessEnd();
+	}
 }
 
 void CutSceneManager::SuccessStart()
@@ -246,7 +250,28 @@ void CutSceneManager::SuccessStart()
 		Menu->AllRenderersActiveOff();
 	}
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Booper->GetImageRenderer()->CreateAnimation("Scene_Success", "Success", 0, 7, 0.05f, false);
+	Booper->GetImageRenderer()->ChangeAnimation("Scene_Success");
+	Booper->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.0275f }, { WinScale.X * 0.572f, WinScale.Y * 0.185f } });
+	Booper->GetImageRenderer()->ActiveOn();
+}
 
+
+void CutSceneManager::SuccessEnd()
+{
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->AllRenderersActiveOff();
+	}
+
+	ChapterManager::M_StateChange(EChapterState::End);
+	C_StateChange(ECutSceneState::None);
 }
 
 void CutSceneManager::SelectStart()

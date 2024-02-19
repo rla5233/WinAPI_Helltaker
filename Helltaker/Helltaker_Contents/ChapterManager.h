@@ -103,6 +103,9 @@ private:
 	void ResetStart();
 	void ResetCheck();
 
+	void End(float _DeltaTime);
+	void EndStart();
+
 	void M_StateUpdate(float _DeltaTime);
 
 private:
