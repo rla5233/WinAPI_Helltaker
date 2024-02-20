@@ -251,11 +251,11 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 		NewKeyComponent->SetName("Key");
 		NewKeyComponent->SetKeyComponentType(EKeyComponentType::Key);
 		Key = NewKeyComponent;
-		KeyPoint = _Point;
 		break;
 	case EKeyComponentType::LockBox:
 		NewKeyComponent->SetName("LockBox");
 		NewKeyComponent->SetKeyComponentType(EKeyComponentType::LockBox);
+		LockBox = NewKeyComponent;
 		break;
 	}
 
@@ -559,7 +559,22 @@ void ChapterManager::M_StateChange(EChapterState _State)
 
 bool ChapterManager::IsKeyPoint()
 {
-	return PlayerHero->GetNextLocationPoint() == KeyPoint;
+	if (nullptr == Key)
+	{
+		return false;
+	}
+
+	return PlayerHero->GetNextLocationPoint() == Key->GetLocationPoint();
+}
+
+bool ChapterManager::IsLockBoxPoint()
+{
+	if (nullptr == LockBox)
+	{
+		return false;
+	}
+
+	return PlayerHero->GetNextLocationPoint() == LockBox->GetLocationPoint();
 }
 
 void ChapterManager::DeleteKey()
@@ -571,6 +586,17 @@ void ChapterManager::DeleteKey()
 
 	Key->StateChange(EKeyComponentState::Death);
 	Key = nullptr;
+}
+
+void ChapterManager::DeleteLockBox()
+{
+	if (nullptr == LockBox)
+	{
+		return;
+	}
+
+	LockBox->StateChange(EKeyComponentState::Death);
+	LockBox = nullptr;
 }
 
 // 디버그용

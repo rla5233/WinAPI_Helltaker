@@ -104,7 +104,9 @@ public:
 	}
 
 	bool IsKeyPoint();
+	bool IsLockBoxPoint();
 	void DeleteKey();
+	void DeleteLockBox();
 	
 	// Debug
 	void ShowLocationPoint();
@@ -142,7 +144,6 @@ private:
 
 	FVector ChapterStartLocation = FVector::Zero;
 	Point EndPoint = { -1, -1 };
-	Point KeyPoint = { -1, -1 };
 	int ChapterEndOrder = -1;
 
 	int ChapterNumber = -1;
@@ -157,6 +158,8 @@ private:
 	Demon* ChapterDemon = nullptr;
 	Text* HeroActionPoint = nullptr;
 	Text* BottomText = nullptr;
+
+	KeyComponent* LockBox = nullptr;
 	KeyComponent* Key = nullptr;
 
 	EChapterState State = EChapterState::None;

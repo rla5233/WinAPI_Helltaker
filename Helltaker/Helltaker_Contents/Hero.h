@@ -65,6 +65,7 @@ private:
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 	int ActionPoint = -1;
+	bool IsHaveKey = false;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.07f;
