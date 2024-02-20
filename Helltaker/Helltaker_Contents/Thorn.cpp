@@ -5,6 +5,9 @@
 
 bool Thorn::IsLoad = false;
 
+const FVector Thorn::IdleScale = { 0.9f, 0.9f };
+const float Thorn::ChangeInter = 0.05f;
+
 Thorn::Thorn()
 {
 }
@@ -30,8 +33,8 @@ void Thorn::BeginPlay()
 	ImageRenderer = CreateImageRenderer(RenderOrder::Thorn);
 	ImageRenderer->SetImage("Thorn_Idle.png");
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * 0.05f }, { TileScale * IdleScale } });
-	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, UpDownInter, false);
-	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, UpDownInter, false);	
+	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);
+	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, ChangeInter, false);
 }
 
 void Thorn::Idle(float _DeltaTime)

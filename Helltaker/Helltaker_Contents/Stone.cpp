@@ -34,7 +34,7 @@ void Stone::BeginPlay()
 		IsLoad = true;
 	}
 
-	Renderer = CreateImageRenderer(RenderOrder::Stone);
+	Renderer = CreateImageRenderer(RenderOrder::HitActor);
 
 	StateChange(EHitActorState::Idle);
 }

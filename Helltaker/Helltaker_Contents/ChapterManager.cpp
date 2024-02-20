@@ -192,7 +192,7 @@ void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
 void ChapterManager::M_SpawnSkeleton(Point _Point)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
+	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::HitActor));
 	NewSkeleton->SetName("Skeleton");
 	NewSkeleton->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	NewSkeleton->SetLocationPoint({ _Point });
@@ -209,7 +209,7 @@ void ChapterManager::M_SpawnSkeleton(Point _Point)
 void ChapterManager::M_SpawnStone(Point _Point, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Stone* NewStone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
+	Stone* NewStone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::HitActor));
 	NewStone->SetName("Stone");
 	NewStone->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	NewStone->SetLocationPoint(_Point);

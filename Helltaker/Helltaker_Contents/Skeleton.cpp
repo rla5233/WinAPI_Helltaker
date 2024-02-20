@@ -26,7 +26,7 @@ void Skeleton::BeginPlay()
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer = CreateImageRenderer(RenderOrder::Skeleton);
+	Renderer = CreateImageRenderer(RenderOrder::HitActor);
 	Renderer->SetTransform({ {0,0}, {TileScale * IdleScale} });
 
 	Renderer->SetImage("Skeleton_Left_Idle");

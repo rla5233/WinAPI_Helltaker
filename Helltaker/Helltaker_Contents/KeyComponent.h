@@ -16,10 +16,26 @@ public:
 	KeyComponent& operator=(const KeyComponent& _Other) = delete;
 	KeyComponent& operator=(KeyComponent&& _Other) noexcept = delete;
 
-	
+private:
+	void Idle(float _DeltaTime);
+	void IdleStart();
+	void Death(float _DeltaTime);
+	void DeathStart();
+
+	void StateChange(EKeyComponentState _State);
 protected:
+	void StateUpdate(float _DeltaTime);
+
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
+	EKeyComponentState State = EKeyComponentState::None;
+	EKeyComponentType Type = EKeyComponentType::None;
+
+	static const FVector IdleScale;
+	static const float IdleInter;
+	static bool IsLoad;
 };

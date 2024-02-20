@@ -16,6 +16,18 @@ public:
 	Thorn& operator=(const Thorn& _Other) = delete;
 	Thorn& operator=(Thorn&& _Other) noexcept = delete;
 
+	EThornState GetState() const
+	{
+		return State;
+	}
+
+	void SetPoint(Point _Point)
+	{
+		ThornPoint = _Point;
+	}
+
+	void StateChange(EThornState _State);
+private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Up(float _DeltaTime);
@@ -23,18 +35,6 @@ public:
 	void Down(float _DeltaTime);
 	void DownStart();
 
-	void SetPoint(Point _Point)
-	{
-		ThornPoint.X = _Point.X;
-		ThornPoint.Y = _Point.Y;
-	}
-
-	EThornState GetState() const
-	{
-		return State;
-	}
-
-	void StateChange(EThornState _State);
 protected:
 	void StateUpdate(float _DeltaTime);
 
@@ -44,10 +44,10 @@ protected:
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
-	const FVector IdleScale = { 0.9f, 0.9f };
-	const float UpDownInter = 0.05f;
-
 	Point ThornPoint = { -1, -1 };
 	EThornState State = EThornState::None;
+
+	static const FVector IdleScale;
+	static const float ChangeInter;
 	static bool IsLoad;
 };

@@ -2,7 +2,7 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineCore\EngineCore.h>
 
-//#define DEBUG
+#define DEBUG
 
 const Color8Bit HELLTAKER_WHITE = Color8Bit(255, 255, 255, 0);
 const Color8Bit HELLTAKER_GRAY = Color8Bit(125, 125, 125, 0);
@@ -76,8 +76,7 @@ enum class UpdateOrder
 	Scene,
 	Character,
 	Thorn,
-	Skeleton,
-	Stone,
+	HitActor,
 	Demon,
 	Hero,
 	Effect,
@@ -93,8 +92,7 @@ enum class RenderOrder
 	Scene,
 	Character,
 	Thorn,
-	Skeleton,
-	Stone,
+	HitActor,
 	Demon,
 	Hero,
 	Effect,
@@ -158,6 +156,20 @@ enum class EThornState
 	Idle,
 	Up,
 	Down
+};
+
+enum class EKeyComponentState
+{
+	None,
+	Idle,
+	Death
+};
+
+enum class EKeyComponentType
+{
+	None,
+	Key,
+	LockBox
 };
 
 enum class EActorSeeDir
