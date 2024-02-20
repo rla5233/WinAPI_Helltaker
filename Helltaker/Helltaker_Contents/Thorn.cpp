@@ -30,7 +30,7 @@ void Thorn::BeginPlay()
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	ImageRenderer = CreateImageRenderer(RenderOrder::Thorn);
+	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 	ImageRenderer->SetImage("Thorn_Idle.png");
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * 0.05f }, { TileScale * IdleScale } });
 	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);

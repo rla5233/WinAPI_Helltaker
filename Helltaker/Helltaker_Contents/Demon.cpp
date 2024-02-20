@@ -31,7 +31,7 @@ void Demon::SetDemon(std::string_view _Name)
 {
 	std::string AnimationName = _Name.data();
 	AnimationName += "_Idle";
-	ImageRenderer = CreateImageRenderer(RenderOrder::Demon);
+	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 	ImageRenderer->SetImage(_Name);
 	ImageRenderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
 	StateChange(EDemonState::Idle);

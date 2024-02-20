@@ -180,7 +180,7 @@ void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	ChapterDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
+	ChapterDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::RenderActor));
 	ChapterDemon->SetName(_Name);
 	ChapterDemon->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	ChapterDemon->SetDemon(_Name);
@@ -227,7 +227,7 @@ void ChapterManager::M_SpawnStone(Point _Point, std::string_view _Name)
 void ChapterManager::M_SpawnThorn(Point _Point, EThornState _State)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::Thorn));
+	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::RenderActor));
 	NewThorn->SetName("Thorn");
 	NewThorn->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	NewThorn->SetPoint(_Point);
