@@ -50,7 +50,7 @@ void Chapter4::LevelStart(ULevel * _PrevLevel)
 		{ true , true , true , true , true , true , true , false },
 		{ true , true , true , true , true , true , true , true  },
 		{ true , true , true , true , true , true , true , true  },
-		{ false, true , true , true , true , false, false, false }
+		{ false, true , true , true , true , true , false, false }
 	};
 
 	M_CreateTileInfoVec(Map);
