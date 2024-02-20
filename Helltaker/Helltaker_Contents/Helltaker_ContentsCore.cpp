@@ -8,6 +8,7 @@
 #include "Chapter3.h"
 #include "Chapter4.h"
 #include "Chapter5.h"
+#include "Chapter6.h"
 #include "MainMenu.h"
 
 
@@ -28,8 +29,8 @@ void Helltaker_ContentsCore::BeginPlay()
 
 	SetFrame(60);
 
-    CreateLevel<Opening>("Opening");
-    ChangeLevel("Opening");
+    //CreateLevel<Opening>("Opening");
+    //ChangeLevel("Opening");
 
 	//CreateLevel<MainMenu>("MainMenu");
 	//ChangeLevel("MainMenu");
@@ -46,6 +47,9 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter4>("Chapter4");
 	//ChangeLevel("Chapter4");
 
-	CreateLevel<Chapter5>("Chapter5");
-	ChangeLevel("Chapter5");
+	//CreateLevel<Chapter5>("Chapter5");
+	//ChangeLevel("Chapter5");
+
+	CreateLevel<Chapter6>("Chapter6");
+	ChangeLevel("Chapter6");
 }

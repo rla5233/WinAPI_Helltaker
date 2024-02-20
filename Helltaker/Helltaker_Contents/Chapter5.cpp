@@ -1,5 +1,7 @@
 #include "Chapter5.h"
 
+#include "Chapter6.h"
+
 bool Chapter5::IsLoad = false;
 
 const std::vector<const char*> Chap5_Script
@@ -32,7 +34,7 @@ void Chapter5::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Laugh.png");
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Zdrada");
 
-		AddChapterSet("Chapter4");
+		AddChapterSet("Chapter5");
 		IsLoad = true;
 	}
 }
@@ -92,29 +94,66 @@ void Chapter5::LevelStart(ULevel* _PrevLevel)
 
 void Chapter5::CutSceneStart()
 {
+	CutSceneManager::CutSceneStart();
+
+	C_SpawnDialogue("DialogueBG_Hell.png");
+	C_SpawnCharacter("Zd", "Zd_Idle.png", Chap5_Script[0]);
+	C_SpawnBooper();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.021f }, {WinScale.X * 0.256f, WinScale.Y * 0.567f} });
+	C_BooperTextSet(Chap5_Script[1]);
 }
 
 void Chapter5::SelectStart()
 {
+	CutSceneManager::SelectStart();
+
+	C_MenubarTextSet(0, Chap5_Script[2]);
+	C_MenubarTextSet(1, Chap5_Script[3]);
 }
 
 void Chapter5::SelectMenu()
 {
+	switch (C_GetFocusMenuIndex())
+	{
+	case 0:
+		C_StateChange(ECutSceneState::Success);
+		break;
+	case 1:
+		C_StateChange(ECutSceneState::BadEnd);
+		break;
+	}
 }
 
 void Chapter5::BadEndStart()
 {
+	CutSceneManager::BadEndStart();
+
+	C_BooperTextSet(Chap5_Script[4]);
 }
 
 void Chapter5::BadEndSetting()
 {
+	CutSceneManager::BadEndSetting();
+
+	C_BooperTextSet(Chap5_Script[5]);
 }
 
 void Chapter5::SuccessStart()
 {
+	CutSceneManager::SuccessStart();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale.X * 0.327f, WinScale.Y * 0.635f } });
+	C_CharacterSetImage("Zd_Laugh.png");
+	C_BooperTextSet(Chap5_Script[6]);
 }
 
 void Chapter5::ChangeChapter()
 {
-	int a = 0;
+	ChapterManager::ChangeChapter();
+
+	CreateChapter<Chapter6>("Chapter6");
+	GEngine->ChangeLevel("Chapter6");
 }
