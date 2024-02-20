@@ -41,7 +41,7 @@ void KeyComponent::IdleStart()
 		ImageRenderer->ChangeAnimation("Key_Idle");
 		break;
 	case EKeyComponentType::LockBox:
-		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f)}, { WinScale.X * 0.0505f, WinScale.Y * 0.0888f}});
+		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.17f)}, { WinScale.X * 0.0505f, WinScale.Y * 0.0888f}});
 		ImageRenderer->SetImage("LockBox.png");
 		break;
 	}

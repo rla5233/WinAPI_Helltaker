@@ -100,7 +100,7 @@ void Chapter3::CutSceneStart()
 	C_SpawnBooper();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.503f, WinScale.Y * 0.576f } });
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0175f }, { WinScale.X * 0.503f, WinScale.Y * 0.576f } });
 	C_BooperTextSet(Chap3_Script[1]);
 }
 
@@ -144,7 +144,7 @@ void Chapter3::SuccessStart()
 	CutSceneManager::SuccessStart();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.493f, WinScale.Y * 0.643f } });
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (-0.016f)}, {WinScale.X * 0.493f, WinScale.Y * 0.643f}});
 	C_CharacterSetImage("Cer_Happy.png");
 	C_BooperTextSet(Chap3_Script[6]);
 }

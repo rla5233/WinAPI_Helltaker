@@ -99,7 +99,7 @@ void Chapter4::CutSceneStart()
 	C_SpawnBooper();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.229f, WinScale.Y * 0.51f} });
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.05f}, {WinScale.X * 0.229f, WinScale.Y * 0.51f}});
 	C_BooperTextSet(Chap4_Script[1]);
 }
 
@@ -143,7 +143,7 @@ void Chapter4::SuccessStart()
 	CutSceneManager::SuccessStart();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.21f, WinScale.Y * 0.576f } });
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.017f }, { WinScale.X * 0.21f, WinScale.Y * 0.576f } });
 	C_CharacterSetImage("Mal_Puzzled.png");
 	C_BooperTextSet(Chap4_Script[6]);
 }
