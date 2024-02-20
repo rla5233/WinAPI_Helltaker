@@ -34,7 +34,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.07f;

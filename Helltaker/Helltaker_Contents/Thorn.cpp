@@ -38,21 +38,20 @@ void Thorn::BeginPlay()
 }
 
 void Thorn::Idle(float _DeltaTime)
-{}
+{
+}
 
 void Thorn::IdleStart()
 {
-	ImageRenderer->SetImage("Thorn_Idle.png");
 }
 
 void Thorn::Up(float _DeltaTime)
 {
-
 }
 
 void Thorn::UpStart()
 {
-	ImageRenderer->ChangeAnimation("Thorn_Up");
+	ImageRenderer->ChangeAnimation("Thorn_Up");	
 	GetChapter()->M_SetChapterThornInfo(ThornPoint, true);
 }
 
