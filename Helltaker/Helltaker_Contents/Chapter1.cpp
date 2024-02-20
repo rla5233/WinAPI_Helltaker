@@ -56,25 +56,25 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 
 	M_CreateTileInfoVec(Map);
 	M_SetChapterStartLocation({ 0.32f, 0.208f });
-	M_SetChapterEndPoint(5, 5);
+	M_SetChapterEndPoint({ 5, 5 });
 
 	CreateBG("ChapterBG_001");
 	M_CreateChapterUI(1);
 	
-	M_SpawnHero(5, 0, 23);
+	M_SpawnHero({ 5, 0 }, 23);
 
-	M_SpawnSkeleton(3, 1);
-	M_SpawnSkeleton(2, 2);
-	M_SpawnSkeleton(4, 2);
+	M_SpawnSkeleton({ 3, 1 });
+	M_SpawnSkeleton({ 2, 2 });
+	M_SpawnSkeleton({ 4, 2 });
 
-	M_SpawnStone(1, 4, "Stone_002.png");
-	M_SpawnStone(1, 5, "Stone_004.png");
-	M_SpawnStone(4, 4, "Stone_009.png");
-	M_SpawnStone(3, 5, "Stone_005.png");
+	M_SpawnStone({ 1, 4 }, "Stone_002.png");
+	M_SpawnStone({ 1, 5 }, "Stone_004.png");
+	M_SpawnStone({ 4, 4 }, "Stone_009.png");
+	M_SpawnStone({ 3, 5 }, "Stone_005.png");
 
 	M_SetIsThornChange(false);
 
-	M_SpawnDemon(6, 5, "PandeMonica");
+	M_SpawnDemon({ 6, 5 }, "PandeMonica");
 
 	M_StateChange(EChapterState::Idle);	
 

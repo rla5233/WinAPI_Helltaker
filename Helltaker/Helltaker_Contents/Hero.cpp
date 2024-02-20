@@ -99,33 +99,33 @@ void Hero::InputCheck(float _DeltaTime)
 void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 {
 	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
-	FVector CurLocationPoint = GetLocationPoint();
+	Point CurPoint = GetLocationPoint();
 	
 	switch (MoveDir)
 	{
 	case EMoveActorDir::Left:
-		SetNextLocationPoint(CurLocationPoint + FVector::Left);
+		SetNextLocationPoint(CurPoint + Point::Left);
 		SeeDirChange(EActorSeeDir::Left);
 		break;
 	case EMoveActorDir::Right:
-		SetNextLocationPoint(CurLocationPoint + FVector::Right);
+		SetNextLocationPoint(CurPoint + Point::Right);
 		SeeDirChange(EActorSeeDir::Right);
 		break;
 	case EMoveActorDir::Up:
-		SetNextLocationPoint(CurLocationPoint + FVector::Up);
+		SetNextLocationPoint(CurPoint + Point::Up);
 		break;
 	case EMoveActorDir::Down:
-		SetNextLocationPoint(CurLocationPoint + FVector::Down);
+		SetNextLocationPoint(CurPoint + Point::Down);
 		break;
 	}
 
 	int Height = static_cast<int>(Map.size());
 	int Width = static_cast<int>(Map[0].size());
-	int Next_X = GetNextLocationPoint().iX();
-	int Next_Y = GetNextLocationPoint().iY();
-	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
+	
+	Point NextPoint = GetNextLocationPoint();
+	if (0 <= NextPoint.Y && NextPoint.Y < Height && 0 <= NextPoint.X && NextPoint.X < Width)
 	{
-		if (true == Map[Next_Y][Next_X].IsVaild)
+		if (true == Map[NextPoint.Y][NextPoint.X].IsVaild)
 		{
 			if (0 >= ActionPoint)
 			{
@@ -133,7 +133,7 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 				return;
 			}
 
-			NextTileCheck(Next_X, Next_Y, _DeltaTime, _Key1, _Key2);
+			NextTileCheck(NextPoint, _DeltaTime, _Key1, _Key2);
 			return;
 		}
 	}
@@ -142,9 +142,9 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 	StateChange(EHeroState::Idle);
 }
 
-void Hero::NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2)
+void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 {
-	if (nullptr == GetChapter()->M_GetHitActor(_X, _Y))
+	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
 		StateChange(EHeroState::None);
 		StateChange(EHeroState::Move, _DeltaTime);
@@ -164,22 +164,18 @@ void Hero::ThornHitCheck(EHeroState _State)
 		return;
 	}
 
-	FVector CurLocationPoint = GetLocationPoint();
-	int Cur_X = CurLocationPoint.iX();
-	int Cur_Y = CurLocationPoint.iY();
-
-	int Next_X = GetNextLocationPoint().iX();
-	int Next_Y = GetNextLocationPoint().iY();
+	Point CurPoint  = GetLocationPoint();
+	Point NextPoint = GetNextLocationPoint();
 	switch (_State)
 	{
 	case EHeroState::Move:
-		if (true == GetChapter()->GetTileInfoVec()[Next_Y][Next_X].IsThorn)
+		if (true == GetChapter()->GetTileInfoVec()[NextPoint.Y][NextPoint.X].IsThorn)
 		{
 			--ActionPoint;
 		}
 		break;
 	case EHeroState::Kick:
-		if (true == GetChapter()->GetTileInfoVec()[Cur_Y][Cur_X].IsThorn)
+		if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 		{
 			--ActionPoint;
 		}
@@ -277,7 +273,6 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	CanActionCheck = false;
 	KickDelayTimeCount = KickDelayTime;
 
-
 	GetChapter()->M_ChangeThornState();
 	ThornHitCheck(EHeroState::Kick);
 
@@ -285,8 +280,8 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	GetChapter()->M_UpdateHeroActionPoint();
 
 	// Skeleton, Stone 업 캐스팅
-	FVector NextLocationPoint = GetNextLocationPoint();
-	HitActor* Other = GetChapter()->M_GetHitActor(NextLocationPoint.iX(), NextLocationPoint.iY());
+	Point NextPoint = GetNextLocationPoint();
+	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
 	Other->NextStateCheck(MoveDir);	
 
 	switch (SeeDir)

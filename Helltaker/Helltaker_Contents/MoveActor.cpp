@@ -27,19 +27,21 @@ MoveActor::~MoveActor()
 
 void MoveActor::MoveOneBlock(float _DeltaTime)
 {
-	FMoveDirCheck();
+	PMoveDirCheck();
 
 	if (MoveDir == EMoveActorDir::Left || MoveDir == EMoveActorDir::Right)
 	{
 		if (0 < MoveDistanceX)
 		{
+			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
 			AddActorLocation(FMoveDir * Speed * _DeltaTime);
 			MoveDistanceX -= Speed * _DeltaTime;	
 			Speed += Acceleration * _DeltaTime;
 		}
 		else
 		{
-			LocationPoint += FMoveDir;
+
+			LocationPoint += PMoveDir;
 			Speed = FirstSpeed;
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D()};
@@ -52,13 +54,15 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 	{
 		if (0 < MoveDistanceY)
 		{
+			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
 			AddActorLocation(FMoveDir * Speed * _DeltaTime);
 			MoveDistanceY -= Speed * _DeltaTime;
 			Speed += Acceleration * _DeltaTime;
 		}
 		else
 		{
-			LocationPoint += FMoveDir;
+
+			LocationPoint += PMoveDir;
 			Speed = FirstSpeed;
 
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
@@ -74,21 +78,21 @@ void MoveActor::MoveDirChange(EMoveActorDir _Dir)
 	MoveDir = _Dir;
 }
 
-void MoveActor::FMoveDirCheck()
+void MoveActor::PMoveDirCheck()
 {
 	switch (MoveDir)
 	{
 	case EMoveActorDir::Left:
-		FMoveDir = FVector::Left;
+		PMoveDir = Point::Left;
 		break;
 	case EMoveActorDir::Right:
-		FMoveDir = FVector::Right;
+		PMoveDir = Point::Right;
 		break;
 	case EMoveActorDir::Up:
-		FMoveDir = FVector::Up;
+		PMoveDir = Point::Up;
 		break;
 	case EMoveActorDir::Down:
-		FMoveDir = FVector::Down;
+		PMoveDir = Point::Down;
 		break;
 	}
 }

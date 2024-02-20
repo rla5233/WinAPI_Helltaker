@@ -35,6 +35,8 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "LockBox.png");
+		ContentsHelper::LoadFolder("Chapter\\Component", "Key");
 
 #ifdef DEBUG
 		// 디버그 용
@@ -53,23 +55,22 @@ void ChapterManager::M_SetChapterStartLocation(FVector _Value)
 	ChapterStartLocation = _Value * WinScale;
 }
 
-void ChapterManager::M_SetChapterEndPoint(int _X, int _Y)
+void ChapterManager::M_SetChapterEndPoint(Point _Point)
 {
-	EndPoint_X = _X;
-	EndPoint_Y = _Y;
+	EndPoint = _Point;
 }
 
 // 맵좌표를 윈도우 위치로 변환하는 함수
 FVector ChapterManager::ChapterPointToLocation(FVector _Point) const
 {
-	return ChapterPointToLocation(_Point.iX(), _Point.iY());
+	return ChapterPointToLocation(Point(_Point.iX(), _Point.iY()));
 }
 
-FVector ChapterManager::ChapterPointToLocation(int _X, int _Y) const
+FVector ChapterManager::ChapterPointToLocation(Point _Point) const
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Location = ChapterStartLocation;
-	Location += FVector(_X, _Y) * ContentsHelper::GetTileScale();
+	Location += FVector(_Point.X, _Point.Y) * ContentsHelper::GetTileScale();
 	// 오차 보정
 	Location += {fmod(WinScale.X, 19.0f), fmod(WinScale.Y, 10.8f)};
 	return Location;
@@ -94,14 +95,14 @@ void ChapterManager::M_CreateTileInfoVec(const std::vector<std::vector<bool>>& _
 	}
 }
 
-void ChapterManager::M_SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor)
+void ChapterManager::M_SetChapterHitAcotrInfo(Point _Point, HitActor* const _HitActor)
 {
-	TileInfoVec[_Y][_X].Other = _HitActor;
+	TileInfoVec[_Point.Y][_Point.X].Other = _HitActor;
 }
 
-void ChapterManager::M_SetChapterThornInfo(int _X, int _Y, bool _IsUp)
+void ChapterManager::M_SetChapterThornInfo(Point _Point, bool _IsUp)
 {
-	TileInfoVec[_Y][_X].IsThorn = _IsUp;
+	TileInfoVec[_Point.Y][_Point.X].IsThorn = _IsUp;
 }
 
 void ChapterManager::CreateBG(std::string_view _Name)
@@ -163,87 +164,94 @@ void ChapterManager::CreateTransition()
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
-void ChapterManager::M_SpawnHero(int _X, int _Y, int _ActionPoint)
+void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
 	NewHero->SetName("Hero");
-	NewHero->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewHero->SetLocationPoint({ _X, _Y });
+	NewHero->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	NewHero->SetLocationPoint({ _Point.X, _Point.Y });
 	NewHero->SetActionPoint(_ActionPoint);
 	PlayerHero = NewHero;
 	HeroActionPoint->SetText(std::to_string(PlayerHero->GetActionPoint()));
 	AllMapActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
-void ChapterManager::M_SpawnDemon(int _X, int _Y, std::string_view _Name)
+void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	ChapterDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::Demon));
 	ChapterDemon->SetName(_Name);
-	ChapterDemon->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
+	ChapterDemon->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	ChapterDemon->SetDemon(_Name);
 
-	TileInfoVec[_Y][_X].IsVaild = false;
+	TileInfoVec[_Point.Y][_Point.X].IsVaild = false;
 	AllMapActors[reinterpret_cast<__int64>(ChapterDemon)] = ChapterDemon;
 }
 
-void ChapterManager::M_SpawnSkeleton(int _X, int _Y)
+void ChapterManager::M_SpawnSkeleton(Point _Point)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Skeleton* NewSkeleton = SpawnActor<Skeleton>(static_cast<int>(UpdateOrder::Skeleton));
 	NewSkeleton->SetName("Skeleton");
-	NewSkeleton->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewSkeleton->SetLocationPoint({ _X, _Y });
+	NewSkeleton->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	NewSkeleton->SetLocationPoint({ _Point });
 
-	if (nullptr != TileInfoVec[_Y][_X].Other)
+	if (nullptr != TileInfoVec[_Point.Y][_Point.X].Other)
 	{
 		MsgBoxAssert("HitActor Already Exist");
 	}
 
-	TileInfoVec[_Y][_X].Other = NewSkeleton;
+	TileInfoVec[_Point.Y][_Point.X].Other = NewSkeleton;
 	AllMapActors[reinterpret_cast<__int64>(NewSkeleton)] = NewSkeleton;
 }
 
-void ChapterManager::M_SpawnStone(int _X, int _Y, std::string_view _Name)
+void ChapterManager::M_SpawnStone(Point _Point, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Stone* NewStone = SpawnActor<Stone>(static_cast<int>(UpdateOrder::Stone));
 	NewStone->SetName("Stone");
-	NewStone->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewStone->SetLocationPoint({ _X, _Y });
+	NewStone->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	NewStone->SetLocationPoint(_Point);
 	NewStone->SetStoneImg(_Name);
 
-	if (nullptr != TileInfoVec[_Y][_X].Other)
+	if (nullptr != TileInfoVec[_Point.Y][_Point.X].Other)
 	{
 		MsgBoxAssert("HitActor Already Exist");
 	}
 
-	TileInfoVec[_Y][_X].Other = NewStone;
+	TileInfoVec[_Point.Y][_Point.X].Other = NewStone;
 	AllMapActors[reinterpret_cast<__int64>(NewStone)] = NewStone;
 }
 
-void ChapterManager::M_SpawnThorn(int _X, int _Y, EThornState _State)
+void ChapterManager::M_SpawnThorn(Point _Point, EThornState _State)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Thorn* NewThorn = SpawnActor<Thorn>(static_cast<int>(UpdateOrder::Thorn));
 	NewThorn->SetName("Thorn");
-	NewThorn->SetActorLocation(ChapterPointToLocation(_X, _Y) + TileScale.Half2D());
-	NewThorn->SetPoint(_X, _Y);
+	NewThorn->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	NewThorn->SetPoint(_Point);
 	NewThorn->StateChange(_State);
 
 	AllThorn.push_back(NewThorn);
 	AllMapActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }
 
-HitActor* ChapterManager::M_GetHitActor(FVector _Point)
+void ChapterManager::M_SpawnKey(Point _Point)
 {
-	return M_GetHitActor(_Point.iX(), _Point.iY());
+	FVector TileScale = ContentsHelper::GetTileScale();
+
 }
 
-HitActor* ChapterManager::M_GetHitActor(int _X, int _Y)
+// 수정
+HitActor* ChapterManager::M_GetHitActor(FVector _Point)
 {
-	return TileInfoVec[_Y][_X].Other;
+	return M_GetHitActor(Point(_Point.iX(), _Point.iY()));
+}
+
+HitActor* ChapterManager::M_GetHitActor(Point _Point)
+{
+	return TileInfoVec[_Point.Y][_Point.X].Other;
 }
 
 void ChapterManager::M_DestroyHitActor(__int64 _HitActor)
@@ -287,7 +295,6 @@ void ChapterManager::M_UpdateHeroActionPoint()
 	HeroActionPoint->SetText(PointStr);
 }
 
-
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);
@@ -330,8 +337,8 @@ void ChapterManager::Idle(float _DeltaTime)
 		M_StateChange(EChapterState::HeroDeath);
 	}	
 
-	FVector HeroLocationPoint = PlayerHero->GetLocationPoint();
-	if (HeroLocationPoint.iX() == EndPoint_X && HeroLocationPoint.iY() == EndPoint_Y)
+	Point HeroLocationPoint = PlayerHero->GetLocationPoint();
+	if (HeroLocationPoint.X == EndPoint.X && HeroLocationPoint.Y == EndPoint.Y)
 	{
 		M_StateChange(EChapterState::CutScene);
 	}
@@ -426,7 +433,7 @@ void ChapterManager::ResetCheck()
 
 void ChapterManager::End(float _DeltaTime)
 {
-	switch (EndOrder)
+	switch (ChapterEndOrder)
 	{
 	case 0:
 		if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
@@ -434,7 +441,7 @@ void ChapterManager::End(float _DeltaTime)
 			TransitionActor->GetImageRenderer()->ActiveOn();
 			TransitionActor->GetImageRenderer()->AnimationReset();
 			TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
-			++EndOrder;
+			++ChapterEndOrder;
 		}
 		break;
 	case 1:
@@ -465,7 +472,7 @@ void ChapterManager::EndStart()
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->StateChange(EHeroState::Victory);
 	ChapterDemon->StateChange(EDemonState::Victory);
-	EndOrder = 0;
+	ChapterEndOrder = 0;
 }
 
 void ChapterManager::Tick(float _DeltaTime)
@@ -540,7 +547,7 @@ void ChapterManager::ShowLocationPoint()
 		for (int X = 0; X < ChapterWidth; X++)
 		{
 			GreenPoint[Y][X] = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(X, Y));
+			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(Point(X, Y)));
 			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
 
 			if (true == TileInfoVec[Y][X].IsVaild)

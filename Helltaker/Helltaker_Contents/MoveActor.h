@@ -18,7 +18,7 @@ public:
 	void MoveOneBlock(float _DeltaTime);
 
 	void MoveDirChange(EMoveActorDir _Dir);
-	void FMoveDirCheck();
+	void PMoveDirCheck();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
 	bool IsMove() const
@@ -36,22 +36,22 @@ public:
 		IsMoveValue = false;
 	}
 
-	FVector GetLocationPoint() const
+	Point GetLocationPoint() const
 	{
 		return LocationPoint;
 	}
 
-	void SetLocationPoint(FVector _Point)
+	void SetLocationPoint(Point _Point)
 	{
 		LocationPoint = _Point;
 	}
 
-	FVector GetNextLocationPoint() const
+	Point GetNextLocationPoint() const
 	{
 		return NextLocationPoint;
 	}
 
-	void SetNextLocationPoint(FVector _Point)
+	void SetNextLocationPoint(Point _Point)
 	{
 		NextLocationPoint = _Point;
 	}
@@ -67,9 +67,12 @@ private:
 	float FirstSpeed = 0.0f;
 	float Speed = 0.0f;
 	float Acceleration = 0.0f;
-	FVector FMoveDir = FVector::Zero;
+	Point PMoveDir = Point::Zero;
 	bool IsMoveValue = false;
 
-	FVector LocationPoint = FVector::Zero;
-	FVector NextLocationPoint = FVector::Zero;
+	Point LocationPoint = { -1, -1 };
+	Point NextLocationPoint = { -1, -1 };
+
+	//FVector LocationPoint = FVector::Zero;
+	//FVector NextLocationPoint = FVector::Zero;
 };

@@ -42,7 +42,7 @@ void Stone::BeginPlay()
 void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
 	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
-	FVector CurLocationPoint = GetLocationPoint();
+	Point CurPoint = GetLocationPoint();
 
 	switch (_OtherMoveDir)
 	{
@@ -63,28 +63,27 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 	switch (MoveDir)
 	{
 	case EMoveActorDir::Left:
-		SetNextLocationPoint(CurLocationPoint + FVector::Left);
+		SetNextLocationPoint(CurPoint + Point::Left);
 		break;
 	case EMoveActorDir::Right:
-		SetNextLocationPoint(CurLocationPoint + FVector::Right);
+		SetNextLocationPoint(CurPoint + Point::Right);
 		break;
 	case EMoveActorDir::Up:
-		SetNextLocationPoint(CurLocationPoint + FVector::Up);
+		SetNextLocationPoint(CurPoint + Point::Up);
 		break;
 	case EMoveActorDir::Down:
-		SetNextLocationPoint(CurLocationPoint + FVector::Down);
+		SetNextLocationPoint(CurPoint + Point::Down);
 		break;
 	}
 
 	int Height = static_cast<int>(Map.size());
 	int Width = static_cast<int>(Map[0].size());
-	int Next_X = GetNextLocationPoint().iX();
-	int Next_Y = GetNextLocationPoint().iY();
-	if (0 <= Next_Y && Next_Y < Height && 0 <= Next_X && Next_X < Width)
+	Point NextPoint = GetNextLocationPoint();
+	if (0 <= NextPoint.Y && NextPoint.Y < Height && 0 <= NextPoint.X && NextPoint.X < Width)
 	{
-		if (true == Map[Next_Y][Next_X].IsVaild)
+		if (true == Map[NextPoint.Y][NextPoint.X].IsVaild)
 		{
-			NextTileCheck(Next_X, Next_Y);
+			NextTileCheck(NextPoint);
 			return;
 		}
 	}
@@ -92,11 +91,11 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 	StateChange(EHitActorState::Idle);
 }
 
-void Stone::NextTileCheck(int _X, int _Y)
+void Stone::NextTileCheck(Point _Point)
 {
-	HitActor::NextTileCheck(_X, _Y);
+	HitActor::NextTileCheck(_Point);
 
-	if (nullptr == GetChapter()->M_GetHitActor(_X, _Y))
+	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
 		StateChange(EHitActorState::Hit);
 	}

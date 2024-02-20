@@ -35,7 +35,7 @@ public:
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
 
 protected:
-	virtual void NextTileCheck(int _X, int _Y) {};
+	virtual void NextTileCheck(Point _Point) {};
 	virtual void StateUpdate(float _DeltaTime) {};
 	virtual void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) {};
 

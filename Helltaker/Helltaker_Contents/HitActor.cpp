@@ -17,17 +17,17 @@ HitActor::~HitActor()
 
 void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 {
-	FVector CurPoint = GetLocationPoint();
-	FVector NextPoint = GetNextLocationPoint();
+	Point CurPoint = GetLocationPoint();
+	Point NextPoint = GetNextLocationPoint();
 
 	switch (_NextState)
 	{
 	case EHitActorState::Hit:
-		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
-		GetChapter()->M_SetChapterHitAcotrInfo(NextPoint.iX(), NextPoint.iY(), this);
+		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint, nullptr);
+		GetChapter()->M_SetChapterHitAcotrInfo(NextPoint, this);
 		break;
 	case EHitActorState::Death:
-		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint.iX(), CurPoint.iY(), nullptr);
+		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint, nullptr);
 		break;
 	default:
 		break;

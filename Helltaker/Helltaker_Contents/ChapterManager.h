@@ -43,7 +43,7 @@ public:
 	void CreateTransition();
 
 	FVector ChapterPointToLocation(FVector _Point) const;
-	FVector ChapterPointToLocation(int _X, int _Y) const;
+	FVector ChapterPointToLocation(Point _Point) const;
 	
 	const std::vector<std::vector<TileInfo>>& GetTileInfoVec() const
 	{
@@ -52,22 +52,23 @@ public:
 
 	// Map
 	void M_CreateTileInfoVec(const std::vector<std::vector<bool>>& _Map);
-	void M_SetChapterHitAcotrInfo(int _X, int _Y, HitActor* const _HitActor);
-	void M_SetChapterThornInfo(int _X, int _Y, bool _IsUp);
+	void M_SetChapterHitAcotrInfo(Point _Point, HitActor* const _HitActor);
+	void M_SetChapterThornInfo(Point _Point, bool _IsUp);
 
 	void M_CreateChapterUI(int _ChapterNumber);
-	void M_SpawnHero(int _X, int _Y, int _ActionPoint);
-	void M_SpawnDemon(int _X, int _Y, std::string_view _Name);
-	void M_SpawnSkeleton(int _X, int _Y);
-	void M_SpawnStone(int _X, int _Y, std::string_view _Name);
-	void M_SpawnThorn(int _X, int _Y, EThornState _State);
+	void M_SpawnHero(Point _Point, int _ActionPoint);
+	void M_SpawnDemon(Point _Point, std::string_view _Name);
+	void M_SpawnSkeleton(Point _Point);
+	void M_SpawnStone(Point _Point, std::string_view _Name);
+	void M_SpawnThorn(Point _Point, EThornState _State);
+	void M_SpawnKey(Point _Point);
 	void M_SetIsThornChange(bool _Value)
 	{
 		IsThornChange = _Value;
 	}
 
 	HitActor* M_GetHitActor(FVector _Point);
-	HitActor* M_GetHitActor(int _X, int _Y);
+	HitActor* M_GetHitActor(Point _Point);
 	void M_DestroyHitActor(__int64 _HitActor);
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
@@ -78,7 +79,7 @@ public:
 		return ChapterStartLocation;
 	}
 
-	void M_SetChapterEndPoint(int _X, int _Y);
+	void M_SetChapterEndPoint(Point _Point);
 
 	void M_StateChange(EChapterState _State);
 
@@ -136,9 +137,8 @@ private:
 	std::list <Thorn*> AllThorn;
 
 	FVector ChapterStartLocation = FVector::Zero;
-	int EndPoint_X = -1;
-	int EndPoint_Y = -1;
-	int EndOrder = -1;
+	Point EndPoint = { -1, -1 };
+	int ChapterEndOrder = -1;
 
 	int ChapterNumber = -1;
 	int ChapterWidth = -1;
@@ -152,6 +152,9 @@ private:
 	Hero* PlayerHero = nullptr;
 	Demon* ChapterDemon = nullptr;
 	Text* BottomText = nullptr;
+
+	Point KeyPoint = { -1, -1 };
+	Point KeyBoxPoint = { -1, -1 };
 
 	EChapterState State = EChapterState::None;
 

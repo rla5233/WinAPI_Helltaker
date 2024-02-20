@@ -55,29 +55,29 @@ void Chapter3::LevelStart(ULevel* _PrevLevel)
 
 	M_CreateTileInfoVec(Map);
 	M_SetChapterStartLocation({ 0.29f, 0.16f });
-	M_SetChapterEndPoint(6, 0);
+	M_SetChapterEndPoint({ 6, 0 });
 
 	CreateBG("ChapterBG_003");
 	M_CreateChapterUI(3);
 	
-	M_SpawnHero(7, 2, 32);
+	M_SpawnHero({ 7, 2 }, 32);
 	
-	M_SpawnSkeleton(4, 4);
-	M_SpawnSkeleton(5, 6);
+	M_SpawnSkeleton({ 4, 4 });
+	M_SpawnSkeleton({ 5, 6 });
 	
 	M_SetIsThornChange(false);
-	M_SpawnThorn(3, 2, EThornState::Up);
-	M_SpawnThorn(4, 2, EThornState::Up);
-	M_SpawnThorn(2, 3, EThornState::Up);
-	M_SpawnThorn(4, 3, EThornState::Up);
-	M_SpawnThorn(5, 4, EThornState::Up);
-	M_SpawnThorn(6, 4, EThornState::Up);
-	M_SpawnThorn(4, 5, EThornState::Up);
-	M_SpawnThorn(2, 5, EThornState::Up);
+	M_SpawnThorn({ 3, 2 }, EThornState::Up);
+	M_SpawnThorn({ 4, 2 }, EThornState::Up);
+	M_SpawnThorn({ 2, 3 }, EThornState::Up);
+	M_SpawnThorn({ 4, 3 }, EThornState::Up);
+	M_SpawnThorn({ 5, 4 }, EThornState::Up);
+	M_SpawnThorn({ 6, 4 }, EThornState::Up);
+	M_SpawnThorn({ 4, 5 }, EThornState::Up);
+	M_SpawnThorn({ 2, 5 }, EThornState::Up);
 
-	M_SpawnDemon(3, 0, "Cerberus");
-	M_SpawnDemon(4, 0, "Cerberus");
-	M_SpawnDemon(5, 0, "Cerberus");
+	M_SpawnDemon({ 3, 0 }, "Cerberus");
+	M_SpawnDemon({ 4, 0 }, "Cerberus");
+	M_SpawnDemon({ 5, 0 }, "Cerberus");
 	
 	M_StateChange(EChapterState::Idle);
 	

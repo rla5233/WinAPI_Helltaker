@@ -24,10 +24,10 @@ public:
 	void Down(float _DeltaTime);
 	void DownStart();
 
-	void SetPoint(int _X, int _Y)
+	void SetPoint(Point _Point)
 	{
-		Point_X = _X;
-		Point_Y = _Y;
+		ThornPoint.X = _Point.X;
+		ThornPoint.Y = _Point.Y;
 	}
 
 	EThornState GetState() const
@@ -48,8 +48,7 @@ private:
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float UpDownInter = 0.05f;
 
-	int Point_X = -1;
-	int Point_Y = -1;
+	Point ThornPoint = { -1, -1 };
 	EThornState State = EThornState::None;
 	static bool IsLoad;
 };

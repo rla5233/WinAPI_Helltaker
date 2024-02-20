@@ -25,7 +25,7 @@ public:
 
 protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
-	void NextTileCheck(int _X, int _Y) override;
+	void NextTileCheck(Point _Point) override;
 
     void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) override;
 	void StateUpdate(float _DeltaTime) override;

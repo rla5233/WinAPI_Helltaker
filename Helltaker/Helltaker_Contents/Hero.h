@@ -58,7 +58,7 @@ private:
 	void InputCheck(float _DeltaTime);
 	void ThornHitCheck(EHeroState _State);
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
-	void NextTileCheck(int _X, int _Y, float _DeltaTime, int _Key1, int _Key2);
+	void NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2);
 
 	void StateUpdate(float _DeltaTime);
 
