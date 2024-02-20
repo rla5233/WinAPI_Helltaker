@@ -146,6 +146,13 @@ void Skeleton::Hit(float _DeltaTime)
 
 void Skeleton::HitMoveEnd(float _DeltaTime)
 {
+	Point CurPoint = GetLocationPoint();
+	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
+	{
+		StateChange(EHitActorState::Death);
+		return;
+	}
+
 	if (true == Renderer->IsCurAnimationEnd())
 	{
 		StateChange(EHitActorState::Idle);

@@ -40,7 +40,6 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		}
 		else
 		{
-
 			LocationPoint += PMoveDir;
 			Speed = FirstSpeed;
 
@@ -61,7 +60,6 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		}
 		else
 		{
-
 			LocationPoint += PMoveDir;
 			Speed = FirstSpeed;
 
