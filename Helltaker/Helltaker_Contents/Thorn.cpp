@@ -27,11 +27,11 @@ void Thorn::BeginPlay()
 	}
 
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Renderer = CreateImageRenderer(RenderOrder::Thorn);
-	Renderer->SetImage("Thorn_Idle.png");
-	Renderer->SetTransform({ { 0.0f, TileScale.Y * 0.05f }, { TileScale * IdleScale } });
-	Renderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, UpDownInter, false);
-	Renderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, UpDownInter, false);	
+	ImageRenderer = CreateImageRenderer(RenderOrder::Thorn);
+	ImageRenderer->SetImage("Thorn_Idle.png");
+	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * 0.05f }, { TileScale * IdleScale } });
+	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, UpDownInter, false);
+	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, UpDownInter, false);	
 }
 
 void Thorn::Idle(float _DeltaTime)
@@ -39,7 +39,7 @@ void Thorn::Idle(float _DeltaTime)
 
 void Thorn::IdleStart()
 {
-	Renderer->SetImage("Thorn_Idle.png");
+	ImageRenderer->SetImage("Thorn_Idle.png");
 }
 
 void Thorn::Up(float _DeltaTime)
@@ -49,7 +49,7 @@ void Thorn::Up(float _DeltaTime)
 
 void Thorn::UpStart()
 {
-	Renderer->ChangeAnimation("Thorn_Up");
+	ImageRenderer->ChangeAnimation("Thorn_Up");
 	GetChapter()->M_SetChapterThornInfo(ThornPoint, true);
 }
 
@@ -60,7 +60,7 @@ void Thorn::Down(float _DeltaTime)
 
 void Thorn::DownStart()
 {
-	Renderer->ChangeAnimation("Thorn_Down");
+	ImageRenderer->ChangeAnimation("Thorn_Down");
 	GetChapter()->M_SetChapterThornInfo(ThornPoint, false);
 }
 

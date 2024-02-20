@@ -1,7 +1,6 @@
 #pragma once
 
 #include "RenderActor.h"
-#include "ContentsHelper.h"
 
 // Ό³Έν :
 class Thorn : public RenderActor
@@ -43,7 +42,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ImageRenderer = nullptr;
 
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float UpDownInter = 0.05f;
