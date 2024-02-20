@@ -73,6 +73,9 @@ public:
 
 	void AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color = Color8Bit::Black);
 
+	// 알파랑 동시에 안될것이다.
+	void PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _Angle);
+
 	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 
 	bool Create(UWindowImage* _Image, const FVector& _Scale);

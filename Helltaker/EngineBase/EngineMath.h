@@ -73,6 +73,28 @@ public:
 
 
 public:
+	static float4 LerpClamp(float4 p1, float4 p2, float d1)
+	{
+		if (0.0f >= d1)
+		{
+			d1 = 0.0f;
+		}
+
+		if (1.0f <= d1)
+		{
+			d1 = 1.0f;
+		}
+
+		return LerpClamp(p1, p2, d1);
+	}
+
+	// p1 p2          d1의 비율로 간다.
+	static float4 Lerp(float4 p1, float4 p2, float d1)
+	{
+		return (p1 * (1.0f - d1)) + (p2 * d1);
+	}
+
+
 	float Size2D()
 	{
 		// sqrtf 제곱근 구해주는 함수

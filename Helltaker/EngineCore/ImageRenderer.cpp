@@ -5,10 +5,12 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{}
+{
+}
 
 UImageRenderer::~UImageRenderer()
-{}
+{
+}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -76,8 +78,7 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else
-	{
+	else {
 		ImageRender(_DeltaTime);
 	}
 
@@ -208,6 +209,7 @@ FTransform UImageRenderer::GetRenderTransForm()
 		AActor* Actor = GetOwner();
 		ULevel* World = Actor->GetWorld();
 		FVector CameraPos = World->GetCameraPos();
+		CameraPos *= CameraRatio;
 		RendererTrans.AddPosition(-CameraPos);
 	}
 

@@ -8,10 +8,12 @@ UEngineCore* GEngine = nullptr;
 
 UEngineCore::UEngineCore()
 	: MainWindow()
-{}
+{
+}
 
 UEngineCore::~UEngineCore()
-{}
+{
+}
 
 void UEngineCore::CoreTick()
 {
@@ -143,6 +145,11 @@ void UEngineCore::EngineStart(HINSTANCE _hInstance)
 	CoreInit(_hInstance);
 	BeginPlay();
 	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
+}
+
+void Exit()
+{
+
 }
 
 void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)

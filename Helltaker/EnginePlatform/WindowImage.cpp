@@ -19,7 +19,8 @@
 #pragma comment(lib, "Gdiplus.lib")
 
 UWindowImage::UWindowImage()
-{}
+{
+}
 
 UWindowImage::~UWindowImage()
 {
@@ -406,6 +407,62 @@ void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 		ImageScaleY, 							// int y1, 
 		Function
 	);
+}
+
+void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _Angle)
+{
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
+
+	if (_Index >= _CopyImage->Infos.size())
+	{
+		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
+	}
+
+
+	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
+
+	{
+		FTransform Trans = FTransform(float4::Zero, _Trans.GetScale());
+
+		FVector LeftTop = Trans.LeftTop();
+		FVector RightTop = Trans.RightTop();
+		FVector LeftBot = Trans.LeftBottom();
+
+		// LeftTop.RotationZ(40);
+
+		// 회전시키고 위치를 이동시켜야 한다.
+	}
+
+
+	//// 각도만큼 회전시킨 값을 만들어 내야 합니다.
+	//// 어떻게 그렇게 만들수 있을까?
+
+
+	//HDC hdc = ImageDC;
+	//// 이미지
+	//HDC hdcSrc = _CopyImage->Infos[_Index].ImageDC;
+
+
+	//// 3개를 넣어줘야 한다.
+	//POINT
+	//// 
+
+	//PlgBlt(
+	//	hdc, 							  // HDC hdc, // 
+
+	//	hdcSrc,							// HDC hdcSrc, 
+	//	RenderLeft, 		  // int x,   // 
+	//	RenderTop, 		  // int y,   // 
+	//	RenderScaleX,		  // int cx,  // 
+	//	RenderScaleY,		  // int cy,  
+	//	ImageLeft,   							// int y1, 
+	//	ImageTop,   							// int x1,  
+	//	ImageScaleX, 							// int y1, 
+	//	ImageScaleY, 							// int y1, 
+	//);
 }
 
 void UWindowImage::Cutting(int _X, int _Y)

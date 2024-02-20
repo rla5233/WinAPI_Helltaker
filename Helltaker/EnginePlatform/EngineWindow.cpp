@@ -35,7 +35,8 @@ void UEngineWindow::Init(HINSTANCE _hInst)
 
 
 UEngineWindow::UEngineWindow()
-{}
+{
+}
 
 UEngineWindow::~UEngineWindow()
 {
@@ -130,6 +131,11 @@ unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)(
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+			if (false == WindowLive)
+			{
+				break;
+			}
 		}
 
 		// 메세지 루프의 데드타임이라는 곳에서 실행됩니다.
