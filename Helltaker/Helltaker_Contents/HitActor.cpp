@@ -29,8 +29,6 @@ void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 	case EHitActorState::Death:
 		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint, nullptr);
 		break;
-	default:
-		break;
 	}	
 }
 
