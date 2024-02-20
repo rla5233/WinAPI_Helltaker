@@ -140,7 +140,8 @@ private:
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::map<__int64, AActor*> AllMapActors;
-	std::list <Thorn*> AllThorn;
+	std::list<Thorn*> AllThorn;
+	std::list<Demon*> AllChapterDemon;
 
 	FVector ChapterStartLocation = FVector::Zero;
 	Point EndPoint = { -1, -1 };
@@ -155,7 +156,6 @@ private:
 	Scene* TransitionActor = nullptr;
 	BackGround* ChapterBG = nullptr;
 	Hero* PlayerHero = nullptr;
-	Demon* ChapterDemon = nullptr;
 	Text* HeroActionPoint = nullptr;
 	Text* BottomText = nullptr;
 

@@ -2,6 +2,8 @@
 
 #include "CutSceneManager.h"
 
+class Demon;
+
 // Ό³Έν :
 class Chapter3 : public HellTakerManager
 {
@@ -32,7 +34,6 @@ protected:
 	void BadEndSetting() override;
 
 	void SuccessStart() override;
-
 private:
 
 	static bool IsLoad;

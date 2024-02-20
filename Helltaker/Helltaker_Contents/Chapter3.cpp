@@ -91,28 +91,63 @@ void Chapter3::LevelStart(ULevel* _PrevLevel)
 
 void Chapter3::CutSceneStart()
 {
-}
+	CutSceneManager::CutSceneStart();
 
-void Chapter3::ChangeChapter()
-{
+	C_SpawnDialogue("DialogueBG_Hell.png");
+	C_SpawnCharacter("Cer", "Cer_Idle.png", Chap3_Script[0]);
+	C_SpawnBooper();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.503f, WinScale.Y * 0.576f } });
+	C_BooperTextSet(Chap3_Script[1]);
 }
 
 void Chapter3::SelectStart()
 {
+	CutSceneManager::SelectStart();
+
+	C_MenubarTextSet(0, Chap3_Script[2]);
+	C_MenubarTextSet(1, Chap3_Script[3]);
 }
 
 void Chapter3::SelectMenu()
 {
+	switch (C_GetFocusMenuIndex())
+	{
+	case 0:
+		C_StateChange(ECutSceneState::Success);
+		break;
+	case 1:
+		C_StateChange(ECutSceneState::BadEnd);
+		break;
+	}
 }
 
 void Chapter3::BadEndStart()
 {
+	CutSceneManager::BadEndStart();
+
+	C_BooperTextSet(Chap3_Script[4]);
 }
 
 void Chapter3::BadEndSetting()
 {
+	CutSceneManager::BadEndSetting();
+
+	C_BooperTextSet(Chap3_Script[5]);
 }
 
 void Chapter3::SuccessStart()
 {
+	CutSceneManager::SuccessStart();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.493f, WinScale.Y * 0.643f } });
+	C_CharacterSetImage("Cer_Happy.png");
+	C_BooperTextSet(Chap3_Script[6]);
+}
+
+void Chapter3::ChangeChapter()
+{
+	int a = 0;
 }

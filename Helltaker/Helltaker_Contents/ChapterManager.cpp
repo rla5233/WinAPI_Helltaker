@@ -181,11 +181,12 @@ void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	ChapterDemon =  SpawnActor<Demon>(static_cast<int>(UpdateOrder::RenderActor));
+	Demon* ChapterDemon = SpawnActor<Demon>(static_cast<int>(UpdateOrder::RenderActor));
 	ChapterDemon->SetName(_Name);
 	ChapterDemon->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	ChapterDemon->SetDemon(_Name);
 
+	AllChapterDemon.push_back(ChapterDemon);
 	TileInfoVec[_Point.Y][_Point.X].IsVaild = false;
 	AllMapActors[reinterpret_cast<__int64>(ChapterDemon)] = ChapterDemon;
 }
@@ -332,6 +333,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
 
+	AllChapterDemon.clear();
 	TileInfoVec.clear();
 	AllThorn.clear();
 
@@ -477,7 +479,6 @@ void ChapterManager::End(float _DeltaTime)
 		}
 		break;
 	}
-
 }
 
 void ChapterManager::EndStart()
@@ -497,7 +498,12 @@ void ChapterManager::EndStart()
 	BottomText->GetTextRenderer()->ActiveOff();
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->StateChange(EHeroState::Victory);
-	ChapterDemon->StateChange(EDemonState::Victory);
+
+	for (Demon* ChapterDemon : AllChapterDemon)
+	{
+		ChapterDemon->StateChange(EDemonState::Victory);
+	}
+
 	ChapterEndOrder = 0;
 }
 
