@@ -40,7 +40,6 @@ private:
 	EKeyComponentState State = EKeyComponentState::None;
 	EKeyComponentType Type = EKeyComponentType::None;
 
-	static const FVector IdleScale;
 	static const float IdleInter;
 	static bool IsLoad;
 };
