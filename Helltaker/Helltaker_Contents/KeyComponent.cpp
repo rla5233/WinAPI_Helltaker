@@ -1,8 +1,8 @@
 #include "KeyComponent.h"
 
 bool KeyComponent::IsLoad = false;
-const FVector KeyComponent::IdleScale = { 0.5f, 0.5f };
-const float KeyComponent::IdleInter = 0.2f;
+const FVector KeyComponent::IdleScale = { 0.9f, 0.9f };
+const float KeyComponent::IdleInter = 0.075f;
 
 KeyComponent::KeyComponent()
 {
@@ -43,7 +43,7 @@ void KeyComponent::IdleStart()
 		ImageRenderer->ChangeAnimation("Key_Idle");
 		break;
 	case EKeyComponentType::LockBox:
-		ImageRenderer->SetTransform({ { 0, 0 }, { TileScale * IdleScale } });
+		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f)}, {TileScale * IdleScale}});
 		ImageRenderer->SetImage("LockBox.png");
 		break;
 	}
@@ -75,7 +75,7 @@ void KeyComponent::StateChange(EKeyComponentState _State)
 {
 	if (State != _State)
 	{
-		switch (State)
+		switch (_State)
 		{
 		case EKeyComponentState::Idle:
 			IdleStart();

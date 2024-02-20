@@ -75,6 +75,9 @@ void Chapter3::LevelStart(ULevel* _PrevLevel)
 	M_SpawnThorn({ 4, 5 }, EThornState::Up);
 	M_SpawnThorn({ 2, 5 }, EThornState::Up);
 
+	M_SpawnKeyComponent({ 0, 5 }, EKeyComponentType::Key);
+	M_SpawnKeyComponent({ 6, 1 }, EKeyComponentType::LockBox);
+
 	M_SpawnDemon({ 3, 0 }, "Cerberus");
 	M_SpawnDemon({ 4, 0 }, "Cerberus");
 	M_SpawnDemon({ 5, 0 }, "Cerberus");

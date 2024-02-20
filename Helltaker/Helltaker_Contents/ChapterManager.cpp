@@ -36,8 +36,6 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "LockBox.png");
-		ContentsHelper::LoadFolder("Chapter\\Component", "Key");
 
 #ifdef DEBUG
 		// 디버그 용
@@ -243,7 +241,6 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 	FVector TileScale = ContentsHelper::GetTileScale();
 	KeyComponent* NewKeyComponent = SpawnActor<KeyComponent>(static_cast<int>(UpdateOrder::RenderActor));
 	NewKeyComponent->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
-	NewKeyComponent->StateChange(EKeyComponentState::Idle);
 
 	switch (_Type)
 	{
@@ -257,6 +254,7 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 		break;
 	}
 
+	NewKeyComponent->StateChange(EKeyComponentState::Idle);
 	AllMapActors[reinterpret_cast<__int64>(NewKeyComponent)] = NewKeyComponent;
 }
 
