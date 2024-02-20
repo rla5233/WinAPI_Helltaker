@@ -1,6 +1,7 @@
 #include "ChapterManager.h"
 
 #include "ContentsHelper.h"
+#include "KeyComponent.h"
 #include "BackGround.h"
 #include "Character.h"
 #include "HitActor.h"
@@ -237,10 +238,26 @@ void ChapterManager::M_SpawnThorn(Point _Point, EThornState _State)
 	AllMapActors[reinterpret_cast<__int64>(NewThorn)] = NewThorn;
 }
 
-void ChapterManager::M_SpawnKey(Point _Point)
+void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
+	KeyComponent* NewKeyComponent = SpawnActor<KeyComponent>(static_cast<int>(UpdateOrder::RenderActor));
+	NewKeyComponent->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	NewKeyComponent->StateChange(EKeyComponentState::Idle);
 
+	switch (_Type)
+	{
+	case EKeyComponentType::Key:
+		NewKeyComponent->SetName("Key");
+		NewKeyComponent->SetKeyComponentType(EKeyComponentType::Key);
+		break;
+	case EKeyComponentType::LockBox:
+		NewKeyComponent->SetName("LockBox");
+		NewKeyComponent->SetKeyComponentType(EKeyComponentType::LockBox);
+		break;
+	}
+
+	AllMapActors[reinterpret_cast<__int64>(NewKeyComponent)] = NewKeyComponent;
 }
 
 // ¼öÁ¤

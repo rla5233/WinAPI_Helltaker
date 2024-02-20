@@ -16,16 +16,21 @@ public:
 	KeyComponent& operator=(const KeyComponent& _Other) = delete;
 	KeyComponent& operator=(KeyComponent&& _Other) noexcept = delete;
 
+	void SetKeyComponentType(EKeyComponentType _Type)
+	{
+		Type = _Type;
+	}
+
+	void StateChange(EKeyComponentState _State);
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Death(float _DeltaTime);
 	void DeathStart();
 
-	void StateChange(EKeyComponentState _State);
-protected:
 	void StateUpdate(float _DeltaTime);
 
+protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 

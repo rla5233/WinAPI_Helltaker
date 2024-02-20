@@ -61,7 +61,7 @@ public:
 	void M_SpawnSkeleton(Point _Point);
 	void M_SpawnStone(Point _Point, std::string_view _Name);
 	void M_SpawnThorn(Point _Point, EThornState _State);
-	void M_SpawnKey(Point _Point);
+	void M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type);
 	void M_SetIsThornChange(bool _Value)
 	{
 		IsThornChange = _Value;
