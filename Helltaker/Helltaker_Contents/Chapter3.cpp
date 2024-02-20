@@ -1,5 +1,7 @@
 #include "Chapter3.h"
 
+#include "Chapter4.h"
+
 bool Chapter3::IsLoad = false;
 
 const std::vector<const char*> Chap3_Script
@@ -44,13 +46,13 @@ void Chapter3::LevelStart(ULevel* _PrevLevel)
 	// 스테이지 생성
 	std::vector<std::vector<bool>> Map =
 	{
-		{ false, false, false, true , true , true , true , false  },
-		{ false, false, false, false, false, false, true , false  },
-		{ false, false, true , true , true , true , true , true   },
-		{ false, false, true , false, true , false, true , true   },
-		{ false, false, true , true , true , true , true , false  },
-		{ true , false, true , false, true , false, true , false  },
-		{ true , true , true , true , true , true , true , false  }
+		{ false, false, false, true , true , true , true , false },
+		{ false, false, false, false, false, false, true , false },
+		{ false, false, true , true , true , true , true , true  },
+		{ false, false, true , false, true , false, true , true  },
+		{ false, false, true , true , true , true , true , false },
+		{ true , false, true , false, true , false, true , false },
+		{ true , true , true , true , true , true , true , false }
 	};
 
 	M_CreateTileInfoVec(Map);
@@ -149,5 +151,8 @@ void Chapter3::SuccessStart()
 
 void Chapter3::ChangeChapter()
 {
-	int a = 0;
+	ChapterManager::ChangeChapter();
+
+	CreateChapter<Chapter4>("Chapter4");
+	GEngine->ChangeLevel("Chapter4");
 }
