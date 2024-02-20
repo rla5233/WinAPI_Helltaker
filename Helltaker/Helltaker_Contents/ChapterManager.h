@@ -7,6 +7,7 @@
 
 #include <EngineCore/Level.h>
 
+class KeyComponent;
 class BackGround;
 class Character;
 class HitActor;
@@ -69,7 +70,7 @@ public:
 
 	HitActor* M_GetHitActor(FVector _Point);
 	HitActor* M_GetHitActor(Point _Point);
-	void M_DestroyHitActor(__int64 _HitActor);
+	void M_DestroyHitActor(__int64 _Key);
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
 
@@ -103,6 +104,7 @@ public:
 	}
 
 	bool IsKeyPoint();
+	void DeleteKey();
 	
 	// Debug
 	void ShowLocationPoint();
@@ -148,13 +150,14 @@ private:
 	int ChapterHeight = -1;
 	bool IsThornChange = false;
 
-	const float TransitionInter = 0.0435f;
-	BackGround* ChapterBG = nullptr;
+	static const float TransitionInter;
 	Scene* TransitionActor = nullptr;
-	Text* HeroActionPoint = nullptr;
+	BackGround* ChapterBG = nullptr;
 	Hero* PlayerHero = nullptr;
 	Demon* ChapterDemon = nullptr;
+	Text* HeroActionPoint = nullptr;
 	Text* BottomText = nullptr;
+	KeyComponent* Key = nullptr;
 
 	EChapterState State = EChapterState::None;
 

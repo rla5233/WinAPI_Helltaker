@@ -142,11 +142,6 @@ void Skeleton::Hit(float _DeltaTime)
 	{
 		StateChange(EHitActorState::HitMoveEnd);
 	}
-
-	if (true == Renderer->IsCurAnimationEnd())
-	{
-		StateChange(EHitActorState::Idle);
-	}	
 }
 
 void Skeleton::HitMoveEnd(float _DeltaTime)
@@ -180,7 +175,7 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 
 void Skeleton::Death(float _DeltaTime)
 {
-	Destroy(0.0f);
+	Destroy();
 }
 
 void Skeleton::DeathStart()

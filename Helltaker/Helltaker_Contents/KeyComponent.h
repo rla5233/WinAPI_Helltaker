@@ -31,7 +31,6 @@ private:
 	void Death(float _DeltaTime);
 	void DeathStart();
 
-
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

@@ -54,19 +54,16 @@ void KeyComponent::Death(float _DeltaTime)
 
 void KeyComponent::DeathStart()
 {
-
+	HitActorInfoUpdate(EHitActorState::Death);
+	InformDestroytoChapter();
 }
-
 
 void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
 	switch (Type)
 	{
-	case EKeyComponentType::Key:
-
-		break;
 	case EKeyComponentType::LockBox:
-		
+		//StateChange(EKeyComponentState::Hit);
 		break;
 	}
 }

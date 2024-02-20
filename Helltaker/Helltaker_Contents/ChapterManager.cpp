@@ -21,6 +21,8 @@
 #include <vector>
 
 bool ChapterManager::IsLoad = false;
+
+const float ChapterManager::TransitionInter = 0.0435f;
 std::set<std::string> ChapterManager::ChapterSet;
 
 ChapterManager::ChapterManager()
@@ -241,12 +243,14 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 	FVector TileScale = ContentsHelper::GetTileScale();
 	KeyComponent* NewKeyComponent = SpawnActor<KeyComponent>(static_cast<int>(UpdateOrder::RenderActor));
 	NewKeyComponent->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	NewKeyComponent->SetLocationPoint(_Point);
 
 	switch (_Type)
 	{
 	case EKeyComponentType::Key:
 		NewKeyComponent->SetName("Key");
 		NewKeyComponent->SetKeyComponentType(EKeyComponentType::Key);
+		Key = NewKeyComponent;
 		KeyPoint = _Point;
 		break;
 	case EKeyComponentType::LockBox:
@@ -271,9 +275,14 @@ HitActor* ChapterManager::M_GetHitActor(Point _Point)
 	return TileInfoVec[_Point.Y][_Point.X].Other;
 }
 
-void ChapterManager::M_DestroyHitActor(__int64 _HitActor)
+void ChapterManager::M_DestroyHitActor(__int64 _Key)
 {
-	AllMapActors.erase(_HitActor);
+	if (false == AllMapActors.contains(_Key))
+	{
+		MsgBoxAssert("HitActor Not Exist.")
+	}
+
+	AllMapActors.erase(_Key);
 }
 
 void ChapterManager::M_ChangeThornState()
@@ -551,6 +560,17 @@ void ChapterManager::M_StateChange(EChapterState _State)
 bool ChapterManager::IsKeyPoint()
 {
 	return PlayerHero->GetNextLocationPoint() == KeyPoint;
+}
+
+void ChapterManager::DeleteKey()
+{
+	if (nullptr == Key)
+	{
+		return;
+	}
+
+	Key->StateChange(EKeyComponentState::Death);
+	Key = nullptr;
 }
 
 // 디버그용
