@@ -56,11 +56,6 @@ void ChapterManager::M_SetChapterStartLocation(FVector _Value)
 	ChapterStartLocation = _Value * WinScale;
 }
 
-void ChapterManager::M_SetChapterEndPoint(Point _Point)
-{
-	EndPoint = _Point;
-}
-
 // 맵좌표를 윈도우 위치로 변환하는 함수
 FVector ChapterManager::ChapterPointToLocation(FVector _Point) const
 {
@@ -185,6 +180,7 @@ void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
 	ChapterDemon->SetName(_Name);
 	ChapterDemon->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	ChapterDemon->SetDemon(_Name);
+	ChapterDemon->SetLocationPoint(_Point);
 
 	AllChapterDemon.push_back(ChapterDemon);
 	TileInfoVec[_Point.Y][_Point.X].IsVaild = false;
@@ -365,11 +361,7 @@ void ChapterManager::Idle(float _DeltaTime)
 		M_StateChange(EChapterState::HeroDeath);
 	}	
 
-	Point HeroLocationPoint = PlayerHero->GetLocationPoint();
-	if (HeroLocationPoint.X == EndPoint.X && HeroLocationPoint.Y == EndPoint.Y)
-	{
-		M_StateChange(EChapterState::CutScene);
-	}
+	CutSceneCheck();
 
 	// Debug
 	if (UEngineInput::IsPress('P'))
@@ -415,6 +407,22 @@ void ChapterManager::HeroDeathStart()
 void ChapterManager::CutScene(float _DeltaTime)
 {
 	ResetCheck();
+}
+
+void ChapterManager::CutSceneCheck()
+{
+	Point HeroCurPoint = PlayerHero->GetLocationPoint();
+	for (Demon* Demon : AllChapterDemon)
+	{
+		Point DemonPoint = Demon->GetLocationPoint();
+		if (DemonPoint + Point::Left  == HeroCurPoint ||
+			DemonPoint + Point::Right == HeroCurPoint || 
+			DemonPoint + Point::Up    == HeroCurPoint || 
+			DemonPoint + Point::Down  == HeroCurPoint  )
+		{
+			M_StateChange(EChapterState::CutScene);
+		}
+	}
 }
 
 void ChapterManager::CutSceneStart()

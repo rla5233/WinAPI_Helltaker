@@ -27,8 +27,8 @@ void Helltaker_ContentsCore::BeginPlay()
 
 	SetFrame(60);
 
-    //CreateLevel<Opening>("Opening");
-    //ChangeLevel("Opening");
+    CreateLevel<Opening>("Opening");
+    ChangeLevel("Opening");
 
 	//CreateLevel<MainMenu>("MainMenu");
 	//ChangeLevel("MainMenu");
@@ -36,11 +36,14 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter1>("Chapter1");
 	//ChangeLevel("Chapter1");
 
-	CreateLevel<Chapter2>("Chapter2");
-	ChangeLevel("Chapter2");
+	//CreateLevel<Chapter2>("Chapter2");
+	//ChangeLevel("Chapter2");
 
 	//CreateLevel<Chapter3>("Chapter3");
 	//ChangeLevel("Chapter3");
+
+	//CreateLevel<Chapter4>("Chapter4");
+	//ChangeLevel("Chapter4");
 
 	//CreateLevel<Chapter4>("Chapter4");
 	//ChangeLevel("Chapter4");

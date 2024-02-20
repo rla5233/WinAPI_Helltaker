@@ -56,7 +56,6 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 
 	M_CreateTileInfoVec(Map);
 	M_SetChapterStartLocation({ 0.318f, 0.208f });
-	M_SetChapterEndPoint({ 4, 4 });
 
 	CreateBG("ChapterBG_002");
 	M_CreateChapterUI(2);

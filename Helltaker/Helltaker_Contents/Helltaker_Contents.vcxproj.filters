@@ -76,6 +76,9 @@
     <ClInclude Include="Chapter4.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="Chapter5.h">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -151,6 +154,9 @@
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Chapter4.cpp">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter5.cpp">
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
   </ItemGroup>

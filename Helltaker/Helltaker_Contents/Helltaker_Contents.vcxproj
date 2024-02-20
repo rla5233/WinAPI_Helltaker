@@ -179,6 +179,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Chapter5.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ChapterManager.h">
       <SubType>
       </SubType>
@@ -278,6 +282,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Chapter4.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Chapter5.cpp">
       <SubType>
       </SubType>
     </ClCompile>

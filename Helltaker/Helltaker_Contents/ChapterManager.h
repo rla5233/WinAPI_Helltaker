@@ -80,8 +80,6 @@ public:
 		return ChapterStartLocation;
 	}
 
-	void M_SetChapterEndPoint(Point _Point);
-
 	void M_StateChange(EChapterState _State);
 
 	template<typename Chapter>
@@ -127,6 +125,7 @@ private:
 	void HeroDeathStart();
 
 	void CutScene(float _DeltaTime);
+	void CutSceneCheck();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();
@@ -144,7 +143,6 @@ private:
 	std::list<Demon*> AllChapterDemon;
 
 	FVector ChapterStartLocation = FVector::Zero;
-	Point EndPoint = { -1, -1 };
 	int ChapterEndOrder = -1;
 
 	int ChapterNumber = -1;

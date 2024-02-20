@@ -1,5 +1,7 @@
 #include "Chapter4.h"
 
+#include "Chapter5.h"
+
 bool Chapter4::IsLoad = false;
 
 const std::vector<const char*> Chap4_Script
@@ -53,7 +55,6 @@ void Chapter4::LevelStart(ULevel * _PrevLevel)
 
 	M_CreateTileInfoVec(Map);
 	M_SetChapterStartLocation({ 0.292f, 0.255f });
-	M_SetChapterEndPoint({ 6, 2 });
 
 	CreateBG("ChapterBG_004");
 	M_CreateChapterUI(4);
@@ -150,5 +151,8 @@ void Chapter4::SuccessStart()
 
 void Chapter4::ChangeChapter()
 {
-	int a = 0;
+	ChapterManager::ChangeChapter();
+
+	CreateChapter<Chapter5>("Chapter5");
+	GEngine->ChangeLevel("Chapter5");
 }

@@ -27,6 +27,16 @@ public:
 	void SetDemon(std::string_view _Name);
 	void LoveSignAnimation(float _DeltaTime);
 
+	void SetLocationPoint(Point _Point)
+	{
+		LocationPoint = _Point;
+	}
+
+	Point GetLocationPoint() const
+	{
+		return LocationPoint;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -44,7 +54,8 @@ private:
 
 	const FVector IdleScale = { 0.9f, 0.9f };
 	const float IdleInter = 0.082f;
-
+	
+	Point LocationPoint = { -1, -1 };
 	EDemonState State = EDemonState::None;
 	static bool IsLoad;
 };
