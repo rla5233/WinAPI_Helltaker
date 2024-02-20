@@ -31,9 +31,7 @@ public:
 
 	void InformDestroytoChapter();
 
-
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
-
 protected:
 	virtual void NextTileCheck(Point _Point) {};
 	virtual void StateUpdate(float _DeltaTime) {};

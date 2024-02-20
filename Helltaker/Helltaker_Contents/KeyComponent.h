@@ -1,9 +1,9 @@
 #pragma once
 
-#include "RenderActor.h"
+#include "HitActor.h"
 
 // Ό³Έν :
-class KeyComponent : public RenderActor
+class KeyComponent : public HitActor
 {
 public:
 	// constructor destructor
@@ -21,18 +21,22 @@ public:
 		Type = _Type;
 	}
 
+	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
+
 	void StateChange(EKeyComponentState _State);
+
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Death(float _DeltaTime);
 	void DeathStart();
 
-	void StateUpdate(float _DeltaTime);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+	void StateUpdate(float _DeltaTime) override;
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;

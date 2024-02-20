@@ -144,7 +144,8 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 
 void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 {
-	if (nullptr == GetChapter()->M_GetHitActor(_Point))
+	if (nullptr == GetChapter()->M_GetHitActor(_Point) ||
+		true == GetChapter()->IsKeyPoint())
 	{
 		StateChange(EHeroState::None);
 		StateChange(EHeroState::Move, _DeltaTime);

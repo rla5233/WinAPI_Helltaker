@@ -247,6 +247,7 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 	case EKeyComponentType::Key:
 		NewKeyComponent->SetName("Key");
 		NewKeyComponent->SetKeyComponentType(EKeyComponentType::Key);
+		KeyPoint = _Point;
 		break;
 	case EKeyComponentType::LockBox:
 		NewKeyComponent->SetName("LockBox");
@@ -255,6 +256,7 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 	}
 
 	NewKeyComponent->StateChange(EKeyComponentState::Idle);
+	TileInfoVec[_Point.Y][_Point.X].Other = NewKeyComponent;
 	AllMapActors[reinterpret_cast<__int64>(NewKeyComponent)] = NewKeyComponent;
 }
 
@@ -544,6 +546,11 @@ void ChapterManager::M_StateChange(EChapterState _State)
 	}
 
 	State = _State;
+}
+
+bool ChapterManager::IsKeyPoint()
+{
+	return PlayerHero->GetNextLocationPoint() == KeyPoint;
 }
 
 // 디버그용

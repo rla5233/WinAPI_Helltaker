@@ -26,9 +26,7 @@ void KeyComponent::BeginPlay()
 }
 
 void KeyComponent::Idle(float _DeltaTime)
-{
-
-}
+{}
 
 void KeyComponent::IdleStart()
 {
@@ -51,12 +49,26 @@ void KeyComponent::IdleStart()
 
 void KeyComponent::Death(float _DeltaTime)
 {
-
+	Destroy();
 }
 
 void KeyComponent::DeathStart()
 {
 
+}
+
+
+void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
+{
+	switch (Type)
+	{
+	case EKeyComponentType::Key:
+
+		break;
+	case EKeyComponentType::LockBox:
+		
+		break;
+	}
 }
 
 void KeyComponent::Tick(float _DeltaTime)
@@ -68,7 +80,15 @@ void KeyComponent::Tick(float _DeltaTime)
 
 void KeyComponent::StateUpdate(float _DeltaTime)
 {
-
+	switch (State)
+	{
+	case EKeyComponentState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case EKeyComponentState::Death:
+		Death(_DeltaTime);
+		break;
+	}
 }
 
 void KeyComponent::StateChange(EKeyComponentState _State)

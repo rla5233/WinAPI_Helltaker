@@ -101,6 +101,8 @@ public:
 
 		ChapterSet.insert(_Name);
 	}
+
+	bool IsKeyPoint();
 	
 	// Debug
 	void ShowLocationPoint();
@@ -138,6 +140,7 @@ private:
 
 	FVector ChapterStartLocation = FVector::Zero;
 	Point EndPoint = { -1, -1 };
+	Point KeyPoint = { -1, -1 };
 	int ChapterEndOrder = -1;
 
 	int ChapterNumber = -1;
@@ -152,9 +155,6 @@ private:
 	Hero* PlayerHero = nullptr;
 	Demon* ChapterDemon = nullptr;
 	Text* BottomText = nullptr;
-
-	Point KeyPoint = { -1, -1 };
-	Point KeyBoxPoint = { -1, -1 };
 
 	EChapterState State = EChapterState::None;
 
