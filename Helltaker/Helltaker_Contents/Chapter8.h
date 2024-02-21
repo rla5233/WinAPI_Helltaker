@@ -27,6 +27,9 @@ protected:
 	void ChangeChapter() override;
 
 	// CutScene
+	void Enter(float _DeltaTime) override;
+	void EnterStart() override;
+
 	void SelectStart() override;
 	void SelectMenu() override;
 
@@ -36,11 +39,20 @@ protected:
 	void SuccessStart() override;
 
 private:
+	void EnterOrder0();
+	void EnterOrder1();
+	void EnterOrder2();
+
 	void CreateDefaultBG();
+	void SpawnSkeletonMan();
 
 private:
-	BackGround* DefaultBackGround = nullptr;
+	BackGround* M_DefaultBackGround = nullptr;
 	Point EndPoint = Point::Zero;
+
+	std::vector<Scene*> SkeletonMan;
+
+	int EnterOrder = -1;
 
 	static bool IsLoad;
 };

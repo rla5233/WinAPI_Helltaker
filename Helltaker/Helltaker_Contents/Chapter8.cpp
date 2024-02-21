@@ -1,6 +1,8 @@
 #include "Chapter8.h"
 
 #include "BackGround.h"
+#include "Character.h"
+#include "Scene.h"
 
 bool Chapter8::IsLoad = false;
 
@@ -38,6 +40,7 @@ void Chapter8::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_008.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Throne.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_Skeleton.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Angry.png");
@@ -105,17 +108,47 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 
 void Chapter8::CreateDefaultBG()
 {
-	DefaultBackGround = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
-	DefaultBackGround->CreateBackGround("DefaultBG");
-	DefaultBackGround->GetImageRenderer()->CameraEffectOff();
+	M_DefaultBackGround = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	M_DefaultBackGround->CreateBackGround("DefaultBG");
+	M_DefaultBackGround->GetImageRenderer()->CameraEffectOff();
+}
+
+void Chapter8::SpawnSkeletonMan()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Scene* Skeleton = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	Skeleton->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
+	Skeleton->SetName("Skeleton_Man");
+	Skeleton->CreateImageRenderer(RenderOrder::Scene);
+	Skeleton->GetImageRenderer()->SetImage("Man_Skeleton.png");
+	Skeleton->GetImageRenderer()->CameraEffectOff();
+	SkeletonMan.push_back(Skeleton);
 }
 
 void Chapter8::LevelEnd(ULevel* _NextLevel)
 {
 	CutSceneManager::LevelEnd(_NextLevel);
 
-	DefaultBackGround->Destroy();
-	DefaultBackGround = nullptr;
+	if (nullptr == M_DefaultBackGround)
+	{
+		MsgBoxAssert("BackGround is nullptr.")
+	}
+
+	M_DefaultBackGround->Destroy();
+	M_DefaultBackGround = nullptr;
+
+	for (Scene* Skeleton : SkeletonMan)
+	{
+		if (nullptr == Skeleton)
+		{
+			MsgBoxAssert("Skeleton is nullptr.");
+		}
+
+		Skeleton->Destroy();
+		Skeleton = nullptr;
+	}
+
+	SkeletonMan.clear();
 }
 
 void Chapter8::CutSceneCheck()
@@ -128,8 +161,80 @@ void Chapter8::CutSceneCheck()
 
 void Chapter8::CutSceneStart()
 {
+	CutSceneManager::CutSceneStart();
 
-	int a = 0;
+	M_DefaultBackGround->ActiveOff();
+	M_DefaultBackGround->AllRenderersActiveOff();
+
+	C_SpawnDialogue("DialogueBG_Throne.png");
+	C_SpawnCharacter("Lu", "Lu_Swirl");
+	C_CreateCharacterAnimation("Lu_Swirl_1", "Lu_Swirl", 0, 9, 0.15f, false);
+	C_CreateCharacterAnimation("Lu_Swirl_2", "Lu_Swirl", 10, 13, 0.15f, false);
+	C_ChangeCharacterAnimation("Lu_Swirl_1");
+	
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0f}, {WinScale.X * 0.242f, WinScale.Y * 0.619f} });
+
+
+	//C_SpawnBooper();
+	//C_BooperTextSet(Chap8_Script[1]);
+
+}
+
+void Chapter8::EnterStart()
+{
+	SkeletonMan.reserve(2);
+	EnterOrder = 0;
+}
+
+void Chapter8::Enter(float _DeltaTime)
+{
+	switch (EnterOrder)
+	{
+	case 0 :
+		EnterOrder0();
+		break;
+	case 1 :
+		EnterOrder1();
+		break;
+	case 2:
+		EnterOrder2();
+		break;
+	}
+}
+
+void Chapter8::EnterOrder0()
+{
+	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		SpawnSkeletonMan();
+		SpawnSkeletonMan();
+
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+		SkeletonMan[0]->GetImageRenderer()->SetTransform({ { WinScale.X *   0.211f,  WinScale.Y * (-0.025f) }, SkeletonScale });
+		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * (-0.211f), WinScale.Y * (-0.025f) }, SkeletonScale });
+
+		++EnterOrder;
+	}
+}
+
+void Chapter8::EnterOrder1()
+{
+	C_ChangeCharacterAnimation("Lu_Swirl_2");
+	++EnterOrder;
+}
+
+void Chapter8::EnterOrder2()
+{
+	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
+		C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
+		C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f}});
+		++EnterOrder;
+	}
 }
 
 void Chapter8::SelectStart()
@@ -161,3 +266,4 @@ void Chapter8::ChangeChapter()
 {
 
 }
+

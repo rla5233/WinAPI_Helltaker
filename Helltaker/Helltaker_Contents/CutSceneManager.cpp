@@ -54,6 +54,7 @@ void CutSceneManager::C_SpawnDialogue(std::string_view _Name)
 	Dialogue->CreateImageRenderer(RenderOrder::Scene);
 	Dialogue->GetImageRenderer()->SetImage(_Name);
 	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y * 0.5045f } });
+	Dialogue->GetImageRenderer()->CameraEffectOff();
 	AllCutSceneActors.push_back(Dialogue);
 }
 
@@ -70,12 +71,14 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 
 	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
 	SceneCharacter->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.255f, WinScale.Y * 0.611f} });
+	SceneCharacter->GetImageRenderer()->CameraEffectOff();
 
 	SceneCharacter->GetNameRenderer()->SetText(_Text);
 	SceneCharacter->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
 	SceneCharacter->GetNameRenderer()->SetTextSize(40);
 	SceneCharacter->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
 	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+	SceneCharacter->GetNameRenderer()->CameraEffectOff();
 }
 
 void CutSceneManager::C_SpawnBooper()
@@ -124,6 +127,31 @@ void CutSceneManager::C_CharacterSetImage(std::string_view _Name)
 void CutSceneManager::C_CharacterSetTransform(FTransform _FTransform)
 {
 	SceneCharacter->GetImageRenderer()->SetTransform(_FTransform);
+}
+
+void CutSceneManager::C_CreateCharacterAnimation(
+	std::string_view _AnimationName, 
+	std::string_view _ImageName, 
+	int _Start, int _End, 
+	float _Inter, 
+	bool _Loop /* = true*/)
+{
+	SceneCharacter->GetImageRenderer()->CreateAnimation(_AnimationName, _ImageName, _Start, _End, _Inter, _Loop);
+}
+
+void CutSceneManager::C_CreateCharacterAnimation(
+	std::string_view _AnimationName,
+	std::string_view _ImageName, 
+	std::vector<int> _Indexs, 
+	float _Inter, 
+	bool _Loop /* = true */)
+{
+	SceneCharacter->GetImageRenderer()->CreateAnimation(_AnimationName, _ImageName, _Indexs, _Inter, _Loop);
+}
+
+void CutSceneManager::C_ChangeCharacterAnimation(std::string_view _AnimationName)
+{
+	SceneCharacter->GetImageRenderer()->ChangeAnimation(_AnimationName);
 }
 
 void CutSceneManager::C_SpawnMenubar()

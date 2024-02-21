@@ -25,7 +25,7 @@ public:
 
 	// CutScene
 	void C_SpawnDialogue(std::string_view _Name);
-	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text);
+	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text = " ");
 	void C_SpawnBooper();
 	void C_SpawnMenubar();
 
@@ -34,6 +34,21 @@ public:
 	void C_MenubarRenderActiveOff();
 	void C_CharacterSetImage(std::string_view _Name);
 	void C_CharacterSetTransform(FTransform _FTransform);
+	void C_CreateCharacterAnimation(
+		std::string_view _AnimationName, 
+		std::string_view _ImageName,
+		int _Start,	int _End,
+		float _Inter,
+		bool _Loop = true);
+
+	void C_CreateCharacterAnimation(
+		std::string_view _AnimationName,
+		std::string_view _ImageName,
+		std::vector<int> _Indexs,
+		float _Inter,
+		bool _Loop = true);
+
+	void C_ChangeCharacterAnimation(std::string_view _AnimationName);
 
 	int C_GetFocusMenuIndex() const
 	{
@@ -52,6 +67,11 @@ public:
 		return FailOrder;
 	}
 
+	Character* C_GetSceneCharacter()
+	{
+		return SceneCharacter;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
@@ -59,6 +79,9 @@ protected:
 
 	virtual void CutSceneStart() override;
 	
+	virtual void Enter(float _DeltaTime);
+	virtual void EnterStart() {};
+
 	virtual void SelectStart();
 	virtual void SelectMenu() {};
 
@@ -72,9 +95,6 @@ protected:
 
 private:
 	void C_StateUpdate(float _DeltaTime);
-
-	void Enter(float _DeltaTime);
-	void EnterStart() {};
 
 	void Select(float _DeltaTime);
 

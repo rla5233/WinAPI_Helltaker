@@ -2,6 +2,8 @@
 
 #include "RenderActor.h"
 
+// 수정 (클래스 삭제 가능?)
+
 // 설명 :
 class Dialogue : public RenderActor
 {
