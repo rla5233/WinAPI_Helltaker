@@ -1,6 +1,7 @@
 #include "BackGround.h"
 
 #include "ContentsHelper.h"
+#include "ChapterManager.h"
 
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
@@ -24,7 +25,6 @@ void BackGround::CreateBackGround(std::string_view _Name)
 	FVector ImgScale = ImageRenderer->GetImage()->GetScale();
 	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * (ImgScale.Y / 1080) };
 	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
-	ImageRenderer->CameraEffectOff();
 }
 
 void BackGround::BackGroundChange(std::string_view _Name)

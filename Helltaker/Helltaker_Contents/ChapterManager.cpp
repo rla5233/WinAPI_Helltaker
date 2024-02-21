@@ -106,6 +106,13 @@ void ChapterManager::CreateBG(std::string_view _Name)
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ChapterBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	ChapterBG->CreateBackGround(_Name);
+
+	FVector ImgScale = ChapterBG->GetImageRenderer()->GetImage()->GetScale();
+	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * (ImgScale.Y / 1080) };
+
+	FVector CameraPos = { 0.0f, (Scale.Y - WinScale.Y) / 2.0f };
+	SetCameraPos(CameraPos);
+
 	AllMapActors[reinterpret_cast<__int64>(ChapterBG)] = ChapterBG;
 }
 
@@ -118,6 +125,7 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	ChapterUI->CreateImageRenderer(RenderOrder::UI);
 	ChapterUI->GetImageRenderer()->SetImage(ChapterUI->GetName() + ".png");
 	ChapterUI->GetImageRenderer()->SetTransform({ {0,0}, WinScale });
+	ChapterUI->GetImageRenderer()->CameraEffectOff();
 	ChapterNumber = _ChapterNumber;
 	AllMapActors[reinterpret_cast<__int64>(ChapterUI)] = ChapterUI;
 
@@ -128,6 +136,7 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	ChapterNum->SetTextTransForm({ {0,0}, {0,0} });
 	ChapterNum->TextSetting(90, Color8Bit::White);
 	ChapterNum->SetText(std::to_string(ChapterNumber));  
+	ChapterNum->GetTextRenderer()->CameraEffectOff();
 	AllMapActors[reinterpret_cast<__int64>(ChapterNum)] = ChapterNum;
 
 	BottomText = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
@@ -137,6 +146,7 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	BottomText->SetTextTransForm({ {0,0}, {0,0} });
 	BottomText->TextSetting(38, Color8Bit::White);
 	BottomText->SetText("재시작 [R키]");
+	BottomText->GetTextRenderer()->CameraEffectOff();
 	AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;
 
 	HeroActionPoint = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
@@ -144,6 +154,7 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	HeroActionPoint->CreateTextRenderer(RenderOrder::Text);
 	HeroActionPoint->SetTextTransForm({ {0,0},{0,0} });
 	HeroActionPoint->TextSetting(90, Color8Bit::White);
+	HeroActionPoint->GetTextRenderer()->CameraEffectOff();
 	AllMapActors[reinterpret_cast<__int64>(HeroActionPoint)] = HeroActionPoint;
 }
 
@@ -157,6 +168,7 @@ void ChapterManager::CreateTransition()
 	TransitionActor->GetImageRenderer()->SetTransform({ { 0, 0 }, WinScale });
 	TransitionActor->GetImageRenderer()->SetImage("Transition");
 	TransitionActor->GetImageRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
+	TransitionActor->GetImageRenderer()->CameraEffectOff();
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
@@ -316,6 +328,11 @@ void ChapterManager::M_UpdateHeroActionPoint()
 	}
 
 	HeroActionPoint->SetText(PointStr);
+}
+
+FVector ChapterManager::M_GetHeroLocation()
+{
+	return PlayerHero->GetActorLocation();
 }
 
 void ChapterManager::LevelStart(ULevel* _PrevLevel)

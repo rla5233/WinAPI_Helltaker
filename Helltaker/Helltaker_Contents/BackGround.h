@@ -28,4 +28,5 @@ protected:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
+
 };

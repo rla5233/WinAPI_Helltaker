@@ -73,6 +73,7 @@ public:
 	void M_DestroyHitActor(__int64 _Key);
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
+	FVector M_GetHeroLocation();
 
 	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const
