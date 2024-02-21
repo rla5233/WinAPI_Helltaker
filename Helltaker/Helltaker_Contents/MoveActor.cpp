@@ -31,7 +31,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 
 	if (MoveDir == EMoveActorDir::Left || MoveDir == EMoveActorDir::Right)
 	{
-		if (0 < MoveDistanceX)
+		if (0.0001f < MoveDistanceX)
 		{
 			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
 			AddActorLocation(FMoveDir * Speed * _DeltaTime);
@@ -51,10 +51,14 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 	}
 	else if (MoveDir == EMoveActorDir::Up || MoveDir == EMoveActorDir::Down)
 	{
-		if (0 < MoveDistanceY)
+		if (0.0001f < MoveDistanceY)
 		{
+			FVector PrevLocation = GetActorLocation();
 			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
 			AddActorLocation(FMoveDir * Speed * _DeltaTime);
+			FVector NextLocation = GetActorLocation();
+
+			ChapterCameraPosUpdate(NextLocation - PrevLocation);
 			MoveDistanceY -= Speed * _DeltaTime;
 			Speed += Acceleration * _DeltaTime;
 		}
@@ -63,9 +67,13 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			LocationPoint += PMoveDir;
 			Speed = FirstSpeed;
 
+			FVector PrevLocation = GetActorLocation();
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
 			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
 			MoveDistanceY = ContentsHelper::GetTileScale().Y;
+			FVector NextLocation = GetActorLocation();
+
+			ChapterCameraPosUpdate(NextLocation - PrevLocation);
 			MoveOff();
 		}
 	}

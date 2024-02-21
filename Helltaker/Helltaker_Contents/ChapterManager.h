@@ -81,6 +81,11 @@ public:
 		return ChapterStartLocation;
 	}
 
+	void M_SetCameraPosUpdate(bool _Value)
+	{
+		IsCameraPosUpdateOn = _Value;
+	}
+
 	void M_StateChange(EChapterState _State);
 
 	template<typename Chapter>
@@ -106,6 +111,7 @@ public:
 	bool IsLockBoxPoint();
 	void DeleteKey();
 	void DeleteLockBox();
+	void CameraPosUpdate(const FVector& _Pos);
 	
 	// Debug
 	void ShowLocationPoint();
@@ -137,7 +143,6 @@ private:
 
 	void M_StateUpdate(float _DeltaTime);
 	
-	void CameraPosUpdate();
 
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;
@@ -152,6 +157,7 @@ private:
 	int ChapterWidth = -1;
 	int ChapterHeight = -1;
 	bool IsThornChange = false;
+	bool IsCameraPosUpdateOn = false;
 
 	static const float TransitionInter;
 	Scene* TransitionActor = nullptr;

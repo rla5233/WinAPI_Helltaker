@@ -19,6 +19,7 @@ public:
 protected:
 	void BeginPlay() override;
 	void LevelStart(ULevel* _PrevLevel) override;
+	void LevelEnd(ULevel* _NextLevel) override;
 
 	// Chapter
 	void CutSceneStart() override;
@@ -34,6 +35,10 @@ protected:
 	void SuccessStart() override;
 
 private:
+	void CreateDefaultBG();
+
+private:
+	BackGround* DefaultBackGround = nullptr;
 
 	static bool IsLoad;
 };

@@ -57,6 +57,8 @@ public:
 	}
 
 protected:
+	virtual void ChapterCameraPosUpdate(const FVector& _NextLocation) {};
+
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
 
@@ -72,7 +74,4 @@ private:
 
 	Point LocationPoint = { -1, -1 };
 	Point NextLocationPoint = { -1, -1 };
-
-	//FVector LocationPoint = FVector::Zero;
-	//FVector NextLocationPoint = FVector::Zero;
 };

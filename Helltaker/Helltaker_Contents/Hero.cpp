@@ -350,6 +350,13 @@ void Hero::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 }
 
+void Hero::ChapterCameraPosUpdate(const FVector& _Diff)
+{
+	MoveActor::ChapterCameraPosUpdate(_Diff);
+
+	GetChapter()->CameraPosUpdate(_Diff);
+}
+
 void Hero::StateUpdate(float _DeltaTime)
 {
 	switch (State)

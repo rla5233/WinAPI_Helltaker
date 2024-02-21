@@ -139,15 +139,19 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	ChapterNum->GetTextRenderer()->CameraEffectOff();
 	AllMapActors[reinterpret_cast<__int64>(ChapterNum)] = ChapterNum;
 
-	BottomText = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
-	BottomText->SetActorLocation({ WinScale.X * 0.612f, WinScale.Y * 0.953f });
-	BottomText->SetName("BottomText");
-	BottomText->CreateTextRenderer(RenderOrder::Text);
-	BottomText->SetTextTransForm({ {0,0}, {0,0} });
-	BottomText->TextSetting(38, Color8Bit::White);
-	BottomText->SetText("재시작 [R키]");
-	BottomText->GetTextRenderer()->CameraEffectOff();
-	AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;
+	if (8 != ChapterNumber)
+	{
+		BottomText = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
+		BottomText->SetActorLocation({ WinScale.X * 0.612f, WinScale.Y * 0.953f });
+		BottomText->SetName("BottomText");
+		BottomText->CreateTextRenderer(RenderOrder::Text);
+		BottomText->SetTextTransForm({ {0,0}, {0,0} });
+		BottomText->TextSetting(38, Color8Bit::White);
+		BottomText->SetText("재시작 [R키]");
+		BottomText->GetTextRenderer()->CameraEffectOff();
+
+		AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;
+	}	
 
 	HeroActionPoint = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
 	HeroActionPoint->SetActorLocation({ WinScale.X * 0.11f, WinScale.Y * 0.775f });
@@ -371,7 +375,6 @@ void ChapterManager::Idle(float _DeltaTime)
 		TransitionActor->GetImageRenderer()->ActiveOff();
 	}
 	
-	CameraPosUpdate();
 	ResetCheck();
 
 	if (EHeroState::Death == PlayerHero->GetHeroState())
@@ -562,11 +565,12 @@ void ChapterManager::M_StateUpdate(float _DeltaTime)
 	}
 }
 
-void ChapterManager::CameraPosUpdate()
+void ChapterManager::CameraPosUpdate(const FVector& _Pos)
 {
-	// 수정 (카메라Pos 구현 필요/ On, Off 기능 필요 할듯)
-	FVector HeroLocation = PlayerHero->GetActorLocation();
-
+	if (true == IsCameraPosUpdateOn)
+	{
+		AddCameraPos(_Pos);
+	}
 }
 
 void ChapterManager::M_StateChange(EChapterState _State)

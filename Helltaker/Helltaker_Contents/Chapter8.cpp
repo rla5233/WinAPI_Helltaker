@@ -1,5 +1,7 @@
 #include "Chapter8.h"
 
+#include "BackGround.h"
+
 bool Chapter8::IsLoad = false;
 
 const std::vector<const char*> Chap8_Script
@@ -72,7 +74,9 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 
 	M_CreateTileInfoVec(Map);
 	M_SetChapterStartLocation({ 0.265f, 0.115f });
+	M_SetCameraPosUpdate(true);
 
+	CreateDefaultBG();
 	CreateBG("ChapterBG_008");
 	M_CreateChapterUI(8);
 
@@ -96,6 +100,21 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 #ifdef DEBUG
 	ShowLocationPoint();
 #endif
+}
+
+void Chapter8::CreateDefaultBG()
+{
+	DefaultBackGround = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	DefaultBackGround->CreateBackGround("DefaultBG");
+	DefaultBackGround->GetImageRenderer()->CameraEffectOff();
+}
+
+void Chapter8::LevelEnd(ULevel* _NextLevel)
+{
+	CutSceneManager::LevelEnd(_NextLevel);
+
+	DefaultBackGround->Destroy();
+	DefaultBackGround = nullptr;
 }
 
 void Chapter8::CutSceneStart()

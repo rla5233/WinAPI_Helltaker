@@ -43,6 +43,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void ChapterCameraPosUpdate(const FVector& _Diff) override;
+
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
