@@ -4,9 +4,13 @@
 
 #include "EngineBase/Transform.h"
 
+class Chapter6;
+
 // Ό³Έν :
 class CutSceneManager : public ChapterManager
 {
+	friend Chapter6;
+
 public:
 	// constructor destructor
 	CutSceneManager();
@@ -26,6 +30,7 @@ public:
 
 	void C_BooperTextSet(std::string_view _Text);
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
+	void C_MenubarRenderActiveOff();
 	void C_CharacterSetImage(std::string_view _Name);
 	void C_CharacterSetTransform(FTransform _FTransform);
 
@@ -35,6 +40,17 @@ public:
 	}
 
 	void C_StateChange(ECutSceneState _State);
+
+	void C_AddFailOrder(int _Order)
+	{
+		FailOrder += _Order;
+	}
+
+	int C_GetFailOrder() const
+	{
+		return FailOrder;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
@@ -47,6 +63,9 @@ protected:
 
 	virtual void BadEndStart();
 	virtual void BadEndSetting();
+	virtual void FailOrderCheck();
+	void FailOrderInputCheck();
+	void ChapterRestart();
 
 	virtual void SuccessStart();
 
@@ -59,7 +78,6 @@ private:
 	void Select(float _DeltaTime);
 
 	void BadEnd(float _DeltaTime);
-	void BadEnding();
 
 	void Success(float _DeltaTime);
 	void SuccessEnd();

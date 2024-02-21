@@ -54,7 +54,6 @@ public:
 class ContentsHelper
 {
 public:
-
 	static FVector GetWindowScale();
 	static FVector GetTileScale();
 	static void LoadImg(std::string_view _Path, std::string_view _Name);

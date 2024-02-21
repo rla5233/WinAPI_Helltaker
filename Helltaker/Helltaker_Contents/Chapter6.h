@@ -28,10 +28,14 @@ protected:
 	void SelectStart() override;
 	void SelectMenu() override;
 
+	void FailOrderCheck() override;
 	void BadEndStart() override;
-	void BadEndSetting() override;
 
 	void SuccessStart() override;
+
+private:
+	void BadEndSetting1();
+	void BadEndSetting2();
 
 private:
 

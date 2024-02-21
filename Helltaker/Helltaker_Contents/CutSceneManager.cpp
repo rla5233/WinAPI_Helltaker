@@ -108,6 +108,14 @@ void CutSceneManager::C_MenubarTextSet(int _Index, std::string_view _Text)
 	MenuBar[_Index]->GetTextRenderer()->SetText(_Text);
 }
 
+void CutSceneManager::C_MenubarRenderActiveOff()
+{
+	for (UI* Menu : MenuBar)
+	{
+		Menu->AllRenderersActiveOff();
+	}
+}
+
 void CutSceneManager::C_CharacterSetImage(std::string_view _Name)
 {
 	SceneCharacter->GetImageRenderer()->SetImage(_Name);
@@ -192,20 +200,7 @@ void CutSceneManager::Select(float _DeltaTime)
 
 void CutSceneManager::BadEnd(float _DeltaTime)
 {
-	switch (FailOrder)
-	{
-	case 1:
-		BadEndSetting();
-		break;
-	case 2:
-		BadEnding();
-		return;
-	}
-
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		++FailOrder;
-	}
+	FailOrderCheck();
 }
 
 void CutSceneManager::BadEndSetting()
@@ -222,7 +217,31 @@ void CutSceneManager::BadEndSetting()
 	++FailOrder;
 }
 
-void CutSceneManager::BadEnding()
+void CutSceneManager::FailOrderCheck()
+{
+	switch (FailOrder)
+	{
+	case 0:
+		FailOrderInputCheck();
+		break;
+	case 1:
+		BadEndSetting();
+		break;
+	case 2:
+		ChapterRestart();
+		break;
+	}
+}
+
+void CutSceneManager::FailOrderInputCheck()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		++FailOrder;
+	}
+}
+
+void CutSceneManager::ChapterRestart()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -234,11 +253,7 @@ void CutSceneManager::BadEnding()
 void CutSceneManager::BadEndStart()
 {
 	Booper->GetImageRenderer()->ActiveOn();
-
-	for (UI* Menu : MenuBar)
-	{
-		Menu->AllRenderersActiveOff();
-	}
+	C_MenubarRenderActiveOff();
 
 	FailOrder = 0;
 }
@@ -253,10 +268,7 @@ void CutSceneManager::Success(float _DeltaTime)
 
 void CutSceneManager::SuccessStart()
 {
-	for (UI* Menu : MenuBar)
-	{
-		Menu->AllRenderersActiveOff();
-	}
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Booper->GetImageRenderer()->CreateAnimation("Scene_Success", "Success", 0, 7, 0.05f, false);

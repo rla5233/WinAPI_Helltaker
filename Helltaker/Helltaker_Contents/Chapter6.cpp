@@ -1,8 +1,12 @@
 #include "Chapter6.h"
 
+// Test
+#include "Scene.h"
+#include "UI.h"
+
 bool Chapter6::IsLoad = false;
 
-const std::vector<const char*> Chap5_Script
+const std::vector<const char*> Chap6_Script
 {
 	/* 0 Demon	  */ "호기심 많은 천사 아자젤",
 	/* 1 Script 1 */ "하느님 맘소사! 살아있는 인간이 지옥에서 뭘 하고 있는 거죠?\n흔치 않은 일이네요.",
@@ -94,26 +98,98 @@ void Chapter6::LevelStart(ULevel* _PrevLevel)
 
 void Chapter6::CutSceneStart()
 {
+	CutSceneManager::CutSceneStart();
+
+	C_SpawnDialogue("DialogueBG_Hell.png");
+	C_SpawnCharacter("Az", "Az_Idle.png", Chap6_Script[0]);
+	C_SpawnBooper();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0f }, {WinScale.X * 0.235f, WinScale.Y * 0.591f} });
+	C_BooperTextSet(Chap6_Script[1]);
 }
 
 void Chapter6::SelectStart()
 {
+	CutSceneManager::SelectStart();
+
+	C_MenubarTextSet(0, Chap6_Script[2]);
+	C_MenubarTextSet(1, Chap6_Script[3]);
 }
 
 void Chapter6::SelectMenu()
 {
+	switch (C_GetFocusMenuIndex())
+	{
+	case 0:
+		C_StateChange(ECutSceneState::Success);
+		break;
+	case 1:
+		C_StateChange(ECutSceneState::BadEnd);
+		break;
+	}
+}
+
+void Chapter6::FailOrderCheck()
+{
+	switch (C_GetFailOrder())
+	{
+	case 0:
+		FailOrderInputCheck();
+		break;
+	case 1:
+		BadEndSetting1();
+		break;
+	case 2:
+		BadEndSetting2();
+		break;
+	case 3:
+		ChapterRestart();
+		return;
+	}
 }
 
 void Chapter6::BadEndStart()
 {
+	CutSceneManager::BadEndStart();
+
+	C_BooperTextSet(Chap6_Script[4]);
 }
 
-void Chapter6::BadEndSetting()
+void Chapter6::BadEndSetting1()
 {
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		Actor->AllRenderersActiveOff();
+	}
+
+	Booper->AllRenderersActiveOn();
+	C_BooperTextSet(Chap6_Script[5]);
+	C_AddFailOrder(1);
+}
+
+void Chapter6::BadEndSetting2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		Dialogue->GetImageRenderer()->SetImage("CutScene_AngelEnd.png");
+		Dialogue->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
+		Dialogue->GetImageRenderer()->ActiveOn();
+		C_BooperTextSet(Chap6_Script[6]);
+
+		C_AddFailOrder(1);
+	}
 }
 
 void Chapter6::SuccessStart()
 {
+	CutSceneManager::SuccessStart();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (0.045f) }, { WinScale.X * 0.211f, WinScale.Y * 0.516f } });
+	C_CharacterSetImage("Az_Note.png");
+	C_BooperTextSet(Chap6_Script[7]);
 }
 
 void Chapter6::ChangeChapter()
