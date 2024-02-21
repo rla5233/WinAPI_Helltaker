@@ -144,17 +144,6 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 
 void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 {
-	if (true == GetChapter()->IsKeyPoint())
-	{
-		StateChange(EHeroState::None);
-		StateChange(EHeroState::Move, _DeltaTime);
-		GetChapter()->DeleteKey();
-		IsHaveKey = true;
-		return;
-	}
-
-	int a = 0;
-
 	if (true == GetChapter()->IsLockBoxPoint() && IsHaveKey)
 	{
 		StateChange(EHeroState::None);
@@ -167,6 +156,12 @@ void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 	{
 		StateChange(EHeroState::None);
 		StateChange(EHeroState::Move, _DeltaTime);
+
+		if (true == GetChapter()->IsKeyPoint())
+		{
+			GetChapter()->DeleteKey();
+			IsHaveKey = true;
+		}
 	}
 	else
 	{

@@ -252,12 +252,12 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 	case EKeyComponentType::LockBox:
 		NewKeyComponent->SetName("LockBox");
 		NewKeyComponent->SetKeyComponentType(EKeyComponentType::LockBox);
+		TileInfoVec[_Point.Y][_Point.X].Other = NewKeyComponent;
 		LockBox = NewKeyComponent;
 		break;
 	}
 
 	NewKeyComponent->StateChange(EKeyComponentState::Idle);
-	TileInfoVec[_Point.Y][_Point.X].Other = NewKeyComponent;
 	AllMapActors[reinterpret_cast<__int64>(NewKeyComponent)] = NewKeyComponent;
 }
 

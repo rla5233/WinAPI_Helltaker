@@ -54,7 +54,11 @@ void KeyComponent::Death(float _DeltaTime)
 
 void KeyComponent::DeathStart()
 {
-	HitActorInfoUpdate(EHitActorState::Death);
+	if (EKeyComponentType::LockBox == Type)
+	{
+		HitActorInfoUpdate(EHitActorState::Death);
+	}
+
 	InformDestroytoChapter();
 }
 
