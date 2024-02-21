@@ -82,6 +82,12 @@
     <ClInclude Include="Chapter6.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="Chapter7.h">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Chapter8.h">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -163,6 +169,12 @@
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Chapter6.cpp">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter7.cpp">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter8.cpp">
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
   </ItemGroup>

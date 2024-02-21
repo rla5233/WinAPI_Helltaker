@@ -15,7 +15,7 @@ Opening::~Opening()
 {
 
 }
-
+// 수정 (리팩토링 가능?)
 void Opening::BeginPlay()
 {
 	ULevel::BeginPlay();

@@ -9,6 +9,7 @@ class Chapter6;
 // 설명 :
 class CutSceneManager : public ChapterManager
 {
+	// 수정 (friend 제거 가능?)
 	friend Chapter6;
 
 public:

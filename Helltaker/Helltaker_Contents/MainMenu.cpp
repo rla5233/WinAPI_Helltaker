@@ -18,7 +18,7 @@ MainMenu::MainMenu()
 MainMenu::~MainMenu()
 {
 }
-
+// 수정 (리팩토링 가능?)
 void MainMenu::BeginPlay()
 {
 	ULevel::BeginPlay();

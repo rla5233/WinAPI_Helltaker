@@ -261,7 +261,7 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 	AllMapActors[reinterpret_cast<__int64>(NewKeyComponent)] = NewKeyComponent;
 }
 
-// 수정
+// 수정 필요 (제거 가능?)
 HitActor* ChapterManager::M_GetHitActor(FVector _Point)
 {
 	return M_GetHitActor(Point(_Point.iX(), _Point.iY()));

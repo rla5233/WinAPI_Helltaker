@@ -1,6 +1,8 @@
 #include "Chapter6.h"
 
-// Test
+#include "Chapter7.h"
+
+// 수정 (제거 가능?)
 #include "Scene.h"
 #include "UI.h"
 
@@ -196,6 +198,6 @@ void Chapter6::ChangeChapter()
 {
 	ChapterManager::ChangeChapter();
 
-	//CreateChapter<Chapter7>("Chapter7");
-	//GEngine->ChangeLevel("Chapter7");
+	CreateChapter<Chapter7>("Chapter7");
+	GEngine->ChangeLevel("Chapter7");
 }
