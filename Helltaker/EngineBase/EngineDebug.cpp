@@ -1,6 +1,6 @@
 #include "EngineDebug.h"
 
-namespace EngineDebug
+namespace UEngineDebug
 {
 	void OutPutDebugText(std::string_view _DebugText)
 	{

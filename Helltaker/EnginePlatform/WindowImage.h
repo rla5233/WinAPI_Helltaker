@@ -3,6 +3,11 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineBase\Transform.h>
 #include <Windows.h>
+#include <string>
+#include <string_view>
+
+#include <objidl.h>
+#include <gdiplus.h>
 
 // 우리 엔진 WinAPi단계에서 랜더링이라는것은
 // 이미지가 다른 이미지를 자신내부에 그리는 겁니다.
@@ -74,9 +79,11 @@ public:
 	void AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color = Color8Bit::Black);
 
 	// 알파랑 동시에 안될것이다.
-	void PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _Angle);
+	void PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _RadAngle);
 
 	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
+
+	void TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 
 	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
@@ -92,9 +99,19 @@ public:
 		return ImageType;
 	}
 
+	// 이걸 해줘야 회전이 가능합니다.
+	void SetRotationMaskImage(UWindowImage* _RotationMaskImage)
+	{
+		RotationMaskImage = _RotationMaskImage;
+	}
+
+	void TextPrint(std::string_view _Text, FVector _Pos);
+
 protected:
 
 private:
+	UWindowImage* RotationMaskImage = nullptr;
+
 	EImageLoadType LoadType = EImageLoadType::IMG_Cutting;
 
 	// 윈도우에서 지원해주는 H붙은 애들은 다 struct HBITMAP__{int unused;}; typedef struct HBITMAP__ *HBITMAP

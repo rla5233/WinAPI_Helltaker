@@ -5,12 +5,10 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{
-}
+{}
 
 UImageRenderer::~UImageRenderer()
-{
-}
+{}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -78,7 +76,8 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else {
+	else
+	{
 		ImageRender(_DeltaTime);
 	}
 
@@ -254,7 +253,14 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		// bmp일때는 일반적으로 Transcopy로 투명처리를 한다.
 		break;
 	case EWIndowImageType::IMG_PNG:
-		GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		if (0.0f == Angle)
+		{
+			GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		}
+		else
+		{
+			GEngine->MainWindow.GetBackBufferImage()->PlgCopy(Image, RendererTrans, InfoIndex, Angle * UEngineMath::DToR);
+		}
 		break;
 	default:
 		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");

@@ -1,5 +1,11 @@
 #include "EngineMath.h"
 
+const float UEngineMath::PI = 3.14159265358979323846264338327950288419716939937510f;
+const float UEngineMath::PI2 = UEngineMath::PI * 2.0f;
+const float UEngineMath::DToR = UEngineMath::PI / 180.0f;
+const float UEngineMath::RToD = 180.0f / UEngineMath::PI;
+
+
 const float4 float4::Zero = { 0.0f, 0.0f, 0.0f, 0.0f };
 const float4 float4::Left = { -1.0f, 0.0f, 0.0f, 0.0f };
 const float4 float4::Right = { 1.0f, 0.0f, 0.0f, 0.0f };
@@ -20,9 +26,9 @@ const Color8Bit Color8Bit::BlueA = { 0, 0, 255, 0 };
 const Color8Bit Color8Bit::WhiteA = { 255, 255, 255, 0 };
 const Color8Bit Color8Bit::MagentaA = { 255, 0, 255, 0 };
 
-EngineMath::EngineMath()
+UEngineMath::UEngineMath()
 {}
 
-EngineMath::~EngineMath()
+UEngineMath::~UEngineMath()
 {}
 
