@@ -339,6 +339,11 @@ FVector ChapterManager::M_GetHeroLocation()
 	return PlayerHero->GetActorLocation();
 }
 
+Point ChapterManager::M_GetHeroLocationPoint()
+{
+	return PlayerHero->GetLocationPoint();
+}
+
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);

@@ -22,6 +22,7 @@ protected:
 	void LevelEnd(ULevel* _NextLevel) override;
 
 	// Chapter
+	void CutSceneCheck() override;
 	void CutSceneStart() override;
 	void ChangeChapter() override;
 
@@ -39,6 +40,7 @@ private:
 
 private:
 	BackGround* DefaultBackGround = nullptr;
+	Point EndPoint = Point::Zero;
 
 	static bool IsLoad;
 };

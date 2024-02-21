@@ -94,6 +94,7 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 	M_SetIsThornChange(false);
 
 	M_SpawnDemon({ 4, 0 }, "Lucy");
+	EndPoint = { 4, 2 };
 
 	M_StateChange(EChapterState::Idle);
 
@@ -117,9 +118,18 @@ void Chapter8::LevelEnd(ULevel* _NextLevel)
 	DefaultBackGround = nullptr;
 }
 
+void Chapter8::CutSceneCheck()
+{
+	if (M_GetHeroLocationPoint() == EndPoint)
+	{
+		M_StateChange(EChapterState::CutScene);
+	}
+}
+
 void Chapter8::CutSceneStart()
 {
 
+	int a = 0;
 }
 
 void Chapter8::SelectStart()

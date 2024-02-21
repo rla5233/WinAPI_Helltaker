@@ -74,6 +74,7 @@ public:
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
 	FVector M_GetHeroLocation();
+	Point M_GetHeroLocationPoint();
 
 	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const
@@ -123,6 +124,7 @@ protected:
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart();
+	virtual void CutSceneCheck();
 	virtual void ChangeChapter() {};
 private:
 	void Idle(float _DeltaTime);
@@ -132,7 +134,6 @@ private:
 	void HeroDeathStart();
 
 	void CutScene(float _DeltaTime);
-	void CutSceneCheck();
 
 	void Reset(float _DeltaTime);
 	void ResetStart();
