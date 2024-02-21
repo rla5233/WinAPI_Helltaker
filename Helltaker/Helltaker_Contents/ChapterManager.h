@@ -136,6 +136,8 @@ private:
 	void EndStart();
 
 	void M_StateUpdate(float _DeltaTime);
+	
+	void CameraPosUpdate();
 
 private:
 	std::vector<std::vector<TileInfo>> TileInfoVec;

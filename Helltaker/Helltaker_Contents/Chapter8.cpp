@@ -99,22 +99,36 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 }
 
 void Chapter8::CutSceneStart()
-{}
+{
+
+}
 
 void Chapter8::SelectStart()
-{}
+{
+
+}
 
 void Chapter8::SelectMenu()
-{}
+{
+
+}
 
 void Chapter8::BadEndStart()
-{}
+{
+
+}
 
 void Chapter8::BadEndSetting()
-{}
+{
+
+}
 
 void Chapter8::SuccessStart()
-{}
+{
+
+}
 
 void Chapter8::ChangeChapter()
-{}
+{
+
+}

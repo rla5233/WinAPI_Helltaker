@@ -370,7 +370,8 @@ void ChapterManager::Idle(float _DeltaTime)
 	{
 		TransitionActor->GetImageRenderer()->ActiveOff();
 	}
-
+	
+	CameraPosUpdate();
 	ResetCheck();
 
 	if (EHeroState::Death == PlayerHero->GetHeroState())
@@ -559,6 +560,13 @@ void ChapterManager::M_StateUpdate(float _DeltaTime)
 		End(_DeltaTime);
 		break;
 	}
+}
+
+void ChapterManager::CameraPosUpdate()
+{
+	// 수정 (카메라Pos 구현 필요/ On, Off 기능 필요 할듯)
+	FVector HeroLocation = PlayerHero->GetActorLocation();
+
 }
 
 void ChapterManager::M_StateChange(EChapterState _State)
