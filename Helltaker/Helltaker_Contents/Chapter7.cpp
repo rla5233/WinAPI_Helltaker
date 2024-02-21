@@ -1,5 +1,7 @@
 #include "Chapter7.h"
 
+#include "Chapter8.h"
+
 bool Chapter7::IsLoad = false;
 
 const std::vector<const char*> Chap7_Script
@@ -148,6 +150,6 @@ void Chapter7::ChangeChapter()
 {
 	ChapterManager::ChangeChapter();
 
-	//CreateChapter<Chapter5>("Chapter5");
-	//GEngine->ChangeLevel("Chapter5");
+	CreateChapter<Chapter8>("Chapter8");
+	GEngine->ChangeLevel("Chapter8");
 }

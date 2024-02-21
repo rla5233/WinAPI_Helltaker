@@ -20,7 +20,11 @@ void BackGround::CreateBackGround(std::string_view _Name)
 	SetName(_Name);
 	ImageRenderer = CreateImageRenderer(RenderOrder::BackGround);
 	ImageRenderer->SetImage(GetName() + ".png");
-	ImageRenderer->SetTransform({ {0, 0}, WinScale });
+	
+	FVector ImgScale = ImageRenderer->GetImage()->GetScale();
+	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * (ImgScale.Y / 1080) };
+	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
+	ImageRenderer->CameraEffectOff();
 }
 
 void BackGround::BackGroundChange(std::string_view _Name)

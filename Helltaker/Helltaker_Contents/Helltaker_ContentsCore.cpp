@@ -25,8 +25,8 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 // 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
-	MainWindow.SetWindowScale({ 1920, 1080 });
-	//MainWindow.SetWindowScale({ 1280, 720 });
+	//MainWindow.SetWindowScale({ 1920, 1080 });
+	MainWindow.SetWindowScale({ 1280, 720 });
 	UEngineCore::BeginPlay();
 
 	SetFrame(60);
@@ -55,9 +55,9 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter6>("Chapter6");
 	//ChangeLevel("Chapter6");
 
-	//CreateLevel<Chapter7>("Chapter7");
-	//ChangeLevel("Chapter7");
+	CreateLevel<Chapter7>("Chapter7");
+	ChangeLevel("Chapter7");
 
-	CreateLevel<Chapter8>("Chapter8");
-	ChangeLevel("Chapter8");
+	//CreateLevel<Chapter8>("Chapter8");
+	//ChangeLevel("Chapter8");
 }

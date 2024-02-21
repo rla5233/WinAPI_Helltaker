@@ -49,7 +49,54 @@ void Chapter8::BeginPlay()
 }
 
 void Chapter8::LevelStart(ULevel * _PrevLevel)
-{}
+{
+	ChapterManager::LevelStart(_PrevLevel);
+
+	// 스테이지 생성
+	std::vector<std::vector<bool>> Map =
+	{
+		{ true , false, false, false, false, false, false, false, false },
+		{ true , true , false, false, false, false, false, true , true  },
+		{ true , true , true , true , true , true , true , true , true  },
+		{ true , true , true , true , true , true , true , true , true  },
+		{ true , true , false, true , true , true , false, true , true  },
+		{ true , true , true , true , true , true , true , true , true  },
+		{ true , true , false, true , true , true , false, true , true  },
+		{ true , true , true , true , true , true , true , true , true  },
+		{ false, true , false, true , true , true , false, true , false },
+		{ false, true , true , true , true , true , true , true , false },
+		{ false, true , false, true , true , true , false, true , false },
+		{ false, true , true , true , true , true , true , true , false },
+		{ false, false, false, true , true , true , false, false, false }
+	};
+
+	M_CreateTileInfoVec(Map);
+	M_SetChapterStartLocation({ 0.292f, 0.255f });
+
+	CreateBG("ChapterBG_008");
+	M_CreateChapterUI(8);
+
+	M_SpawnHero({ 4, 11 }, 12);
+
+	M_SpawnSkeleton({ 4, 2 });
+	M_SpawnSkeleton({ 4, 3 });
+	M_SpawnSkeleton({ 4, 4 });
+	M_SpawnSkeleton({ 4, 5 });
+	M_SpawnSkeleton({ 4, 6 });
+	M_SpawnSkeleton({ 4, 7 });
+	M_SpawnSkeleton({ 4, 8 });
+	M_SpawnSkeleton({ 4, 9 });
+
+	M_SetIsThornChange(false);
+
+	M_SpawnDemon({ 4, 0 }, "Lucy");
+
+	M_StateChange(EChapterState::Idle);
+
+#ifdef DEBUG
+	ShowLocationPoint();
+#endif
+}
 
 void Chapter8::CutSceneStart()
 {}
