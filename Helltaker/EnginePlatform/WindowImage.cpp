@@ -18,7 +18,8 @@
 #pragma comment(lib, "Gdiplus.lib")
 
 UWindowImage::UWindowImage()
-{}
+{
+}
 
 UWindowImage::~UWindowImage()
 {
@@ -397,7 +398,7 @@ void UWindowImage::TextCopyBold(const std::string& _Text, const std::string& _Fo
 	Gdiplus::StringFormat stringFormat;
 	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
 	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
-	
+
 	Gdiplus::Graphics graphics(ImageDC);
 	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
 	Gdiplus::Font fnt(WFont.c_str(), _Size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
@@ -489,6 +490,8 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 	}
 
 
+	UImageInfo& CurInfo = _CopyImage->Infos[_Index];
+
 	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
 
 	POINT Arr[3];
@@ -521,7 +524,7 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 	//// 각도만큼 회전시킨 값을 만들어 내야 합니다.
 	//// 어떻게 그렇게 만들수 있을까?
 
-	if (nullptr == _CopyImage->RotationMaskImage)
+	if (nullptr == CurInfo.RotationMaskImage)
 	{
 		MsgBoxAssert("이미지를 회전시키려고 했는데 이미지가 없습니다.");
 	}
@@ -538,7 +541,7 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 		ImageTop,   							// int x1,  
 		ImageScaleX, 							// int y1, 
 		ImageScaleY, 							// int y1, 
-		_CopyImage->RotationMaskImage->hBitMap, // 투명처리할 부분을 알려달라고 하는데
+		CurInfo.RotationMaskImage->hBitMap, // 투명처리할 부분을 알려달라고 하는데
 		ImageLeft,   							// int y1, 
 		ImageTop   							// int x1,  
 	);

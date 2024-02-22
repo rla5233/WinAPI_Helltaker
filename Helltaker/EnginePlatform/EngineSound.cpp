@@ -5,7 +5,7 @@
 // lib를 사용하는법
 
 // Debug 일때는
-//#pragma comment(lib, "ThirdParty\\FMOD\\inc\\fmodL_vc.lib")
+// #pragma comment(lib, "ThirdParty\\FMOD\\inc\\fmodL_vc.lib")
 #pragma comment(lib, "fmodL_vc.lib")
 
 // Release 일때는 
