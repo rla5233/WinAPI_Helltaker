@@ -47,6 +47,8 @@ private:
 	void EnterOrder4();
 	void EnterOrder5();
 
+	void SuccessStart1();
+
 	void CreateDefaultBG();
 	void SpawnSkeletonMan();
 
@@ -56,6 +58,7 @@ private:
 
 	std::vector<Scene*> SkeletonMan;
 	int EnterOrder = -1;
+	int SelectOrder = -1;
 	
 	const static float SkeletonCreateDelay;
 	const static float SkeletonRenderDelay;

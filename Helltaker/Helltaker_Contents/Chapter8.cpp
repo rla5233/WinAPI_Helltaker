@@ -295,6 +295,7 @@ void Chapter8::EnterOrder4()
 	{
 		C_BooperTextSet(Chap8_Script[2]);
 		++EnterOrder;
+		SelectOrder = -1;
 	}
 }
 
@@ -302,6 +303,7 @@ void Chapter8::EnterOrder5()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		++SelectOrder;
 		C_StateChange(ECutSceneState::Select);
 	}
 }
@@ -310,8 +312,17 @@ void Chapter8::SelectStart()
 {
 	CutSceneManager::SelectStart();
 
-	C_MenubarTextSet(0, Chap8_Script[3]);
-	C_MenubarTextSet(1, Chap8_Script[4]);
+	switch (SelectOrder)
+	{
+	case 0:
+		C_MenubarTextSet(0, Chap8_Script[3]);
+		C_MenubarTextSet(1, Chap8_Script[4]);
+		break;
+	case 1:
+		C_MenubarTextSet(0, Chap8_Script[8]);
+		C_MenubarTextSet(1, Chap8_Script[9]);
+		break;
+	}
 }
 
 void Chapter8::SelectMenu()
@@ -331,7 +342,15 @@ void Chapter8::BadEndStart()
 {
 	CutSceneManager::BadEndStart();
 
-	C_BooperTextSet(Chap8_Script[5]);
+	switch (SelectOrder)
+	{
+	case 0:
+		C_BooperTextSet(Chap8_Script[5]);
+		break;
+	case 1:
+
+		break;
+	}
 }
 
 void Chapter8::BadEndSetting()
@@ -343,24 +362,49 @@ void Chapter8::BadEndSetting()
 		Skeleton->AllRenderersActiveOff();
 	}
 
-	C_BooperTextSet(Chap8_Script[6]);
+	switch (SelectOrder)
+	{
+	case 0 :
+		C_BooperTextSet(Chap8_Script[6]);
+		break;
+	case 1:
+		break;
+	}
 }
 
 void Chapter8::SuccessStart()
+{
+	switch (SelectOrder)
+	{
+	case 0:
+		SuccessStart1();
+		break;
+	case 1:
+		break;
+	}
+}
+
+void Chapter8::SuccessStart1()
 {
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(Chap8_Script[7]);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale.X * 0.247f, WinScale.Y * 0.561f } });
-	C_CharacterSetImage("Lu_Angry.png");
+	C_CharacterSetTransform({ { WinScale.X * 0.015f, WinScale.Y * 0.02f }, { WinScale.X * 0.247f, WinScale.Y * 0.561f } });
+	C_CharacterSetImage("Lu_Angry.png");	
 }
 
 void Chapter8::Success(float _DeltaTime)
 {
-
-	int a = 0;
+	switch (SelectOrder)
+	{
+	case 0:
+		EnterOrder5();
+		break;
+	case 1:
+		break;
+	}
 }
 
 void Chapter8::ChangeChapter()
