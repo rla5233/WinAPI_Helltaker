@@ -16,10 +16,12 @@ UEnginePath::UEnginePath()
 
 UEnginePath::UEnginePath(std::filesystem::path _Path)
 	: Path(_Path)
-{}
+{
+}
 
 UEnginePath::~UEnginePath()
-{}
+{
+}
 
 std::string UEnginePath::GetExtension() const
 {

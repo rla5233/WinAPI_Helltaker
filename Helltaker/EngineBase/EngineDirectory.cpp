@@ -3,7 +3,8 @@
 #include "EngineString.h"
 
 UEngineDirectory::UEngineDirectory()
-{}
+{
+}
 
 UEngineDirectory::UEngineDirectory(const UEnginePath& _Path)
 	: UEnginePath(_Path.GetFullPath())
@@ -12,7 +13,8 @@ UEngineDirectory::UEngineDirectory(const UEnginePath& _Path)
 }
 
 UEngineDirectory::~UEngineDirectory()
-{}
+{
+}
 
 void UEngineDirectory::AllFileRecursive(
 	const std::string_view _Path,

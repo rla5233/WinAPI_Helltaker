@@ -7,7 +7,8 @@ EngineTime::EngineTime()
 }
 
 EngineTime::~EngineTime()
-{}
+{
+}
 
 //typedef union _LARGE_INTEGER {
 //    struct {
