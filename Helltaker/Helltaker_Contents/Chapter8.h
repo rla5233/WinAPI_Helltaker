@@ -43,6 +43,7 @@ private:
 	void EnterOrder1(float _DeltaTime);
 	void EnterOrder2(float _DeltaTime);
 	void EnterOrder3(float _DeltaTime);
+	void EnterOrder4();
 
 	void CreateDefaultBG();
 	void SpawnSkeletonMan();

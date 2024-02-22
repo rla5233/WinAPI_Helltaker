@@ -205,6 +205,9 @@ void Chapter8::Enter(float _DeltaTime)
 	case 3:
 		EnterOrder3(_DeltaTime);
 		break;
+	case 4:
+		EnterOrder4();
+		break;
 	}
 }
 
@@ -280,6 +283,14 @@ void Chapter8::EnterOrder3(float _DeltaTime)
 		}
 
 		TimeCount -= _DeltaTime;
+	}
+}
+
+void Chapter8::EnterOrder4()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Chap8_Script[2]);
 	}
 }
 
