@@ -455,6 +455,21 @@ void Chapter8::SuccessEndScene()
 	}
 }
 
+void Chapter8::SuccessEnd()
+{
+	for (Scene* Skeleton : SkeletonMan)
+	{
+		if (nullptr == Skeleton)
+		{
+			MsgBoxAssert("Skeleton is nullptr");
+		}
+
+		Skeleton->AllRenderersActiveOff();
+	}
+
+	CutSceneManager::SuccessEnd();
+}
+
 void Chapter8::ChangeChapter()
 {
 	int a = 0;

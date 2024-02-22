@@ -98,6 +98,7 @@ protected:
 
 	virtual void SuccessStart();
 	virtual void Success(float _DeltaTime);
+	virtual void SuccessEnd();
 
 private:
 	void C_StateUpdate(float _DeltaTime);
@@ -105,8 +106,6 @@ private:
 	void Select(float _DeltaTime);
 
 	void BadEnd(float _DeltaTime);
-
-	void SuccessEnd();
 
 	void SetFocusMenuIndex(int _Index);
 

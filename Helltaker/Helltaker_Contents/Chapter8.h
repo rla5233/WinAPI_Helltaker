@@ -38,6 +38,7 @@ protected:
 
 	void SuccessStart() override;
 	void Success(float _DeltaTime) override;
+	void SuccessEnd() override;
 
 private:
 	void EnterOrder0(float _DeltaTime);
