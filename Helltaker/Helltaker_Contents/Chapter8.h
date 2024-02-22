@@ -39,8 +39,8 @@ protected:
 	void SuccessStart() override;
 
 private:
-	void EnterOrder0();
-	void EnterOrder1();
+	void EnterOrder0(float _DeltaTime);
+	void EnterOrder1(float _DeltaTime);
 	void EnterOrder2(float _DeltaTime);
 	void EnterOrder3();
 
@@ -52,7 +52,9 @@ private:
 	Point EndPoint = Point::Zero;
 
 	std::vector<Scene*> SkeletonMan;
+	const static float SkeletonCreateDelay;
 	const static float SkeletonRenderDelay;
+	const static float LuSwirl2RenderDelay;
 	float TimeCount = 0;
 
 	int EnterOrder = -1;

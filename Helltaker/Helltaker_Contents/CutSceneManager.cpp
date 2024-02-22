@@ -347,6 +347,7 @@ void CutSceneManager::CutSceneStart()
 {
 	ChapterManager::CutSceneStart();
 
+	C_StateChange(ECutSceneState::None);
 	C_StateChange(ECutSceneState::Enter);
 }
 

@@ -6,6 +6,8 @@
 
 bool Chapter8::IsLoad = false;
 const float Chapter8::SkeletonRenderDelay = 0.2f;
+const float Chapter8::SkeletonCreateDelay = 0.1f;
+const float Chapter8::LuSwirl2RenderDelay = 0.6f;
 
 const std::vector<const char*> Chap8_Script
 {
@@ -176,7 +178,6 @@ void Chapter8::CutSceneStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0f}, {WinScale.X * 0.242f, WinScale.Y * 0.619f} });
 
-
 	//C_SpawnBooper();
 	//C_BooperTextSet(Chap8_Script[1]);
 
@@ -185,6 +186,7 @@ void Chapter8::CutSceneStart()
 void Chapter8::EnterStart()
 {
 	SkeletonMan.reserve(2);
+	TimeCount = SkeletonCreateDelay;
 	EnterOrder = 0;
 }
 
@@ -193,10 +195,10 @@ void Chapter8::Enter(float _DeltaTime)
 	switch (EnterOrder)
 	{
 	case 0 :
-		EnterOrder0();
+		EnterOrder0(_DeltaTime);
 		break;
 	case 1 :
-		EnterOrder1();
+		EnterOrder1(_DeltaTime);
 		break;
 	case 2:
 		EnterOrder2(_DeltaTime);
@@ -207,39 +209,52 @@ void Chapter8::Enter(float _DeltaTime)
 	}
 }
 
-void Chapter8::EnterOrder0()
+void Chapter8::EnterOrder0(float _DeltaTime)
 {
 	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		SpawnSkeletonMan();
-		SpawnSkeletonMan();
-		TimeCount = SkeletonRenderDelay;
-		++EnterOrder;
+		if (0 >= TimeCount)
+		{
+			SpawnSkeletonMan();	
+			SpawnSkeletonMan();
+
+			FVector WinScale = ContentsHelper::GetWindowScale();
+			FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+			SkeletonMan[0]->GetImageRenderer()->SetTransform({ { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) }, SkeletonScale });
+
+			TimeCount = SkeletonRenderDelay;
+			++EnterOrder;
+			return;
+		}
+
+		TimeCount -= _DeltaTime;
 	}
 }
 
-void Chapter8::EnterOrder1()
-{
-	C_ChangeCharacterAnimation("Lu_Swirl_2");
-
-	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
-	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
-		SkeletonMan[0]->GetImageRenderer()->SetTransform({ { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) }, SkeletonScale });
-		++EnterOrder;
-	}
-}
-
-void Chapter8::EnterOrder2(float _DeltaTime)
+void Chapter8::EnterOrder1(float _DeltaTime)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
 
-	if (0 >= TimeCount)
+	if (0.0f >= TimeCount)
 	{
-		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * 0.211f, WinScale.Y * (-0.025f) }, SkeletonScale });
+		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * 0.211f, WinScale.Y * (-0.025f) }, SkeletonScale });		
+
+		TimeCount = LuSwirl2RenderDelay;
 		++EnterOrder;
+		return;
+	}
+
+	TimeCount -= _DeltaTime;
+}
+
+void Chapter8::EnterOrder2(float _DeltaTime)
+{
+	if (0.0f >= TimeCount)
+	{
+		C_ChangeCharacterAnimation("Lu_Swirl_2");
+		++EnterOrder;
+		return;
 	}
 
 	TimeCount -= _DeltaTime;
