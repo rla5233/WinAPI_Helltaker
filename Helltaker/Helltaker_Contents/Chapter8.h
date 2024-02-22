@@ -42,7 +42,7 @@ private:
 	void EnterOrder0(float _DeltaTime);
 	void EnterOrder1(float _DeltaTime);
 	void EnterOrder2(float _DeltaTime);
-	void EnterOrder3();
+	void EnterOrder3(float _DeltaTime);
 
 	void CreateDefaultBG();
 	void SpawnSkeletonMan();
@@ -52,12 +52,13 @@ private:
 	Point EndPoint = Point::Zero;
 
 	std::vector<Scene*> SkeletonMan;
+	int EnterOrder = -1;
+	
 	const static float SkeletonCreateDelay;
 	const static float SkeletonRenderDelay;
 	const static float LuSwirl2RenderDelay;
+	const static float LuIdleRenderDelay;
 	float TimeCount = 0;
-
-	int EnterOrder = -1;
 
 	static bool IsLoad;
 };

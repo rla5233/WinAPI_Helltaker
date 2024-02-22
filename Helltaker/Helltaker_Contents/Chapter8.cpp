@@ -6,8 +6,9 @@
 
 bool Chapter8::IsLoad = false;
 const float Chapter8::SkeletonRenderDelay = 0.2f;
-const float Chapter8::SkeletonCreateDelay = 0.1f;
+const float Chapter8::SkeletonCreateDelay = 0.15f;
 const float Chapter8::LuSwirl2RenderDelay = 0.6f;
+const float Chapter8::LuIdleRenderDelay = 0.05f;
 
 const std::vector<const char*> Chap8_Script
 {
@@ -174,13 +175,9 @@ void Chapter8::CutSceneStart()
 	C_CreateCharacterAnimation("Lu_Swirl_1", "Lu_Swirl", 0, 9, 0.15f, false);
 	C_CreateCharacterAnimation("Lu_Swirl_2", "Lu_Swirl", 10, 13, 0.15f, false);
 	C_ChangeCharacterAnimation("Lu_Swirl_1");
-	
+
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0f}, {WinScale.X * 0.242f, WinScale.Y * 0.619f} });
-
-	//C_SpawnBooper();
-	//C_BooperTextSet(Chap8_Script[1]);
-
 }
 
 void Chapter8::EnterStart()
@@ -204,7 +201,7 @@ void Chapter8::Enter(float _DeltaTime)
 		EnterOrder2(_DeltaTime);
 		break;
 	case 3:
-
+		EnterOrder3(_DeltaTime);
 		break;
 	}
 }
@@ -253,6 +250,8 @@ void Chapter8::EnterOrder2(float _DeltaTime)
 	if (0.0f >= TimeCount)
 	{
 		C_ChangeCharacterAnimation("Lu_Swirl_2");
+
+		TimeCount = LuIdleRenderDelay;
 		++EnterOrder;
 		return;
 	}
@@ -260,15 +259,24 @@ void Chapter8::EnterOrder2(float _DeltaTime)
 	TimeCount -= _DeltaTime;
 }
 
-void Chapter8::EnterOrder3()
+void Chapter8::EnterOrder3(float _DeltaTime)
 {
 	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
-		C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
-		C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f} });
-		++EnterOrder;
+		if (0.0f >= TimeCount)
+		{
+			FVector WinScale = ContentsHelper::GetWindowScale();
+			C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
+			C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
+			C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f} });
+			
+			//C_SpawnBooper();
+			//C_BooperTextSet(Chap8_Script[1]);
+
+			++EnterOrder;
+		}
+
+		TimeCount -= _DeltaTime;
 	}
 }
 
