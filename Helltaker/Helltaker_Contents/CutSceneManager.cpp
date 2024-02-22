@@ -171,12 +171,14 @@ void CutSceneManager::C_SpawnMenubar()
 
 		MenuBar[i]->CreateImageRenderer(RenderOrder::UI);
 		MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X * 0.518f, WinScale.Y * 0.091f} });
+		MenuBar[i]->GetImageRenderer()->CameraEffectOff();
 
 		MenuBar[i]->CreateTextRenderer(RenderOrder::Text);
 		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -4}, {0, 0} });
 		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 		MenuBar[i]->GetTextRenderer()->SetTextSize(26);
 		MenuBar[i]->GetTextRenderer()->SetText("Test");
+		MenuBar[i]->GetTextRenderer()->CameraEffectOff();
 
 		if (i == 0)
 		{

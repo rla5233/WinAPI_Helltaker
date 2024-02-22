@@ -294,6 +294,7 @@ void Chapter8::EnterOrder4()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_BooperTextSet(Chap8_Script[2]);
+		++EnterOrder;
 	}
 }
 
@@ -307,7 +308,10 @@ void Chapter8::EnterOrder5()
 
 void Chapter8::SelectStart()
 {
+	CutSceneManager::SelectStart();
 
+	C_MenubarTextSet(0, Chap8_Script[3]);
+	C_MenubarTextSet(1, Chap8_Script[4]);
 }
 
 void Chapter8::SelectMenu()
