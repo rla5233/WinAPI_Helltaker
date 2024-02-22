@@ -30,6 +30,8 @@ public:
 	void C_SpawnMenubar();
 
 	void C_BooperTextSet(std::string_view _Text);
+	void C_BooperChangeAnimation(std::string_view _AnimationName);
+	void C_BooperSetTransform(const FTransform& _Trans);
 	void C_BooperImageRendererOn();
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
 	void C_MenubarRenderActiveOff();
@@ -50,13 +52,13 @@ public:
 		bool _Loop = true);
 
 	void C_ChangeCharacterAnimation(std::string_view _AnimationName);
+	void C_StateChange(ECutSceneState _State);
 
 	int C_GetFocusMenuIndex() const
 	{
 		return FocusMenuIndex;
 	}
 
-	void C_StateChange(ECutSceneState _State);
 
 	void C_AddFailOrder(int _Order)
 	{

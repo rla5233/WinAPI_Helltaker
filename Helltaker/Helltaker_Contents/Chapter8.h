@@ -48,6 +48,9 @@ private:
 	void EnterOrder5();
 
 	void SuccessStart1();
+	void SuccessStart2();
+	void SuccessEnter();
+	void SuccessEndScene();
 
 	void CreateDefaultBG();
 	void SpawnSkeletonMan();

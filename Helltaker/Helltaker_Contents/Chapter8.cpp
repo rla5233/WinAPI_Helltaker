@@ -24,8 +24,8 @@ const std::vector<const char*> Chap8_Script
 	/* 9  MenuBar2_2 */ "커피, 턴제 전략 게임과 초콜렛 팬케이크를 제공할 수 있지",
 	/* 10 Failed2    */ "네 주제를 가르쳐 줘야겠구나.",
 	/* 11 Bad End2   */ "루시퍼의 손짓에, 당신의 피는 모조리 식초로 변해버렸다.\n참으로 형언하기 어려운 느낌이다.",
-	/* 12 Success1   */ "정말? 그게 다야? 여기까지 와 놓고선, 날 고작 팬케이크로\n 사려고?"
-	/* 13 Success2   */ "내가 팬케이크를 좋아하니 운 좋은 줄 알아라."
+	/* 12 Success1   */ "정말? 그게 다야? 여기까지 와 놓고선, 날 고작 팬케이크로\n 사려고?",
+	/* 13 Success2   */ "내가 팬케이크를 좋아하니 운 좋은 줄 알아라.",
 	/* 14 Success3   */ "그럼 설득된 것 같네. 어쩌면 네 하렘이라는 게 재밌을 수도\n있겠어."
 };
 
@@ -381,6 +381,7 @@ void Chapter8::SuccessStart()
 		SuccessStart1();
 		break;
 	case 1:
+		SuccessStart2();
 		break;
 	}
 }
@@ -396,15 +397,57 @@ void Chapter8::SuccessStart1()
 	C_CharacterSetImage("Lu_Angry.png");	
 }
 
+void Chapter8::SuccessStart2()
+{
+	C_MenubarRenderActiveOff();
+	C_BooperImageRendererOn();
+	C_BooperTextSet(Chap8_Script[12]);
+}
+
 void Chapter8::Success(float _DeltaTime)
 {
+	ResetCheck();
+
 	switch (SelectOrder)
 	{
 	case 0:
 		EnterOrder5();
 		break;
 	case 1:
+		SuccessEnter();
 		break;
+	case 2:
+		SuccessEndScene();
+		break;
+	}
+}
+
+void Chapter8::SuccessEnter()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		CutSceneManager::SuccessStart();
+
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector CharPos = { WinScale.X * 0.015f, WinScale.Y * 0.02f };
+		FVector CharScale = { WinScale.X * 0.247f, WinScale.Y * 0.561f };
+		C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Happy.png");
+		C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ CharPos, CharScale });
+		C_BooperTextSet(Chap8_Script[13]);
+		++SelectOrder;
+	}	
+}
+
+void Chapter8::SuccessEndScene()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FTransform BooperTrans = { {0, 0}, { WinScale.X * 0.027f, WinScale.Y * 0.022f } };
+		C_BooperChangeAnimation("Booper_Idle");
+		C_BooperSetTransform(BooperTrans);
+		C_BooperTextSet(Chap8_Script[14]);
+		++SelectOrder;
 	}
 }
 

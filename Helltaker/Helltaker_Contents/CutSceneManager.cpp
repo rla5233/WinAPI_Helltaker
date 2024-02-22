@@ -108,6 +108,16 @@ void CutSceneManager::C_BooperTextSet(std::string_view _Text)
 	Booper->GetTextRenderer()->SetText(_Text);
 }
 
+void CutSceneManager::C_BooperChangeAnimation(std::string_view _AnimationName)
+{
+	Booper->GetImageRenderer()->ChangeAnimation(_AnimationName);
+}
+
+void CutSceneManager::C_BooperSetTransform(const FTransform& _Trans)
+{
+	Booper->GetImageRenderer()->SetTransform(_Trans);
+}
+
 void CutSceneManager::C_BooperImageRendererOn()
 {
 	Booper->GetImageRenderer()->ActiveOn();
