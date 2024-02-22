@@ -1,5 +1,6 @@
 #include "Chapter8.h"
 
+#include "Chapter9.h"
 #include "BackGround.h"
 #include "Character.h"
 #include "Scene.h"
@@ -472,6 +473,9 @@ void Chapter8::SuccessEnd()
 
 void Chapter8::ChangeChapter()
 {
-	int a = 0;
+	ChapterManager::ChangeChapter();
+
+	CreateChapter<Chapter9>("Chapter9");
+	GEngine->ChangeLevel("Chapter9");
 }
 
