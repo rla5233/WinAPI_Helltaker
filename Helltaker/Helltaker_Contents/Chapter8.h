@@ -41,7 +41,8 @@ protected:
 private:
 	void EnterOrder0();
 	void EnterOrder1();
-	void EnterOrder2();
+	void EnterOrder2(float _DeltaTime);
+	void EnterOrder3();
 
 	void CreateDefaultBG();
 	void SpawnSkeletonMan();
@@ -51,6 +52,8 @@ private:
 	Point EndPoint = Point::Zero;
 
 	std::vector<Scene*> SkeletonMan;
+	const static float SkeletonRenderDelay;
+	float TimeCount = 0;
 
 	int EnterOrder = -1;
 

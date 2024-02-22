@@ -5,6 +5,7 @@
 #include "Scene.h"
 
 bool Chapter8::IsLoad = false;
+const float Chapter8::SkeletonRenderDelay = 0.2f;
 
 const std::vector<const char*> Chap8_Script
 {
@@ -198,7 +199,10 @@ void Chapter8::Enter(float _DeltaTime)
 		EnterOrder1();
 		break;
 	case 2:
-		EnterOrder2();
+		EnterOrder2(_DeltaTime);
+		break;
+	case 3:
+
 		break;
 	}
 }
@@ -209,12 +213,7 @@ void Chapter8::EnterOrder0()
 	{
 		SpawnSkeletonMan();
 		SpawnSkeletonMan();
-
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
-		SkeletonMan[0]->GetImageRenderer()->SetTransform({ { WinScale.X *   0.211f,  WinScale.Y * (-0.025f) }, SkeletonScale });
-		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * (-0.211f), WinScale.Y * (-0.025f) }, SkeletonScale });
-
+		TimeCount = SkeletonRenderDelay;
 		++EnterOrder;
 	}
 }
@@ -222,17 +221,38 @@ void Chapter8::EnterOrder0()
 void Chapter8::EnterOrder1()
 {
 	C_ChangeCharacterAnimation("Lu_Swirl_2");
-	++EnterOrder;
+
+	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+		SkeletonMan[0]->GetImageRenderer()->SetTransform({ { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) }, SkeletonScale });
+		++EnterOrder;
+	}
 }
 
-void Chapter8::EnterOrder2()
+void Chapter8::EnterOrder2(float _DeltaTime)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+
+	if (0 >= TimeCount)
+	{
+		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * 0.211f, WinScale.Y * (-0.025f) }, SkeletonScale });
+		++EnterOrder;
+	}
+
+	TimeCount -= _DeltaTime;
+}
+
+void Chapter8::EnterOrder3()
 {
 	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
 		C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
-		C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f}});
+		C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f} });
 		++EnterOrder;
 	}
 }
