@@ -22,6 +22,7 @@ void Opening::BeginPlay()
 
 	ContentsHelper::LoadImg("Scene\\Dialogue", "UnityLogo.png");
 	ContentsHelper::LoadImg("Background", "OpeningBG.png");
+	ContentsHelper::LoadSound("Sound", "Vitality.wav");
 }
 
 void Opening::Tick(float _DeltaTime)
@@ -52,6 +53,8 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	UnityLogo->GetRenderer()->SetImage(UnityLogo->GetName() + ".png");
 	UnityLogo->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
 	AllActors.push_back(UnityLogo);
+
+	ContentsHelper::SoundPlay("Vitality.wav");
 }
 
 void Opening::LevelEnd(ULevel* _NextLevel)

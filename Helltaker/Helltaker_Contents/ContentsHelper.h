@@ -58,6 +58,8 @@ public:
 	static FVector GetTileScale();
 	static void LoadImg(std::string_view _Path, std::string_view _Name);
 	static void LoadFolder(std::string_view _Path, std::string_view _Name);
+	static void LoadSound(std::string_view _Path, std::string_view _Name);
+	static void SoundPlay(std::string_view _Name);
 
 protected:
 
