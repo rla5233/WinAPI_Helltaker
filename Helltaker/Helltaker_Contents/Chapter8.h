@@ -44,6 +44,7 @@ private:
 	void EnterOrder2(float _DeltaTime);
 	void EnterOrder3(float _DeltaTime);
 	void EnterOrder4();
+	void EnterOrder5();
 
 	void CreateDefaultBG();
 	void SpawnSkeletonMan();
