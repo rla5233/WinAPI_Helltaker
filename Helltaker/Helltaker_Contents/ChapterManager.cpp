@@ -495,6 +495,8 @@ void ChapterManager::ResetCheck()
 
 void ChapterManager::End(float _DeltaTime)
 {
+	ResetCheck();
+
 	switch (ChapterEndOrder)
 	{
 	case 0:
