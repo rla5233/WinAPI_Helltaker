@@ -37,6 +37,7 @@ protected:
 	void BadEndSetting() override;
 
 	void SuccessStart() override;
+	void Success(float _DeltaTime) override;
 
 private:
 	void EnterOrder0(float _DeltaTime);

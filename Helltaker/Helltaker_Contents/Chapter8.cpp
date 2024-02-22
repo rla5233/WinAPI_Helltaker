@@ -316,22 +316,51 @@ void Chapter8::SelectStart()
 
 void Chapter8::SelectMenu()
 {
-
+	switch (C_GetFocusMenuIndex())
+	{
+	case 0:
+		C_StateChange(ECutSceneState::BadEnd);
+		break;
+	case 1:
+		C_StateChange(ECutSceneState::Success);
+		break;
+	}
 }
 
 void Chapter8::BadEndStart()
 {
+	CutSceneManager::BadEndStart();
 
+	C_BooperTextSet(Chap8_Script[5]);
 }
 
 void Chapter8::BadEndSetting()
 {
+	CutSceneManager::BadEndSetting();
 
+	for (Scene* Skeleton : SkeletonMan)
+	{
+		Skeleton->AllRenderersActiveOff();
+	}
+
+	C_BooperTextSet(Chap8_Script[6]);
 }
 
 void Chapter8::SuccessStart()
 {
+	C_MenubarRenderActiveOff();
+	C_BooperImageRendererOn();
+	C_BooperTextSet(Chap8_Script[7]);
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale.X * 0.247f, WinScale.Y * 0.561f } });
+	C_CharacterSetImage("Lu_Angry.png");
+}
+
+void Chapter8::Success(float _DeltaTime)
+{
+
+	int a = 0;
 }
 
 void Chapter8::ChangeChapter()

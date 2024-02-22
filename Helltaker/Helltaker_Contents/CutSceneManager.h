@@ -30,6 +30,7 @@ public:
 	void C_SpawnMenubar();
 
 	void C_BooperTextSet(std::string_view _Text);
+	void C_BooperImageRendererOn();
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
 	void C_MenubarRenderActiveOff();
 	void C_CharacterSetImage(std::string_view _Name);
@@ -94,6 +95,7 @@ protected:
 	void ResetCheck() override;
 
 	virtual void SuccessStart();
+	virtual void Success(float _DeltaTime);
 
 private:
 	void C_StateUpdate(float _DeltaTime);
@@ -102,7 +104,6 @@ private:
 
 	void BadEnd(float _DeltaTime);
 
-	void Success(float _DeltaTime);
 	void SuccessEnd();
 
 	void SetFocusMenuIndex(int _Index);
