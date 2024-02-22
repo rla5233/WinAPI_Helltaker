@@ -78,6 +78,7 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 	SceneCharacter->GetNameRenderer()->SetTextSize(40);
 	SceneCharacter->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
 	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+	SceneCharacter->GetNameRenderer()->SetTextEffect(2);
 	SceneCharacter->GetNameRenderer()->CameraEffectOff();
 }
 
