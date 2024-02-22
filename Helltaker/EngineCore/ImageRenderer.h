@@ -148,9 +148,10 @@ public:
 	{
 		Size = _Value;
 	}
-	void SetTextColor(Color8Bit _Color)
+	void SetTextColor(Color8Bit _Color, Color8Bit _Color2 = Color8Bit::White)  //변경
 	{
 		TextColor = _Color;
+		TextColor2 = _Color2; //추가
 	}
 	void SetCameraRatio(float _Ratio)
 	{
@@ -158,6 +159,8 @@ public:
 	}
 
 	FTransform GetRenderTransForm();
+
+	void SwitchTextBold() { TextBoldSwitch = !TextBoldSwitch; } // 추가 
 
 protected:
 	void BeginPlay() override;
@@ -183,5 +186,7 @@ private:
 	std::string Font = "궁서";
 	float Size = 10.0f;
 	Color8Bit TextColor = Color8Bit::BlackA;
+	Color8Bit TextColor2 = Color8Bit::BlackA; //추가
+	bool TextBoldSwitch = false; // 추가
 };
 

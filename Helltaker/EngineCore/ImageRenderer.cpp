@@ -225,7 +225,15 @@ void UImageRenderer::TextRender(float _DeltaTime)
 	//RendererTrans.AddPosition(float4::Up * Size * 0.5f);
 	// RendererTrans.AddPosition(float4::Left * (Size * 0.5f) * (TextCount * 0.5f));
 
-	GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+	if (TextBoldSwitch == false)
+	{
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+	}
+	else
+	{
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2);
+	}
+
 }
 
 void UImageRenderer::ImageRender(float _DeltaTime)
