@@ -139,19 +139,16 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	ChapterNum->GetTextRenderer()->CameraEffectOff();
 	AllMapActors[reinterpret_cast<__int64>(ChapterNum)] = ChapterNum;
 
-	if (8 != ChapterNumber)
-	{
-		BottomText = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
-		BottomText->SetActorLocation({ WinScale.X * 0.612f, WinScale.Y * 0.953f });
-		BottomText->SetName("BottomText");
-		BottomText->CreateTextRenderer(RenderOrder::Text);
-		BottomText->SetTextTransForm({ {0,0}, {0,0} });
-		BottomText->TextSetting(38, Color8Bit::White);
-		BottomText->SetText("재시작 [R키]");
-		BottomText->GetTextRenderer()->CameraEffectOff();
+	BottomText = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
+	BottomText->SetActorLocation({ WinScale.X * 0.612f, WinScale.Y * 0.953f });
+	BottomText->SetName("BottomText");
+	BottomText->CreateTextRenderer(RenderOrder::Text);
+	BottomText->SetTextTransForm({ {0,0}, {0,0} });
+	BottomText->TextSetting(38, Color8Bit::White);
+	BottomText->SetText("재시작 [R키]"); 
+	BottomText->GetTextRenderer()->CameraEffectOff();
 
-		AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;
-	}	
+	AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;
 
 	HeroActionPoint = SpawnActor<Text>(static_cast<int>(UpdateOrder::Text));
 	HeroActionPoint->SetActorLocation({ WinScale.X * 0.11f, WinScale.Y * 0.775f });
@@ -332,6 +329,11 @@ void ChapterManager::M_UpdateHeroActionPoint()
 	}
 
 	HeroActionPoint->SetText(PointStr);
+}
+
+void ChapterManager::M_BottomTextRendererOff()
+{
+	BottomText->AllRenderersActiveOff();
 }
 
 FVector ChapterManager::M_GetHeroLocation()

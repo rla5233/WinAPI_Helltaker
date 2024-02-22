@@ -73,6 +73,7 @@ public:
 	void M_DestroyHitActor(__int64 _Key);
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
+	void M_BottomTextRendererOff();
 	FVector M_GetHeroLocation();
 	Point M_GetHeroLocationPoint();
 

@@ -86,6 +86,7 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 	CreateDefaultBG();
 	CreateBG("ChapterBG_008");
 	M_CreateChapterUI(8);
+	M_BottomTextRendererOff();
 
 	M_SpawnHero({ 4, 11 }, 12);
 
@@ -419,6 +420,9 @@ void Chapter8::Success(float _DeltaTime)
 	case 2:
 		SuccessEndScene();
 		break;
+	case 3:
+		CutSceneManager::Success(_DeltaTime);
+		break;
 	}
 }
 
@@ -453,6 +457,6 @@ void Chapter8::SuccessEndScene()
 
 void Chapter8::ChangeChapter()
 {
-
+	int a = 0;
 }
 
