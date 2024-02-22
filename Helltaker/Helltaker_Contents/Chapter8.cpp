@@ -189,6 +189,8 @@ void Chapter8::EnterStart()
 
 void Chapter8::Enter(float _DeltaTime)
 {
+	ResetCheck();
+
 	switch (EnterOrder)
 	{
 	case 0 :

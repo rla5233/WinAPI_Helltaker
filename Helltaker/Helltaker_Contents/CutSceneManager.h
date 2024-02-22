@@ -91,6 +91,8 @@ protected:
 	void FailOrderInputCheck();
 	void ChapterRestart();
 
+	void ResetCheck() override;
+
 	virtual void SuccessStart();
 
 private:

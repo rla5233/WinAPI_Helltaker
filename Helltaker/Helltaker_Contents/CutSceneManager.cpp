@@ -198,6 +198,8 @@ void CutSceneManager::C_SpawnMenubar()
 
 void CutSceneManager::Enter(float _DeltaTime)
 {
+	ResetCheck();
+
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_StateChange(ECutSceneState::Select);
@@ -206,6 +208,8 @@ void CutSceneManager::Enter(float _DeltaTime)
 
 void CutSceneManager::Select(float _DeltaTime)
 {
+	ResetCheck();
+
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
@@ -280,6 +284,16 @@ void CutSceneManager::ChapterRestart()
 	}	
 }
 
+void CutSceneManager::ResetCheck()
+{
+	ChapterManager::ResetCheck();
+
+	if (UEngineInput::IsPress('R'))
+	{
+		C_StateChange(ECutSceneState::None);
+	}
+}
+
 void CutSceneManager::BadEndStart()
 {
 	Booper->GetImageRenderer()->ActiveOn();
@@ -290,6 +304,8 @@ void CutSceneManager::BadEndStart()
 
 void CutSceneManager::Success(float _DeltaTime)
 {
+	ResetCheck();
+
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		SuccessEnd();
@@ -396,6 +412,8 @@ void CutSceneManager::C_StateChange(ECutSceneState _State)
 			break;
 		case ECutSceneState::Success:
 			SuccessStart();
+			break;
+		case ECutSceneState::Reset:
 			break;
 		}
 	}
