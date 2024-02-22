@@ -1,7 +1,7 @@
 #include "EngineCore.h"
 #include <Windows.h>
 #include "Level.h"
-//#include <EnginePlatform\EngineSound.h>
+#include <EnginePlatform\EngineSound.h>
 #include "EnginePlatform\EngineInput.h"
 
 bool UEngineCore::IsDebugValue = false;
@@ -9,10 +9,12 @@ UEngineCore* GEngine = nullptr;
 
 UEngineCore::UEngineCore()
 	: MainWindow()
-{}
+{
+}
 
 UEngineCore::~UEngineCore()
-{}
+{
+}
 
 void UEngineCore::CoreTick()
 {
@@ -61,7 +63,7 @@ void UEngineCore::CoreTick()
 		DeltaTime = 1.0f / 60.0f;
 	}
 
-	//UEngineSound::Update();
+	UEngineSound::Update();
 	UEngineInput::KeyCheckTick(DeltaTime);
 
 

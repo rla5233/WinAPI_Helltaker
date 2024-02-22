@@ -2,7 +2,8 @@
 #include "ImageRenderer.h"
 
 AActor::AActor()
-{}
+{
+}
 
 AActor::~AActor()
 {

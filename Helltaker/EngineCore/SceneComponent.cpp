@@ -2,10 +2,12 @@
 #include "Actor.h"
 
 USceneComponent::USceneComponent()
-{}
+{
+}
 
 USceneComponent::~USceneComponent()
-{}
+{
+}
 
 FTransform USceneComponent::GetActorBaseTransform()
 {

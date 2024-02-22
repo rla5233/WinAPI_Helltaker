@@ -5,10 +5,12 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{}
+{
+}
 
 UImageRenderer::~UImageRenderer()
-{}
+{
+}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -76,8 +78,7 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else
-	{
+	else {
 		ImageRender(_DeltaTime);
 	}
 
@@ -227,7 +228,7 @@ void UImageRenderer::TextRender(float _DeltaTime)
 	case 2:
 		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
 		break;
-	default:		
+	default:
 		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
 		break;
 	}

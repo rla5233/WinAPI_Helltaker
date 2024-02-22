@@ -189,8 +189,7 @@ private:
 	float Size = 10.0f;
 	Color8Bit TextColor = Color8Bit::BlackA;
 	Color8Bit TextColor2 = Color8Bit::BlackA; //Ãß°¡
-	
-	int TextEffect = 0; 
+	int TextEffect = 0;
 	// Default : 0, 
 	// Bold & Italic : 1, (custom)
 	// Bold : 2,
