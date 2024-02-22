@@ -89,7 +89,7 @@ void CutSceneManager::C_SpawnBooper()
 	Booper->SetName("Booper");
 	Booper->CreateImageRenderer(RenderOrder::UI);
 	Booper->GetImageRenderer()->SetImage(Booper->GetName());
-	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
+	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.027f, WinScale.Y * 0.022f } });
 	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
 	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
 	Booper->GetImageRenderer()->CameraEffectOff();
