@@ -269,9 +269,10 @@ void Chapter8::EnterOrder3(float _DeltaTime)
 			C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
 			C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
 			C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f} });
+			C_GetSceneCharacter()->GetNameRenderer()->SetText(Chap8_Script[0]);
 			
-			//C_SpawnBooper();
-			//C_BooperTextSet(Chap8_Script[1]);
+			C_SpawnBooper();
+			C_BooperTextSet(Chap8_Script[1]);
 
 			++EnterOrder;
 		}

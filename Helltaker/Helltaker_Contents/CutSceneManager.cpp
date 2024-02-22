@@ -92,12 +92,14 @@ void CutSceneManager::C_SpawnBooper()
 	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
 	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
 	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
+	Booper->GetImageRenderer()->CameraEffectOff();
 	Booper->CreateTextRenderer(RenderOrder::Text);
 	Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.0995f) }, { 0, 0 } });
 	Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 	Booper->GetTextRenderer()->SetTextSize(35);
 	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	Booper->GetTextRenderer()->SetText(" ");
+	Booper->GetTextRenderer()->CameraEffectOff();
 	AllCutSceneActors.push_back(Booper);
 }
 
