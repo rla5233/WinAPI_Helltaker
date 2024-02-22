@@ -348,7 +348,7 @@ void Chapter8::BadEndStart()
 		C_BooperTextSet(Chap8_Script[5]);
 		break;
 	case 1:
-
+		C_BooperTextSet(Chap8_Script[10]);
 		break;
 	}
 }
@@ -368,6 +368,7 @@ void Chapter8::BadEndSetting()
 		C_BooperTextSet(Chap8_Script[6]);
 		break;
 	case 1:
+		C_BooperTextSet(Chap8_Script[11]);
 		break;
 	}
 }
