@@ -35,6 +35,8 @@ void Skeleton::BeginPlay()
 	ImageRenderer->CreateAnimation("Skeleton_LHit", "Skeleton_Left_Hit", 0, 8, HitInter, false);
 	ImageRenderer->CreateAnimation("Skeleton_RHit", "Skeleton_Right_Hit", 0, 8, HitInter, false);
 
+	CreateBigHitEffect();
+
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHitActorState::Idle);
 }
@@ -146,8 +148,6 @@ void Skeleton::Hit(float _DeltaTime)
 	{
 		StateChange(EHitActorState::HitMoveEnd);
 	}
-
-	HitEffectOffCheck();
 }
 
 void Skeleton::HitMoveEnd(float _DeltaTime)
@@ -164,7 +164,7 @@ void Skeleton::HitMoveEnd(float _DeltaTime)
 		StateChange(EHitActorState::Idle);
 	}
 
-	HitEffectOffCheck();
+	HitEffectEndCheck();
 }
 
 void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
@@ -184,7 +184,6 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 		break;
 	}
 
-	CreateBigHitEffect();
 	SetRandomBigHitEffect();
 
 	MoveOn();
@@ -193,11 +192,17 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 
 void Skeleton::Death(float _DeltaTime)
 {
-	Destroy();
+	if (true == HitEffectEndCheck())
+	{
+		Destroy();	
+	}
 }
 
 void Skeleton::DeathStart()
 {
+	SetRandomBigHitEffect();
+	ImageRenderer->ActiveOff();
+
 	HitActorInfoUpdate(EHitActorState::Death);
 	InformDestroytoChapter();
 }

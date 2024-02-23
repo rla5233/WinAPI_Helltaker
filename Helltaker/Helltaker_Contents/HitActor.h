@@ -36,7 +36,7 @@ public:
 
 	void SetRandomBigHitEffect();
 
-	void HitEffectOffCheck();
+	bool HitEffectEndCheck();
 
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
 protected:

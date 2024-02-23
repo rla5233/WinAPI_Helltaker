@@ -76,10 +76,13 @@ void HitActor::SetRandomBigHitEffect()
 	EffectRenderer->ActiveOn();
 }
 
-void HitActor::HitEffectOffCheck()
+bool HitActor::HitEffectEndCheck()
 {
 	if (true == EffectRenderer->IsCurAnimationEnd())
 	{
 		EffectRenderer->ActiveOff();
+		return true;
 	}
+
+	return false;
 }
