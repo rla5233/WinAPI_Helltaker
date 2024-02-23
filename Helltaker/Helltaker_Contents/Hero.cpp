@@ -232,7 +232,7 @@ void Hero::Move(float _DeltaTime)
 	}
 }
 
-void Hero::MoveStart(float _DeltaTime)
+void Hero::MoveStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * MoveScale } });
@@ -254,7 +254,7 @@ void Hero::MoveStart(float _DeltaTime)
 		break;
 	}
 
-	MoveOn();
+	MoveActor::MoveStart();
 }
 
 void Hero::Kick(float _DeltaTime)
@@ -389,7 +389,7 @@ void Hero::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _Key2
 			IdleStart();
 			break;
 		case EHeroState::Move:
-			MoveStart(_DeltaTime);
+			MoveStart();
 			break;
 		case EHeroState::Kick:
 			KickStart(_DeltaTime, _Key1, _Key2);

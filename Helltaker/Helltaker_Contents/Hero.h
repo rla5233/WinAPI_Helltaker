@@ -49,7 +49,7 @@ private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Move(float _DeltaTime);
-	void MoveStart(float _DeltaTime);
+	void MoveStart() override;
 	void Kick(float _DeltaTime);
 	void KickStart(float _DeltaTime, int _Key1, int _Key2);
 	void Victory(float _DeltaTime);

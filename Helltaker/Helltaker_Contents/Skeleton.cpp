@@ -169,7 +169,8 @@ void Skeleton::Move(float _DeltaTime)
 
 void Skeleton::MoveStart()
 {
-	MoveOn();
+	MoveActor::MoveStart();
+
 	HitActorInfoUpdate(EHitActorState::Move);
 }
 

@@ -9,12 +9,10 @@ UEngineCore* GEngine = nullptr;
 
 UEngineCore::UEngineCore()
 	: MainWindow()
-{
-}
+{}
 
 UEngineCore::~UEngineCore()
-{
-}
+{}
 
 void UEngineCore::CoreTick()
 {
@@ -86,6 +84,7 @@ void UEngineCore::CoreTick()
 		NextLevel = nullptr;
 		MainTimer.TimeCheckStart();
 		DeltaTime = MainTimer.TimeCheck();
+		CurFrameTime = 0.0f;
 	}
 
 

@@ -21,7 +21,7 @@ public:
 	void Hit(float _DeltaTime);
 	void HitStart(EMoveActorDir _OtherMoveDir);
 	void Move(float _DeltaTime);
-	void MoveStart();
+	void MoveStart() override;
 
 	void SetStoneImg(std::string_view _Name);
 

@@ -65,6 +65,8 @@ protected:
 
 	virtual void ChapterCameraPosUpdate(const FVector& _NextLocation) {};
 
+	virtual void MoveStart();
+
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
 

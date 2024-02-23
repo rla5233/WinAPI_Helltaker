@@ -38,12 +38,19 @@ void MoveActor::BeginPlay()
 
 		IsLoad = true;
 	}
+
+	CreateMoveEffect();
+}
+
+void MoveActor::MoveStart()
+{
+	MoveOn();
+	PMoveDirCheck();
+	SetRandomMoveEffect();
 }
 
 void MoveActor::MoveOneBlock(float _DeltaTime)
 {
-	PMoveDirCheck();
-
 	if (MoveDir == EMoveActorDir::Left || MoveDir == EMoveActorDir::Right)
 	{
 		if (0.0001f < MoveDistanceX)
@@ -134,5 +141,26 @@ void MoveActor::CreateMoveEffect()
 
 void MoveActor::SetRandomMoveEffect()
 {
+	int RandomValue = rand() % 2;
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	EffectRenderer->AnimationReset();
+	EffectRenderer->ChangeAnimation("MoveEffect1");
+	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.036f, WinScale.Y * 0.043f } });
+
+	
+
+	//switch (RandomValue)
+	//{
+	//case 0:
+	//	EffectRenderer->ChangeAnimation("BigHit1");
+	//	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
+	//	break;
+	//case 1:
+	//	EffectRenderer->ChangeAnimation("BigHit2");
+	//	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+	//	break;
+	//}
+
+	EffectRenderer->ActiveOn();
 }

@@ -140,7 +140,8 @@ void Stone::Move(float _DeltaTime)
 
 void Stone::MoveStart()
 {
-	MoveOn();
+	MoveActor::MoveStart();
+
 	HitActorInfoUpdate(EHitActorState::Move);
 }
 
