@@ -27,10 +27,10 @@ public:
 
 protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
-	void NextTileCheck(Point _Point) override;
+	void NextTileCheck(Point _Point);
 
-	void StateChange(EHitActorState _State) override;
-	void StateUpdate(float _DeltaTime) override;
+	void StateChange(EHitActorState _State);
+	void StateUpdate(float _DeltaTime);
 	
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

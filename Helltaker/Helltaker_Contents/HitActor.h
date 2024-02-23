@@ -44,12 +44,6 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void NextTileCheck(Point _Point) {};
-	virtual void StateUpdate(float _DeltaTime) {};
-	virtual void StateChange(EHitActorState _State) {};
-	virtual void Hit(float _DeltaTime) {};
-	virtual void HitStart() {};
-
 private:
 	UImageRenderer* EffectRenderer = nullptr;
 	

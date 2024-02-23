@@ -99,8 +99,6 @@ void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 
 void Skeleton::NextTileCheck(Point _Point)
 {
-	HitActor::NextTileCheck(_Point);
-
 	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
 		StateChange(EHitActorState::Hit);
@@ -216,8 +214,6 @@ void Skeleton::Tick(float _DeltaTime)
 
 void Skeleton::StateUpdate(float _DeltaTime)
 {
-	HitActor::StateUpdate(_DeltaTime);
-
 	switch (GetHitActorState())
 	{
 	case EHitActorState::Idle:
@@ -237,8 +233,6 @@ void Skeleton::StateUpdate(float _DeltaTime)
 
 void Skeleton::StateChange(EHitActorState _State)
 {
-	HitActor::StateChange(_State);
-
 	if (GetHitActorState() != _State)
 	{
 		switch (_State)

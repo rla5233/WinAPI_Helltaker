@@ -81,8 +81,6 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 
 void Stone::NextTileCheck(Point _Point)
 {
-	HitActor::NextTileCheck(_Point);
-
 	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
 
@@ -160,8 +158,6 @@ void Stone::Tick(float _DeltaTime)
 
 void Stone::StateUpdate(float _DeltaTime)
 {
-	HitActor::StateUpdate(_DeltaTime);
-
 	switch (GetHitActorState())
 	{
 	case EHitActorState::Idle:
@@ -178,8 +174,6 @@ void Stone::StateUpdate(float _DeltaTime)
 
 void Stone::StateChange(EHitActorState _State)
 {
-	HitActor::StateChange(_State);
-
 	if (GetHitActorState() != _State)
 	{
 		switch (_State)
