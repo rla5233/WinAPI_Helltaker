@@ -21,7 +21,7 @@ public:
 		Type = _Type;
 	}
 
-	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
+	void NextStateCheck();
 
 	void StateChange(EKeyComponentState _State);
 

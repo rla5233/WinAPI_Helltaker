@@ -136,7 +136,7 @@ void KeyComponent::StateChange(EKeyComponentState _State)
 	State = _State;
 }
 
-void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
+void KeyComponent::NextStateCheck()
 {
 	switch (Type)
 	{
