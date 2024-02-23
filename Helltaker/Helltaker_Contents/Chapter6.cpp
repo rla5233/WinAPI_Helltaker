@@ -3,6 +3,7 @@
 #include "Chapter7.h"
 
 // 수정 (제거 가능?)
+#include "BackGround.h"
 #include "Scene.h"
 #include "UI.h"
 
@@ -162,6 +163,11 @@ void Chapter6::BadEndSetting1()
 {
 	for (AActor* Actor : AllCutSceneActors)
 	{
+		if (nullptr != dynamic_cast<BackGround*>(Actor))
+		{
+			continue;
+		}
+
 		Actor->AllRenderersActiveOff();
 	}
 
