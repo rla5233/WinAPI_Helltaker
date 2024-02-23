@@ -39,10 +39,12 @@ protected:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
+	UImageRenderer* EffectRenderer = nullptr;
 
 	EKeyComponentState State = EKeyComponentState::None;
 	EKeyComponentType Type = EKeyComponentType::None;
 
-	static const float IdleInter;
+	static const float Key_IdleInter;
+	static const float Death_EffectInter;
 	static bool IsLoad;
 };

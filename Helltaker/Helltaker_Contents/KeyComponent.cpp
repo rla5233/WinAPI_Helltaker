@@ -1,7 +1,8 @@
 #include "KeyComponent.h"
 
 bool KeyComponent::IsLoad = false;
-const float KeyComponent::IdleInter = 0.06f;
+const float KeyComponent::Key_IdleInter = 0.06f;
+const float KeyComponent::Death_EffectInter = 0.06f;
 
 KeyComponent::KeyComponent()
 {
@@ -17,12 +18,10 @@ void KeyComponent::BeginPlay()
 	{
 		ContentsHelper::LoadFolder("Chapter\\Component", "Key");
 		ContentsHelper::LoadImg("Chapter\\Component", "LockBox.png");
+		ContentsHelper::LoadFolder("Effect", "KeyComp");
+
 		IsLoad = true;
 	}
-
-	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
-	ImageRenderer->SetImage("LockBox.png");
-	ImageRenderer->CreateAnimation("Key_Idle", "Key", 0, 11, IdleInter, true);
 }
 
 void KeyComponent::Idle(float _DeltaTime)
@@ -32,11 +31,14 @@ void KeyComponent::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 
 	switch (Type)
 	{
 	case EKeyComponentType::Key:
 		ImageRenderer->SetTransform({ { TileScale.X * 0.07f, TileScale.Y * (-0.2f) }, {WinScale.X * 0.0437f, WinScale.Y * 0.0852f}});
+		ImageRenderer->SetImage("LockBox.png");
+		ImageRenderer->CreateAnimation("Key_Idle", "Key", 0, 11, Key_IdleInter, true);
 		ImageRenderer->AnimationReset();
 		ImageRenderer->ChangeAnimation("Key_Idle");
 		break;
@@ -49,11 +51,23 @@ void KeyComponent::IdleStart()
 
 void KeyComponent::Death(float _DeltaTime)
 {
-	Destroy();
+	if (true == EffectRenderer->IsCurAnimationEnd())
+	{
+		Destroy();
+	}
 }
 
 void KeyComponent::DeathStart()
 {
+	ImageRenderer->ActiveOff();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
+	EffectRenderer->SetImage("KeyComp");
+	EffectRenderer->SetTransform({ { 0 , 0 }, { WinScale.X * 0.165f, WinScale.Y * 0.278f } });
+	EffectRenderer->CreateAnimation("KeyComp_Death", "KeyComp", 0, 8, Death_EffectInter, false);
+	EffectRenderer->ChangeAnimation("KeyComp_Death");
+
 	if (EKeyComponentType::LockBox == Type)
 	{
 		HitActorInfoUpdate(EHitActorState::Death);
