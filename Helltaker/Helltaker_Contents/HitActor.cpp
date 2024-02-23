@@ -69,10 +69,43 @@ void HitActor::CreateSmallHitEffect()
 
 void HitActor::SetRandomBigHitEffect()
 {
+	int RandomValue = rand() % 2;
+
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	EffectRenderer->AnimationReset();
-	EffectRenderer->ChangeAnimation("BigHit1");
-	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
+	switch (RandomValue)
+	{
+	case 0:
+		EffectRenderer->ChangeAnimation("BigHit1");
+		EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
+		break;
+	case 1:
+		EffectRenderer->ChangeAnimation("BigHit2");
+		EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+		break;
+	}
+	
+	EffectRenderer->ActiveOn();
+}
+
+void HitActor::SetRandomSmallHitEffect()
+{
+	int RandomValue = rand() % 2;
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	EffectRenderer->AnimationReset();
+	switch (RandomValue)
+	{
+	case 0:
+		EffectRenderer->ChangeAnimation("SmallHit1");
+		EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.04f, WinScale.Y * 0.074f } });
+		break;
+	case 1:
+		EffectRenderer->ChangeAnimation("SmallHit2");
+		EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.047f, WinScale.Y * 0.076f } });
+		break;
+	}
+
 	EffectRenderer->ActiveOn();
 }
 

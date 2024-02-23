@@ -35,6 +35,9 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void Hit(float _DeltaTime) override;
+	void HitStart() override;
+
 	void StateUpdate(float _DeltaTime) override;
 
 private:

@@ -22,6 +22,10 @@ void KeyComponent::BeginPlay()
 
 		IsLoad = true;
 	}
+
+	FVector TileScale = ContentsHelper::GetTileScale();
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 }
 
 void KeyComponent::Idle(float _DeltaTime)
@@ -31,7 +35,6 @@ void KeyComponent::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 
 	switch (Type)
 	{
@@ -45,6 +48,7 @@ void KeyComponent::IdleStart()
 	case EKeyComponentType::LockBox:
 		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.17f)}, { WinScale.X * 0.0505f, WinScale.Y * 0.0888f}});
 		ImageRenderer->SetImage("LockBox.png");
+		CreateSmallHitEffect();
 		break;
 	}
 }
@@ -76,14 +80,17 @@ void KeyComponent::DeathStart()
 	InformDestroytoChapter();
 }
 
-void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
+void KeyComponent::Hit(float _DeltaTime)
 {
-	switch (Type)
+	if (true == HitEffectEndCheck())
 	{
-	case EKeyComponentType::LockBox:
-		//StateChange(EKeyComponentState::Hit);
-		break;
+		StateChange(EKeyComponentState::Idle);
 	}
+}
+
+void KeyComponent::HitStart()
+{
+	SetRandomSmallHitEffect();
 }
 
 void KeyComponent::Tick(float _DeltaTime)
@@ -100,6 +107,9 @@ void KeyComponent::StateUpdate(float _DeltaTime)
 	case EKeyComponentState::Idle:
 		Idle(_DeltaTime);
 		break;
+	case EKeyComponentState::Hit:
+		Hit(_DeltaTime);
+		break;
 	case EKeyComponentState::Death:
 		Death(_DeltaTime);
 		break;
@@ -115,6 +125,9 @@ void KeyComponent::StateChange(EKeyComponentState _State)
 		case EKeyComponentState::Idle:
 			IdleStart();
 			break;
+		case EKeyComponentState::Hit:
+			HitStart();
+			break;
 		case EKeyComponentState::Death:
 			DeathStart();
 			break;
@@ -122,4 +135,14 @@ void KeyComponent::StateChange(EKeyComponentState _State)
 	}
 
 	State = _State;
+}
+
+void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
+{
+	switch (Type)
+	{
+	case EKeyComponentType::LockBox:
+		StateChange(EKeyComponentState::Hit);
+		break;
+	}
 }

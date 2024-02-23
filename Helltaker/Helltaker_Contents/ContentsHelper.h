@@ -161,6 +161,7 @@ enum class EKeyComponentState
 {
 	None,
 	Idle,
+	Hit,
 	Death
 };
 

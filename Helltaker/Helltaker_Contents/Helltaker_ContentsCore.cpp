@@ -2,6 +2,8 @@
 
 #include "Opening.h"
 
+#include <time.h>
+
 // Test
 #include "Chapter1.h"
 #include "Chapter2.h"
@@ -25,6 +27,7 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 // 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
+	srand(static_cast<unsigned int>(time(0)));
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	//MainWindow.SetWindowScale({ 1280, 720 });
 	UEngineCore::BeginPlay();

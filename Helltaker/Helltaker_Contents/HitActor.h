@@ -35,17 +35,21 @@ public:
 	void CreateSmallHitEffect();
 
 	void SetRandomBigHitEffect();
+	void SetRandomSmallHitEffect();
 
 	bool HitEffectEndCheck();
 
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
 protected:
+	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) {};
+
 	virtual void NextTileCheck(Point _Point) {};
 	virtual void StateUpdate(float _DeltaTime) {};
 	virtual void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) {};
 
-	virtual void BeginPlay() override;
-	virtual void Tick(float _DeltaTime) {};
+	virtual void Hit(float _DeltaTime) {};
+	virtual void HitStart() {};
 
 private:
 	UImageRenderer* EffectRenderer = nullptr;
