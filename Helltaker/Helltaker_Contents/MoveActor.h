@@ -18,7 +18,7 @@ public:
 	void MoveOneBlock(float _DeltaTime);
 
 	void MoveDirChange(EMoveActorDir _Dir);
-	void PMoveDirCheck();
+	void MoveDirCheck();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
 	bool IsMove() const
@@ -38,12 +38,12 @@ public:
 
 	Point GetLocationPoint() const
 	{
-		return LocationPoint;
+		return CurLocationPoint;
 	}
 
 	void SetLocationPoint(Point _Point)
 	{
-		LocationPoint = _Point;
+		CurLocationPoint = _Point;
 	}
 
 	Point GetNextLocationPoint() const
@@ -67,6 +67,7 @@ protected:
 	EActorSeeDir SeeDir = EActorSeeDir::None;
 
 private:
+	void MovePosCheck();
 	void CreateMoveEffect();
 	void SetRandomMoveEffect();
 	void UpdateMoveEffect(const FVector& _Diff);
@@ -80,10 +81,17 @@ private:
 	float FirstSpeed = 0.0f;
 	float Speed = 0.0f;
 	float Acceleration = 0.0f;
+
+
+
+	float MoveTime = 0.0f;
+	FVector StartPos = FVector::Zero;
+	FVector TargetPos = FVector::Zero;
+	FVector FMoveDir = FVector::Zero;
 	Point PMoveDir = Point::Zero;
 	bool IsMoveValue = false;
 
-	Point LocationPoint = { -1, -1 };
+	Point CurLocationPoint = { -1, -1 };
 	Point NextLocationPoint = { -1, -1 };
 
 	static const float MoveInter;

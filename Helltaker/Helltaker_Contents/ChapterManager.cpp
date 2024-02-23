@@ -56,19 +56,11 @@ void ChapterManager::M_SetChapterStartLocation(FVector _Value)
 	ChapterStartLocation = _Value * WinScale;
 }
 
-// 맵좌표를 윈도우 위치로 변환하는 함수
-FVector ChapterManager::ChapterPointToLocation(FVector _Point) const
-{
-	return ChapterPointToLocation(Point(_Point.iX(), _Point.iY()));
-}
-
 FVector ChapterManager::ChapterPointToLocation(Point _Point) const
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Location = ChapterStartLocation;
 	Location += FVector(_Point.X, _Point.Y) * ContentsHelper::GetTileScale();
-	// 오차 보정
-	Location += {fmod(WinScale.X, 19.0f), fmod(WinScale.Y, 10.8f)};
 	return Location;
 }
 

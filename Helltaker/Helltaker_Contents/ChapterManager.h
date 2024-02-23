@@ -43,7 +43,6 @@ public:
 	void CreateBG(std::string_view _Name);
 	void CreateTransition();
 
-	FVector ChapterPointToLocation(FVector _Point) const;
 	FVector ChapterPointToLocation(Point _Point) const;
 	
 	const std::vector<std::vector<TileInfo>>& GetTileInfoVec() const
