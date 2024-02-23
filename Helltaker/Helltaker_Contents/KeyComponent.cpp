@@ -84,7 +84,7 @@ void KeyComponent::Hit(float _DeltaTime)
 {
 	if (true == HitEffectEndCheck())
 	{
-		StateChange(EKeyComponentState::Idle);
+		State = EKeyComponentState::Idle;
 	}
 }
 

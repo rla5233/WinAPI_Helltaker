@@ -4,7 +4,7 @@
 
 bool HitActor::IsLoad = false;
 const float HitActor::BigHitInter = 0.04f;
-const float HitActor::SmallHitInter = 0.02f;
+const float HitActor::SmallHitInter = 0.04f;
 
 HitActor::HitActor()
 {
