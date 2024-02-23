@@ -170,7 +170,7 @@ void Skeleton::MoveStart()
 	HitActorInfoUpdate(EHitActorState::Move);
 }
 
-void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
+void Skeleton::HitStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * HitScale } });
@@ -235,9 +235,9 @@ void Skeleton::StateUpdate(float _DeltaTime)
 	}
 }
 
-void Skeleton::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
+void Skeleton::StateChange(EHitActorState _State)
 {
-	HitActor::StateChange(_State, _OtherMoveDir);
+	HitActor::StateChange(_State);
 
 	if (GetHitActorState() != _State)
 	{
@@ -247,7 +247,7 @@ void Skeleton::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
 			IdleStart();
 			break;
 		case EHitActorState::Hit:
-			HitStart(_OtherMoveDir);
+			HitStart();
 			break;
 		case EHitActorState::Move:
 			MoveStart();

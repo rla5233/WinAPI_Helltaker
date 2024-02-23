@@ -176,9 +176,9 @@ void Stone::StateUpdate(float _DeltaTime)
 	}
 }
 
-void Stone::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
+void Stone::StateChange(EHitActorState _State)
 {
-	HitActor::StateChange(_State, _OtherMoveDir);
+	HitActor::StateChange(_State);
 
 	if (GetHitActorState() != _State)
 	{

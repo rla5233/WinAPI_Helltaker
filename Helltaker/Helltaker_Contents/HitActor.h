@@ -46,8 +46,7 @@ protected:
 
 	virtual void NextTileCheck(Point _Point) {};
 	virtual void StateUpdate(float _DeltaTime) {};
-	virtual void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) {};
-
+	virtual void StateChange(EHitActorState _State) {};
 	virtual void Hit(float _DeltaTime) {};
 	virtual void HitStart() {};
 

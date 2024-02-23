@@ -15,20 +15,20 @@ public:
 	Skeleton& operator=(const Skeleton& _Other) = delete;
 	Skeleton& operator=(Skeleton&& _Other) noexcept = delete;
 
-	void Idle(float _DeltaTime) ;
-	void IdleStart() ;
-	void Hit(float _DeltaTime) ;
-	void HitStart(EMoveActorDir _OtherMoveDir) ;
+	void Idle(float _DeltaTime);
+	void IdleStart();
+	void Hit(float _DeltaTime);
+	void HitStart();
 	void Move(float _DeltaTime);
 	void MoveStart() override;
-	void Death(float _DeltaTime) ;
+	void Death(float _DeltaTime);
 	void DeathStart();
 
 protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
 	void NextTileCheck(Point _Point) override;
 
-    void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) override;
+    void StateChange(EHitActorState _State) override;
 	void StateUpdate(float _DeltaTime) override;
 
 	void BeginPlay() override;

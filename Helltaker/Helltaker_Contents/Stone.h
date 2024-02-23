@@ -29,7 +29,7 @@ protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
 	void NextTileCheck(Point _Point) override;
 
-	void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) override;
+	void StateChange(EHitActorState _State) override;
 	void StateUpdate(float _DeltaTime) override;
 	
 	void BeginPlay() override;
