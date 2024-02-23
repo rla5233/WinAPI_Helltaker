@@ -70,7 +70,7 @@ public:
 		return FailOrder;
 	}
 
-	Character* C_GetSceneCharacter()
+	Character* C_GetSceneCharacter() const
 	{
 		return SceneCharacter;
 	}

@@ -16,11 +16,12 @@ public:
 	Stone& operator=(const Stone& _Other) = delete;
 	Stone& operator=(Stone&& _Other) noexcept = delete;
 
-	void IdleStart();
 	void Idle(float _DeltaTime);
-	void HitStart(EMoveActorDir _OtherMoveDir);
+	void IdleStart();
 	void Hit(float _DeltaTime);
-	void HitMoveEnd(float _DeltaTime);
+	void HitStart(EMoveActorDir _OtherMoveDir);
+	void Move(float _DeltaTime);
+	void MoveStart();
 
 	void SetStoneImg(std::string_view _Name);
 

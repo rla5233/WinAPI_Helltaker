@@ -68,14 +68,14 @@ public:
 		IsThornChange = _Value;
 	}
 
-	HitActor* M_GetHitActor(FVector _Point);
-	HitActor* M_GetHitActor(Point _Point);
+	HitActor* M_GetHitActor(FVector _Point) const;
+	HitActor* M_GetHitActor(Point _Point) const;
 	void M_DestroyHitActor(__int64 _Key);
 	void M_ChangeThornState();
 	void M_UpdateHeroActionPoint();
 	void M_BottomTextRendererOff();
-	FVector M_GetHeroLocation();
-	Point M_GetHeroLocationPoint();
+	FVector M_GetHeroLocation() const;
+	Point M_GetHeroLocationPoint() const;
 
 	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const

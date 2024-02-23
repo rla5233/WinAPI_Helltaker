@@ -275,12 +275,12 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 }
 
 // 수정 필요 (제거 가능?)
-HitActor* ChapterManager::M_GetHitActor(FVector _Point)
+HitActor* ChapterManager::M_GetHitActor(FVector _Point) const
 {
 	return M_GetHitActor(Point(_Point.iX(), _Point.iY()));
 }
 
-HitActor* ChapterManager::M_GetHitActor(Point _Point)
+HitActor* ChapterManager::M_GetHitActor(Point _Point) const
 {
 	return TileInfoVec[_Point.Y][_Point.X].Other;
 }
@@ -336,12 +336,12 @@ void ChapterManager::M_BottomTextRendererOff()
 	BottomText->AllRenderersActiveOff();
 }
 
-FVector ChapterManager::M_GetHeroLocation()
+FVector ChapterManager::M_GetHeroLocation() const
 {
 	return PlayerHero->GetActorLocation();
 }
 
-Point ChapterManager::M_GetHeroLocationPoint()
+Point ChapterManager::M_GetHeroLocationPoint() const
 {
 	return PlayerHero->GetLocationPoint();
 }

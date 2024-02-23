@@ -20,7 +20,7 @@ public:
 
 	void CreateImageRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetRenderer()
+	UImageRenderer* GetRenderer() const
 	{
 		return Renderer;
 	}

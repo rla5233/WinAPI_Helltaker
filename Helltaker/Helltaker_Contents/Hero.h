@@ -29,7 +29,7 @@ public:
 		return State;
 	}
 
-	UImageRenderer* GetImageRenderer()
+	UImageRenderer* GetImageRenderer() const
 	{
 		return ImageRenderer;
 	}

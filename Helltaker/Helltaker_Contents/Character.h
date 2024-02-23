@@ -19,12 +19,12 @@ public:
 	void CreateImageRenderer(RenderOrder _Order);
 	void CreateNameRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetImageRenderer()
+	UImageRenderer* GetImageRenderer() const
 	{
 		return ImageRenderer;
 	}
 
-	UImageRenderer* GetNameRenderer()
+	UImageRenderer* GetNameRenderer() const
 	{
 		return NameRenderer;
 	}

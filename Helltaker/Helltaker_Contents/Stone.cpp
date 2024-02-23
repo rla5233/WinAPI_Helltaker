@@ -42,7 +42,6 @@ void Stone::BeginPlay()
 
 void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
-	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
 	Point CurPoint = GetLocationPoint();
 
 	switch (_OtherMoveDir)
@@ -77,6 +76,40 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 		break;
 	}
 
+	StateChange(EHitActorState::Hit);
+}
+
+void Stone::NextTileCheck(Point _Point)
+{
+	HitActor::NextTileCheck(_Point);
+
+	if (nullptr == GetChapter()->M_GetHitActor(_Point))
+	{
+		StateChange(EHitActorState::Move);
+	}
+	else
+	{
+		StateChange(EHitActorState::Idle);
+	}
+}
+
+void Stone::IdleStart()
+{
+}
+
+void Stone::Idle(float _DeltaTime)
+{
+	//HitEffectEndCheck();
+}
+
+void Stone::HitStart(EMoveActorDir _OtherMoveDir)
+{
+	SetRandomSmallHitEffect();
+}
+
+void Stone::Hit(float _DeltaTime)
+{
+	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
 	int Height = static_cast<int>(Map.size());
 	int Width = static_cast<int>(Map[0].size());
 	Point NextPoint = GetNextLocationPoint();
@@ -88,41 +121,9 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 			return;
 		}
 	}
-
-	StateChange(EHitActorState::Idle);
 }
 
-void Stone::NextTileCheck(Point _Point)
-{
-	HitActor::NextTileCheck(_Point);
-
-	if (nullptr == GetChapter()->M_GetHitActor(_Point))
-	{
-		StateChange(EHitActorState::Hit);
-	}
-	else
-	{
-		// Block : ½ºÅæ Áøµ¿
-		StateChange(EHitActorState::Idle);
-	}
-}
-
-void Stone::IdleStart()
-{
-}
-
-void Stone::Idle(float _DeltaTime)
-{
-}
-
-void Stone::HitStart(EMoveActorDir _OtherMoveDir)
-{
-	MoveOn();
-	SetRandomSmallHitEffect();
-	HitActorInfoUpdate(EHitActorState::Hit);
-}
-
-void Stone::Hit(float _DeltaTime)
+void Stone::Move(float _DeltaTime)
 {
 	if (true == IsMove())
 	{
@@ -135,9 +136,10 @@ void Stone::Hit(float _DeltaTime)
 	}
 }
 
-void Stone::HitMoveEnd(float _DeltaTime)
+void Stone::MoveStart()
 {
-	HitEffectEndCheck();
+	MoveOn();
+	HitActorInfoUpdate(EHitActorState::Move);
 }
 
 void Stone::SetStoneImg(std::string_view _Name)
@@ -146,7 +148,6 @@ void Stone::SetStoneImg(std::string_view _Name)
 	Renderer->SetImage(_Name);
 	Renderer->SetTransform({ {0.0f, TileScale.Y * (-0.125f)}, {TileScale * StoneScale} });
 }
-
 
 void Stone::Tick(float _DeltaTime)
 {
@@ -168,7 +169,7 @@ void Stone::StateUpdate(float _DeltaTime)
 		Hit(_DeltaTime);
 		break;
 	case EHitActorState::Move:
-		//Move(_DeltaTime);
+		Move(_DeltaTime);
 		break;
 	}
 }
@@ -188,7 +189,7 @@ void Stone::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
 			HitStart(_OtherMoveDir);
 			break;
 		case EHitActorState::Move:
-			//MoveStart();
+			MoveStart();
 			break;
 		}
 	}

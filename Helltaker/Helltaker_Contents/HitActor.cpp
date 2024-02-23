@@ -36,7 +36,7 @@ void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 
 	switch (_NextState)
 	{
-	case EHitActorState::Hit:
+	case EHitActorState::Move:
 		GetChapter()->M_SetChapterHitAcotrInfo(CurPoint, nullptr);
 		GetChapter()->M_SetChapterHitAcotrInfo(NextPoint, this);
 		break;
@@ -114,6 +114,8 @@ void HitActor::SetRandomSmallHitEffect()
 
 bool HitActor::HitEffectEndCheck()
 {
+
+
 	if (true == EffectRenderer->IsCurAnimationEnd())
 	{
 		EffectRenderer->ActiveOff();

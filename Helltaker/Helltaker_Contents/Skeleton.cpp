@@ -144,6 +144,8 @@ void Skeleton::Hit(float _DeltaTime)
 
 void Skeleton::Move(float _DeltaTime)
 {
+	HitEffectEndCheck();
+	
 	if (true == IsMove())
 	{
 		MoveOneBlock(_DeltaTime);
@@ -162,14 +164,13 @@ void Skeleton::Move(float _DeltaTime)
 		{
 			StateChange(EHitActorState::Idle);
 		}
-
-		HitEffectEndCheck();
 	}
 }
 
 void Skeleton::MoveStart()
 {
 	MoveOn();
+	HitActorInfoUpdate(EHitActorState::Move);
 }
 
 void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
@@ -190,8 +191,6 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 	}
 
 	SetRandomBigHitEffect();
-
-	HitActorInfoUpdate(EHitActorState::Hit);
 }
 
 void Skeleton::Death(float _DeltaTime)

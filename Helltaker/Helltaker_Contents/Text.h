@@ -22,13 +22,8 @@ public:
 
 	void CreateTextRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetTextRenderer()
+	UImageRenderer* GetTextRenderer() const
 	{
-		if (nullptr == TextRenderer)
-		{
-			MsgBoxAssert("Renderer is nullptr");
-		}
-
 		return TextRenderer;
 	}
 

@@ -18,7 +18,7 @@ public:
 
 	void CreateImageRenderer(RenderOrder _Order);
 
-	UImageRenderer* GetImageRenderer()
+	UImageRenderer* GetImageRenderer() const
 	{
 		return ImageRenderer;
 	}

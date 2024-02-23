@@ -19,7 +19,7 @@ public:
 	void CreateBackGround(std::string_view _Name);
 	void BackGroundChange(std::string_view _Name);
 
-	UImageRenderer* GetImageRenderer()
+	UImageRenderer* GetImageRenderer() const
 	{
 		return ImageRenderer;
 	}
