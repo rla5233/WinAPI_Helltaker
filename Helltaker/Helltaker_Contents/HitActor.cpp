@@ -125,3 +125,9 @@ bool HitActor::HitEffectEndCheck()
 
 	return false;
 }
+
+void HitActor::EffectPosUpdate(const FVector& _Diff)
+{
+	FVector CurPos = EffectRenderer->GetPosition();
+	EffectRenderer->SetPosition(CurPos - _Diff);
+}

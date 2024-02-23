@@ -71,10 +71,12 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		SetActorLocation(NextPos);
 
 		FVector NextLocation = GetActorLocation();
+		FVector Diff = NextLocation - CurLocation;
 
+		EffectPosUpdate(Diff);
 		if (PMoveDir == Point::Down || PMoveDir == Point::Up)
 		{
-			ChapterCameraPosUpdate(NextLocation - CurLocation);
+			ChapterCameraPosUpdate(Diff);
 		}		
 
 		if (1.0f <= MoveTime)

@@ -58,9 +58,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void ChapterCameraPosUpdate(const FVector& _NextLocation) {};
+	virtual void ChapterCameraPosUpdate(const FVector& _Diff) {};
 
 	virtual void MoveStart();
+	virtual void EffectPosUpdate(const FVector& _Diff) {};
 
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
