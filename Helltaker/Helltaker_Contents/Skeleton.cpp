@@ -139,6 +139,11 @@ void Skeleton::IdleStart()
 
 void Skeleton::Hit(float _DeltaTime)
 {
+	StateChange(EHitActorState::Move);
+}
+
+void Skeleton::Move(float _DeltaTime)
+{
 	if (true == IsMove())
 	{
 		MoveOneBlock(_DeltaTime);
@@ -146,25 +151,25 @@ void Skeleton::Hit(float _DeltaTime)
 
 	if (false == IsMove())
 	{
-		StateChange(EHitActorState::HitMoveEnd);
+		Point CurPoint = GetLocationPoint();
+		if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
+		{
+			StateChange(EHitActorState::Death);
+			return;
+		}
+
+		if (true == ImageRenderer->IsCurAnimationEnd())
+		{
+			StateChange(EHitActorState::Idle);
+		}
+
+		HitEffectEndCheck();
 	}
 }
 
-void Skeleton::HitMoveEnd(float _DeltaTime)
+void Skeleton::MoveStart()
 {
-	Point CurPoint = GetLocationPoint();
-	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
-	{
-		StateChange(EHitActorState::Death);
-		return;
-	}
-
-	if (true == ImageRenderer->IsCurAnimationEnd())
-	{
-		StateChange(EHitActorState::Idle);
-	}
-
-	HitEffectEndCheck();
+	MoveOn();
 }
 
 void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
@@ -186,7 +191,6 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 
 	SetRandomBigHitEffect();
 
-	MoveOn();
 	HitActorInfoUpdate(EHitActorState::Hit);
 }
 
@@ -226,8 +230,8 @@ void Skeleton::StateUpdate(float _DeltaTime)
 	case EHitActorState::Hit:
 		Hit(_DeltaTime);
 		break;
-	case EHitActorState::HitMoveEnd:
-		HitMoveEnd(_DeltaTime);
+	case EHitActorState::Move:
+		Move(_DeltaTime);
 		break;
 	case EHitActorState::Death:
 		Death(_DeltaTime);
@@ -248,6 +252,9 @@ void Skeleton::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
 			break;
 		case EHitActorState::Hit:
 			HitStart(_OtherMoveDir);
+			break;
+		case EHitActorState::Move:
+			MoveStart();
 			break;
 		case EHitActorState::Death:
 			DeathStart();

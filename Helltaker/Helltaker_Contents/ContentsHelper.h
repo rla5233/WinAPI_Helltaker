@@ -145,7 +145,7 @@ enum class EHitActorState
 	None,
 	Idle,
 	Hit,
-	HitMoveEnd,
+	Move,
 	Death
 };
 

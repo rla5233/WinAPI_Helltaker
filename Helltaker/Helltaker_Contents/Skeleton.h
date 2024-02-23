@@ -15,13 +15,14 @@ public:
 	Skeleton& operator=(const Skeleton& _Other) = delete;
 	Skeleton& operator=(Skeleton&& _Other) noexcept = delete;
 
-	void IdleStart() ;
 	void Idle(float _DeltaTime) ;
-	void HitStart(EMoveActorDir _OtherMoveDir) ;
+	void IdleStart() ;
 	void Hit(float _DeltaTime) ;
-	void HitMoveEnd(float _DeltaTime);
-	void DeathStart();
+	void HitStart(EMoveActorDir _OtherMoveDir) ;
+	void Move(float _DeltaTime);
+	void MoveStart();
 	void Death(float _DeltaTime) ;
+	void DeathStart();
 
 protected:
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
