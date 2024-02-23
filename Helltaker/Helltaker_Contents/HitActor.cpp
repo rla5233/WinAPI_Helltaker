@@ -48,12 +48,24 @@ void HitActor::InformDestroytoChapter()
 	GetChapter()->M_DestroyHitActor(reinterpret_cast<__int64>(this));
 }
 
+void HitActor::CreateHitEffect()
+{
+	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
+	EffectRenderer->SetImage("Hit");
+	EffectRenderer->CreateAnimation("SmallHit1", "Hit", 10, 13, SmallHitInter, false);
+	EffectRenderer->CreateAnimation("SmallHit2", "Hit", 14, 17, SmallHitInter, false);
+	EffectRenderer->CreateAnimation("BigHit1", "Hit", 0, 4, BigHitInter, false);
+	EffectRenderer->CreateAnimation("BigHit2", "Hit", 5, 9, BigHitInter, false);
+	EffectRenderer->AnimationReset();
+}
+
 void HitActor::CreateBigHitEffect()
 {
 	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
 	EffectRenderer->SetImage("Hit");
 	EffectRenderer->CreateAnimation("BigHit1", "Hit", 0, 4, BigHitInter, false);
 	EffectRenderer->CreateAnimation("BigHit2", "Hit", 5, 9, BigHitInter, false);
+	EffectRenderer->AnimationReset();
 }
 
 void HitActor::CreateSmallHitEffect()
@@ -128,6 +140,8 @@ bool HitActor::HitEffectEndCheck()
 
 void HitActor::EffectPosUpdate(const FVector& _Diff)
 {
+	MoveActor::EffectPosUpdate(_Diff);
+
 	FVector CurPos = EffectRenderer->GetPosition();
 	EffectRenderer->SetPosition(CurPos - _Diff);
 }

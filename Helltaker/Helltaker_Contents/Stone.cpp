@@ -35,7 +35,7 @@ void Stone::BeginPlay()
 	}
 
 	Renderer = CreateImageRenderer(RenderOrder::HitActor);
-	CreateSmallHitEffect();
+	CreateHitEffect();
 
 	StateChange(EHitActorState::Idle);
 }
@@ -85,10 +85,12 @@ void Stone::NextTileCheck(Point _Point)
 
 	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
+
 		StateChange(EHitActorState::Move);
 	}
 	else
 	{
+
 		StateChange(EHitActorState::Idle);
 	}
 }
@@ -102,9 +104,9 @@ void Stone::Idle(float _DeltaTime)
 	HitEffectEndCheck();
 }
 
-void Stone::HitStart(EMoveActorDir _OtherMoveDir)
+void Stone::HitStart()
 {
-	SetRandomSmallHitEffect();
+
 }
 
 void Stone::Hit(float _DeltaTime)
@@ -186,7 +188,7 @@ void Stone::StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir)
 			IdleStart();
 			break;
 		case EHitActorState::Hit:
-			HitStart(_OtherMoveDir);
+			HitStart();
 			break;
 		case EHitActorState::Move:
 			MoveStart();

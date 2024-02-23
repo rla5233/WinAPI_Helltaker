@@ -30,6 +30,7 @@ public:
 
 	void InformDestroytoChapter();
 
+	void CreateHitEffect();
 	void CreateBigHitEffect();
 	void CreateSmallHitEffect();
 

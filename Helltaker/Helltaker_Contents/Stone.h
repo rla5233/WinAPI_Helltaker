@@ -19,7 +19,7 @@ public:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Hit(float _DeltaTime);
-	void HitStart(EMoveActorDir _OtherMoveDir);
+	void HitStart();
 	void Move(float _DeltaTime);
 	void MoveStart() override;
 
