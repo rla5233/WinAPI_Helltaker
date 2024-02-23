@@ -133,6 +133,11 @@ public:
 		return CurAnimation->CurTime;
 	}
 
+	UAnimationInfo* GetCurAnimation() const
+	{
+		return CurAnimation;
+	}
+
 	void TextRender(float _DeltaTime);
 	void ImageRender(float _DeltaTime);
 

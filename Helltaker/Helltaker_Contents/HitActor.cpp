@@ -65,6 +65,7 @@ void HitActor::CreateSmallHitEffect()
 	EffectRenderer->SetImage("Hit");
 	EffectRenderer->CreateAnimation("SmallHit1", "Hit", 10, 13, SmallHitInter, false);
 	EffectRenderer->CreateAnimation("SmallHit2", "Hit", 14, 17, SmallHitInter, false);
+	EffectRenderer->AnimationReset();
 }
 
 void HitActor::SetRandomBigHitEffect()
@@ -90,9 +91,9 @@ void HitActor::SetRandomBigHitEffect()
 
 void HitActor::SetRandomSmallHitEffect()
 {
-	int RandomValue = rand() % 2;
-	int RandomValueX = (rand() % 10) - 4;  // -4 ~ 5
-	int RandomValueY = (rand() % 10) - 4;  // -4 ~ 5
+	int RandomValue = rand() % 2;			// 0 ~ 1
+	int RandomValueX = (rand() % 10) - 4;	// -4 ~ 5
+	int RandomValueY = (rand() % 10) - 4;	// -4 ~ 5
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector RandomPos = { WinScale.X * (RandomValueX * 0.002f + 0.002f), WinScale.Y * (RandomValueY * 0.002f - 0.015f)};
@@ -114,7 +115,10 @@ void HitActor::SetRandomSmallHitEffect()
 
 bool HitActor::HitEffectEndCheck()
 {
-
+	if (nullptr == EffectRenderer->GetCurAnimation())
+	{
+		return false;
+	}
 
 	if (true == EffectRenderer->IsCurAnimationEnd())
 	{

@@ -99,7 +99,7 @@ void Stone::IdleStart()
 
 void Stone::Idle(float _DeltaTime)
 {
-	//HitEffectEndCheck();
+	HitEffectEndCheck();
 }
 
 void Stone::HitStart(EMoveActorDir _OtherMoveDir)
@@ -121,6 +121,8 @@ void Stone::Hit(float _DeltaTime)
 			return;
 		}
 	}
+
+	StateChange(EHitActorState::Idle);
 }
 
 void Stone::Move(float _DeltaTime)
