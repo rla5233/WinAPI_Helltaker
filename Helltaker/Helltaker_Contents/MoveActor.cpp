@@ -6,7 +6,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 bool MoveActor::IsLoad = false;
-const float MoveActor::MoveInter = 0.06f;
+const float MoveActor::MoveInter = 0.2f;
 
 MoveActor::MoveActor()
 {
@@ -58,6 +58,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
 			FVector Diff = FMoveDir * Speed * _DeltaTime;
 			AddActorLocation(Diff);
+
 			UpdateMoveEffect(Diff);
 
 			MoveDistanceX -= Speed * _DeltaTime;	
@@ -68,8 +69,15 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			LocationPoint += PMoveDir;
 			Speed = FirstSpeed;
 
+			FVector CurPos = GetActorLocation();
+
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D()};
-			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
+			FVector NextPos = GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale;
+			SetActorLocation(NextPos);
+			
+			FVector Diff = NextPos - CurPos;
+			UpdateMoveEffect(Diff);
+			
 			MoveDistanceX = ContentsHelper::GetTileScale().X;
 			MoveOff();
 		}
@@ -80,10 +88,14 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		{
 			FVector PrevLocation = GetActorLocation();
 			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
-			AddActorLocation(FMoveDir * Speed * _DeltaTime);
-			FVector NextLocation = GetActorLocation();
+			FVector Diff = FMoveDir * Speed * _DeltaTime;
+			AddActorLocation(Diff);
 
+			UpdateMoveEffect(Diff);
+
+			FVector NextLocation = GetActorLocation();
 			ChapterCameraPosUpdate(NextLocation - PrevLocation);
+
 			MoveDistanceY -= Speed * _DeltaTime;
 			Speed += Acceleration * _DeltaTime;
 		}
@@ -93,12 +105,19 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			Speed = FirstSpeed;
 
 			FVector PrevLocation = GetActorLocation();
+			
+			FVector CurPos = GetActorLocation();
 			FVector hTileScale = { ContentsHelper::GetTileScale().Half2D() };
-			SetActorLocation(GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale);
-			MoveDistanceY = ContentsHelper::GetTileScale().Y;
-			FVector NextLocation = GetActorLocation();
+			FVector NextPos = GetChapter()->ChapterPointToLocation(LocationPoint) + hTileScale;
+			SetActorLocation(NextPos);
 
+			FVector Diff = NextPos - CurPos;
+			UpdateMoveEffect(Diff);
+
+			FVector NextLocation = GetActorLocation();
 			ChapterCameraPosUpdate(NextLocation - PrevLocation);
+
+			MoveDistanceY = ContentsHelper::GetTileScale().Y;
 			MoveOff();
 		}
 	}
