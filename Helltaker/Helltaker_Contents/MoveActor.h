@@ -56,10 +56,6 @@ public:
 		NextLocationPoint = _Point;
 	}
 
-	void CreateMoveEffect();
-
-	void SetRandomMoveEffect();
-
 protected:
 	virtual void BeginPlay() override;
 
@@ -69,6 +65,11 @@ protected:
 
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
+
+private:
+	void CreateMoveEffect();
+	void SetRandomMoveEffect();
+	void UpdateMoveEffect(const FVector& _Diff);
 
 private:
 	UImageRenderer* EffectRenderer = nullptr;

@@ -6,7 +6,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 bool MoveActor::IsLoad = false;
-const float MoveActor::MoveInter = 0.02f;
+const float MoveActor::MoveInter = 0.06f;
 
 MoveActor::MoveActor()
 {
@@ -56,7 +56,10 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		if (0.0001f < MoveDistanceX)
 		{
 			FVector FMoveDir = FVector(PMoveDir.X, PMoveDir.Y);
-			AddActorLocation(FMoveDir * Speed * _DeltaTime);
+			FVector Diff = FMoveDir * Speed * _DeltaTime;
+			AddActorLocation(Diff);
+			UpdateMoveEffect(Diff);
+
 			MoveDistanceX -= Speed * _DeltaTime;	
 			Speed += Acceleration * _DeltaTime;
 		}
@@ -163,4 +166,10 @@ void MoveActor::SetRandomMoveEffect()
 	//}
 
 	EffectRenderer->ActiveOn();
+}
+
+void MoveActor::UpdateMoveEffect(const FVector& _Diff)
+{
+	FVector CurPos = EffectRenderer->GetPosition();
+	EffectRenderer->SetPosition(CurPos - _Diff);
 }
