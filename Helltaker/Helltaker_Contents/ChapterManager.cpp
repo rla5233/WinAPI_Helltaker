@@ -455,9 +455,9 @@ void ChapterManager::CutSceneStart()
 		{
 			MapActors.second->AllRenderersActiveOff();
 		}
-
-		MapActors.second->ActiveOff();
 	}
+	
+	PlayerHero->ActiveOff();
 }
 
 void ChapterManager::CutSceneCheck()
