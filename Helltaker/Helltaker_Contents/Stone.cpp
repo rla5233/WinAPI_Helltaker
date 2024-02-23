@@ -42,6 +42,7 @@ void Stone::BeginPlay()
 
 void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
+	HitActor::NextStateCheck(_OtherMoveDir);
 	Point CurPoint = GetLocationPoint();
 
 	switch (_OtherMoveDir)
@@ -83,12 +84,11 @@ void Stone::NextTileCheck(Point _Point)
 {
 	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
-
 		StateChange(EHitActorState::Move);
 	}
 	else
 	{
-
+		SetRandomSmallHitEffect();
 		StateChange(EHitActorState::Idle);
 	}
 }
@@ -104,7 +104,6 @@ void Stone::Idle(float _DeltaTime)
 
 void Stone::HitStart()
 {
-
 }
 
 void Stone::Hit(float _DeltaTime)
@@ -122,6 +121,7 @@ void Stone::Hit(float _DeltaTime)
 		}
 	}
 
+	SetRandomSmallHitEffect();
 	StateChange(EHitActorState::Idle);
 }
 
@@ -139,6 +139,7 @@ void Stone::MoveStart()
 {
 	MoveActor::MoveStart();
 
+	SetRandomBigHitEffect();
 	HitActorInfoUpdate(EHitActorState::Move);
 }
 

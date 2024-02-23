@@ -40,7 +40,7 @@ void Skeleton::BeginPlay()
 	StateChange(EHitActorState::Idle);
 }
 
-
+// 수정 (Stone, HitActor virtual 관계 리팩토링 가능?)
 void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
 	HitActor::NextStateCheck(_OtherMoveDir);
