@@ -77,11 +77,11 @@ enum class UpdateOrder
 	RenderActor,
 	HitActor,
 	Hero,
-	UI,
-	Text,
 	Effect,
 	Scene,
 	Character,
+	UI,
+	Text,
 	Transition
 };
 
@@ -92,11 +92,11 @@ enum class RenderOrder
 	RenderActor,
 	HitActor,
 	Hero,
-	UI,
-	Text,
 	Effect,
 	Scene,
 	Character,
+	UI,
+	Text,
 	Transition
 };
 

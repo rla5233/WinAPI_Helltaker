@@ -446,6 +446,11 @@ void ChapterManager::CutSceneStart()
 			MsgBoxAssert("Actor is nullptr");
 		}
 
+		if (MapActors.second->GetName() == "LOCKBOX")
+		{
+			continue;
+		} 		
+
 		MapActors.second->AllRenderersActiveOff();
 		MapActors.second->ActiveOff();
 	}
