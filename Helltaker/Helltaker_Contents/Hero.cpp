@@ -220,10 +220,7 @@ void Hero::IdleStart()
 
 void Hero::Move(float _DeltaTime)
 {
-	if (true == IsMove())
-	{
-		MoveOneBlock(_DeltaTime);
-	}
+	MoveOneBlock(_DeltaTime);
 
 	if (false == IsMove())
 	{

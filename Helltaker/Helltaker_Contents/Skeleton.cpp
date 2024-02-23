@@ -145,10 +145,8 @@ void Skeleton::Move(float _DeltaTime)
 {
 	HitEffectEndCheck();
 	
-	if (true == IsMove())
-	{
-		MoveOneBlock(_DeltaTime);
-	}
+	MoveOneBlock(_DeltaTime);
+	
 
 	if (false == IsMove())
 	{

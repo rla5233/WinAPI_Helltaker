@@ -127,10 +127,7 @@ void Stone::Hit(float _DeltaTime)
 
 void Stone::Move(float _DeltaTime)
 {
-	if (true == IsMove())
-	{
-		MoveOneBlock(_DeltaTime);
-	}
+	MoveOneBlock(_DeltaTime);
 
 	if (false == IsMove())
 	{
