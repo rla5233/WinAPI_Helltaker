@@ -31,16 +31,29 @@ public:
 
 	void InformDestroytoChapter();
 
+	void CreateBigHitEffect();
+	void CreateSmallHitEffect();
+
+	void SetRandomBigHitEffect();
+
+	void HitEffectOffCheck();
+
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
 protected:
 	virtual void NextTileCheck(Point _Point) {};
 	virtual void StateUpdate(float _DeltaTime) {};
 	virtual void StateChange(EHitActorState _State, EMoveActorDir _OtherMoveDir = EMoveActorDir::None) {};
 
-	virtual void BeginPlay() {};
+	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) {};
 
 private:
+	UImageRenderer* EffectRenderer = nullptr;
+	
 	EHitActorState State = EHitActorState::None;
+
+	static const float BigHitInter;
+	static const float SmallHitInter;
+	static bool IsLoad;
 };
 

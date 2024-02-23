@@ -146,6 +146,8 @@ void Skeleton::Hit(float _DeltaTime)
 	{
 		StateChange(EHitActorState::HitMoveEnd);
 	}
+
+	HitEffectOffCheck();
 }
 
 void Skeleton::HitMoveEnd(float _DeltaTime)
@@ -161,6 +163,8 @@ void Skeleton::HitMoveEnd(float _DeltaTime)
 	{
 		StateChange(EHitActorState::Idle);
 	}
+
+	HitEffectOffCheck();
 }
 
 void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
@@ -179,6 +183,9 @@ void Skeleton::HitStart(EMoveActorDir _OtherMoveDir)
 		ImageRenderer->ChangeAnimation("Skeleton_RHit");
 		break;
 	}
+
+	CreateBigHitEffect();
+	SetRandomBigHitEffect();
 
 	MoveOn();
 	HitActorInfoUpdate(EHitActorState::Hit);
