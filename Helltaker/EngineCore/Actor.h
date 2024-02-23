@@ -69,10 +69,12 @@ public:
 	UCollision* CreateCollision(int _Order = 0);
 	UImageRenderer* CreateImageRenderer(int _Order = 0);
 
+	void SetActive(bool _Active, float _ActiveTime = 0.0f) override;
+	void ActiveUpdate(float _DeltaTime) override;
+
 	void Destroy(float _DestroyTime = 0.0f) override;
 	void DestroyUpdate(float _DeltaTime) override;
 
-	void ActiveUpdate(float _DeltaTime) override;
 
 	void CheckReleaseChild();
 
