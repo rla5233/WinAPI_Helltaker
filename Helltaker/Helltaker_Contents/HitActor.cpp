@@ -91,18 +91,21 @@ void HitActor::SetRandomBigHitEffect()
 void HitActor::SetRandomSmallHitEffect()
 {
 	int RandomValue = rand() % 2;
+	int RandomValueX = (rand() % 10) - 4;  // -4 ~ 5
+	int RandomValueY = (rand() % 10) - 4;  // -4 ~ 5
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector RandomPos = { WinScale.X * (RandomValueX * 0.002f + 0.002f), WinScale.Y * (RandomValueY * 0.002f - 0.015f)};
 	EffectRenderer->AnimationReset();
 	switch (RandomValue)
 	{
 	case 0:
 		EffectRenderer->ChangeAnimation("SmallHit1");
-		EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.04f, WinScale.Y * 0.074f } });
+		EffectRenderer->SetTransform({ RandomPos, { WinScale.X * 0.04f, WinScale.Y * 0.074f } });
 		break;
 	case 1:
 		EffectRenderer->ChangeAnimation("SmallHit2");
-		EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.047f, WinScale.Y * 0.076f } });
+		EffectRenderer->SetTransform({ RandomPos, { WinScale.X * 0.047f, WinScale.Y * 0.076f } });
 		break;
 	}
 

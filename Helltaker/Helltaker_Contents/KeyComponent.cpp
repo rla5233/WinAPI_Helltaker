@@ -142,6 +142,7 @@ void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
 	switch (Type)
 	{
 	case EKeyComponentType::LockBox:
+		StateChange(EKeyComponentState::None);
 		StateChange(EKeyComponentState::Hit);
 		break;
 	}
