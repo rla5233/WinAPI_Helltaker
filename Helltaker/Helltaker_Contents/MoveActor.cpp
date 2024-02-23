@@ -10,19 +10,12 @@ const float MoveActor::MoveInter = 0.2f;
 
 MoveActor::MoveActor()
 {
-	MoveDistanceX = ContentsHelper::GetTileScale().X;
-	MoveDistanceY = ContentsHelper::GetTileScale().Y;
-	Speed = ContentsHelper::GetWindowScale().X / 3.0f;
-	FirstSpeed = ContentsHelper::GetWindowScale().X / 3.0f;
-	Acceleration = ContentsHelper::GetWindowScale().X * 4.0f;
+
 }
 
 MoveActor::MoveActor(float _Speed, float _Acceleration)
-	: Speed(_Speed), Acceleration(_Acceleration)
 {
-	MoveDistanceX = ContentsHelper::GetTileScale().X;
-	MoveDistanceY = ContentsHelper::GetTileScale().Y;
-	FirstSpeed = _Speed;
+
 }
 
 MoveActor::~MoveActor()
@@ -146,6 +139,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 	if (true == IsMoveValue)
 	{
 		MoveTime += _DeltaTime;
+		MoveTime += MoveTimeWeight;
 
 		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
 		SetActorLocation(NextPos);

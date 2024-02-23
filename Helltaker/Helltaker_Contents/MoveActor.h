@@ -75,16 +75,8 @@ private:
 private:
 	UImageRenderer* EffectRenderer = nullptr;
 
-	float MoveDistanceX = 0.0f;
-	float MoveDistanceY = 0.0f;
-
-	float FirstSpeed = 0.0f;
-	float Speed = 0.0f;
-	float Acceleration = 0.0f;
-
-
-
 	float MoveTime = 0.0f;
+	float MoveTimeWeight = 0.18f;
 	FVector StartPos = FVector::Zero;
 	FVector TargetPos = FVector::Zero;
 	FVector FMoveDir = FVector::Zero;
