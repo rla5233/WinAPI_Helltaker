@@ -57,6 +57,7 @@ void KeyComponent::Death(float _DeltaTime)
 {
 	if (true == EffectRenderer->IsCurAnimationEnd())
 	{
+		InformDestroytoChapter();
 		Destroy();
 	}
 }
@@ -75,9 +76,7 @@ void KeyComponent::DeathStart()
 	if (EKeyComponentType::LockBox == Type)
 	{
 		HitActorInfoUpdate(EHitActorState::Death);
-	}
-
-	InformDestroytoChapter();
+	}	
 }
 
 void KeyComponent::Hit(float _DeltaTime)

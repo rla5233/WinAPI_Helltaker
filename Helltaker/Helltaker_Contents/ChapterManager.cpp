@@ -437,22 +437,6 @@ void ChapterManager::CutScene(float _DeltaTime)
 	ResetCheck();
 }
 
-void ChapterManager::CutSceneCheck()
-{
-	Point HeroCurPoint = PlayerHero->GetLocationPoint();
-	for (Demon* Demon : AllChapterDemon)
-	{
-		Point DemonPoint = Demon->GetLocationPoint();
-		if (DemonPoint + Point::Left  == HeroCurPoint ||
-			DemonPoint + Point::Right == HeroCurPoint || 
-			DemonPoint + Point::Up    == HeroCurPoint || 
-			DemonPoint + Point::Down  == HeroCurPoint  )
-		{
-			M_StateChange(EChapterState::CutScene);
-		}
-	}
-}
-
 void ChapterManager::CutSceneStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
@@ -462,13 +446,29 @@ void ChapterManager::CutSceneStart()
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		MapActors.second->ActiveOff();
 		MapActors.second->AllRenderersActiveOff();
+		MapActors.second->ActiveOff();
 	}
 
 	ChapterBG->ActiveOn();
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
+}
+
+void ChapterManager::CutSceneCheck()
+{
+	Point HeroCurPoint = PlayerHero->GetLocationPoint();
+	for (Demon* Demon : AllChapterDemon)
+	{
+		Point DemonPoint = Demon->GetLocationPoint();
+		if (DemonPoint + Point::Left == HeroCurPoint ||
+			DemonPoint + Point::Right == HeroCurPoint ||
+			DemonPoint + Point::Up == HeroCurPoint ||
+			DemonPoint + Point::Down == HeroCurPoint)
+		{
+			M_StateChange(EChapterState::CutScene);
+		}
+	}
 }
 
 void ChapterManager::Reset(float _DeltaTime)

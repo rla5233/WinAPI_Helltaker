@@ -74,14 +74,14 @@ enum class UpdateOrder
 {
 	None,
 	BackGround,
-	Scene,
-	Character,
 	RenderActor,
 	HitActor,
 	Hero,
-	Effect,
 	UI,
 	Text,
+	Effect,
+	Scene,
+	Character,
 	Transition
 };
 
@@ -89,14 +89,14 @@ enum class RenderOrder
 {
 	None,
 	BackGround,
-	Scene,
-	Character,
 	RenderActor,
 	HitActor,
 	Hero,
-	Effect,
 	UI,
 	Text,
+	Effect,
+	Scene,
+	Character,
 	Transition
 };
 
