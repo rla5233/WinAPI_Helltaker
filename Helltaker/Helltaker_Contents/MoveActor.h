@@ -6,7 +6,6 @@ class MoveActor : public RenderActor
 public:
 	// constructor destructor
 	MoveActor();
-	MoveActor(float _Speed, float _Acceleration);
 	~MoveActor();
 
 	// delete Function
@@ -74,9 +73,10 @@ private:
 
 private:
 	UImageRenderer* EffectRenderer = nullptr;
+	static const float MoveEffectInter;
 
 	float MoveTime = 0.0f;
-	float MoveTimeWeight = 0.18f;
+	static const float MoveTimeWeight;
 	FVector StartPos = FVector::Zero;
 	FVector TargetPos = FVector::Zero;
 	FVector FMoveDir = FVector::Zero;
@@ -86,6 +86,5 @@ private:
 	Point CurLocationPoint = { -1, -1 };
 	Point NextLocationPoint = { -1, -1 };
 
-	static const float MoveInter;
 	static bool IsLoad;
 };

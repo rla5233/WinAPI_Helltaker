@@ -5,7 +5,6 @@
 bool Skeleton::IsLoad = false;
 
 Skeleton::Skeleton()
-	: HitActor(ContentsHelper::GetWindowScale().X * (0.6f), ContentsHelper::GetWindowScale().X* (-1.5f))
 {}
 
 Skeleton::~Skeleton()

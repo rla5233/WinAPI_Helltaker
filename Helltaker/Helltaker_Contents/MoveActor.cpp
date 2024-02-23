@@ -6,16 +6,11 @@
 #include <EnginePlatform/EngineInput.h>
 
 bool MoveActor::IsLoad = false;
-const float MoveActor::MoveInter = 0.2f;
+const float MoveActor::MoveEffectInter = 0.2f;
+const float MoveActor::MoveTimeWeight = 0.17f;
 
 MoveActor::MoveActor()
 {
-
-}
-
-MoveActor::MoveActor(float _Speed, float _Acceleration)
-{
-
 }
 
 MoveActor::~MoveActor()
@@ -128,9 +123,9 @@ void MoveActor::CreateMoveEffect()
 {
 	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
 	EffectRenderer->SetImage("Move");
-	EffectRenderer->CreateAnimation("MoveEffect1", "Move", 0, 2, MoveInter, false);
-	EffectRenderer->CreateAnimation("MoveEffect2", "Move", 3, 5, MoveInter, false);
-	EffectRenderer->CreateAnimation("MoveEffect3", "Move", 6, 8, MoveInter, false);
+	EffectRenderer->CreateAnimation("MoveEffect1", "Move", 0, 2, MoveEffectInter, false);
+	EffectRenderer->CreateAnimation("MoveEffect2", "Move", 3, 5, MoveEffectInter, false);
+	EffectRenderer->CreateAnimation("MoveEffect3", "Move", 6, 8, MoveEffectInter, false);
 }
 
 void MoveActor::SetRandomMoveEffect()

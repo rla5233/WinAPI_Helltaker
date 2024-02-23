@@ -8,7 +8,6 @@ class HitActor : public MoveActor
 public:
 	// constructor destructor
 	HitActor();
-	HitActor(float _Speed, float _Acceleration);
 	~HitActor();
 	
 	// delete Function
