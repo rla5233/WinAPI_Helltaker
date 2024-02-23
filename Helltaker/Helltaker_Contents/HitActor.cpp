@@ -21,6 +21,8 @@ HitActor::~HitActor()
 
 void HitActor::BeginPlay()
 {
+	MoveActor::BeginPlay();
+
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadFolder("Effect", "Hit");

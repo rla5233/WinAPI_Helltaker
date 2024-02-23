@@ -56,13 +56,21 @@ public:
 		NextLocationPoint = _Point;
 	}
 
+	void CreateMoveEffect();
+
+	void SetRandomMoveEffect();
+
 protected:
+	virtual void BeginPlay() override;
+
 	virtual void ChapterCameraPosUpdate(const FVector& _NextLocation) {};
 
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
 
 private:
+	UImageRenderer* EffectRenderer = nullptr;
+
 	float MoveDistanceX = 0.0f;
 	float MoveDistanceY = 0.0f;
 
@@ -74,4 +82,7 @@ private:
 
 	Point LocationPoint = { -1, -1 };
 	Point NextLocationPoint = { -1, -1 };
+
+	static const float MoveInter;
+	static bool IsLoad;
 };

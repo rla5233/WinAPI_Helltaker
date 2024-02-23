@@ -5,6 +5,9 @@
 
 #include <EnginePlatform/EngineInput.h>
 
+bool MoveActor::IsLoad = false;
+const float MoveActor::MoveInter = 0.02f;
+
 MoveActor::MoveActor()
 {
 	MoveDistanceX = ContentsHelper::GetTileScale().X;
@@ -24,6 +27,18 @@ MoveActor::MoveActor(float _Speed, float _Acceleration)
 
 MoveActor::~MoveActor()
 {}
+
+void MoveActor::BeginPlay()
+{
+	RenderActor::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadFolder("Effect", "Move");
+
+		IsLoad = true;
+	}
+}
 
 void MoveActor::MoveOneBlock(float _DeltaTime)
 {
@@ -106,4 +121,18 @@ void MoveActor::PMoveDirCheck()
 void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 {
 	SeeDir = _Dir;
+}
+
+void MoveActor::CreateMoveEffect()
+{
+	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
+	EffectRenderer->SetImage("Move");
+	EffectRenderer->CreateAnimation("MoveEffect1", "Move", 0, 2, MoveInter, false);
+	EffectRenderer->CreateAnimation("MoveEffect2", "Move", 3, 5, MoveInter, false);
+	EffectRenderer->CreateAnimation("MoveEffect3", "Move", 6, 8, MoveInter, false);
+}
+
+void MoveActor::SetRandomMoveEffect()
+{
+
 }
