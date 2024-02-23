@@ -53,6 +53,7 @@ ChapterManager* RenderActor::GetChapter()
 	{
 		MsgBoxAssert("Chapter is nullptr");
 	}
+
 	return Ptr;
 }
 

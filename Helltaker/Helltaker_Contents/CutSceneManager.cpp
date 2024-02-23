@@ -45,6 +45,17 @@ void CutSceneManager::BeginPlay()
 	}
 }
 
+void CutSceneManager::C_CreateSceneBG()
+{
+	BackGround* SceneBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::SceneBackGround));
+	FVector WinScale = ContentsHelper::GetWindowScale();
+
+	SceneBG->CreateSceneBackGround("DefaultBG");
+	SceneBG->GetImageRenderer()->CameraEffectOff();
+	
+	AllCutSceneActors.push_back(SceneBG);
+}
+
 void CutSceneManager::C_SpawnDialogue(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -382,6 +393,8 @@ void CutSceneManager::SetFocusMenuIndex(int _Index)
 void CutSceneManager::CutSceneStart()
 {
 	ChapterManager::CutSceneStart();
+
+	C_CreateSceneBG();
 
 	C_StateChange(ECutSceneState::None);
 	C_StateChange(ECutSceneState::Enter);

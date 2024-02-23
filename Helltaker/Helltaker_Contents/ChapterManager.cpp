@@ -446,18 +446,18 @@ void ChapterManager::CutSceneStart()
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		if (MapActors.second->GetName() == "LOCKBOX")
+		if (nullptr != dynamic_cast<Text*>(MapActors.second))
 		{
-			continue;
-		} 		
+			MapActors.second->AllRenderersActiveOff();
+		}
 
-		MapActors.second->AllRenderersActiveOff();
+		if (nullptr != dynamic_cast<UI*>(MapActors.second))
+		{
+			MapActors.second->AllRenderersActiveOff();
+		}
+
 		MapActors.second->ActiveOff();
 	}
-
-	ChapterBG->ActiveOn();
-	ChapterBG->AllRenderersActiveOn();
-	ChapterBG->BackGroundChange("DefaultBG.png");
 }
 
 void ChapterManager::CutSceneCheck()
