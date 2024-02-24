@@ -111,7 +111,7 @@ void Skeleton::NextTileCheck(Point _Point)
 
 void Skeleton::Idle(float _DeltaTime)
 {
-	EffectEndCheck();
+	AllEffectEndCheck();
 	Point CurPoint = GetLocationPoint();
 	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 	{
@@ -142,7 +142,7 @@ void Skeleton::Hit(float _DeltaTime)
 
 void Skeleton::Move(float _DeltaTime)
 {
-	EffectEndCheck();
+	AllEffectEndCheck();
 	MoveOneBlock(_DeltaTime);
 
 	if (false == IsMove())

@@ -122,7 +122,7 @@ void HitActor::SetRandomSmallHitEffect()
 	EffectRenderer->ActiveOn();
 }
 
-bool HitActor::EffectEndCheck()
+bool HitActor::AllEffectEndCheck()
 {
 	return HitEffectEndCheck() && MoveEffectEndCheck();
 }

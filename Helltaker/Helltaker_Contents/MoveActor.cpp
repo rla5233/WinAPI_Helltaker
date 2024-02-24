@@ -6,7 +6,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 bool MoveActor::IsLoad = false;
-const float MoveActor::MoveEffectInter = 0.05f;
+const float MoveActor::MoveEffectInter = 0.11f;
 const float MoveActor::MoveTimeWeight = 0.17f;
 
 MoveActor::MoveActor()
