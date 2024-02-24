@@ -6,7 +6,7 @@ bool Skeleton::IsLoad = false;
 const FVector Skeleton::IdleScale = { 0.047f, 0.083f };
 const float Skeleton::IdleInter = 0.06f;
 
-const FVector Skeleton::HitScale = { 0.9f, 0.9f };
+const FVector Skeleton::HitScale = { 0.0494f, 0.083f };
 const float Skeleton::HitInter = 0.04f;
 
 Skeleton::Skeleton()
@@ -134,11 +134,6 @@ void Skeleton::IdleStart()
 	}
 }
 
-void Skeleton::Hit(float _DeltaTime)
-{
-	StateChange(EHitActorState::Move);
-}
-
 void Skeleton::Move(float _DeltaTime)
 {
 	MoveOneBlock(_DeltaTime);
@@ -166,10 +161,15 @@ void Skeleton::MoveStart()
 	HitActorInfoUpdate(EHitActorState::Move);
 }
 
+void Skeleton::Hit(float _DeltaTime)
+{
+	StateChange(EHitActorState::Move);
+}
+
 void Skeleton::HitStart()
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * HitScale } });
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale * HitScale } });
 
 	switch (SeeDir)
 	{
