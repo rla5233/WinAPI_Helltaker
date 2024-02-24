@@ -3,7 +3,7 @@
 #include "ChapterManager.h"
 
 bool Skeleton::IsLoad = false;
-const FVector Skeleton::IdleScale = { 0.9f, 0.9f };
+const FVector Skeleton::IdleScale = { 0.047f, 0.083f };
 const float Skeleton::IdleInter = 0.06f;
 
 const FVector Skeleton::HitScale = { 0.9f, 0.9f };
@@ -29,10 +29,7 @@ void Skeleton::BeginPlay()
 		IsLoad = true;
 	}
 
-	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer = CreateImageRenderer(RenderOrder::HitActor);
-	ImageRenderer->SetTransform({ {0,0}, {TileScale * IdleScale} });
-
 	ImageRenderer->SetImage("Skeleton_Left_Idle");
 	ImageRenderer->CreateAnimation("Skeleton_LIdle", "Skeleton_Left_Idle", 0, 11, IdleInter, true);
 	ImageRenderer->CreateAnimation("Skeleton_RIdle", "Skeleton_Right_Idle", 0, 11, IdleInter, true);
@@ -123,8 +120,8 @@ void Skeleton::Idle(float _DeltaTime)
 
 void Skeleton::IdleStart()
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale }});
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale * IdleScale }});
 
 	switch (SeeDir)
 	{
