@@ -23,6 +23,7 @@
 bool ChapterManager::IsLoad = false;
 
 const float ChapterManager::TransitionInter = 0.0435f;
+const float ChapterManager::HeroDelayTime = 0.15f;
 std::set<std::string> ChapterManager::ChapterSet;
 
 ChapterManager::ChapterManager()
@@ -373,6 +374,8 @@ void ChapterManager::Idle(float _DeltaTime)
 	{
 		TransitionActor->GetImageRenderer()->ActiveOff();
 	}
+
+	HeroDelayTimeUpdate(_DeltaTime);
 	
 	ResetCheck();
 
@@ -424,6 +427,22 @@ void ChapterManager::HeroDeathStart()
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
+
+void ChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
+{
+	if (false == PlayerHero->GetCanActionCheck())
+	{
+		if (0.0f >= HeroDelayTimeCount)
+		{
+			PlayerHero->SetCanActionCheck(true);
+			HeroDelayTimeCount = HeroDelayTime;
+			return;
+		}
+
+		HeroDelayTimeCount -= _DeltaTime;
+	}
+}
+
 
 void ChapterManager::CutScene(float _DeltaTime)
 {

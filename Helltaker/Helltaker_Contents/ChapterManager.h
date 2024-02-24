@@ -135,6 +135,8 @@ private:
 	void HeroDeath(float _DeltaTime);
 	void HeroDeathStart();
 
+	void HeroDelayTimeUpdate(float _DeltaTime);
+
 	void CutScene(float _DeltaTime);
 
 	void Reset(float _DeltaTime);
@@ -164,6 +166,9 @@ private:
 	static const float TransitionInter;
 	Scene* TransitionActor = nullptr;
 	BackGround* ChapterBG = nullptr;
+	
+	static const float HeroDelayTime;
+	float HeroDelayTimeCount = HeroDelayTime;
 	Hero* PlayerHero = nullptr;
 	Text* HeroActionPoint = nullptr;
 	Text* BottomText = nullptr;

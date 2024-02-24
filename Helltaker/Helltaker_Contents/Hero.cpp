@@ -19,7 +19,6 @@ const float Hero::MoveInter = 0.02f;
 
 const FVector Hero::KickScale = { 0.95f, 0.95f };
 const float Hero::KickInter = 0.016f;
-const float Hero::KickDelayTime = 0.01f;
 
 const float Hero::DeathInter = 0.05f;
 
@@ -249,7 +248,6 @@ void Hero::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale } });
-	CanActionCheck = true;
 
 	switch (SeeDir)
 	{
@@ -321,22 +319,14 @@ void Hero::Kick(float _DeltaTime)
 
 		ThornHitCheck();
 		GetChapter()->M_UpdateHeroActionPoint();
-		CanActionCheck = true;
 	}
 }
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
-	if (0 < KickDelayTimeCount)
-	{ 
-		KickDelayTimeCount -= _DeltaTime;
-		return;
-	}
-
 	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
 	CanActionCheck = false;
-	KickDelayTimeCount = KickDelayTime;
 
 	GetChapter()->M_ChangeThornState();
 

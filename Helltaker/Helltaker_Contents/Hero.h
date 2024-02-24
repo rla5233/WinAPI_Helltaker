@@ -34,6 +34,16 @@ public:
 		return ImageRenderer;
 	}
 
+	bool GetCanActionCheck() const
+	{
+		return CanActionCheck;
+	}
+
+	void SetCanActionCheck(bool _Value)
+	{
+		CanActionCheck = _Value;
+	}
+
 	void AllEffectActiveOff();
 	
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
@@ -81,9 +91,6 @@ private:
 
 	static const FVector KickScale;
 	static const float KickInter;
-
-	static const float KickDelayTime;
-	float KickDelayTimeCount = 0.0f;
 
 	static const float HitInter;
 	static const float DeathInter;
