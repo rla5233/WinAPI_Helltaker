@@ -11,8 +11,8 @@
 bool Hero::IsLoad = false;
 const float Hero::HitInter = 0.08f;
 
-const FVector Hero::IdleScale = { 0.9f, 0.9f };
-const float Hero::IdleInter = 0.06f;
+const FVector Hero::IdleScale = { 0.052f, 0.083f };
+const float Hero::IdleInter = 0.057f;
 
 const FVector Hero::MoveScale = { 0.9f, 0.9f };
 const float Hero::MoveInter = 0.03f;
@@ -246,8 +246,8 @@ void Hero::Idle(float _DeltaTime)
 
 void Hero::IdleStart()
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * IdleScale } });
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * IdleScale } });
 
 	switch (SeeDir)
 	{
