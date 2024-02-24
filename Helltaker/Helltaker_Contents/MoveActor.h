@@ -18,6 +18,7 @@ public:
 
 	void MoveDirChange(EMoveActorDir _Dir);
 	void MoveDirCheck();
+	bool MoveEffectEndCheck();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
 	bool IsMove() const
@@ -62,7 +63,6 @@ protected:
 
 	virtual void MoveStart();
 	virtual void EffectPosUpdate(const FVector& _Diff);
-	virtual void EffectEndCheck();
 
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;

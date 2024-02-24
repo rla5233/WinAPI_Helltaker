@@ -6,7 +6,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 bool MoveActor::IsLoad = false;
-const float MoveActor::MoveEffectInter = 0.2f;
+const float MoveActor::MoveEffectInter = 0.05f;
 const float MoveActor::MoveTimeWeight = 0.17f;
 
 MoveActor::MoveActor()
@@ -162,6 +162,18 @@ void MoveActor::EffectPosUpdate(const FVector& _Diff)
 	EffectRenderer->SetPosition(CurPos - _Diff);
 }
 
-void MoveActor::EffectEndCheck()
+bool MoveActor::MoveEffectEndCheck()
 {
+	if (nullptr == EffectRenderer->GetCurAnimation())
+	{
+		return false;
+	}
+
+	if (true == EffectRenderer->IsCurAnimationEnd())
+	{
+		EffectRenderer->ActiveOff();
+		return true;
+	}
+
+	return false;
 }

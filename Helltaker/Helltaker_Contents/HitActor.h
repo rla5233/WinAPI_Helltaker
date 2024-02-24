@@ -38,6 +38,7 @@ public:
 	void SetRandomSmallHitEffect();
 
 	bool HitEffectEndCheck();
+	bool EffectEndCheck();
 	void EffectPosUpdate(const FVector& _Diff) override;
 
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};

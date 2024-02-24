@@ -122,6 +122,11 @@ void HitActor::SetRandomSmallHitEffect()
 	EffectRenderer->ActiveOn();
 }
 
+bool HitActor::EffectEndCheck()
+{
+	return HitEffectEndCheck() && MoveEffectEndCheck();
+}
+
 bool HitActor::HitEffectEndCheck()
 {
 	if (nullptr == EffectRenderer->GetCurAnimation())
