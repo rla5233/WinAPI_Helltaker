@@ -525,8 +525,8 @@ void ChapterManager::EndStart()
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		MapActors.second->ActiveOn();		
 		MapActors.second->AllRenderersActiveOn();
+		MapActors.second->ActiveOn();		
 	}
 
 	TransitionActor->GetImageRenderer()->ActiveOff();

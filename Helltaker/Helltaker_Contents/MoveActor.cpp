@@ -156,8 +156,12 @@ void MoveActor::SetRandomMoveEffect()
 	EffectRenderer->ActiveOn();
 }
 
-void MoveActor::UpdateMoveEffect(const FVector& _Diff)
+void MoveActor::EffectPosUpdate(const FVector& _Diff)
 {
 	FVector CurPos = EffectRenderer->GetPosition();
 	EffectRenderer->SetPosition(CurPos - _Diff);
+}
+
+void MoveActor::EffectEndCheck()
+{
 }

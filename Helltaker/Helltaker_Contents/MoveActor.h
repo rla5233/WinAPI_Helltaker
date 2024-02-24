@@ -61,7 +61,8 @@ protected:
 	virtual void ChapterCameraPosUpdate(const FVector& _Diff) {};
 
 	virtual void MoveStart();
-	virtual void EffectPosUpdate(const FVector& _Diff) {};
+	virtual void EffectPosUpdate(const FVector& _Diff);
+	virtual void EffectEndCheck();
 
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
@@ -70,7 +71,6 @@ private:
 	void MovePosCheck();
 	void CreateMoveEffect();
 	void SetRandomMoveEffect();
-	void UpdateMoveEffect(const FVector& _Diff);
 
 private:
 	UImageRenderer* EffectRenderer = nullptr;
