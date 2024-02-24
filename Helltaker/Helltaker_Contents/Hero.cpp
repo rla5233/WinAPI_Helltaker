@@ -9,6 +9,22 @@
 #include <EngineCore/EngineResourcesManager.h>
 
 bool Hero::IsLoad = false;
+const float Hero::HitInter = 0.04f;
+
+const FVector Hero::IdleScale = { 0.9f, 0.9f };
+const float Hero::IdleInter = 0.07f;
+
+const FVector Hero::MoveScale = { 0.9f, 0.9f };
+const float Hero::MoveInter = 0.02f;
+
+const FVector Hero::KickScale = { 0.95f, 0.95f };
+const float Hero::KickInter = 0.016f;
+const float Hero::KickDelayTime = 0.01f;
+
+const float Hero::DeathInter = 0.05f;
+
+const FVector Hero::VictoryScale = { 0.9f, 1.2f };
+const float Hero::VictoryInter = 0.1f;
 
 Hero::Hero()
 {}
@@ -195,6 +211,31 @@ void Hero::ThornHitCheck(EHeroState _State)
 		}
 		break;
 	}
+}
+
+void Hero::CreateRandomHitEffect()
+{
+	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
+	Renderer->SetImage("Hit");
+
+	int RandomValue = rand() % 2;
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	switch (RandomValue)
+	{
+	case 0:
+		Renderer->CreateAnimation("BigHit1", "Hit", 0, 4, HitInter, false);
+		Renderer->ChangeAnimation("BigHit1");
+		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
+		break;
+	case 1:
+		Renderer->CreateAnimation("BigHit2", "Hit", 5, 9, HitInter, false);
+		Renderer->ChangeAnimation("BigHit2");
+		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+		break;
+	}
+
+	AllHitEffectRenderer.push_back(Renderer);
 }
 
 void Hero::Idle(float _DeltaTime)

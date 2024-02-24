@@ -62,34 +62,38 @@ private:
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
 	void NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2);
 
+	void CreateRandomHitEffect();
+
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
+	std::list<UImageRenderer*> AllHitEffectRenderer;
+	static const float HitInter;
+
 	int ActionPoint = -1;
 	bool IsHaveKey = false;
 
-	const FVector IdleScale = { 0.9f, 0.9f };
-	const float IdleInter = 0.07f;
+	static const FVector IdleScale;
+	static const float IdleInter;
 
-	const FVector MoveScale = { 0.9f, 0.9f };
-	const float MoveInter = 0.02f;
+	static const FVector MoveScale;
+	static const float MoveInter;
 
-	const FVector KickScale = { 0.95f, 0.95f };
-	const float KickInter = 0.016f;
+	static const FVector KickScale;
+	static const float KickInter;
 
-	const float KickDelayTime = 0.01f;
+	static const float KickDelayTime;
 	float KickDelayTimeCount = 0.0f;
 
-	const float DeathInter = 0.05f;
+	static const float DeathInter;
 
-	const FVector VictoryScale = { 0.9f, 1.2f };
-	const float VictoryInter = 0.1f;
+	static const FVector VictoryScale;
+	static const float VictoryInter;
 	
 	bool CanActionCheck = false;
 	EHeroState State = EHeroState::None;
 	static bool IsLoad;
-
 
 	bool CheatMode = false;
 };
