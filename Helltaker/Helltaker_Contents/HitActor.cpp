@@ -94,12 +94,12 @@ void HitActor::CreateRandomSmallHitEffect()
 	switch (RandomValue)
 	{
 	case 0 :
-		Renderer->CreateAnimation("SmallHit1", "Hit", 10, 13, SmallHitInter, false);
+		Renderer->CreateAnimation("SmallHit1", "Hit", 28, 31, SmallHitInter, false);
 		Renderer->ChangeAnimation("SmallHit1");
 		Renderer->SetTransform({ RandomPos, { WinScale.X * 0.04f, WinScale.Y * 0.074f } });
 		break;
 	case 1:
-		Renderer->CreateAnimation("SmallHit2", "Hit", 14, 17, SmallHitInter, false);
+		Renderer->CreateAnimation("SmallHit2", "Hit", 32, 35, SmallHitInter, false);
 		Renderer->ChangeAnimation("SmallHit2");
 		Renderer->SetTransform({ RandomPos, { WinScale.X * 0.047f, WinScale.Y * 0.076f } });
 		break;
@@ -144,4 +144,9 @@ void HitActor::EffectPosUpdate(const FVector& _Diff)
 		FVector CurPos = Renderer->GetPosition();
 		Renderer->SetPosition(CurPos - _Diff);
 	}
+}
+
+void HitActor::AddHitEffectRenderer(UImageRenderer* const _Renderer)
+{
+	AllHitEffectRenderer.push_back(_Renderer);
 }

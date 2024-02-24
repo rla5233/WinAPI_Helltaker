@@ -1,7 +1,7 @@
 #pragma once
-#include "MoveActor.h"
+#include "HitActor.h"
 
-class Hero : public MoveActor
+class Hero : public HitActor
 {
 public:
 	// constrcuter destructer
@@ -68,8 +68,6 @@ private:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-	std::list<UImageRenderer*> AllHitEffectRenderer;
-	static const float HitInter;
 
 	int ActionPoint = -1;
 	bool IsHaveKey = false;
@@ -86,6 +84,7 @@ private:
 	static const float KickDelayTime;
 	float KickDelayTimeCount = 0.0f;
 
+	static const float HitInter;
 	static const float DeathInter;
 
 	static const FVector VictoryScale;

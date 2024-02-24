@@ -9,7 +9,7 @@
 #include <EngineCore/EngineResourcesManager.h>
 
 bool Hero::IsLoad = false;
-const float Hero::HitInter = 0.04f;
+const float Hero::HitInter = 0.08f;
 
 const FVector Hero::IdleScale = { 0.9f, 0.9f };
 const float Hero::IdleInter = 0.07f;
@@ -34,7 +34,7 @@ Hero::~Hero()
 
 void Hero::BeginPlay()
 {
-	MoveActor::BeginPlay();
+	HitActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -47,7 +47,6 @@ void Hero::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Kick");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Victory");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Death");
-		ContentsHelper::LoadFolder("Effect", "Hero_Hit");
 		
 		IsLoad = true;
 	}
@@ -201,12 +200,14 @@ void Hero::ThornHitCheck(EHeroState _State)
 	case EHeroState::Move:
 		if (true == GetChapter()->GetTileInfoVec()[NextPoint.Y][NextPoint.X].IsThorn)
 		{
+			CreateRandomHitEffect();
 			--ActionPoint;
 		}
 		break;
 	case EHeroState::Kick:
 		if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 		{
+			CreateRandomHitEffect();
 			--ActionPoint;
 		}
 		break;
@@ -216,31 +217,32 @@ void Hero::ThornHitCheck(EHeroState _State)
 void Hero::CreateRandomHitEffect()
 {
 	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
-	Renderer->SetImage("Hero_Hit");
+	Renderer->SetImage("Hit");
 
 	int RandomValue = rand() % 3;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector TransPos = { 0.0f, WinScale.Y * (-0.08f) };
 	switch (RandomValue)
 	{
 	case 0:
-		Renderer->CreateAnimation("HeroHit1", "Hit", 0, 4, HitInter, false);
+		Renderer->CreateAnimation("HeroHit1", "Hit", 10, 15, HitInter, false);
 		Renderer->ChangeAnimation("HeroHit1");
-		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
+		Renderer->SetTransform({ TransPos, { WinScale.X * 0.082f, WinScale.Y * 0.1f } });
 		break;
 	case 1:
-		Renderer->CreateAnimation("HeroHit2", "Hit", 5, 9, HitInter, false);
+		Renderer->CreateAnimation("HeroHit2", "Hit", 16, 21, HitInter, false);
 		Renderer->ChangeAnimation("HeroHit2");
-		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+		Renderer->SetTransform({ TransPos, { WinScale.X * 0.092f, WinScale.Y * 0.106f } });
 		break;
 	case 2:
-		Renderer->CreateAnimation("HeroHit2", "Hit", 5, 9, HitInter, false);
-		Renderer->ChangeAnimation("HeroHit2");
-		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+		Renderer->CreateAnimation("HeroHit3", "Hit", 22, 27, HitInter, false);
+		Renderer->ChangeAnimation("HeroHit3");
+		Renderer->SetTransform({ TransPos, { WinScale.X * 0.075f, WinScale.Y * 0.118f } });
 		break;
 	}
 
-	AllHitEffectRenderer.push_back(Renderer);
+	AddHitEffectRenderer(Renderer);
 }
 
 void Hero::Idle(float _DeltaTime)
@@ -297,7 +299,7 @@ void Hero::MoveStart()
 		break;
 	}
 
-	MoveActor::MoveStart();
+	HitActor::MoveStart();
 }
 
 void Hero::Kick(float _DeltaTime)
@@ -383,18 +385,20 @@ void Hero::DeathStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ {0.0f, (WinScale.Y * 1.15f) * (-0.25f)}, {WinScale.X * 0.375f, WinScale.Y * 1.15f} });
 	ImageRenderer->ChangeAnimation("Hero_Death");
+
+
 }
 
 void Hero::Tick(float _DeltaTime)
 {
-	MoveActor::Tick(_DeltaTime);
+	HitActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
 
 void Hero::ChapterCameraPosUpdate(const FVector& _Diff)
 {
-	MoveActor::ChapterCameraPosUpdate(_Diff);
+	HitActor::ChapterCameraPosUpdate(_Diff);
 
 	GetChapter()->CameraPosUpdate(_Diff);
 }

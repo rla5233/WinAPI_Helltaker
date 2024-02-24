@@ -37,6 +37,8 @@ public:
 	bool AllEffectEndCheck();
 	void EffectPosUpdate(const FVector& _Diff) override;
 
+	void AddHitEffectRenderer(UImageRenderer* const _Renderer);
+
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
 protected:
 	virtual void BeginPlay() override;
