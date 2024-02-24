@@ -37,11 +37,11 @@ protected:
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
-	const FVector IdleScale = { 0.9f, 0.9f };
-	const float IdleInter = 0.07f;
-
-	const FVector HitScale = { 0.9f, 0.9f };
-	const float HitInter = 0.04f;
+	static const FVector IdleScale;
+	static const float IdleInter;
+	
+	static const FVector HitScale;
+	static const float HitInter;
 
 	static bool IsLoad;
 };

@@ -3,6 +3,11 @@
 #include "ChapterManager.h"
 
 bool Skeleton::IsLoad = false;
+static const FVector IdleScale = { 0.9f, 0.9f };
+static const float IdleInter = 0.05f;
+
+static const FVector HitScale = { 0.9f, 0.9f };
+static const float HitInter = 0.04f;
 
 Skeleton::Skeleton()
 {}
