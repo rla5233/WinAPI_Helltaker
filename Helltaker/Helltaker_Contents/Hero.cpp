@@ -185,27 +185,6 @@ void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 	}
 }
 
-void Hero::ThornHitCheck(EHeroState _State)
-{
-	// Dubug
-	if (true == CheatMode)
-	{
-		return;
-	}
-
-	Point CurPoint  = GetLocationPoint();
-	switch (_State)
-	{
-	case EHeroState::Kick:
-		if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
-		{
-			CreateRandomHitEffect();
-			--ActionPoint;
-		}
-		break;
-	}
-}
-
 void Hero::ThornHitCheck()
 {
 	HitActor::ThornHitCheck();
@@ -328,13 +307,26 @@ void Hero::Kick(float _DeltaTime)
 	
 	if (6 == ImageRenderer->GetCurAnimationImageFrame())
 	{
+		switch (SeeDir)
+		{
+		case EActorSeeDir::Left:
+			ImageRenderer->AnimationReset();
+			ImageRenderer->ChangeAnimation("Hero_LKick", false, 7);
+			break;
+		case EActorSeeDir::Right:
+			ImageRenderer->AnimationReset();
+			ImageRenderer->ChangeAnimation("Hero_RKick", false, 7);
+			break;
+		}
+
+		ThornHitCheck();
+		GetChapter()->M_UpdateHeroActionPoint();
 		CanActionCheck = true;
 	}
 }
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
-
 	if (0 < KickDelayTimeCount)
 	{ 
 		KickDelayTimeCount -= _DeltaTime;
@@ -347,10 +339,8 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	KickDelayTimeCount = KickDelayTime;
 
 	GetChapter()->M_ChangeThornState();
-	ThornHitCheck(EHeroState::Kick);
 
 	UpdateActionPoint();
-	GetChapter()->M_UpdateHeroActionPoint();
 
 	Point NextPoint = GetNextLocationPoint();
 	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
