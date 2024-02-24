@@ -34,6 +34,7 @@ public:
 		return ImageRenderer;
 	}
 
+	void AllEffectActiveOff();
 	
 	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
 

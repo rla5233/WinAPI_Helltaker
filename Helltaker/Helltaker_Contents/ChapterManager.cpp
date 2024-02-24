@@ -420,6 +420,7 @@ void ChapterManager::HeroDeathStart()
 	}
 
 	PlayerHero->AllRenderersActiveOn();
+	PlayerHero->AllEffectActiveOff();
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }

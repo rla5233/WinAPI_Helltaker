@@ -27,10 +27,10 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 // 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
+	UEngineCore::BeginPlay();
 	srand(static_cast<unsigned int>(time(0)));
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	//MainWindow.SetWindowScale({ 1280, 720 });
-	UEngineCore::BeginPlay();
 
 	SetFrame(60);
 

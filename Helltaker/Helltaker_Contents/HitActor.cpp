@@ -113,6 +113,19 @@ bool HitActor::AllEffectEndCheck()
 	return HitEffectEndCheck() && MoveEffectEndCheck();
 }
 
+void HitActor::AllHitEffectActiveOff()
+{
+	for (UImageRenderer* Renderer : AllHitEffectRenderer)
+	{
+		if (nullptr == Renderer)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		Renderer->ActiveOff();
+	}
+}
+
 bool HitActor::HitEffectEndCheck()
 {
 	if (true == AllHitEffectRenderer.empty())

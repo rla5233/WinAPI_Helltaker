@@ -35,6 +35,7 @@ public:
 
 	bool HitEffectEndCheck();
 	bool AllEffectEndCheck();
+	void AllHitEffectActiveOff();
 	void EffectPosUpdate(const FVector& _Diff) override;
 
 	void AddHitEffectRenderer(UImageRenderer* const _Renderer);
