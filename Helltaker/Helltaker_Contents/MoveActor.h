@@ -62,6 +62,7 @@ protected:
 	virtual void Tick(float _DeltaTime) override;
 
 	virtual void ChapterCameraPosUpdate(const FVector& _Diff) {};
+	virtual void ThornHitCheck() {};
 
 	virtual void MoveStart();
 	virtual void EffectPosUpdate(const FVector& _Diff);

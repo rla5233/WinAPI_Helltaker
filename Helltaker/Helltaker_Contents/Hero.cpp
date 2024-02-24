@@ -194,16 +194,8 @@ void Hero::ThornHitCheck(EHeroState _State)
 	}
 
 	Point CurPoint  = GetLocationPoint();
-	Point NextPoint = GetNextLocationPoint();
 	switch (_State)
 	{
-	case EHeroState::Move:
-		if (true == GetChapter()->GetTileInfoVec()[NextPoint.Y][NextPoint.X].IsThorn)
-		{
-			CreateRandomHitEffect();
-			--ActionPoint;
-		}
-		break;
 	case EHeroState::Kick:
 		if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 		{
@@ -211,6 +203,24 @@ void Hero::ThornHitCheck(EHeroState _State)
 			--ActionPoint;
 		}
 		break;
+	}
+}
+
+void Hero::ThornHitCheck()
+{
+	HitActor::ThornHitCheck();
+
+	// Cheat
+	if (true == CheatMode)
+	{
+		return;
+	}
+
+	Point CurPoint = GetLocationPoint();
+	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
+	{
+		CreateRandomHitEffect();
+		--ActionPoint;
 	}
 }
 
@@ -290,10 +300,8 @@ void Hero::MoveStart()
 	CanActionCheck = false;
 
 	GetChapter()->M_ChangeThornState();
-	ThornHitCheck(EHeroState::Move);
 
 	UpdateActionPoint();
-	GetChapter()->M_UpdateHeroActionPoint();
 
 	switch (SeeDir)
 	{

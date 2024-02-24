@@ -60,6 +60,7 @@ private:
 
 	void InputCheck(float _DeltaTime);
 	void ThornHitCheck(EHeroState _State);
+	void ThornHitCheck() override;
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
 	void NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2);
 

@@ -89,6 +89,8 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		{
 			MoveTime = 0.0f;
 			CurLocationPoint += PMoveDir;
+			ThornHitCheck();
+			GetChapter()->M_UpdateHeroActionPoint();
 			IsMoveValue = false;
 		}
 	}
