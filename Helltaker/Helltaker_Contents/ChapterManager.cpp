@@ -179,7 +179,7 @@ void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 	AllMapActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
 }
 
-void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
+void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	Demon* ChapterDemon = SpawnActor<Demon>(static_cast<int>(UpdateOrder::RenderActor));
@@ -187,6 +187,8 @@ void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name)
 	ChapterDemon->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
 	ChapterDemon->SetDemon(_Name);
 	ChapterDemon->SetLocationPoint(_Point);
+	ChapterDemon->GetImageRenderer()->SetTransform(_FTransform);
+	ChapterDemon->StateChange(EDemonState::Idle);
 
 	AllChapterDemon.push_back(ChapterDemon);
 	TileInfoVec[_Point.Y][_Point.X].IsVaild = false;

@@ -75,7 +75,10 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 
 	M_SetIsThornChange(false);
 
-	M_SpawnDemon({ 6, 5 }, "PandeMonica");
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
+	FVector Pos = { WinScale.X * (-0.003f), WinScale.Y * (-0.01f) };
+	M_SpawnDemon({ 6, 5 }, "PandeMonica", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);	
 

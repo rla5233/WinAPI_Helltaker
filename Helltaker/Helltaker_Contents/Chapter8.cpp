@@ -102,7 +102,9 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 
 	M_SetIsThornChange(false);
 
-	M_SpawnDemon({ 4, 0 }, "Lucy");
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
+	M_SpawnDemon({ 4, 0 }, "Lucy", { { 0.0f, 0.0f }, Scale });
 	EndPoint = { 4, 2 };
 
 	M_StateChange(EChapterState::Idle);

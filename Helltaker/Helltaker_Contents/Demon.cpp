@@ -39,7 +39,6 @@ void Demon::SetDemon(std::string_view _Name)
 	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 	ImageRenderer->SetImage(_Name);
 	ImageRenderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
-	StateChange(EDemonState::Idle);
 }
 
 // LoveSign 상하이동 애니메이션
@@ -72,7 +71,6 @@ void Demon::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	LoveSignRenderer->SetTransform({ { -TileScale.hX(), -(TileScale.hY() * LoveSignY_Location) }, {TileScale * LoveSignScale} });
-	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.2f) }, { TileScale * IdleScale } });
 	ImageRenderer->ChangeAnimation(GetName() + "_Idle");
 }
 

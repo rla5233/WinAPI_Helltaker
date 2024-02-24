@@ -78,7 +78,9 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	M_SpawnThorn({ 5, 2 }, EThornState::Up);
 	M_SpawnThorn({ 5, 3 }, EThornState::Up);
 
-	M_SpawnDemon({ 4, 5 }, "Modeus");
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
+	M_SpawnDemon({ 4, 5 }, "Modeus", { { 0.0f, 0.0f }, Scale });
 
 	M_StateChange(EChapterState::Idle);
 

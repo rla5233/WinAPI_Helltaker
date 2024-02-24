@@ -82,7 +82,9 @@ void Chapter4::LevelStart(ULevel * _PrevLevel)
 	M_SpawnKeyComponent({ 2, 0 }, EKeyComponentType::Key);
 	M_SpawnKeyComponent({ 5, 1 }, EKeyComponentType::LockBox);
 
-	M_SpawnDemon({ 7, 2 }, "Malina");
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
+	M_SpawnDemon({ 7, 2 }, "Malina", { { 0.0f, 0.0f }, Scale });
 
 	M_StateChange(EChapterState::Idle);
 

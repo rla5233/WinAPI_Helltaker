@@ -37,6 +37,11 @@ public:
 		return LocationPoint;
 	}
 
+	UImageRenderer* GetImageRenderer() const
+	{
+		return ImageRenderer;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
