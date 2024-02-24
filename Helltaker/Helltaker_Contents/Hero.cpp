@@ -17,7 +17,7 @@ const float Hero::IdleInter = 0.057f;
 const FVector Hero::MoveScale = { 0.047f, 0.083f };
 const float Hero::MoveInter = 0.03f;
 
-const FVector Hero::KickScale = { 0.95f, 0.95f };
+const FVector Hero::KickScale = { 0.049f, 0.088f };
 const float Hero::KickInter = 0.06f;
 
 const float Hero::DeathInter = 0.05f;
@@ -328,8 +328,7 @@ void Hero::Kick(float _DeltaTime)
 
 void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.225f) }, { TileScale * KickScale } });
+	FVector WinScale = ContentsHelper::GetWindowScale();
 	CanActionCheck = false;
 
 	GetChapter()->M_ChangeThornState();
@@ -345,10 +344,12 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	case EActorSeeDir::Left:
 		ImageRenderer->AnimationReset();
 		ImageRenderer->ChangeAnimation("Hero_LKick");
+		ImageRenderer->SetTransform({ { WinScale.X * 0.001f, WinScale.Y * (-0.011f) }, { WinScale * KickScale } });
 		break;
 	case EActorSeeDir::Right:
 		ImageRenderer->AnimationReset();
 		ImageRenderer->ChangeAnimation("Hero_RKick");
+		ImageRenderer->SetTransform({ { WinScale.X * (-0.001f), WinScale.Y * (-0.011f) }, { WinScale * KickScale } });
 		break;
 	}
 }
