@@ -3,6 +3,11 @@
 #include "ContentsHelper.h"
 
 bool Demon::IsLoad = false;
+const FVector Demon::IdleScale = { 0.9f, 0.9f };
+const float Demon::IdleInter = 0.065f;
+
+const float Demon::LoveSignY_Location = 0.9f;
+const float Demon::LoveSignY_MaxLocation = 1.1f;
 
 Demon::Demon()
 {

@@ -48,12 +48,12 @@ private:
 	const FVector LoveSignScale = { 0.3f, 0.4f };
 	float LoveSignMove = 0.0f;
 	float LoveSignSpeed = 0.0f;
-	const float LoveSignY_Location = 0.9f;
-	const float LoveSignY_MaxLocation = 1.1f;
+	static const float LoveSignY_Location;
+	static const float LoveSignY_MaxLocation;
 	bool IsUp = true;
 
-	const FVector IdleScale = { 0.9f, 0.9f };
-	const float IdleInter = 0.082f;
+	static const FVector IdleScale;
+	static const float IdleInter;
 	
 	Point LocationPoint = { -1, -1 };
 	EDemonState State = EDemonState::None;

@@ -12,7 +12,7 @@ bool Hero::IsLoad = false;
 const float Hero::HitInter = 0.08f;
 
 const FVector Hero::IdleScale = { 0.9f, 0.9f };
-const float Hero::IdleInter = 0.07f;
+const float Hero::IdleInter = 0.06f;
 
 const FVector Hero::MoveScale = { 0.9f, 0.9f };
 const float Hero::MoveInter = 0.03f;
@@ -306,18 +306,18 @@ void Hero::Kick(float _DeltaTime)
 		StateChange(EHeroState::Idle);
 		return;
 	}
-	
-	if (6 == ImageRenderer->GetCurAnimationImageFrame())
+
+	if (2 == ImageRenderer->GetCurAnimationImageFrame())
 	{
 		switch (SeeDir)
 		{
 		case EActorSeeDir::Left:
 			ImageRenderer->AnimationReset();
-			ImageRenderer->ChangeAnimation("Hero_LKick", false, 7);
+			ImageRenderer->ChangeAnimation("Hero_LKick", false, 3);
 			break;
 		case EActorSeeDir::Right:
 			ImageRenderer->AnimationReset();
-			ImageRenderer->ChangeAnimation("Hero_RKick", false, 7);
+			ImageRenderer->ChangeAnimation("Hero_RKick", false, 3);
 			break;
 		}
 
