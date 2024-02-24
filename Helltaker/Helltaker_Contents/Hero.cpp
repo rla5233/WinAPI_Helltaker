@@ -31,6 +31,7 @@ void Hero::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Kick");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Victory");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Death");
+		ContentsHelper::LoadFolder("Effect", "Hero");
 		
 		IsLoad = true;
 	}
