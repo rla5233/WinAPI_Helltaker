@@ -360,7 +360,7 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Actor.second->Destroy(0.0f);
+		Actor.second->Destroy();
 		Actor.second = nullptr;
 	}
 

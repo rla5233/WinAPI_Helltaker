@@ -70,11 +70,10 @@ protected:
 
 private:
 	void MovePosCheck();
-	void CreateMoveEffect();
-	void SetRandomMoveEffect();
+	void CreateRandomMoveEffect();
 
 private:
-	UImageRenderer* EffectRenderer = nullptr;
+	std::list<UImageRenderer*> AllMoveEffectRenderer;
 	static const float MoveEffectInter;
 
 	float MoveTime = 0.0f;

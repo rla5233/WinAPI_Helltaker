@@ -26,8 +26,6 @@ void MoveActor::BeginPlay()
 
 		IsLoad = true;
 	}
-
-	CreateMoveEffect();
 }
 
 void MoveActor::Tick(float _DeltaTime)
@@ -40,7 +38,8 @@ void MoveActor::Tick(float _DeltaTime)
 void MoveActor::MoveStart()
 {
 	MovePosCheck();
-	SetRandomMoveEffect();
+	
+	CreateRandomMoveEffect();
 }
 
 void MoveActor::MovePosCheck()
@@ -128,58 +127,61 @@ void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 	SeeDir = _Dir;
 }
 
-void MoveActor::CreateMoveEffect()
+void MoveActor::CreateRandomMoveEffect()
 {
-	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
-	EffectRenderer->SetImage("Move");
-	EffectRenderer->CreateAnimation("MoveEffect1", "Move", 0, 2, MoveEffectInter, false);
-	EffectRenderer->CreateAnimation("MoveEffect2", "Move", 3, 5, MoveEffectInter, false);
-	EffectRenderer->CreateAnimation("MoveEffect3", "Move", 6, 8, MoveEffectInter, false);
-}
+	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
+	Renderer->SetImage("Move");
 
-void MoveActor::SetRandomMoveEffect()
-{
-	int RandomValue = rand() % 2;
+	int RandomValue = rand() % 3;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	EffectRenderer->AnimationReset();
-	EffectRenderer->ChangeAnimation("MoveEffect1");
-	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.036f, WinScale.Y * 0.043f } });
+	switch (RandomValue)
+	{
+	case 0:
+		Renderer->CreateAnimation("MoveEffect1", "Move", 0, 2, MoveEffectInter, false);
+		Renderer->ChangeAnimation("MoveEffect1");
+		break;
+	case 1:
+		Renderer->CreateAnimation("MoveEffect2", "Move", 3, 5, MoveEffectInter, false);
+		Renderer->ChangeAnimation("MoveEffect2");
+		break;
+	case 2:
+		Renderer->CreateAnimation("MoveEffect3", "Move", 6, 8, MoveEffectInter, false);
+		Renderer->ChangeAnimation("MoveEffect3");
+		break;
+	}
 
+	Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.036f, WinScale.Y * 0.043f } });
 	
-
-	//switch (RandomValue)
-	//{
-	//case 0:
-	//	EffectRenderer->ChangeAnimation("BigHit1");
-	//	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
-	//	break;
-	//case 1:
-	//	EffectRenderer->ChangeAnimation("BigHit2");
-	//	EffectRenderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
-	//	break;
-	//}
-
-	EffectRenderer->ActiveOn();
+	AllMoveEffectRenderer.push_back(Renderer);
 }
 
 void MoveActor::EffectPosUpdate(const FVector& _Diff)
 {
-	FVector CurPos = EffectRenderer->GetPosition();
-	EffectRenderer->SetPosition(CurPos - _Diff);
+	for (UImageRenderer* Renderer : AllMoveEffectRenderer)
+	{
+		if (nullptr == Renderer)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		FVector CurPos = Renderer->GetPosition();
+		Renderer->SetPosition(CurPos - _Diff);
+	}
 }
 
 bool MoveActor::MoveEffectEndCheck()
 {
-	if (nullptr == EffectRenderer->GetCurAnimation())
+	if (true == AllMoveEffectRenderer.empty())
 	{
-		return false;
+		return true;
 	}
 
-	if (true == EffectRenderer->IsCurAnimationEnd())
+	if (true == AllMoveEffectRenderer.front()->IsCurAnimationEnd())
 	{
-		EffectRenderer->ActiveOff();
-		return true;
+		AllMoveEffectRenderer.front()->ActiveOff();
+		AllMoveEffectRenderer.front()->Destroy();
+		AllMoveEffectRenderer.pop_front();
 	}
 
 	return false;
