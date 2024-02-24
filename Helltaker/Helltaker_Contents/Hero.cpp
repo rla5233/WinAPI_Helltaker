@@ -47,7 +47,7 @@ void Hero::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Kick");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Victory");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Death");
-		ContentsHelper::LoadFolder("Effect", "Hero");
+		ContentsHelper::LoadFolder("Effect", "Hero_Hit");
 		
 		IsLoad = true;
 	}
@@ -216,21 +216,26 @@ void Hero::ThornHitCheck(EHeroState _State)
 void Hero::CreateRandomHitEffect()
 {
 	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
-	Renderer->SetImage("Hit");
+	Renderer->SetImage("Hero_Hit");
 
-	int RandomValue = rand() % 2;
+	int RandomValue = rand() % 3;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	switch (RandomValue)
 	{
 	case 0:
-		Renderer->CreateAnimation("BigHit1", "Hit", 0, 4, HitInter, false);
-		Renderer->ChangeAnimation("BigHit1");
+		Renderer->CreateAnimation("HeroHit1", "Hit", 0, 4, HitInter, false);
+		Renderer->ChangeAnimation("HeroHit1");
 		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
 		break;
 	case 1:
-		Renderer->CreateAnimation("BigHit2", "Hit", 5, 9, HitInter, false);
-		Renderer->ChangeAnimation("BigHit2");
+		Renderer->CreateAnimation("HeroHit2", "Hit", 5, 9, HitInter, false);
+		Renderer->ChangeAnimation("HeroHit2");
+		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+		break;
+	case 2:
+		Renderer->CreateAnimation("HeroHit2", "Hit", 5, 9, HitInter, false);
+		Renderer->ChangeAnimation("HeroHit2");
 		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
 		break;
 	}
