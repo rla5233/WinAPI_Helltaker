@@ -22,8 +22,8 @@ const float Hero::KickInter = 0.06f;
 
 const float Hero::DeathInter = 0.05f;
 
-const FVector Hero::VictoryScale = { 0.9f, 1.2f };
-const float Hero::VictoryInter = 0.1f;
+const FVector Hero::VictoryScale = { 0.052f, 0.111f };
+const float Hero::VictoryInter = 0.125f;
 
 Hero::Hero()
 {}
@@ -360,8 +360,8 @@ void Hero::Victory(float _DeltaTime)
 
 void Hero::VictoryStart()
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
-	ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.375f) }, { TileScale * VictoryScale } });
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.0225f) }, { WinScale * VictoryScale } });
 
 	switch (SeeDir)
 	{
