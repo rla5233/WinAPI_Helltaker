@@ -289,7 +289,6 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	UpdateActionPoint();
 	GetChapter()->M_UpdateHeroActionPoint();
 
-	// Skeleton, Stone 업 캐스팅
 	Point NextPoint = GetNextLocationPoint();
 	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
 	Other->NextStateCheck(MoveDir);	

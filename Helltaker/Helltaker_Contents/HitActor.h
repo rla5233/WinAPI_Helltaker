@@ -30,12 +30,8 @@ public:
 
 	void InformDestroytoChapter();
 
-	void CreateHitEffect();
-	void CreateBigHitEffect();
-	void CreateSmallHitEffect();
-
-	void SetRandomBigHitEffect();
-	void SetRandomSmallHitEffect();
+	void CreateRandomBigHitEffect();
+	void CreateRandomSmallHitEffect();
 
 	bool HitEffectEndCheck();
 	bool AllEffectEndCheck();
@@ -47,12 +43,12 @@ protected:
 	virtual void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* EffectRenderer = nullptr;
+	std::list<UImageRenderer*> AllHitEffectRenderer;
+	static const float BigHitInter;
+	static const float SmallHitInter;
 	
 	EHitActorState State = EHitActorState::None;
 
-	static const float BigHitInter;
-	static const float SmallHitInter;
 	static bool IsLoad;
 };
 

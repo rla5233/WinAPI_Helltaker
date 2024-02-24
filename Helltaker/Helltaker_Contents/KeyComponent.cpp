@@ -48,7 +48,6 @@ void KeyComponent::IdleStart()
 	case EKeyComponentType::LockBox:
 		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.17f)}, { WinScale.X * 0.0505f, WinScale.Y * 0.0888f}});
 		ImageRenderer->SetImage("LockBox.png");
-		CreateSmallHitEffect();
 		break;
 	}
 }
@@ -89,7 +88,7 @@ void KeyComponent::Hit(float _DeltaTime)
 
 void KeyComponent::HitStart()
 {
-	SetRandomSmallHitEffect();
+	CreateRandomSmallHitEffect();
 }
 
 void KeyComponent::Tick(float _DeltaTime)
@@ -136,7 +135,7 @@ void KeyComponent::StateChange(EKeyComponentState _State)
 	State = _State;
 }
 
-void KeyComponent::NextStateCheck()
+void KeyComponent::NextStateCheck(EMoveActorDir _OtherMoveDir)
 {
 	switch (Type)
 	{

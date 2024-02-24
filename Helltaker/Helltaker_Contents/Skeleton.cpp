@@ -34,8 +34,6 @@ void Skeleton::BeginPlay()
 	ImageRenderer->CreateAnimation("Skeleton_LHit", "Skeleton_Left_Hit", 0, 8, HitInter, false);
 	ImageRenderer->CreateAnimation("Skeleton_RHit", "Skeleton_Right_Hit", 0, 8, HitInter, false);
 
-	CreateBigHitEffect();
-
 	SeeDirChange(EActorSeeDir::Right);
 	StateChange(EHitActorState::Idle);
 }
@@ -183,7 +181,7 @@ void Skeleton::HitStart()
 		break;
 	}
 
-	SetRandomBigHitEffect();
+	CreateRandomBigHitEffect();
 }
 
 void Skeleton::Death(float _DeltaTime)
@@ -196,7 +194,7 @@ void Skeleton::Death(float _DeltaTime)
 
 void Skeleton::DeathStart()
 {
-	SetRandomBigHitEffect();
+	CreateRandomBigHitEffect();
 	ImageRenderer->ActiveOff();
 
 	HitActorInfoUpdate(EHitActorState::Death);
