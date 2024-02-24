@@ -198,7 +198,6 @@ void Hero::ThornHitCheck(EHeroState _State)
 
 void Hero::Idle(float _DeltaTime)
 {
-	MoveEffectEndCheck();
 	InputCheck(_DeltaTime);
 }
 

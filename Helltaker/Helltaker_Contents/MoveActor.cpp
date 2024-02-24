@@ -30,6 +30,13 @@ void MoveActor::BeginPlay()
 	CreateMoveEffect();
 }
 
+void MoveActor::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+
+	MoveEffectEndCheck();
+}
+
 void MoveActor::MoveStart()
 {
 	MovePosCheck();

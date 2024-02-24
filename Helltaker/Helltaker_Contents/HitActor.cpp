@@ -26,6 +26,13 @@ void HitActor::BeginPlay()
 	}
 }
 
+void HitActor::Tick(float _DeltaTime)
+{
+	MoveActor::Tick(_DeltaTime);
+
+	HitEffectEndCheck();
+}
+
 void HitActor::HitActorInfoUpdate(EHitActorState _NextState)
 {
 	Point CurPoint = GetLocationPoint();

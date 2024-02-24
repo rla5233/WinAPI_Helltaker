@@ -44,6 +44,7 @@ public:
 	virtual void NextStateCheck(EMoveActorDir _OtherMoveDir) {};
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
 
 private:
 	UImageRenderer* EffectRenderer = nullptr;

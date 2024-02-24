@@ -99,7 +99,6 @@ void Stone::IdleStart()
 
 void Stone::Idle(float _DeltaTime)
 {
-	AllEffectEndCheck();
 }
 
 void Stone::HitStart()
