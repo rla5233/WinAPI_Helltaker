@@ -15,10 +15,10 @@ const FVector Hero::IdleScale = { 0.9f, 0.9f };
 const float Hero::IdleInter = 0.07f;
 
 const FVector Hero::MoveScale = { 0.9f, 0.9f };
-const float Hero::MoveInter = 0.02f;
+const float Hero::MoveInter = 0.03f;
 
 const FVector Hero::KickScale = { 0.95f, 0.95f };
-const float Hero::KickInter = 0.016f;
+const float Hero::KickInter = 0.06f;
 
 const float Hero::DeathInter = 0.05f;
 
@@ -262,9 +262,11 @@ void Hero::IdleStart()
 
 void Hero::Move(float _DeltaTime)
 {
+	InputCheck(_DeltaTime);
+
 	MoveOneBlock(_DeltaTime);
 
-	if (false == IsMove())
+	if ((false == IsMove()) && (true == ImageRenderer->IsCurAnimationEnd()))
 	{
 		StateChange(EHeroState::Idle);
 	}
@@ -283,9 +285,11 @@ void Hero::MoveStart()
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
+		ImageRenderer->AnimationReset();
 		ImageRenderer->ChangeAnimation("Hero_LMove");
 		break;
 	case EActorSeeDir::Right:
+		ImageRenderer->AnimationReset();
 		ImageRenderer->ChangeAnimation("Hero_RMove");
 		break;
 	}
