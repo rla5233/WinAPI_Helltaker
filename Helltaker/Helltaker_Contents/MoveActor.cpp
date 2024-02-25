@@ -6,6 +6,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 bool MoveActor::IsLoad = false;
+const FVector MoveActor::MoveEffectScale = { 0.0375f, 0.0444f };
 const float MoveActor::MoveEffectInter = 0.11f;
 const float MoveActor::MoveTimeWeight = 0.17f;
 
@@ -131,7 +132,7 @@ void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 
 void MoveActor::CreateRandomMoveEffect()
 {
-	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
+	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::RenderActor);
 	Renderer->SetImage("Move");
 
 	int RandomValue = rand() % 3;
@@ -153,7 +154,7 @@ void MoveActor::CreateRandomMoveEffect()
 		break;
 	}
 
-	Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.036f, WinScale.Y * 0.043f } });
+	Renderer->SetTransform({ { 0.0f, WinScale.Y * 0.0175f }, {WinScale * MoveEffectScale}});
 	
 	AllMoveEffectRenderer.push_back(Renderer);
 }

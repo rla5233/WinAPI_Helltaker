@@ -76,6 +76,7 @@ private:
 
 private:
 	std::list<UImageRenderer*> AllMoveEffectRenderer;
+	static const FVector MoveEffectScale;
 	static const float MoveEffectInter;
 
 	float MoveTime = 0.0f;
