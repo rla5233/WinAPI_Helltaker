@@ -364,6 +364,7 @@ void Hero::VictoryStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.0225f) }, { WinScale * VictoryScale } });
+	AllEffectActiveOff();
 
 	switch (SeeDir)
 	{
