@@ -92,6 +92,7 @@ private:
 	static const FVector KickScale;
 	static const float KickInter;
 
+	static const FVector HitScale;
 	static const float HitInter;
 	static const float DeathInter;
 

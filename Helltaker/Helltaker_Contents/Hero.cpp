@@ -9,6 +9,8 @@
 #include <EngineCore/EngineResourcesManager.h>
 
 bool Hero::IsLoad = false;
+
+const FVector Hero::HitScale = { 0.092f, 0.1185f };
 const float Hero::HitInter = 0.08f;
 
 const FVector Hero::IdleScale = { 0.052f, 0.083f };
@@ -198,7 +200,7 @@ void Hero::ThornHitCheck()
 	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 	{
 		CreateRandomHitEffect();
-		--ActionPoint;
+		//--ActionPoint;
 	}
 }
 
@@ -210,23 +212,23 @@ void Hero::CreateRandomHitEffect()
 	int RandomValue = rand() % 3;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector TransPos = { 0.0f, WinScale.Y * (-0.08f) };
+	FVector TransPos = { WinScale.X * 0.005f, WinScale.Y * (-0.08f) };
 	switch (RandomValue)
 	{
 	case 0:
 		Renderer->CreateAnimation("HeroHit1", "Hit", 10, 15, HitInter, false);
 		Renderer->ChangeAnimation("HeroHit1");
-		Renderer->SetTransform({ TransPos, { WinScale.X * 0.082f, WinScale.Y * 0.1f } });
+		Renderer->SetTransform({ TransPos, { WinScale * HitScale } });
 		break;
 	case 1:
 		Renderer->CreateAnimation("HeroHit2", "Hit", 16, 21, HitInter, false);
 		Renderer->ChangeAnimation("HeroHit2");
-		Renderer->SetTransform({ TransPos, { WinScale.X * 0.092f, WinScale.Y * 0.106f } });
+		Renderer->SetTransform({ TransPos, { WinScale * HitScale } });
 		break;
 	case 2:
 		Renderer->CreateAnimation("HeroHit3", "Hit", 22, 27, HitInter, false);
 		Renderer->ChangeAnimation("HeroHit3");
-		Renderer->SetTransform({ TransPos, { WinScale.X * 0.075f, WinScale.Y * 0.118f } });
+		Renderer->SetTransform({ TransPos, { WinScale * HitScale } });
 		break;
 	}
 
