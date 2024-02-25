@@ -3,7 +3,11 @@
 #include "ChapterManager.h"
 
 bool HitActor::IsLoad = false;
+
+const FVector HitActor::BigHitScale = { 0.091f, 0.187f };
 const float HitActor::BigHitInter = 0.04f;
+
+const FVector HitActor::SmallHitScale = { 0.0f, 0.0f };
 const float HitActor::SmallHitInter = 0.04f;
 
 HitActor::HitActor()
@@ -68,12 +72,12 @@ void HitActor::CreateRandomBigHitEffect()
 	case 0 :
 		Renderer->CreateAnimation("BigHit1", "Hit", 0, 4, BigHitInter, false);
 		Renderer->ChangeAnimation("BigHit1");
-		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.081f, WinScale.Y * 0.186f } });
+		Renderer->SetTransform({ { 0, 0 }, WinScale * BigHitScale });
 		break;
 	case 1:
 		Renderer->CreateAnimation("BigHit2", "Hit", 5, 9, BigHitInter, false);
 		Renderer->ChangeAnimation("BigHit2");
-		Renderer->SetTransform({ { 0, 0 }, { WinScale.X * 0.09f, WinScale.Y * 0.145f } });
+		Renderer->SetTransform({ { 0, 0 }, WinScale * BigHitScale });
 		break;
 	}
 

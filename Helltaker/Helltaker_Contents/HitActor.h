@@ -47,7 +47,11 @@ protected:
 
 private:
 	std::list<UImageRenderer*> AllHitEffectRenderer;
+	
+	static const FVector BigHitScale;
 	static const float BigHitInter;
+
+	static const FVector SmallHitScale;
 	static const float SmallHitInter;
 	
 	EHitActorState State = EHitActorState::None;

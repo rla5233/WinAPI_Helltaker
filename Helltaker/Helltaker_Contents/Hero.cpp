@@ -200,7 +200,7 @@ void Hero::ThornHitCheck()
 	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 	{
 		CreateRandomHitEffect();
-		//--ActionPoint;
+		--ActionPoint;
 	}
 }
 
