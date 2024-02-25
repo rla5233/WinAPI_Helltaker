@@ -25,7 +25,6 @@ void KeyComponent::BeginPlay()
 
 	FVector TileScale = ContentsHelper::GetTileScale();
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 }
 
 void KeyComponent::Idle(float _DeltaTime)
@@ -39,14 +38,16 @@ void KeyComponent::IdleStart()
 	switch (Type)
 	{
 	case EKeyComponentType::Key:
-		ImageRenderer->SetTransform({ { TileScale.X * 0.07f, TileScale.Y * (-0.2f) }, {WinScale.X * 0.0437f, WinScale.Y * 0.0852f}});
+		ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
+		ImageRenderer->SetTransform({ { WinScale.X * 0.001f, WinScale.Y * (-0.007f) }, { WinScale.X * 0.0437f, WinScale.Y * 0.0852f }});
 		ImageRenderer->SetImage("LockBox.png");
 		ImageRenderer->CreateAnimation("Key_Idle", "Key", 0, 11, Key_IdleInter, true);
 		ImageRenderer->AnimationReset();
 		ImageRenderer->ChangeAnimation("Key_Idle");
 		break;
 	case EKeyComponentType::LockBox:
-		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.17f)}, { WinScale.X * 0.0505f, WinScale.Y * 0.0888f}});
+		ImageRenderer = CreateImageRenderer(RenderOrder::HitActor);
+		ImageRenderer->SetTransform({ { 0.0f, TileScale.Y * (-0.17f)}, { WinScale.X * 0.0505f, WinScale.Y * 0.0888f }});
 		ImageRenderer->SetImage("LockBox.png");
 		break;
 	}
