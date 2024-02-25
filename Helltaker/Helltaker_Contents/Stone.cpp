@@ -3,6 +3,7 @@
 #include "ChapterManager.h"
 
 bool Stone::IsLoad = false;
+const FVector Stone::StoneScale = { 0.043f, 0.081f };
 
 Stone::Stone()
 {
@@ -143,9 +144,9 @@ void Stone::MoveStart()
 
 void Stone::SetStoneImg(std::string_view _Name)
 {
-	FVector TileScale = ContentsHelper::GetTileScale();
+	FVector WinScale = ContentsHelper::GetWindowScale();
 	Renderer->SetImage(_Name);
-	Renderer->SetTransform({ {0.0f, TileScale.Y * (-0.125f)}, {TileScale * StoneScale} });
+	Renderer->SetTransform({ { 0.0f, 0.0f }, { WinScale * StoneScale } });
 }
 
 void Stone::Tick(float _DeltaTime)
