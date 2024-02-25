@@ -16,14 +16,6 @@ public:
 	Demon& operator=(const Demon& _Other) = delete;
 	Demon& operator=(Demon&& _Other) noexcept = delete;
 
-	void IdleStart();
-	void Idle(float _DeltaTime);
-
-	void VictoryStart();
-
-	void StateChange(EDemonState _State);
-	void StateUpdate(float _DeltaTime);
-
 	void SetDemon(std::string_view _Name);
 	void LoveSignAnimation(float _DeltaTime);
 
@@ -42,12 +34,25 @@ public:
 		return ImageRenderer;
 	}
 
+	void StateChange(EDemonState _State);
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
+	void IdleStart();
+	void Idle(float _DeltaTime);
+
+	void VictoryStart();
+
+	void CreateLoveStarEffect();
+
+	void StateUpdate(float _DeltaTime);
+
+private:
 	UImageRenderer* ImageRenderer = nullptr;
+	std::list<UImageRenderer*> LoveEffect;
 
 	UImageRenderer* LoveSignRenderer = nullptr;
 	const FVector LoveSignScale = { 0.3f, 0.4f };

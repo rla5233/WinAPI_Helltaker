@@ -24,7 +24,8 @@ void Demon::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
-		IsLoad = true;
+		ContentsHelper::LoadImg("Effect\\Particle", "LoveStar.png");
+		IsLoad = true; 
 	}
 
 	LoveSignRenderer = AActor::CreateImageRenderer(static_cast<int>(RenderOrder::Effect));
@@ -87,6 +88,11 @@ void Demon::VictoryStart()
 	}
 
 	LoveSignRenderer->ActiveOff();
+}
+
+void Demon::CreateLoveStarEffect()
+{
+
 }
 
 void Demon::Tick(float _DeltaTime)
