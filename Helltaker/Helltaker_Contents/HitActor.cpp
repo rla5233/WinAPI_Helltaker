@@ -7,7 +7,7 @@ bool HitActor::IsLoad = false;
 const FVector HitActor::BigHitScale = { 0.091f, 0.187f };
 const float HitActor::BigHitInter = 0.04f;
 
-const FVector HitActor::SmallHitScale = { 0.0f, 0.0f };
+const FVector HitActor::SmallHitScale = { 0.048f, 0.076f };
 const float HitActor::SmallHitInter = 0.04f;
 
 HitActor::HitActor()
@@ -100,12 +100,12 @@ void HitActor::CreateRandomSmallHitEffect()
 	case 0 :
 		Renderer->CreateAnimation("SmallHit1", "Hit", 28, 31, SmallHitInter, false);
 		Renderer->ChangeAnimation("SmallHit1");
-		Renderer->SetTransform({ RandomPos, { WinScale.X * 0.04f, WinScale.Y * 0.074f } });
+		Renderer->SetTransform({ RandomPos, WinScale * SmallHitScale });
 		break;
 	case 1:
 		Renderer->CreateAnimation("SmallHit2", "Hit", 32, 35, SmallHitInter, false);
 		Renderer->ChangeAnimation("SmallHit2");
-		Renderer->SetTransform({ RandomPos, { WinScale.X * 0.047f, WinScale.Y * 0.076f } });
+		Renderer->SetTransform({ RandomPos, WinScale * SmallHitScale });
 		break;
 	}
 
