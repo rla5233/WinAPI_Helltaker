@@ -47,7 +47,11 @@ private:
 	EKeyComponentState State = EKeyComponentState::None;
 	EKeyComponentType Type = EKeyComponentType::None;
 
+	static const FVector KeyScale;
+	static const FVector LockBoxScale;
+
 	static const float Key_IdleInter;
 	static const float Death_EffectInter;
+
 	static bool IsLoad;
 };
