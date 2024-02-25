@@ -32,7 +32,7 @@ void Thorn::BeginPlay()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 	ImageRenderer->SetImage("Thorn_Idle.png");
-	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * 0.008f }, { WinScale * IdleScale } });
+	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * 0.018f }, { WinScale * IdleScale } });
 	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);
 	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, ChangeInter, false);
 }
