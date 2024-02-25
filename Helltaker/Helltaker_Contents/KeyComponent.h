@@ -51,6 +51,8 @@ private:
 	static const FVector LockBoxScale;
 
 	static const float Key_IdleInter;
+
+	static const FVector Death_EffectScale;
 	static const float Death_EffectInter;
 
 	static bool IsLoad;

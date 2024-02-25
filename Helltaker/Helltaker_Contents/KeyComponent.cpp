@@ -2,6 +2,8 @@
 
 bool KeyComponent::IsLoad = false;
 const float KeyComponent::Key_IdleInter = 0.06f;
+
+const FVector KeyComponent::Death_EffectScale = { 0.165f, 0.278f };
 const float KeyComponent::Death_EffectInter = 0.06f;
 
 const FVector KeyComponent::KeyScale = { 0.0437f, 0.0852f };
@@ -71,7 +73,7 @@ void KeyComponent::DeathStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
 	EffectRenderer->SetImage("KeyComp");
-	EffectRenderer->SetTransform({ { 0 , 0 }, { WinScale.X * 0.165f, WinScale.Y * 0.278f } });
+	EffectRenderer->SetTransform({ { 0, 0 }, WinScale * Death_EffectScale });
 	EffectRenderer->CreateAnimation("KeyComp_Death", "KeyComp", 0, 8, Death_EffectInter, false);
 	EffectRenderer->ChangeAnimation("KeyComp_Death");
 
