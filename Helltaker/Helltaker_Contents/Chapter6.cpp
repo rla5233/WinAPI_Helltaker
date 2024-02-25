@@ -92,7 +92,8 @@ void Chapter6::LevelStart(ULevel* _PrevLevel)
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
-	M_SpawnDemon({ 5, 7 }, "Azazel", { { 0.0f, 0.0f }, Scale });
+	FVector Pos = { WinScale.X * (-0.002f), WinScale.Y * (-0.007f) };
+	M_SpawnDemon({ 5, 7 }, "Azazel", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
 
