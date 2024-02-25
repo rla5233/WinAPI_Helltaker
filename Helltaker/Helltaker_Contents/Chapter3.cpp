@@ -80,10 +80,11 @@ void Chapter3::LevelStart(ULevel* _PrevLevel)
 	M_SpawnKeyComponent({ 6, 1 }, EKeyComponentType::LockBox);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
-	M_SpawnDemon({ 3, 0 }, "Cerberus", { { 0.0f, 0.0f }, Scale });
-	M_SpawnDemon({ 4, 0 }, "Cerberus", { { 0.0f, 0.0f }, Scale });
-	M_SpawnDemon({ 5, 0 }, "Cerberus", { { 0.0f, 0.0f }, Scale });
+	FVector Scale = { WinScale.X * 0.047f, WinScale.Y * 0.08f };
+	FVector Pos = { 0.0f, WinScale.Y * (-0.008f) };
+	M_SpawnDemon({ 3, 0 }, "Cerberus", { Pos, Scale });
+	M_SpawnDemon({ 4, 0 }, "Cerberus", { Pos, Scale });
+	M_SpawnDemon({ 5, 0 }, "Cerberus", { Pos, Scale });
 	
 	M_StateChange(EChapterState::Idle);
 	
