@@ -84,8 +84,9 @@ void Chapter5::LevelStart(ULevel* _PrevLevel)
 	M_SpawnKeyComponent({ 3, 1 }, EKeyComponentType::LockBox);
 	
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
-	M_SpawnDemon({ 4, 0 }, "Zdrada", { { 0.0f, 0.0f }, Scale });
+	FVector Scale = { WinScale.X * 0.047f, WinScale.Y * 0.08f };
+	FVector Pos = { 0.0f, WinScale.Y * (-0.008f) };
+	M_SpawnDemon({ 4, 0 }, "Zdrada", { Pos, Scale });
 	
 	M_StateChange(EChapterState::Idle);
 
