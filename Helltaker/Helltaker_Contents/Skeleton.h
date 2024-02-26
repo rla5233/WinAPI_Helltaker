@@ -49,6 +49,7 @@ private:
 	static const float HitInter;
 
 	std::list<DeathParticle> AllDeathParticle;
+	static const int DeathParticleCount;
 
 	static bool IsLoad;
 };

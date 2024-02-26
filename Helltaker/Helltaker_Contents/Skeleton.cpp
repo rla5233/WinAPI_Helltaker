@@ -9,6 +9,8 @@ const float Skeleton::IdleInter = 0.06f;
 const FVector Skeleton::HitScale = { 0.0494f, 0.083f };
 const float Skeleton::HitInter = 0.04f;
 
+const int Skeleton::DeathParticleCount = 14;
+
 const FVector DeathParticle::Scale = { 0.021f, 0.022f };
 
 Skeleton::Skeleton()
@@ -208,7 +210,7 @@ void Skeleton::DeathStart()
 	CreateRandomBigHitEffect();
 	ImageRenderer->ActiveOff();
 
-	for (int i = 0; i < 14; i++)
+	for (int i = 0; i < DeathParticleCount; i++)
 	{
 		CreateRandomDeathParicle();
 	}
