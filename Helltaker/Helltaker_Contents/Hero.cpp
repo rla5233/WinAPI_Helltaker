@@ -25,7 +25,7 @@ const float Hero::KickInter = 0.06f;
 const float Hero::DeathInter = 0.05f;
 
 const FVector Hero::VictoryScale = { 0.052f, 0.111f };
-const float Hero::VictoryInter = 1.125f;
+const float Hero::VictoryInter = 0.125f;
 
 Hero::Hero()
 {}

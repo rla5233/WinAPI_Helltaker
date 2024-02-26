@@ -54,7 +54,7 @@ private:
 	void StarEffectMoveUpdate(float _DeltaTime);
 
 	void LovePlosionUpdate();
-	void CreateLovePlosion();
+	void CreateLovePlosion(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
@@ -73,12 +73,14 @@ private:
 
 	int VictoryOrder = -1;
 	int EffectCount = 0;
+	float DelayTimeCount = 0.0f;
 	std::list<StarEffect> AllStarEffect;
 	static const int StarEffectCount;
 
 	UImageRenderer* LovePlosionRenderer = nullptr;
 	static const FVector LovePlosionScale;
 	static const float LovePlosionInter;
+	static const float LovePlosionDelay;
 
 	
 	Point LocationPoint = { -1, -1 };

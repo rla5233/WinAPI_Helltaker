@@ -13,7 +13,8 @@ const int Demon::StarEffectCount = 20;
 FVector StarEffect::TargetPos = FVector::Zero;
 
 const FVector Demon::LovePlosionScale = { 0.169f, 0.287f };
-const float Demon::LovePlosionInter = 0.02f;
+const float Demon::LovePlosionInter = 0.08f;
+const float Demon::LovePlosionDelay = 0.7f;
 
 Demon::Demon()
 {
@@ -108,6 +109,9 @@ void Demon::Victory(float _DeltaTime)
 		StarEffectUpdate(_DeltaTime);
 		break;
 	case 1:
+		CreateLovePlosion(_DeltaTime);
+		break;
+	case 2:
 		LovePlosionUpdate();
 		break;
 	}
@@ -147,6 +151,7 @@ void Demon::StarEffectMoveUpdate(float _DeltaTime)
 {
 	if (true == AllStarEffect.empty())
 	{
+		DelayTimeCount = LovePlosionDelay;
 		++VictoryOrder;
 	}
 
@@ -166,7 +171,7 @@ void Demon::StarEffectMoveUpdate(float _DeltaTime)
 		}
 		else
 		{
-			Iter->StarEffectMove(this, _DeltaTime, 0.02f);
+			Iter->StarEffectMove(this, _DeltaTime, 0.01f);
 			++Iter;
 		}
 	}
@@ -191,16 +196,31 @@ void StarEffect::StarEffectMove(const Demon* const _Demon, float _DeltaTime, flo
 
 void Demon::LovePlosionUpdate()
 {
-
+	if (true == LovePlosionRenderer->IsCurAnimationEnd())
+	{
+		LovePlosionRenderer->ActiveOff();
+		LovePlosionRenderer->Destroy();
+		++VictoryOrder;
+	}
 }
 
-void Demon::CreateLovePlosion()
+void Demon::CreateLovePlosion(float _DeltaTime)
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = ContentsHelper::GetWindowScale();
-	LovePlosionRenderer = CreateImageRenderer(RenderOrder::Effect);
-	LovePlosionRenderer->SetImage("LovePlosion");
-	LovePlosionRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * LovePlosionScale });
+	if (0.0f >= DelayTimeCount)
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Pos = ContentsHelper::GetWindowScale();
+		LovePlosionRenderer = CreateImageRenderer(RenderOrder::Effect);
+		LovePlosionRenderer->SetImage("LovePlosion");
+		LovePlosionRenderer->CreateAnimation("LovePlosion", "LovePlosion", 0, 14, LovePlosionInter, false);
+		LovePlosionRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * LovePlosionScale });
+		LovePlosionRenderer->ChangeAnimation("LovePlosion");
+		++VictoryOrder;
+
+		return;
+	}
+
+	DelayTimeCount -= _DeltaTime;
 }
 
 void Demon::Tick(float _DeltaTime)
