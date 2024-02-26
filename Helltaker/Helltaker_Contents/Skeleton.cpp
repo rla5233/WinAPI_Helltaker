@@ -232,9 +232,23 @@ void Skeleton::CreateRandomDeathParicle()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	NewDeathParticle.DeathParticleRenderer->SetImage(Name);
-	NewDeathParticle.DeathParticleRenderer->SetTransform({ {0, 0}, WinScale * DeathParticle::Scale });
+	NewDeathParticle.DeathParticleRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f)}, WinScale * DeathParticle::Scale });
+	
+	int SpeedX = rand() % 51;
+	int SpeedY = rand() % 101;
+	if (1 == (rand() % 2))
+	{
+		SpeedX *= -1;
+	}
+
+	NewDeathParticle.Speed = { SpeedX, SpeedY };
 
 	AllDeathParticle.push_back(NewDeathParticle);
+}
+
+void DeathParticle::DeathParticleMove(float _DeltaTime)
+{
+
 }
 
 void Skeleton::Tick(float _DeltaTime)

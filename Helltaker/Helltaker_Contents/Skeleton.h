@@ -58,10 +58,11 @@ class DeathParticle
 {
 	friend Skeleton;
 public:
+	void DeathParticleMove(float _DeltaTime);
 
 private:
 	UImageRenderer* DeathParticleRenderer = nullptr;
-	FVector StartPos = FVector::Zero;
+	FVector Speed = FVector::Zero;
 
 	static const FVector Scale;
 };
