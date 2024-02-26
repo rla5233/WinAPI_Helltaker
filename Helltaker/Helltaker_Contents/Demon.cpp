@@ -10,6 +10,7 @@ const float Demon::LoveSignY_Location = 0.9f;
 const float Demon::LoveSignY_MaxLocation = 1.1f;
 
 const int Demon::StarEffectCount = 20;
+FVector StarEffect::TargetPos = FVector::Zero;
 
 Demon::Demon()
 {
@@ -35,13 +36,15 @@ void Demon::BeginPlay()
 	LoveSignSpeed = ContentsHelper::GetTileScale().Y * 0.45f;
 }
 
-void Demon::SetDemon(std::string_view _Name)
+void Demon::SetDemon(std::string_view _Name, const FTransform& _FTransform)
 {
 	std::string AnimationName = _Name.data();
 	AnimationName += "_Idle";
 	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);
 	ImageRenderer->SetImage(_Name);
+	ImageRenderer->SetTransform(_FTransform);
 	ImageRenderer->CreateAnimation(AnimationName, _Name, 0, 11, IdleInter, true);
+	StarEffect::TargetPos = ImageRenderer->GetPosition();
 }
 
 // LoveSign 상하이동 애니메이션
@@ -101,7 +104,6 @@ void Demon::Victory(float _DeltaTime)
 	}
 
 	StarEffectMoveUpdate(_DeltaTime);
-	
 }
 
 void Demon::CreateStarEffect()
@@ -118,6 +120,7 @@ void Demon::CreateStarEffect()
 	Star.EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
 	Star.EffectRenderer->SetTransform({ Pos, Scale });
 	Star.EffectRenderer->SetImage("LoveStar.png");
+	Star.StartPos = Star.EffectRenderer->GetPosition();
 	Star.IsMove = true;
 	AllStarEffect.push_back(Star);
 }
@@ -140,21 +143,20 @@ void Demon::StarEffectMoveUpdate(float _DeltaTime)
 		}
 		else
 		{
-			Iter->StarEffectMove(_DeltaTime);
+			Iter->StarEffectMove(this, _DeltaTime, 0.02f);
 			++Iter;
 		}
 	}
 }
 
-void StarEffect::StarEffectMove(float _DeltaTime)
+void StarEffect::StarEffectMove(const Demon* const _Demon, float _DeltaTime, float _TimeWeight)
 {
 	if (true == IsMove)
 	{
-		MoveTime += _DeltaTime;
+		MoveTime += _DeltaTime + _TimeWeight;
 
-		FVector StartPos = EffectRenderer->GetActorBaseTransform().GetPosition();
-		//FVector NextPos = 
-
+		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
+		EffectRenderer->SetPosition(NextPos);
 
 		if (1.0f <= MoveTime)
 		{

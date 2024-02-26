@@ -185,9 +185,8 @@ void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name, const FT
 	Demon* ChapterDemon = SpawnActor<Demon>(static_cast<int>(UpdateOrder::RenderActor));
 	ChapterDemon->SetName(_Name);
 	ChapterDemon->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
-	ChapterDemon->SetDemon(_Name);
+	ChapterDemon->SetDemon(_Name, _FTransform);
 	ChapterDemon->SetLocationPoint(_Point);
-	ChapterDemon->GetImageRenderer()->SetTransform(_FTransform);
 	ChapterDemon->StateChange(EDemonState::Idle);
 
 	AllChapterDemon.push_back(ChapterDemon);

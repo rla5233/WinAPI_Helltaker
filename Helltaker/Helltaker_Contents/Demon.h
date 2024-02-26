@@ -2,16 +2,7 @@
 
 #include "RenderActor.h"
 
-class StarEffect
-{
-public:
-	void StarEffectMove(float _DeltaTime);
-
-public:
-	UImageRenderer* EffectRenderer = nullptr;
-	float MoveTime;
-	bool IsMove = false;
-};
+class StarEffect;
 
 // Ό³Έν :
 class Demon : public RenderActor
@@ -27,7 +18,7 @@ public:
 	Demon& operator=(const Demon& _Other) = delete;
 	Demon& operator=(Demon&& _Other) noexcept = delete;
 
-	void SetDemon(std::string_view _Name);
+	void SetDemon(std::string_view _Name, const FTransform& _FTransform);
 	void LoveSignAnimation(float _DeltaTime);
 
 	void SetLocationPoint(Point _Point)
@@ -85,3 +76,16 @@ private:
 	static bool IsLoad;
 };
 
+class StarEffect
+{
+	friend Demon;
+public:
+	void StarEffectMove(const Demon* const _Demon, float _DeltaTime, float _TimeWeight = 0.0f);
+
+private:
+	UImageRenderer* EffectRenderer = nullptr;
+	FVector StartPos = FVector::Zero;
+	static FVector TargetPos;
+	float MoveTime = 0.0f;
+	bool IsMove = false;
+};

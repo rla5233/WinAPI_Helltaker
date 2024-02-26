@@ -39,7 +39,6 @@ void MoveActor::Tick(float _DeltaTime)
 void MoveActor::MoveStart()
 {
 	MovePosCheck();
-	
 	CreateRandomMoveEffect();
 }
 
@@ -69,8 +68,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 {
 	if (true == IsMoveValue)
 	{
-		MoveTime += _DeltaTime;
-		MoveTime += MoveTimeWeight;
+		MoveTime += _DeltaTime + MoveTimeWeight;
 		
 		FVector CurLocation = GetActorLocation();
 
