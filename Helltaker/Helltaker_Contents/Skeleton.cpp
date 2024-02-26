@@ -25,7 +25,13 @@ void Skeleton::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Right_Idle");
 		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Left_Hit");
 		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Right_Hit");
-		ContentsHelper::LoadFolder("Effect\\Particle", "Skel_Particle");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_001.png");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_002.png");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_003.png");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_004.png");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_005.png");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_006.png");
+		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_007.png");
 		
 		IsLoad = true;
 	}
@@ -200,13 +206,32 @@ void Skeleton::DeathStart()
 	CreateRandomBigHitEffect();
 	ImageRenderer->ActiveOff();
 
+	for (int i = 0; i < 14; i++)
+	{
+		CreateRandomDeathParicle();
+	}
+
 	HitActorInfoUpdate(EHitActorState::Death);
 	InformDestroytoChapter();
 }
 
-void Skeleton::CreateDeathParicle()
+void Skeleton::CreateRandomDeathParicle()
 {
 	// 14개 파티클 랜덤인듯
+	DeathParticle NewDeathParticle = DeathParticle();
+	NewDeathParticle.DeathParticleRenderer = CreateImageRenderer(RenderOrder::Effect);
+
+	int RandomValue = (rand() % 7) + 1;
+	std::string Name = "Skel_Particle_00";
+	Name += RandomValue + '0';
+	Name += ".png";
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	NewDeathParticle.DeathParticleRenderer->SetImage(Name);
+	//NewDeathParticle.DeathParticleRenderer->SetTransform();
+	
+
+	AllDeathParticle.push_back(NewDeathParticle);
 }
 
 void Skeleton::Tick(float _DeltaTime)

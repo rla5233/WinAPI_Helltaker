@@ -37,7 +37,7 @@ private:
 	void StateUpdate(float _DeltaTime);
     void StateChange(EHitActorState _State);
 
-	void CreateDeathParicle();
+	void CreateRandomDeathParicle();
 	
 private:
 	UImageRenderer* ImageRenderer = nullptr;
@@ -60,5 +60,5 @@ public:
 
 private:
 	UImageRenderer* DeathParticleRenderer = nullptr;
-
+	FVector StartPos = FVector::Zero;
 };
