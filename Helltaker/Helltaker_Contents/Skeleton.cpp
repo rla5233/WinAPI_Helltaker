@@ -25,6 +25,7 @@ void Skeleton::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Right_Idle");
 		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Left_Hit");
 		ContentsHelper::LoadFolder("Chapter\\Skeleton", "Skeleton_Right_Hit");
+		ContentsHelper::LoadFolder("Effect\\Particle", "Skel_Particle");
 		
 		IsLoad = true;
 	}
@@ -201,6 +202,11 @@ void Skeleton::DeathStart()
 
 	HitActorInfoUpdate(EHitActorState::Death);
 	InformDestroytoChapter();
+}
+
+void Skeleton::CreateDeathParicle()
+{
+	// 14개 파티클 랜덤인듯
 }
 
 void Skeleton::Tick(float _DeltaTime)

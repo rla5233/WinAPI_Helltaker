@@ -15,6 +15,11 @@ public:
 	Skeleton& operator=(const Skeleton& _Other) = delete;
 	Skeleton& operator=(Skeleton&& _Other) noexcept = delete;
 
+protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+private:
 	void Idle(float _DeltaTime);
 	void IdleStart();
 	void Hit(float _DeltaTime);
@@ -23,17 +28,15 @@ public:
 	void MoveStart() override;
 	void Death(float _DeltaTime);
 	void DeathStart();
-
-protected:
+	
 	void NextStateCheck(EMoveActorDir _OtherMoveDir) override;
 	void NextTileCheck(Point _Point);
-
-    void StateChange(EHitActorState _State);
+	
 	void StateUpdate(float _DeltaTime);
+    void StateChange(EHitActorState _State);
 
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
-
+	void CreateDeathParicle();
+	
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
