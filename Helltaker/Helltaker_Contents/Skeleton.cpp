@@ -201,9 +201,9 @@ void Skeleton::Death(float _DeltaTime)
 {
 	DeathParticleMoveUpdate(_DeltaTime);
 
-	if (true == HitEffectEndCheck())
+	if (true == AllDeathParticle.empty())
 	{
-		//Destroy();	
+		Destroy();	
 	}
 }
 
@@ -223,9 +223,9 @@ void Skeleton::DeathStart()
 
 void Skeleton::DeathParticleMoveUpdate(float _DeltaTime)
 {
+	FVector WindowScale = ContentsHelper::GetWindowScale();
 	std::list<DeathParticle>::iterator Iter = AllDeathParticle.begin();
-
-	for (Iter; Iter != AllDeathParticle.end(); ++Iter)
+	for (Iter; Iter != AllDeathParticle.end();)
 	{
 		if (nullptr == Iter->DeathParticleRenderer)
 		{
@@ -233,6 +233,18 @@ void Skeleton::DeathParticleMoveUpdate(float _DeltaTime)
 		}
 
 		Iter->DeathParticleMove(_DeltaTime);
+
+		float Pos_Y = Iter->DeathParticleRenderer->GetActorBaseTransform().GetPosition().Y;
+		if (WindowScale.Y < Pos_Y)
+		{
+			Iter->DeathParticleRenderer->ActiveOff();
+			Iter->DeathParticleRenderer->Destroy();
+			Iter = AllDeathParticle.erase(Iter);
+		}
+		else
+		{
+			++Iter;
+		}
 	}
 }
 
