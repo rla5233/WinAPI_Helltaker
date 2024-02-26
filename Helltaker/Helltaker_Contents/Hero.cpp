@@ -52,7 +52,6 @@ void Hero::BeginPlay()
 		IsLoad = true;
 	}
 
-	FVector TileScale = ContentsHelper::GetTileScale();
 	ImageRenderer = CreateImageRenderer(RenderOrder::Hero);
 	
 	ImageRenderer->SetImage("Hero_Left_Idle");
@@ -69,7 +68,6 @@ void Hero::BeginPlay()
 	ImageRenderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, DeathInter, false);
 
 	SeeDirChange(EActorSeeDir::Right);
-	StateChange(EHeroState::Idle);
 }
 
 void Hero::InputCheck(float _DeltaTime)

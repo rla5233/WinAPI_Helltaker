@@ -47,20 +47,16 @@ void Thorn::IdleStart()
 
 void Thorn::Up(float _DeltaTime)
 {
-	if (true == ImageRenderer->IsCurAnimationEnd())
-	{
-		GetChapter()->M_SetChapterThornInfo(ThornPoint, true);
-	}
 }
 
 void Thorn::UpStart()
 {
 	ImageRenderer->ChangeAnimation("Thorn_Up");		
+	GetChapter()->M_SetChapterThornInfo(ThornPoint, true);
 }
 
 void Thorn::Down(float _DeltaTime)
 {
-
 }
 
 void Thorn::DownStart()

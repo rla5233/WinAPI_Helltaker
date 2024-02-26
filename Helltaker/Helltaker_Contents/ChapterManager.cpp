@@ -169,14 +169,14 @@ void ChapterManager::CreateTransition()
 void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
-	Hero* NewHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
-	NewHero->SetName("Hero");
-	NewHero->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
-	NewHero->SetLocationPoint({ _Point.X, _Point.Y });
-	NewHero->SetActionPoint(_ActionPoint);
-	PlayerHero = NewHero;
+	PlayerHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
+	PlayerHero->SetName("Hero");
+	PlayerHero->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	PlayerHero->SetLocationPoint({ _Point.X, _Point.Y });
+	PlayerHero->SetActionPoint(_ActionPoint);
+	PlayerHero->StateChange(EHeroState::Idle);
 	HeroActionPoint->SetText(std::to_string(PlayerHero->GetActionPoint()));
-	AllMapActors[reinterpret_cast<__int64>(NewHero)] = NewHero;
+	AllMapActors[reinterpret_cast<__int64>(PlayerHero)] = PlayerHero;
 }
 
 void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
