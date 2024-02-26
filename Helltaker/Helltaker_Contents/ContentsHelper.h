@@ -61,6 +61,8 @@ public:
 	static void LoadSound(std::string_view _Path, std::string_view _Name);
 	static void SoundPlay(std::string_view _Name);
 
+	static FVector RandomCirclePoint(FVector _Center, float _Radius);
+
 protected:
 
 private:

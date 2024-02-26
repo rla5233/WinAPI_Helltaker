@@ -62,3 +62,34 @@ void ContentsHelper::SoundPlay(std::string_view _Name)
 {
 	UEngineSound::SoundPlay(_Name);
 }
+
+FVector ContentsHelper::RandomCirclePoint(FVector _Center, float _Radius)
+{
+	if (0 == _Radius)
+	{
+		return _Center;
+	}
+
+	float RandomValue = static_cast<float>(rand());
+	float Random_X = fmodf(RandomValue, _Radius);
+
+	int Sign_X = rand() % 2;
+	if (1 == Sign_X)
+	{
+		Random_X *= -1;
+	}
+	Random_X += _Center.X;
+
+	float Random_Y = 0.0f;
+	int Sign_Y = rand() % 2;
+	if (1 == Sign_Y)
+	{
+		Random_Y = _Center.Y + sqrtf(powf(_Radius, 2) - powf((Random_X - _Center.X), 2));
+	}
+	else
+	{
+		Random_Y = _Center.Y - sqrtf(powf(_Radius, 2) - powf((Random_X - _Center.X), 2));
+	}
+
+	return FVector(Random_X, Random_Y);
+}

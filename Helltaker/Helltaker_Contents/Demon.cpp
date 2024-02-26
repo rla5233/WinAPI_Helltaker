@@ -9,6 +9,8 @@ const float Demon::IdleInter = 0.065f;
 const float Demon::LoveSignY_Location = 0.9f;
 const float Demon::LoveSignY_MaxLocation = 1.1f;
 
+const int Demon::StarEffectCount = 20;
+
 Demon::Demon()
 {
 }
@@ -88,10 +90,49 @@ void Demon::VictoryStart()
 	}
 
 	LoveSignRenderer->ActiveOff();
+	EffectCount = StarEffectCount;
 }
 
-void Demon::CreateLoveStarEffect()
+void Demon::Victory(float _DeltaTime)
 {
+	if (1 <= EffectCount)
+	{
+		CreateStarEffect();
+		--EffectCount;
+	}
+
+	//for (UImageRenderer* StarEffect : AllStarEffect)
+	//{
+	//	if (nullptr == StarEffect)
+	//	{
+	//		MsgBoxAssert("Renderer is nullptr");
+	//	}
+	//
+	//	
+	//}
+}
+
+void Demon::CreateStarEffect()
+{
+	float Radius = 100.0f;
+	FVector Center = GetActorLocation() + ImageRenderer->GetPosition();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.021f, WinScale.Y * 0.022f };
+	FVector Pos = ContentsHelper::RandomCirclePoint(Center, Radius);
+	Pos -= GetActorLocation();
+
+	StarEffect NewStarEffect = StarEffect();
+	NewStarEffect.EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
+	//UImageRenderer* Star = 
+	//Star->SetTransform({ Pos, Scale });
+	//Star->SetImage("LoveStar.png");
+	//AllStarEffect.push_back(Star);
+}
+
+void Demon::StarMove()
+{
+
 
 }
 
@@ -110,6 +151,7 @@ void Demon::StateUpdate(float _DeltaTime)
 		Idle(_DeltaTime);
 		break;
 	case EDemonState::Victory:
+		Victory(_DeltaTime);
 		break;
 	}
 }

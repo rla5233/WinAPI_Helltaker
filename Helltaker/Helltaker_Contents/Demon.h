@@ -2,6 +2,13 @@
 
 #include "RenderActor.h"
 
+class StarEffect
+{
+public:
+	UImageRenderer* EffectRenderer = nullptr;
+	bool IsMove = false;
+};
+
 // Ό³Έν :
 class Demon : public RenderActor
 {
@@ -45,14 +52,18 @@ private:
 	void Idle(float _DeltaTime);
 
 	void VictoryStart();
+	void Victory(float _DeltaTime);
 
-	void CreateLoveStarEffect();
+	void CreateStarEffect();
+	void StarMove();
 
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-	std::list<UImageRenderer*> LoveEffect;
+	std::list<StarEffect*> AllStarEffect;
+	static const int StarEffectCount;
+	int EffectCount = 0;
 
 	UImageRenderer* LoveSignRenderer = nullptr;
 	const FVector LoveSignScale = { 0.3f, 0.4f };
