@@ -101,39 +101,68 @@ void Demon::Victory(float _DeltaTime)
 		--EffectCount;
 	}
 
-	//for (UImageRenderer* StarEffect : AllStarEffect)
-	//{
-	//	if (nullptr == StarEffect)
-	//	{
-	//		MsgBoxAssert("Renderer is nullptr");
-	//	}
-	//
-	//	
-	//}
+	StarEffectMoveUpdate(_DeltaTime);
+	
 }
 
 void Demon::CreateStarEffect()
 {
 	float Radius = 100.0f;
-	FVector Center = GetActorLocation() + ImageRenderer->GetPosition();
+	FVector Center = ImageRenderer->GetActorBaseTransform().GetPosition();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.021f, WinScale.Y * 0.022f };
 	FVector Pos = ContentsHelper::RandomCirclePoint(Center, Radius);
 	Pos -= GetActorLocation();
 
-	StarEffect NewStarEffect = StarEffect();
-	NewStarEffect.EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
-	//UImageRenderer* Star = 
-	//Star->SetTransform({ Pos, Scale });
-	//Star->SetImage("LoveStar.png");
-	//AllStarEffect.push_back(Star);
+	StarEffect Star = StarEffect();
+	Star.EffectRenderer = CreateImageRenderer(RenderOrder::Effect);
+	Star.EffectRenderer->SetTransform({ Pos, Scale });
+	Star.EffectRenderer->SetImage("LoveStar.png");
+	Star.IsMove = true;
+	AllStarEffect.push_back(Star);
 }
 
-void Demon::StarMove()
+void Demon::StarEffectMoveUpdate(float _DeltaTime)
 {
+	std::list<StarEffect>::iterator Iter = AllStarEffect.begin();
+	for (Iter; Iter != AllStarEffect.end();)
+	{
+		if (nullptr == Iter->EffectRenderer)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		if (false == Iter->IsMove)
+		{
+			Iter->EffectRenderer->ActiveOff();
+			Iter->EffectRenderer->Destroy();
+			Iter = AllStarEffect.erase(Iter);
+		}
+		else
+		{
+			Iter->StarEffectMove(_DeltaTime);
+			++Iter;
+		}
+	}
+}
+
+void StarEffect::StarEffectMove(float _DeltaTime)
+{
+	if (true == IsMove)
+	{
+		MoveTime += _DeltaTime;
+
+		FVector CurLocation = EffectRenderer->GetActorBaseTransform().GetPosition();
+		
 
 
+		if (1.0f <= MoveTime)
+		{
+			MoveTime = 0.0f;
+			IsMove = false;
+		}
+	}
 }
 
 void Demon::Tick(float _DeltaTime)

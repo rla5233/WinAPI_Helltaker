@@ -5,7 +5,11 @@
 class StarEffect
 {
 public:
+	void StarEffectMove(float _DeltaTime);
+
+public:
 	UImageRenderer* EffectRenderer = nullptr;
+	float MoveTime;
 	bool IsMove = false;
 };
 
@@ -55,13 +59,13 @@ private:
 	void Victory(float _DeltaTime);
 
 	void CreateStarEffect();
-	void StarMove();
+	void StarEffectMoveUpdate(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-	std::list<StarEffect*> AllStarEffect;
+	std::list<StarEffect> AllStarEffect;
 	static const int StarEffectCount;
 	int EffectCount = 0;
 
