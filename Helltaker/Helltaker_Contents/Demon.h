@@ -81,7 +81,6 @@ private:
 	static const FVector LovePlosionScale;
 	static const float LovePlosionInter;
 	static const float LovePlosionDelay;
-
 	
 	Point LocationPoint = { -1, -1 };
 	EDemonState State = EDemonState::None;
