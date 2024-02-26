@@ -199,9 +199,11 @@ void Skeleton::HitStart()
 
 void Skeleton::Death(float _DeltaTime)
 {
+	DeathParticleMoveUpdate(_DeltaTime);
+
 	if (true == HitEffectEndCheck())
 	{
-		Destroy();	
+		//Destroy();	
 	}
 }
 
@@ -219,9 +221,23 @@ void Skeleton::DeathStart()
 	InformDestroytoChapter();
 }
 
+void Skeleton::DeathParticleMoveUpdate(float _DeltaTime)
+{
+	std::list<DeathParticle>::iterator Iter = AllDeathParticle.begin();
+
+	for (Iter; Iter != AllDeathParticle.end(); ++Iter)
+	{
+		if (nullptr == Iter->DeathParticleRenderer)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		Iter->DeathParticleMove(_DeltaTime);
+	}
+}
+
 void Skeleton::CreateRandomDeathParicle()
 {
-	// 14개 파티클 랜덤인듯
 	DeathParticle NewDeathParticle = DeathParticle();
 	NewDeathParticle.DeathParticleRenderer = CreateImageRenderer(RenderOrder::Effect);
 
@@ -234,8 +250,8 @@ void Skeleton::CreateRandomDeathParicle()
 	NewDeathParticle.DeathParticleRenderer->SetImage(Name);
 	NewDeathParticle.DeathParticleRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f)}, WinScale * DeathParticle::Scale });
 	
-	int SpeedX = rand() % 51;
-	int SpeedY = rand() % 101;
+	int SpeedX = rand() % 301 + 200;
+	int SpeedY = -(rand() % 1001 + 1000) ;
 	if (1 == (rand() % 2))
 	{
 		SpeedX *= -1;
@@ -248,8 +264,11 @@ void Skeleton::CreateRandomDeathParicle()
 
 void DeathParticle::DeathParticleMove(float _DeltaTime)
 {
+	FVector CurPos = DeathParticleRenderer->GetPosition();
+	DeathParticleRenderer->SetPosition(CurPos + (Speed * _DeltaTime));
 
-}
+	Speed.Y += 5000.0f * _DeltaTime;
+ }
 
 void Skeleton::Tick(float _DeltaTime)
 {

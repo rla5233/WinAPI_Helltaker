@@ -37,6 +37,7 @@ private:
 	void StateUpdate(float _DeltaTime);
     void StateChange(EHitActorState _State);
 
+	void DeathParticleMoveUpdate(float _DeltaTime);
 	void CreateRandomDeathParicle();
 	
 private:
