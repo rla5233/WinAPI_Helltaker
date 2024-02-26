@@ -1,6 +1,8 @@
 #pragma once
 #include "HitActor.h"
 
+class DeathParticle;
+
 // Ό³Έν :
 class Skeleton : public HitActor
 {
@@ -46,5 +48,17 @@ private:
 	static const FVector HitScale;
 	static const float HitInter;
 
+	std::list<DeathParticle> AllDeathParticle;
+
 	static bool IsLoad;
+};
+
+class DeathParticle
+{
+	friend Skeleton;
+public:
+
+private:
+	UImageRenderer* DeathParticleRenderer = nullptr;
+
 };
