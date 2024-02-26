@@ -67,7 +67,6 @@ void Demon::LoveSignAnimation(float _DeltaTime)
 			IsUp = true;
 		}
 	}
-
 }
 
 void Demon::IdleStart()
@@ -153,8 +152,8 @@ void StarEffect::StarEffectMove(float _DeltaTime)
 	{
 		MoveTime += _DeltaTime;
 
-		FVector CurLocation = EffectRenderer->GetActorBaseTransform().GetPosition();
-		
+		FVector StartPos = EffectRenderer->GetActorBaseTransform().GetPosition();
+		//FVector NextPos = 
 
 
 		if (1.0f <= MoveTime)
