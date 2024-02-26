@@ -53,13 +53,15 @@ private:
 	void CreateStarEffect();
 	void StarEffectMoveUpdate(float _DeltaTime);
 
+	void LovePlosionUpdate();
+	void CreateLovePlosion();
+
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-	std::list<StarEffect> AllStarEffect;
-	static const int StarEffectCount;
-	int EffectCount = 0;
+	static const FVector IdleScale;
+	static const float IdleInter;
 
 	UImageRenderer* LoveSignRenderer = nullptr;
 	const FVector LoveSignScale = { 0.3f, 0.4f };
@@ -69,10 +71,15 @@ private:
 	static const float LoveSignY_MaxLocation;
 	bool IsUp = true;
 
-	static const FVector IdleScale;
-	static const float IdleInter;
-
 	int VictoryOrder = -1;
+	int EffectCount = 0;
+	std::list<StarEffect> AllStarEffect;
+	static const int StarEffectCount;
+
+	UImageRenderer* LovePlosionRenderer = nullptr;
+	static const FVector LovePlosionScale;
+	static const float LovePlosionInter;
+
 	
 	Point LocationPoint = { -1, -1 };
 	EDemonState State = EDemonState::None;

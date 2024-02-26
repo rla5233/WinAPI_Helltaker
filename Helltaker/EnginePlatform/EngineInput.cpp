@@ -62,12 +62,10 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 }
 
 UEngineInput::UEngineInput()
-{
-}
+{}
 
 UEngineInput::~UEngineInput()
-{
-}
+{}
 
 void UEngineInput::InputInit()
 {
@@ -91,8 +89,8 @@ void UEngineInput::InputInit()
 	AllKeys[VK_IME_ON] = EngineKey(VK_IME_ON);
 	AllKeys[VK_JUNJA] = EngineKey(VK_JUNJA);
 	AllKeys[VK_FINAL] = EngineKey(VK_FINAL);
-	AllKeys[VK_HANJA] = EngineKey(VK_HANJA);
-	AllKeys[VK_KANJI] = EngineKey(VK_KANJI);
+	//AllKeys[VK_HANJA] = EngineKey(VK_HANJA);
+	//AllKeys[VK_KANJI] = EngineKey(VK_KANJI);
 	AllKeys[VK_IME_OFF] = EngineKey(VK_IME_OFF);
 	AllKeys[VK_ESCAPE] = EngineKey(VK_ESCAPE);
 	AllKeys[VK_CONVERT] = EngineKey(VK_CONVERT);

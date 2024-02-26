@@ -12,6 +12,9 @@ const float Demon::LoveSignY_MaxLocation = 1.1f;
 const int Demon::StarEffectCount = 20;
 FVector StarEffect::TargetPos = FVector::Zero;
 
+const FVector Demon::LovePlosionScale = { 0.169f, 0.287f };
+const float Demon::LovePlosionInter = 0.02f;
+
 Demon::Demon()
 {
 }
@@ -28,6 +31,7 @@ void Demon::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
 		ContentsHelper::LoadImg("Effect\\Particle", "LoveStar.png");
+		ContentsHelper::LoadFolder("Effect", "LovePlosion");
 		IsLoad = true; 
 	}
 
@@ -103,10 +107,10 @@ void Demon::Victory(float _DeltaTime)
 	case 0:
 		StarEffectUpdate(_DeltaTime);
 		break;
+	case 1:
+		LovePlosionUpdate();
+		break;
 	}
-
-
-
 }
 
 void Demon::StarEffectUpdate(float _DeltaTime)
@@ -141,6 +145,11 @@ void Demon::CreateStarEffect()
 
 void Demon::StarEffectMoveUpdate(float _DeltaTime)
 {
+	if (true == AllStarEffect.empty())
+	{
+		++VictoryOrder;
+	}
+
 	std::list<StarEffect>::iterator Iter = AllStarEffect.begin();
 	for (Iter; Iter != AllStarEffect.end();)
 	{
@@ -178,6 +187,20 @@ void StarEffect::StarEffectMove(const Demon* const _Demon, float _DeltaTime, flo
 			IsMove = false;
 		}
 	}
+}
+
+void Demon::LovePlosionUpdate()
+{
+
+}
+
+void Demon::CreateLovePlosion()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = ContentsHelper::GetWindowScale();
+	LovePlosionRenderer = CreateImageRenderer(RenderOrder::Effect);
+	LovePlosionRenderer->SetImage("LovePlosion");
+	LovePlosionRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * LovePlosionScale });
 }
 
 void Demon::Tick(float _DeltaTime)
