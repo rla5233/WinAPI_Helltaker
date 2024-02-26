@@ -61,4 +61,6 @@ public:
 private:
 	UImageRenderer* DeathParticleRenderer = nullptr;
 	FVector StartPos = FVector::Zero;
+
+	static const FVector Scale;
 };

@@ -9,6 +9,8 @@ const float Skeleton::IdleInter = 0.06f;
 const FVector Skeleton::HitScale = { 0.0494f, 0.083f };
 const float Skeleton::HitInter = 0.04f;
 
+const FVector DeathParticle::Scale = { 0.021f, 0.022f };
+
 Skeleton::Skeleton()
 {}
 
@@ -228,8 +230,7 @@ void Skeleton::CreateRandomDeathParicle()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	NewDeathParticle.DeathParticleRenderer->SetImage(Name);
-	//NewDeathParticle.DeathParticleRenderer->SetTransform();
-	
+	NewDeathParticle.DeathParticleRenderer->SetTransform({ {0, 0}, WinScale * DeathParticle::Scale });
 
 	AllDeathParticle.push_back(NewDeathParticle);
 }
