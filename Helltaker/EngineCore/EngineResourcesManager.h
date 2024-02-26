@@ -66,6 +66,8 @@ public:
 
 	UWindowImage* LoadImg(std::string_view _Path, std::string_view _Name);
 
+	void UnloadImg(std::string_view _Name);
+
 	UWindowImage* FindImg(std::string_view _Name);
 
 	// 그 이미지가 없었는데 새롭게 만드는 기능.

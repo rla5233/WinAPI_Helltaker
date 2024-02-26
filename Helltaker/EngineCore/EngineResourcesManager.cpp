@@ -59,6 +59,21 @@ UWindowImage* UEngineResourcesManager::LoadImg(std::string_view _Path, std::stri
 
 }
 
+void UEngineResourcesManager::UnloadImg(std::string_view _Name)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
+
+	if (false == Images.contains(UpperName))
+	{
+		MsgBoxAssert("이미지명 : " + std::string(_Name) + "존재하지 않는 이미지를 언로드하려고 했습니다");
+		return;
+	}
+
+	UWindowImage* Image = Images[UpperName];
+	Images.erase(UpperName);
+	delete Image;
+}
+
 UWindowImage* UEngineResourcesManager::FindImg(std::string_view _Name)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);
@@ -114,5 +129,5 @@ UWindowImage* UEngineResourcesManager::LoadFolder(std::string_view _Path, std::s
 	// 그래서 Png를 출력하는것도 아니고 부분 반투명
 	Images[UpperName] = NewImage;
 
-	return nullptr;
+	return NewImage;
 }

@@ -5,12 +5,10 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{
-}
+{}
 
 UImageRenderer::~UImageRenderer()
-{
-}
+{}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -78,7 +76,8 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else {
+	else
+	{
 		ImageRender(_DeltaTime);
 	}
 
@@ -88,6 +87,17 @@ void UImageRenderer::BeginPlay()
 {
 	// 부모것을 실행시켜주는 습관을 들이자.
 	USceneComponent::BeginPlay();
+}
+
+void UImageRenderer::Tick(float _DeltaTime)
+{
+	USceneComponent::Tick(_DeltaTime);
+
+	if (nullptr != CurAnimation)
+	{
+		Image = CurAnimation->Image;
+		InfoIndex = CurAnimation->Update(_DeltaTime);
+	}
 }
 
 void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex /*= 0*/)
@@ -240,12 +250,6 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 	if (nullptr == Image)
 	{
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
-	}
-
-	if (nullptr != CurAnimation)
-	{
-		Image = CurAnimation->Image;
-		InfoIndex = CurAnimation->Update(_DeltaTime);
 	}
 
 	FTransform RendererTrans = GetRenderTransForm();

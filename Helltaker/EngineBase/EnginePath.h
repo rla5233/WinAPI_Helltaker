@@ -29,6 +29,8 @@ public:
 	std::string GetFileName() const;
 	std::string GetExtension() const;
 
+	bool IsRoot();
+
 	void MoveParent();
 	void Move(std::string_view _Path);
 

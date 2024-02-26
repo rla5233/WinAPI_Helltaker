@@ -18,8 +18,7 @@
 #pragma comment(lib, "Gdiplus.lib")
 
 UWindowImage::UWindowImage()
-{
-}
+{}
 
 UWindowImage::~UWindowImage()
 {
@@ -570,6 +569,11 @@ void UWindowImage::Cutting(int _X, int _Y)
 		CuttingPos.X = 0.0f;
 		CuttingPos.Y += CuttingScale.Y;
 	}
+}
+
+void UWindowImage::SetCuttingTransform(const FTransform& _CuttingTrans, int _Index)
+{
+	Infos[_Index].CuttingTrans = _CuttingTrans;
 }
 
 Color8Bit UWindowImage::GetColor(int _X, int _Y, Color8Bit _DefaultColor)
