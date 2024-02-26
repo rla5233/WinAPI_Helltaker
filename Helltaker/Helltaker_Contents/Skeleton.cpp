@@ -152,7 +152,8 @@ void Skeleton::Move(float _DeltaTime)
 	if (false == IsMove())
 	{
 		Point CurPoint = GetLocationPoint();
-		if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
+		if (2 < ImageRenderer->GetCurAnimationFrame() && 
+			true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 		{
 			StateChange(EHitActorState::Death);
 			return;

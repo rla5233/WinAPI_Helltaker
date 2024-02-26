@@ -324,6 +324,7 @@ void Hero::Kick(float _DeltaTime)
 		}
 
 		ThornHitCheck();
+		UpdateActionPoint();
 		GetChapter()->M_UpdateHeroActionPoint();
 	}
 }
@@ -334,8 +335,6 @@ void Hero::KickStart(float _DeltaTime, int _Key1, int _Key2)
 	CanActionCheck = false;
 
 	GetChapter()->M_ChangeThornState();
-
-	UpdateActionPoint();
 
 	Point NextPoint = GetNextLocationPoint();
 	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
