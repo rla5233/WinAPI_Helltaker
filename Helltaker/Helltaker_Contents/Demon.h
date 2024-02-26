@@ -49,6 +49,7 @@ private:
 	void VictoryStart();
 	void Victory(float _DeltaTime);
 
+	void StarEffectUpdate(float _DeltaTime);
 	void CreateStarEffect();
 	void StarEffectMoveUpdate(float _DeltaTime);
 
@@ -70,6 +71,8 @@ private:
 
 	static const FVector IdleScale;
 	static const float IdleInter;
+
+	int VictoryOrder = -1;
 	
 	Point LocationPoint = { -1, -1 };
 	EDemonState State = EDemonState::None;

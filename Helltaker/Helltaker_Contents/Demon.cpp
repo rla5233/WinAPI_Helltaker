@@ -93,9 +93,23 @@ void Demon::VictoryStart()
 
 	LoveSignRenderer->ActiveOff();
 	EffectCount = StarEffectCount;
+	VictoryOrder = 0;
 }
 
 void Demon::Victory(float _DeltaTime)
+{
+	switch (VictoryOrder)
+	{
+	case 0:
+		StarEffectUpdate(_DeltaTime);
+		break;
+	}
+
+
+
+}
+
+void Demon::StarEffectUpdate(float _DeltaTime)
 {
 	if (1 <= EffectCount)
 	{

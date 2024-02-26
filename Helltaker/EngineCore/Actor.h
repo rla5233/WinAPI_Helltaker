@@ -79,7 +79,7 @@ public:
 	void AllRenderersActiveOff();
 	void AllRenderersActiveOn();
 
-	void SetActive(bool _Active, float _ActiveTime /*= 0.0f*/) override;
+	void SetActive(bool _Active, float _ActiveTime = 0.0f) override;
 
 protected:
 	void Tick(float _DeltaTime) override;
