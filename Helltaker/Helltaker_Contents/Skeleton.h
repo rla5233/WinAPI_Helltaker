@@ -17,6 +17,8 @@ public:
 	Skeleton& operator=(const Skeleton& _Other) = delete;
 	Skeleton& operator=(Skeleton&& _Other) noexcept = delete;
 
+	void ThornHitCheck() override;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

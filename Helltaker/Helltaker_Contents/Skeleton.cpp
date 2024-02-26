@@ -120,13 +120,17 @@ void Skeleton::NextTileCheck(Point _Point)
 	}	
 }
 
-void Skeleton::Idle(float _DeltaTime)
+void Skeleton::ThornHitCheck()
 {
 	Point CurPoint = GetLocationPoint();
 	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 	{
 		StateChange(EHitActorState::Death);
 	}
+}
+
+void Skeleton::Idle(float _DeltaTime)
+{
 }
 
 void Skeleton::IdleStart()

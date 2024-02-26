@@ -2,6 +2,7 @@
 
 #include "ContentsHelper.h"
 #include "ChapterManager.h"
+#include "Skeleton.h"
 
 bool Thorn::IsLoad = false;
 
@@ -47,6 +48,14 @@ void Thorn::IdleStart()
 
 void Thorn::Up(float _DeltaTime)
 {
+	if (3 == ImageRenderer->GetCurAnimationFrame())
+	{
+		Skeleton* Skel = dynamic_cast<Skeleton*>(GetChapter()->M_GetHitActor(ThornPoint));
+		if (nullptr != Skel)
+		{
+			Skel->ThornHitCheck();
+		}
+	}
 }
 
 void Thorn::UpStart()
