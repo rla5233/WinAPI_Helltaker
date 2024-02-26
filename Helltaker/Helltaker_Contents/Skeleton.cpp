@@ -262,8 +262,8 @@ void Skeleton::CreateRandomDeathParicle()
 	NewDeathParticle.DeathParticleRenderer->SetImage(Name);
 	NewDeathParticle.DeathParticleRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f)}, WinScale * DeathParticle::Scale });
 	
-	int SpeedX = rand() % 301 + 200;
-	int SpeedY = -(rand() % 1001 + 1000) ;
+	int SpeedX = rand() % 451 + 50;
+	int SpeedY = -(rand() % 1251 + 1000) ;
 	if (1 == (rand() % 2))
 	{
 		SpeedX *= -1;
