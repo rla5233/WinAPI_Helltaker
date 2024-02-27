@@ -41,7 +41,6 @@ public:
 
 	void CreateTransition();
 	void SpawnDialogue();
-	void SpawnBooper();
 
 	void SetFocusMenuIndex(int _Index)
 	{
@@ -90,5 +89,6 @@ private:
 	int SelectChapterNum = -1;
 	EMainMenuState State = EMainMenuState::None;
 
+	static const std::vector<const char*> MainMenu_Script;
 	static bool IsLoad;
 };

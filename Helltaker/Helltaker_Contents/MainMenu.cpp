@@ -13,6 +13,18 @@
 
 bool MainMenu::IsLoad = false;
 
+const std::vector<const char*> MainMenu::MainMenu_Script
+{
+	/* 0 Demon	  */ "피곤한 악마 판데모니카",
+	/* 1 Script 1 */ "지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?",
+	/* 2 MenuBar1 */ "우리 집에 가면 알 수 있겠지.",
+	/* 3 MenuBar2 */ "글쎄, 내가 널 도와줘야겠는데?",
+	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.",
+	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
+	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
+};
+
+
 MainMenu::MainMenu()
 {
 }
@@ -54,7 +66,7 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 
 	CreateTransition();
 	SpawnDialogue();
-	SpawnBooper();	
+	C_SpawnBooper();	
 
 	StateChange(EMainMenuState::Begin);
 }
@@ -103,29 +115,9 @@ void MainMenu::SpawnDialogue()
 	AllActors.push_back(Dialogue);
 }
 
-void MainMenu::SpawnBooper()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
-	Booper->SetName("Booper");
-	Booper->CreateImageRenderer(RenderOrder::UI);
-	Booper->GetImageRenderer()->SetImage(Booper->GetName());
-	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X / 36.0f, WinScale.Y / 45.0f } });
-	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
-	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
-	Booper->CreateTextRenderer(RenderOrder::Text);
-	Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.085f) }, { 0, 0 } });
-	Booper->GetTextRenderer()->SetFont("맑은 고딕");
-	Booper->GetTextRenderer()->SetTextSize(22);
-	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-	Booper->GetTextRenderer()->SetText(" ");
-	AllActors.push_back(Booper);
-}
-
 void MainMenu::Begin(float _DeltaTime)
 {
-	Booper->GetTextRenderer()->SetText("당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.");
+	//Booper->GetTextRenderer()->SetText("당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.");
 
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
