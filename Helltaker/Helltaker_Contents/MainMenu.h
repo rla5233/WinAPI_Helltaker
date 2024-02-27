@@ -89,4 +89,6 @@ private:
 	
 	int SelectChapterNum = -1;
 	EMainMenuState State = EMainMenuState::None;
+
+	static bool IsLoad;
 };

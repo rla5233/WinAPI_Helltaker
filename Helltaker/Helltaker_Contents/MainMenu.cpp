@@ -11,6 +11,8 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/ImageRenderer.h>
 
+bool MainMenu::IsLoad = false;
+
 MainMenu::MainMenu()
 {
 }
@@ -18,21 +20,27 @@ MainMenu::MainMenu()
 MainMenu::~MainMenu()
 {
 }
+
 // 수정 (리팩토링 가능?)
 void MainMenu::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
-	ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
-	ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
-	ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
-	ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
-	ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
-	ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
-	ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
-	ContentsHelper::LoadFolder("UI", "Booper");
-	ContentsHelper::LoadFolder("Scene", "Transition");
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
+		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
+		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
+		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
+		ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
+		ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
+		ContentsHelper::LoadFolder("UI", "Booper");
+		ContentsHelper::LoadFolder("Scene", "Transition");
+
+		IsLoad = true;
+	}
 }
 
 void MainMenu::LevelStart(ULevel* _PrevLevel)
