@@ -62,7 +62,7 @@ bool RenderActor::FadeInUpdate(UImageRenderer* _Renderer, float _DeltaTime, floa
 	if (true == IsFadeIn)
 	{
 		TimeCount += _DeltaTime * _TimeWeight;
-		float NextAlpha = ContentsHelper::LerpClampf(0, 255, TimeCount);
+		float NextAlpha = ContentsHelper::LerpClampf(0, 1, TimeCount);
 		_Renderer->SetAlpha(NextAlpha);
 
 		if (1.0f <= TimeCount)
@@ -80,7 +80,7 @@ bool RenderActor::FadeOutUpdate(UImageRenderer* _Renderer, float _DeltaTime, flo
 	if (true == IsFadeOut)
 	{
 		TimeCount += _DeltaTime * _TimeWeight;
-		float NextAlpha = ContentsHelper::LerpClampf(255, 0, TimeCount);
+		float NextAlpha = ContentsHelper::LerpClampf(1, 0, TimeCount);
 		_Renderer->SetAlpha(NextAlpha);
 
 		if (1.0f <= TimeCount)

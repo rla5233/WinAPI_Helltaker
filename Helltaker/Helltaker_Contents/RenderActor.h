@@ -39,7 +39,6 @@ public:
 	{
 		IsFadeOut = true;
 	}
-	
 
 	void VibrationEffect(UImageRenderer* _Renderer);
 

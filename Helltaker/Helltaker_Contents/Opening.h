@@ -30,5 +30,5 @@ private:
 	BackGround* OpeningBG = nullptr;
 	Scene* UnityLogo = nullptr;
 
-	float TimeCount = 0;
+	int OpeningOrder = -1;
 };

@@ -29,18 +29,23 @@ void Opening::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-
-	UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.002f);
-	//UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.002f);
-
-	//TimeCount += _DeltaTime;
-	//
-	//if (2 <= TimeCount)
-	//{
-	//	GEngine->CreateLevel<MainMenu>("MainMenu");
-	//	GEngine->ChangeLevel("MainMenu");
-	//}
+	switch (OpeningOrder)
+	{
+	case 0:
+		if (false == UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime))
+		{
+			UnityLogo->FadeOutOn();
+			++OpeningOrder;
+		}
+		break;
+	case 1:
+		if (false == UnityLogo->FadeOutUpdate(UnityLogo->GetImageRenderer(), _DeltaTime))
+		{
+			GEngine->CreateLevel<MainMenu>("MainMenu");
+			GEngine->ChangeLevel("MainMenu");	
+		}
+		break;
+	}
 }
 
 void Opening::LevelStart(ULevel* _PrevLevel)
@@ -59,6 +64,7 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	UnityLogo->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.25f, WinScale.Y * 0.225f } });
 	UnityLogo->FadeInOn();
 
+	OpeningOrder = 0;
 	//ContentsHelper::SoundPlay("Vitality.wav");
 }
 
