@@ -29,11 +29,12 @@ public:
 	void C_SpawnDialogue(std::string_view _Name);
 	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text = " ");
 	void C_SpawnBooper();
-	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.87f }, int _MenuBarCount = 2);
+	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
 	void C_BooperTextSet(std::string_view _Text);
 	void C_BooperChangeAnimation(std::string_view _AnimationName);
 	void C_BooperSetTransform(const FTransform& _Trans);
+	void C_BooperSetTextPosition(const FVector& _Pos);
 	void C_BooperImageRendererOn();
 	void C_BooperImageRendererOff();
 	void C_MenubarTextSet(int _Index, std::string_view _Text);

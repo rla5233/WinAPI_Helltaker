@@ -87,7 +87,8 @@ void MainMenu::EnterStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.995f, WinScale.Y * 0.693f };
-	C_CharacterSetTransform({ {0, 0}, Scale });
+	FVector Pos = { WinScale.X * 0.0222f, WinScale.Y * (-0.0445f) };
+	C_CharacterSetTransform({ Pos, Scale });
 	C_BooperTextSet(MainMenu_Script[2]);
 }
 
@@ -173,10 +174,14 @@ void MainMenu::NewGameLastOrder()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { WinScale.X * 0.67f, WinScale.Y * 0.6f };
+		FVector Pos = { 0.0f, WinScale.Y * (-0.02f) };
 		std::string ImgName = "CutScene1_00";
 		ImgName += std::to_string(NewGameOrder - 1) + ".png";
-		C_ChangeDialogue(ImgName, { { 0, 0 }, Scale });
+		C_ChangeDialogue(ImgName, { Pos, Scale });
+
 		C_BooperTextSet(MainMenu_Script[NewGameOrder + 7]);
+		Pos = { 0.0f, WinScale.Y * (-0.0995f) };
+		C_BooperSetTextPosition(Pos);
 		SelectChapterNum = 1;
 		++NewGameOrder;
 	}
@@ -187,6 +192,10 @@ void MainMenu::NewGameStart()
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
+	C_BooperSetTextPosition(Pos);
 	NewGameOrder = 0;
 }
 

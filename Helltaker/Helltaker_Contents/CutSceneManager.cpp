@@ -113,7 +113,7 @@ void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -2}, {0, 0} });
 		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 		MenuBar[i]->GetTextRenderer()->SetTextSize(30);
-		MenuBar[i]->GetTextRenderer()->SetText("Test");
+		MenuBar[i]->GetTextRenderer()->SetText(" ");
 		MenuBar[i]->GetTextRenderer()->CameraEffectOff();
 
 		if (i == 0)
@@ -171,6 +171,11 @@ void CutSceneManager::C_BooperChangeAnimation(std::string_view _AnimationName)
 void CutSceneManager::C_BooperSetTransform(const FTransform& _Trans)
 {
 	Booper->GetImageRenderer()->SetTransform(_Trans);
+}
+
+void CutSceneManager::C_BooperSetTextPosition(const FVector& _Pos)
+{
+	Booper->GetTextRenderer()->SetPosition(_Pos);
 }
 
 void CutSceneManager::C_BooperImageRendererOn()
