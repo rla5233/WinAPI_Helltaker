@@ -241,7 +241,7 @@ void CutSceneManager::Enter(float _DeltaTime)
 	}
 }
 
-void CutSceneManager::Select(float _DeltaTime)
+void CutSceneManager::Select()
 {
 	ResetCheck();
 	FocusMenuBarCheck();
@@ -253,7 +253,7 @@ void CutSceneManager::SelectStart()
 	C_SpawnMenubar();
 }
 
-void CutSceneManager::BadEnd(float _DeltaTime)
+void CutSceneManager::BadEnd()
 {
 	FailOrderCheck();
 }
@@ -386,10 +386,10 @@ void CutSceneManager::C_StateUpdate(float _DeltaTime)
 		Enter(_DeltaTime);
 		break;
 	case ECutSceneState::Select:
-		Select(_DeltaTime);
+		Select();
 		break;
 	case ECutSceneState::BadEnd:
-		BadEnd(_DeltaTime);
+		BadEnd();
 		break;
 	case ECutSceneState::Success:
 		Success(_DeltaTime);

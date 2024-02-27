@@ -87,7 +87,7 @@ void MainMenu::Enter(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		StateChange(EMainMenuState::SelectMenu);
+		StateChange(EMainMenuState::Select);
 	}
 }
 
@@ -101,12 +101,12 @@ void MainMenu::EnterStart()
 	C_BooperTextSet(MainMenu_Script[2]);
 }
 
-void MainMenu::SelectMenu(float _DeltaTime)
+void MainMenu::Select()
 {
 	FocusMenuBarCheck();
 }
 
-void MainMenu::SelectMenuStart()
+void MainMenu::SelectStart()
 {
 	C_BooperImageRendererOff();
 	C_BooperTextSet(" ");
@@ -115,6 +115,11 @@ void MainMenu::SelectMenuStart()
 	C_MenubarTextSet(0, MainMenu_Script[3]);
 	C_MenubarTextSet(1, MainMenu_Script[4]);
 	C_MenubarTextSet(2, MainMenu_Script[5]);
+}
+
+void MainMenu::SelectMenu()
+{
+	int a = 0;
 }
 
 void MainMenu::CutScene(float _DeltaTime)
@@ -221,8 +226,8 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	case EMainMenuState::Enter:
 		Enter(_DeltaTime);
 		break;
-	case EMainMenuState::SelectMenu:
-		SelectMenu(_DeltaTime);
+	case EMainMenuState::Select:
+		Select();
 		break;
 	case EMainMenuState::SelectChapter:
 		break;
@@ -250,8 +255,8 @@ void MainMenu::StateChange(EMainMenuState _State)
 		case EMainMenuState::Enter:
 			EnterStart();
 			break;
-		case EMainMenuState::SelectMenu:
-			SelectMenuStart();
+		case EMainMenuState::Select:
+			SelectStart();
 			break;
 		case EMainMenuState::SelectChapter:
 			break;

@@ -38,6 +38,10 @@ protected:
 	void LevelStart(ULevel* _PrevLevel) override;
 	void LevelEnd(ULevel* _NextLevel) override;
 
+	void SelectStart() override;
+	void Select() override;
+	void SelectMenu() override;
+
 private:
 	void StateUpdate(float _DeltaTime);
 
@@ -46,9 +50,6 @@ private:
 
 	void EnterStart();
 	void Enter(float _DeltaTime);
-
-	void SelectMenuStart();
-	void SelectMenu(float _DeltaTime);
 
 
 private:

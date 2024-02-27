@@ -88,6 +88,7 @@ protected:
 	virtual void EnterStart() {};
 
 	virtual void SelectStart();
+	virtual void Select();
 	virtual void SelectMenu() {};
 
 	virtual void BadEndStart();
@@ -107,9 +108,8 @@ protected:
 private:
 	void C_StateUpdate(float _DeltaTime);
 
-	void Select(float _DeltaTime);
 
-	void BadEnd(float _DeltaTime);
+	void BadEnd();
 
 	void SetFocusMenuIndex(int _Index);
 

@@ -129,7 +129,7 @@ enum class EMainMenuState
 	None,
 	Begin,
 	Enter,
-	SelectMenu,
+	Select,
 	SelectChapter,
 	CutScene,
 	EnterChapter,
