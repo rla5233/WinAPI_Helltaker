@@ -163,6 +163,7 @@ void ChapterManager::CreateTransition()
 	TransitionActor->GetImageRenderer()->SetImage("Transition");
 	TransitionActor->GetImageRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
 	TransitionActor->GetImageRenderer()->CameraEffectOff();
+	TransitionActor->GetImageRenderer()->ActiveOff();
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
