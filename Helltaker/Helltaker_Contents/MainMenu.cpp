@@ -93,11 +93,12 @@ void MainMenu::Enter(float _DeltaTime)
 
 void MainMenu::EnterStart()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
-	//C_CharacterSetTransform();
 
-	//Booper->GetTextRenderer()->SetText();
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.995f, WinScale.Y * 0.693f };
+	C_CharacterSetTransform({ {0, 0}, Scale });
+	C_BooperTextSet(MainMenu_Script[2]);
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
