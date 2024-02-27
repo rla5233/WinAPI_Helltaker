@@ -34,6 +34,7 @@ protected:
 	void SuccessStart() override;
 private:
 
+	static const std::vector<const char*> Chap3_Script;
 	static bool IsLoad;
 };
 
