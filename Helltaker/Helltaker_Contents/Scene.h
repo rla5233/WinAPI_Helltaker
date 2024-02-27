@@ -18,6 +18,14 @@ public:
 
 	void CreateImageRenderer(RenderOrder _Order);
 
+	bool FadeInUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
+	bool FadeOutUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
+
+	void FadeInOn()
+	{
+		IsFadeIn = true;
+	}
+	
 	UImageRenderer* GetImageRenderer() const
 	{
 		return ImageRenderer;
@@ -27,4 +35,9 @@ protected:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
+
+	bool IsFadeIn = false;
+	bool IsFadeOut = false;
+
+	float TimeCount = 0.0f;
 };

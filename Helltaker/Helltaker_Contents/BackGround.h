@@ -20,7 +20,7 @@ public:
 	void CreateSceneBackGround(std::string_view _Name);
 	void BackGroundChange(std::string_view _Name);
 
-	void ScaleChangeUpdate(const FVector& _TargetScale, float _DeltaTime, float _TimeWeight);
+	void ScaleChangeUpdate(const FVector& _TargetScale, float _DeltaTime, float _TimeWeight = 1.0f);
 	void ScaleChangeOn()
 	{
 		StartScale = ImageRenderer->GetTransform().GetScale();

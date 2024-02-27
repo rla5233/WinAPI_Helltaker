@@ -30,11 +30,9 @@ void Opening::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	OpeningBG->ScaleChangeUpdate({ WinScale * 1.01f }, _DeltaTime, );
 
-
-
-
+	UnityLogo->FadeInUpdate(_DeltaTime, 0.002f);
+	UnityLogo->FadeInUpdate(_DeltaTime, 0.002f);
 
 	//TimeCount += _DeltaTime;
 	//
@@ -52,14 +50,14 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	OpeningBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	OpeningBG->CreateBackGround("OpeningBG");
-	OpeningBG->ScaleChangeOn();
 
 	UnityLogo = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.522f });
 	UnityLogo->SetName("UnityLogo");
 	UnityLogo->CreateImageRenderer(RenderOrder::Scene);
 	UnityLogo->GetImageRenderer()->SetImage(UnityLogo->GetName() + ".png");
-	UnityLogo->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.25f, WinScale.Y * 0.25f } });
+	UnityLogo->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.25f, WinScale.Y * 0.225f } });
+	UnityLogo->FadeInOn();
 
 	//ContentsHelper::SoundPlay("Vitality.wav");
 }
