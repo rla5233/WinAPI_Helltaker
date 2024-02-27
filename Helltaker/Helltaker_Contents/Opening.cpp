@@ -31,8 +31,8 @@ void Opening::Tick(float _DeltaTime)
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 
-	UnityLogo->FadeInUpdate(_DeltaTime, 0.002f);
-	UnityLogo->FadeInUpdate(_DeltaTime, 0.002f);
+	UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.002f);
+	//UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.002f);
 
 	//TimeCount += _DeltaTime;
 	//

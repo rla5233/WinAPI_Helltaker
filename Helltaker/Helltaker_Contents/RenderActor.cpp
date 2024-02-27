@@ -57,6 +57,42 @@ ChapterManager* RenderActor::GetChapter()
 	return Ptr;
 }
 
+bool RenderActor::FadeInUpdate(UImageRenderer* _Renderer, float _DeltaTime, float _TimeWeight /* = 1.0f*/)
+{
+	if (true == IsFadeIn)
+	{
+		TimeCount += _DeltaTime * _TimeWeight;
+		float NextAlpha = ContentsHelper::LerpClampf(0, 255, TimeCount);
+		_Renderer->SetAlpha(NextAlpha);
+
+		if (1.0f <= TimeCount)
+		{
+			TimeCount = 0.0f;
+			IsFadeIn = false;
+		}
+	}
+
+	return IsFadeIn;
+}
+
+bool RenderActor::FadeOutUpdate(UImageRenderer* _Renderer, float _DeltaTime, float _TimeWeight)
+{
+	if (true == IsFadeOut)
+	{
+		TimeCount += _DeltaTime * _TimeWeight;
+		float NextAlpha = ContentsHelper::LerpClampf(255, 0, TimeCount);
+		_Renderer->SetAlpha(NextAlpha);
+
+		if (1.0f <= TimeCount)
+		{
+			TimeCount = 0.0f;
+			IsFadeOut = false;
+		}
+	}
+
+	return IsFadeOut;
+}
+
 void RenderActor::VibrationEffect(UImageRenderer* _Renderer)
 {
 	FTransform OrgTransform = _Renderer->GetTransform();
