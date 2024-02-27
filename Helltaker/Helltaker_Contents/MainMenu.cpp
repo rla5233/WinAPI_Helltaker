@@ -18,6 +18,8 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 {
 	/* 0 Demon	  */ "위대한 파리 베엘제붑",
 	/* 1 Script 0 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
+	/* 2 Script 1 */ "반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.",
+	
 	/* 2 MenuBar1 */ "우리 집에 가면 알 수 있겠지.",
 	/* 3 MenuBar2 */ "글쎄, 내가 널 도와줘야겠는데?",
 	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.",
@@ -86,30 +88,16 @@ void MainMenu::Enter(float _DeltaTime)
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::SelectMenu);
-		return;
 	}
 }
 
 void MainMenu::EnterStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
+	//C_CharacterSetTransform();
 
-	Beel = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	Beel->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.9f });
-	Beel->SetName("Beel_Fly");
-	Beel->CreateImageRenderer(RenderOrder::Character);
-	Beel->CreateNameRenderer(RenderOrder::Text);
-	AllActors.push_back(Beel);
-
-	Beel->GetImageRenderer()->SetImage(Beel->GetName() + ".png");
-	Beel->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 1.44f} });
-	Beel->GetNameRenderer()->SetText("위대한 파리 베엘제붑");
-	Beel->GetNameRenderer()->SetFont("맑은 고딕");
-	Beel->GetNameRenderer()->SetTextSize(23);
-	Beel->GetNameRenderer()->SetTransform({ {0.0f, WinScale.Y * (0.36f)},{0,0}});
-	Beel->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
-
-	Booper->GetTextRenderer()->SetText("반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.");
+	//Booper->GetTextRenderer()->SetText();
 }
 
 void MainMenu::SelectMenu(float _DeltaTime)
