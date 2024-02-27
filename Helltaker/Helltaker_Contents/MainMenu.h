@@ -57,19 +57,8 @@ private:
 private:
 	std::list<AActor*> AllActors;
 	
-	Character* Beel = nullptr;	
-	Scene* Dialogue = nullptr;
-	Scene* SceneActor = nullptr;
 	int SceneIndex = -1;
 	bool SceneInput = false;
-	
-	UI* Booper = nullptr;
-	std::vector<UI*> MenuBarVec;
-	
-	const int MenuBarCount = 3;
-	int FocusMenuIndex = -1;
-
-	bool IsSelectMenuInit = false;
 	
 	int SelectChapterNum = -1;
 	EMainMenuState State = EMainMenuState::None;

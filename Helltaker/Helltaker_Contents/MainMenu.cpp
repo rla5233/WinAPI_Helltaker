@@ -147,57 +147,54 @@ void MainMenu::NewGameStart()
 	C_BooperTextSet(MainMenu_Script[6]);
 
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	SceneActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	SceneActor->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.385f });
 
 	//SelectChapterNum = 1;
 }
 
 void MainMenu::CutScene(float _DeltaTime)
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		++SceneIndex;
-		SceneInput = true;
-	}
-	
-	if (true == SceneInput)
-	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-
-		switch (SceneIndex)
-		{
-		case 0:
-			Booper->GetTextRenderer()->SetText("혹시 해설자가 필요하진 않은가?\n ");
-			break;
-		case 1:
-			Dialogue->GetImageRenderer()->ActiveOff();
-			Beel->GetImageRenderer()->ActiveOff();
-			Beel->GetNameRenderer()->ActiveOff();
-			Booper->GetTextRenderer()->SetText("허락해준다면 참 고맙겠어.\n ");
-			break;
-		case 2:
-			SceneActor->CreateImageRenderer(RenderOrder::Scene);
-			SceneActor->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
-			SceneActor->GetImageRenderer()->SetImage("CutScene1_001.png");
-			Booper->GetTextRenderer()->SetText("어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.");
-			break;
-		case 3:
-			SceneActor->GetImageRenderer()->SetImage("CutScene1_002.png");
-			Booper->GetTextRenderer()->SetText("하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.");
-			break;
-		case 4:
-			SceneActor->GetImageRenderer()->SetImage("CutScene1_003.png");
-			Booper->GetTextRenderer()->SetText("\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.");
-			break;
-		case 5:
-			StateChange(EMainMenuState::EnterChapter);
-			break;
-		}
-
-		SceneInput = false;
-	}
+	//if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	//{
+	//	++SceneIndex;
+	//	SceneInput = true;
+	//}
+	//
+	//if (true == SceneInput)
+	//{
+	//	FVector WinScale = ContentsHelper::GetWindowScale();
+	//
+	//	switch (SceneIndex)
+	//	{
+	//	case 0:
+	//		Booper->GetTextRenderer()->SetText("혹시 해설자가 필요하진 않은가?\n ");
+	//		break;
+	//	case 1:
+	//		Dialogue->GetImageRenderer()->ActiveOff();
+	//		Beel->GetImageRenderer()->ActiveOff();
+	//		Beel->GetNameRenderer()->ActiveOff();
+	//		Booper->GetTextRenderer()->SetText("허락해준다면 참 고맙겠어.\n ");
+	//		break;
+	//	case 2:
+	//		SceneActor->CreateImageRenderer(RenderOrder::Scene);
+	//		SceneActor->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
+	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_001.png");
+	//		Booper->GetTextRenderer()->SetText("어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.");
+	//		break;
+	//	case 3:
+	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_002.png");
+	//		Booper->GetTextRenderer()->SetText("하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.");
+	//		break;
+	//	case 4:
+	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_003.png");
+	//		Booper->GetTextRenderer()->SetText("\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.");
+	//		break;
+	//	case 5:
+	//		StateChange(EMainMenuState::EnterChapter);
+	//		break;
+	//	}
+	//
+	//	SceneInput = false;
+	//}
 }
 
 void MainMenu::EnterChapter(float _DeltaTime)
