@@ -16,11 +16,6 @@ public:
 	MainMenu& operator=(const MainMenu& _Other) = delete;
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
-	void EnterChapter(float _DeltaTime);
-	void EnterChapterStart();
-
-	void Exit(float _DeltaTime);
-	
 	void StateChange(EMainMenuState _State);
 
 protected:
@@ -48,6 +43,12 @@ private:
 	void NewGameOrder1();
 	void NewGameOrder2();
 	void NewGameLastOrder();
+
+	void EnterChapter();
+	void EnterChapterStart();
+
+	void Exit();
+	void ExitStart();
 
 private:
 	int NewGameOrder = -1;

@@ -20,6 +20,7 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 	/* 9  NewGame4 */ "어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.",
 	/* 10 NewGame5 */ "하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.",
 	/* 11 NewGame6 */ "\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.",
+	/* 12 Exit     */ "나도 수 없이 시도 해봤지만 아직 제대로 성공한 적이 없지."
 };
 
 MainMenu::MainMenu()
@@ -117,7 +118,7 @@ void MainMenu::SelectMenu()
 		StateChange(EMainMenuState::None);
 		break;
 	case 2:
-		StateChange(EMainMenuState::None);
+		StateChange(EMainMenuState::Exit);
 		break;
 	}
 }
@@ -189,7 +190,7 @@ void MainMenu::NewGameStart()
 	NewGameOrder = 0;
 }
 
-void MainMenu::EnterChapter(float _DeltaTime)
+void MainMenu::EnterChapter()
 {
 	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
 	{
@@ -208,8 +209,20 @@ void MainMenu::EnterChapterStart()
 	TransitionOn();
 }
 
-void MainMenu::Exit(float _DeltaTime)
-{}
+void MainMenu::Exit()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		GEngine->MainWindow.Off();;
+	}
+}
+
+void MainMenu::ExitStart()
+{
+	C_MenubarRenderActiveOff();
+	C_BooperImageRendererOn();
+	C_BooperTextSet(MainMenu_Script[12]);
+}
 
 void MainMenu::Tick(float _DeltaTime)
 {
@@ -235,11 +248,10 @@ void MainMenu::StateUpdate(float _DeltaTime)
 		NewGame();
 		break;
 	case EMainMenuState::EnterChapter:
-		EnterChapter(_DeltaTime);
+		EnterChapter();
 		break;
-	
 	case EMainMenuState::Exit:
-		Exit(_DeltaTime);
+		Exit();
 		break;
 	}
 }
@@ -265,8 +277,8 @@ void MainMenu::StateChange(EMainMenuState _State)
 		case EMainMenuState::EnterChapter:
 			EnterChapterStart();
 			break;
-
 		case EMainMenuState::Exit:
+			ExitStart();
 			break;
 		}
 	}
