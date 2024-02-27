@@ -225,6 +225,7 @@ void MainMenu::SelectChapter(float _DeltaTime)
 void MainMenu::SelectChapterStart()
 {
 	C_MenubarRenderActiveOff();
+	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
 
 	//Scene* New = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	//New->SetActorLocation({1920 * 0.5f, 1080 * 0.75f});
