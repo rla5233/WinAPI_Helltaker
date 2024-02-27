@@ -39,14 +39,10 @@ void ChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("UI", "ChapterUI.png");
-
-#ifdef DEBUG
-		// 디버그 용
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
-
 		ContentsHelper::LoadFolder("Scene", "Transition");
-#endif 
+		
 		IsLoad = true;
 	}
 }

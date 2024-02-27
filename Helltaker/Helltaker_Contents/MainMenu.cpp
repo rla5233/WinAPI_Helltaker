@@ -244,10 +244,10 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	case EMainMenuState::NewGame:
 		NewGame();
 		break;
-
 	case EMainMenuState::EnterChapter:
 		EnterChapter(_DeltaTime);
 		break;
+	
 	case EMainMenuState::Exit:
 		Exit(_DeltaTime);
 		break;

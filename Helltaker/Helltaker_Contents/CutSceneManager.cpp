@@ -30,17 +30,14 @@ void CutSceneManager::BeginPlay()
 
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
-		ContentsHelper::LoadFolder("Scene\\Dialogue", "Death");
-		ContentsHelper::LoadFolder("Scene\\Dialogue", "Success");
-
-#ifdef DEBUG
-		// 디버그 용
-		ContentsHelper::LoadFolder("UI", "Booper");
 		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
 		ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
 		ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
-#endif 
+		ContentsHelper::LoadFolder("UI", "Booper");
+		ContentsHelper::LoadFolder("Scene\\Dialogue", "Death");
+		ContentsHelper::LoadFolder("Scene\\Dialogue", "Success");
+		
 		IsLoad = true;
 	}
 }
