@@ -38,7 +38,6 @@ void MainMenu::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
-		ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_002.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
@@ -54,6 +53,13 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 
 	C_CreateSceneBG();
 	C_SpawnDialogue("MainMenuDialogue_001.png");
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector ImgScale = C_GetDialogue()->GetImageRenderer()->GetImage()->GetScale();
+	FVector Scale = { ImgScale.X * WinScale.X / 1920.0f, WinScale.Y * 0.5045f };
+	FVector Pos = { (Scale.X - WinScale.X) * 0.5f, 0.0f };
+	C_GetDialogue()->GetImageRenderer()->SetTransform({ Pos, Scale });
+	
 	C_SpawnBooper();	
 	CreateTransition();
 
@@ -237,9 +243,18 @@ void MainMenu::ExitStart()
 	C_BooperSetTextPosition(Pos);
 }
 
+void MainMenu::DialogueMoveUpdate(float _DeltaTime)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector CurPos = C_GetDialogue()->GetImageRenderer()->GetPosition();
+	CurPos += { WinScale.X * 0.0007f, 0.0f };
+}
+
 void MainMenu::Tick(float _DeltaTime)
 {
 	CutSceneManager::Tick(_DeltaTime);
+
+	DialogueMoveUpdate(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }

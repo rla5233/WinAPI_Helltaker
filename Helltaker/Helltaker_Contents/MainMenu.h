@@ -50,6 +50,8 @@ private:
 	void Exit();
 	void ExitStart();
 
+	void DialogueMoveUpdate(float _DeltaTime);
+
 private:
 	int NewGameOrder = -1;
 	int SelectChapterNum = -1;

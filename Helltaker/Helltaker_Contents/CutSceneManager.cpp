@@ -58,7 +58,7 @@ void CutSceneManager::C_SpawnDialogue(std::string_view _Name)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
+	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
 	Dialogue->SetName("Dialogue");
 	Dialogue->CreateImageRenderer(RenderOrder::Scene);
 	Dialogue->GetImageRenderer()->SetImage(_Name);
@@ -140,7 +140,7 @@ void CutSceneManager::C_SpawnBooper()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.15f });
+	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.87f });
 	Booper->SetName("Booper");
 	Booper->CreateImageRenderer(RenderOrder::UI);
 	Booper->GetImageRenderer()->SetImage(Booper->GetName());
