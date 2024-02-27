@@ -223,10 +223,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Dialogue.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Helltaker_ContentsCore.h">
       <SubType>
       </SubType>
@@ -342,10 +338,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Demon.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Dialogue.cpp">
       <SubType>
       </SubType>
     </ClCompile>

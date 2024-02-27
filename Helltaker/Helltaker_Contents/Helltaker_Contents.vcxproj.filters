@@ -10,9 +10,6 @@
     <ClInclude Include="BackGround.h">
       <Filter>Object\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Dialogue.h">
-      <Filter>Object\Actor\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Hero.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
@@ -101,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Object\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialogue.cpp">
-      <Filter>Object\Actor\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
       <Filter>Object\Actor\Chapter</Filter>

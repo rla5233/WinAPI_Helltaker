@@ -1,15 +1,8 @@
 ﻿#include "MainMenu.h"
 
-#include "BackGround.h"
-#include "Dialogue.h"
 #include "Character.h"
 #include "Scene.h"
-#include "UI.h"
 #include "Chapter1.h"
-
-#include <string>
-#include <EnginePlatform/EngineInput.h>
-#include <EngineCore/ImageRenderer.h>
 
 bool MainMenu::IsLoad = false;
 
@@ -27,9 +20,6 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 	/* 9  NewGame4 */ "어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.",
 	/* 10 NewGame5 */ "하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.",
 	/* 11 NewGame6 */ "\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.",
-	
-	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
-	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
 };
 
 MainMenu::MainMenu()
