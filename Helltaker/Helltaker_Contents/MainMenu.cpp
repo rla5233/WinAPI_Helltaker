@@ -148,7 +148,10 @@ void MainMenu::NewGame()
 		NewGameLastOrder();
 		break;
 	case 5:
-		StateChange(EMainMenuState::EnterChapter);
+		if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		{
+			StateChange(EMainMenuState::EnterChapter);
+		}
 		break;
 	}
 }
