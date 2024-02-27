@@ -64,17 +64,3 @@ void RenderActor::VibrationEffect(UImageRenderer* _Renderer)
 
 	_Renderer->SetTransform(OrgTransform);
 }
-
-void RenderActor::ScaleChangeUpdate(
-	UImageRenderer* _Renderer, 
-	FVector _StartScale,
-	FVector _TargetScale,
-	float _DeltaTime)
-{
-	if (true == IsScaleChange)
-	{
-	
-
-
-	}
-}

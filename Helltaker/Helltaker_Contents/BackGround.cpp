@@ -44,3 +44,20 @@ void BackGround::BackGroundChange(std::string_view _Name)
 {
 	ImageRenderer->SetImage(_Name);
 }
+
+void BackGround::ScaleChangeUpdate(const FVector& _TargetScale, float _DeltaTime, float _TimeWeight)
+{
+	if (true == IsScaleChange)
+	{
+		ScaleChangeTime += (_DeltaTime * _TimeWeight);
+		
+		FVector NextScale = FVector::LerpClamp(StartScale, _TargetScale, ScaleChangeTime);
+		ImageRenderer->SetScale(NextScale);
+
+		if (1.0f <= ScaleChangeTime)
+		{
+			ScaleChangeTime = 0.0f;
+			IsScaleChange = false;
+		}
+	}
+}

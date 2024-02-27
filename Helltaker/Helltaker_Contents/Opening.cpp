@@ -29,7 +29,8 @@ void Opening::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	//OpeningBG->ScaleChangeUpdate(OpeningBG->GetImageRenderer(), );
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	OpeningBG->ScaleChangeUpdate({ WinScale * 1.01f }, _DeltaTime, );
 
 
 
