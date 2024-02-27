@@ -187,17 +187,19 @@ void CutSceneManager::C_ChangeCharacterAnimation(std::string_view _AnimationName
 	SceneCharacter->GetImageRenderer()->ChangeAnimation(_AnimationName);
 }
 
-void CutSceneManager::C_SpawnMenubar()
+void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 {
  	float interval = 0.0f;
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = WinScale * _Pos;
 
+	MenuBarCount = _MenuBarCount;
 	MenuBar.reserve(MenuBarCount);
 	for (int i = 0; i < MenuBarCount; i++)
 	{
 		MenuBar.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
 
-		MenuBar[i]->SetActorLocation({ WinScale.hX(), (WinScale.Y * 0.87f) + interval });
+		MenuBar[i]->SetActorLocation({ Pos.X, Pos.Y + interval });
 		MenuBar[i]->SetName("MenuBar");
 
 		MenuBar[i]->CreateImageRenderer(RenderOrder::UI);

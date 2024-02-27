@@ -169,6 +169,7 @@ void MainMenu::SelectMenuStart()
 {
 	C_BooperImageRendererOff();
 	C_BooperTextSet(" ");
+	C_SpawnMenubar({ 0.5f, 0.79f }, 3);
 
 	//if (false == IsSelectMenuInit)
 	//{

@@ -29,7 +29,7 @@ public:
 	void C_SpawnDialogue(std::string_view _Name);
 	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text = " ");
 	void C_SpawnBooper();
-	void C_SpawnMenubar();
+	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.87f }, int _MenuBarCount = 2);
 
 	void C_BooperTextSet(std::string_view _Text);
 	void C_BooperChangeAnimation(std::string_view _AnimationName);
@@ -61,7 +61,6 @@ public:
 	{
 		return FocusMenuIndex;
 	}
-
 
 	void C_AddFailOrder(int _Order)
 	{
@@ -119,7 +118,7 @@ private:
 	Scene* Dialogue = nullptr;
 	UI* Booper = nullptr;
 	std::vector<UI*> MenuBar;
-	int MenuBarCount = 2;
+	int MenuBarCount = -1;
 	int FocusMenuIndex = -1;
 
 	int FailOrder = -1;
