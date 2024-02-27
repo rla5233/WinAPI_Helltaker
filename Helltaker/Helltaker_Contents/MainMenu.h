@@ -36,8 +36,6 @@ public:
 
 	void Exit(float _DeltaTime);
 
-	void CreateTransition();
-
 	void SetFocusMenuIndex(int _Index)
 	{
 		FocusMenuIndex = _Index;

@@ -88,20 +88,6 @@ void MainMenu::LevelEnd(ULevel* _NextLevel)
 	AllActors.clear();
 }
 
-void MainMenu::CreateTransition()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	TransitionActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Transition));
-	TransitionActor->SetName("Transition");
-	TransitionActor->CreateImageRenderer(RenderOrder::Transition);
-	TransitionActor->SetActorLocation(WinScale.Half2D());
-	TransitionActor->GetImageRenderer()->SetTransform({ { 0, 0 }, WinScale });
-	TransitionActor->GetImageRenderer()->SetImage("Transition");
-	TransitionActor->GetImageRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
-	TransitionActor->GetImageRenderer()->ActiveOff();
-	AllActors.push_back(TransitionActor);
-}
-
 void MainMenu::Begin(float _DeltaTime)
 {
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
