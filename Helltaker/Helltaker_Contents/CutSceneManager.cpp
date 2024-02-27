@@ -247,9 +247,23 @@ void CutSceneManager::Select(float _DeltaTime)
 	FocusMenuBarCheck();
 }
 
+void CutSceneManager::SelectStart()
+{
+	Booper->GetImageRenderer()->ActiveOff();
+	C_SpawnMenubar();
+}
+
 void CutSceneManager::BadEnd(float _DeltaTime)
 {
 	FailOrderCheck();
+}
+
+void CutSceneManager::BadEndStart()
+{
+	Booper->GetImageRenderer()->ActiveOn();
+	C_MenubarRenderActiveOff();
+
+	FailOrder = 0;
 }
 
 void CutSceneManager::BadEndSetting()
@@ -309,14 +323,6 @@ void CutSceneManager::ResetCheck()
 	}
 }
 
-void CutSceneManager::BadEndStart()
-{
-	Booper->GetImageRenderer()->ActiveOn();
-	C_MenubarRenderActiveOff();
-
-	FailOrder = 0;
-}
-
 void CutSceneManager::Success(float _DeltaTime)
 {
 	ResetCheck();
@@ -353,51 +359,6 @@ void CutSceneManager::SuccessEnd()
 
 	ChapterManager::M_StateChange(EChapterState::End);
 	C_StateChange(ECutSceneState::None);
-}
-
-void CutSceneManager::SelectStart()
-{
-	Booper->GetImageRenderer()->ActiveOff();
-	C_SpawnMenubar();
-}
-
-void CutSceneManager::FocusMenuBarCheck()
-{
-	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
-	{
-		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		SetFocusMenuIndex(FocusMenuIndex - 1);
-		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-	}
-	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
-	{
-		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		SetFocusMenuIndex(FocusMenuIndex + 1);
-		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-	}
-	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		SelectMenu();
-	}
-}
-
-void CutSceneManager::SetFocusMenuIndex(int _Index)
-{
-	FocusMenuIndex = _Index;
-
-	if (FocusMenuIndex < 0)
-	{
-		FocusMenuIndex = MenuBarCount - 1;
-	}
-
-	if (FocusMenuIndex >= MenuBarCount)
-	{
-		FocusMenuIndex = 0;
-	}
 }
 
 void CutSceneManager::CutSceneStart()
@@ -479,4 +440,43 @@ void CutSceneManager::LevelEnd(ULevel* _NextLevel)
 
 	MenuBar.clear();
 	AllCutSceneActors.clear();
+}
+
+void CutSceneManager::FocusMenuBarCheck()
+{
+	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
+	{
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		SetFocusMenuIndex(FocusMenuIndex - 1);
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+	}
+	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
+	{
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		SetFocusMenuIndex(FocusMenuIndex + 1);
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+	}
+	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		SelectMenu();
+	}
+}
+
+void CutSceneManager::SetFocusMenuIndex(int _Index)
+{
+	FocusMenuIndex = _Index;
+
+	if (FocusMenuIndex < 0)
+	{
+		FocusMenuIndex = MenuBarCount - 1;
+	}
+
+	if (FocusMenuIndex >= MenuBarCount)
+	{
+		FocusMenuIndex = 0;
+	}
 }

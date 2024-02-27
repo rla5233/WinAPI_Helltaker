@@ -104,24 +104,6 @@ void MainMenu::EnterStart()
 void MainMenu::SelectMenu(float _DeltaTime)
 {
 	FocusMenuBarCheck();
-
-	//if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	//{
-	//	switch (FocusMenuIndex)
-	//	{
-	//	case 0:
-	//		StateChange(EMainMenuState::CutScene);
-	//		break;
-	//	case 1:
-	//		//StateChange(EMainMenuState::SelectChapter);
-	//		break;
-	//	case 2:
-	//		//StateChange(EMainMenuState::Exit);
-	//		break;
-	//	default:
-	//		break;
-	//	}
-	//}
 }
 
 void MainMenu::SelectMenuStart()
