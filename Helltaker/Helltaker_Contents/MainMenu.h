@@ -53,12 +53,8 @@ private:
 	void NewGameStart();
 	void NewGame(float _DeltaTime);
 
-
 private:
-	std::list<AActor*> AllActors;
-	
-	int SceneIndex = -1;
-	bool SceneInput = false;
+	int NewGameOrder = -1;
 	
 	int SelectChapterNum = -1;
 	EMainMenuState State = EMainMenuState::None;

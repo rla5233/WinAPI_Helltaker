@@ -39,7 +39,7 @@ MainMenu::~MainMenu()
 // 수정 (리팩토링 가능?)
 void MainMenu::BeginPlay()
 {
-	ULevel::BeginPlay();
+	CutSceneManager::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -60,7 +60,7 @@ void MainMenu::BeginPlay()
 
 void MainMenu::LevelStart(ULevel* _PrevLevel)
 {
-	ULevel::LevelStart(_PrevLevel);
+	CutSceneManager::LevelStart(_PrevLevel);
 
 	C_CreateSceneBG();
 	C_SpawnDialogue("MainMenuDialogue_001.png");
@@ -140,13 +140,11 @@ void MainMenu::NewGame(float _DeltaTime)
 
 void MainMenu::NewGameStart()
 {
-	// CutScene 재생
-
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
 
-
+	NewGameOrder = 0;
 
 	//SelectChapterNum = 1;
 }
@@ -221,7 +219,7 @@ void MainMenu::Exit(float _DeltaTime)
 
 void MainMenu::Tick(float _DeltaTime)
 {
-	ULevel::Tick(_DeltaTime);
+	CutSceneManager::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
@@ -288,18 +286,5 @@ void MainMenu::StateChange(EMainMenuState _State)
 
 void MainMenu::LevelEnd(ULevel* _NextLevel)
 {
-	ULevel::LevelEnd(_NextLevel);
-
-	for (AActor* Actor : AllActors)
-	{
-		if (nullptr == Actor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Actor->Destroy(0.0f);
-		Actor = nullptr;
-	}
-
-	AllActors.clear();
+	CutSceneManager::LevelEnd(_NextLevel);
 }
