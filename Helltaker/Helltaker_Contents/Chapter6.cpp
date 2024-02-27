@@ -184,11 +184,10 @@ void Chapter6::BadEndSetting2()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		Dialogue->GetImageRenderer()->SetImage("CutScene_AngelEnd.png");
-		Dialogue->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
-		Dialogue->GetImageRenderer()->ActiveOn();
-		C_BooperTextSet(Chap6_Script[6]);
+		FVector Scale = { WinScale.X * 0.67f, WinScale.Y * 0.6f };
+		C_ChangeDialogue("CutScene_AngelEnd.png", { {0, 0}, Scale });
 
+		C_BooperTextSet(Chap6_Script[6]);
 		C_AddFailOrder(1);
 	}
 }

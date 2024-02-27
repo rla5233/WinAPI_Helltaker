@@ -187,6 +187,13 @@ void CutSceneManager::C_ChangeCharacterAnimation(std::string_view _AnimationName
 	SceneCharacter->GetImageRenderer()->ChangeAnimation(_AnimationName);
 }
 
+void CutSceneManager::C_ChangeDialogue(std::string_view _ImageName, const FTransform& _FTransform)
+{
+	Dialogue->GetImageRenderer()->SetImage(_ImageName);
+	Dialogue->GetImageRenderer()->SetTransform(_FTransform);
+	Dialogue->GetImageRenderer()->ActiveOn();
+}
+
 void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 {
  	float interval = 0.0f;

@@ -55,7 +55,8 @@ public:
 		bool _Loop = true);
 
 	void C_ChangeCharacterAnimation(std::string_view _AnimationName);
-	void C_StateChange(ECutSceneState _State);
+
+	void C_ChangeDialogue(std::string_view _ImageName, const FTransform& _FTransform);
 
 	int C_GetFocusMenuIndex() const
 	{
@@ -76,6 +77,8 @@ public:
 	{
 		return SceneCharacter;
 	}
+
+	void C_StateChange(ECutSceneState _State);
 
 protected:
 	virtual void BeginPlay() override;

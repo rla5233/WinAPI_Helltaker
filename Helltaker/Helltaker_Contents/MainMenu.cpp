@@ -146,13 +146,12 @@ void MainMenu::NewGameStart()
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
 
-	SelectChapterNum = 1;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	SceneActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	SceneActor->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.385f });
-	AllActors.push_back(SceneActor);
 
+	//SelectChapterNum = 1;
 }
 
 void MainMenu::CutScene(float _DeltaTime)
