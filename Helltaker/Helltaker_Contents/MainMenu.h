@@ -54,11 +54,12 @@ private:
 	void NewGame();
 	void NewGameOrder1();
 	void NewGameOrder2();
+	void NewGameLastOrder();
 
 private:
 	int NewGameOrder = -1;
-	
 	int SelectChapterNum = -1;
+	
 	EMainMenuState State = EMainMenuState::None;
 
 	static const std::vector<const char*> MainMenu_Script;

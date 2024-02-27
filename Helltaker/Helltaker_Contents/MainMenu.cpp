@@ -13,18 +13,20 @@
 
 bool MainMenu::IsLoad = false;
 
-
 const std::vector<const char*> MainMenu::MainMenu_Script
 {
-	/* 0 Demon	  */ "위대한 파리 베엘제붑",
-	/* 1 Script 1 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
-	/* 2 Script 2 */ "반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.",
-	/* 3 MenuBar1 */ "새 게임",
-	/* 4 MenuBar2 */ "챕터 선택",
-	/* 5 MenuBar3 */ "나가기",
-	/* 6 NewGame1 */ "또 헬테이커의 이야기를 들려달라고? 재미있군...",
-	/* 7 NewGame2 */ "혹시 해설자가 필요하진 않은가?",
-	/* 8 NewGame3 */ "허락해준다면 참 고맙겠어.",
+	/* 0  Demon	   */ "위대한 파리 베엘제붑",
+	/* 1  Script 1 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
+	/* 2  Script 2 */ "반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.",
+	/* 3  MenuBar1 */ "새 게임",
+	/* 4  MenuBar2 */ "챕터 선택",
+	/* 5  MenuBar3 */ "나가기",
+	/* 6  NewGame1 */ "또 헬테이커의 이야기를 들려달라고? 재미있군...",
+	/* 7  NewGame2 */ "혹시 해설자가 필요하진 않은가?",
+	/* 8  NewGame3 */ "허락해준다면 참 고맙겠어.",
+	/* 9  NewGame4 */ "어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.",
+	/* 10 NewGame5 */ "하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.",
+	/* 11 NewGame6 */ "\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.",
 	
 	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
 	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
@@ -140,6 +142,13 @@ void MainMenu::NewGame()
 	case 1:
 		NewGameOrder2();
 		break;
+	case 2:
+	case 3:
+	case 4:
+		NewGameLastOrder();
+		break;
+	case 5:
+		break;
 	}
 }
 
@@ -163,15 +172,27 @@ void MainMenu::NewGameOrder2()
 	}
 }
 
+void MainMenu::NewGameLastOrder()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { WinScale.X * 0.67f, WinScale.Y * 0.6f };
+		std::string ImgName = "CutScene1_00";
+		ImgName += std::to_string(NewGameOrder - 1) + ".png";
+		C_ChangeDialogue(ImgName, { { 0, 0 }, Scale });
+		C_BooperTextSet(MainMenu_Script[NewGameOrder + 7]);
+		SelectChapterNum = 1;
+		++NewGameOrder;
+	}
+}
+
 void MainMenu::NewGameStart()
 {
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
-
 	NewGameOrder = 0;
-
-	//SelectChapterNum = 1;
 }
 
 void MainMenu::CutScene(float _DeltaTime)
@@ -188,19 +209,12 @@ void MainMenu::CutScene(float _DeltaTime)
 	//
 	//	switch (SceneIndex)
 	//	{
-	//	case 2:
-	//		SceneActor->CreateImageRenderer(RenderOrder::Scene);
-	//		SceneActor->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });
-	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_001.png");
-	//		Booper->GetTextRenderer()->SetText("어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.");
-	//		break;
+
 	//	case 3:
 	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_002.png");
-	//		Booper->GetTextRenderer()->SetText("하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.");
 	//		break;
 	//	case 4:
 	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_003.png");
-	//		Booper->GetTextRenderer()->SetText("\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.");
 	//		break;
 	//	case 5:
 	//		StateChange(EMainMenuState::EnterChapter);
