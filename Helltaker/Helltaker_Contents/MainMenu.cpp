@@ -95,8 +95,8 @@ void MainMenu::EnterStart()
 	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.995f, WinScale.Y * 0.693f };
-	FVector Pos = { WinScale.X * 0.0222f, WinScale.Y * (-0.0445f) };
+	FVector Scale = { WinScale.X * 1.04f, WinScale.Y * 0.693f };
+	FVector Pos = { 0.0f, WinScale.Y * (-0.0445f) };
 	C_CharacterSetTransform({ Pos, Scale });
 	C_BooperTextSet(MainMenu_Script[2]);
 }
