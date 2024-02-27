@@ -4,7 +4,7 @@
 
 bool Chapter5::IsLoad = false;
 
-const std::vector<const char*> Chap5_Script
+const std::vector<const char*> Chapter5::Chap5_Script
 {
 	/* 0 Demon	  */ "상스러운 악마 즈드라다",
 	/* 1 Script 1 */ "야, 하렘 꾸린다고 들었는데. 나도 낄래.",
