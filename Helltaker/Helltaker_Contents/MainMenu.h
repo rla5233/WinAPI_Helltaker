@@ -21,9 +21,6 @@ public:
 	MainMenu& operator=(const MainMenu& _Other) = delete;
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
-	void Begin(float _DeltaTime);
-	void BeginStart();
-
 	void Enter(float _DeltaTime);
 	void EnterStart();
 
@@ -40,7 +37,6 @@ public:
 	void Exit(float _DeltaTime);
 
 	void CreateTransition();
-	void SpawnDialogue();
 
 	void SetFocusMenuIndex(int _Index)
 	{
@@ -57,7 +53,7 @@ public:
 		}
 	}
 
-	void StateUpdate(float _DeltaTime);
+	
 	void StateChange(EMainMenuState _State);
 
 protected:
@@ -66,6 +62,12 @@ protected:
 
 	void LevelStart(ULevel* _PrevLevel) override;
 	void LevelEnd(ULevel* _NextLevel) override;
+
+private:
+	void StateUpdate(float _DeltaTime);
+
+	void Begin(float _DeltaTime);
+	void BeginStart();
 
 private:
 	std::list<AActor*> AllActors;

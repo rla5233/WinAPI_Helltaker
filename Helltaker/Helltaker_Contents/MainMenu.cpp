@@ -13,10 +13,11 @@
 
 bool MainMenu::IsLoad = false;
 
+
 const std::vector<const char*> MainMenu::MainMenu_Script
 {
-	/* 0 Demon	  */ "피곤한 악마 판데모니카",
-	/* 1 Script 1 */ "지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?",
+	/* 0 Demon	  */ "위대한 파리 베엘제붑",
+	/* 1 Script 0 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
 	/* 2 MenuBar1 */ "우리 집에 가면 알 수 있겠지.",
 	/* 3 MenuBar2 */ "글쎄, 내가 널 도와줘야겠는데?",
 	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.",
@@ -59,14 +60,12 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	BackGround* BG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
-	BG->CreateBackGround("DefaultBG");
-	AllActors.push_back(BG);
+	C_CreateSceneBG();
+	C_SpawnDialogue("MainMenuDialogue_001.png");
+	C_SpawnBooper();	
+
 
 	CreateTransition();
-	SpawnDialogue();
-	C_SpawnBooper();	
 
 	StateChange(EMainMenuState::Begin);
 }
@@ -103,22 +102,8 @@ void MainMenu::CreateTransition()
 	AllActors.push_back(TransitionActor);
 }
 
-void MainMenu::SpawnDialogue()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	Dialogue = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	Dialogue->SetActorLocation({ WinScale.hX(), WinScale.Y / 2.45f });
-	Dialogue->SetName("MainMenuDialogue_001");
-	Dialogue->CreateImageRenderer(RenderOrder::Scene);
-	Dialogue->GetImageRenderer()->SetImage(Dialogue->GetName() + ".png");
-	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y / 2.0f } });
-	AllActors.push_back(Dialogue);
-}
-
 void MainMenu::Begin(float _DeltaTime)
 {
-	//Booper->GetTextRenderer()->SetText("당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.");
-
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Enter);
@@ -126,7 +111,9 @@ void MainMenu::Begin(float _DeltaTime)
 }
 
 void MainMenu::BeginStart()
-{}
+{
+	C_BooperTextSet(MainMenu_Script[1]);
+}
 
 void MainMenu::Enter(float _DeltaTime)
 {
@@ -381,6 +368,7 @@ void MainMenu::StateChange(EMainMenuState _State)
 		switch (_State)
 		{
 		case EMainMenuState::Begin:
+			BeginStart();
 			break;
 		case EMainMenuState::Enter:
 			EnterStart();
