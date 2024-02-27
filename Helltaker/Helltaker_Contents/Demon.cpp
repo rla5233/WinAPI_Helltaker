@@ -215,6 +215,7 @@ void Demon::CreateLovePlosion(float _DeltaTime)
 		LovePlosionRenderer->CreateAnimation("LovePlosion", "LovePlosion", 0, 14, LovePlosionInter, false);
 		LovePlosionRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * LovePlosionScale });
 		LovePlosionRenderer->ChangeAnimation("LovePlosion");
+		ImageRenderer->ActiveOff();
 		++VictoryOrder;
 
 		return;
