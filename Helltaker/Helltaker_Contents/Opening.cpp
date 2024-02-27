@@ -54,7 +54,7 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	UnityLogo->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
 	AllActors.push_back(UnityLogo);
 
-	ContentsHelper::SoundPlay("Vitality.wav");
+	//ContentsHelper::SoundPlay("Vitality.wav");
 }
 
 void Opening::LevelEnd(ULevel* _NextLevel)
