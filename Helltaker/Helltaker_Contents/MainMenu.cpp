@@ -22,7 +22,9 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 	/* 3 MenuBar1 */ "새 게임",
 	/* 4 MenuBar2 */ "챕터 선택",
 	/* 5 MenuBar3 */ "나가기",
-	/* 6 NewGame1 */ "또 헬테이커의 이야기를 들려달라고 ? 재미있군...",
+	/* 6 NewGame1 */ "또 헬테이커의 이야기를 들려달라고? 재미있군...",
+	/* 7 NewGame2 */ "혹시 해설자가 필요하진 않은가?",
+	/* 8 NewGame3 */ "허락해준다면 참 고맙겠어.",
 	
 	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
 	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
@@ -43,16 +45,11 @@ void MainMenu::BeginPlay()
 
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
-		ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
-		ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
-		ContentsHelper::LoadFolder("UI", "Booper");
-		ContentsHelper::LoadFolder("Scene", "Transition");
 
 		IsLoad = true;
 	}
@@ -133,9 +130,35 @@ void MainMenu::SelectMenu()
 	}
 }
 
-void MainMenu::NewGame(float _DeltaTime)
+void MainMenu::NewGame()
 {
-	int a = 0;
+	switch (NewGameOrder)
+	{
+	case 0:
+		NewGameOrder1();
+		break;
+	case 1:
+		NewGameOrder2();
+		break;
+	}
+}
+
+void MainMenu::NewGameOrder1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(MainMenu_Script[7]);
+		++NewGameOrder;
+	}
+}
+
+void MainMenu::NewGameOrder2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(MainMenu_Script[8]);
+		++NewGameOrder;
+	}
 }
 
 void MainMenu::NewGameStart()
@@ -163,9 +186,6 @@ void MainMenu::CutScene(float _DeltaTime)
 	//
 	//	switch (SceneIndex)
 	//	{
-	//	case 0:
-	//		Booper->GetTextRenderer()->SetText("혹시 해설자가 필요하진 않은가?\n ");
-	//		break;
 	//	case 1:
 	//		Dialogue->GetImageRenderer()->ActiveOff();
 	//		Beel->GetImageRenderer()->ActiveOff();
@@ -238,7 +258,7 @@ void MainMenu::StateUpdate(float _DeltaTime)
 		Select();
 		break;
 	case EMainMenuState::NewGame:
-		NewGame(_DeltaTime);
+		NewGame();
 		break;
 
 	case EMainMenuState::SelectChapter:

@@ -51,7 +51,9 @@ private:
 	void Enter();
 
 	void NewGameStart();
-	void NewGame(float _DeltaTime);
+	void NewGame();
+	void NewGameOrder1();
+	void NewGameOrder2();
 
 private:
 	int NewGameOrder = -1;
