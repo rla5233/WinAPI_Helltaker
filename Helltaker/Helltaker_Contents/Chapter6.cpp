@@ -9,7 +9,7 @@
 
 bool Chapter6::IsLoad = false;
 
-const std::vector<const char*> Chap6_Script
+const std::vector<const char*> Chapter6::Chap6_Script
 {
 	/* 0 Demon	  */ "호기심 많은 천사 아자젤",
 	/* 1 Script 1 */ "하느님 맘소사! 살아있는 인간이 지옥에서 뭘 하고 있는 거죠?\n흔치 않은 일이네요.",
