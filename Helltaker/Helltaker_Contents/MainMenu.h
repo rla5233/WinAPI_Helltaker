@@ -35,6 +35,7 @@ private:
 	void Begin(float _DeltaTime);
 
 	void Select(float _DeltaTime);
+	void ReturnSelect();
 
 	void EnterStart();
 	void Enter(float _DeltaTime);
@@ -44,6 +45,9 @@ private:
 	void NewGameOrder1();
 	void NewGameOrder2();
 	void NewGameLastOrder();
+
+	void SelectChapterStart();
+	void SelectChapter(float _DeltaTime);
 
 	void EnterChapter();
 	void EnterChapterStart();

@@ -42,6 +42,7 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_001.png");
 
 		IsLoad = true;
 	}
@@ -125,7 +126,7 @@ void MainMenu::SelectMenu()
 		StateChange(EMainMenuState::NewGame);
 		break;
 	case 1:
-		StateChange(EMainMenuState::None);
+		StateChange(EMainMenuState::SelectChapter);
 		break;
 	case 2:
 		StateChange(EMainMenuState::Exit);
@@ -210,6 +211,34 @@ void MainMenu::NewGameStart()
 	NewGameOrder = 0;
 }
 
+void MainMenu::SelectChapter(float _DeltaTime)
+{
+	DialogueMoveUpdate(_DeltaTime);
+
+	if (UEngineInput::IsDown(VK_ESCAPE))
+	{
+		ReturnSelect();
+	}
+	
+}
+
+void MainMenu::SelectChapterStart()
+{
+
+
+	//Scene* New = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	//New->SetActorLocation({1920 * 0.5f, 1080 * 0.75f});
+	//New->CreateImageRenderer(RenderOrder::Transition);
+	//New->GetImageRenderer()->SetImage("UnSelect_001.png");
+	//New->GetImageRenderer()->SetTransform({ {0, 0}, {110, 76} });
+}
+
+void MainMenu::ReturnSelect()
+{
+	State = EMainMenuState::Select;
+}
+
+
 void MainMenu::EnterChapter()
 {
 	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
@@ -289,6 +318,9 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	case EMainMenuState::Select:
 		Select(_DeltaTime);
 		break;
+	case EMainMenuState::SelectChapter:
+		SelectChapter(_DeltaTime);
+		break;
 	case EMainMenuState::NewGame:
 		NewGame(_DeltaTime);
 		break;
@@ -315,6 +347,9 @@ void MainMenu::StateChange(EMainMenuState _State)
 			break;
 		case EMainMenuState::Select:
 			SelectStart();
+			break;
+		case EMainMenuState::SelectChapter:
+			SelectChapterStart();
 			break;
 		case EMainMenuState::NewGame:
 			NewGameStart();

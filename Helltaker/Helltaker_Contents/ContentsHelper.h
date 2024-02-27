@@ -128,6 +128,7 @@ enum class EMainMenuState
 	Begin,
 	Enter,
 	Select,
+	SelectChapter,
 	NewGame,
 	EnterChapter,
 	Exit
