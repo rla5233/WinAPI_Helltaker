@@ -4,7 +4,7 @@
 
 bool Chapter7::IsLoad = false;
 
-const std::vector<const char*> Chap7_Script
+const std::vector<const char*> Chapter7::Chap7_Script
 {
 	/* 0 Demon	  */ "끝내주는 악마 저스티스",
 	/* 1 Script 1 */ "야, 저 퍼즐을 풀었어? 끝내주는데!",
