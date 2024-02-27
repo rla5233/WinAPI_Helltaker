@@ -31,7 +31,6 @@ MainMenu::~MainMenu()
 {
 }
 
-// 수정 (리팩토링 가능?)
 void MainMenu::BeginPlay()
 {
 	CutSceneManager::BeginPlay();
@@ -39,6 +38,7 @@ void MainMenu::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_001.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "MainMenuDialogue_002.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Beel_Fly.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
@@ -231,6 +231,10 @@ void MainMenu::ExitStart()
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[12]);
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
+	C_BooperSetTextPosition(Pos);
 }
 
 void MainMenu::Tick(float _DeltaTime)
