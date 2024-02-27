@@ -1,16 +1,14 @@
 #pragma once
 
 #include "ContentsHelper.h"
-
-#include <vector>
-#include <EngineCore/Level.h>
+#include "CutSceneManager.h"
 
 class Character;
 class Scene;
 class UI;
 
 // Ό³Έν :
-class MainMenu : public ULevel
+class MainMenu : public CutSceneManager
 {
 public:
 	// constructor destructor
