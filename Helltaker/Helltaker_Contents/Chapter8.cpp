@@ -11,7 +11,7 @@ const float Chapter8::SkeletonCreateDelay = 0.15f;
 const float Chapter8::LuSwirl2RenderDelay = 0.6f;
 const float Chapter8::LuIdleRenderDelay = 0.05f;
 
-const std::vector<const char*> Chap8_Script
+const std::vector<const char*> Chapter8::Chap8_Script
 {
 	/* 0  Demon	     */ "지옥의 CEO 루시퍼",
 	/* 1  Script 1   */ "이제야 만나네. 넌 시련들을 통과하며 가치를 증명했어.",

@@ -70,5 +70,6 @@ private:
 	const static float LuIdleRenderDelay;
 	float TimeCount = 0;
 
+	static const std::vector<const char*> Chap8_Script;
 	static bool IsLoad;
 };
