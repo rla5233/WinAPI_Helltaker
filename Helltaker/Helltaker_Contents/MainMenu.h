@@ -26,20 +26,21 @@ protected:
 	void LevelEnd(ULevel* _NextLevel) override;
 
 	void SelectStart() override;
-	void Select() override;
 	void SelectMenu() override;
 
 private:
 	void StateUpdate(float _DeltaTime);
 
 	void BeginStart();
-	void Begin();
+	void Begin(float _DeltaTime);
+
+	void Select(float _DeltaTime);
 
 	void EnterStart();
-	void Enter();
+	void Enter(float _DeltaTime);
 
 	void NewGameStart();
-	void NewGame();
+	void NewGame(float _DeltaTime);
 	void NewGameOrder1();
 	void NewGameOrder2();
 	void NewGameLastOrder();
@@ -47,7 +48,7 @@ private:
 	void EnterChapter();
 	void EnterChapterStart();
 
-	void Exit();
+	void Exit(float _DeltaTime);
 	void ExitStart();
 
 	void DialogueMoveUpdate(float _DeltaTime);
@@ -55,6 +56,7 @@ private:
 private:
 	int NewGameOrder = -1;
 	int SelectChapterNum = -1;
+	float DialogueMoveSum = 0.0f;
 	
 	EMainMenuState State = EMainMenuState::None;
 

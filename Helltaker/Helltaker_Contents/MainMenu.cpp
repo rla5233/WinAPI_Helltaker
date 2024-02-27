@@ -57,7 +57,7 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector ImgScale = C_GetDialogue()->GetImageRenderer()->GetImage()->GetScale();
 	FVector Scale = { ImgScale.X * WinScale.X / 1920.0f, WinScale.Y * 0.5045f };
-	FVector Pos = { (Scale.X - WinScale.X) * 0.5f, 0.0f };
+	FVector Pos = { (Scale.X - WinScale.X) * (-0.5f), 0.0f};
 	C_GetDialogue()->GetImageRenderer()->SetTransform({ Pos, Scale });
 	
 	C_SpawnBooper();	
@@ -66,8 +66,9 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	StateChange(EMainMenuState::Begin);
 }
 
-void MainMenu::Begin()
+void MainMenu::Begin(float _DeltaTime)
 {
+	DialogueMoveUpdate(_DeltaTime);
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Enter);
@@ -79,8 +80,9 @@ void MainMenu::BeginStart()
 	C_BooperTextSet(MainMenu_Script[1]);
 }
 
-void MainMenu::Enter()
+void MainMenu::Enter(float _DeltaTime)
 {
+	DialogueMoveUpdate(_DeltaTime);
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Select);
@@ -98,8 +100,9 @@ void MainMenu::EnterStart()
 	C_BooperTextSet(MainMenu_Script[2]);
 }
 
-void MainMenu::Select()
+void MainMenu::Select(float _DeltaTime)
 {
+	DialogueMoveUpdate(_DeltaTime);
 	FocusMenuBarCheck();
 }
 
@@ -130,14 +133,16 @@ void MainMenu::SelectMenu()
 	}
 }
 
-void MainMenu::NewGame()
+void MainMenu::NewGame(float _DeltaTime)
 {
 	switch (NewGameOrder)
 	{
 	case 0:
+		DialogueMoveUpdate(_DeltaTime);
 		NewGameOrder1();
 		break;
 	case 1:
+		DialogueMoveUpdate(_DeltaTime);
 		NewGameOrder2();
 		break;
 	case 2:
@@ -224,8 +229,9 @@ void MainMenu::EnterChapterStart()
 	TransitionOn();
 }
 
-void MainMenu::Exit()
+void MainMenu::Exit(float _DeltaTime)
 {
+	DialogueMoveUpdate(_DeltaTime);
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		GEngine->MainWindow.Off();;
@@ -247,14 +253,25 @@ void MainMenu::DialogueMoveUpdate(float _DeltaTime)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector CurPos = C_GetDialogue()->GetImageRenderer()->GetPosition();
-	CurPos += { WinScale.X * 0.0007f, 0.0f };
+	float Diff = WinScale.X * _DeltaTime * 0.04f;
+	CurPos += { Diff, 0.0f };
+	DialogueMoveSum += Diff;
+	C_GetDialogue()->GetImageRenderer()->SetPosition(CurPos);
+
+	FVector ImgScale = C_GetDialogue()->GetImageRenderer()->GetImage()->GetScale();
+	float DialogueMoveDistance = (ImgScale.X * WinScale.X / 1920.0f) * 0.5f;
+	if (DialogueMoveDistance <= DialogueMoveSum)
+	{
+		FVector Scale = { ImgScale.X * WinScale.X / 1920.0f, WinScale.Y * 0.5045f };
+		FVector Pos = { (Scale.X - WinScale.X) * (-0.5f), 0.0f };
+		C_GetDialogue()->GetImageRenderer()->SetTransform({ Pos, Scale });
+		DialogueMoveSum = 0.0f;
+	}
 }
 
 void MainMenu::Tick(float _DeltaTime)
 {
 	CutSceneManager::Tick(_DeltaTime);
-
-	DialogueMoveUpdate(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
@@ -264,22 +281,22 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case EMainMenuState::Begin:
-		Begin();
+		Begin(_DeltaTime);
 		break;
 	case EMainMenuState::Enter:
-		Enter();
+		Enter(_DeltaTime);
 		break;
 	case EMainMenuState::Select:
-		Select();
+		Select(_DeltaTime);
 		break;
 	case EMainMenuState::NewGame:
-		NewGame();
+		NewGame(_DeltaTime);
 		break;
 	case EMainMenuState::EnterChapter:
 		EnterChapter();
 		break;
 	case EMainMenuState::Exit:
-		Exit();
+		Exit(_DeltaTime);
 		break;
 	}
 }
