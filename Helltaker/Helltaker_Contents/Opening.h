@@ -29,6 +29,8 @@ protected:
 private:
 	BackGround* OpeningBG = nullptr;
 	Scene* UnityLogo = nullptr;
-
+	
 	int OpeningOrder = -1;
+	float DelayTimeCount = 0.0f;
+	static const float FadeOutDelayTime;
 };

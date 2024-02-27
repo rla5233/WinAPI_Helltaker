@@ -1,11 +1,10 @@
 #include "Opening.h"
 
-#include "ContentsHelper.h"
 #include "BackGround.h"
 #include "Scene.h"
 #include "MainMenu.h"
 
-#include <EnginePlatform/EngineWindow.h>
+const float Opening::FadeOutDelayTime = 0.3f;
 
 Opening::Opening()
 {
@@ -13,16 +12,14 @@ Opening::Opening()
 
 Opening::~Opening()
 {
-
 }
-// 수정 (리팩토링 가능?)
+
 void Opening::BeginPlay()
 {
 	ULevel::BeginPlay();
 
 	ContentsHelper::LoadImg("Scene\\Dialogue", "UnityLogo.png");
 	ContentsHelper::LoadImg("Background", "OpeningBG.png");
-	//ContentsHelper::LoadSound("Sound", "Vitality.wav");
 }
 
 void Opening::Tick(float _DeltaTime)
@@ -32,18 +29,29 @@ void Opening::Tick(float _DeltaTime)
 	switch (OpeningOrder)
 	{
 	case 0:
-		if (false == UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime))
+		if (false == UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.9f))
 		{
 			UnityLogo->FadeOutOn();
+			DelayTimeCount = FadeOutDelayTime;
 			++OpeningOrder;
 		}
 		break;
 	case 1:
-		if (false == UnityLogo->FadeOutUpdate(UnityLogo->GetImageRenderer(), _DeltaTime))
+		if (0.0f >= DelayTimeCount)
 		{
-			GEngine->CreateLevel<MainMenu>("MainMenu");
-			GEngine->ChangeLevel("MainMenu");	
+			++OpeningOrder;
 		}
+		DelayTimeCount -= _DeltaTime;
+		break;
+	case 2:
+		if (false == UnityLogo->FadeOutUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.9f))
+		{
+			++OpeningOrder;
+		}
+		break;
+	case 3:
+		GEngine->CreateLevel<MainMenu>("MainMenu");
+		GEngine->ChangeLevel("MainMenu");
 		break;
 	}
 }
@@ -65,7 +73,6 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	UnityLogo->FadeInOn();
 
 	OpeningOrder = 0;
-	//ContentsHelper::SoundPlay("Vitality.wav");
 }
 
 void Opening::LevelEnd(ULevel* _NextLevel)
