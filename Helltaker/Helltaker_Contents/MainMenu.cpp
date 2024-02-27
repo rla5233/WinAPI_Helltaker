@@ -140,58 +140,58 @@ void MainMenu::SelectMenu(float _DeltaTime)
 
 void MainMenu::SelectMenuInit()
 {
-	MenuBarVec.reserve(MenuBarCount);
-	for (int i = 0; i < MenuBarCount; i++)
-	{
-		MenuBarVec.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
-	}
-
-	float interval = 0.0f;
-   	FVector WinScale = ContentsHelper::GetWindowScale();
-	
-	for (UI* MenuBar : MenuBarVec)
-	{
-		MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
-		MenuBar->SetName("MenuBar");
-		MenuBar->CreateImageRenderer(RenderOrder::UI);
-		MenuBar->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
-		MenuBar->CreateTextRenderer(RenderOrder::Text);
-		MenuBar->GetTextRenderer()->SetTransform({ {0, 2}, {0, 0} });
-		MenuBar->GetTextRenderer()->SetFont("맑은 고딕");
-		MenuBar->GetTextRenderer()->SetTextSize(20);
-		interval += WinScale.Y / 13.5f;
-	}	
-
-	IsSelectMenuInit = true;
+	//MenuBarVec.reserve(MenuBarCount);
+	//for (int i = 0; i < MenuBarCount; i++)
+	//{
+	//	MenuBarVec.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
+	//}
+	//
+	//float interval = 0.0f;
+   	//FVector WinScale = ContentsHelper::GetWindowScale();
+	//
+	//for (UI* MenuBar : MenuBarVec)
+	//{
+	//	MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
+	//	MenuBar->SetName("MenuBar");
+	//	MenuBar->CreateImageRenderer(RenderOrder::UI);
+	//	MenuBar->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
+	//	MenuBar->CreateTextRenderer(RenderOrder::Text);
+	//	MenuBar->GetTextRenderer()->SetTransform({ {0, 2}, {0, 0} });
+	//	MenuBar->GetTextRenderer()->SetFont("맑은 고딕");
+	//	MenuBar->GetTextRenderer()->SetTextSize(20);
+	//	interval += WinScale.Y / 13.5f;
+	//}	
+	//
+	//IsSelectMenuInit = true;
 }
 
 void MainMenu::SelectMenuStart()
 {
-	Booper->GetImageRenderer()->ActiveOff();
-	Booper->GetTextRenderer()->ActiveOff();
+	C_BooperImageRendererOff();
+	C_BooperTextSet(" ");
 
-	if (false == IsSelectMenuInit)
-	{
-		SelectMenuInit();
-	}
+	//if (false == IsSelectMenuInit)
+	//{
+	//	SelectMenuInit();
+	//}
 
-	SetFocusMenuIndex(0);
-	std::vector<std::string> MenuBarText = { "새 게임", "챕터 선택", "나가기" };
-	for (int i = 0; i < MenuBarCount; i++)
-	{
-		if (i == FocusMenuIndex)
-		{
-			MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-			MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-		}
-		else
-		{
-			MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-			MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
-		}
-
-		MenuBarVec[i]->GetTextRenderer()->SetText(MenuBarText[i]);
-	}
+	// SetFocusMenuIndex(0);
+	//std::vector<std::string> MenuBarText = { "새 게임", "챕터 선택", "나가기" };
+	//for (int i = 0; i < MenuBarCount; i++)
+	//{
+	//	if (i == FocusMenuIndex)
+	//	{
+	//		MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+	//		MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	//	}
+	//	else
+	//	{
+	//		MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+	//		MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
+	//	}
+	//
+	//	MenuBarVec[i]->GetTextRenderer()->SetText(MenuBarText[i]);
+	//}
 }
 
 void MainMenu::CutScene(float _DeltaTime)

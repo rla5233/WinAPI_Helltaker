@@ -21,9 +21,6 @@ public:
 	MainMenu& operator=(const MainMenu& _Other) = delete;
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
-	void Enter(float _DeltaTime);
-	void EnterStart();
-
 	void SelectMenu(float _DeltaTime);
 	void SelectMenuInit();
 	void SelectMenuStart();
@@ -66,6 +63,11 @@ private:
 
 	void Begin(float _DeltaTime);
 	void BeginStart();
+
+	void Enter(float _DeltaTime);
+	void EnterStart();
+
+
 
 private:
 	std::list<AActor*> AllActors;

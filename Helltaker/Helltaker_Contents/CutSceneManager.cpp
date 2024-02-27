@@ -134,6 +134,11 @@ void CutSceneManager::C_BooperImageRendererOn()
 	Booper->GetImageRenderer()->ActiveOn();
 }
 
+void CutSceneManager::C_BooperImageRendererOff()
+{
+	Booper->GetImageRenderer()->ActiveOff();
+}
+
 void CutSceneManager::C_MenubarTextSet(int _Index, std::string_view _Text)
 {
 	MenuBar[_Index]->GetTextRenderer()->SetText(_Text);
