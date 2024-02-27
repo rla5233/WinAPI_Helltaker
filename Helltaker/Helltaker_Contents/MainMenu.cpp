@@ -148,6 +148,7 @@ void MainMenu::NewGame()
 		NewGameLastOrder();
 		break;
 	case 5:
+		StateChange(EMainMenuState::EnterChapter);
 		break;
 	}
 }
@@ -195,48 +196,18 @@ void MainMenu::NewGameStart()
 	NewGameOrder = 0;
 }
 
-void MainMenu::CutScene(float _DeltaTime)
-{
-	//if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	//{
-	//	++SceneIndex;
-	//	SceneInput = true;
-	//}
-	//
-	//if (true == SceneInput)
-	//{
-	//	FVector WinScale = ContentsHelper::GetWindowScale();
-	//
-	//	switch (SceneIndex)
-	//	{
-
-	//	case 3:
-	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_002.png");
-	//		break;
-	//	case 4:
-	//		SceneActor->GetImageRenderer()->SetImage("CutScene1_003.png");
-	//		break;
-	//	case 5:
-	//		StateChange(EMainMenuState::EnterChapter);
-	//		break;
-	//	}
-	//
-	//	SceneInput = false;
-	//}
-}
-
 void MainMenu::EnterChapter(float _DeltaTime)
 {
-	//if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
-	//{
-	//	switch (SelectChapterNum)
-	//	{
-	//	case 1:
-	//		GEngine->CreateLevel<Chapter1>("Chapter1");
-	//		GEngine->ChangeLevel("Chapter1");
-	//		break;
-	//	}		
-	//}
+	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
+	{
+		switch (SelectChapterNum)
+		{
+		case 1:
+			GEngine->CreateLevel<Chapter1>("Chapter1");
+			GEngine->ChangeLevel("Chapter1");
+			break;
+		}		
+	}
 }
 
 void MainMenu::EnterChapterStart()
@@ -271,8 +242,6 @@ void MainMenu::StateUpdate(float _DeltaTime)
 		NewGame();
 		break;
 
-	case EMainMenuState::SelectChapter:
-		break;
 	case EMainMenuState::EnterChapter:
 		EnterChapter(_DeltaTime);
 		break;
@@ -300,12 +269,10 @@ void MainMenu::StateChange(EMainMenuState _State)
 		case EMainMenuState::NewGame:
 			NewGameStart();
 			break;
-
-		case EMainMenuState::SelectChapter:
-			break;
 		case EMainMenuState::EnterChapter:
 			EnterChapterStart();
 			break;
+
 		case EMainMenuState::Exit:
 			break;
 		}

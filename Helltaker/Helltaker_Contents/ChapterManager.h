@@ -44,6 +44,10 @@ public:
 	void CreateBG(std::string_view _Name);
 	void CreateTransition();
 	void TransitionOn();
+	Scene* GetTransitionActor() const
+	{
+		return TransitionActor;
+	}
 
 	FVector ChapterPointToLocation(Point _Point) const;
 	

@@ -21,8 +21,6 @@ public:
 	MainMenu& operator=(const MainMenu& _Other) = delete;
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
-	void CutScene(float _DeltaTime);
-
 	void EnterChapter(float _DeltaTime);
 	void EnterChapterStart();
 
