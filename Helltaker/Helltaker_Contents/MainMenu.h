@@ -22,7 +22,6 @@ public:
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
 	void CutScene(float _DeltaTime);
-	void CutSceneStart();
 
 	void EnterChapter(float _DeltaTime);
 	void EnterChapterStart();

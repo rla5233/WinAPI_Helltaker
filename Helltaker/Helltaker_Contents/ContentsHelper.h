@@ -133,7 +133,6 @@ enum class EMainMenuState
 	NewGame,
 
 	SelectChapter,
-	CutScene,
 	EnterChapter,
 	Exit
 };

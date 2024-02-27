@@ -142,11 +142,16 @@ void MainMenu::NewGameStart()
 {
 	// CutScene 재생
 
-	CutSceneStart();
-
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
+
+	SelectChapterNum = 1;
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	SceneActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	SceneActor->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.385f });
+	AllActors.push_back(SceneActor);
 
 }
 
@@ -194,17 +199,6 @@ void MainMenu::CutScene(float _DeltaTime)
 
 		SceneInput = false;
 	}
-}
-
-void MainMenu::CutSceneStart()
-{
-	
-	SelectChapterNum = 1;
-
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	SceneActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	SceneActor->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.385f });
-	AllActors.push_back(SceneActor);
 }
 
 void MainMenu::EnterChapter(float _DeltaTime)
@@ -255,9 +249,6 @@ void MainMenu::StateUpdate(float _DeltaTime)
 
 	case EMainMenuState::SelectChapter:
 		break;
-	case EMainMenuState::CutScene:
-		CutScene(_DeltaTime);
-		break;
 	case EMainMenuState::EnterChapter:
 		EnterChapter(_DeltaTime);
 		break;
@@ -287,9 +278,6 @@ void MainMenu::StateChange(EMainMenuState _State)
 			break;
 
 		case EMainMenuState::SelectChapter:
-			break;
-		case EMainMenuState::CutScene:
-			CutSceneStart();
 			break;
 		case EMainMenuState::EnterChapter:
 			EnterChapterStart();
