@@ -46,10 +46,13 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 	void BeginStart();
-	void Begin(float _DeltaTime);
+	void Begin();
 
 	void EnterStart();
-	void Enter(float _DeltaTime);
+	void Enter();
+
+	void NewGameStart();
+	void NewGame(float _DeltaTime);
 
 
 private:

@@ -17,13 +17,13 @@ bool MainMenu::IsLoad = false;
 const std::vector<const char*> MainMenu::MainMenu_Script
 {
 	/* 0 Demon	  */ "위대한 파리 베엘제붑",
-	/* 1 Script 0 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
-	/* 2 Script 1 */ "반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.",
+	/* 1 Script 1 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
+	/* 2 Script 2 */ "반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.",
 	/* 3 MenuBar1 */ "새 게임",
 	/* 4 MenuBar2 */ "챕터 선택",
 	/* 5 MenuBar3 */ "나가기",
-
-	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.",
+	/* 6 NewGame1 */ "또 헬테이커의 이야기를 들려달라고 ? 재미있군...",
+	
 	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
 	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
 };
@@ -70,7 +70,7 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	StateChange(EMainMenuState::Begin);
 }
 
-void MainMenu::Begin(float _DeltaTime)
+void MainMenu::Begin()
 {
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
@@ -83,7 +83,7 @@ void MainMenu::BeginStart()
 	C_BooperTextSet(MainMenu_Script[1]);
 }
 
-void MainMenu::Enter(float _DeltaTime)
+void MainMenu::Enter()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -119,7 +119,35 @@ void MainMenu::SelectStart()
 
 void MainMenu::SelectMenu()
 {
+	switch (C_GetFocusMenuIndex())
+	{
+	case 0:
+		StateChange(EMainMenuState::NewGame);
+		break;
+	case 1:
+		StateChange(EMainMenuState::None);
+		break;
+	case 2:
+		StateChange(EMainMenuState::None);
+		break;
+	}
+}
+
+void MainMenu::NewGame(float _DeltaTime)
+{
 	int a = 0;
+}
+
+void MainMenu::NewGameStart()
+{
+	// CutScene 재생
+
+	CutSceneStart();
+
+	C_MenubarRenderActiveOff();
+	C_BooperImageRendererOn();
+	C_BooperTextSet(MainMenu_Script[6]);
+
 }
 
 void MainMenu::CutScene(float _DeltaTime)
@@ -170,15 +198,7 @@ void MainMenu::CutScene(float _DeltaTime)
 
 void MainMenu::CutSceneStart()
 {
-	for (UI* MenuBar : MenuBarVec)
-	{
-		MenuBar->GetImageRenderer()->ActiveOff();
-		MenuBar->GetTextRenderer()->ActiveOff();
-	}
-
-	Booper->GetImageRenderer()->ActiveOn();
-	Booper->GetTextRenderer()->ActiveOn();
-	Booper->GetTextRenderer()->SetText("또 헬테이커의 이야기를 들려달라고? 재미있군...\n ");
+	
 	SelectChapterNum = 1;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -221,14 +241,18 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case EMainMenuState::Begin:
-		Begin(_DeltaTime);
+		Begin();
 		break;
 	case EMainMenuState::Enter:
-		Enter(_DeltaTime);
+		Enter();
 		break;
 	case EMainMenuState::Select:
 		Select();
 		break;
+	case EMainMenuState::NewGame:
+		NewGame(_DeltaTime);
+		break;
+
 	case EMainMenuState::SelectChapter:
 		break;
 	case EMainMenuState::CutScene:
@@ -258,6 +282,10 @@ void MainMenu::StateChange(EMainMenuState _State)
 		case EMainMenuState::Select:
 			SelectStart();
 			break;
+		case EMainMenuState::NewGame:
+			NewGameStart();
+			break;
+
 		case EMainMenuState::SelectChapter:
 			break;
 		case EMainMenuState::CutScene:

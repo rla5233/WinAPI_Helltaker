@@ -108,7 +108,6 @@ protected:
 private:
 	void C_StateUpdate(float _DeltaTime);
 
-
 	void BadEnd();
 
 	void SetFocusMenuIndex(int _Index);
