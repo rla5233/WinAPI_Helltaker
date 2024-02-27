@@ -39,6 +39,7 @@ public:
 	void C_BooperImageRendererOff();
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
 	void C_MenubarRenderActiveOff();
+	void C_MenubarRenderActiveOn();
 	void C_CharacterSetImage(std::string_view _Name);
 	void C_CharacterSetTransform(FTransform _FTransform);
 	void C_CreateCharacterAnimation(

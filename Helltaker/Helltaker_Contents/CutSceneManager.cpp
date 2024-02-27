@@ -201,6 +201,14 @@ void CutSceneManager::C_MenubarRenderActiveOff()
 	}
 }
 
+void CutSceneManager::C_MenubarRenderActiveOn()
+{
+	for (UI* Menu : MenuBar)
+	{
+		Menu->AllRenderersActiveOn();
+	}
+}
+
 void CutSceneManager::C_CharacterSetImage(std::string_view _Name)
 {
 	SceneCharacter->GetImageRenderer()->SetImage(_Name);

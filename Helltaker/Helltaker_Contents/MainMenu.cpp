@@ -224,7 +224,7 @@ void MainMenu::SelectChapter(float _DeltaTime)
 
 void MainMenu::SelectChapterStart()
 {
-
+	C_MenubarRenderActiveOff();
 
 	//Scene* New = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	//New->SetActorLocation({1920 * 0.5f, 1080 * 0.75f});
@@ -235,6 +235,7 @@ void MainMenu::SelectChapterStart()
 
 void MainMenu::ReturnSelect()
 {
+	C_MenubarRenderActiveOn();
 	State = EMainMenuState::Select;
 }
 
