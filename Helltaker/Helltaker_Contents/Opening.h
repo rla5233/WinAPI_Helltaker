@@ -2,6 +2,9 @@
 
 #include <EngineCore/Level.h>
 
+class BackGround;
+class Scene;
+
 // Ό³Έν :
 class Opening : public ULevel
 {
@@ -24,7 +27,8 @@ protected:
 	void LevelEnd(ULevel* _NextLevel) override;
 
 private:
-	std::list<AActor*> AllActors;
+	BackGround* OpeningBG = nullptr;
+	Scene* UnityLogo = nullptr;
 
 	float TimeCount = 0;
 };

@@ -30,4 +30,5 @@ protected:
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
+	bool IsScaleChange;
 };

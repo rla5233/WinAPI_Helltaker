@@ -28,11 +28,25 @@ public:
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
 
+	void ScaleChangeOn()
+	{
+		IsScaleChange = true;
+	}
+
+	void ScaleChangeUpdate(
+		UImageRenderer* _Renderer, 
+		FVector _StartScale, 
+		FVector _TargetScale,
+		float _DeltaTime
+		);
+
 	void VibrationEffect(UImageRenderer* _Renderer);
 
 protected:
 	
 private:
+
+	bool IsScaleChange = false;
 
 };
 

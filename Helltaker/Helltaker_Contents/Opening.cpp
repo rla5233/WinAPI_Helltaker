@@ -2,7 +2,7 @@
 
 #include "ContentsHelper.h"
 #include "BackGround.h"
-#include "Dialogue.h"
+#include "Scene.h"
 #include "MainMenu.h"
 
 #include <EnginePlatform/EngineWindow.h>
@@ -28,13 +28,20 @@ void Opening::BeginPlay()
 void Opening::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
-	TimeCount += _DeltaTime;
 
-	if (2 <= TimeCount)
-	{
-		GEngine->CreateLevel<MainMenu>("MainMenu");
-		GEngine->ChangeLevel("MainMenu");
-	}
+	//OpeningBG->ScaleChangeUpdate(OpeningBG->GetImageRenderer(), );
+
+
+
+
+
+	//TimeCount += _DeltaTime;
+	//
+	//if (2 <= TimeCount)
+	//{
+	//	GEngine->CreateLevel<MainMenu>("MainMenu");
+	//	GEngine->ChangeLevel("MainMenu");
+	//}
 }
 
 void Opening::LevelStart(ULevel* _PrevLevel)
@@ -42,17 +49,16 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	ULevel::LevelStart(_PrevLevel);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	BackGround* OpeningBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	OpeningBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
 	OpeningBG->CreateBackGround("OpeningBG");
-	AllActors.push_back(OpeningBG);
+	OpeningBG->ScaleChangeOn();
 
-	Dialogue* UnityLogo = SpawnActor<Dialogue>(static_cast<int>(UpdateOrder::Scene));
-	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.9f });
+	UnityLogo = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	UnityLogo->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.522f });
 	UnityLogo->SetName("UnityLogo");
 	UnityLogo->CreateImageRenderer(RenderOrder::Scene);
-	UnityLogo->GetRenderer()->SetImage(UnityLogo->GetName() + ".png");
-	UnityLogo->GetRenderer()->SetTransform({ {0, 0}, {WinScale.X / 4.0f, WinScale.Y / 4.0f } });
-	AllActors.push_back(UnityLogo);
+	UnityLogo->GetImageRenderer()->SetImage(UnityLogo->GetName() + ".png");
+	UnityLogo->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.25f, WinScale.Y * 0.25f } });
 
 	//ContentsHelper::SoundPlay("Vitality.wav");
 }
@@ -61,16 +67,8 @@ void Opening::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
 
-	for (AActor* Actor : AllActors)
-	{
-		if (nullptr == Actor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Actor->Destroy(0.0f);
-		Actor = nullptr;
-	}
-
-	AllActors.clear();
+	OpeningBG->Destroy();
+	OpeningBG = nullptr;
+	UnityLogo->Destroy();
+	UnityLogo = nullptr;
 }
