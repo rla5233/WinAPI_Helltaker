@@ -156,6 +156,8 @@ void MainMenu::NewGameOrder2()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		C_GetDialogue()->AllRenderersActiveOff();
+		C_GetSceneCharacter()->AllRenderersActiveOff();
 		C_BooperTextSet(MainMenu_Script[8]);
 		++NewGameOrder;
 	}
@@ -186,12 +188,6 @@ void MainMenu::CutScene(float _DeltaTime)
 	//
 	//	switch (SceneIndex)
 	//	{
-	//	case 1:
-	//		Dialogue->GetImageRenderer()->ActiveOff();
-	//		Beel->GetImageRenderer()->ActiveOff();
-	//		Beel->GetNameRenderer()->ActiveOff();
-	//		Booper->GetTextRenderer()->SetText("허락해준다면 참 고맙겠어.\n ");
-	//		break;
 	//	case 2:
 	//		SceneActor->CreateImageRenderer(RenderOrder::Scene);
 	//		SceneActor->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.67f, WinScale.Y * 0.6f } });

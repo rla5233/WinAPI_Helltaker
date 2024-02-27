@@ -78,6 +78,11 @@ public:
 		return SceneCharacter;
 	}
 
+	Scene* C_GetDialogue() const
+	{
+		return Dialogue;
+	}
+
 	void C_StateChange(ECutSceneState _State);
 
 protected:
