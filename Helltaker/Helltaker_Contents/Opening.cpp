@@ -22,7 +22,7 @@ void Opening::BeginPlay()
 
 	ContentsHelper::LoadImg("Scene\\Dialogue", "UnityLogo.png");
 	ContentsHelper::LoadImg("Background", "OpeningBG.png");
-	ContentsHelper::LoadSound("Sound", "Vitality.wav");
+	//ContentsHelper::LoadSound("Sound", "Vitality.wav");
 }
 
 void Opening::Tick(float _DeltaTime)
