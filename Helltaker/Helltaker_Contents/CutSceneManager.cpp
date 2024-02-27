@@ -207,7 +207,7 @@ void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 		MenuBar[i]->GetImageRenderer()->CameraEffectOff();
 
 		MenuBar[i]->CreateTextRenderer(RenderOrder::Text);
-		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -4}, {0, 0} });
+		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -3}, {0, 0} });
 		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 		MenuBar[i]->GetTextRenderer()->SetTextSize(26);
 		MenuBar[i]->GetTextRenderer()->SetText("Test");

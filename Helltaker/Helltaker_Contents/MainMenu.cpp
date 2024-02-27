@@ -19,14 +19,14 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 	/* 0 Demon	  */ "위대한 파리 베엘제붑",
 	/* 1 Script 0 */ "당신은 공허에 휩싸인 것을 느꼈다.\n계속 하려면 [ENTER]키를 누르시오.",
 	/* 2 Script 1 */ "반갑네 인간이여. 나를 괘념치 말게.\n그저 오랜 친구 베엘제붑일세.",
-	
-	/* 2 MenuBar1 */ "우리 집에 가면 알 수 있겠지.",
-	/* 3 MenuBar2 */ "글쎄, 내가 널 도와줘야겠는데?",
+	/* 3 MenuBar1 */ "새 게임",
+	/* 4 MenuBar2 */ "챕터 선택",
+	/* 5 MenuBar3 */ "나가기",
+
 	/* 4 Failed	  */ "지옥을 살아서 빠져나갈 수 있으리라 생각한거야?\n 꿈도 크셔라.",
 	/* 5 Bad End  */ "판데모니카는 당신의 얼굴을 손아귀로 가져가더니\n 전문가다운 부드러운 동작으로 목을 꺽어 버렸다.",
 	/* 6 Success  */ "참 달콤한 제안이에요.커피를 마시고 싶네요.\n피곤해서 정신을 못차리겠어요."
 };
-
 
 MainMenu::MainMenu()
 {
@@ -128,30 +128,11 @@ void MainMenu::SelectMenuStart()
 {
 	C_BooperImageRendererOff();
 	C_BooperTextSet(" ");
+
 	C_SpawnMenubar({ 0.5f, 0.79f }, 3);
-
-	//if (false == IsSelectMenuInit)
-	//{
-	//	SelectMenuInit();
-	//}
-
-	// SetFocusMenuIndex(0);
-	//std::vector<std::string> MenuBarText = { "새 게임", "챕터 선택", "나가기" };
-	//for (int i = 0; i < MenuBarCount; i++)
-	//{
-	//	if (i == FocusMenuIndex)
-	//	{
-	//		MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-	//		MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
-	//	}
-	//	else
-	//	{
-	//		MenuBarVec[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-	//		MenuBarVec[i]->GetTextRenderer()->SetTextColor(Color8Bit(125, 125, 125, 0));
-	//	}
-	//
-	//	MenuBarVec[i]->GetTextRenderer()->SetText(MenuBarText[i]);
-	//}
+	C_MenubarTextSet(0, MainMenu_Script[3]);
+	C_MenubarTextSet(1, MainMenu_Script[4]);
+	C_MenubarTextSet(2, MainMenu_Script[5]);
 }
 
 void MainMenu::CutScene(float _DeltaTime)
