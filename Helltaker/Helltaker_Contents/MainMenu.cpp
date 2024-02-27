@@ -103,66 +103,25 @@ void MainMenu::EnterStart()
 
 void MainMenu::SelectMenu(float _DeltaTime)
 {
-	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
-	{
-		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		SetFocusMenuIndex(FocusMenuIndex - 1);
-		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-	}
-	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
-	{
-		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		SetFocusMenuIndex(FocusMenuIndex + 1);
-		MenuBarVec[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-		MenuBarVec[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-	}
-	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		switch (FocusMenuIndex)
-		{
-		case 0:
-			StateChange(EMainMenuState::CutScene);
-			break;
-		case 1:
-			//StateChange(EMainMenuState::SelectChapter);
-			break;
-		case 2:
-			//StateChange(EMainMenuState::Exit);
-			break;
-		default:
-			break;
-		}
-	}
-}
+	FocusMenuBarCheck();
 
-void MainMenu::SelectMenuInit()
-{
-	//MenuBarVec.reserve(MenuBarCount);
-	//for (int i = 0; i < MenuBarCount; i++)
+	//if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	//{
-	//	MenuBarVec.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
+	//	switch (FocusMenuIndex)
+	//	{
+	//	case 0:
+	//		StateChange(EMainMenuState::CutScene);
+	//		break;
+	//	case 1:
+	//		//StateChange(EMainMenuState::SelectChapter);
+	//		break;
+	//	case 2:
+	//		//StateChange(EMainMenuState::Exit);
+	//		break;
+	//	default:
+	//		break;
+	//	}
 	//}
-	//
-	//float interval = 0.0f;
-   	//FVector WinScale = ContentsHelper::GetWindowScale();
-	//
-	//for (UI* MenuBar : MenuBarVec)
-	//{
-	//	MenuBar->SetActorLocation({ WinScale.hX(), WinScale.Y / 1.27f + interval });
-	//	MenuBar->SetName("MenuBar");
-	//	MenuBar->CreateImageRenderer(RenderOrder::UI);
-	//	MenuBar->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X / 1.93f, WinScale.Y / 11.0f} });
-	//	MenuBar->CreateTextRenderer(RenderOrder::Text);
-	//	MenuBar->GetTextRenderer()->SetTransform({ {0, 2}, {0, 0} });
-	//	MenuBar->GetTextRenderer()->SetFont("맑은 고딕");
-	//	MenuBar->GetTextRenderer()->SetTextSize(20);
-	//	interval += WinScale.Y / 13.5f;
-	//}	
-	//
-	//IsSelectMenuInit = true;
 }
 
 void MainMenu::SelectMenuStart()

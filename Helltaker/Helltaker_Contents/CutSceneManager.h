@@ -102,6 +102,8 @@ protected:
 	virtual void Success(float _DeltaTime);
 	virtual void SuccessEnd();
 
+	void FocusMenuBarCheck();
+
 private:
 	void C_StateUpdate(float _DeltaTime);
 

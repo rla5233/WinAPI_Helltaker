@@ -21,9 +21,7 @@ public:
 	MainMenu& operator=(const MainMenu& _Other) = delete;
 	MainMenu& operator=(MainMenu&& _Other) noexcept = delete;
 
-	void SelectMenu(float _DeltaTime);
-	void SelectMenuInit();
-	void SelectMenuStart();
+
 
 	void CutScene(float _DeltaTime);
 	void CutSceneStart();
@@ -32,22 +30,6 @@ public:
 	void EnterChapterStart();
 
 	void Exit(float _DeltaTime);
-
-	void SetFocusMenuIndex(int _Index)
-	{
-		FocusMenuIndex = _Index;
-
-		if (FocusMenuIndex < 0)
-		{
-			FocusMenuIndex = MenuBarCount - 1;
-		}
-
-		if (FocusMenuIndex >= MenuBarCount)
-		{
-			FocusMenuIndex = 0;
-		}
-	}
-
 	
 	void StateChange(EMainMenuState _State);
 
@@ -61,12 +43,14 @@ protected:
 private:
 	void StateUpdate(float _DeltaTime);
 
-	void Begin(float _DeltaTime);
 	void BeginStart();
+	void Begin(float _DeltaTime);
 
-	void Enter(float _DeltaTime);
 	void EnterStart();
+	void Enter(float _DeltaTime);
 
+	void SelectMenuStart();
+	void SelectMenu(float _DeltaTime);
 
 
 private:
