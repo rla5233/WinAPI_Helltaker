@@ -101,7 +101,7 @@ void MainMenu::SelectStart()
 	C_BooperImageRendererOff();
 	C_BooperTextSet(" ");
 
-	C_SpawnMenubar({ 0.5f, 0.79f }, 3);
+	C_SpawnMenubar({ 0.5f, 0.786f }, 3);
 	C_MenubarTextSet(0, MainMenu_Script[3]);
 	C_MenubarTextSet(1, MainMenu_Script[4]);
 	C_MenubarTextSet(2, MainMenu_Script[5]);

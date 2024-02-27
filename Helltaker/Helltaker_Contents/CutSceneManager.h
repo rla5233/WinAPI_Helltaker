@@ -126,9 +126,12 @@ private:
 	Character* SceneCharacter = nullptr;
 	Scene* Dialogue = nullptr;
 	UI* Booper = nullptr;
+
 	std::vector<UI*> MenuBar;
 	int MenuBarCount = -1;
 	int FocusMenuIndex = -1;
+	static const FVector FocusMenuScale;
+	static const FVector UnFocusMenuScale;
 
 	int FailOrder = -1;
 	

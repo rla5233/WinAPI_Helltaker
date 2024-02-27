@@ -14,6 +14,8 @@
 #include "UI.h"
 
 bool CutSceneManager::IsLoad = false;
+const FVector CutSceneManager::FocusMenuScale = { 0.501f, 0.074f };
+const FVector CutSceneManager::UnFocusMenuScale = { 0.475f, 0.065f };
 
 CutSceneManager::CutSceneManager()
 {
@@ -87,6 +89,51 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
 	SceneCharacter->GetNameRenderer()->SetTextEffect(2);
 	SceneCharacter->GetNameRenderer()->CameraEffectOff();
+}
+
+void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
+{
+	float interval = 0.0f;
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = WinScale * _Pos;
+
+	MenuBarCount = _MenuBarCount;
+	MenuBar.reserve(MenuBarCount);
+	for (int i = 0; i < MenuBarCount; i++)
+	{
+		MenuBar.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
+
+		MenuBar[i]->SetActorLocation({ Pos.X, Pos.Y + interval });
+		MenuBar[i]->SetName("MenuBar");
+
+		MenuBar[i]->CreateImageRenderer(RenderOrder::UI);
+		MenuBar[i]->GetImageRenderer()->CameraEffectOff();
+
+		MenuBar[i]->CreateTextRenderer(RenderOrder::Text);
+		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -2}, {0, 0} });
+		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
+		MenuBar[i]->GetTextRenderer()->SetTextSize(30);
+		MenuBar[i]->GetTextRenderer()->SetText("Test");
+		MenuBar[i]->GetTextRenderer()->CameraEffectOff();
+
+		if (i == 0)
+		{
+			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+			MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
+			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		}
+		else
+		{
+			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+			MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
+			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		}
+
+		interval += WinScale.Y * 0.074f;
+		AllCutSceneActors.push_back(MenuBar[i]);
+	}
+
+	SetFocusMenuIndex(0);
 }
 
 void CutSceneManager::C_SpawnBooper()
@@ -189,50 +236,6 @@ void CutSceneManager::C_ChangeDialogue(std::string_view _ImageName, const FTrans
 	Dialogue->GetImageRenderer()->SetImage(_ImageName);
 	Dialogue->GetImageRenderer()->SetTransform(_FTransform);
 	Dialogue->GetImageRenderer()->ActiveOn();
-}
-
-void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
-{
- 	float interval = 0.0f;
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = WinScale * _Pos;
-
-	MenuBarCount = _MenuBarCount;
-	MenuBar.reserve(MenuBarCount);
-	for (int i = 0; i < MenuBarCount; i++)
-	{
-		MenuBar.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
-
-		MenuBar[i]->SetActorLocation({ Pos.X, Pos.Y + interval });
-		MenuBar[i]->SetName("MenuBar");
-
-		MenuBar[i]->CreateImageRenderer(RenderOrder::UI);
-		MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, {WinScale.X * 0.518f, WinScale.Y * 0.091f} });
-		MenuBar[i]->GetImageRenderer()->CameraEffectOff();
-
-		MenuBar[i]->CreateTextRenderer(RenderOrder::Text);
-		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -3}, {0, 0} });
-		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
-		MenuBar[i]->GetTextRenderer()->SetTextSize(26);
-		MenuBar[i]->GetTextRenderer()->SetText("Test");
-		MenuBar[i]->GetTextRenderer()->CameraEffectOff();
-
-		if (i == 0)
-		{
-			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
-			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-		}
-		else
-		{
-			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
-			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
-		}
-
-		interval += WinScale.Y * 0.074f;
-		AllCutSceneActors.push_back(MenuBar[i]);
-	}
-
-	SetFocusMenuIndex(0);
 }
 
 void CutSceneManager::Enter(float _DeltaTime)
@@ -450,18 +453,24 @@ void CutSceneManager::FocusMenuBarCheck()
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
 		SetFocusMenuIndex(FocusMenuIndex - 1);
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
 		SetFocusMenuIndex(FocusMenuIndex + 1);
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
