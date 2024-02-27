@@ -166,6 +166,13 @@ void ChapterManager::CreateTransition()
 	AllMapActors[reinterpret_cast<__int64>(TransitionActor)] = TransitionActor;
 }
 
+void ChapterManager::TransitionOn()
+{
+	TransitionActor->GetImageRenderer()->ActiveOn();
+	TransitionActor->GetImageRenderer()->AnimationReset();
+	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+}
+
 void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
@@ -266,12 +273,6 @@ void ChapterManager::M_SpawnKeyComponent(Point _Point, EKeyComponentType _Type)
 
 	NewKeyComponent->StateChange(EKeyComponentState::Idle);
 	AllMapActors[reinterpret_cast<__int64>(NewKeyComponent)] = NewKeyComponent;
-}
-
-// 수정 필요 (제거 가능?)
-HitActor* ChapterManager::M_GetHitActor(FVector _Point) const
-{
-	return M_GetHitActor(Point(_Point.iX(), _Point.iY()));
 }
 
 HitActor* ChapterManager::M_GetHitActor(Point _Point) const
@@ -522,9 +523,7 @@ void ChapterManager::End(float _DeltaTime)
 	case 0:
 		if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
 		{
-			TransitionActor->GetImageRenderer()->ActiveOn();
-			TransitionActor->GetImageRenderer()->AnimationReset();
-			TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+			TransitionOn();
 			++ChapterEndOrder;
 		}
 		break;

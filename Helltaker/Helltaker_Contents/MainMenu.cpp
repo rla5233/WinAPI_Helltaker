@@ -63,29 +63,9 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	C_CreateSceneBG();
 	C_SpawnDialogue("MainMenuDialogue_001.png");
 	C_SpawnBooper();	
-
-
 	CreateTransition();
 
 	StateChange(EMainMenuState::Begin);
-}
-
-void MainMenu::LevelEnd(ULevel* _NextLevel)
-{
-	ULevel::LevelEnd(_NextLevel);
-
-	for (AActor* Actor : AllActors)
-	{
-		if (nullptr == Actor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Actor->Destroy(0.0f);
-		Actor = nullptr;
-	}
-
-	AllActors.clear();
 }
 
 void MainMenu::Begin(float _DeltaTime)
@@ -292,22 +272,21 @@ void MainMenu::CutSceneStart()
 
 void MainMenu::EnterChapter(float _DeltaTime)
 {
-	if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
-	{
-		switch (SelectChapterNum)
-		{
-		case 1:
-			GEngine->CreateLevel<Chapter1>("Chapter1");
-			GEngine->ChangeLevel("Chapter1");
-			break;
-		}		
-	}
+	//if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
+	//{
+	//	switch (SelectChapterNum)
+	//	{
+	//	case 1:
+	//		GEngine->CreateLevel<Chapter1>("Chapter1");
+	//		GEngine->ChangeLevel("Chapter1");
+	//		break;
+	//	}		
+	//}
 }
 
 void MainMenu::EnterChapterStart()
 {
-	TransitionActor->GetImageRenderer()->ActiveOn();
-	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+	TransitionOn();
 }
 
 void MainMenu::Exit(float _DeltaTime)
@@ -376,4 +355,22 @@ void MainMenu::StateChange(EMainMenuState _State)
 	}
 
 	State = _State;
+}
+
+void MainMenu::LevelEnd(ULevel* _NextLevel)
+{
+	ULevel::LevelEnd(_NextLevel);
+
+	for (AActor* Actor : AllActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy(0.0f);
+		Actor = nullptr;
+	}
+
+	AllActors.clear();
 }

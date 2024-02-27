@@ -70,8 +70,6 @@ private:
 private:
 	std::list<AActor*> AllActors;
 	
-	const float TransitionInter = 0.0435f;
-	Scene* TransitionActor = nullptr;
 	Character* Beel = nullptr;	
 	Scene* Dialogue = nullptr;
 	Scene* SceneActor = nullptr;

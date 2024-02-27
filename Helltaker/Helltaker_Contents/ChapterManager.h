@@ -43,6 +43,7 @@ public:
 
 	void CreateBG(std::string_view _Name);
 	void CreateTransition();
+	void TransitionOn();
 
 	FVector ChapterPointToLocation(Point _Point) const;
 	
@@ -68,7 +69,6 @@ public:
 		IsThornChange = _Value;
 	}
 
-	HitActor* M_GetHitActor(FVector _Point) const;
 	HitActor* M_GetHitActor(Point _Point) const;
 	void M_DestroyHitActor(__int64 _Key);
 	void M_ChangeThornState();
@@ -113,6 +113,7 @@ public:
 	bool IsLockBoxPoint();
 	void DeleteKey();
 	void DeleteLockBox();
+
 	void CameraPosUpdate(const FVector& _Pos);
 	
 	// Debug
