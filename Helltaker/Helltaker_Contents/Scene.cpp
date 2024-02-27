@@ -38,5 +38,5 @@ bool Scene::FadeInUpdate(float _DeltaTime, float _TimeWeight /* = 1.0f*/)
 
 bool Scene::FadeOutUpdate(float _DeltaTime, float _TimeWeight /* = 1.0f*/)
 {
-	return false
+	return false;
 }
