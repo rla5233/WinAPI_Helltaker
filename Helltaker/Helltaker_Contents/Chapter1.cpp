@@ -4,7 +4,7 @@
 
 bool Chapter1::IsLoad = false;
 
-const std::vector<const char*> Chap1_Script
+const std::vector<const char*> Chapter1::Chap1_Script
 {
 	/* 0 Demon	  */ "피곤한 악마 판데모니카",
 	/* 1 Script 1 */ "지옥 고객센터의 판데모니카라고 합니다.\n무엇을 도와드릴까요?",
