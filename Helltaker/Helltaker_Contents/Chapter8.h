@@ -45,7 +45,7 @@ private:
 	void EnterOrder1(float _DeltaTime);
 	void EnterOrder2(float _DeltaTime);
 	void EnterOrder3(float _DeltaTime);
-	void EnterOrder4();
+	void EnterOrder4(float _DeltaTime);
 	void EnterOrder5();
 	void EnterOrder6();
 
@@ -67,6 +67,7 @@ private:
 	
 	const static float SkeletonCreateDelay;
 	const static float SkeletonRenderDelay;
+	const static float LuSwirl1RenderDelay;
 	const static float LuSwirl2RenderDelay;
 	const static float LuIdleRenderDelay;
 	float TimeCount = 0;

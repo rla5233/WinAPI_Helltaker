@@ -7,7 +7,8 @@
 
 bool Chapter8::IsLoad = false;
 const float Chapter8::SkeletonRenderDelay = 0.2f;
-const float Chapter8::SkeletonCreateDelay = 0.15f;
+const float Chapter8::SkeletonCreateDelay = 0.1f;
+const float Chapter8::LuSwirl1RenderDelay = 0.39f;
 const float Chapter8::LuSwirl2RenderDelay = 0.6f;
 const float Chapter8::LuIdleRenderDelay = 0.05f;
 
@@ -165,7 +166,7 @@ void Chapter8::CutSceneStart()
 void Chapter8::EnterStart()
 {
 	SkeletonMan.reserve(2);
-	TimeCount = SkeletonCreateDelay;
+	TimeCount = LuSwirl1RenderDelay;
 	EnterOrder = 0;
 }
 
@@ -190,7 +191,7 @@ void Chapter8::Enter(float _DeltaTime)
 		EnterOrder3(_DeltaTime);
 		break;
 	case 4:
-		EnterOrder4();
+		EnterOrder4(_DeltaTime);
 		break;
 	case 5:
 		EnterOrder5();
@@ -205,21 +206,25 @@ void Chapter8::EnterOrder0(float _DeltaTime)
 {
 	if (false == C_GetSceneCharacter()->GetIsImageRendererMoveValue())
 	{
-		if (true)
+		if (0.0f >= TimeCount)
 		{
 			C_ChangeCharacterAnimation("Lu_Swirl_1");
+			TimeCount = SkeletonCreateDelay;
+			++EnterOrder;
+			return;
 		}
-	}
-	else
-	{
-		return;
-	}
 
+		TimeCount -= _DeltaTime;
+	}
+}
+
+void Chapter8::EnterOrder1(float _DeltaTime)
+{
 	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		if (0 >= TimeCount)
+		if (0.0f >= TimeCount)
 		{
-			SpawnSkeletonMan();	
+			SpawnSkeletonMan();
 			SpawnSkeletonMan();
 
 			FVector WinScale = ContentsHelper::GetWindowScale();
@@ -235,14 +240,14 @@ void Chapter8::EnterOrder0(float _DeltaTime)
 	}
 }
 
-void Chapter8::EnterOrder1(float _DeltaTime)
+void Chapter8::EnterOrder2(float _DeltaTime)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
 
 	if (0.0f >= TimeCount)
 	{
-		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * 0.211f, WinScale.Y * (-0.025f) }, SkeletonScale });		
+		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * 0.211f, WinScale.Y * (-0.025f) }, SkeletonScale });
 
 		TimeCount = LuSwirl2RenderDelay;
 		++EnterOrder;
@@ -252,7 +257,7 @@ void Chapter8::EnterOrder1(float _DeltaTime)
 	TimeCount -= _DeltaTime;
 }
 
-void Chapter8::EnterOrder2(float _DeltaTime)
+void Chapter8::EnterOrder3(float _DeltaTime)
 {
 	if (0.0f >= TimeCount)
 	{
@@ -266,7 +271,7 @@ void Chapter8::EnterOrder2(float _DeltaTime)
 	TimeCount -= _DeltaTime;
 }
 
-void Chapter8::EnterOrder3(float _DeltaTime)
+void Chapter8::EnterOrder4(float _DeltaTime)
 {
 	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
@@ -277,7 +282,7 @@ void Chapter8::EnterOrder3(float _DeltaTime)
 			C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
 			C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f} });
 			C_GetSceneCharacter()->GetNameRenderer()->SetText(Chap8_Script[0]);
-			
+
 			C_SpawnBooper();
 			C_BooperTextSet(Chap8_Script[1]);
 
@@ -288,7 +293,7 @@ void Chapter8::EnterOrder3(float _DeltaTime)
 	}
 }
 
-void Chapter8::EnterOrder4()
+void Chapter8::EnterOrder5()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -298,7 +303,7 @@ void Chapter8::EnterOrder4()
 	}
 }
 
-void Chapter8::EnterOrder5()
+void Chapter8::EnterOrder6()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -306,9 +311,6 @@ void Chapter8::EnterOrder5()
 		C_StateChange(ECutSceneState::Select);
 	}
 }
-
-void Chapter8::EnterOrder6()
-{}
 
 void Chapter8::SelectStart()
 {
