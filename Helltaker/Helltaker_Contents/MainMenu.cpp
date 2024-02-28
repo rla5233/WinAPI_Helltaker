@@ -299,7 +299,7 @@ void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 	for (int i = 0; i < 2; i++)
 	{
 		UI* TopBottomBar = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-		TopBottomBar->SetName("SelectChapterTopBottomBar");
+		TopBottomBar->SetName("SC_TopBottomBar");
 		TopBottomBar->CreateImageRenderer(RenderOrder::UI);
 		TopBottomBar->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.749f, WinScale.Y * 0.05f } });
 		TopBottomBar->GetImageRenderer()->ActiveOff();
@@ -351,22 +351,44 @@ void MainMenu::FocusSC_MenuBarCheck()
 {
 	if (UEngineInput::IsDown('A') || UEngineInput::IsDown(VK_LEFT))
 	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
+		AutoSC_UnSelectMenuImage();
 		SetFocusSC_MenuIndex(FocusSC_MenuIndex - 1);
-		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
+		AutoSC_SelectMenuImage();
 	}
 	else if (UEngineInput::IsDown('D') || UEngineInput::IsDown(VK_RIGHT))
 	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
+		AutoSC_UnSelectMenuImage();
 		SetFocusSC_MenuIndex(FocusSC_MenuIndex + 1);
-		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
+		AutoSC_SelectMenuImage();
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		//SelectMenu();	
 	}
+}
+
+void MainMenu::AutoSC_SelectMenuImage()
+{
+	std::string Name = "Select_0";
+	std::string Num = std::to_string(FocusSC_MenuIndex + 1);
+	if (1 == Num.size())
+	{
+		Name += "0";
+	}
+	Name += Num + ".png";
+	SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage(Name);
+}
+
+void MainMenu::AutoSC_UnSelectMenuImage()
+{
+	std::string Name = "UnSelect_0";
+	std::string Num = std::to_string(FocusSC_MenuIndex + 1);
+	if (1 == Num.size())
+	{
+		Name += "0";
+	}
+	Name += Num + ".png";
+	SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage(Name);
 }
 
 void MainMenu::SetFocusSC_MenuIndex(int _Index)

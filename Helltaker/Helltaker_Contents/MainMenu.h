@@ -60,6 +60,8 @@ private:
 	void SC_MenuBarOff();
 
 	void FocusSC_MenuBarCheck();
+	void AutoSC_SelectMenuImage();
+	void AutoSC_UnSelectMenuImage();
 	void SetFocusSC_MenuIndex(int _Index);
 
 	void DialogueMoveUpdate(float _DeltaTime);
