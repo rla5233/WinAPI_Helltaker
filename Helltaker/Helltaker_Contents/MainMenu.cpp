@@ -276,7 +276,7 @@ void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 {
 	float interval = 0.0f;
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { WinScale.X * 0.218f, WinScale.Y * 0.75f };
+	FVector Pos = { WinScale.X * 0.218f, WinScale.Y * 0.801f };
 	FVector Scale = { WinScale.X * 0.0573f, WinScale.Y * 0.07f };
 
 	SC_MenuCount = _IndexCount;
@@ -322,12 +322,12 @@ void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 
 		if (i == 0)
 		{
-			TopBottomBar->SetActorLocation({ WinScale.hX(), Pos.Y + WinScale.Y * 0.05f });
+			TopBottomBar->SetActorLocation({ WinScale.hX(), Pos.Y + WinScale.Y * 0.0545f });
 			TopBottomBar->GetImageRenderer()->SetImage("ChapterSelect_Bottom.png");
 		}
 		else
 		{
-			TopBottomBar->SetActorLocation({ WinScale.hX(), Pos.Y - WinScale.Y * 0.05f });
+			TopBottomBar->SetActorLocation({ WinScale.hX(), Pos.Y - WinScale.Y * 0.0545f });
 			TopBottomBar->GetImageRenderer()->SetImage("ChapterSelect_Top.png");
 		}
 
