@@ -7,10 +7,10 @@
 
 bool Chapter8::IsLoad = false;
 const float Chapter8::SkeletonRenderDelay = 0.2f;
-const float Chapter8::SkeletonCreateDelay = 0.1f;
+const float Chapter8::SkeletonCreateDelay = 0.07f;
 const float Chapter8::LuSwirl1RenderDelay = 0.39f;
 const float Chapter8::LuSwirl2RenderDelay = 0.6f;
-const float Chapter8::LuIdleRenderDelay = 0.05f;
+const float Chapter8::LuIdleRenderDelay = 0.075f;
 
 const std::vector<const char*> Chapter8::Chap8_Script
 {
@@ -256,12 +256,14 @@ void Chapter8::EnterOrder1(float _DeltaTime)
 
 void Chapter8::EnterOrder2(float _DeltaTime)
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
-
 	if (0.0f >= TimeCount)
 	{
-		SkeletonMan[1]->GetImageRenderer()->SetTransform({ { WinScale.X * 0.211f, WinScale.Y * (-0.025f) }, SkeletonScale });
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+		FVector Pos = { WinScale.X * 0.211f, WinScale.Y * (-0.025f) };
+		SkeletonMan[1]->GetImageRenderer()->SetScale(Scale);
+		SkeletonMan[1]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+		SkeletonMan[1]->ImageRendererFadeInOn();
 
 		TimeCount = LuSwirl2RenderDelay;
 		++EnterOrder;
@@ -429,7 +431,7 @@ void Chapter8::Success(float _DeltaTime)
 	switch (SelectOrder)
 	{
 	case 0:
-		EnterOrder5();
+		EnterOrder6();
 		break;
 	case 1:
 		SuccessEnter();
