@@ -98,7 +98,7 @@ void Chapter1::CutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.255f, WinScale.Y * 0.611f };
-	FVector Pos = { WinScale.X * 0.0f, WinScale.Y * 0.0f };
+	FVector Pos = { WinScale.X * (-0.015f), WinScale.Y * 0.0f };
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
 	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
 	C_GetSceneCharacter()->ImageRendererFadeInOn();

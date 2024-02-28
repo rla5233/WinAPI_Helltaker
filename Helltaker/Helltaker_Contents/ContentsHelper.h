@@ -6,7 +6,8 @@
 
 const Color8Bit HELLTAKER_WHITE = Color8Bit(255, 255, 255, 0);
 const Color8Bit HELLTAKER_GRAY = Color8Bit(125, 125, 125, 0);
-const Color8Bit HELLTAKER_RED = Color8Bit(230, 77, 81, 255);
+const Color8Bit HELLTAKER_RED1 = Color8Bit(230, 77, 81, 255);
+const Color8Bit HELLTAKER_RED2 = Color8Bit(205, 20, 16, 255);
 
 class Point
 {

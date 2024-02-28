@@ -19,7 +19,7 @@ public:
 	void CreateImageRenderer(RenderOrder _Order);
 	void CreateNameRenderer(RenderOrder _Order);
 
-	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 3.5f);
+	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 4.0f);
 	void ImageRendererMoveOn(const FVector& _StartPos, const FVector& _TargetPos)
 	{
 		StartPos = _StartPos;
@@ -32,7 +32,7 @@ public:
 		return IsImageMoveValue;
 	}
 
-	bool ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight = 3.5f);
+	bool ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight = 4.0f);
 	void ImageRendererFadeInOn();
 
 	UImageRenderer* GetImageRenderer() const

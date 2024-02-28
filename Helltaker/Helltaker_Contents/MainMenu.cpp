@@ -134,7 +134,7 @@ void MainMenu::EnterStart()
 	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
 	C_GetSceneCharacter()->GetImageRenderer()->SetAlpha(0.0f);
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.05f), Pos.Y}, Pos);
+	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.04f), Pos.Y}, Pos);
 	C_GetSceneCharacter()->FadeInOn();
 
 	C_BooperTextSet(MainMenu_Script[2]);

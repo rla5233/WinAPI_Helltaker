@@ -86,7 +86,7 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 	SceneCharacter->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
 	SceneCharacter->GetNameRenderer()->SetTextSize(40);
 	SceneCharacter->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
-	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED);
+	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED1);
 	SceneCharacter->GetNameRenderer()->SetTextEffect(2);
 	SceneCharacter->GetNameRenderer()->CameraEffectOff();
 }
@@ -109,7 +109,7 @@ void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 		MenuBar[i]->GetImageRenderer()->CameraEffectOff();
 
 		MenuBar[i]->CreateTextRenderer(RenderOrder::Text);
-		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -2}, {0, 0} });
+		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -1}, {0, 0} });
 		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 		MenuBar[i]->GetTextRenderer()->SetTextSize(30);
 		MenuBar[i]->GetTextRenderer()->SetText(" ");
@@ -295,7 +295,8 @@ void CutSceneManager::BadEndSetting()
 	Dialogue->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.816f, WinScale.Y * 0.444f } });
 	Dialogue->GetImageRenderer()->ChangeAnimation("Scene_Death");
 	SceneCharacter->AllRenderersActiveOff();
-	Booper->GetTextRenderer()->SetTextColor(HELLTAKER_RED);
+	Booper->GetTextRenderer()->SetTextColor(HELLTAKER_RED2);
+	Booper->GetTextRenderer()->SetTextEffect(2);
 	Booper->GetImageRenderer()->ActiveOff();
 	
 	ChapterManager::M_StateChange(EChapterState::None);
