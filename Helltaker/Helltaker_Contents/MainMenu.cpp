@@ -230,24 +230,25 @@ void MainMenu::SelectChapterStart()
 {
 	C_MenubarRenderActiveOff();
 	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
-	
-	
 
-
-	//Scene* New = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	//New->SetActorLocation({1920 * 0.5f, 1080 * 0.75f});
-	//New->CreateImageRenderer(RenderOrder::Transition);
-	//New->GetImageRenderer()->SetImage("UnSelect_001.png");
-	//New->GetImageRenderer()->SetTransform({ {0, 0}, {110, 76} });
+	SelectChatperMenuBarOn();
 }
 
 void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
 {
+	float interval = 0.0f;
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = { WinScale.X * 0.5f, WinScale.Y * 0.75f };
+	FVector Scale = { WinScale.X * 0.0573f, WinScale.Y * 0.07f };
+
 	SelectChapterMenuCount = _IndexCount;
 	SelectChapterMenu.reserve(SelectChapterMenuCount);
 	for (int i = 0; i < SelectChapterMenuCount; i++)
 	{
 		UI* MenuBar = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+		MenuBar->SetName("SelectChapterMenuBar");
+		MenuBar->SetActorLocation({ Pos.X + interval, Pos.Y });
+
 		MenuBar->CreateImageRenderer(RenderOrder::UI);
 
 		if (i == 0)
@@ -259,8 +260,39 @@ void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
 			MenuBar->GetImageRenderer()->SetImage("UnSelect_001.png");
 		}
 		
+		MenuBar->GetImageRenderer()->SetTransform({ { 0, 0 }, Scale });
 		MenuBar->ActiveOff();
+		
+		interval += WinScale.X * 0.0625f;
 		SelectChapterMenu.push_back(MenuBar);
+	}
+
+
+}
+
+void MainMenu::SelectChatperMenuBarOn()
+{
+	for (UI* Menu : SelectChapterMenu)
+	{
+		if (nullptr == Menu)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Menu->AllRenderersActiveOn();
+	}
+}
+
+void MainMenu::SelectChatperMenuBarOff()
+{
+	for (UI* Menu : SelectChapterMenu)
+	{
+		if (nullptr == Menu)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Menu->AllRenderersActiveOff();
 	}
 }
 

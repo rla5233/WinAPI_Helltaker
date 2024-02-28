@@ -102,7 +102,6 @@ void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 	for (int i = 0; i < MenuBarCount; i++)
 	{
 		MenuBar.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
-
 		MenuBar[i]->SetActorLocation({ Pos.X, Pos.Y + interval });
 		MenuBar[i]->SetName("MenuBar");
 

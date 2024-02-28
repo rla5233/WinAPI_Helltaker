@@ -56,6 +56,8 @@ private:
 	void ExitStart();
 
 	void SpawnSelectChapterMenuBar(int _IndexCount);
+	void SelectChatperMenuBarOn();
+	void SelectChatperMenuBarOff();
 
 	void DialogueMoveUpdate(float _DeltaTime);
 
