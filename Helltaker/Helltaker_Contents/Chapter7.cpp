@@ -106,12 +106,13 @@ void Chapter7::CutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.228f, WinScale.Y * 0.567f };
-	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
+	FVector Pos = { WinScale.X * (-0.005f), WinScale.Y * 0.02f};
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
 	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
 	C_GetSceneCharacter()->ImageRendererFadeInOn();
 
 	C_BooperTextSet(Chap7_Script[1]);
+	C_BooperSetTextPosition(1);
 }
 
 void Chapter7::SelectStart()
@@ -149,7 +150,8 @@ void Chapter7::SuccessStart()
 		C_BooperTextSet(Chap7_Script[4]);
 		break;
 	case 1:
-		C_BooperTextSet(Chap7_Script[5]);
+		C_BooperTextSet(Chap7_Script[5]); 
+		C_BooperSetTextPosition(2);
 		break;
 	}
 	
