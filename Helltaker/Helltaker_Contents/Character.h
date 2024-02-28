@@ -19,7 +19,19 @@ public:
 	void CreateImageRenderer(RenderOrder _Order);
 	void CreateNameRenderer(RenderOrder _Order);
 
-	void ImageMoveUpdate(const FVector& _TargetPos, float _DeltaTime, float _TimeWeight = 1.0f);
+	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
+
+	void ImageRendererMoveOn(const FVector& _StartPos, const FVector& _TargetPos)
+	{
+		StartPos = _StartPos;
+		TargetPos = _TargetPos;
+		IsImageMoveValue = true;
+	}
+
+	bool GetIsImageRendererMoveValue() const
+	{
+		return IsImageMoveValue;
+	}
 
 	UImageRenderer* GetImageRenderer() const
 	{
@@ -38,6 +50,7 @@ private:
 	UImageRenderer* NameRenderer = nullptr;
 
 	FVector StartPos = FVector::Zero;
+	FVector TargetPos = FVector::Zero;
 	float MoveTime = 0.0f;
-	bool IsMoveValue = false;
+	bool IsImageMoveValue = false;
 };

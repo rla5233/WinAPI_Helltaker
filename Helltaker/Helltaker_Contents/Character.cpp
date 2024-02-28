@@ -23,19 +23,19 @@ void Character::CreateNameRenderer(RenderOrder _Order)
 	NameRenderer = RenderActor::CreateImageRenderer(_Order);
 }
 
-void Character::ImageMoveUpdate(const FVector& _TargetPos, float _DeltaTime, float _TimeWeight/* = 1.0f */)
+void Character::ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight/* = 1.0f */)
 {
-	if (true == IsMoveValue)
+	if (true == IsImageMoveValue)
 	{
 		MoveTime += _DeltaTime * _TimeWeight;
 
-		FVector NextPos = FVector::LerpClamp(StartPos, _TargetPos, MoveTime);
+		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
 		ImageRenderer->SetPosition(NextPos);
 
 		if (1.0f <= MoveTime)
 		{
 			MoveTime = 0.0f;
-			IsMoveValue = false;
+			IsImageMoveValue = false;
 		}
 	}
 }
