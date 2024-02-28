@@ -47,7 +47,25 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("UI", "ChapterSelect_Bottom.png");
 		ContentsHelper::LoadImg("UI", "ChapterSelect_Top.png");
 		ContentsHelper::LoadImg("UI", "UnSelect_001.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_002.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_003.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_004.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_005.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_006.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_007.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_008.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_009.png");
+		ContentsHelper::LoadImg("UI", "UnSelect_010.png");
 		ContentsHelper::LoadImg("UI", "Select_001.png");
+		ContentsHelper::LoadImg("UI", "Select_002.png");
+		ContentsHelper::LoadImg("UI", "Select_003.png");
+		ContentsHelper::LoadImg("UI", "Select_004.png");
+		ContentsHelper::LoadImg("UI", "Select_005.png");
+		ContentsHelper::LoadImg("UI", "Select_006.png");
+		ContentsHelper::LoadImg("UI", "Select_007.png");
+		ContentsHelper::LoadImg("UI", "Select_008.png");
+		ContentsHelper::LoadImg("UI", "Select_009.png");
+		ContentsHelper::LoadImg("UI", "Select_010.png");
 
 		IsLoad = true;
 	}
@@ -261,7 +279,14 @@ void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 		}
 		else
 		{
-			MenuBar->GetImageRenderer()->SetImage("UnSelect_001.png");
+			std::string Name = "UnSelect_0";
+			std::string Num = std::to_string(i + 1);
+			if (1 == Num.size())
+			{
+				Name += "0";
+			}
+			Name += Num + ".png";
+			MenuBar->GetImageRenderer()->SetImage(Name);
 		}
 		
 		MenuBar->GetImageRenderer()->SetTransform({ { 0, 0 }, Scale });
