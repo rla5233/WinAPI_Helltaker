@@ -47,6 +47,7 @@ private:
 	void EnterOrder3(float _DeltaTime);
 	void EnterOrder4();
 	void EnterOrder5();
+	void EnterOrder6();
 
 	void SuccessStart1();
 	void SuccessStart2();

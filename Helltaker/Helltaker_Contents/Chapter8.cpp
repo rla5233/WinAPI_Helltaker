@@ -47,6 +47,7 @@ void Chapter8::BeginPlay()
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_008.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Throne.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_Skeleton.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Swirl_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Angry.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Happy.png");
@@ -134,32 +135,6 @@ void Chapter8::SpawnSkeletonMan()
 	SkeletonMan.push_back(Skeleton);
 }
 
-void Chapter8::LevelEnd(ULevel* _NextLevel)
-{
-	CutSceneManager::LevelEnd(_NextLevel);
-
-	if (nullptr == M_DefaultBackGround)
-	{
-		MsgBoxAssert("BackGround is nullptr.")
-	}
-
-	M_DefaultBackGround->Destroy();
-	M_DefaultBackGround = nullptr;
-
-	for (Scene* Skeleton : SkeletonMan)
-	{
-		if (nullptr == Skeleton)
-		{
-			MsgBoxAssert("Skeleton is nullptr.");
-		}
-
-		Skeleton->Destroy();
-		Skeleton = nullptr;
-	}
-
-	SkeletonMan.clear();
-}
-
 void Chapter8::CutSceneCheck()
 {
 	if (M_GetHeroLocationPoint() == EndPoint)
@@ -170,19 +145,21 @@ void Chapter8::CutSceneCheck()
 
 void Chapter8::CutSceneStart()
 {
-	CutSceneManager::CutSceneStart();
-
 	M_DefaultBackGround->ActiveOff();
 	M_DefaultBackGround->AllRenderersActiveOff();
 
 	C_SpawnDialogue("DialogueBG_Throne.png");
-	C_SpawnCharacter("Lu", "Lu_Swirl");
+	C_SpawnCharacter("Lu", "Lu_Swirl_Idle.png");
 	C_CreateCharacterAnimation("Lu_Swirl_1", "Lu_Swirl", 0, 9, 0.15f, false);
 	C_CreateCharacterAnimation("Lu_Swirl_2", "Lu_Swirl", 10, 13, 0.15f, false);
-	C_ChangeCharacterAnimation("Lu_Swirl_1");
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0f}, {WinScale.X * 0.242f, WinScale.Y * 0.619f} });
+	FVector Scale = { WinScale.X * 0.242f, WinScale.Y * 0.619f };
+	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
+	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
+	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.1f), Pos.Y }, Pos);
+	
+	CutSceneManager::CutSceneStart();
 }
 
 void Chapter8::EnterStart()
@@ -195,6 +172,8 @@ void Chapter8::EnterStart()
 void Chapter8::Enter(float _DeltaTime)
 {
 	ResetCheck();
+	C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
+	C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime);
 
 	switch (EnterOrder)
 	{
@@ -216,11 +195,26 @@ void Chapter8::Enter(float _DeltaTime)
 	case 5:
 		EnterOrder5();
 		break;
+	case 6:
+		EnterOrder6();
+		break;
 	}
 }
 
 void Chapter8::EnterOrder0(float _DeltaTime)
 {
+	if (false == C_GetSceneCharacter()->GetIsImageRendererMoveValue())
+	{
+		if (true)
+		{
+			C_ChangeCharacterAnimation("Lu_Swirl_1");
+		}
+	}
+	else
+	{
+		return;
+	}
+
 	if (true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
 		if (0 >= TimeCount)
@@ -312,6 +306,9 @@ void Chapter8::EnterOrder5()
 		C_StateChange(ECutSceneState::Select);
 	}
 }
+
+void Chapter8::EnterOrder6()
+{}
 
 void Chapter8::SelectStart()
 {
@@ -482,3 +479,28 @@ void Chapter8::ChangeChapter()
 	GEngine->ChangeLevel("Chapter9");
 }
 
+void Chapter8::LevelEnd(ULevel* _NextLevel)
+{
+	CutSceneManager::LevelEnd(_NextLevel);
+
+	if (nullptr == M_DefaultBackGround)
+	{
+		MsgBoxAssert("BackGround is nullptr.")
+	}
+
+	M_DefaultBackGround->Destroy();
+	M_DefaultBackGround = nullptr;
+
+	for (Scene* Skeleton : SkeletonMan)
+	{
+		if (nullptr == Skeleton)
+		{
+			MsgBoxAssert("Skeleton is nullptr.");
+		}
+
+		Skeleton->Destroy();
+		Skeleton = nullptr;
+	}
+
+	SkeletonMan.clear();
+}
