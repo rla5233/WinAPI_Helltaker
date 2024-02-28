@@ -48,6 +48,7 @@ private:
 
 	void SelectChapterStart();
 	void SelectChapter(float _DeltaTime);
+	void SelectChapterMenu();
 
 	void EnterChapter();
 	void EnterChapterStart();
@@ -73,7 +74,7 @@ private:
 	
 	int SC_MenuCount = -1;
 	int FocusSC_MenuIndex = -1;
-	std::vector<UI*> SelectChapterMenu;
+	std::vector<UI*> SC_MenuBar;
 	
 	EMainMenuState State = EMainMenuState::None;
 
