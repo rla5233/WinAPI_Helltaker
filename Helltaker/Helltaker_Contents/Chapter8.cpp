@@ -127,7 +127,7 @@ void Chapter8::CreateDefaultBG()
 void Chapter8::SpawnSkeletonMan()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Character* Skeleton = SpawnActor<Character>(static_cast<int>(UpdateOrder::Scene));
+	Character* Skeleton = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
 	Skeleton->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
 	Skeleton->SetName("Skeleton_Man");
 	Skeleton->CreateImageRenderer(RenderOrder::Scene);
@@ -175,6 +175,17 @@ void Chapter8::Enter(float _DeltaTime)
 	ResetCheck();
 	C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
 	C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime);
+
+	for (Character* Skeleton : SkeletonMan)
+	{
+		if (nullptr == Skeleton)
+		{
+			MsgBoxAssert("Acotr is nullptr");
+		}
+
+		Skeleton->ImageRendererMoveUpdate(_DeltaTime);
+		Skeleton->ImageRendererFadeInUpdate(_DeltaTime);
+	}
 
 	switch (EnterOrder)
 	{
@@ -228,8 +239,11 @@ void Chapter8::EnterOrder1(float _DeltaTime)
 			SpawnSkeletonMan();
 
 			FVector WinScale = ContentsHelper::GetWindowScale();
-			FVector SkeletonScale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
-			SkeletonMan[0]->GetImageRenderer()->SetTransform({ { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) }, SkeletonScale });
+			FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+			FVector Pos = { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) };
+			SkeletonMan[0]->GetImageRenderer()->SetScale(Scale);
+			SkeletonMan[0]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+			SkeletonMan[0]->ImageRendererFadeInOn();
 
 			TimeCount = SkeletonRenderDelay;
 			++EnterOrder;
