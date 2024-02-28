@@ -1,5 +1,6 @@
 #include "Chapter5.h"
 
+#include "Character.h"
 #include "Chapter6.h"
 
 bool Chapter5::IsLoad = false;
@@ -104,7 +105,12 @@ void Chapter5::CutSceneStart()
 	C_SpawnBooper();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.021f }, {WinScale.X * 0.256f, WinScale.Y * 0.567f} });
+	FVector Scale = { WinScale.X * 0.256f, WinScale.Y * 0.567f };
+	FVector Pos = { 0.0f, WinScale.Y * 0.021f };
+	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
+	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+	C_GetSceneCharacter()->ImageRendererFadeInOn();
+	
 	C_BooperTextSet(Chap5_Script[1]);
 }
 
