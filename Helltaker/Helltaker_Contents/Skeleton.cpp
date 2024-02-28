@@ -208,6 +208,7 @@ void Skeleton::Death(float _DeltaTime)
 
 	if (true == AllDeathParticle.empty())
 	{
+		InformDestroytoChapter();
 		Destroy();	
 	}
 }
@@ -223,7 +224,6 @@ void Skeleton::DeathStart()
 	}
 
 	HitActorInfoUpdate(EHitActorState::Death);
-	InformDestroytoChapter();
 }
 
 void Skeleton::DeathParticleMoveUpdate(float _DeltaTime)
