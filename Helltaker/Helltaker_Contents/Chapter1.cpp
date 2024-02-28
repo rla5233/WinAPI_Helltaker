@@ -146,7 +146,9 @@ void Chapter1::SuccessStart()
 	CutSceneManager::SuccessStart();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.255f, WinScale.Y * 0.611f } });
+	FVector Scale = { WinScale.X * 0.255f, WinScale.Y * 0.611f };
+	FVector Pos = { WinScale.X * (-0.009f), WinScale.Y * 0.0f };
+	C_CharacterSetTransform({ Pos, Scale });
 	C_CharacterSetImage("Pand_Flust.png");
 	C_BooperTextSet(Chap1_Script[6]);
 }
