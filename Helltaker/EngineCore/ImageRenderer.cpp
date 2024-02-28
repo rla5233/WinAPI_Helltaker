@@ -5,10 +5,12 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{}
+{
+}
 
 UImageRenderer::~UImageRenderer()
-{}
+{
+}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -76,8 +78,7 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else
-	{
+	else {
 		ImageRender(_DeltaTime);
 	}
 
@@ -267,6 +268,18 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 	FTransform RendererTrans = GetRenderTransForm();
 
 	EWIndowImageType ImageType = Image->GetImageType();
+
+	switch (SortType)
+	{
+	case EImageSortType::Left:
+	{
+		const UImageInfo& Info = Image->ImageInfo(InfoIndex);
+		RendererTrans.AddPosition({ RendererTrans.GetScale().hX() , 0.0f });
+		break;
+	}
+	default:
+		break;
+	}
 
 	switch (ImageType)
 	{

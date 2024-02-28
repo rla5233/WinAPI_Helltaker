@@ -27,6 +27,11 @@ public:
 		Transform.SetScale(_Value);
 	}
 
+	void AddScale(const FVector& _Value)
+	{
+		Transform.AddScale(_Value);
+	}
+
 	void SetTransform(const FTransform& _Value)
 	{
 		Transform = _Value;

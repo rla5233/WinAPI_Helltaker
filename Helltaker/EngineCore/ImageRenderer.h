@@ -3,6 +3,12 @@
 #include <EnginePlatform\WindowImage.h>
 #include <map>
 
+enum class EImageSortType
+{
+	Center,
+	Left,
+};
+
 class UAnimationInfo
 {
 public:
@@ -182,6 +188,11 @@ public:
 		TextEffect = _Effect;
 	}
 
+	void SetSortType(EImageSortType _SortType)
+	{
+		SortType = _SortType;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _Time) override;
@@ -207,6 +218,9 @@ private:
 	Color8Bit TextColor = Color8Bit::BlackA;
 	Color8Bit TextColor2 = Color8Bit::BlackA; //Ãß°¡
 	int TextEffect = 0;
+
+	EImageSortType SortType = EImageSortType::Center;
+
 	// Default : 0, 
 	// Bold & Italic : 1, (custom)
 	// Bold : 2,
