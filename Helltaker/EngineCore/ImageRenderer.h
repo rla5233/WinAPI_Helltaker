@@ -75,6 +75,15 @@ public:
 		bool _Loop = true
 	);
 
+	void CreateAnimation(
+		std::string_view _AnimationName,
+		std::string_view _ImageName,
+		std::vector<int> _Indexs,
+		std::vector<float> _Inters,
+		bool _Loop = true
+	);
+
+
 	void ChangeAnimation(std::string_view _AnimationName, bool _IsForce = false, int _StartIndex = 0, float _Time = -1.0f);
 	void AnimationReset();
 

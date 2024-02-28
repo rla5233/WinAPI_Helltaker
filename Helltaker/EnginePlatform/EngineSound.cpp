@@ -54,12 +54,10 @@ void UEngineSound::ResourcesRelease()
 }
 
 UEngineSound::UEngineSound()
-{
-}
+{}
 
 UEngineSound::~UEngineSound()
-{
-}
+{}
 
 
 void UEngineSound::ResLoad(std::string_view _Path)
@@ -69,7 +67,7 @@ void UEngineSound::ResLoad(std::string_view _Path)
 	SoundSystem->createSound(_Path.data(), FMOD_LOOP_NORMAL, nullptr, &SoundHandle);
 	if (nullptr == SoundHandle)
 	{
-		MsgBoxAssert("사운드 로드에 실패했습니다.");
+		MsgBoxAssert("사운드 로드에 실패했습니다." + std::string(_Path));
 		return;
 	}
 
