@@ -1,9 +1,18 @@
 ﻿#include "MainMenu.h"
 
-#include "Chapter1.h"
 #include "Character.h"
 #include "Scene.h"
 #include "UI.h"
+
+#include "Chapter1.h"
+#include "Chapter2.h"
+#include "Chapter3.h"
+#include "Chapter4.h"
+#include "Chapter5.h"
+#include "Chapter6.h"
+#include "Chapter7.h"
+#include "Chapter8.h"
+#include "Chapter9.h"
 
 bool MainMenu::IsLoad = false;
 
@@ -327,6 +336,7 @@ void MainMenu::SelectChapterMenu()
 
 	if (1 == SelectChapterNum)
 	{
+		C_GetSceneCharacter()->GetNameRenderer()->ActiveOn();
 		StateChange(EMainMenuState::NewGame);
 	}
 	else
@@ -433,13 +443,40 @@ void MainMenu::EnterChapter()
 {
 	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
 	{
+		std::string Chapter = "Chapter";
+		Chapter += std::to_string(SelectChapterNum);
 		switch (SelectChapterNum)
 		{
 		case 1:
-			CreateChapter<Chapter1>("Chapter1");
-			GEngine->ChangeLevel("Chapter1");
+			CreateChapter<Chapter1>(Chapter);
+			break;
+		case 2:
+			CreateChapter<Chapter2>(Chapter);
+			break;
+		case 3:
+			CreateChapter<Chapter3>(Chapter);
+			break;
+		case 4:
+			CreateChapter<Chapter4>(Chapter);
+			break;
+		case 5:
+			CreateChapter<Chapter5>(Chapter);
+			break;
+		case 6:
+			CreateChapter<Chapter6>(Chapter);
+			break;
+		case 7:
+			CreateChapter<Chapter7>(Chapter);
+			break;
+		case 8:
+			CreateChapter<Chapter8>(Chapter);
+			break;
+		case 9:
+			CreateChapter<Chapter9>(Chapter);
 			break;
 		}		
+
+		GEngine->ChangeLevel(Chapter);
 	}
 }
 
