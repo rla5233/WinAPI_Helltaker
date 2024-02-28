@@ -75,13 +75,8 @@ void Chapter9::LevelStart(ULevel * _PrevLevel)
 	M_SpawnStone({ 3, 5 }, "Stone_005.png");
 	M_SpawnStone({ 6, 5 }, "Stone_006.png");
 	
-	//M_SpawnKeyComponent({ 1, 2 }, EKeyComponentType::Key);
-	//M_SpawnKeyComponent({ 4, 1 }, EKeyComponentType::LockBox);
-	//
-	//FVector WinScale = ContentsHelper::GetWindowScale();
-	//FVector Scale = { WinScale.X * 0.047f, WinScale.Y * 0.08f };
-	//FVector Pos = { 0.0f, WinScale.Y * (-0.009f) };
-	//M_SpawnDemon({ 3, 0 }, "Justice", { Pos, Scale });
+	M_SpawnKeyComponent({ 8, 3 }, EKeyComponentType::Key);
+	M_SpawnKeyComponent({ 4, 1 }, EKeyComponentType::LockBox);
 
 	M_StateChange(EChapterState::Idle);
 
