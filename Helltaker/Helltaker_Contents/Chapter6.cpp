@@ -18,7 +18,7 @@ const std::vector<const char*> Chapter6::Chap6_Script
 	/* 4 Failed	  */ "여기선 찾기 힘들거에요. 다행히 제가 좋은 곳을 알고 있죠.\n자, 손을 잡으세요.",
 	/* 5 Bad End  */ "거짓말 때문에 천국에 가리라고 누가 예상이나 했을까.",
 	/* 6 Bad End  */ "악마 하렘과는 영영 이별이지만.",
-	/* 7 Success  */ "아, 그쪽도요? 혹시, 현대 죄악 관련 논문인가요? 아니면 악마학?\n같이 하는게 좋겠어요."
+	/* 7 Success  */ "아, 그쪽도요? 혹시, 현대 죄악 관련 논문인가요? 아니면\n악마학? 같이 하는게 좋겠어요."
 };
 
 Chapter6::Chapter6()
@@ -112,7 +112,7 @@ void Chapter6::CutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.235f, WinScale.Y * 0.591f };
-	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
+	FVector Pos = { 0.0f, WinScale.Y * 0.01f };
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
 	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
 	C_GetSceneCharacter()->ImageRendererFadeInOn();
@@ -181,6 +181,7 @@ void Chapter6::BadEndSetting1()
 
 	Booper->AllRenderersActiveOn();
 	C_BooperTextSet(Chap6_Script[5]);
+	C_BooperSetTextPosition(1);
 	C_AddFailOrder(1);
 }
 
@@ -202,7 +203,9 @@ void Chapter6::SuccessStart()
 	CutSceneManager::SuccessStart();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (0.045f) }, { WinScale.X * 0.211f, WinScale.Y * 0.516f } });
+	FVector Scale = { WinScale.X * 0.211f, WinScale.Y * 0.516f };
+	FVector Pos = { WinScale.X * (-0.007f), WinScale.Y * (0.03f) };
+	C_CharacterSetTransform({ Pos, Scale });
 	C_CharacterSetImage("Az_Note.png");
 	C_BooperTextSet(Chap6_Script[7]);
 }
