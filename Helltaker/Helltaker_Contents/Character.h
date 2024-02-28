@@ -32,7 +32,8 @@ public:
 		return IsImageMoveValue;
 	}
 
-	bool ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
+	bool ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight = 3.5f);
+	void ImageRendererFadeInOn();
 
 	UImageRenderer* GetImageRenderer() const
 	{

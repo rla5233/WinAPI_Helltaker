@@ -44,3 +44,9 @@ bool Character::ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight)
 {
 	return RenderActor::FadeInUpdate(ImageRenderer, _DeltaTime, _TimeWeight);
 }
+
+void Character::ImageRendererFadeInOn()
+{
+	ImageRenderer->SetAlpha(0.0f);
+	FadeInOn();
+}
