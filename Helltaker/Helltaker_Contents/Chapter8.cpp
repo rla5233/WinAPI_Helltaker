@@ -127,7 +127,7 @@ void Chapter8::CreateDefaultBG()
 void Chapter8::SpawnSkeletonMan()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Scene* Skeleton = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	Character* Skeleton = SpawnActor<Character>(static_cast<int>(UpdateOrder::Scene));
 	Skeleton->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
 	Skeleton->SetName("Skeleton_Man");
 	Skeleton->CreateImageRenderer(RenderOrder::Scene);
@@ -361,7 +361,7 @@ void Chapter8::BadEndSetting()
 {
 	CutSceneManager::BadEndSetting();
 
-	for (Scene* Skeleton : SkeletonMan)
+	for (Character* Skeleton : SkeletonMan)
 	{
 		Skeleton->AllRenderersActiveOff();
 	}
@@ -460,7 +460,7 @@ void Chapter8::SuccessEndScene()
 
 void Chapter8::SuccessEnd()
 {
-	for (Scene* Skeleton : SkeletonMan)
+	for (Character* Skeleton : SkeletonMan)
 	{
 		if (nullptr == Skeleton)
 		{
@@ -493,7 +493,7 @@ void Chapter8::LevelEnd(ULevel* _NextLevel)
 	M_DefaultBackGround->Destroy();
 	M_DefaultBackGround = nullptr;
 
-	for (Scene* Skeleton : SkeletonMan)
+	for (Character* Skeleton : SkeletonMan)
 	{
 		if (nullptr == Skeleton)
 		{

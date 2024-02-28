@@ -61,7 +61,7 @@ private:
 	BackGround* M_DefaultBackGround = nullptr;
 	Point EndPoint = Point::Zero;
 
-	std::vector<Scene*> SkeletonMan;
+	std::vector<Character*> SkeletonMan;
 	int EnterOrder = -1;
 	int SelectOrder = -1;
 	
