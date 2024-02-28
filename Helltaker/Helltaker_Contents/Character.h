@@ -19,7 +19,7 @@ public:
 	void CreateImageRenderer(RenderOrder _Order);
 	void CreateNameRenderer(RenderOrder _Order);
 
-	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
+	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 3.5f);
 	void ImageRendererMoveOn(const FVector& _StartPos, const FVector& _TargetPos)
 	{
 		StartPos = _StartPos;

@@ -253,8 +253,11 @@ void CutSceneManager::C_ChangeDialogue(std::string_view _ImageName, const FTrans
 void CutSceneManager::Enter(float _DeltaTime)
 {
 	ResetCheck();
+	SceneCharacter->ImageRendererFadeInUpdate(_DeltaTime);
+	SceneCharacter->ImageRendererMoveUpdate(_DeltaTime);
 
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((false == SceneCharacter->GetIsImageRendererMoveValue())
+	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
 		C_StateChange(ECutSceneState::Select);
 	}
@@ -433,8 +436,6 @@ void CutSceneManager::C_StateChange(ECutSceneState _State)
 			break;
 		case ECutSceneState::Success:
 			SuccessStart();
-			break;
-		case ECutSceneState::Reset:
 			break;
 		}
 	}
