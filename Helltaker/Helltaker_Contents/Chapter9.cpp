@@ -57,24 +57,24 @@ void Chapter9::LevelStart(ULevel * _PrevLevel)
 
 	M_SpawnHero({ 1, 5 }, 33);
 
-	//M_SpawnSkeleton({ 0, 3 });
-	//M_SpawnSkeleton({ 3, 3 });
-	//M_SpawnSkeleton({ 2, 4 });
-	//
-	//M_SetIsThornChange(true);
-	//M_SpawnThorn({ 0, 5 }, EThornState::Up);
-	//M_SpawnThorn({ 3, 5 }, EThornState::Down);
-	//M_SpawnThorn({ 0, 6 }, EThornState::Down);
-	//M_SpawnThorn({ 1, 6 }, EThornState::Up);
-	//M_SpawnThorn({ 2, 6 }, EThornState::Down);
-	//M_SpawnThorn({ 3, 6 }, EThornState::Up);
-	//
-	//M_SpawnStone({ 3, 2 }, "Stone_009.png");
-	//M_SpawnStone({ 4, 2 }, "Stone_005.png");
-	//M_SpawnStone({ 5, 2 }, "Stone_007.png");
-	//M_SpawnStone({ 1, 3 }, "Stone_006.png");
-	//M_SpawnStone({ 4, 3 }, "Stone_002.png");
-	//
+	M_SetIsThornChange(false);
+	
+	M_SpawnStone({ 3, 1 }, "Stone_009.png");
+	M_SpawnStone({ 5, 1 }, "Stone_005.png");
+	M_SpawnStone({ 1, 2 }, "Stone_005.png");
+	M_SpawnStone({ 3, 2 }, "Stone_005.png");
+	M_SpawnStone({ 0, 3 }, "Stone_005.png");
+	M_SpawnStone({ 3, 3 }, "Stone_005.png");
+	M_SpawnStone({ 4, 3 }, "Stone_005.png");
+	M_SpawnStone({ 5, 3 }, "Stone_005.png");
+	M_SpawnStone({ 1, 4 }, "Stone_005.png");
+	M_SpawnStone({ 2, 4 }, "Stone_005.png");
+	M_SpawnStone({ 3, 4 }, "Stone_005.png");
+	M_SpawnStone({ 6, 4 }, "Stone_005.png");
+	M_SpawnStone({ 7, 4 }, "Stone_005.png");
+	M_SpawnStone({ 3, 5 }, "Stone_005.png");
+	M_SpawnStone({ 6, 5 }, "Stone_005.png");
+	
 	//M_SpawnKeyComponent({ 1, 2 }, EKeyComponentType::Key);
 	//M_SpawnKeyComponent({ 4, 1 }, EKeyComponentType::LockBox);
 	//
