@@ -338,6 +338,16 @@ Point ChapterManager::M_GetHeroLocationPoint() const
 	return PlayerHero->GetLocationPoint();
 }
 
+Point ChapterManager::M_GetHeroNextLocationPoint() const
+{
+	return PlayerHero->GetNextLocationPoint();
+}
+
+EHeroState ChapterManager::M_GetHeroState() const
+{
+	return PlayerHero->GetHeroState();
+}
+
 void ChapterManager::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);

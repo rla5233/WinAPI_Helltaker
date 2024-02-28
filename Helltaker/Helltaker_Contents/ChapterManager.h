@@ -80,6 +80,8 @@ public:
 	void M_BottomTextRendererOff();
 	FVector M_GetHeroLocation() const;
 	Point M_GetHeroLocationPoint() const;
+	Point M_GetHeroNextLocationPoint() const;
+	EHeroState M_GetHeroState() const;
 
 	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const

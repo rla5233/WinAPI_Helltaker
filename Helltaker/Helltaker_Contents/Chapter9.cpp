@@ -78,11 +78,22 @@ void Chapter9::LevelStart(ULevel * _PrevLevel)
 	M_SpawnKeyComponent({ 8, 3 }, EKeyComponentType::Key);
 	M_SpawnKeyComponent({ 4, 1 }, EKeyComponentType::LockBox);
 
+	EndPoint = { 4, 0 };
+
 	M_StateChange(EChapterState::Idle);
 
 #ifdef DEBUG
 	ShowLocationPoint();
 #endif
+}
+
+void Chapter9::CutSceneCheck()
+{
+	if ((M_GetHeroNextLocationPoint() == EndPoint) 
+	&& (M_GetHeroState() == EHeroState::Move))
+	{
+		M_StateChange(EChapterState::CutScene);
+	}
 }
 
 void Chapter9::CutSceneStart()

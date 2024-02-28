@@ -21,6 +21,7 @@ protected:
 	void LevelStart(ULevel* _PrevLevel) override;
 
 	// Chapter
+	void CutSceneCheck() override;
 	void CutSceneStart() override;
 	void ChangeChapter() override;
 
@@ -34,6 +35,7 @@ protected:
 	void SuccessStart() override;
 
 private:
+	Point EndPoint = Point::Zero;
 
 	static const std::vector<const char*> Chap9_Script;
 	static bool IsLoad;
