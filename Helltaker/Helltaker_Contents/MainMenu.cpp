@@ -43,6 +43,9 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_001.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
+		
+		ContentsHelper::LoadImg("UI", "ChapterSelect_Bottom.png");
+		ContentsHelper::LoadImg("UI", "ChapterSelect_Top.png");
 		ContentsHelper::LoadImg("UI", "UnSelect_001.png");
 		ContentsHelper::LoadImg("UI", "Select_001.png");
 
@@ -223,7 +226,6 @@ void MainMenu::SelectChapter(float _DeltaTime)
 	{
 		ReturnSelect();
 	}
-	
 }
 
 void MainMenu::SelectChapterStart()
@@ -238,11 +240,11 @@ void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
 {
 	float interval = 0.0f;
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { WinScale.X * 0.5f, WinScale.Y * 0.75f };
+	FVector Pos = { WinScale.X * 0.218f, WinScale.Y * 0.75f };
 	FVector Scale = { WinScale.X * 0.0573f, WinScale.Y * 0.07f };
 
 	SelectChapterMenuCount = _IndexCount;
-	SelectChapterMenu.reserve(SelectChapterMenuCount);
+	SelectChapterMenu.reserve(SelectChapterMenuCount + 2);
 	for (int i = 0; i < SelectChapterMenuCount; i++)
 	{
 		UI* MenuBar = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
@@ -261,13 +263,33 @@ void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
 		}
 		
 		MenuBar->GetImageRenderer()->SetTransform({ { 0, 0 }, Scale });
-		MenuBar->ActiveOff();
+		MenuBar->AllRenderersActiveOff();
 		
 		interval += WinScale.X * 0.0625f;
 		SelectChapterMenu.push_back(MenuBar);
 	}
 
+	for (int i = 0; i < 2; i++)
+	{
+		UI* TopBottomBar = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+		TopBottomBar->SetName("SelectChapterTopBottomBar");
+		TopBottomBar->CreateImageRenderer(RenderOrder::UI);
+		TopBottomBar->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.749f, WinScale.Y * 0.05f } });
+		TopBottomBar->GetImageRenderer()->ActiveOff();
 
+		if (i == 0)
+		{
+			TopBottomBar->SetActorLocation({ WinScale.hX(), Pos.Y + WinScale.Y * 0.05f });
+			TopBottomBar->GetImageRenderer()->SetImage("ChapterSelect_Bottom.png");
+		}
+		else
+		{
+			TopBottomBar->SetActorLocation({ WinScale.hX(), Pos.Y - WinScale.Y * 0.05f });
+			TopBottomBar->GetImageRenderer()->SetImage("ChapterSelect_Top.png");
+		}
+
+		SelectChapterMenu.push_back(TopBottomBar);
+	}
 }
 
 void MainMenu::SelectChatperMenuBarOn()
@@ -298,10 +320,11 @@ void MainMenu::SelectChatperMenuBarOff()
 
 void MainMenu::ReturnSelect()
 {
+	SelectChatperMenuBarOff();
 	C_MenubarRenderActiveOn();
+	C_GetSceneCharacter()->GetNameRenderer()->ActiveOn();
 	State = EMainMenuState::Select;
 }
-
 
 void MainMenu::EnterChapter()
 {
