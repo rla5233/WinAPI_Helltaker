@@ -26,16 +26,15 @@ protected:
 	void ChangeChapter() override;
 
 	// CutScene
-	void SelectStart() override;
-	void SelectMenu() override;
+	void Enter(float _DeltaTime) override;
+	void EnterStart() override;
 
 	void BadEndStart() override;
 	void BadEndSetting() override;
 
-	void SuccessStart() override;
-
 private:
 	Point EndPoint = Point::Zero;
+	int EnterOrder = -1;
 
 	static const std::vector<const char*> Chap9_Script;
 	static bool IsLoad;

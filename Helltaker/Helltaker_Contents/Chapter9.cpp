@@ -1,16 +1,15 @@
 #include "Chapter9.h"
 
+#include "Character.h"
+
 bool Chapter9::IsLoad = false;
 
 const std::vector<const char*> Chapter9::Chap9_Script
 {
-	/* 0 Demon	  */ "시큰둥한 악마 말리나",
-	/* 1 Script 1 */ "대단하네, 또 골 빈 멍청이들이야...\n너같이 못생긴 놈은 처음인데, 지옥에서 뭘 하고 있어?",
-	/* 2 MenuBar1 */ "너랑 같이 놀고 싶은데.",
-	/* 3 MenuBar2 */ "기분 좋은데. 더 매도해 줘",
-	/* 4 Failed	  */ "기가막히네 마조 변태나 또 보고.",
-	/* 5 Bad End  */ "말리나가 팔을 휘두르자 작살 난 당신 목에서 피가 분수처럼\n터져 나왔다.",
-	/* 6 Success  */ "뭐... 게임? 그래, 안 될 게 어디있어. 턴제 전략 게임이\n괜찮다면야."
+	/* 0 Demon	  */ "???",
+	/* 1 Script 1 */ "도망갈 수 있을 거라고 생각했느냐?",
+	/* 2 Script 2 */ "그 짓거릴 해 놓고?",
+	/* 3 Bad End  */ "피부에 닿은 사슬로부터 살을 에는 한기가 느껴졌다.\n뒤이어 뼛속까지 불태우는 불길이 느껴졌다.",
 };
 
 Chapter9::Chapter9()
@@ -97,22 +96,47 @@ void Chapter9::CutSceneCheck()
 }
 
 void Chapter9::CutSceneStart()
-{}
+{
+	CutSceneManager::CutSceneStart();
 
-void Chapter9::SelectStart()
-{}
+	C_SpawnDialogue("DialogueBG_Hell.png");
+	C_SpawnCharacter("???", "DefaultBG.png", Chap9_Script[0]);
+	C_GetSceneCharacter()->GetImageRenderer()->ActiveOff();
+	
+	C_SpawnBooper();
+	C_BooperTextSet(Chap9_Script[1]);
+}
 
-void Chapter9::SelectMenu()
-{}
+void Chapter9::EnterStart()
+{
+	EnterOrder = 0;
+}
+
+void Chapter9::Enter(float _DeltaTime)
+{
+	ResetCheck();
+
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_StateChange(ECutSceneState::BadEnd);
+	}
+}
 
 void Chapter9::BadEndStart()
-{}
+{
+	CutSceneManager::BadEndStart();
+
+	C_BooperTextSet(Chap9_Script[2]);
+}
 
 void Chapter9::BadEndSetting()
-{}
+{
+	CutSceneManager::BadEndSetting();
 
-void Chapter9::SuccessStart()
-{}
+	C_BooperTextSet(Chap9_Script[3]);
+}
 
 void Chapter9::ChangeChapter()
-{}
+{
+	int a = 0;
+}
