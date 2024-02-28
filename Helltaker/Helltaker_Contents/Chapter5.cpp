@@ -12,7 +12,7 @@ const std::vector<const char*> Chapter5::Chap5_Script
 	/* 2 MenuBar1 */ "잠깐만. 나중에 후회할 것 같은 기분인데.",
 	/* 3 MenuBar2 */ "사실 하렘같은거 때려치웠어. 턴제 전략 게임이나 할 거야.",
 	/* 4 Failed	  */ "어우 씨. 그 고통을 끝내줄게.",
-	/* 5 Bad End  */ "갈비뼈 사이에 자루 깊숙이 박힌 칼을 끝으로 당신의 시야는 흐려졌다.",
+	/* 5 Bad End  */ "갈비뼈 사이에 자루 깊숙이 박힌 칼을 끝으로 당신의 시야는\n흐려졌다.",
 	/* 6 Success  */ "안 됐지만 그래도 낄 거야. 막을 테면 막아 보던가."
 };
 
@@ -106,12 +106,13 @@ void Chapter5::CutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.256f, WinScale.Y * 0.567f };
-	FVector Pos = { 0.0f, WinScale.Y * 0.021f };
+	FVector Pos = { WinScale.X * 0.014f, WinScale.Y * 0.021f };
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
 	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
 	C_GetSceneCharacter()->ImageRendererFadeInOn();
 	
 	C_BooperTextSet(Chap5_Script[1]);
+	C_BooperSetTextPosition(1);
 }
 
 void Chapter5::SelectStart()
@@ -147,6 +148,7 @@ void Chapter5::BadEndSetting()
 	CutSceneManager::BadEndSetting();
 
 	C_BooperTextSet(Chap5_Script[5]);
+	C_BooperSetTextPosition(2);
 }
 
 void Chapter5::SuccessStart()
