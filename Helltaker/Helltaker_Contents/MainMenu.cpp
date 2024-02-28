@@ -116,7 +116,7 @@ void MainMenu::BeginStart()
 void MainMenu::Enter(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
-	C_GetSceneCharacter()->FadeInUpdate(C_GetSceneCharacter()->GetImageRenderer(), _DeltaTime, 3.5f);
+	C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime, 3.5f);
 	C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
 
 	if ((false == C_GetSceneCharacter()->GetIsImageRendererMoveValue())

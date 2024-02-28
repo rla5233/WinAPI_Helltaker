@@ -39,3 +39,8 @@ void Character::ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight/* = 
 		}
 	}
 }
+
+bool Character::ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight)
+{
+	return RenderActor::FadeInUpdate(ImageRenderer, _DeltaTime, _TimeWeight);
+}
