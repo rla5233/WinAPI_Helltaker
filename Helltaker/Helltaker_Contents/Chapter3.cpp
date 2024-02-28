@@ -110,6 +110,7 @@ void Chapter3::CutSceneStart()
 	C_GetSceneCharacter()->ImageRendererFadeInOn();
 	
 	C_BooperTextSet(Chap3_Script[1]);
+	C_BooperSetTextPosition(1);
 }
 
 void Chapter3::SelectStart()
@@ -138,6 +139,7 @@ void Chapter3::BadEndStart()
 	CutSceneManager::BadEndStart();
 
 	C_BooperTextSet(Chap3_Script[4]);
+	C_BooperSetTextPosition(2);
 }
 
 void Chapter3::BadEndSetting()
@@ -152,7 +154,9 @@ void Chapter3::SuccessStart()
 	CutSceneManager::SuccessStart();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0.0f, WinScale.Y * (-0.016f)}, {WinScale.X * 0.493f, WinScale.Y * 0.643f}});
+	FVector Scale = { WinScale.X * 0.493f, WinScale.Y * 0.643f };
+	FVector Pos = { WinScale.X * (-0.004f), WinScale.Y * (-0.016f) };
+	C_CharacterSetTransform({ Pos, Scale });
 	C_CharacterSetImage("Cer_Happy.png");
 	C_BooperTextSet(Chap3_Script[6]);
 }
