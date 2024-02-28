@@ -1,8 +1,9 @@
 ﻿#include "MainMenu.h"
 
+#include "Chapter1.h"
 #include "Character.h"
 #include "Scene.h"
-#include "Chapter1.h"
+#include "UI.h"
 
 bool MainMenu::IsLoad = false;
 
@@ -43,6 +44,7 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_002.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene1_003.png");
 		ContentsHelper::LoadImg("UI", "UnSelect_001.png");
+		ContentsHelper::LoadImg("UI", "Select_001.png");
 
 		IsLoad = true;
 	}
@@ -116,6 +118,8 @@ void MainMenu::SelectStart()
 	C_MenubarTextSet(0, MainMenu_Script[3]);
 	C_MenubarTextSet(1, MainMenu_Script[4]);
 	C_MenubarTextSet(2, MainMenu_Script[5]);
+	
+	SpawnSelectChapterMenuBar(10);
 }
 
 void MainMenu::SelectMenu()
@@ -226,12 +230,38 @@ void MainMenu::SelectChapterStart()
 {
 	C_MenubarRenderActiveOff();
 	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
+	
+	
+
 
 	//Scene* New = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
 	//New->SetActorLocation({1920 * 0.5f, 1080 * 0.75f});
 	//New->CreateImageRenderer(RenderOrder::Transition);
 	//New->GetImageRenderer()->SetImage("UnSelect_001.png");
 	//New->GetImageRenderer()->SetTransform({ {0, 0}, {110, 76} });
+}
+
+void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
+{
+	SelectChapterMenuCount = _IndexCount;
+	SelectChapterMenu.reserve(SelectChapterMenuCount);
+	for (int i = 0; i < SelectChapterMenuCount; i++)
+	{
+		UI* MenuBar = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+		MenuBar->CreateImageRenderer(RenderOrder::UI);
+
+		if (i == 0)
+		{
+			MenuBar->GetImageRenderer()->SetImage("Select_001.png");
+		}
+		else
+		{
+			MenuBar->GetImageRenderer()->SetImage("UnSelect_001.png");
+		}
+		
+		MenuBar->ActiveOff();
+		SelectChapterMenu.push_back(MenuBar);
+	}
 }
 
 void MainMenu::ReturnSelect()

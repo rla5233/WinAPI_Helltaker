@@ -55,12 +55,17 @@ private:
 	void Exit(float _DeltaTime);
 	void ExitStart();
 
+	void SpawnSelectChapterMenuBar(int _IndexCount);
+
 	void DialogueMoveUpdate(float _DeltaTime);
 
 private:
 	int NewGameOrder = -1;
 	int SelectChapterNum = -1;
 	float DialogueMoveSum = 0.0f;
+
+	int SelectChapterMenuCount = -1;
+	std::vector<UI*> SelectChapterMenu;
 	
 	EMainMenuState State = EMainMenuState::None;
 
