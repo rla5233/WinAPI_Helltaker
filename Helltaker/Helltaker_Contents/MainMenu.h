@@ -58,6 +58,7 @@ private:
 	void SpawnSelectChapterMenuBar(int _IndexCount);
 	void SelectChatperMenuBarOn();
 	void SelectChatperMenuBarOff();
+	void SetSelectChapterMenuFocus(int _Index);
 
 	void DialogueMoveUpdate(float _DeltaTime);
 
@@ -67,6 +68,7 @@ private:
 	float DialogueMoveSum = 0.0f;
 
 	int SelectChapterMenuCount = -1;
+	int SelectChapterMenuFocus = -1;
 	std::vector<UI*> SelectChapterMenu;
 	
 	EMainMenuState State = EMainMenuState::None;

@@ -318,6 +318,21 @@ void MainMenu::SelectChatperMenuBarOff()
 	}
 }
 
+void MainMenu::SetSelectChapterMenuFocus(int _Index)
+{
+	SelectChapterMenuFocus = _Index;
+
+	if (SelectChapterMenuFocus < 0)
+	{
+		SelectChapterMenuFocus = SelectChapterMenuCount - 1;
+	}
+
+	if (SelectChapterMenuFocus >= SelectChapterMenuCount)
+	{
+		SelectChapterMenuFocus = 0;
+	}
+}
+
 void MainMenu::ReturnSelect()
 {
 	SelectChatperMenuBarOff();
