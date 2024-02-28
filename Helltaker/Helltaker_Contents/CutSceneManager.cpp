@@ -177,6 +177,20 @@ void CutSceneManager::C_BooperSetTextPosition(const FVector& _Pos)
 	Booper->GetTextRenderer()->SetPosition(_Pos);
 }
 
+void CutSceneManager::C_BooperSetTextPosition(int _LineCount)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	switch (_LineCount)
+	{
+	case 1:
+		Booper->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * (-0.12f) });
+		break;
+	case 2:
+		Booper->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * (-0.1f) });
+		break;
+	}
+}
+
 void CutSceneManager::C_BooperImageRendererOn()
 {
 	Booper->GetImageRenderer()->ActiveOn();

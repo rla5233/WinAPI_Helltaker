@@ -107,6 +107,7 @@ void Chapter2::CutSceneStart()
 	C_GetSceneCharacter()->ImageRendererFadeInOn();
 
 	C_BooperTextSet(Chap2_Script[1]);
+	C_BooperSetTextPosition(1);
 }
 
 void Chapter2::SelectStart()
@@ -135,6 +136,7 @@ void Chapter2::BadEndStart()
 	CutSceneManager::BadEndStart();
 
 	C_BooperTextSet(Chap2_Script[4]);
+	C_BooperSetTextPosition(2);
 }
 
 void Chapter2::BadEndSetting()
@@ -142,6 +144,7 @@ void Chapter2::BadEndSetting()
 	CutSceneManager::BadEndSetting();
 
 	C_BooperTextSet(Chap2_Script[5]);
+	C_BooperSetTextPosition(1);
 }
 
 void Chapter2::SuccessStart()
@@ -151,7 +154,9 @@ void Chapter2::SuccessStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_CharacterSetTransform({ { 0, 0 }, { WinScale.X * 0.252f, WinScale.Y * 0.613f } });
 	C_CharacterSetImage("Mod_Close.png");
+
 	C_BooperTextSet(Chap2_Script[6]);
+	C_BooperSetTextPosition(2);
 }
 
 void Chapter2::ChangeChapter()

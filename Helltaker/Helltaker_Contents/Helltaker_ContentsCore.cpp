@@ -41,11 +41,11 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<MainMenu>("MainMenu");
 	//ChangeLevel("MainMenu");
 
-	CreateLevel<Chapter1>("Chapter1");
-	ChangeLevel("Chapter1");
+	//CreateLevel<Chapter1>("Chapter1");
+	//ChangeLevel("Chapter1");
 
-	//CreateLevel<Chapter2>("Chapter2");
-	//ChangeLevel("Chapter2");
+	CreateLevel<Chapter2>("Chapter2");
+	ChangeLevel("Chapter2");
 
 	//CreateLevel<Chapter3>("Chapter3");
 	//ChangeLevel("Chapter3");
