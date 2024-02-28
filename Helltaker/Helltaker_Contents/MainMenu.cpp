@@ -122,7 +122,7 @@ void MainMenu::SelectStart()
 	C_MenubarTextSet(1, MainMenu_Script[4]);
 	C_MenubarTextSet(2, MainMenu_Script[5]);
 	
-	SpawnSelectChapterMenuBar(10);
+	SpawnSC_MenuBar(10);
 }
 
 void MainMenu::SelectMenu()
@@ -222,7 +222,7 @@ void MainMenu::SelectChapter(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
 	
-	FocusSelectChapterMenuBarCheck();
+	FocusSC_MenuBarCheck();
 
 	if (UEngineInput::IsDown(VK_ESCAPE))
 	{
@@ -235,19 +235,19 @@ void MainMenu::SelectChapterStart()
 	C_MenubarRenderActiveOff();
 	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
 
-	SelectChatperMenuBarOn();
+	SC_MenuBarOn();
 }
 
-void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
+void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 {
 	float interval = 0.0f;
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Pos = { WinScale.X * 0.218f, WinScale.Y * 0.75f };
 	FVector Scale = { WinScale.X * 0.0573f, WinScale.Y * 0.07f };
 
-	SelectChapterMenuCount = _IndexCount;
-	SelectChapterMenu.reserve(SelectChapterMenuCount + 2);
-	for (int i = 0; i < SelectChapterMenuCount; i++)
+	SC_MenuCount = _IndexCount;
+	SelectChapterMenu.reserve(SC_MenuCount + 2);
+	for (int i = 0; i < SC_MenuCount; i++)
 	{
 		UI* MenuBar = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
 		MenuBar->SetName("SelectChapterMenuBar");
@@ -293,10 +293,10 @@ void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
 		SelectChapterMenu.push_back(TopBottomBar);
 	}
 
-	SetFocusSelectChapterMenuIndex(0);
+	SetFocusSC_MenuIndex(0);
 }
 
-void MainMenu::SelectChatperMenuBarOn()
+void MainMenu::SC_MenuBarOn()
 {
 	for (UI* Menu : SelectChapterMenu)
 	{
@@ -309,7 +309,7 @@ void MainMenu::SelectChatperMenuBarOn()
 	}
 }
 
-void MainMenu::SelectChatperMenuBarOff()
+void MainMenu::SC_MenuBarOff()
 {
 	for (UI* Menu : SelectChapterMenu)
 	{
@@ -322,21 +322,21 @@ void MainMenu::SelectChatperMenuBarOff()
 	}
 }
 
-void MainMenu::FocusSelectChapterMenuBarCheck()
+void MainMenu::FocusSC_MenuBarCheck()
 {
 	if (UEngineInput::IsDown('A') || UEngineInput::IsDown(VK_LEFT))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
-		SetFocusSelectChapterMenuIndex(FocusSelectChapterMenuIndex - 1);
-		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
+		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
+		SetFocusSC_MenuIndex(FocusSC_MenuIndex - 1);
+		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
 	}
 	else if (UEngineInput::IsDown('D') || UEngineInput::IsDown(VK_RIGHT))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
-		SetFocusSelectChapterMenuIndex(FocusSelectChapterMenuIndex + 1);
-		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
+		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
+		SetFocusSC_MenuIndex(FocusSC_MenuIndex + 1);
+		SelectChapterMenu[FocusSC_MenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -344,24 +344,24 @@ void MainMenu::FocusSelectChapterMenuBarCheck()
 	}
 }
 
-void MainMenu::SetFocusSelectChapterMenuIndex(int _Index)
+void MainMenu::SetFocusSC_MenuIndex(int _Index)
 {
-	FocusSelectChapterMenuIndex = _Index;
+	FocusSC_MenuIndex = _Index;
 
-	if (FocusSelectChapterMenuIndex < 0)
+	if (FocusSC_MenuIndex < 0)
 	{
-		FocusSelectChapterMenuIndex = SelectChapterMenuCount - 1;
+		FocusSC_MenuIndex = SC_MenuCount - 1;
 	}
 
-	if (FocusSelectChapterMenuIndex >= SelectChapterMenuCount)
+	if (FocusSC_MenuIndex >= SC_MenuCount)
 	{
-		FocusSelectChapterMenuIndex = 0;
+		FocusSC_MenuIndex = 0;
 	}
 }
 
 void MainMenu::ReturnSelect()
 {
-	SelectChatperMenuBarOff();
+	SC_MenuBarOff();
 	C_MenubarRenderActiveOn();
 	C_GetSceneCharacter()->GetNameRenderer()->ActiveOn();
 	State = EMainMenuState::Select;
