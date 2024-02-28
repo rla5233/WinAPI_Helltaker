@@ -116,6 +116,7 @@ void MainMenu::BeginStart()
 void MainMenu::Enter(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
+	C_GetSceneCharacter()->FadeInUpdate(C_GetSceneCharacter()->GetImageRenderer(), _DeltaTime, 7.0f);
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		StateChange(EMainMenuState::Select);
@@ -125,6 +126,8 @@ void MainMenu::Enter(float _DeltaTime)
 void MainMenu::EnterStart()
 {
 	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
+	C_GetSceneCharacter()->GetImageRenderer()->SetAlpha(0.0f);
+	C_GetSceneCharacter()->FadeInOn();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 1.04f, WinScale.Y * 0.693f };

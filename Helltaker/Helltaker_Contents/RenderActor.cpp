@@ -57,7 +57,7 @@ ChapterManager* RenderActor::GetChapter()
 	return Ptr;
 }
 
-bool RenderActor::FadeInUpdate(UImageRenderer* _Renderer, float _DeltaTime, float _TimeWeight /* = 1.0f*/)
+bool RenderActor::FadeInUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight /* = 1.0f*/)
 {
 	if (true == IsFadeIn)
 	{
@@ -75,7 +75,7 @@ bool RenderActor::FadeInUpdate(UImageRenderer* _Renderer, float _DeltaTime, floa
 	return IsFadeIn;
 }
 
-bool RenderActor::FadeOutUpdate(UImageRenderer* _Renderer, float _DeltaTime, float _TimeWeight)
+bool RenderActor::FadeOutUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight)
 {
 	if (true == IsFadeOut)
 	{

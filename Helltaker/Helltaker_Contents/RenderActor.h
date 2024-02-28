@@ -28,13 +28,13 @@ public:
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
 	
-	bool FadeInUpdate(UImageRenderer* _Renderer, float _DeltaTime, float _TimeWeight = 1.0f);
+	bool FadeInUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight = 1.0f);
 	void FadeInOn()
 	{
 		IsFadeIn = true;
 	}
 
-	bool FadeOutUpdate(UImageRenderer* _Renderer, float _DeltaTime, float _TimeWeight = 1.0f);
+	bool FadeOutUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight = 1.0f);
 	void FadeOutOn()
 	{
 		IsFadeOut = true;
