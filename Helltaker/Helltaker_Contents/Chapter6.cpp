@@ -1,11 +1,11 @@
 #include "Chapter6.h"
 
+#include "BackGround.h"
+#include "Character.h"
+#include "UI.h"
 #include "Chapter7.h"
 
-// 수정 (제거 가능?)
-#include "BackGround.h"
-#include "Scene.h"
-#include "UI.h"
+
 
 bool Chapter6::IsLoad = false;
 
@@ -111,7 +111,12 @@ void Chapter6::CutSceneStart()
 	C_SpawnBooper();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	C_CharacterSetTransform({ { 0.0f, WinScale.Y * 0.0f }, {WinScale.X * 0.235f, WinScale.Y * 0.591f} });
+	FVector Scale = { WinScale.X * 0.235f, WinScale.Y * 0.591f };
+	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
+	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
+	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+	C_GetSceneCharacter()->ImageRendererFadeInOn();
+	
 	C_BooperTextSet(Chap6_Script[1]);
 }
 
