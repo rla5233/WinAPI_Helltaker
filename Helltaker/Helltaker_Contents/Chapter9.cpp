@@ -2,7 +2,7 @@
 
 bool Chapter9::IsLoad = false;
 
-const std::vector<const char*> Chap9_Script
+const std::vector<const char*> Chapter9::Chap9_Script
 {
 	/* 0 Demon	  */ "시큰둥한 악마 말리나",
 	/* 1 Script 1 */ "대단하네, 또 골 빈 멍청이들이야...\n너같이 못생긴 놈은 처음인데, 지옥에서 뭘 하고 있어?",
@@ -22,10 +22,73 @@ Chapter9::~Chapter9()
 }
 
 void Chapter9::BeginPlay()
-{}
+{
+	HellTakerManager::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("BackGround", "ChapterBG_009.png");
+
+		AddChapterSet("Chapter9");
+		IsLoad = true;
+	}
+}
 
 void Chapter9::LevelStart(ULevel * _PrevLevel)
-{}
+{
+	ChapterManager::LevelStart(_PrevLevel);
+
+	// 스테이지 생성
+	std::vector<std::vector<bool>> Map =
+	{
+		{ false, false, false, true, true , true , false, false, false },
+		{ false, false, false, true, true , true , false, false, false },
+		{ false, true , false, true, true , true , false, true , false },
+		{ true , true , true , true, true , true , true , true , true  },
+		{ true , true , true , true, true , true , true , true , true  },
+		{ false, true , true , true, true , true , true , true , false }
+	};
+
+	M_CreateTileInfoVec(Map);
+	M_SetChapterStartLocation({ 0.267f, 0.3f });
+
+	CreateBG("ChapterBG_009");
+	M_CreateChapterUI(9);
+
+	M_SpawnHero({ 1, 5 }, 33);
+
+	//M_SpawnSkeleton({ 0, 3 });
+	//M_SpawnSkeleton({ 3, 3 });
+	//M_SpawnSkeleton({ 2, 4 });
+	//
+	//M_SetIsThornChange(true);
+	//M_SpawnThorn({ 0, 5 }, EThornState::Up);
+	//M_SpawnThorn({ 3, 5 }, EThornState::Down);
+	//M_SpawnThorn({ 0, 6 }, EThornState::Down);
+	//M_SpawnThorn({ 1, 6 }, EThornState::Up);
+	//M_SpawnThorn({ 2, 6 }, EThornState::Down);
+	//M_SpawnThorn({ 3, 6 }, EThornState::Up);
+	//
+	//M_SpawnStone({ 3, 2 }, "Stone_009.png");
+	//M_SpawnStone({ 4, 2 }, "Stone_005.png");
+	//M_SpawnStone({ 5, 2 }, "Stone_007.png");
+	//M_SpawnStone({ 1, 3 }, "Stone_006.png");
+	//M_SpawnStone({ 4, 3 }, "Stone_002.png");
+	//
+	//M_SpawnKeyComponent({ 1, 2 }, EKeyComponentType::Key);
+	//M_SpawnKeyComponent({ 4, 1 }, EKeyComponentType::LockBox);
+	//
+	//FVector WinScale = ContentsHelper::GetWindowScale();
+	//FVector Scale = { WinScale.X * 0.047f, WinScale.Y * 0.08f };
+	//FVector Pos = { 0.0f, WinScale.Y * (-0.009f) };
+	//M_SpawnDemon({ 3, 0 }, "Justice", { Pos, Scale });
+
+	M_StateChange(EChapterState::Idle);
+
+#ifdef DEBUG
+	ShowLocationPoint();
+#endif
+}
 
 void Chapter9::CutSceneStart()
 {}

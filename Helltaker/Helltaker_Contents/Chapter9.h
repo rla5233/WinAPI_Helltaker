@@ -35,5 +35,6 @@ protected:
 
 private:
 
+	static const std::vector<const char*> Chap9_Script;
 	static bool IsLoad;
 };
