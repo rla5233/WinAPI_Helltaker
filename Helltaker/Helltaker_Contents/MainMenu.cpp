@@ -221,6 +221,8 @@ void MainMenu::NewGameStart()
 void MainMenu::SelectChapter(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
+	
+	FocusSelectChapterMenuBarCheck();
 
 	if (UEngineInput::IsDown(VK_ESCAPE))
 	{
@@ -290,6 +292,8 @@ void MainMenu::SpawnSelectChapterMenuBar(int _IndexCount)
 
 		SelectChapterMenu.push_back(TopBottomBar);
 	}
+
+	SetFocusSelectChapterMenuIndex(0);
 }
 
 void MainMenu::SelectChatperMenuBarOn()
@@ -318,18 +322,40 @@ void MainMenu::SelectChatperMenuBarOff()
 	}
 }
 
-void MainMenu::SetSelectChapterMenuFocus(int _Index)
+void MainMenu::FocusSelectChapterMenuBarCheck()
 {
-	SelectChapterMenuFocus = _Index;
-
-	if (SelectChapterMenuFocus < 0)
+	if (UEngineInput::IsDown('A') || UEngineInput::IsDown(VK_LEFT))
 	{
-		SelectChapterMenuFocus = SelectChapterMenuCount - 1;
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
+		SetFocusSelectChapterMenuIndex(FocusSelectChapterMenuIndex - 1);
+		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
+	}
+	else if (UEngineInput::IsDown('D') || UEngineInput::IsDown(VK_RIGHT))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("UnSelect_001.png");
+		SetFocusSelectChapterMenuIndex(FocusSelectChapterMenuIndex + 1);
+		SelectChapterMenu[FocusSelectChapterMenuIndex]->GetImageRenderer()->SetImage("Select_001.png");
+	}
+	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		//SelectMenu();	
+	}
+}
+
+void MainMenu::SetFocusSelectChapterMenuIndex(int _Index)
+{
+	FocusSelectChapterMenuIndex = _Index;
+
+	if (FocusSelectChapterMenuIndex < 0)
+	{
+		FocusSelectChapterMenuIndex = SelectChapterMenuCount - 1;
 	}
 
-	if (SelectChapterMenuFocus >= SelectChapterMenuCount)
+	if (FocusSelectChapterMenuIndex >= SelectChapterMenuCount)
 	{
-		SelectChapterMenuFocus = 0;
+		FocusSelectChapterMenuIndex = 0;
 	}
 }
 
