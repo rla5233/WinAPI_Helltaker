@@ -328,9 +328,11 @@ void MainMenu::SelectChapterMenu()
 	if (1 == SelectChapterNum)
 	{
 		StateChange(EMainMenuState::NewGame);
-		return;
 	}
-
+	else
+	{
+		StateChange(EMainMenuState::EnterChapter);
+	}
 }
 
 void MainMenu::SC_MenuBarOn()
@@ -375,7 +377,7 @@ void MainMenu::FocusSC_MenuBarCheck()
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-
+		SC_MenuBarOff();
 		SelectChapterMenu();
 	}
 }
@@ -434,7 +436,7 @@ void MainMenu::EnterChapter()
 		switch (SelectChapterNum)
 		{
 		case 1:
-			GEngine->CreateLevel<Chapter1>("Chapter1");
+			CreateChapter<Chapter1>("Chapter1");
 			GEngine->ChangeLevel("Chapter1");
 			break;
 		}		
