@@ -138,6 +138,9 @@ protected:
 	virtual void EndStart();
 
 	virtual void ResetCheck();
+
+	
+
 private:
 	void Idle(float _DeltaTime);
 	void IdleStart();

@@ -157,12 +157,14 @@ void Chapter9::EndChapter9()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		M_StateChange(EChapterState::End);
+		C_StateChange(ECutSceneState::None);
 	}
 }
 
 void Chapter9::EndStart()
 {
-
+	//ChapterEndOrder = 0;
 }
 
 void Chapter9::ChangeChapter()
