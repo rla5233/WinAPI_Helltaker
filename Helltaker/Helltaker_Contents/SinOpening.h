@@ -25,15 +25,14 @@ protected:
 	void ChangeChapter() override;
 
 	// CutScene
-	void SelectStart() override;
-	void SelectMenu() override;
-
-	void BadEndStart() override;
-	void BadEndSetting() override;
-
-	void SuccessStart() override;
+	void EnterStart() override;
+	void Enter(float _DeltaTime) override;
 
 private:
+	void EnterOrder1();
+
+private:
+	int EnterOrder = -1;
 
 	static const std::vector<const char*> SinOpening_Script;
 	static bool IsLoad;

@@ -479,7 +479,10 @@ void ChapterManager::CutSceneStart()
 		}
 	}
 	
-	PlayerHero->ActiveOff();
+	if (nullptr != PlayerHero)
+	{
+		PlayerHero->ActiveOff();
+	}
 }
 
 void ChapterManager::CutSceneCheck()

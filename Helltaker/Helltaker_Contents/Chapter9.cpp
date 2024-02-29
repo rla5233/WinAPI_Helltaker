@@ -37,7 +37,7 @@ void Chapter9::BeginPlay()
 
 void Chapter9::LevelStart(ULevel * _PrevLevel)
 {
-	ChapterManager::LevelStart(_PrevLevel);
+	HellTakerManager::LevelStart(_PrevLevel);
 
 	// 스테이지 생성
 	std::vector<std::vector<bool>> Map =
