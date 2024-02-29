@@ -23,6 +23,7 @@ public:
 	ChapterManager* GetChapter();
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
+	UImageRenderer* CreateImageRenderer(SinRenderOrder _Order);
 	
 	bool FadeInUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight = 1.0f);
 	void FadeInOn()

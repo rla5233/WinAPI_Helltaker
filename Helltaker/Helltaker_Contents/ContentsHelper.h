@@ -137,6 +137,7 @@ enum class SinRenderOrder
 {
 	None,
 	BackGround,
+	Bottom_Zero,
 	Hero,
 	Transition
 };

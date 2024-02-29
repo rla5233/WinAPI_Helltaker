@@ -19,6 +19,11 @@ UImageRenderer* RenderActor::CreateImageRenderer(RenderOrder _Order)
 	return AActor::CreateImageRenderer(static_cast<int>(_Order));
 }
 
+UImageRenderer* RenderActor::CreateImageRenderer(SinRenderOrder _Order)
+{
+	return AActor::CreateImageRenderer(static_cast<int>(_Order));
+}
+
 ChapterManager* RenderActor::GetChapter()
 {
 	ChapterManager* Ptr = dynamic_cast<ChapterManager*>(GetWorld());

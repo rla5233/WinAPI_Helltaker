@@ -42,7 +42,7 @@ void SinChapterManager::M_CreateSinPit()
 	for (int i = 0; i < SinPitCount; i++)
 	{
 		SinPit.push_back(SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround)));
-		//SinPit[i]->
+		SinPit[i]->CreateImageRenderer()
 	}
 }
 

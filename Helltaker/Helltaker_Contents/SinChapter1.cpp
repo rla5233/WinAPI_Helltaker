@@ -19,8 +19,8 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 {
 	SinChapterManager::LevelStart(_PrevLevel);
 
-	M_CreateSinBG("SinBG");
 
+	M_CreateSinBG("SinBG");
 
 }
 
