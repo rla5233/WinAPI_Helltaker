@@ -32,6 +32,12 @@ void SinOpening::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Sin.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialBG_DarkHell.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialBG_LitHell.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_LArm_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_LArm_002.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_LArm_003.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_RArm_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_RArm_002.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_RArm_003.png");
 
 		IsLoad = true;
 	}
