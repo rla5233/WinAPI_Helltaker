@@ -19,6 +19,7 @@ public:
 	SinChapterManager& operator=(SinChapterManager&& _Other) noexcept = delete;
 
 	void M_CreateSinBG(std::string_view _Name);
+	void M_CreateSinPit();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -30,6 +31,8 @@ protected:
 
 private:
 	std::map<__int64, AActor*> AllSMapActors;
+
+	std::vector<>
 
 	static bool IsLoad;
 };

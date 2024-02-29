@@ -27,11 +27,17 @@ void SinChapterManager::BeginPlay()
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 {
-	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
 	SinBG->CreateBackGround(_Name);
+	SinBG->SetOrder(static_cast<int>(SinRenderOrder::BackGround))
 	SinBG->GetImageRenderer()->SetAlpha(0.8f);
 
 	AllSMapActors[reinterpret_cast<__int64>(SinBG)] = SinBG;
+}
+
+void SinChapterManager::M_CreateSinPit()
+{
+
 }
 
 void SinChapterManager::Tick(float _DeltaTime)

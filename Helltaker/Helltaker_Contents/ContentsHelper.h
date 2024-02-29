@@ -125,6 +125,22 @@ enum class RenderOrder
 	Transition
 };
 
+enum class SinUpdateOrder
+{
+	None,
+	BackGround,
+	Hero,
+	Transition
+};
+
+enum class SinRenderOrder
+{
+	None,
+	BackGround,
+	Hero,
+	Transition
+};
+
 enum class EMainMenuState
 {
 	None,

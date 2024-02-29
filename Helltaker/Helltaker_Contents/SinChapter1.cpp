@@ -19,7 +19,7 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 {
 	SinChapterManager::LevelStart(_PrevLevel);
 
-	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
 	SinBG->CreateBackGround("Sin_Pit");
 
 	M_CreateSinBG("SinBG");
