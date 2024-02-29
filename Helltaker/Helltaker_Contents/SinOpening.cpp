@@ -124,6 +124,7 @@ void SinOpening::EnterOrder1()
 		C_SpawnCharacter("???", "DefaultBG.png", SinOpening_Script[0]);
 		C_GetSceneCharacter()->GetImageRenderer()->ActiveOff();
 		C_BooperTextSet(SinOpening_Script[3]);
+		C_BooperSetTextPosition(2);
 		++EnterOrder;
 	}
 }

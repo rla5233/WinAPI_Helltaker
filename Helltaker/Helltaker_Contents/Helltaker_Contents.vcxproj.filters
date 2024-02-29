@@ -88,14 +88,20 @@
     <ClInclude Include="Chapter9.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>Object\Level\Chapter</Filter>
-    </ClInclude>
-    <ClInclude Include="SinOpening.h">
-      <Filter>Object\Level\Chapter</Filter>
-    </ClInclude>
     <ClInclude Include="HeroBase.h">
       <Filter>Object\Actor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SinOpening.h">
+      <Filter>Object\Level\Sin</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>Object\Level\Sin</Filter>
+    </ClInclude>
+    <ClInclude Include="SinChapterManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SinCutSceneManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -186,11 +192,17 @@
     <ClCompile Include="Chapter9.cpp">
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
-    <ClCompile Include="SinOpening.cpp">
-      <Filter>Object\Level\Chapter</Filter>
-    </ClCompile>
     <ClCompile Include="HeroBase.cpp">
       <Filter>Object\Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SinOpening.cpp">
+      <Filter>Object\Level\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="SinChapterManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SinCutSceneManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +235,9 @@
     </Filter>
     <Filter Include="Object\Actor\Scene">
       <UniqueIdentifier>{f6d60d8f-f757-4b67-836c-cf199e530f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Level\Sin">
+      <UniqueIdentifier>{0d749ca9-b980-40c0-b14e-c1c8e6749f4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

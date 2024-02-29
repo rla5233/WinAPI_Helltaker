@@ -38,7 +38,7 @@ Chapter8::Chapter8()
 Chapter8::~Chapter8()
 {
 }
-// 수정 (컷신 렌더러 위치 조정)
+
 void Chapter8::BeginPlay()
 {
 	HellTakerManager::BeginPlay();

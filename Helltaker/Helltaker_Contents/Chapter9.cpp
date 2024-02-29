@@ -21,7 +21,7 @@ Chapter9::Chapter9()
 Chapter9::~Chapter9()
 {
 }
-// 수정 (컷신 렌더러 위치 조정)
+
 void Chapter9::BeginPlay()
 {
 	HellTakerManager::BeginPlay();
@@ -107,6 +107,7 @@ void Chapter9::CutSceneStart()
 	
 	C_SpawnBooper();
 	C_BooperTextSet(Chap9_Script[1]);
+	C_BooperSetTextPosition(1);
 }
 
 void Chapter9::EnterStart()

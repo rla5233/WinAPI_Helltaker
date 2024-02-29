@@ -267,6 +267,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SinChapterManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SinCutSceneManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SinOpening.h">
       <SubType>
       </SubType>
@@ -390,6 +398,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SinChapterManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SinCutSceneManager.cpp">
       <SubType>
       </SubType>
     </ClCompile>
