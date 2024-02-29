@@ -91,6 +91,9 @@ void SinOpening::Enter(float _DeltaTime)
 	case 2:
 		EnterOrder3();
 		break;
+	case 3:
+		EnterOrder4(_DeltaTime);
+		break;
 	}
 
 	// Sample
@@ -134,7 +137,19 @@ void SinOpening::EnterOrder3()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		DialBG_LHell->GetImageRenderer()->SetAlpha(1);
-		DialBG_LHell->GetImageRenderer();
+		DialBG_LHell->FadeOutOn();
+		C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
+		C_BooperImageRendererOff();
+		C_BooperTextSet(" ");
+		++EnterOrder;
+	}
+}
+
+void SinOpening::EnterOrder4(float _DeltaTime)
+{
+	if (false == DialBG_LHell->FadeOutUpdate(DialBG_LHell->GetImageRenderer(), _DeltaTime))
+	{
+
 	}
 }
 

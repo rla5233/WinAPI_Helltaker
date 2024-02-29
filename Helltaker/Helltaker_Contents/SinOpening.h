@@ -31,6 +31,7 @@ private:
 	void EnterOrder1();
 	void EnterOrder2();
 	void EnterOrder3();
+	void EnterOrder4(float _DeltaTime);
 
 	void SpawnDialogue(Scene*& _Dial, std::string_view _Name, std::string_view _ImageName);
 
