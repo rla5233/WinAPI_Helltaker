@@ -106,6 +106,9 @@
     <ClInclude Include="SinChapter1.h">
       <Filter>Object\Level\Sin</Filter>
     </ClInclude>
+    <ClInclude Include="SinComponent.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="SinChapter1.cpp">
       <Filter>Object\Level\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="SinComponent.cpp">
+      <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
