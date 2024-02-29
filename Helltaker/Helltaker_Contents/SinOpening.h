@@ -32,7 +32,7 @@ private:
 	void EnterOrder2();
 	void EnterOrder3();
 
-	void SpawnDialogue(Scene* _Dial, std::string_view _Name, std::string_view _ImageName);
+	void SpawnDialogue(Scene*& _Dial, std::string_view _Name, std::string_view _ImageName);
 
 private:
 	int EnterOrder = -1;

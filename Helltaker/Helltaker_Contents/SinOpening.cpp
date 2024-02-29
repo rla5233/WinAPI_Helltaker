@@ -47,7 +47,7 @@ void SinOpening::LevelStart(ULevel * _PrevLevel)
 	M_StateChange(EChapterState::CutScene);
 }
 
-void SinOpening::SpawnDialogue(Scene* _Dial, std::string_view _Name, std::string_view _ImageName)
+void SinOpening::SpawnDialogue(Scene*& _Dial, std::string_view _Name, std::string_view _ImageName)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	_Dial = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
@@ -108,6 +108,8 @@ void SinOpening::EnterOrder1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		SpawnDialogue(DialBG_DHell, "DialBG_DHell", "DialBG_DarkHell.png");
+		SpawnDialogue(DialBG_LHell, "DialBG_LHell", "DialBG_LitHell.png");
+		DialBG_LHell->GetImageRenderer()->SetAlpha(0);
 		SpawnDialogue(DialBG_Sin, "DialBG_Sin", "DialogueBG_Sin.png");
 
 		C_SpawnCharacter("???", "DefaultBG.png", SinOpening_Script[0]);
@@ -131,7 +133,8 @@ void SinOpening::EnterOrder3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		int a = 0;
+		DialBG_LHell->GetImageRenderer()->SetAlpha(1);
+		DialBG_LHell->GetImageRenderer();
 	}
 }
 
