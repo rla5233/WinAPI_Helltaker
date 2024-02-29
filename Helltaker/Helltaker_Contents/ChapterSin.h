@@ -35,6 +35,7 @@ protected:
 
 private:
 
-	static const std::vector<const char*> ChapSin_Script;
+	static const std::vector<const char*> ChapSin_Script1;
+	static const std::vector<const char*> ChapSin_Script2;
 	static bool IsLoad;
 };
