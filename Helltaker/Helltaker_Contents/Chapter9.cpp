@@ -2,7 +2,7 @@
 
 #include "Character.h"
 #include "Scene.h"
-#include "ChapterSin.h"
+#include "SinOpening.h"
 
 bool Chapter9::IsLoad = false;
 
@@ -189,8 +189,8 @@ void Chapter9::ChangeChapter()
 {
 	ChapterManager::ChangeChapter();
 
-	CreateChapter<ChapterSin>("ChapterSin");
-	GEngine->ChangeLevel("ChapterSin");
+	CreateChapter<SinOpening>("SinOpening");
+	GEngine->ChangeLevel("SinOpening");
 }
 
 

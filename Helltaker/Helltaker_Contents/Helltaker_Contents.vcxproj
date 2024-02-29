@@ -207,10 +207,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ChapterSin.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Character.h">
       <SubType>
       </SubType>
@@ -260,6 +256,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Scene.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SinOpening.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -329,10 +333,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ChapterSin.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Character.cpp">
       <SubType>
       </SubType>
@@ -382,6 +382,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SinOpening.cpp">
       <SubType>
       </SubType>
     </ClCompile>

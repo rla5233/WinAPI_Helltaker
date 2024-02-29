@@ -3,18 +3,18 @@
 #include "CutSceneManager.h"
 
 // Ό³Έν :
-class ChapterSin : public HellTakerManager
+class SinOpening : public HellTakerManager
 {
 public:
 	// constructor destructor
-	ChapterSin();
-	~ChapterSin();
+	SinOpening();
+	~SinOpening();
 
 	// delete Function
-	ChapterSin(const ChapterSin& _Other) = delete;
-	ChapterSin(ChapterSin&& _Other) noexcept = delete;
-	ChapterSin& operator=(const ChapterSin& _Other) = delete;
-	ChapterSin& operator=(ChapterSin&& _Other) noexcept = delete;
+	SinOpening(const SinOpening& _Other) = delete;
+	SinOpening(SinOpening&& _Other) noexcept = delete;
+	SinOpening& operator=(const SinOpening& _Other) = delete;
+	SinOpening& operator=(SinOpening&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;
@@ -35,7 +35,6 @@ protected:
 
 private:
 
-	static const std::vector<const char*> ChapSin_Script1;
-	static const std::vector<const char*> ChapSin_Script2;
+	static const std::vector<const char*> SinOpening_Script;
 	static bool IsLoad;
 };

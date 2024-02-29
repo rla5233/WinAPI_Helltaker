@@ -88,7 +88,10 @@
     <ClInclude Include="Chapter9.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="ChapterSin.h">
+    <ClInclude Include="Script.h">
+      <Filter>Object\Level\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="SinOpening.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
   </ItemGroup>
@@ -180,7 +183,7 @@
     <ClCompile Include="Chapter9.cpp">
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
-    <ClCompile Include="ChapterSin.cpp">
+    <ClCompile Include="SinOpening.cpp">
       <Filter>Object\Level\Chapter</Filter>
     </ClCompile>
   </ItemGroup>
