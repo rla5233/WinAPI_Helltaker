@@ -43,5 +43,4 @@ private:
 	bool IsHaveKey = false;
 	
 	static bool IsLoad;
-	bool CheatMode = false;
 };

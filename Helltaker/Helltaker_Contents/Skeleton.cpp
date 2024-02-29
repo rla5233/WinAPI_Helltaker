@@ -240,7 +240,7 @@ void Skeleton::DeathParticleMoveUpdate(float _DeltaTime)
 		Iter->DeathParticleMove(_DeltaTime);
 
 		float Pos_Y = Iter->DeathParticleRenderer->GetActorBaseTransform().GetPosition().Y;
-		if (WindowScale.Y < Pos_Y)
+		if (WindowScale.Y * 1.5f < Pos_Y)
 		{
 			Iter->DeathParticleRenderer->ActiveOff();
 			Iter->DeathParticleRenderer->Destroy();

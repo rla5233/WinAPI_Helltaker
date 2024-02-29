@@ -93,7 +93,7 @@ void Hero::ThornHitCheck()
 	HitActor::ThornHitCheck();
 
 	// Cheat
-	if (true == CheatMode)
+	if (true == GetCheatMode())
 	{
 		return;
 	}
@@ -120,11 +120,18 @@ void Hero::ChapterCameraPosUpdate(const FVector& _Diff)
 	GetChapter()->CameraPosUpdate(_Diff);
 }
 
+void Hero::MoveStart()
+{
+	HeroBase::MoveStart();
+
+	UpdateActionPoint();
+}
+
 // Debug
 void Hero::UpdateActionPoint()
 {
 	// Debug
-	if (true == CheatMode)
+	if (true == GetCheatMode())
 	{
 		return;
 	}
@@ -132,9 +139,3 @@ void Hero::UpdateActionPoint()
 	--ActionPoint;
 }
 
-void Hero::MoveStart()
-{
-	HeroBase::MoveStart();
-
-	UpdateActionPoint();
-}
