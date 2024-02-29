@@ -17,7 +17,24 @@ public:
 	ChapterSin& operator=(ChapterSin&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void LevelStart(ULevel* _PrevLevel) override;
+
+	// Chapter
+	void CutSceneStart() override;
+	void ChangeChapter() override;
+
+	// CutScene
+	void SelectStart() override;
+	void SelectMenu() override;
+
+	void BadEndStart() override;
+	void BadEndSetting() override;
+
+	void SuccessStart() override;
 
 private:
 
+	static const std::vector<const char*> ChapSin_Script;
+	static bool IsLoad;
 };

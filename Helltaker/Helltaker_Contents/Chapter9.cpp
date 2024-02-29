@@ -11,7 +11,7 @@ const std::vector<const char*> Chapter9::Chap9_Script
 	/* 0 Demon	  */ "???",
 	/* 1 Script 1 */ "도망갈 수 있을 거라고 생각했느냐?",
 	/* 2 Script 2 */ "그 짓거릴 해 놓고?",
-	/* 3 Bad End  */ "피부에 닿은 사슬로부터 살을 에는 한기가 느껴졌다.\n뒤이어 뼛속까지 불태우는 불길이 느껴졌다.",
+	/* 3 Bad End  */ "피부에 닿은 사슬로부터 살을 에는 한기가 느껴졌다. 뒤이어\n뼛속까지 불태우는 불길이 느껴졌다.",
 };
 
 Chapter9::Chapter9()
