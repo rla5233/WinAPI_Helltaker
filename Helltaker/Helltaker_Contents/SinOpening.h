@@ -30,14 +30,15 @@ protected:
 private:
 	void EnterOrder1();
 	void EnterOrder2();
+	void EnterOrder3();
 
-	void SpawnDialBG_Hell();
-	void SpawnDialBG_Sin();
+	void SpawnDialogue(Scene* _Dial, std::string_view _Name, std::string_view _ImageName);
 
 private:
 	int EnterOrder = -1;
 
-	Scene* DialBG_Hell = nullptr;
+	Scene* DialBG_DHell = nullptr;
+	Scene* DialBG_LHell = nullptr;
 	Scene* DialBG_Sin = nullptr;
 
 	static const std::vector<const char*> SinOpening_Script;

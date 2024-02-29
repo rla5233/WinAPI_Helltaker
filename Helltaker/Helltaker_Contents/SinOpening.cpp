@@ -47,6 +47,21 @@ void SinOpening::LevelStart(ULevel * _PrevLevel)
 	M_StateChange(EChapterState::CutScene);
 }
 
+void SinOpening::SpawnDialogue(Scene* _Dial, std::string_view _Name, std::string_view _ImageName)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	_Dial = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+	_Dial->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
+	_Dial->SetName(_Name);
+	_Dial->CreateImageRenderer(RenderOrder::Scene);
+	_Dial->GetImageRenderer()->SetImage(_ImageName);
+
+	FVector ImgScale = _Dial->GetImageRenderer()->GetImage()->GetScale();
+	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * 0.504f };
+	_Dial->GetImageRenderer()->GetImage()->SetCuttingTransform({ {0, 0}, Scale });
+	_Dial->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
+}
+
 void SinOpening::CutSceneStart()
 {
 	CutSceneManager::CutSceneStart();
@@ -71,7 +86,10 @@ void SinOpening::Enter(float _DeltaTime)
 		EnterOrder1();
 		break;
 	case 1:
-
+		EnterOrder2();
+		break;
+	case 2:
+		EnterOrder3();
 		break;
 	}
 
@@ -89,8 +107,8 @@ void SinOpening::EnterOrder1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		SpawnDialBG_Hell();
-		SpawnDialBG_Sin();
+		SpawnDialogue(DialBG_DHell, "DialBG_DHell", "DialBG_DarkHell.png");
+		SpawnDialogue(DialBG_Sin, "DialBG_Sin", "DialogueBG_Sin.png");
 
 		C_SpawnCharacter("???", "DefaultBG.png", SinOpening_Script[0]);
 		C_GetSceneCharacter()->GetImageRenderer()->ActiveOff();
@@ -101,37 +119,20 @@ void SinOpening::EnterOrder1()
 
 void SinOpening::EnterOrder2()
 {
-
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(SinOpening_Script[4]);
+		C_BooperSetTextPosition(1);
+		++EnterOrder;
+	}
 }
 
-void SinOpening::SpawnDialBG_Hell()
+void SinOpening::EnterOrder3()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	DialBG_Hell = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	DialBG_Hell->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
-	DialBG_Hell->SetName("DialBG_Hell");
-	DialBG_Hell->CreateImageRenderer(RenderOrder::Scene);
-	DialBG_Hell->GetImageRenderer()->SetImage("DialBG_DarkHell.png");
-
-	FVector ImgScale = DialBG_Hell->GetImageRenderer()->GetImage()->GetScale();
-	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * 0.504f };
-	DialBG_Hell->GetImageRenderer()->GetImage()->SetCuttingTransform({ {0, 0}, Scale });
-	DialBG_Hell->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
-}
-
-void SinOpening::SpawnDialBG_Sin()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	DialBG_Sin = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	DialBG_Sin->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
-	DialBG_Sin->SetName("DialBG_Sin");
-	DialBG_Sin->CreateImageRenderer(RenderOrder::Scene);
-	DialBG_Sin->GetImageRenderer()->SetImage("DialogueBG_Sin.png");
-
-	FVector ImgScale = DialBG_Sin->GetImageRenderer()->GetImage()->GetScale();
-	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * 0.504f };
-	DialBG_Sin->GetImageRenderer()->GetImage()->SetCuttingTransform({ {0, 0}, Scale });
-	DialBG_Sin->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		int a = 0;
+	}
 }
 
 void SinOpening::ChangeChapter()
