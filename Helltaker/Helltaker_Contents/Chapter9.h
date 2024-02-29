@@ -25,12 +25,18 @@ protected:
 	void CutSceneStart() override;
 	void ChangeChapter() override;
 
+	void EndStart() override;
+
 	// CutScene
 	void Enter(float _DeltaTime) override;
 	void EnterStart() override;
 
 	void BadEndStart() override;
 	void BadEndSetting() override;
+	void FailOrderCheck() override;
+
+private:
+	void EndChapter9();
 
 private:
 	Point EndPoint = Point::Zero;

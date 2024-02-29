@@ -134,6 +134,8 @@ protected:
 	virtual void CutSceneStart();
 	virtual void CutSceneCheck();
 	virtual void ChangeChapter() {};
+	
+	virtual void EndStart();
 
 	virtual void ResetCheck();
 private:
@@ -151,7 +153,6 @@ private:
 	void ResetStart();
 
 	void End(float _DeltaTime);
-	void EndStart();
 
 	void M_StateUpdate(float _DeltaTime);
 

@@ -135,6 +135,7 @@ void ChapterManager::M_CreateChapterUI(int _ChapterNumber)
 	BottomText->SetTextTransForm({ {0,0}, {0,0} });
 	BottomText->TextSetting(38, Color8Bit::White);
 	BottomText->SetText("재시작 [R키]"); 
+	BottomText->GetTextRenderer()->SetTextEffect(2);
 	BottomText->GetTextRenderer()->CameraEffectOff();
 
 	AllMapActors[reinterpret_cast<__int64>(BottomText)] = BottomText;

@@ -1,6 +1,7 @@
 #include "Chapter9.h"
 
 #include "Character.h"
+#include "ChapterSin.h"
 
 bool Chapter9::IsLoad = false;
 
@@ -136,7 +137,40 @@ void Chapter9::BadEndSetting()
 	C_BooperTextSet(Chap9_Script[3]);
 }
 
+void Chapter9::FailOrderCheck()
+{
+	switch (C_GetFailOrder())
+	{
+	case 0:
+		FailOrderInputCheck();
+		break;
+	case 1:
+		BadEndSetting();
+		break;
+	case 2:
+		EndChapter9();
+		break;
+	}
+}
+
+void Chapter9::EndChapter9()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+	}
+}
+
+void Chapter9::EndStart()
+{
+
+}
+
 void Chapter9::ChangeChapter()
 {
-	int a = 0;
+	ChapterManager::ChangeChapter();
+
+	CreateChapter<ChapterSin>("ChapterSin");
+	GEngine->ChangeLevel("ChapterSin");
 }
+
+
