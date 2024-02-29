@@ -94,6 +94,9 @@
     <ClInclude Include="SinOpening.h">
       <Filter>Object\Level\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="HeroBase.h">
+      <Filter>Object\Actor\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -185,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="SinOpening.cpp">
       <Filter>Object\Level\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroBase.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
