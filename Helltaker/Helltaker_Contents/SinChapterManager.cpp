@@ -50,13 +50,13 @@ void SinChapterManager::M_CreateSinPit()
 		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::BackGround)));
 		SinPit[i]->SetActorLocation({ WinScale.hX(), Pos.Y  });
 
-		SinPit[i]->CreateImageRenderer("Left_Pit", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Left_Pit")->SetImage("Sin_Pit_Left.png");
-		SinPit[i]->GetImageRenderer("Left_Pit")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+		SinPit[i]->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
+		SinPit[i]->GetImageRenderer("Left")->SetImage("Sin_Pit_Left.png");
+		SinPit[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
-		SinPit[i]->CreateImageRenderer("Right_Pit", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Right_Pit")->SetImage("Sin_Pit_Right.png");
-		SinPit[i]->GetImageRenderer("Right_Pit")->SetTransform({ { Pos.X, 0.0f }, Scale });
+		SinPit[i]->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
+		SinPit[i]->GetImageRenderer("Right")->SetImage("Sin_Pit_Right.png");
+		SinPit[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 
 		Pos += WinScale * SinPitInterval;
 	}
