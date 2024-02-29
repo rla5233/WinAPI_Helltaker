@@ -136,10 +136,17 @@ enum class SinUpdateOrder
 enum class SinRenderOrder
 {
 	None,
+	UnderBackGround,
 	BackGround,
-	Bottom_Zero,
 	Hero,
 	Transition
+};
+
+enum class EBackGroundType
+{
+	None,
+	Default,
+	Sin,
 };
 
 enum class EMainMenuState

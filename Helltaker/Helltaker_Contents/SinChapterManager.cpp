@@ -1,10 +1,12 @@
 #include "SinChapterManager.h"
 
 #include "BackGround.h"
+#include "SinComponent.h"
 
 bool SinChapterManager::IsLoad = false;
 
-const int SinChapterManager::SinPitCount = 3;
+const int SinChapterManager::SinPitCount = 1;
+const FVector SinChapterManager::SinPitInterval = { 0.0f, 0.6074f };
 
 SinChapterManager::SinChapterManager()
 {
@@ -21,7 +23,8 @@ void SinChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pit.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pit_Left.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pit_Right.png");
 
 		IsLoad = true;
 	}
@@ -30,8 +33,7 @@ void SinChapterManager::BeginPlay()
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 {
 	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
-	SinBG->CreateBackGround(_Name);
-	SinBG->SetOrder(static_cast<int>(SinRenderOrder::BackGround));
+	SinBG->CreateBackGround(_Name, EBackGroundType::Sin);
 	SinBG->GetImageRenderer()->SetAlpha(0.8f);
 
 	AllSMapActors[reinterpret_cast<__int64>(SinBG)] = SinBG;
@@ -41,8 +43,19 @@ void SinChapterManager::M_CreateSinPit()
 {
 	for (int i = 0; i < SinPitCount; i++)
 	{
-		SinPit.push_back(SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround)));
-		SinPit[i]->CreateImageRenderer()
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.607f };
+		FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.196f };
+		
+		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::BackGround)));
+		SinPit[i]->SetActorLocation({ WinScale.hX() - Pos.X, Pos.Y });
+		SinPit[i]->CreateImageRenderer("Left_Pit", SinRenderOrder::UnderBackGround);
+		SinPit[i]->GetImageRenderer("Left_Pit")->SetImage("Sin_Pit_Left.png");
+		SinPit[i]->GetImageRenderer("Left_Pit")->SetTransform({ {0, 0}, Scale });
+		
+
+		//SinPit[i]->CreateImageRenderer("Right_Pit", SinRenderOrder::UnderBackGround);
+		//SinPit[i]->GetImageRenderer("Right_Pit")->SetImage("Sin_Pit_Right.png");
 	}
 }
 

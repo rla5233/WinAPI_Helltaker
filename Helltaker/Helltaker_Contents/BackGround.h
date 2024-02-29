@@ -16,7 +16,7 @@ public:
 	BackGround& operator=(const BackGround& _Other) = delete;
 	BackGround& operator=(BackGround&& _Other) noexcept = delete;
 
-	void CreateBackGround(std::string_view _Name);
+	void CreateBackGround(std::string_view _Name, EBackGroundType _Type = EBackGroundType::Default);
 	void CreateSceneBackGround(std::string_view _Name);
 	void BackGroundChange(std::string_view _Name);
 

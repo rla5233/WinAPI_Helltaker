@@ -14,12 +14,21 @@ BackGround::~BackGround()
 {
 }
 
-void BackGround::CreateBackGround(std::string_view _Name)
+void BackGround::CreateBackGround(std::string_view _Name, EBackGroundType _Type)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	SetActorLocation({ WinScale.Half2D()});
 	SetName(_Name);
-	ImageRenderer = CreateImageRenderer(RenderOrder::BackGround);
+
+	switch (_Type)
+	{
+	case EBackGroundType::Default:
+		ImageRenderer = CreateImageRenderer(RenderOrder::BackGround);
+		break;
+	case EBackGroundType::Sin:
+		ImageRenderer = CreateImageRenderer(SinRenderOrder::BackGround);
+		break;
+	}
 	ImageRenderer->SetImage(GetName() + ".png");
 	
 	FVector ImgScale = ImageRenderer->GetImage()->GetScale();
