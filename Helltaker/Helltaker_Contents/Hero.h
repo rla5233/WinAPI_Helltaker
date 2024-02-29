@@ -1,7 +1,8 @@
 #pragma once
-#include "HitActor.h"
 
-class Hero : public HitActor
+#include "HeroBase.h"
+
+class Hero : public HeroBase
 {
 public:
 	// constrcuter destructer
@@ -24,84 +25,23 @@ public:
 		ActionPoint = _Value;
 	}
 
-	EHeroState GetHeroState() const
-	{
-		return State;
-	}
-
-	UImageRenderer* GetImageRenderer() const
-	{
-		return ImageRenderer;
-	}
-
-	bool GetCanActionCheck() const
-	{
-		return CanActionCheck;
-	}
-
-	void SetCanActionCheck(bool _Value)
-	{
-		CanActionCheck = _Value;
-	}
-
-	void AllEffectActiveOff();
-	
-	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
-
 	// Debug
 	void UpdateActionPoint();
 protected:
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
+	void MoveStart() override;
 
 	void ChapterCameraPosUpdate(const FVector& _Diff) override;
 
 private:
-	void Idle(float _DeltaTime);
-	void IdleStart();
-	void Move(float _DeltaTime);
-	void MoveStart() override;
-	void Kick(float _DeltaTime);
-	void KickStart(float _DeltaTime, int _Key1, int _Key2);
-	void Victory(float _DeltaTime);
-	void VictoryStart();
-	void Death(float _DeltaTime);
-	void DeathStart();
-
-	void InputCheck(float _DeltaTime);
 	void ThornHitCheck() override;
 	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
+	void KickCheck() override;
 	void NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2);
 
-	void CreateRandomHitEffect();
-
-	void StateUpdate(float _DeltaTime);
-
 private:
-	UImageRenderer* ImageRenderer = nullptr;
-
 	int ActionPoint = -1;
 	bool IsHaveKey = false;
-
-	static const FVector IdleScale;
-	static const float IdleInter;
-
-	static const FVector MoveScale;
-	static const float MoveInter;
-
-	static const FVector KickScale;
-	static const float KickInter;
-
-	static const FVector HitScale;
-	static const float HitInter;
-	static const float DeathInter;
-
-	static const FVector VictoryScale;
-	static const float VictoryInter;
 	
-	bool CanActionCheck = false;
-	EHeroState State = EHeroState::None;
 	static bool IsLoad;
-
 	bool CheatMode = false;
 };
