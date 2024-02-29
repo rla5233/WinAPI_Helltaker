@@ -20,10 +20,6 @@ public:
 	RenderActor& operator=(const RenderActor& _Other) = delete;
 	RenderActor& operator=(RenderActor&& _Other) noexcept = delete;
 
-	void LoadFolder(std::string_view _Path);
-	void LoadImg(std::string_view _Path);
-	void LoadImg(std::string_view _Path, std::string_view _Name);
-
 	ChapterManager* GetChapter();
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);

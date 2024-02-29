@@ -4,6 +4,8 @@
 
 bool SinChapterManager::IsLoad = false;
 
+const int SinChapterManager::SinPitCount = 3;
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -37,7 +39,11 @@ void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 
 void SinChapterManager::M_CreateSinPit()
 {
-
+	for (int i = 0; i < SinPitCount; i++)
+	{
+		SinPit.push_back(SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround)));
+		//SinPit[i]->
+	}
 }
 
 void SinChapterManager::Tick(float _DeltaTime)

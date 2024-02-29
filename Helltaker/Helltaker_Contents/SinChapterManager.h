@@ -4,6 +4,8 @@
 
 #include <EngineCore/Level.h>
 
+class BackGround;
+
 // Ό³Έν :
 class SinChapterManager : public ULevel
 {
@@ -32,7 +34,8 @@ protected:
 private:
 	std::map<__int64, AActor*> AllSMapActors;
 
-	std::vector<>
+	std::vector<BackGround*> SinPit;
+	static const int SinPitCount;
 
 	static bool IsLoad;
 };

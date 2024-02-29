@@ -38,6 +38,6 @@ private:
 	UImageRenderer* ImageRenderer = nullptr;
 
 	FVector StartScale = FVector::Zero;
-	float ScaleChangeTime;
-	bool IsScaleChange;
+	float ScaleChangeTime = 0.0f;
+	bool IsScaleChange = false;
 };

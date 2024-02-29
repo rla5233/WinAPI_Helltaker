@@ -245,5 +245,8 @@
     <Filter Include="Object\Level\Sin">
       <UniqueIdentifier>{0d749ca9-b980-40c0-b14e-c1c8e6749f4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Actor\Sin">
+      <UniqueIdentifier>{d89c5fa3-005a-4654-8f69-a32c510c86da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
