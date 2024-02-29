@@ -29,6 +29,10 @@ protected:
 
 private:
 	void EnterOrder1();
+	void EnterOrder2();
+
+	void SpawnDialBG_Hell();
+	void SpawnDialBG_Sin();
 
 private:
 	int EnterOrder = -1;

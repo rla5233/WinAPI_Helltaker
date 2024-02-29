@@ -62,11 +62,7 @@ void CutSceneManager::C_SpawnDialogue(std::string_view _Name)
 	Dialogue->SetName("Dialogue");
 	Dialogue->CreateImageRenderer(RenderOrder::Scene);
 	Dialogue->GetImageRenderer()->SetImage(_Name);
-
-	FVector ImgScale = Dialogue->GetImageRenderer()->GetImage()->GetScale();
-	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * (ImgScale.Y / 1080) };
-	//Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y * 0.5045f } });
-	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
+	Dialogue->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X, WinScale.Y * 0.5045f } });
 	Dialogue->GetImageRenderer()->CameraEffectOff();
 	AllCutSceneActors.push_back(Dialogue);
 }
