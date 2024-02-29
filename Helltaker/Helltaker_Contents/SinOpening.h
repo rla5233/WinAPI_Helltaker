@@ -25,7 +25,6 @@ protected:
 	void ChangeChapter() override;
 
 	// CutScene
-	void EnterStart() override;
 	void Enter(float _DeltaTime) override;
 
 private:
@@ -33,6 +32,9 @@ private:
 
 private:
 	int EnterOrder = -1;
+
+	Scene* DialBG_Hell = nullptr;
+	Scene* DialBG_Sin = nullptr;
 
 	static const std::vector<const char*> SinOpening_Script;
 	static bool IsLoad;

@@ -1,5 +1,6 @@
 #include "SinOpening.h"
 
+#include "Character.h"
 #include "Scene.h"
 
 bool SinOpening::IsLoad = false;
@@ -24,9 +25,11 @@ SinOpening::~SinOpening()
 
 void SinOpening::BeginPlay()
 {
+	HellTakerManager::BeginPlay();
+
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Sin_001.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Sin.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialBG_DarkHell.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialBG_LitHell.png");
 
@@ -77,16 +80,40 @@ void SinOpening::EnterOrder1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_SpawnDialogue("DialBG_LitHell.png");
-		C_SpawnDialogue("DialogueBG_Sin_001.png");
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		
+		{
+			DialBG_Hell = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+			DialBG_Hell->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
+			DialBG_Hell->SetName("DialBG_Hell");
+			DialBG_Hell->CreateImageRenderer(RenderOrder::Scene);
+			DialBG_Hell->GetImageRenderer()->SetImage("DialBG_DarkHell.png");
+
+			FVector ImgScale = DialBG_Hell->GetImageRenderer()->GetImage()->GetScale();
+			FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * 0.504f };
+			DialBG_Hell->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
+
+			DialBG_Hell->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
+			//DialBG_Hell->GetImageRenderer()->SetImageCuttingTransform();
+		}
+
+		{
+			//DialBG_Sin = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
+			//DialBG_Sin->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
+			//DialBG_Sin->SetName("DialBG_Sin");
+			//DialBG_Sin->CreateImageRenderer(RenderOrder::Scene);
+			//DialBG_Sin->GetImageRenderer()->SetImage("DialogueBG_Sin.png");
+			//
+			//FVector ImgScale = DialBG_Sin->GetImageRenderer()->GetImage()->GetScale();
+			//FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * (ImgScale.Y / 1080) };
+			//DialBG_Sin->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
+		}
+
+		C_SpawnCharacter("???", "DefaultBG.png", SinOpening_Script[0]);
+		C_GetSceneCharacter()->GetImageRenderer()->ActiveOff();
+		C_BooperTextSet(SinOpening_Script[3]);
 		++EnterOrder;
 	}
-}
-
-void SinOpening::EnterStart()
-{
-
-	//C_SpawnCharacter("Cer", "Cer_Idle.png", Chap3_Script[0]);
 }
 
 void SinOpening::ChangeChapter()
