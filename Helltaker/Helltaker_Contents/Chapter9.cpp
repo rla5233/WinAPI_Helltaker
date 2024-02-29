@@ -1,6 +1,7 @@
 #include "Chapter9.h"
 
 #include "Character.h"
+#include "Scene.h"
 #include "ChapterSin.h"
 
 bool Chapter9::IsLoad = false;
@@ -164,7 +165,24 @@ void Chapter9::EndChapter9()
 
 void Chapter9::EndStart()
 {
-	//ChapterEndOrder = 0;
+	EndOrder = 0;
+}
+
+void Chapter9::End(float _DeltaTime)
+{
+	switch (EndOrder)
+	{
+	case 0:
+		TransitionOn();
+		++EndOrder;
+		break;
+	case 1:
+		if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
+		{
+			ChangeChapter();
+		}
+		break;
+	}
 }
 
 void Chapter9::ChangeChapter()

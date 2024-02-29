@@ -136,26 +136,28 @@ protected:
 	virtual void ChangeChapter() {};
 	
 	virtual void EndStart();
+	virtual void End(float _DeltaTime);
 
 	virtual void ResetCheck();
 
-	
+	void M_InitChapterEndOrder()
+	{
+		ChapterEndOrder = 0;
+	}
 
 private:
-	void Idle(float _DeltaTime);
 	void IdleStart();
+	void Idle(float _DeltaTime);
 
-	void HeroDeath(float _DeltaTime);
 	void HeroDeathStart();
+	void HeroDeath(float _DeltaTime);
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
 	void CutScene(float _DeltaTime);
 
-	void Reset(float _DeltaTime);
 	void ResetStart();
-
-	void End(float _DeltaTime);
+	void Reset(float _DeltaTime);
 
 	void M_StateUpdate(float _DeltaTime);
 

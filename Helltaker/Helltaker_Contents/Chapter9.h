@@ -26,6 +26,7 @@ protected:
 	void ChangeChapter() override;
 
 	void EndStart() override;
+	void End(float _DeltaTime) override;
 
 	// CutScene
 	void Enter(float _DeltaTime) override;
@@ -41,6 +42,7 @@ private:
 private:
 	Point EndPoint = Point::Zero;
 	int EnterOrder = -1;
+	int EndOrder = -1;
 
 	static const std::vector<const char*> Chap9_Script;
 	static bool IsLoad;
