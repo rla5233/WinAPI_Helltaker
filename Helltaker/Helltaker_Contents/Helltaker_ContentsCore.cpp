@@ -16,6 +16,7 @@
 #include "Chapter8.h"
 #include "Chapter9.h"
 #include "SinOpening.h"
+#include "SinChapter1.h"
 
 // 수정 (스크립트 문자 재확인)
 Helltaker_ContentsCore::Helltaker_ContentsCore()
@@ -69,6 +70,9 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter9>("Chapter9");
 	//ChangeLevel("Chapter9");
 
-	CreateLevel<SinOpening>("SinOpening");
-	ChangeLevel("SinOpening");
+	//CreateLevel<SinOpening>("SinOpening");
+	//ChangeLevel("SinOpening");
+
+	CreateLevel<SinChapter1>("SinChapter1");
+	ChangeLevel("SinChapter1");
 }

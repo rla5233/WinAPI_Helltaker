@@ -1,9 +1,48 @@
 #include "SinChapterManager.h"
 
+#include "BackGround.h"
+
+bool SinChapterManager::IsLoad = false;
+
 SinChapterManager::SinChapterManager()
 {
 }
 
 SinChapterManager::~SinChapterManager()
+{
+}
+
+void SinChapterManager::BeginPlay()
+{
+	ULevel::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("BackGround", "SinBG.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pit.png");
+
+		IsLoad = true;
+	}
+}
+
+void SinChapterManager::M_CreateSinBG(std::string_view _Name)
+{
+	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	SinBG->CreateBackGround(_Name);
+	SinBG->GetImageRenderer()->SetAlpha(0.8f);
+
+	AllSMapActors[reinterpret_cast<__int64>(SinBG)] = SinBG;
+}
+
+void SinChapterManager::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
+}
+
+void SinChapterManager::LevelStart(ULevel* _PrevLevel)
+{
+}
+
+void SinChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 }

@@ -1,7 +1,11 @@
 #pragma once
 
+#include "ContentsHelper.h"
+
+#include <EngineCore/Level.h>
+
 // Ό³Έν :
-class SinChapterManager
+class SinChapterManager : public ULevel
 {
 public:
 	// constructor destructor
@@ -14,10 +18,19 @@ public:
 	SinChapterManager& operator=(const SinChapterManager& _Other) = delete;
 	SinChapterManager& operator=(SinChapterManager&& _Other) noexcept = delete;
 
-
+	void M_CreateSinBG(std::string_view _Name);
+	
 protected:
+	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime);
+
+	virtual void LevelStart(ULevel* _PrevLevel) override;
+	virtual void LevelEnd(ULevel* _NextLevel) override;
+
 
 private:
+	std::map<__int64, AActor*> AllSMapActors;
 
+	static bool IsLoad;
 };
 

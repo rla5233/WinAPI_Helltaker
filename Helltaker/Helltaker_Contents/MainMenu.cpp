@@ -43,7 +43,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::BeginPlay()
 {
-	CutSceneManager::BeginPlay();
+	HellTakerManager::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -82,7 +82,7 @@ void MainMenu::BeginPlay()
 
 void MainMenu::LevelStart(ULevel* _PrevLevel)
 {
-	CutSceneManager::LevelStart(_PrevLevel);
+	HellTakerManager::LevelStart(_PrevLevel);
 
 	C_CreateSceneBG();
 	C_SpawnDialogue("MainMenuDialogue_001.png");
