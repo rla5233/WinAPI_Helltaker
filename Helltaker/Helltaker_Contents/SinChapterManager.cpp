@@ -36,8 +36,11 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pyre_Off.png");
 		ContentsHelper::LoadFolder("Chapter\\Component", "Sin_Fire");
 
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Shield.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LShield.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RShield.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Shield_Top.png");
+
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
 
 		IsLoad = true;
 	}
@@ -191,10 +194,10 @@ void SinChapterManager::M_CreateSinPyre()
 void SinChapterManager::M_CreateSinShield()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.8125f, WinScale.Y * 0.686f };
+	FVector Scale = { WinScale.X * 0.75f, WinScale.Y * 0.686f };
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.322f };
 
-	FVector TopScale = { WinScale.X * 0.5573f, WinScale.Y * 0.2965f };
+	FVector TopScale = { WinScale.X * 0.5136f, WinScale.Y * 0.2965f };
 	float TopPosY = WinScale.Y * (-0.1947f);
 
 	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
@@ -208,6 +211,24 @@ void SinChapterManager::M_CreateSinShield()
 	SinShield->GetImageRenderer("Shield_Top")->SetTransform({ { 0.0f, TopPosY },  TopScale });
 
 	AllSMapActors[reinterpret_cast<__int64>(SinShield)] = SinShield;
+}
+
+void SinChapterManager::M_CreateSinBridge()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.492f, WinScale.Y * 0.556f };
+	FVector Pos = { WinScale.hX(), WinScale.Y * 0.322f };
+	const float IntervalY = Scale.Y;
+
+	SinBridge.reserve(1);
+	for (int i = 0; i < 1; i++)
+	{
+		SinBridge.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinBridge[i]->SetActorLocation(Pos);
+		SinBridge[i]->CreateImageRenderer("Bridge", SinRenderOrder::Mid);
+		SinBridge[i]->GetImageRenderer("Bridge")->SetImage("Sin_Bridge.png");
+		SinBridge[i]->GetImageRenderer("Bridge")->SetTransform({ { 0.0f, 0.0f },  Scale });
+	}
 }
 
 void SinChapterManager::Tick(float _DeltaTime)

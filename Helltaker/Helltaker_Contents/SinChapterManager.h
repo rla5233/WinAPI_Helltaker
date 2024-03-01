@@ -30,6 +30,7 @@ public:
 	void M_CreateSinPyre();
 
 	void M_CreateSinShield();
+	void M_CreateSinBridge();
 
 protected:
 	virtual void BeginPlay() override;
@@ -49,6 +50,8 @@ private:
 
 	std::vector<SinComponent*> SinPyre;
 	static const float SinFireInter;
+
+	std::vector<SinComponent*> SinBridge;
 	
 	static bool IsLoad;
 };
