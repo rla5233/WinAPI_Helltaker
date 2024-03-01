@@ -19,11 +19,10 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 {
 	SinChapterManager::LevelStart(_PrevLevel);
 
-	M_CreateSinBG("SinBG");
-	M_CreateSinPit();
-	M_CreateSinGear();
-
+	M_CreateSinBackGround();
 	M_CreateSinUnderPanel();
+
+	M_CreateSinShield();
 }
 
 void SinChapter1::Tick(float _DeltaTime)

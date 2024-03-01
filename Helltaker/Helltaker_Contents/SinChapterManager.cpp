@@ -36,11 +36,20 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pyre_Off.png");
 		ContentsHelper::LoadFolder("Chapter\\Component", "Sin_Fire");
 
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Shield.png");
+
 		IsLoad = true;
 	}
 }
 
-void SinChapterManager::M_CreateSinBG(std::string_view _Name)
+void SinChapterManager::M_CreateSinBackGround()
+{
+	M_CreateSinBG("SinBG");
+	M_CreateSinPit();
+	M_CreateSinGear();
+}
+
+void SinChapterManager::M_CreateSinBG(std::string_view _Name /* = "SinBG" */)
 {
 	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
 	SinBG->CreateBackGround(_Name, EBackGroundType::Sin);
@@ -154,6 +163,7 @@ void SinChapterManager::M_CreateSinPyre()
 		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
 		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
 
+		AllSMapActors[reinterpret_cast<__int64>(SinPyre[idx])] = SinPyre[idx];
 		++idx;
 	}
 	
@@ -173,8 +183,24 @@ void SinChapterManager::M_CreateSinPyre()
 		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
 		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
 
+		AllSMapActors[reinterpret_cast<__int64>(SinPyre[idx])] = SinPyre[idx];
 		++idx;
 	}
+}
+
+void SinChapterManager::M_CreateSinShield()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.8125f, WinScale.Y * 0.686f };
+	FVector Pos = { WinScale.hX(), WinScale.Y * 0.322f };
+
+	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
+	SinShield->SetActorLocation(Pos);
+	SinShield->CreateImageRenderer("Shield", SinRenderOrder::Top);
+	SinShield->GetImageRenderer("Shield")->SetImage("Sin_Shield.png");
+	SinShield->GetImageRenderer("Shield")->SetTransform({ { 0.0f, 0.0f },  Scale });
+
+	AllSMapActors[reinterpret_cast<__int64>(SinShield)] = SinShield;
 }
 
 void SinChapterManager::Tick(float _DeltaTime)
