@@ -31,7 +31,8 @@ public:
 
 	void M_CreateSinShield();
 	void M_CreateSinSkull();
-	void M_CreateSinPiston();
+	void M_CreateSinChain();
+	void M_CreateSinPiston();  //=> ¹Ì¿Ï
 
 	void M_CreateSinBridge();
 
@@ -47,8 +48,7 @@ protected:
 private:
 	std::list<AActor*> AllMapRenderActors;
 
-	std::vector<SinComponent*> SinPit;
-	static const float SinPitInterval;
+	std::list<SinComponent*> AllSinPit;
 
 	SinComponent* SinGear = nullptr;
 
@@ -58,6 +58,7 @@ private:
 	std::vector<SinComponent*> SinBridge;
 	
 	SinComponent* Skull = nullptr;
+	std::list<SinComponent*> AllSinChain;
 
 	static bool IsLoad;
 };

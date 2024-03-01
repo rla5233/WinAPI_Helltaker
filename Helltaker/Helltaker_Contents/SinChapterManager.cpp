@@ -5,7 +5,6 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const float SinChapterManager::SinPitInterval = 0.6079f;
 const float SinChapterManager::SinFireInter = 0.06f;
 
 SinChapterManager::SinChapterManager()
@@ -47,6 +46,7 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RArm.png");
 		
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Piston.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_ChainLink.png");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
 
@@ -74,24 +74,25 @@ void SinChapterManager::M_CreateSinPit()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.607f };
 	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.196f };
+	const float IntervalY = WinScale.Y * 0.6079f;
 
-	SinPit.reserve(3);
 	for (int i = 0; i < 3; i++)
 	{		
-		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
-		SinPit[i]->SetActorLocation({ WinScale.hX(), Pos.Y  });
+		SinComponent* SinPit = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround));
+		SinPit->SetActorLocation({ WinScale.hX(), Pos.Y  });
 
-		SinPit[i]->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
-		SinPit[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+		SinPit->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
+		SinPit->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
+		SinPit->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
-		SinPit[i]->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Right")->SetImage("Sin_RPit.png");
-		SinPit[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+		SinPit->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
+		SinPit->GetImageRenderer("Right")->SetImage("Sin_RPit.png");
+		SinPit->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+		
+		Pos.Y += IntervalY;
 
-		Pos.Y += WinScale.Y * SinPitInterval;
-
-		AllMapRenderActors.push_back(SinPit[i]);
+		AllSinPit.push_back(SinPit);
+		AllMapRenderActors.push_back(SinPit);
 	}
 }
 
@@ -269,8 +270,36 @@ void SinChapterManager::M_CreateSinSkull()
 	AllMapRenderActors.push_back(Skull);
 }
 
+void SinChapterManager::M_CreateSinChain()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.0375f, WinScale.Y * 0.139f };
+	FVector Pos = { WinScale.X * 0.2f, WinScale.Y * 0.5f };
+	const float IntervalY = 0.0f;
+
+	for (int i = 0; i < 1; i++)
+	{
+		SinComponent* SinChain = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
+		SinChain->SetActorLocation({ WinScale.hX(), Pos.Y });
+
+		SinChain->CreateImageRenderer("Left", SinRenderOrder::Mid);
+		SinChain->GetImageRenderer("Left")->SetImage("Sin_ChainLink.png");
+		SinChain->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+
+		Pos.Y += IntervalY;
+
+		AllSinChain.push_back(SinChain);
+		AllMapRenderActors.push_back(SinChain);
+	}
+}
+
 void SinChapterManager::M_CreateSinPiston()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.556f };
+	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
+
+	SinComponent* UnderPiston = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
 }
 
 void SinChapterManager::M_CreateSinBridge()

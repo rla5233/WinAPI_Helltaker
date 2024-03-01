@@ -25,6 +25,7 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 	M_CreateSinShield();
 	M_CreateSinBridge();
 	M_CreateSinSkull();
+	M_CreateSinChain();
 }
 
 void SinChapter1::Tick(float _DeltaTime)
