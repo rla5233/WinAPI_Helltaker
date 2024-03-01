@@ -21,7 +21,7 @@ public:
 	SinChapterManager& operator=(SinChapterManager&& _Other) noexcept = delete;
 
 	void M_CreateSinBackGround();
-	void M_CreateSinBG(std::string_view _Name = "SinBG");
+	void M_CreateSinBG(std::string_view _Name);
 	void M_CreateSinPit();
 	void M_CreateSinGear();
 

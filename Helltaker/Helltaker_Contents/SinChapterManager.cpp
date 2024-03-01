@@ -49,11 +49,10 @@ void SinChapterManager::M_CreateSinBackGround()
 	M_CreateSinGear();
 }
 
-void SinChapterManager::M_CreateSinBG(std::string_view _Name /* = "SinBG" */)
+void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 {
 	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
 	SinBG->CreateBackGround(_Name, EBackGroundType::Sin);
-	SinBG->GetImageRenderer()->SetAlpha(0.7f);
 
 	AllSMapActors[reinterpret_cast<__int64>(SinBG)] = SinBG;
 }
@@ -206,6 +205,8 @@ void SinChapterManager::M_CreateSinShield()
 void SinChapterManager::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
+
+
 }
 
 void SinChapterManager::LevelStart(ULevel* _PrevLevel)
