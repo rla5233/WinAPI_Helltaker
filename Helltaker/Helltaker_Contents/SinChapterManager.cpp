@@ -37,6 +37,7 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Component", "Sin_Fire");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Shield.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Shield_Top.png");
 
 		IsLoad = true;
 	}
@@ -193,11 +194,18 @@ void SinChapterManager::M_CreateSinShield()
 	FVector Scale = { WinScale.X * 0.8125f, WinScale.Y * 0.686f };
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.322f };
 
-	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
+	FVector TopScale = { WinScale.X * 0.5573f, WinScale.Y * 0.2965f };
+	float TopPosY = WinScale.Y * (-0.1947f);
+
+	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
 	SinShield->SetActorLocation(Pos);
-	SinShield->CreateImageRenderer("Shield", SinRenderOrder::Top);
+	SinShield->CreateImageRenderer("Shield", SinRenderOrder::Mid);
 	SinShield->GetImageRenderer("Shield")->SetImage("Sin_Shield.png");
 	SinShield->GetImageRenderer("Shield")->SetTransform({ { 0.0f, 0.0f },  Scale });
+
+	SinShield->CreateImageRenderer("Shield_Top", SinRenderOrder::Top);
+	SinShield->GetImageRenderer("Shield_Top")->SetImage("Sin_Shield_Top.png");
+	SinShield->GetImageRenderer("Shield_Top")->SetTransform({ { 0.0f, TopPosY },  TopScale });
 
 	AllSMapActors[reinterpret_cast<__int64>(SinShield)] = SinShield;
 }
