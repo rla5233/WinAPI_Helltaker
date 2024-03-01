@@ -20,9 +20,9 @@ void SinComponent::MoveUp(float _Speed, float _DeltaTime)
 	{
 		AddActorLocation({ 0.0f, _Speed * _DeltaTime });
 
-		if (EndPos.Y >= GetActorLocation().Y)
+		if (EndPosY >= GetActorLocation().Y)
 		{
-			SetActorLocation(ResetPos);
+			SetActorLocation({ GetActorLocation().X, ResetPosY });
 		}
 	}
 }

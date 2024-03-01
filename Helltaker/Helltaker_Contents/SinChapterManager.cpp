@@ -7,7 +7,7 @@ bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::SinFireInter = 0.06f;
 
-const float SinChapterManager::SinPitSpeedY = -100.0f;
+const float SinChapterManager::SinPitSpeedY = -250.0f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -385,6 +385,9 @@ void SinChapterManager::AllSinPitMoveOn()
 		}
 
 		SinPit->MoveOn();
+		float ScaleY = SinPit->GetImageRenderer("Left")->GetTransform().GetScale().Y;
+		SinPit->SetEndPosY(-(ScaleY / 2.0f));
+		SinPit->SetResetPosY(ScaleY * 2.48f);
 	}
 }
 

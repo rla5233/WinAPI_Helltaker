@@ -27,14 +27,14 @@ public:
 		IsMove = false;
 	}
 
-	void SetResetPos(const FVector& _Pos)
+	void SetResetPosY(float _PosY)
 	{
-		ResetPos = _Pos;
+		ResetPosY = _PosY;
 	}
 
-	void SetEndPos(const FVector& _Pos)
+	void SetEndPosY(float _PosY)
 	{
-		EndPos = _Pos;
+		EndPosY = _PosY;
 	}
 
 	void CreateImageRenderer(std::string_view _KeyName, SinRenderOrder _Order);
@@ -49,8 +49,8 @@ protected:
 private:
 	std::map<std::string, UImageRenderer*> ImageRenderers;
 
-	FVector EndPos = FVector::Zero;
-	FVector ResetPos = FVector::Zero;
+	float EndPosY = 0.0f;
+	float ResetPosY = 0.0f;
 	bool IsMove = false;
 };
 
