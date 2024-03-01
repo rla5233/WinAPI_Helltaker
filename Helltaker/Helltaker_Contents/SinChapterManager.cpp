@@ -6,6 +6,7 @@
 bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::SinPitInterval = 0.6079f;
+const float SinChapterManager::SinFireInter = 0.02f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -31,6 +32,9 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPanel.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPanel.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Eye.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pyre_On.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pyre_Off.png");
+		ContentsHelper::LoadFolder("Chapter\\Component", "Sin_Fire");
 
 		IsLoad = true;
 	}
@@ -51,6 +55,7 @@ void SinChapterManager::M_CreateSinPit()
 	FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.607f };
 	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.196f };
 
+	SinPit.reserve(3);
 	for (int i = 0; i < 3; i++)
 	{		
 		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
@@ -90,11 +95,19 @@ void SinChapterManager::M_CreateSinGear()
 	AllSMapActors[reinterpret_cast<__int64>(SinGear)] = SinGear;
 }
 
+void SinChapterManager::M_CreateSinUnderPanel()
+{
+	M_CreateSinPanel();
+	M_CreateSinPyre();
+}
+
 void SinChapterManager::M_CreateSinPanel()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.39f, WinScale.Y * 0.133f };
 	FVector Pos = { WinScale.X * 0.228f, WinScale.Y * 0.962f };
+	FVector EyeScale = { WinScale.X * 0.167f, WinScale.Y * 0.167f };
+	float EyePosY = WinScale.Y * (-0.005f);
 
 	SinComponent* SinPanel = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
 	SinPanel->SetActorLocation({ WinScale.hX(), Pos.Y });
@@ -109,9 +122,52 @@ void SinChapterManager::M_CreateSinPanel()
 
 	SinPanel->CreateImageRenderer("Eye", SinRenderOrder::Mid);
 	SinPanel->GetImageRenderer("Eye")->SetImage("Sin_Eye.png");
-	SinPanel->GetImageRenderer("Eye")->SetTransform({ { Pos.X, 0.0f }, Scale });
+	SinPanel->GetImageRenderer("Eye")->SetTransform({ { 0.0f, EyePosY }, EyeScale });
 
 	AllSMapActors[reinterpret_cast<__int64>(SinPanel)] = SinPanel;
+}
+
+void SinChapterManager::M_CreateSinPyre()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector PyreScale = { WinScale.X * 0.13f, WinScale.Y * 0.111f };
+	FVector FireScale = { WinScale.X * 0.0625f, WinScale.Y * 0.107f };
+	FVector Pos = { WinScale.X * 0.255f, WinScale.Y * 0.962f };
+	const float IntervalX = WinScale.X * 0.111f;
+
+	int idx = 0;
+	SinPyre.reserve(4);
+	for (int i = 0; i < 2; i++)
+	{
+		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
+
+		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Mid);
+		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
+		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
+
+		SinPyre[idx]->CreateImageRenderer("Fire", SinRenderOrder::Mid);
+		SinPyre[idx]->GetImageRenderer("Fire")->SetImage("Sin_Fire");
+		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, 0.0f }, FireScale });
+		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
+		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
+
+		++idx;
+	}
+	
+	Pos.X = WinScale.X * 0.635f;
+	for (int i = 0; i < 2; i++)
+	{
+		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
+
+		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Mid);
+		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
+		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
+
+		++idx;
+	}
+
 }
 
 void SinChapterManager::Tick(float _DeltaTime)

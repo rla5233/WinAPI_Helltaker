@@ -23,7 +23,10 @@ public:
 	void M_CreateSinBG(std::string_view _Name);
 	void M_CreateSinPit();
 	void M_CreateSinGear();
+
+	void M_CreateSinUnderPanel();
 	void M_CreateSinPanel();
+	void M_CreateSinPyre();
 
 protected:
 	virtual void BeginPlay() override;
@@ -41,6 +44,8 @@ private:
 
 	SinComponent* SinGear = nullptr;
 
+	std::vector<SinComponent*> SinPyre;
+	static const float SinFireInter;
 	
 	static bool IsLoad;
 };
