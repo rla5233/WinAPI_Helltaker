@@ -35,7 +35,6 @@ public:
 
 	void M_CreateSinBridge();
 
-
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);
