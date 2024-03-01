@@ -226,12 +226,12 @@ void SinChapterManager::M_CreateSinShield()
 void SinChapterManager::M_CreateSinBridge()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.492f, WinScale.Y * 0.556f };
+	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.556f };
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.322f };
 	const float IntervalY = Scale.Y;
 
-	SinBridge.reserve(1);
-	for (int i = 0; i < 1; i++)
+	SinBridge.reserve(2);
+	for (int i = 0; i < 2; i++)
 	{
 		SinBridge.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinBridge[i]->SetActorLocation(Pos);
