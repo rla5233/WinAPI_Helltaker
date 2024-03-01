@@ -85,7 +85,7 @@ void SinChapterManager::M_CreateSinPit()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.607f };
 	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.196f };
-	const float IntervalY = WinScale.Y * 0.6079f;
+	const float IntervalY = WinScale.Y * 0.6074f;
 
 	for (int i = 0; i < 3; i++)
 	{		
