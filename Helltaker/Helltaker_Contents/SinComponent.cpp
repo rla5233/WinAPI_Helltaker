@@ -22,7 +22,8 @@ void SinComponent::MoveUp(float _Speed, float _DeltaTime)
 
 		if (EndPosY >= GetActorLocation().Y)
 		{
-			SetActorLocation({ GetActorLocation().X, ResetPosY });
+			float Diff = GetActorLocation().Y - EndPosY;
+			SetActorLocation({ GetActorLocation().X, ResetPosY + Diff });
 		}
 	}
 }

@@ -8,6 +8,8 @@ bool SinChapterManager::IsLoad = false;
 const float SinChapterManager::SinFireInter = 0.06f;
 
 const float SinChapterManager::SinPitSpeedY = -250.0f;
+const float SinChapterManager::SinPitInterValY = 0.6074f;
+
 
 SinChapterManager::SinChapterManager()
 {
@@ -83,14 +85,14 @@ void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 void SinChapterManager::M_CreateSinPit()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.607f };
-	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.196f };
-	const float IntervalY = WinScale.Y * 0.6074f;
+	FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.6074f };
+	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.304f };
+	const float IntervalY = WinScale.Y * SinPitInterValY;
 
 	for (int i = 0; i < 3; i++)
 	{		
 		SinComponent* SinPit = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround));
-		SinPit->SetActorLocation({ WinScale.hX(), Pos.Y  });
+		SinPit->SetActorLocation({ WinScale.hX(), Pos.Y });
 
 		SinPit->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
 		SinPit->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
@@ -347,9 +349,9 @@ void SinChapterManager::M_CreateSinPiston()
 void SinChapterManager::M_CreateSinBridge()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.556f };
+	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.5555f };
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
-	const float IntervalY = WinScale.Y * 0.554f;
+	const float IntervalY = WinScale.Y * 0.5555f;
 
 	SinBridge.reserve(3);
 	for (int i = 0; i < 3; i++)
@@ -377,6 +379,7 @@ void SinChapterManager::Phase1Start()
 
 void SinChapterManager::AllSinPitMoveOn()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
 	for (SinComponent* SinPit : AllSinPit)
 	{
 		if (nullptr == SinPit)
@@ -386,8 +389,11 @@ void SinChapterManager::AllSinPitMoveOn()
 
 		SinPit->MoveOn();
 		float ScaleY = SinPit->GetImageRenderer("Left")->GetTransform().GetScale().Y;
-		SinPit->SetEndPosY(-(ScaleY / 2.0f));
-		SinPit->SetResetPosY(ScaleY * 2.48f);
+		float a = -(ScaleY * 0.5f);
+		float b = (ScaleY * 0.5f) + (2 * WinScale.Y * SinPitInterValY);
+
+		SinPit->SetEndPosY(-(ScaleY * 0.5f));
+		SinPit->SetResetPosY((ScaleY * 0.5f) + (2 * WinScale.Y * SinPitInterValY));
 	}
 }
 

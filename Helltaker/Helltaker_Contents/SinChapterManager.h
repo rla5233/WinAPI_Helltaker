@@ -58,6 +58,7 @@ private:
 
 	std::list<SinComponent*> AllSinPit;
 	static const float SinPitSpeedY;
+	static const float SinPitInterValY;
 
 	SinComponent* SinGear = nullptr;
 
