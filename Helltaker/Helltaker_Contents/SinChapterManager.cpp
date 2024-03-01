@@ -276,10 +276,10 @@ void SinChapterManager::M_CreateSinChain()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.0375f, WinScale.Y * 0.139f };
-	FVector Pos = { WinScale.X * 0.412f, WinScale.Y * 0.175f };
-	const float IntervalY = WinScale.Y * 0.139f;
+	FVector Pos = { WinScale.X * 0.412f, WinScale.Y * 0.12f };
+	const float IntervalY = WinScale.Y * 0.1388f;
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		SinComponent* SinChain = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
 		SinChain->SetActorLocation({ WinScale.hX(), Pos.Y });
@@ -315,6 +315,16 @@ void SinChapterManager::M_CreateSinPiston()
 	UpPiston->CreateImageRenderer("Left_Top", SinRenderOrder::Top);
 	UpPiston->GetImageRenderer("Left_Top")->SetImage("Sin_TPiston.png");
 	UpPiston->GetImageRenderer("Left_Top")->SetTransform({ { -UpPos.X, 0.0f }, UpScale });
+
+	UpPiston->CreateImageRenderer("Right_Bottom", SinRenderOrder::Bottom);
+	UpPiston->GetImageRenderer("Right_Bottom")->SetImage("Sin_BPiston.png");
+	UpPiston->GetImageRenderer("Right_Bottom")->SetTransform({ { UpPos.X, 0.0f }, UpScale });
+
+	UpPiston->CreateImageRenderer("Right_Top", SinRenderOrder::Top);
+	UpPiston->GetImageRenderer("Right_Top")->SetImage("Sin_TPiston.png");
+	UpPiston->GetImageRenderer("Right_Top")->SetTransform({ { UpPos.X, 0.0f }, UpScale });
+
+	AllMapRenderActors.push_back(UpPiston);
 
 
 }
