@@ -56,11 +56,18 @@ void SinChapterManager::BeginPlay()
 	}
 }
 
-void SinChapterManager::M_CreateSinBackGround()
+void SinChapterManager::M_CreateSinMap()
 {
 	M_CreateSinBG("SinBG");
 	M_CreateSinPit();
 	M_CreateSinGear();
+	M_CreateSinPanel();
+	M_CreateSinPyre();
+	M_CreateSinShield();
+	M_CreateSinBridge();
+	M_CreateSinSkull();
+	M_CreateSinChain();
+	M_CreateSinPiston();
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
@@ -116,12 +123,6 @@ void SinChapterManager::M_CreateSinGear()
 	SinGear->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 	
 	AllMapRenderActors.push_back(SinGear);
-}
-
-void SinChapterManager::M_CreateSinUnderPanel()
-{
-	M_CreateSinPanel();
-	M_CreateSinPyre();
 }
 
 void SinChapterManager::M_CreateSinPanel()

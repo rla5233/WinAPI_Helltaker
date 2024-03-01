@@ -20,12 +20,11 @@ public:
 	SinChapterManager& operator=(const SinChapterManager& _Other) = delete;
 	SinChapterManager& operator=(SinChapterManager&& _Other) noexcept = delete;
 
-	void M_CreateSinBackGround();
+	void M_CreateSinMap();
 	void M_CreateSinBG(std::string_view _Name);
 	void M_CreateSinPit();
 	void M_CreateSinGear();
 
-	void M_CreateSinUnderPanel();
 	void M_CreateSinPanel();
 	void M_CreateSinPyre();
 
