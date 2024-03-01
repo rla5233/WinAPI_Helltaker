@@ -377,3 +377,44 @@ void SinChapterManager::LevelStart(ULevel* _PrevLevel)
 void SinChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 }
+
+void SinChapterManager::Phase1Start()
+{
+}
+
+void SinChapterManager::Phase1(float _DeltaTime)
+{
+}
+
+void SinChapterManager::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case ESinState::Intro:
+		break;
+	case ESinState::Phase1:
+		Phase1(_DeltaTime);
+		break;
+	case ESinState::Phase2:
+		break;
+	}
+}
+
+void SinChapterManager::StateChange(ESinState _State)
+{
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case ESinState::Intro:
+			break;
+		case ESinState::Phase1:
+			Phase1Start();
+			break;
+		case ESinState::Phase2:
+			break;
+		}
+	}
+
+	State = _State;
+}

@@ -42,6 +42,13 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
+	void StateChange(ESinState _State);
+
+private:
+	void Phase1Start();
+	void Phase1(float _DeltaTime);
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	std::list<AActor*> AllMapRenderActors;
@@ -60,6 +67,7 @@ private:
 	SinComponent* Skull = nullptr;
 	std::list<SinComponent*> AllSinChain;
 
+	ESinState State = ESinState::None;
 	static bool IsLoad;
 };
 

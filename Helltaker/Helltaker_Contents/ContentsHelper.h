@@ -178,6 +178,14 @@ enum class EChapterState
 	End
 };
 
+enum class ESinState
+{
+	None,
+	Intro,
+	Phase1,
+	Phase2
+};
+
 enum class EHeroState
 {
 	None,
