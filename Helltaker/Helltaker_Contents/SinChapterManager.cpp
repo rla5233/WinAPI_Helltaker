@@ -7,6 +7,8 @@ bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::SinFireInter = 0.06f;
 
+const float SinChapterManager::SinPitSpeedY = -100.0f;
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -363,27 +365,57 @@ void SinChapterManager::M_CreateSinBridge()
 	}
 }
 
-void SinChapterManager::Tick(float _DeltaTime)
+void SinChapterManager::Phase1(float _DeltaTime)
 {
-	ULevel::Tick(_DeltaTime);
-
-
-}
-
-void SinChapterManager::LevelStart(ULevel* _PrevLevel)
-{
-}
-
-void SinChapterManager::LevelEnd(ULevel* _NextLevel)
-{
+	AllSinPitMoveUpdate(_DeltaTime);
 }
 
 void SinChapterManager::Phase1Start()
 {
+	AllSinPitMoveOn();
 }
 
-void SinChapterManager::Phase1(float _DeltaTime)
+void SinChapterManager::AllSinPitMoveOn()
 {
+	for (SinComponent* SinPit : AllSinPit)
+	{
+		if (nullptr == SinPit)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		SinPit->MoveOn();
+	}
+}
+
+void SinChapterManager::AllSinPitMoveUpdate(float _DeltaTime)
+{
+	for (SinComponent* SinPit : AllSinPit)
+	{
+		if (nullptr == SinPit)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		SinPit->MoveUp(SinPitSpeedY, _DeltaTime);
+	}
+}
+
+void SinChapterManager::LevelStart(ULevel* _PrevLevel)
+{
+	ULevel::LevelStart(_PrevLevel);
+}
+
+void SinChapterManager::LevelEnd(ULevel* _NextLevel)
+{
+	ULevel::LevelEnd(_NextLevel);
+}
+
+void SinChapterManager::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
 }
 
 void SinChapterManager::StateUpdate(float _DeltaTime)
@@ -400,7 +432,7 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	}
 }
 
-void SinChapterManager::StateChange(ESinState _State)
+void SinChapterManager::M_StateChange(ESinState _State)
 {
 	if (State != _State)
 	{

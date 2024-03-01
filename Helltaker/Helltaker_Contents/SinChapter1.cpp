@@ -20,6 +20,8 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 	SinChapterManager::LevelStart(_PrevLevel);
 
 	M_CreateSinMap();
+
+	M_StateChange(ESinState::Phase1);
 }
 
 void SinChapter1::Tick(float _DeltaTime)

@@ -42,11 +42,14 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
-	void StateChange(ESinState _State);
+	void M_StateChange(ESinState _State);
 
 private:
 	void Phase1Start();
 	void Phase1(float _DeltaTime);
+
+	void AllSinPitMoveOn();
+	void AllSinPitMoveUpdate(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
@@ -54,6 +57,7 @@ private:
 	std::list<AActor*> AllMapRenderActors;
 
 	std::list<SinComponent*> AllSinPit;
+	static const float SinPitSpeedY;
 
 	SinComponent* SinGear = nullptr;
 
