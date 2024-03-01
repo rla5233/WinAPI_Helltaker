@@ -31,8 +31,8 @@ public:
 
 	void M_CreateSinShield();
 	void M_CreateSinSkull();
-	void M_CreateSinChain();
-	void M_CreateSinPiston();  //=> 미완
+	void M_CreateSinChain(); // 수정
+	void M_CreateSinPiston();  // 수정
 
 	void M_CreateSinBridge();
 

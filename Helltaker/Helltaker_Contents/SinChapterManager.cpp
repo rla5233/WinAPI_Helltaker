@@ -46,7 +46,8 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RArm.png");
 		
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Piston.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_ChainLink.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LChainLink.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
 
@@ -274,17 +275,21 @@ void SinChapterManager::M_CreateSinChain()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.0375f, WinScale.Y * 0.139f };
-	FVector Pos = { WinScale.X * 0.2f, WinScale.Y * 0.5f };
-	const float IntervalY = 0.0f;
+	FVector Pos = { WinScale.X * 0.412f, WinScale.Y * 0.175f };
+	const float IntervalY = WinScale.Y * 0.139f;
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		SinComponent* SinChain = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
 		SinChain->SetActorLocation({ WinScale.hX(), Pos.Y });
 
 		SinChain->CreateImageRenderer("Left", SinRenderOrder::Mid);
-		SinChain->GetImageRenderer("Left")->SetImage("Sin_ChainLink.png");
+		SinChain->GetImageRenderer("Left")->SetImage("Sin_LChainLink.png");
 		SinChain->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+
+		SinChain->CreateImageRenderer("Right", SinRenderOrder::Mid);
+		SinChain->GetImageRenderer("Right")->SetImage("Sin_RChainLink.png");
+		SinChain->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 
 		Pos.Y += IntervalY;
 
