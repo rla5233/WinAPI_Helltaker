@@ -132,6 +132,7 @@ enum class SinUpdateOrder
 	BackGround,
 	Bottom,
 	Mid,
+	Top,
 	Hero,
 	Transition
 };
@@ -143,6 +144,7 @@ enum class SinRenderOrder
 	BackGround,
 	Bottom,
 	Mid,
+	Top,
 	Hero,
 	Transition
 };

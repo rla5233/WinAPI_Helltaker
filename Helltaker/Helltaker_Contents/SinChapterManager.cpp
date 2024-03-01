@@ -6,7 +6,7 @@
 bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::SinPitInterval = 0.6079f;
-const float SinChapterManager::SinFireInter = 0.02f;
+const float SinChapterManager::SinFireInter = 0.06f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -131,24 +131,26 @@ void SinChapterManager::M_CreateSinPyre()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector PyreScale = { WinScale.X * 0.13f, WinScale.Y * 0.111f };
-	FVector FireScale = { WinScale.X * 0.0625f, WinScale.Y * 0.107f };
 	FVector Pos = { WinScale.X * 0.255f, WinScale.Y * 0.962f };
 	const float IntervalX = WinScale.X * 0.111f;
+
+	FVector FireScale = { WinScale.X * 0.0625f, WinScale.Y * 0.107f };
+	float FirePosY = WinScale.Y * (-0.035f);
 
 	int idx = 0;
 	SinPyre.reserve(4);
 	for (int i = 0; i < 2; i++)
 	{
-		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
 		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
 
-		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Mid);
+		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Top);
 		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
 		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
 
-		SinPyre[idx]->CreateImageRenderer("Fire", SinRenderOrder::Mid);
+		SinPyre[idx]->CreateImageRenderer("Fire", SinRenderOrder::Top);
 		SinPyre[idx]->GetImageRenderer("Fire")->SetImage("Sin_Fire");
-		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, 0.0f }, FireScale });
+		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, FirePosY }, FireScale });
 		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
 		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
 
@@ -158,16 +160,21 @@ void SinChapterManager::M_CreateSinPyre()
 	Pos.X = WinScale.X * 0.635f;
 	for (int i = 0; i < 2; i++)
 	{
-		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
 		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
 
-		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Mid);
+		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Top);
 		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
 		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
 
+		SinPyre[idx]->CreateImageRenderer("Fire", SinRenderOrder::Top);
+		SinPyre[idx]->GetImageRenderer("Fire")->SetImage("Sin_Fire");
+		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, FirePosY }, FireScale });
+		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
+		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
+
 		++idx;
 	}
-
 }
 
 void SinChapterManager::Tick(float _DeltaTime)
