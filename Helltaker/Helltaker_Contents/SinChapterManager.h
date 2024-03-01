@@ -48,24 +48,28 @@ private:
 	void Phase1Start();
 	void Phase1(float _DeltaTime);
 
-	void AllSinPitMoveOn();
-	void AllSinPitMoveUpdate(float _DeltaTime);
+	void SinPitMoveOn();
+	void SinPitMoveUpdate(float _DeltaTime);
+	void SinBridgeMoveOn();
+	void SinBridgeMoveUpdate(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
 private:
 	std::list<AActor*> AllMapRenderActors;
 
-	std::list<SinComponent*> AllSinPit;
+	std::vector<SinComponent*> SinPit;
+	static const FVector SinPitScale;
 	static const float SinPitSpeedY;
-	static const float SinPitInterValY;
-
+	
 	SinComponent* SinGear = nullptr;
 
 	std::vector<SinComponent*> SinPyre;
 	static const float SinFireInter;
 
 	std::vector<SinComponent*> SinBridge;
+	static const FVector SinBridgeScale;
+	static const float SinBridgeSpeedY;
 	
 	SinComponent* UpPiston = nullptr;
 	SinComponent* DownPiston = nullptr;

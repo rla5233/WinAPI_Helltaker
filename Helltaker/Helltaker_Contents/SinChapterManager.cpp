@@ -7,9 +7,11 @@ bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::SinFireInter = 0.06f;
 
-const float SinChapterManager::SinPitSpeedY = -250.0f;
-const float SinChapterManager::SinPitInterValY = 0.6074f;
+const FVector SinChapterManager::SinPitScale = { 0.283f, 0.6074f };
+const float SinChapterManager::SinPitSpeedY = -100.0f;
 
+const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
+const float SinChapterManager::SinBridgeSpeedY = -200.0f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -85,27 +87,25 @@ void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 void SinChapterManager::M_CreateSinPit()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.283f, WinScale.Y * 0.6074f };
+	FVector Scale = WinScale * SinPitScale;
 	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.304f };
-	const float IntervalY = WinScale.Y * SinPitInterValY;
 
 	for (int i = 0; i < 3; i++)
 	{		
-		SinComponent* SinPit = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround));
-		SinPit->SetActorLocation({ WinScale.hX(), Pos.Y });
+		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
+		SinPit[i]->SetActorLocation({WinScale.hX(), Pos.Y});
 
-		SinPit->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
-		SinPit->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
-		SinPit->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+		SinPit[i]->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
+		SinPit[i]->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
+		SinPit[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
-		SinPit->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
-		SinPit->GetImageRenderer("Right")->SetImage("Sin_RPit.png");
-		SinPit->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+		SinPit[i]->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
+		SinPit[i]->GetImageRenderer("Right")->SetImage("Sin_RPit.png");
+		SinPit[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 		
-		Pos.Y += IntervalY;
+		Pos.Y += Scale.Y;
 
-		AllSinPit.push_back(SinPit);
-		AllMapRenderActors.push_back(SinPit);
+		AllMapRenderActors.push_back(SinPit[i]);
 	}
 }
 
@@ -349,9 +349,8 @@ void SinChapterManager::M_CreateSinPiston()
 void SinChapterManager::M_CreateSinBridge()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.5555f };
+	FVector Scale = WinScale * SinBridgeScale;
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
-	const float IntervalY = WinScale.Y * 0.5555f;
 
 	SinBridge.reserve(3);
 	for (int i = 0; i < 3; i++)
@@ -362,51 +361,82 @@ void SinChapterManager::M_CreateSinBridge()
 		SinBridge[i]->GetImageRenderer("Bridge")->SetImage("Sin_Bridge.png");
 		SinBridge[i]->GetImageRenderer("Bridge")->SetTransform({ { 0.0f, 0.0f },  Scale });
 
-		Pos.Y += IntervalY;
+		Pos.Y += Scale.Y;
 		AllMapRenderActors.push_back(SinBridge[i]);
 	}
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
-	AllSinPitMoveUpdate(_DeltaTime);
+	SinPitMoveUpdate(_DeltaTime);
+	SinBridgeMoveUpdate(_DeltaTime);
 }
 
 void SinChapterManager::Phase1Start()
 {
-	AllSinPitMoveOn();
+	SinPitMoveOn();
+	SinBridgeMoveOn();
 }
 
-void SinChapterManager::AllSinPitMoveOn()
+void SinChapterManager::SinPitMoveOn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	for (SinComponent* SinPit : AllSinPit)
+	for (SinComponent* Pit : SinPit)
 	{
-		if (nullptr == SinPit)
+		if (nullptr == Pit)
 		{
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		SinPit->MoveOn();
-		float ScaleY = SinPit->GetImageRenderer("Left")->GetTransform().GetScale().Y;
-		float a = -(ScaleY * 0.5f);
-		float b = (ScaleY * 0.5f) + (2 * WinScale.Y * SinPitInterValY);
+		Pit->MoveOn();
 
-		SinPit->SetEndPosY(-(ScaleY * 0.5f));
-		SinPit->SetResetPosY((ScaleY * 0.5f) + (2 * WinScale.Y * SinPitInterValY));
+		float ScaleY = WinScale.Y * SinPitScale.Y;
+		Pit->SetEndPosY(-(ScaleY * 0.5f));
+		Pit->SetResetPosY(ScaleY * 2.5f);
 	}
 }
 
-void SinChapterManager::AllSinPitMoveUpdate(float _DeltaTime)
+void SinChapterManager::SinPitMoveUpdate(float _DeltaTime)
 {
-	for (SinComponent* SinPit : AllSinPit)
+	for (SinComponent* Pit : SinPit)
 	{
-		if (nullptr == SinPit)
+		if (nullptr == Pit)
 		{
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		SinPit->MoveUp(SinPitSpeedY, _DeltaTime);
+		Pit->MoveUp(SinPitSpeedY, _DeltaTime);
+	}
+}
+
+void SinChapterManager::SinBridgeMoveOn()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	for (SinComponent* Bridge : SinBridge)
+	{
+		if (nullptr == Bridge)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Bridge->MoveOn();
+
+		float ScaleY = WinScale.Y * SinBridgeScale.Y;
+		Bridge->SetEndPosY(-(ScaleY * 0.5f));
+		Bridge->SetResetPosY(ScaleY * 2.5f);
+	}
+}
+
+void SinChapterManager::SinBridgeMoveUpdate(float _DeltaTime)
+{
+	for (SinComponent* Bridge : SinBridge)
+	{
+		if (nullptr == Bridge)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Bridge->MoveUp(SinBridgeSpeedY, _DeltaTime);
 	}
 }
 
