@@ -31,8 +31,8 @@ public:
 
 	void M_CreateSinShield();
 	void M_CreateSinSkull();
-	void M_CreateSinChain(); // 수정
-	void M_CreateSinPiston();  // 수정
+	void M_CreateSinChain();
+	void M_CreateSinPiston();
 
 	void M_CreateSinBridge();
 
@@ -58,7 +58,7 @@ private:
 	std::vector<SinComponent*> SinBridge;
 	
 	SinComponent* UpPiston = nullptr;
-	SinComponent* UnderPiston = nullptr;
+	SinComponent* DownPiston = nullptr;
 	SinComponent* Skull = nullptr;
 	std::list<SinComponent*> AllSinChain;
 
