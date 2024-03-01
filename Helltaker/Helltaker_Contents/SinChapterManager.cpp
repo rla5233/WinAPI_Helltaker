@@ -45,6 +45,8 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Skull_002.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LArm.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RArm.png");
+		
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Piston.png");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
 
@@ -64,7 +66,7 @@ void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 	BackGround* SinBG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
 	SinBG->CreateBackGround(_Name, EBackGroundType::Sin);
 
-	AllSMapActors[reinterpret_cast<__int64>(SinBG)] = SinBG;
+	AllMapRenderActors.push_back(SinBG);
 }
 
 void SinChapterManager::M_CreateSinPit()
@@ -89,7 +91,7 @@ void SinChapterManager::M_CreateSinPit()
 
 		Pos.Y += WinScale.Y * SinPitInterval;
 
-		AllSMapActors[reinterpret_cast<__int64>(SinPit[i])] = SinPit[i];
+		AllMapRenderActors.push_back(SinPit[i]);
 	}
 }
 
@@ -110,7 +112,7 @@ void SinChapterManager::M_CreateSinGear()
 	SinGear->GetImageRenderer("Right")->SetImage("Sin_RGears_001.png");
 	SinGear->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 	
-	AllSMapActors[reinterpret_cast<__int64>(SinGear)] = SinGear;
+	AllMapRenderActors.push_back(SinGear);
 }
 
 void SinChapterManager::M_CreateSinUnderPanel()
@@ -142,7 +144,7 @@ void SinChapterManager::M_CreateSinPanel()
 	SinPanel->GetImageRenderer("Eye")->SetImage("Sin_Eye.png");
 	SinPanel->GetImageRenderer("Eye")->SetTransform({ { 0.0f, EyePosY }, EyeScale });
 
-	AllSMapActors[reinterpret_cast<__int64>(SinPanel)] = SinPanel;
+	AllMapRenderActors.push_back(SinPanel);
 }
 
 void SinChapterManager::M_CreateSinPyre()
@@ -172,7 +174,7 @@ void SinChapterManager::M_CreateSinPyre()
 		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
 		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
 
-		AllSMapActors[reinterpret_cast<__int64>(SinPyre[idx])] = SinPyre[idx];
+		AllMapRenderActors.push_back(SinPyre[idx]);
 		++idx;
 	}
 	
@@ -192,7 +194,7 @@ void SinChapterManager::M_CreateSinPyre()
 		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
 		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
 
-		AllSMapActors[reinterpret_cast<__int64>(SinPyre[idx])] = SinPyre[idx];
+		AllMapRenderActors.push_back(SinPyre[idx]);
 		++idx;
 	}
 }
@@ -225,7 +227,7 @@ void SinChapterManager::M_CreateSinShield()
 	SinShield->GetImageRenderer("RShield_Top")->SetImage("Sin_RShield_Top.png");
 	SinShield->GetImageRenderer("RShield_Top")->SetTransform({ { TopPos.X, TopPos.Y },  TopScale });
 
-	AllSMapActors[reinterpret_cast<__int64>(SinShield)] = SinShield;
+	AllMapRenderActors.push_back(SinShield);
 }
 
 void SinChapterManager::M_CreateSinSkull()
@@ -264,7 +266,11 @@ void SinChapterManager::M_CreateSinSkull()
 	Skull->GetImageRenderer("RArm")->SetImage("Sin_RArm.png");
 	Skull->GetImageRenderer("RArm")->SetTransform({ { ArmPos.X, ArmPos.Y },  ArmScale });
 
-	AllSMapActors[reinterpret_cast<__int64>(Skull)] = Skull;
+	AllMapRenderActors.push_back(Skull);
+}
+
+void SinChapterManager::M_CreateSinPiston()
+{
 }
 
 void SinChapterManager::M_CreateSinBridge()
@@ -284,7 +290,7 @@ void SinChapterManager::M_CreateSinBridge()
 		SinBridge[i]->GetImageRenderer("Bridge")->SetTransform({ { 0.0f, 0.0f },  Scale });
 
 		Pos.Y += IntervalY;
-		AllSMapActors[reinterpret_cast<__int64>(SinBridge[i])] = SinBridge[i];
+		AllMapRenderActors.push_back(SinBridge[i]);
 	}
 }
 

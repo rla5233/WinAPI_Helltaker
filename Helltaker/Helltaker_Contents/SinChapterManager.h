@@ -31,6 +31,8 @@ public:
 
 	void M_CreateSinShield();
 	void M_CreateSinSkull();
+	void M_CreateSinPiston();
+
 	void M_CreateSinBridge();
 
 
@@ -43,7 +45,7 @@ protected:
 
 
 private:
-	std::map<__int64, AActor*> AllSMapActors;
+	std::list<AActor*> AllMapRenderActors;
 
 	std::vector<SinComponent*> SinPit;
 	static const float SinPitInterval;
