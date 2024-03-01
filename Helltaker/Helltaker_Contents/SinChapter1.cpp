@@ -22,6 +22,7 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 	M_CreateSinBG("SinBG");
 	M_CreateSinPit();
 	M_CreateSinGear();
+	M_CreateSinPanel();
 }
 
 void SinChapter1::Tick(float _DeltaTime)

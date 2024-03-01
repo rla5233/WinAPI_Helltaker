@@ -5,7 +5,7 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const FVector SinChapterManager::SinPitInterval = { 0.0f, 0.6079f };
+const float SinChapterManager::SinPitInterval = 0.6079f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -22,11 +22,15 @@ void SinChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pit_Left.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pit_Right.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPit.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPit.png");
 
-		ContentsHelper::LoadImg("Chapter\\Component\\SinGear", "L_SinGears_001.png");
-		ContentsHelper::LoadImg("Chapter\\Component\\SinGear", "R_SinGears_001.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_LGears_001.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_RGears_001.png");
+		
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPanel.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPanel.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Eye.png");
 
 		IsLoad = true;
 	}
@@ -53,14 +57,14 @@ void SinChapterManager::M_CreateSinPit()
 		SinPit[i]->SetActorLocation({ WinScale.hX(), Pos.Y  });
 
 		SinPit[i]->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Left")->SetImage("Sin_Pit_Left.png");
+		SinPit[i]->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
 		SinPit[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
 		SinPit[i]->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Right")->SetImage("Sin_Pit_Right.png");
+		SinPit[i]->GetImageRenderer("Right")->SetImage("Sin_RPit.png");
 		SinPit[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 
-		Pos += WinScale * SinPitInterval;
+		Pos.Y += WinScale.Y * SinPitInterval;
 
 		AllSMapActors[reinterpret_cast<__int64>(SinPit[i])] = SinPit[i];
 	}
@@ -72,21 +76,42 @@ void SinChapterManager::M_CreateSinGear()
 	FVector Scale = { WinScale.X * 0.208f, WinScale.Y * 0.278f };
 	FVector Pos = { WinScale.X * 0.396f, WinScale.Y * 0.861f };
 
-	for (int i = 0; i < 2; i++)
-	{
-		SinGear.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom)));
-		SinGear[i]->SetActorLocation({ WinScale.hX(), Pos.Y });
+	SinGear = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom));
+	SinGear->SetActorLocation({ WinScale.hX(), Pos.Y });
+	
+	SinGear->CreateImageRenderer("Left", SinRenderOrder::Bottom);
+	SinGear->GetImageRenderer("Left")->SetImage("Sin_LGears_001.png");
+	SinGear->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+	
+	SinGear->CreateImageRenderer("Right", SinRenderOrder::Bottom);
+	SinGear->GetImageRenderer("Right")->SetImage("Sin_RGears_001.png");
+	SinGear->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+	
+	AllSMapActors[reinterpret_cast<__int64>(SinGear)] = SinGear;
+}
 
-		SinGear[i]->CreateImageRenderer("Left", SinRenderOrder::Bottom);
-		SinGear[i]->GetImageRenderer("Left")->SetImage("L_SinGears_001.png");
-		SinGear[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+void SinChapterManager::M_CreateSinPanel()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.39f, WinScale.Y * 0.133f };
+	FVector Pos = { WinScale.X * 0.228f, WinScale.Y * 0.962f };
 
-		SinGear[i]->CreateImageRenderer("Right", SinRenderOrder::Bottom);
-		SinGear[i]->GetImageRenderer("Right")->SetImage("R_SinGears_001.png");
-		SinGear[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+	SinComponent* SinPanel = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
+	SinPanel->SetActorLocation({ WinScale.hX(), Pos.Y });
 
-		AllSMapActors[reinterpret_cast<__int64>(SinGear[i])] = SinGear[i];
-	}
+	SinPanel->CreateImageRenderer("Left", SinRenderOrder::Mid);
+	SinPanel->GetImageRenderer("Left")->SetImage("Sin_LPanel.png");
+	SinPanel->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+
+	SinPanel->CreateImageRenderer("Right", SinRenderOrder::Mid);
+	SinPanel->GetImageRenderer("Right")->SetImage("Sin_RPanel.png");
+	SinPanel->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+
+	SinPanel->CreateImageRenderer("Eye", SinRenderOrder::Mid);
+	SinPanel->GetImageRenderer("Eye")->SetImage("Sin_Eye.png");
+	SinPanel->GetImageRenderer("Eye")->SetTransform({ { Pos.X, 0.0f }, Scale });
+
+	AllSMapActors[reinterpret_cast<__int64>(SinPanel)] = SinPanel;
 }
 
 void SinChapterManager::Tick(float _DeltaTime)
