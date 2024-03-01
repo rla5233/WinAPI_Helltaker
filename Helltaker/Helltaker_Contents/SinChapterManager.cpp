@@ -122,18 +122,18 @@ void SinChapterManager::M_CreateSinPanel()
 	FVector EyeScale = { WinScale.X * 0.167f, WinScale.Y * 0.167f };
 	float EyePosY = WinScale.Y * (-0.005f);
 
-	SinComponent* SinPanel = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
+	SinComponent* SinPanel = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
 	SinPanel->SetActorLocation({ WinScale.hX(), Pos.Y });
 
-	SinPanel->CreateImageRenderer("Left", SinRenderOrder::Mid);
+	SinPanel->CreateImageRenderer("Left", SinRenderOrder::Top);
 	SinPanel->GetImageRenderer("Left")->SetImage("Sin_LPanel.png");
 	SinPanel->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
-	SinPanel->CreateImageRenderer("Right", SinRenderOrder::Mid);
+	SinPanel->CreateImageRenderer("Right", SinRenderOrder::Top);
 	SinPanel->GetImageRenderer("Right")->SetImage("Sin_RPanel.png");
 	SinPanel->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 
-	SinPanel->CreateImageRenderer("Eye", SinRenderOrder::Mid);
+	SinPanel->CreateImageRenderer("Eye", SinRenderOrder::Top);
 	SinPanel->GetImageRenderer("Eye")->SetImage("Sin_Eye.png");
 	SinPanel->GetImageRenderer("Eye")->SetTransform({ { 0.0f, EyePosY }, EyeScale });
 
@@ -227,17 +227,20 @@ void SinChapterManager::M_CreateSinBridge()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.556f };
-	FVector Pos = { WinScale.hX(), WinScale.Y * 0.322f };
-	const float IntervalY = Scale.Y;
+	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
+	const float IntervalY = WinScale.Y * 0.554f;
 
-	SinBridge.reserve(2);
-	for (int i = 0; i < 2; i++)
+	SinBridge.reserve(3);
+	for (int i = 0; i < 3; i++)
 	{
 		SinBridge.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinBridge[i]->SetActorLocation(Pos);
 		SinBridge[i]->CreateImageRenderer("Bridge", SinRenderOrder::Mid);
 		SinBridge[i]->GetImageRenderer("Bridge")->SetImage("Sin_Bridge.png");
 		SinBridge[i]->GetImageRenderer("Bridge")->SetTransform({ { 0.0f, 0.0f },  Scale });
+
+		Pos.Y += IntervalY;
+		AllSMapActors[reinterpret_cast<__int64>(SinBridge[i])] = SinBridge[i];
 	}
 }
 
