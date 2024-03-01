@@ -57,6 +57,8 @@ private:
 
 	std::vector<SinComponent*> SinBridge;
 	
+	SinComponent* UpPiston = nullptr;
+	SinComponent* UnderPiston = nullptr;
 	SinComponent* Skull = nullptr;
 	std::list<SinComponent*> AllSinChain;
 

@@ -45,7 +45,8 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LArm.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RArm.png");
 		
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Piston.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_BPiston.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_TPiston.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LChainLink.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
 
@@ -301,10 +302,21 @@ void SinChapterManager::M_CreateSinChain()
 void SinChapterManager::M_CreateSinPiston()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.4912f, WinScale.Y * 0.556f };
-	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
+	FVector UpScale = { WinScale.X * 0.125f, WinScale.Y * 0.740f };
+	FVector UpPos = { WinScale.X * 0.41f, WinScale.Y * (-0.056f) };
 
-	SinComponent* UnderPiston = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
+	UpPiston = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom));
+	UpPiston->SetActorLocation({ WinScale.hX(), UpPos.Y });
+
+	UpPiston->CreateImageRenderer("Left_Bottom", SinRenderOrder::Bottom);
+	UpPiston->GetImageRenderer("Left_Bottom")->SetImage("Sin_BPiston.png");
+	UpPiston->GetImageRenderer("Left_Bottom")->SetTransform({ { -UpPos.X, 0.0f }, UpScale });
+	
+	UpPiston->CreateImageRenderer("Left_Top", SinRenderOrder::Top);
+	UpPiston->GetImageRenderer("Left_Top")->SetImage("Sin_TPiston.png");
+	UpPiston->GetImageRenderer("Left_Top")->SetTransform({ { -UpPos.X, 0.0f }, UpScale });
+
+
 }
 
 void SinChapterManager::M_CreateSinBridge()
