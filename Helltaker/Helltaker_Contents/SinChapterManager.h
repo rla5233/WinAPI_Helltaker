@@ -30,7 +30,9 @@ public:
 	void M_CreateSinPyre();
 
 	void M_CreateSinShield();
+	void M_CreateSinSkull();
 	void M_CreateSinBridge();
+
 
 protected:
 	virtual void BeginPlay() override;
@@ -53,6 +55,8 @@ private:
 
 	std::vector<SinComponent*> SinBridge;
 	
+	SinComponent* Skull = nullptr;
+
 	static bool IsLoad;
 };
 

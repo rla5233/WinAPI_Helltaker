@@ -41,6 +41,11 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LShield_Top.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RShield_Top.png");
 
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Skull_001.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Skull_002.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LArm.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RArm.png");
+
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
 
 		IsLoad = true;
@@ -203,12 +208,12 @@ void SinChapterManager::M_CreateSinShield()
 
 	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
 	SinShield->SetActorLocation({ WinScale.hX(), Pos.Y });
-	SinShield->CreateImageRenderer("LShield", SinRenderOrder::Mid);
+	SinShield->CreateImageRenderer("LShield", SinRenderOrder::Bottom);
 	SinShield->GetImageRenderer("LShield")->SetImage("Sin_LShield.png");
 	SinShield->GetImageRenderer("LShield")->SetTransform({ { -Pos.X, 0.0f },  Scale });
 
 	SinShield->SetActorLocation({ WinScale.hX(), Pos.Y });
-	SinShield->CreateImageRenderer("RShield", SinRenderOrder::Mid);
+	SinShield->CreateImageRenderer("RShield", SinRenderOrder::Bottom);
 	SinShield->GetImageRenderer("RShield")->SetImage("Sin_RShield.png");
 	SinShield->GetImageRenderer("RShield")->SetTransform({ { Pos.X, 0.0f },  Scale });
 
@@ -221,6 +226,45 @@ void SinChapterManager::M_CreateSinShield()
 	SinShield->GetImageRenderer("RShield_Top")->SetTransform({ { TopPos.X, TopPos.Y },  TopScale });
 
 	AllSMapActors[reinterpret_cast<__int64>(SinShield)] = SinShield;
+}
+
+void SinChapterManager::M_CreateSinSkull()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector SkullScale = { WinScale.X * 0.212f, WinScale.Y * 0.396f };
+	FVector SkullPos = { WinScale.X * 0.412f, WinScale.Y * 0.665f };
+
+	Skull = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
+	Skull->SetActorLocation({ WinScale.hX(), SkullPos.Y });
+
+	Skull->CreateImageRenderer("LSkull_Bottom", SinRenderOrder:: Mid);
+	Skull->GetImageRenderer("LSkull_Bottom")->SetImage("Sin_Skull_001.png");
+	Skull->GetImageRenderer("LSkull_Bottom")->SetTransform({ { -SkullPos.X, 0.0f },  SkullScale });
+
+	Skull->CreateImageRenderer("RSkull_Bottom", SinRenderOrder::Mid);
+	Skull->GetImageRenderer("RSkull_Bottom")->SetImage("Sin_Skull_001.png");
+	Skull->GetImageRenderer("RSkull_Bottom")->SetTransform({ { SkullPos.X, 0.0f },  SkullScale });
+
+	Skull->CreateImageRenderer("LSkull_Top", SinRenderOrder::Top);
+	Skull->GetImageRenderer("LSkull_Top")->SetImage("Sin_Skull_002.png");
+	Skull->GetImageRenderer("LSkull_Top")->SetTransform({ { -SkullPos.X, 0.0f },  SkullScale });
+
+	Skull->CreateImageRenderer("RSkull_Top", SinRenderOrder::Top);
+	Skull->GetImageRenderer("RSkull_Top")->SetImage("Sin_Skull_002.png");
+	Skull->GetImageRenderer("RSkull_Top")->SetTransform({ { SkullPos.X, 0.0f },  SkullScale });
+
+	FVector ArmScale = { WinScale.X * 0.206f, WinScale.Y * 0.17f };
+	FVector ArmPos = { WinScale.X * 0.306f, WinScale.Y * 0.04f };
+
+	Skull->CreateImageRenderer("LArm", SinRenderOrder::Bottom);
+	Skull->GetImageRenderer("LArm")->SetImage("Sin_LArm.png");
+	Skull->GetImageRenderer("LArm")->SetTransform({ { -ArmPos.X, ArmPos.Y },  ArmScale });
+
+	Skull->CreateImageRenderer("RArm", SinRenderOrder::Bottom);
+	Skull->GetImageRenderer("RArm")->SetImage("Sin_RArm.png");
+	Skull->GetImageRenderer("RArm")->SetTransform({ { ArmPos.X, ArmPos.Y },  ArmScale });
+
+	AllSMapActors[reinterpret_cast<__int64>(Skull)] = Skull;
 }
 
 void SinChapterManager::M_CreateSinBridge()
