@@ -128,7 +128,9 @@ enum class RenderOrder
 enum class SinUpdateOrder
 {
 	None,
+	UnderBackGround,
 	BackGround,
+	Bottom,
 	Hero,
 	Transition
 };
@@ -138,6 +140,7 @@ enum class SinRenderOrder
 	None,
 	UnderBackGround,
 	BackGround,
+	Bottom,
 	Hero,
 	Transition
 };

@@ -22,6 +22,7 @@ public:
 
 	void M_CreateSinBG(std::string_view _Name);
 	void M_CreateSinPit();
+	void M_CreateSinGear();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -35,8 +36,9 @@ private:
 	std::map<__int64, AActor*> AllSMapActors;
 
 	std::vector<SinComponent*> SinPit;
-	static const int SinPitCount;
 	static const FVector SinPitInterval;
+
+	std::vector<SinComponent*> SinGear;
 	
 	static bool IsLoad;
 };
