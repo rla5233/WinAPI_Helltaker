@@ -28,7 +28,7 @@ void Sin_Thorn::BeginPlay()
 		IsLoad = true;
 	}
 
-	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
+	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Mid);
 	ImageRenderer->SetImage("Thorn_Idle.png");
 	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);
 	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, ChangeInter, false);

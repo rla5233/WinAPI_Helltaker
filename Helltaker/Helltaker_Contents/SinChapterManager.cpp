@@ -376,17 +376,18 @@ void SinChapterManager::M_CreateThorn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector Pos = { WinScale.X * 0.345f, WinScale.Y * 0.3f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.232f };
 
 	UpThorn.resize(2);
 	for (int y = 0; y < 2; y++)
 	{
 		float IntervalX = 0.0f;
 		UpThorn[y].reserve(7);
+
 		for (int x = 0; x < 7; x++)
 		{
-			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Top)));
-			UpThorn[y][x]->SetActorLocation({ Pos.X + IntervalX, Pos.Y });
+			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
+			UpThorn[y][x]->SetActorLocation({ UpPos.X + IntervalX, UpPos.Y });
 			UpThorn[y][x]->StateChange(EThornState::Idle);
 
 			IntervalX += Scale.X * 1.08f;
@@ -394,10 +395,30 @@ void SinChapterManager::M_CreateThorn()
 			AllMapRenderActors.push_back(UpThorn[y][x]);
 		}
 
-		Pos.Y += Scale.Y;
+		UpPos.Y += Scale.Y;
 	}
 
+	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.875f };
 
+	DownThorn.resize(2);
+	for (int y = 0; y < 2; y++)
+	{
+		float IntervalX = 0.0f;
+		DownThorn[y].reserve(7);
+		
+		for (int x = 0; x < 7; x++)
+		{
+			DownThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
+			DownThorn[y][x]->SetActorLocation({ DownPos.X + IntervalX, DownPos.Y });
+			DownThorn[y][x]->StateChange(EThornState::Idle);
+			
+			IntervalX += Scale.X * 1.08f;
+
+			AllMapRenderActors.push_back(DownThorn[y][x]);
+		}
+
+		DownPos.Y += Scale.Y;
+	}
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)

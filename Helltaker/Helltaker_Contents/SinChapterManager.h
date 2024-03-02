@@ -84,9 +84,7 @@ private:
 	static const float SinChainSpeedY;
 
 	std::vector<std::vector<Sin_Thorn*>> UpThorn;
-
-
-
+	std::vector<std::vector<Sin_Thorn*>> DownThorn;
 
 
 	ESinState State = ESinState::None;
