@@ -69,9 +69,6 @@ private:
 	std::list<AActor*> AllMapRenderActors;
 
 	std::vector<SinComponent*> SinPit;
-	static const FVector SinPitScale;
-	static const float SinPitSpeedY;
-	
 	Gear* SinGear = nullptr;
 
 	std::vector<SinComponent*> SinPyre;

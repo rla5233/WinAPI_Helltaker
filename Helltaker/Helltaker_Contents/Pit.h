@@ -1,7 +1,9 @@
 #pragma once
 
+#include "SinComponent.h"
+
 // Ό³Έν :
-class Pit
+class Pit : public SinComponent
 {
 public:
 	// constructor destructor
@@ -16,8 +18,16 @@ public:
 
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
+	UImageRenderer* L_ImageRenderer = nullptr;
+	UImageRenderer* R_ImageRenderer = nullptr;
+	static const FVector SinPitScale;
+	static const float SinPitSpeedY;
 
+	ESinPitState State = ESinPitState::None;
+	static bool IsLoad;
 };
 

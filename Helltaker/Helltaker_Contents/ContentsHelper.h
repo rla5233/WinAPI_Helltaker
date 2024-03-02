@@ -265,6 +265,14 @@ enum class SinRenderOrder
 	Transition
 };
 
+enum class ESinPitState
+{
+	None,
+	Idle,
+	Move,
+	Stop,
+};
+
 enum class ESinGearState
 {
 	None,

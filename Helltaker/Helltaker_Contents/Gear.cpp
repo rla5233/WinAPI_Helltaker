@@ -14,6 +14,8 @@ Gear::~Gear()
 
 void Gear::BeginPlay()
 {
+	RenderActor::BeginPlay();
+
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_LGears_001.png");

@@ -9,9 +9,6 @@ bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::SinFireInter = 0.06f;
 
-const FVector SinChapterManager::SinPitScale = { 0.283f, 0.6074f };
-const float SinChapterManager::SinPitSpeedY = -50.0f;
-
 const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
 const float SinChapterManager::SinBridgeSpeedY = -150.0f;
 
@@ -91,7 +88,7 @@ void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 void SinChapterManager::M_CreateSinPit()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * SinPitScale;
+	//FVector Scale = WinScale * SinPitScale;
 	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.304f };
 
 	SinPit.reserve(3);
