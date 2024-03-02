@@ -48,6 +48,8 @@ protected:
 
 private:
 	std::map<std::string, UImageRenderer*> ImageRenderers;
+	
+
 
 	float EndPosY = 0.0f;
 	float ResetPosY = 0.0f;

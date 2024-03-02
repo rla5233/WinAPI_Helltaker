@@ -16,8 +16,6 @@ const float SinChapterManager::SinBridgeSpeedY = -180.0f;
 const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1388f };
 const float SinChapterManager::SinChainSpeedY = -180.0f;
 
-const FVector SinChapterManager::ThornScale = { 0.0479f, 0.0851f };
-
 SinChapterManager::SinChapterManager()
 {
 }

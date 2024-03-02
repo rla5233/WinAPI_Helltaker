@@ -22,11 +22,21 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void IdleStart();
+	void Idle(float _DeltaTime);
+
+	void UpStart();
+	void Up(float _DeltaTime);
+
+	void DownStart();
+	void Down(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-
+	static const FVector ThornScale;
+	static const float ChangeInter;
 
 	EThornState State = EThornState::None;
 	static bool IsLoad;
