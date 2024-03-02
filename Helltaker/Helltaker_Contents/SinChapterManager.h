@@ -52,6 +52,8 @@ private:
 	void SinPitMoveUpdate(float _DeltaTime);
 	void SinBridgeMoveOn();
 	void SinBridgeMoveUpdate(float _DeltaTime);
+	void SinChainMoveOn();
+	void SinChainMoveUpdate(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 

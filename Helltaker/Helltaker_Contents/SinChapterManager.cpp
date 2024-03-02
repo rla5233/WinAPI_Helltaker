@@ -13,7 +13,7 @@ const float SinChapterManager::SinPitSpeedY = -100.0f;
 const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
 const float SinChapterManager::SinBridgeSpeedY = -200.0f;
 
-const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1389f };
+const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1388f };
 const float SinChapterManager::SinChainSpeedY = -200.0f;
 
 SinChapterManager::SinChapterManager()
@@ -287,8 +287,8 @@ void SinChapterManager::M_CreateSinChain()
 	FVector Scale = WinScale * SinChainSCale;
 	FVector Pos = { WinScale.X * 0.412f, WinScale.Y * 0.12f };
 
-	SinChain.reserve(7);
-	for (int i = 0; i < 7; i++)
+	SinChain.reserve(8);
+	for (int i = 0; i < 8; i++)
 	{
 		SinChain.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinChain[i]->SetActorLocation({WinScale.hX(), Pos.Y});
@@ -373,12 +373,14 @@ void SinChapterManager::Phase1(float _DeltaTime)
 {
 	SinPitMoveUpdate(_DeltaTime);
 	SinBridgeMoveUpdate(_DeltaTime);
+	SinChainMoveUpdate(_DeltaTime);
 }
 
 void SinChapterManager::Phase1Start()
 {
 	SinPitMoveOn();
 	SinBridgeMoveOn();
+	SinChainMoveOn();
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -392,10 +394,9 @@ void SinChapterManager::SinPitMoveOn()
 		}
 
 		Pit->MoveOn();
-
 		float ScaleY = WinScale.Y * SinPitScale.Y;
 		Pit->SetEndPosY(-(ScaleY * 0.5f));
-		Pit->SetResetPosY(ScaleY * 2.5f);
+		Pit->SetResetPosY(ScaleY * (static_cast<float>(SinPit.size()) - 0.5f));
 	}
 }
 
@@ -426,7 +427,7 @@ void SinChapterManager::SinBridgeMoveOn()
 
 		float ScaleY = WinScale.Y * SinBridgeScale.Y;
 		Bridge->SetEndPosY(-(ScaleY * 0.5f));
-		Bridge->SetResetPosY(ScaleY * 2.5f);
+		Bridge->SetResetPosY(ScaleY * (static_cast<float>(SinBridge.size()) - 0.5f));
 	}
 }
 
@@ -440,6 +441,37 @@ void SinChapterManager::SinBridgeMoveUpdate(float _DeltaTime)
 		}
 
 		Bridge->MoveUp(SinBridgeSpeedY, _DeltaTime);
+	}
+}
+
+void SinChapterManager::SinChainMoveOn()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	for (SinComponent* Chain : SinChain)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Chain->MoveOn();
+
+		float ScaleY = WinScale.Y * SinChainSCale.Y;
+		Chain->SetEndPosY(-(ScaleY * 0.5f));
+		Chain->SetResetPosY(ScaleY * (static_cast<float>(SinChain.size()) - 0.5f));
+	}
+}
+
+void SinChapterManager::SinChainMoveUpdate(float _DeltaTime)
+{
+	for (SinComponent* Chain : SinChain)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Chain->MoveUp(SinChainSpeedY, _DeltaTime);
 	}
 }
 
