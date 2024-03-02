@@ -50,6 +50,9 @@ private:
 	void Phase1Start();
 	void Phase1(float _DeltaTime);
 
+	void IntroStart();
+	void Intro(float _DeltaTime);
+
 	void SinPitMoveOn();
 	void SinPitMoveUpdate(float _DeltaTime);
 	void SinBridgeMoveOn();

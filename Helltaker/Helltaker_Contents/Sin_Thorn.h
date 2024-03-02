@@ -16,14 +16,24 @@ public:
 	Sin_Thorn& operator=(const Sin_Thorn& _Other) = delete;
 	Sin_Thorn& operator=(Sin_Thorn&& _Other) noexcept = delete;
 
-	void SetDownPosY(float _DownPosY)
+	void SetDownPosY(float _PosY)
 	{
-		DownPosY = _DownPosY;
+		DownPosY = _PosY;
+	}
+	
+	void SetUpPosY(float _PosY)
+	{
+		UpPosY = _PosY;
 	}
 
 	static const FVector& GetThornScale()
 	{
 		return ThornScale;
+	}
+
+	void SetState(EThornState _State)
+	{
+		State = _State;
 	}
 
 	void StateChange(EThornState _State);
@@ -55,6 +65,7 @@ private:
 
 	static const float SpeedY;
 	float DownPosY = 0.0f;
+	float UpPosY = 0.0f;
 
 	EThornState State = EThornState::None;
 	static bool IsLoad;

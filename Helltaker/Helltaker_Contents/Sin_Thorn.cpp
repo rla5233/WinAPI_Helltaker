@@ -29,7 +29,7 @@ void Sin_Thorn::BeginPlay()
 		IsLoad = true;
 	}
 
-	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
+	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Mid);
 	ImageRenderer->SetImage("Thorn_Idle.png");
 	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);
 	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, ChangeInter, false);
@@ -53,6 +53,10 @@ void Sin_Thorn::IdleStart()
 
 void Sin_Thorn::Idle(float _DeltaTime)
 {
+	if (true == IsMoveOn())
+	{
+		StateChange(EThornState::Move);
+	}
 }
 
 void Sin_Thorn::MoveStart()
@@ -80,7 +84,7 @@ void Sin_Thorn::MoveUpdate(float _DeltaTime)
 		{
 			float Diff = GetActorLocation().Y - GetEndPosY();
 			SetActorLocation({ GetActorLocation().X, GetResetPosY() + Diff });
-			StateChange(EThornState::Up);
+			State = EThornState::Up;
 		}
 	}
 }
@@ -98,9 +102,12 @@ void Sin_Thorn::UpStart()
 
 void Sin_Thorn::Up(float _DeltaTime)
 {
-	if (true == IsMoveOn())
+	MoveUpdate(_DeltaTime);
+
+	if (UpPosY >= GetActorLocation().Y)
 	{
-		StateChange(EThornState::Move);
+		UpStart();
+		State = EThornState::Move;
 	}
 }
 

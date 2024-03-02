@@ -389,10 +389,14 @@ void SinChapterManager::M_CreateThorn()
 			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
 			UpThorn[y][x]->SetActorLocation({ UpPos.X + IntervalX, UpPos.Y });
 
-			UpThorn[y][x]->StateChange(EThornState::Idle);
 			if (y == 2)
 			{
-				UpThorn[y][x]->AllRenderersActiveOff();
+				UpThorn[y][x]->SetState(EThornState::Up);
+				//UpThorn[y][x]->AllRenderersActiveOff();
+			}
+			else
+			{
+				UpThorn[y][x]->StateChange(EThornState::Idle);
 			}
 
 			IntervalX += Scale.X * 1.08f;
@@ -426,12 +430,18 @@ void SinChapterManager::M_CreateThorn()
 	}
 }
 
-void SinChapterManager::Phase1(float _DeltaTime)
+void SinChapterManager::IntroStart()
 {
-	SinPitMoveUpdate(_DeltaTime);
-	SinBridgeMoveUpdate(_DeltaTime);
-	SinChainMoveUpdate(_DeltaTime);
 }
+
+void SinChapterManager::Intro(float _DeltaTime)
+{
+	if (UEngineInput::IsDown(VK_SPACE))
+	{
+		M_StateChange(ESinState::Phase1);
+	}
+}
+
 
 void SinChapterManager::Phase1Start()
 {
@@ -440,6 +450,13 @@ void SinChapterManager::Phase1Start()
 	SinChainMoveOn();
 
 	AllThornMoveOn();
+}
+
+void SinChapterManager::Phase1(float _DeltaTime)
+{
+	SinPitMoveUpdate(_DeltaTime);
+	SinBridgeMoveUpdate(_DeltaTime);
+	SinChainMoveUpdate(_DeltaTime);
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -551,8 +568,9 @@ void SinChapterManager::AllThornMoveOn()
 
 			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.1f);
 			Thorn->SetDownPosY(UpPos.Y);
+			Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.5f);
 			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.1f);
-			Thorn->StateChange(EThornState::Move);
+			Thorn->MoveOn();
 		}
 	}
 
@@ -592,6 +610,7 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case ESinState::Intro:
+		Intro(_DeltaTime);
 		break;
 	case ESinState::Phase1:
 		Phase1(_DeltaTime);
@@ -608,6 +627,7 @@ void SinChapterManager::M_StateChange(ESinState _State)
 		switch (_State)
 		{
 		case ESinState::Intro:
+			IntroStart();
 			break;
 		case ESinState::Phase1:
 			Phase1Start();

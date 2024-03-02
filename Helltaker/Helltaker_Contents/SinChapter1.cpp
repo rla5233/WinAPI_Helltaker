@@ -21,7 +21,7 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 
 	M_CreateSinMap();
 
-	M_StateChange(ESinState::Phase1);
+	M_StateChange(ESinState::Intro);
 }
 
 void SinChapter1::Tick(float _DeltaTime)
