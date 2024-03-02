@@ -62,7 +62,7 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
-		ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
+		
 
 		IsLoad = true;
 	}
@@ -386,9 +386,9 @@ void SinChapterManager::M_CreateThorn()
 		UpThorn[y].reserve(7);
 		for (int x = 0; x < 7; x++)
 		{
-			UpThorn[y].push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+			UpThorn[y].push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
 			UpThorn[y][x]->SetActorLocation({ Pos.X + IntervalX, Pos.Y });
-			UpThorn[y][x]->CreateImageRenderer("Thorn", SinRenderOrder::Mid);
+			UpThorn[y][x]->CreateImageRenderer("Thorn", SinRenderOrder::Top);
 			UpThorn[y][x]->GetImageRenderer("Thorn")->SetImage("Thorn_Idle.png");
 			UpThorn[y][x]->GetImageRenderer("Thorn")->SetTransform({ {0, 0}, Scale });
 			IntervalX += Scale.X * 1.08f;

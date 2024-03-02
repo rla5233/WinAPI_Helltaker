@@ -106,8 +106,11 @@
     <ClInclude Include="SinChapter1.h">
       <Filter>Object\Level\Sin</Filter>
     </ClInclude>
-    <ClInclude Include="SinComponent.h">
+    <ClInclude Include="Sin_Thorn.h">
       <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
+    <ClInclude Include="SinComponent.h">
+      <Filter>Object\Actor\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -213,8 +216,11 @@
     <ClCompile Include="SinChapter1.cpp">
       <Filter>Object\Level\Sin</Filter>
     </ClCompile>
-    <ClCompile Include="SinComponent.cpp">
+    <ClCompile Include="Sin_Thorn.cpp">
       <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="SinComponent.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
