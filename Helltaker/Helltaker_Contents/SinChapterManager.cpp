@@ -4,6 +4,7 @@
 #include "SinComponent.h"
 #include "Sin_Thorn.h"
 #include "Gear.h"
+#include "Pit.h"
 
 bool SinChapterManager::IsLoad = false;
 
@@ -86,25 +87,17 @@ void SinChapterManager::M_CreateSinBG(std::string_view _Name)
 void SinChapterManager::M_CreateSinPit()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	//FVector Scale = WinScale * SinPitScale;
-	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.304f };
+	float ScaleY = WinScale.Y * Pit::GetScale().Y;
+	float PosY = WinScale.Y * 0.304f;
 
 	SinPit.reserve(3);
 	for (int i = 0; i < 3; i++)
 	{		
-		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
-		SinPit[i]->SetActorLocation({WinScale.hX(), Pos.Y});
-
-		SinPit[i]->CreateImageRenderer("Left", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Left")->SetImage("Sin_LPit.png");
-		SinPit[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
-
-		SinPit[i]->CreateImageRenderer("Right", SinRenderOrder::UnderBackGround);
-		SinPit[i]->GetImageRenderer("Right")->SetImage("Sin_RPit.png");
-		SinPit[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+		SinPit.push_back(SpawnActor<Pit>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
+		SinPit[i]->SetActorLocation({WinScale.hX(), PosY });
+		SinPit[i]->StateChange(ESinPitState::Idle);
+		PosY += ScaleY;
 		
-		Pos.Y += Scale.Y;
-
 		AllMapRenderActors.push_back(SinPit[i]);
 	}
 }
@@ -463,9 +456,9 @@ void SinChapterManager::SinPitMoveOn()
 		}
 
 		Pit->MoveOn();
-		float ScaleY = WinScale.Y * SinPitScale.Y;
-		Pit->SetEndPosY(-(ScaleY * 0.5f));
-		Pit->SetResetPosY(ScaleY * (static_cast<float>(SinPit.size()) - 0.5f));
+		//float ScaleY = WinScale.Y * SinPitScale.Y;
+		//Pit->SetEndPosY(-(ScaleY * 0.5f));
+		//Pit->SetResetPosY(ScaleY * (static_cast<float>(SinPit.size()) - 0.5f));
 	}
 }
 
@@ -478,7 +471,7 @@ void SinChapterManager::SinPitMoveUpdate(float _DeltaTime)
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Pit->MoveY_Update(SinPitSpeedY, _DeltaTime);
+		//Pit->MoveY_Update(SinPitSpeedY, _DeltaTime);
 	}
 }
 

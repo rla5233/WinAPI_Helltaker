@@ -7,6 +7,7 @@
 class SinComponent;
 class Sin_Thorn;
 class Gear;
+class Pit;
 
 // Ό³Έν :
 class SinChapterManager : public ULevel
@@ -68,7 +69,7 @@ private:
 private:
 	std::list<AActor*> AllMapRenderActors;
 
-	std::vector<SinComponent*> SinPit;
+	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
 
 	std::vector<SinComponent*> SinPyre;
