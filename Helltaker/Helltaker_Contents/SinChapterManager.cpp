@@ -115,15 +115,12 @@ void SinChapterManager::M_CreateSinPanel()
 	SinComponent* SinPanel = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
 	SinPanel->SetActorLocation({ WinScale.hX(), Pos.Y });
 
-	SinPanel->CreateImageRenderer("Left", SinRenderOrder::Top);
 	SinPanel->GetImageRenderer("Left")->SetImage("Sin_LPanel.png");
 	SinPanel->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
-	SinPanel->CreateImageRenderer("Right", SinRenderOrder::Top);
 	SinPanel->GetImageRenderer("Right")->SetImage("Sin_RPanel.png");
 	SinPanel->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 
-	SinPanel->CreateImageRenderer("Eye", SinRenderOrder::Top);
 	SinPanel->GetImageRenderer("Eye")->SetImage("Sin_Eye.png");
 	SinPanel->GetImageRenderer("Eye")->SetTransform({ { 0.0f, EyePosY }, EyeScale });
 
@@ -133,32 +130,26 @@ void SinChapterManager::M_CreateSinPanel()
 void SinChapterManager::M_CreateSinPyre()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector PyreScale = { WinScale.X * 0.13f, WinScale.Y * 0.111f };
+	
 	FVector Pos = { WinScale.X * 0.255f, WinScale.Y * 0.962f };
 	const float IntervalX = WinScale.X * 0.111f;
 
-	FVector FireScale = { WinScale.X * 0.0625f, WinScale.Y * 0.107f };
 	float FirePosY = WinScale.Y * (-0.035f);
 
-	int idx = 0;
-	SinPyre.reserve(4);
 	for (int i = 0; i < 2; i++)
 	{
 		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
 		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
 
-		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Top);
 		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
 		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
 
-		SinPyre[idx]->CreateImageRenderer("Fire", SinRenderOrder::Top);
 		SinPyre[idx]->GetImageRenderer("Fire")->SetImage("Sin_Fire");
 		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, FirePosY }, FireScale });
 		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
 		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
 
 		AllMapRenderActors.push_back(SinPyre[idx]);
-		++idx;
 	}
 	
 	Pos.X = WinScale.X * 0.635f;

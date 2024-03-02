@@ -33,10 +33,15 @@ private:
 
 private:
 	std::vector<UImageRenderer*> PyreRenderer;
-	
+	static const FVector PyreScale;
 
 	std::vector<UImageRenderer*> FireRenderer;
-	static const float SinFireInter;
+	static const FVector FireScale;
+	static const float FireInter;
+
+	UImageRenderer* L_PanelRenderer = nullptr;
+	UImageRenderer* R_PanelRenderer = nullptr;
+	UImageRenderer* EyeRenderer = nullptr;
 
 	ESinHeroLifeState State = ESinHeroLifeState::None;
 	static bool IsLoad;
