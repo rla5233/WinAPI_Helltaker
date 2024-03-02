@@ -34,9 +34,6 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPit.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPit.png");
-
-		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_LGears_001.png");
-		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_RGears_001.png");
 		
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPanel.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPanel.png");

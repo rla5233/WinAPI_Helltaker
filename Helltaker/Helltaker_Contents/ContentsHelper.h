@@ -125,30 +125,6 @@ enum class RenderOrder
 	Transition
 };
 
-enum class SinUpdateOrder
-{
-	None,
-	UnderBackGround,
-	BackGround,
-	Bottom,
-	Mid,
-	Top,
-	Hero,
-	Transition
-};
-
-enum class SinRenderOrder
-{
-	None,
-	UnderBackGround,
-	BackGround,
-	Bottom,
-	Mid,
-	Top,
-	Hero,
-	Transition
-};
-
 enum class EBackGroundType
 {
 	None,
@@ -261,4 +237,39 @@ enum class ECutSceneState
 	BadEnd,
 	Success,
 	Reset
+};
+
+
+// Sin
+enum class SinUpdateOrder
+{
+	None,
+	UnderBackGround,
+	BackGround,
+	Bottom,
+	Mid,
+	Top,
+	Hero,
+	Transition
+};
+
+enum class SinRenderOrder
+{
+	None,
+	UnderBackGround,
+	BackGround,
+	Bottom,
+	Mid,
+	Top,
+	Hero,
+	Transition
+};
+
+enum class ESinGearState
+{
+	None,
+	Idle,
+	Start,
+	Active,
+	Stop
 };
