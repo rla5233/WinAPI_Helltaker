@@ -43,8 +43,11 @@ void Sin_Thorn::Tick(float _DeltaTime)
 
 void Sin_Thorn::IdleStart()
 {
-	
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * ThornScale;
+
 	ImageRenderer->SetImage("Thorn_Idle.png");
+	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
 }
 
 void Sin_Thorn::Idle(float _DeltaTime)
@@ -53,7 +56,12 @@ void Sin_Thorn::Idle(float _DeltaTime)
 
 void Sin_Thorn::UpStart()
 {
-	
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * ThornScale;
+
+	ImageRenderer->AnimationReset();
+	ImageRenderer->ChangeAnimation("Thorn_Up");
+	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
 }
 
 void Sin_Thorn::Up(float _DeltaTime)
@@ -62,6 +70,12 @@ void Sin_Thorn::Up(float _DeltaTime)
 
 void Sin_Thorn::DownStart()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * ThornScale;
+
+	ImageRenderer->AnimationReset();
+	ImageRenderer->ChangeAnimation("Thorn_Down");
+	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
 }
 
 void Sin_Thorn::Down(float _DeltaTime)
