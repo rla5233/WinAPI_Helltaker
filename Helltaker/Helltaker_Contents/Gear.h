@@ -21,7 +21,6 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
 	
 private:
 	void IdleStart();
@@ -42,6 +41,7 @@ private:
 	UImageRenderer* L_ImageRenderer = nullptr;
 	UImageRenderer* R_ImageRenderer = nullptr;
 	static const FVector Scale;
+	static const float WorkingInter;
 
 	ESinGearState State = ESinGearState::None;
 	static bool IsLoad;

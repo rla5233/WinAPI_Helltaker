@@ -2,6 +2,7 @@
 
 bool Gear::IsLoad = false;
 const FVector Gear::Scale = { 0.208f, 0.278f };
+const float Gear::WorkingInter = 0.01f;
 
 Gear::Gear()
 {
@@ -17,6 +18,9 @@ void Gear::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_LGears_001.png");
 		ContentsHelper::LoadImg("Chapter\\Component\\Sin_Gear", "Sin_RGears_001.png");
+		
+		ContentsHelper::LoadFolder("Chapter\\Component\\Sin_Gear", "Sin_LGear");
+		ContentsHelper::LoadFolder("Chapter\\Component\\Sin_Gear", "Sin_RGear");
 
 		IsLoad = true;
 	}
@@ -52,7 +56,13 @@ void Gear::Activate(float _DeltaTime)
 
 void Gear::WorkingStart()
 {
+	L_ImageRenderer->CreateAnimation("L_Working", "Sin_LGear", 0, 14, WorkingInter, true);
+	L_ImageRenderer->AnimationReset();
+	L_ImageRenderer->ChangeAnimation("L_Working");
 
+	R_ImageRenderer->CreateAnimation("R_Working", "Sin_RGear", 0, 14, WorkingInter, true);
+	R_ImageRenderer->AnimationReset();
+	R_ImageRenderer->ChangeAnimation("R_Working");
 }
 
 void Gear::Working(float _DeltaTime)
