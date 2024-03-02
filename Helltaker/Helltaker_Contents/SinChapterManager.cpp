@@ -376,7 +376,7 @@ void SinChapterManager::M_CreateThorn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.15f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.23f };
 
 	UpThorn.resize(3);
 	for (int y = 0; y < 3; y++)
@@ -388,14 +388,19 @@ void SinChapterManager::M_CreateThorn()
 		{
 			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
 			UpThorn[y][x]->SetActorLocation({ UpPos.X + IntervalX, UpPos.Y });
+
 			UpThorn[y][x]->StateChange(EThornState::Idle);
+			if (y == 2)
+			{
+				UpThorn[y][x]->AllRenderersActiveOff();
+			}
 
 			IntervalX += Scale.X * 1.08f;
 
 			AllMapRenderActors.push_back(UpThorn[y][x]);
 		}
 
-		UpPos.Y += Scale.Y;
+		UpPos.Y += Scale.Y * 1.1f;
 	}
 
 	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.875f };
@@ -417,7 +422,7 @@ void SinChapterManager::M_CreateThorn()
 			AllMapRenderActors.push_back(DownThorn[y][x]);
 		}
 
-		DownPos.Y += Scale.Y;
+		DownPos.Y += Scale.Y * 1.1f;
 	}
 }
 
@@ -434,7 +439,7 @@ void SinChapterManager::Phase1Start()
 	SinBridgeMoveOn();
 	SinChainMoveOn();
 
-	//AllThornMoveOn();
+	AllThornMoveOn();
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -533,7 +538,7 @@ void SinChapterManager::AllThornMoveOn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.232f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.23f };
 
 	for (std::vector<Sin_Thorn*>& ThornVec : UpThorn)
 	{
@@ -544,14 +549,12 @@ void SinChapterManager::AllThornMoveOn()
 				MsgBoxAssert("Actor is nullptr");
 			}
 
-			Thorn->SetEndPosY(WinScale.Y * 0.15f);
-			Thorn->SetDownPosY(WinScale.Y * 0.2f);
-			Thorn->SetResetPosY(WinScale.Y * 0.26f + Scale.Y);
+			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.1f);
+			Thorn->SetDownPosY(UpPos.Y);
+			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.1f);
 			Thorn->StateChange(EThornState::Move);
 		}
 	}
-
-	//FVector WinScale = ContentsHelper::GetWindowScale();
 
 	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
 	{
