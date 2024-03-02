@@ -3,7 +3,7 @@
 #include "RenderActor.h"
 
 // Ό³Έν :
-class HeroLife : RenderActor
+class HeroLife : public RenderActor
 {
 public:
 	// constructor destructor

@@ -12,7 +12,6 @@ const FVector HeroLife::FireScale = { 0.0625f, 0.107f };
 const float HeroLife::FireInter = 0.06f;
 
 
-
 HeroLife::HeroLife()
 {
 }
@@ -48,8 +47,8 @@ void HeroLife::BeginPlay()
 	FireRenderer.reserve(4);
 	for (int i = 0; i < 4; i++)
 	{
-		PyreRenderer[i] = CreateImageRenderer(SinRenderOrder::Top);
-		FireRenderer[i] = CreateImageRenderer(SinRenderOrder::Top);
+		PyreRenderer.push_back(CreateImageRenderer(SinRenderOrder::Top));
+		FireRenderer.push_back(CreateImageRenderer(SinRenderOrder::Top));
 		FireRenderer[i]->SetImage("Sin_Fire");
 		FireRenderer[i]->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, FireInter, true);
 	}
@@ -63,8 +62,8 @@ void HeroLife::SetPanel()
 	L_PanelRenderer->SetImage("Sin_LPanel.png");
 	L_PanelRenderer->SetTransform({ { -PosX, 0.0f }, WinScale * PanelScale });
 
-	L_PanelRenderer->SetImage("Sin_RPanel.png");
-	L_PanelRenderer->SetTransform({ { PosX, 0.0f }, WinScale * PanelScale });
+	R_PanelRenderer->SetImage("Sin_RPanel.png");
+	R_PanelRenderer->SetTransform({ { PosX, 0.0f }, WinScale * PanelScale });
 }
 
 void HeroLife::SetEye()
@@ -113,7 +112,6 @@ void HeroLife::SetFire()
 	int idx = 0;
 	for (int i = 0; i < 2; i++)
 	{
-		FireRenderer[idx]->SetImage("Sin_Pyre_On.png");
 		FireRenderer[idx]->SetTransform({ { PosX + (IntervalX * i), PosY}, WinScale * FireScale });
 		FireRenderer[idx]->AnimationReset();
 		FireRenderer[idx]->ChangeAnimation("Sin_Fire");
@@ -124,7 +122,6 @@ void HeroLife::SetFire()
 	PosX = WinScale.X * 0.134f;
 	for (int i = 0; i < 2; i++)
 	{
-		FireRenderer[idx]->SetImage("Sin_Pyre_On.png");
 		FireRenderer[idx]->SetTransform({ { PosX + (IntervalX * i), PosY}, WinScale * FireScale });
 		FireRenderer[idx]->AnimationReset();
 		FireRenderer[idx]->ChangeAnimation("Sin_Fire");
@@ -156,14 +153,39 @@ void HeroLife::Hit(float _DeltaTime)
 void HeroLife::Tick(float _DeltaTime)
 {
 	RenderActor::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
 }
 
 void HeroLife::StateUpdate(float _DeltaTime)
 {
+	switch (State)
+	{
+	case ESinHeroLifeState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case ESinHeroLifeState::Hit:
+		Hit(_DeltaTime);
+		break;
+	}
 }
 
 void HeroLife::StateChange(ESinHeroLifeState _State)
 {
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case ESinHeroLifeState::Idle:
+			IdleStart();
+			break;
+		case ESinHeroLifeState::Hit:
+			HitStart();
+			break;
+		}
+	}
+
+	State = _State;
 }
 
 

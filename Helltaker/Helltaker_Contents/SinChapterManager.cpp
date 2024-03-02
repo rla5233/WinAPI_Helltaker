@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "SinComponent.h"
 #include "Sin_Thorn.h"
+#include "HeroLife.h"
 #include "Gear.h"
 #include "Pit.h"
 
@@ -57,14 +58,18 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateSinBG("SinBG");
 	M_CreateSinPit();
 	M_CreateSinGear();
-	M_CreateSinPanel();
-	M_CreateSinPyre();
+
+	//
 	M_CreateSinShield();
 	M_CreateSinBridge();
-	M_CreateThorn();
 	M_CreateSinSkull();
 	M_CreateSinChain();
 	M_CreateSinPiston();
+	//
+	
+	M_CreateThorn();
+
+	M_CreateSinHeroLife();
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
@@ -108,9 +113,12 @@ void SinChapterManager::M_CreateSinGear()
 void SinChapterManager::M_CreateSinHeroLife()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float Pos = WinScale.Y * 0.962f;
+	float PosY = WinScale.Y * 0.962f;
+	SinHeroLife = SpawnActor<HeroLife>(static_cast<int>(SinUpdateOrder::Top));
+	SinHeroLife->SetActorLocation({ WinScale.hX(), PosY });
+	SinHeroLife->StateChange(ESinHeroLifeState::Idle);
 
-
+	AllMapRenderActors.push_back(SinHeroLife);
 }
 
 void SinChapterManager::M_CreateSinShield()

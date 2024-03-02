@@ -25,19 +25,25 @@ public:
 	SinChapterManager& operator=(SinChapterManager&& _Other) noexcept = delete;
 
 	void M_CreateSinMap();
+
 	void M_CreateSinBG(std::string_view _Name);
 	void M_CreateSinPit();
 	void M_CreateSinGear();
 
-	void M_CreateSinHeroLife();
 
+	void M_CreateThorn();
+
+	void M_CreateSinHeroLife();
+	
+
+
+	//
 	void M_CreateSinShield();
 	void M_CreateSinSkull();
 	void M_CreateSinChain();
 	void M_CreateSinPiston();
 
 	void M_CreateSinBridge();
-	void M_CreateThorn();
 
 	size_t GetSinPitSize() const
 	{
@@ -76,7 +82,7 @@ private:
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
 
-	std::vector<HeroLife*> SinHeroLife;
+	HeroLife* SinHeroLife = nullptr;
 
 
 	//
