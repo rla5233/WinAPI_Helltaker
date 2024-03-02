@@ -5,6 +5,7 @@
 #include <EngineCore/Actor.h>
 
 class ChapterManager;
+class SinChapterManager;
 
 // Ό³Έν :
 class RenderActor : public AActor
@@ -21,6 +22,7 @@ public:
 	RenderActor& operator=(RenderActor&& _Other) noexcept = delete;
 
 	ChapterManager* GetChapter();
+	SinChapterManager* GetSinChapter();
 
 	UImageRenderer* CreateImageRenderer(RenderOrder _Order);
 	UImageRenderer* CreateImageRenderer(SinRenderOrder _Order);

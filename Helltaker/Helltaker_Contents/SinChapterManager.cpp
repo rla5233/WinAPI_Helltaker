@@ -430,48 +430,30 @@ void SinChapterManager::Intro(float _DeltaTime)
 
 void SinChapterManager::Phase1Start()
 {
-	SinPitMoveOn();
 	SinBridgeMoveOn();
 	SinChainMoveOn();
 
+	SinPitMoveOn();
 	AllThornMoveOn();
 	SinGear->StateChange(ESinGearState::Working);
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
-	SinPitMoveUpdate(_DeltaTime);
 	SinBridgeMoveUpdate(_DeltaTime);
 	SinChainMoveUpdate(_DeltaTime);
 }
 
 void SinChapterManager::SinPitMoveOn()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	for (SinComponent* Pit : SinPit)
+	for (Pit* Pit : SinPit)
 	{
 		if (nullptr == Pit)
 		{
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Pit->MoveOn();
-		//float ScaleY = WinScale.Y * SinPitScale.Y;
-		//Pit->SetEndPosY(-(ScaleY * 0.5f));
-		//Pit->SetResetPosY(ScaleY * (static_cast<float>(SinPit.size()) - 0.5f));
-	}
-}
-
-void SinChapterManager::SinPitMoveUpdate(float _DeltaTime)
-{
-	for (SinComponent* Pit : SinPit)
-	{
-		if (nullptr == Pit)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		//Pit->MoveY_Update(SinPitSpeedY, _DeltaTime);
+		Pit->StateChange(ESinPitState::Move);
 	}
 }
 

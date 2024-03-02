@@ -1,5 +1,7 @@
 #include "Pit.h"
 
+#include "SinChapterManager.h"
+
 bool Pit::IsLoad = false;
 
 const FVector Pit::Scale = { 0.283f, 0.6074f };
@@ -47,10 +49,20 @@ void Pit::Idle(float _DeltaTime)
 
 void Pit::MoveStart()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float ScaleY = WinScale.Y * Scale.Y;
+	
+    SetEndPosY(-(ScaleY * 0.5f));
+
+	float PitCount = static_cast<float>(GetSinChapter()->GetSinPitSize());
+	SetResetPosY(ScaleY * (PitCount - 0.5f));
+    
+    MoveOn();
 }
 
 void Pit::Move(float _DeltaTime)
 {
+	MoveY_Update(SpeedY, _DeltaTime);
 }
 
 void Pit::StopStart()

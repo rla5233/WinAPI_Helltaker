@@ -1,10 +1,7 @@
 #include "RenderActor.h"
 
-#include "ContentsHelper.h"
 #include "ChapterManager.h"
-
-#include <EngineBase/EngineDirectory.h>
-#include <EngineCore/EngineResourcesManager.h>
+#include "SinChapterManager.h"
 
 RenderActor::RenderActor()
 {
@@ -27,6 +24,17 @@ UImageRenderer* RenderActor::CreateImageRenderer(SinRenderOrder _Order)
 ChapterManager* RenderActor::GetChapter()
 {
 	ChapterManager* Ptr = dynamic_cast<ChapterManager*>(GetWorld());
+	if (nullptr == Ptr)
+	{
+		MsgBoxAssert("Chapter is nullptr");
+	}
+
+	return Ptr;
+}
+
+SinChapterManager* RenderActor::GetSinChapter()
+{
+	SinChapterManager* Ptr = dynamic_cast<SinChapterManager*>(GetWorld());
 	if (nullptr == Ptr)
 	{
 		MsgBoxAssert("Chapter is nullptr");

@@ -39,6 +39,11 @@ public:
 	void M_CreateSinBridge();
 	void M_CreateThorn();
 
+	size_t GetSinPitSize() const
+	{
+		return SinPit.size();
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);
@@ -56,7 +61,6 @@ private:
 	void Intro(float _DeltaTime);
 
 	void SinPitMoveOn();
-	void SinPitMoveUpdate(float _DeltaTime);
 	void SinBridgeMoveOn();
 	void SinBridgeMoveUpdate(float _DeltaTime);
 	void SinChainMoveOn();
