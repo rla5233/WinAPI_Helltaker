@@ -392,7 +392,6 @@ void SinChapterManager::M_CreateThorn()
 			if (y == 2)
 			{
 				UpThorn[y][x]->SetState(EThornState::Up);
-				//UpThorn[y][x]->AllRenderersActiveOff();
 			}
 			else
 			{
@@ -407,7 +406,7 @@ void SinChapterManager::M_CreateThorn()
 		UpPos.Y += Scale.Y * 1.1f;
 	}
 
-	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.875f };
+	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.782f };
 
 	DownThorn.resize(3);
 	for (int y = 0; y < 3; y++)
@@ -419,7 +418,16 @@ void SinChapterManager::M_CreateThorn()
 		{
 			DownThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
 			DownThorn[y][x]->SetActorLocation({ DownPos.X + IntervalX, DownPos.Y });
-			DownThorn[y][x]->StateChange(EThornState::Idle);
+
+			if (y == 0)
+			{
+				DownThorn[y][x]->StateChange(EThornState::Idle);
+				DownThorn[y][x]->AllRenderersActiveOff(); 
+			}
+			else
+			{
+				DownThorn[y][x]->StateChange(EThornState::Idle);
+			}
 			
 			IntervalX += Scale.X * 1.08f;
 
@@ -574,6 +582,8 @@ void SinChapterManager::AllThornMoveOn()
 		}
 	}
 
+	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.782f };
+
 	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
 	{
 		for (Sin_Thorn* Thorn : ThornVec)
@@ -583,7 +593,11 @@ void SinChapterManager::AllThornMoveOn()
 				MsgBoxAssert("Actor is nullptr");
 			}
 
-			//Thorn->StateChange(EThornState::Move);
+			Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.1f);
+			Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.6f);
+			Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.1f);
+			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.1f);
+			Thorn->MoveOn();
 		}
 	}
 }
