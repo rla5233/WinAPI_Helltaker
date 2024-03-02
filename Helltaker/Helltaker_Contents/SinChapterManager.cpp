@@ -122,11 +122,9 @@ void SinChapterManager::M_CreateSinGear()
 	SinGear = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom));
 	SinGear->SetActorLocation({ WinScale.hX(), Pos.Y });
 	
-	SinGear->CreateImageRenderer("Left", SinRenderOrder::Bottom);
 	SinGear->GetImageRenderer("Left")->SetImage("Sin_LGears_001.png");
 	SinGear->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 	
-	SinGear->CreateImageRenderer("Right", SinRenderOrder::Bottom);
 	SinGear->GetImageRenderer("Right")->SetImage("Sin_RGears_001.png");
 	SinGear->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 	

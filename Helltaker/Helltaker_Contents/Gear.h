@@ -24,11 +24,24 @@ protected:
 
 	
 private:
+	void IdleStart();
+	void Idle(float _DeltaTime);
+
+	void ActivateStart();
+	void Activate(float _DeltaTime);
+
+	void WorkingStart();
+	void Working(float _DeltaTime);
+
+	void StopStart();
+	void Stop(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* L_ImageRenderer = nullptr;
 	UImageRenderer* R_ImageRenderer = nullptr;
+	static const FVector Scale;
 
 	ESinGearState State = ESinGearState::None;
 	static bool IsLoad;

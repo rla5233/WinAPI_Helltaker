@@ -269,7 +269,7 @@ enum class ESinGearState
 {
 	None,
 	Idle,
-	Start,
-	Active,
+	Activate,
+	Working,
 	Stop
 };
