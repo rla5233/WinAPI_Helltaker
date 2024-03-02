@@ -74,7 +74,10 @@ private:
 	SinComponent* UpPiston = nullptr;
 	SinComponent* DownPiston = nullptr;
 	SinComponent* Skull = nullptr;
-	std::list<SinComponent*> AllSinChain;
+
+	std::vector<SinComponent*> SinChain;
+	static const FVector SinChainSCale;
+	static const float SinChainSpeedY;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

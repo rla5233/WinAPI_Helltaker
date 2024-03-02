@@ -13,6 +13,9 @@ const float SinChapterManager::SinPitSpeedY = -100.0f;
 const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
 const float SinChapterManager::SinBridgeSpeedY = -200.0f;
 
+const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1389f };
+const float SinChapterManager::SinChainSpeedY = -200.0f;
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -90,6 +93,7 @@ void SinChapterManager::M_CreateSinPit()
 	FVector Scale = WinScale * SinPitScale;
 	FVector Pos = { WinScale.X * 0.359f, WinScale.Y * 0.304f };
 
+	SinPit.reserve(3);
 	for (int i = 0; i < 3; i++)
 	{		
 		SinPit.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
@@ -280,27 +284,26 @@ void SinChapterManager::M_CreateSinSkull()
 void SinChapterManager::M_CreateSinChain()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.0375f, WinScale.Y * 0.139f };
+	FVector Scale = WinScale * SinChainSCale;
 	FVector Pos = { WinScale.X * 0.412f, WinScale.Y * 0.12f };
-	const float IntervalY = WinScale.Y * 0.1388f;
 
+	SinChain.reserve(7);
 	for (int i = 0; i < 7; i++)
 	{
-		SinComponent* SinChain = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
-		SinChain->SetActorLocation({ WinScale.hX(), Pos.Y });
+		SinChain.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinChain[i]->SetActorLocation({WinScale.hX(), Pos.Y});
 
-		SinChain->CreateImageRenderer("Left", SinRenderOrder::Mid);
-		SinChain->GetImageRenderer("Left")->SetImage("Sin_LChainLink.png");
-		SinChain->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
+		SinChain[i]->CreateImageRenderer("Left", SinRenderOrder::Mid);
+		SinChain[i]->GetImageRenderer("Left")->SetImage("Sin_LChainLink.png");
+		SinChain[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
 
-		SinChain->CreateImageRenderer("Right", SinRenderOrder::Mid);
-		SinChain->GetImageRenderer("Right")->SetImage("Sin_RChainLink.png");
-		SinChain->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+		SinChain[i]->CreateImageRenderer("Right", SinRenderOrder::Mid);
+		SinChain[i]->GetImageRenderer("Right")->SetImage("Sin_RChainLink.png");
+		SinChain[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
 
-		Pos.Y += IntervalY;
+		Pos.Y += Scale.Y;
 
-		AllSinChain.push_back(SinChain);
-		AllMapRenderActors.push_back(SinChain);
+		AllMapRenderActors.push_back(SinChain[i]);
 	}
 }
 
