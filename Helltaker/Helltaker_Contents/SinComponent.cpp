@@ -14,7 +14,7 @@ void SinComponent::CreateImageRenderer(std::string_view _KeyName, SinRenderOrder
 	ImageRenderers.insert({ _KeyName.data(), Renderer});
 }
 
-void SinComponent::MoveUp(float _Speed, float _DeltaTime)
+void SinComponent::MoveY_Update(float _Speed, float _DeltaTime)
 {
 	if (true == IsMove)
 	{

@@ -4,6 +4,7 @@ bool Sin_Thorn::IsLoad = false;
 
 const FVector Sin_Thorn::ThornScale = { 0.0479f, 0.0851f };
 const float Sin_Thorn::ChangeInter = 0.05f;
+const float Sin_Thorn::SpeedY = -180.0f;;
 
 Sin_Thorn::Sin_Thorn()
 {
@@ -52,6 +53,21 @@ void Sin_Thorn::IdleStart()
 
 void Sin_Thorn::Idle(float _DeltaTime)
 {
+}
+
+void Sin_Thorn::MoveStart()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float ScaleY = WinScale.Y * ThornScale.Y;
+
+	//SetEndPosY(-(ScaleY * 0.5f));
+	//SetResetPosY();
+	MoveOn();
+}
+
+void Sin_Thorn::Move(float _DeltaTime)
+{
+	MoveY_Update(SpeedY, _DeltaTime);
 }
 
 void Sin_Thorn::UpStart()

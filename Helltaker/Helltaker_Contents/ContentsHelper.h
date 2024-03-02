@@ -217,6 +217,7 @@ enum class EThornState
 {
 	None,
 	Idle,
+	Move,
 	Up,
 	Down
 };

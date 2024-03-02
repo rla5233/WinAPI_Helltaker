@@ -16,7 +16,7 @@ public:
 	SinComponent& operator=(const SinComponent& _Other) = delete;
 	SinComponent& operator=(SinComponent&& _Other) noexcept = delete;
 
-	void MoveUp(float _Speed, float _DeltaTime);
+	void MoveY_Update(float _Speed, float _DeltaTime);
 	void MoveOn()
 	{
 		IsMove = true;

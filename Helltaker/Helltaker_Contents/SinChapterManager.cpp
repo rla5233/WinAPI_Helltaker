@@ -461,7 +461,7 @@ void SinChapterManager::SinPitMoveUpdate(float _DeltaTime)
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Pit->MoveUp(SinPitSpeedY, _DeltaTime);
+		Pit->MoveY_Update(SinPitSpeedY, _DeltaTime);
 	}
 }
 
@@ -492,7 +492,7 @@ void SinChapterManager::SinBridgeMoveUpdate(float _DeltaTime)
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Bridge->MoveUp(SinBridgeSpeedY, _DeltaTime);
+		Bridge->MoveY_Update(SinBridgeSpeedY, _DeltaTime);
 	}
 }
 
@@ -523,7 +523,7 @@ void SinChapterManager::SinChainMoveUpdate(float _DeltaTime)
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Chain->MoveUp(SinChainSpeedY, _DeltaTime);
+		Chain->MoveY_Update(SinChainSpeedY, _DeltaTime);
 	}
 }
 
