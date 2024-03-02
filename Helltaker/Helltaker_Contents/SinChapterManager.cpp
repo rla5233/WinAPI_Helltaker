@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "SinComponent.h"
 #include "Sin_Thorn.h"
+#include "Gear.h"
 
 bool SinChapterManager::IsLoad = false;
 
@@ -116,17 +117,10 @@ void SinChapterManager::M_CreateSinPit()
 void SinChapterManager::M_CreateSinGear()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.208f, WinScale.Y * 0.278f };
-	FVector Pos = { WinScale.X * 0.396f, WinScale.Y * 0.861f };
-
-	SinGear = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom));
-	SinGear->SetActorLocation({ WinScale.hX(), Pos.Y });
-	
-	SinGear->GetImageRenderer("Left")->SetImage("Sin_LGears_001.png");
-	SinGear->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
-	
-	SinGear->GetImageRenderer("Right")->SetImage("Sin_RGears_001.png");
-	SinGear->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
+	float PosY = WinScale.Y * 0.861f;
+	SinGear = SpawnActor<Gear>(static_cast<int>(SinUpdateOrder::Bottom));
+	SinGear->SetActorLocation({ WinScale.hX(), PosY });
+	SinGear->StateChange(ESinGearState::Idle);
 	
 	AllMapRenderActors.push_back(SinGear);
 }
@@ -453,6 +447,7 @@ void SinChapterManager::Phase1Start()
 	SinChainMoveOn();
 
 	AllThornMoveOn();
+	SinGear->StateChange(ESinGearState::Working);
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)

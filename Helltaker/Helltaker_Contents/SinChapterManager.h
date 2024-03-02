@@ -6,6 +6,7 @@
 
 class SinComponent;
 class Sin_Thorn;
+class Gear;
 
 // Ό³Έν :
 class SinChapterManager : public ULevel
@@ -71,7 +72,7 @@ private:
 	static const FVector SinPitScale;
 	static const float SinPitSpeedY;
 	
-	SinComponent* SinGear = nullptr;
+	Gear* SinGear = nullptr;
 
 	std::vector<SinComponent*> SinPyre;
 	static const float SinFireInter;

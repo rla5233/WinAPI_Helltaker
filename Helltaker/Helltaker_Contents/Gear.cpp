@@ -27,10 +27,19 @@ void Gear::BeginPlay()
 
 void Gear::IdleStart()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosX = WinScale.X * 0.396f;
+	
+	L_ImageRenderer->SetImage("Sin_LGears_001.png");
+	L_ImageRenderer->SetTransform({ { -PosX, 0.0f } , WinScale * Scale });
+	
+	R_ImageRenderer->SetImage("Sin_RGears_001.png");
+	R_ImageRenderer->SetTransform({ { PosX, 0.0f } , WinScale * Scale });
 }
 
 void Gear::Idle(float _DeltaTime)
 {
+
 }
 
 void Gear::ActivateStart()
@@ -43,6 +52,7 @@ void Gear::Activate(float _DeltaTime)
 
 void Gear::WorkingStart()
 {
+
 }
 
 void Gear::Working(float _DeltaTime)
