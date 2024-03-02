@@ -104,50 +104,13 @@ void SinChapterManager::M_CreateSinGear()
 	AllMapRenderActors.push_back(SinGear);
 }
 
-void SinChapterManager::M_CreateSinPyre()
+
+void SinChapterManager::M_CreateSinHeroLife()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	
-	FVector Pos = { WinScale.X * 0.255f, WinScale.Y * 0.962f };
-	const float IntervalX = WinScale.X * 0.111f;
+	float Pos = WinScale.Y * 0.962f;
 
-	float FirePosY = WinScale.Y * (-0.035f);
 
-	for (int i = 0; i < 2; i++)
-	{
-		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
-		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
-
-		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
-		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
-
-		SinPyre[idx]->GetImageRenderer("Fire")->SetImage("Sin_Fire");
-		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, FirePosY }, FireScale });
-		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
-		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
-
-		AllMapRenderActors.push_back(SinPyre[idx]);
-	}
-	
-	Pos.X = WinScale.X * 0.635f;
-	for (int i = 0; i < 2; i++)
-	{
-		SinPyre.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
-		SinPyre[idx]->SetActorLocation({ Pos.X + (IntervalX * i), Pos.Y });
-
-		SinPyre[idx]->CreateImageRenderer("Pyre", SinRenderOrder::Top);
-		SinPyre[idx]->GetImageRenderer("Pyre")->SetImage("Sin_Pyre_On.png");
-		SinPyre[idx]->GetImageRenderer("Pyre")->SetTransform({ { 0.0f, 0.0f }, PyreScale });
-
-		SinPyre[idx]->CreateImageRenderer("Fire", SinRenderOrder::Top);
-		SinPyre[idx]->GetImageRenderer("Fire")->SetImage("Sin_Fire");
-		SinPyre[idx]->GetImageRenderer("Fire")->SetTransform({ { 0.0f, FirePosY }, FireScale });
-		SinPyre[idx]->GetImageRenderer("Fire")->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, SinFireInter, true);
-		SinPyre[idx]->GetImageRenderer("Fire")->ChangeAnimation("Sin_Fire");
-
-		AllMapRenderActors.push_back(SinPyre[idx]);
-		++idx;
-	}
 }
 
 void SinChapterManager::M_CreateSinShield()

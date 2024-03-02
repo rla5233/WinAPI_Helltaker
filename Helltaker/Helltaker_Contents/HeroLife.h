@@ -28,12 +28,13 @@ private:
 	
 	void SetPanel();
 	void SetEye();
+	void SetPyre();
+	void SetFire();
 
 	void HitStart();
 	void Hit(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
-
 
 private:
 	UImageRenderer* L_PanelRenderer = nullptr;

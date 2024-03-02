@@ -50,6 +50,8 @@ void HeroLife::BeginPlay()
 	{
 		PyreRenderer[i] = CreateImageRenderer(SinRenderOrder::Top);
 		FireRenderer[i] = CreateImageRenderer(SinRenderOrder::Top);
+		FireRenderer[i]->SetImage("Sin_Fire");
+		FireRenderer[i]->CreateAnimation("Sin_Fire", "Sin_Fire", 0, 11, FireInter, true);
 	}
 }
 
@@ -71,13 +73,72 @@ void HeroLife::SetEye()
 	float PosY = WinScale.Y * (-0.005f);
 
 	EyeRenderer->SetImage("Sin_Eye.png");
-	EyeRenderer->SetTransform({ { 0.0f, PosY }, WinScale * EyeScale })
+	EyeRenderer->SetTransform({ { 0.0f, PosY }, WinScale * EyeScale });
+}
+
+void HeroLife::SetPyre()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosX = WinScale.X * (-0.245f);
+
+	const float IntervalX = WinScale.X * 0.111f;
+
+	int idx = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		PyreRenderer[idx]->SetImage("Sin_Pyre_On.png");
+		PyreRenderer[idx]->SetTransform({ { PosX + (IntervalX * i), 0.0f}, WinScale * PyreScale});
+
+		++idx;
+	}
+
+	PosX = WinScale.X * 0.134f;
+	for (int i = 0; i < 2; i++)
+	{
+		PyreRenderer[idx]->SetImage("Sin_Pyre_On.png");
+		PyreRenderer[idx]->SetTransform({ { PosX + (IntervalX * i), 0.0f}, WinScale * PyreScale });
+
+		++idx;
+	}
+}
+
+void HeroLife::SetFire()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosX = WinScale.X * (-0.245f);
+	float PosY = WinScale.Y * (-0.035f);
+
+	const float IntervalX = WinScale.X * 0.111f;
+
+	int idx = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		FireRenderer[idx]->SetImage("Sin_Pyre_On.png");
+		FireRenderer[idx]->SetTransform({ { PosX + (IntervalX * i), PosY}, WinScale * FireScale });
+		FireRenderer[idx]->AnimationReset();
+		FireRenderer[idx]->ChangeAnimation("Sin_Fire");
+		
+		++idx;
+	}
+
+	PosX = WinScale.X * 0.134f;
+	for (int i = 0; i < 2; i++)
+	{
+		FireRenderer[idx]->SetImage("Sin_Pyre_On.png");
+		FireRenderer[idx]->SetTransform({ { PosX + (IntervalX * i), PosY}, WinScale * FireScale });
+		FireRenderer[idx]->AnimationReset();
+		FireRenderer[idx]->ChangeAnimation("Sin_Fire");
+
+		++idx;
+	}
 }
 
 void HeroLife::IdleStart()
 {
 	SetPanel();
-
+	SetEye();
+	SetPyre();
+	SetFire();
 }
 
 void HeroLife::Idle(float _DeltaTime)
