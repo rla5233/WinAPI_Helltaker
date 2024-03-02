@@ -8,13 +8,15 @@ bool SinChapterManager::IsLoad = false;
 const float SinChapterManager::SinFireInter = 0.06f;
 
 const FVector SinChapterManager::SinPitScale = { 0.283f, 0.6074f };
-const float SinChapterManager::SinPitSpeedY = -100.0f;
+const float SinChapterManager::SinPitSpeedY = -50.0f;
 
 const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
-const float SinChapterManager::SinBridgeSpeedY = -200.0f;
+const float SinChapterManager::SinBridgeSpeedY = -180.0f;
 
 const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1388f };
-const float SinChapterManager::SinChainSpeedY = -200.0f;
+const float SinChapterManager::SinChainSpeedY = -180.0f;
+
+const FVector SinChapterManager::ThornScale = { 0.0479f, 0.0851f };
 
 SinChapterManager::SinChapterManager()
 {
@@ -60,6 +62,7 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
+		ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
 
 		IsLoad = true;
 	}
@@ -74,6 +77,7 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateSinPyre();
 	M_CreateSinShield();
 	M_CreateSinBridge();
+	M_CreateThorn();
 	M_CreateSinSkull();
 	M_CreateSinChain();
 	M_CreateSinPiston();
@@ -367,6 +371,35 @@ void SinChapterManager::M_CreateSinBridge()
 		Pos.Y += Scale.Y;
 		AllMapRenderActors.push_back(SinBridge[i]);
 	}
+}
+
+void SinChapterManager::M_CreateThorn()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * ThornScale;
+	FVector Pos = { WinScale.X * 0.345f, WinScale.Y * 0.3f };
+
+	UpThorn.resize(2);
+	for (int y = 0; y < 2; y++)
+	{
+		float IntervalX = 0.0f;
+		UpThorn[y].reserve(7);
+		for (int x = 0; x < 7; x++)
+		{
+			UpThorn[y].push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+			UpThorn[y][x]->SetActorLocation({ Pos.X + IntervalX, Pos.Y });
+			UpThorn[y][x]->CreateImageRenderer("Thorn", SinRenderOrder::Mid);
+			UpThorn[y][x]->GetImageRenderer("Thorn")->SetImage("Thorn_Idle.png");
+			UpThorn[y][x]->GetImageRenderer("Thorn")->SetTransform({ {0, 0}, Scale });
+			IntervalX += Scale.X * 1.08f;
+
+			AllMapRenderActors.push_back(UpThorn[y][x]);
+		}
+
+		Pos.Y += Scale.Y;
+	}
+
+
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)

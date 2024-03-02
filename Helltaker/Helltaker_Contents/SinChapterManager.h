@@ -34,6 +34,7 @@ public:
 	void M_CreateSinPiston();
 
 	void M_CreateSinBridge();
+	void M_CreateThorn();
 
 protected:
 	virtual void BeginPlay() override;
@@ -80,6 +81,13 @@ private:
 	std::vector<SinComponent*> SinChain;
 	static const FVector SinChainSCale;
 	static const float SinChainSpeedY;
+
+	std::vector<std::vector<SinComponent*>> UpThorn;
+	static const FVector ThornScale;
+
+
+
+
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
