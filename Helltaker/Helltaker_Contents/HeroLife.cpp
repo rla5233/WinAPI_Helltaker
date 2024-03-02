@@ -2,9 +2,13 @@
 
 bool HeroLife::IsLoad = false;
 
-static const FVector PyreScale = { 0.13f, 0.111f };
+const FVector HeroLife::PanelScale = { 0.39f, 0.133f };
 
-static const FVector FireScale = { 0.0625f, 0.107f };
+const FVector HeroLife::EyeScale = { 0.167f, 0.167f };
+
+const FVector HeroLife::PyreScale = { 0.13f, 0.111f };
+
+const FVector HeroLife::FireScale = { 0.0625f, 0.107f };
 const float HeroLife::FireInter = 0.06f;
 
 
@@ -49,8 +53,30 @@ void HeroLife::BeginPlay()
 	}
 }
 
+void HeroLife::SetPanel()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosX = WinScale.X * 0.228f;
+
+	L_PanelRenderer->SetImage("Sin_LPanel.png");
+	L_PanelRenderer->SetTransform({ { -PosX, 0.0f }, WinScale * PanelScale });
+
+	L_PanelRenderer->SetImage("Sin_RPanel.png");
+	L_PanelRenderer->SetTransform({ { PosX, 0.0f }, WinScale * PanelScale });
+}
+
+void HeroLife::SetEye()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosY = WinScale.Y * (-0.005f);
+
+	EyeRenderer->SetImage("Sin_Eye.png");
+	EyeRenderer->SetTransform({ { 0.0f, PosY }, WinScale * EyeScale })
+}
+
 void HeroLife::IdleStart()
 {
+	SetPanel();
 
 }
 

@@ -28,7 +28,6 @@ public:
 	void M_CreateSinPit();
 	void M_CreateSinGear();
 
-	void M_CreateSinPanel();
 	void M_CreateSinPyre();
 
 	void M_CreateSinShield();

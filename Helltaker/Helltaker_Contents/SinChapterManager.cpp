@@ -104,29 +104,6 @@ void SinChapterManager::M_CreateSinGear()
 	AllMapRenderActors.push_back(SinGear);
 }
 
-void SinChapterManager::M_CreateSinPanel()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.39f, WinScale.Y * 0.133f };
-	FVector Pos = { WinScale.X * 0.228f, WinScale.Y * 0.962f };
-	FVector EyeScale = { WinScale.X * 0.167f, WinScale.Y * 0.167f };
-	float EyePosY = WinScale.Y * (-0.005f);
-
-	SinComponent* SinPanel = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
-	SinPanel->SetActorLocation({ WinScale.hX(), Pos.Y });
-
-	SinPanel->GetImageRenderer("Left")->SetImage("Sin_LPanel.png");
-	SinPanel->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
-
-	SinPanel->GetImageRenderer("Right")->SetImage("Sin_RPanel.png");
-	SinPanel->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
-
-	SinPanel->GetImageRenderer("Eye")->SetImage("Sin_Eye.png");
-	SinPanel->GetImageRenderer("Eye")->SetTransform({ { 0.0f, EyePosY }, EyeScale });
-
-	AllMapRenderActors.push_back(SinPanel);
-}
-
 void SinChapterManager::M_CreateSinPyre()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();

@@ -25,23 +25,30 @@ protected:
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
+	
+	void SetPanel();
+	void SetEye();
 
 	void HitStart();
 	void Hit(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
+
 private:
+	UImageRenderer* L_PanelRenderer = nullptr;
+	UImageRenderer* R_PanelRenderer = nullptr;
+	static const FVector PanelScale;
+
+	UImageRenderer* EyeRenderer = nullptr;
+	static const FVector EyeScale;
+	
 	std::vector<UImageRenderer*> PyreRenderer;
 	static const FVector PyreScale;
 
 	std::vector<UImageRenderer*> FireRenderer;
 	static const FVector FireScale;
 	static const float FireInter;
-
-	UImageRenderer* L_PanelRenderer = nullptr;
-	UImageRenderer* R_PanelRenderer = nullptr;
-	UImageRenderer* EyeRenderer = nullptr;
 
 	ESinHeroLifeState State = ESinHeroLifeState::None;
 	static bool IsLoad;
