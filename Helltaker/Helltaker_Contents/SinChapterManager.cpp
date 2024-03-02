@@ -8,8 +8,6 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const float SinChapterManager::SinFireInter = 0.06f;
-
 const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
 const float SinChapterManager::SinBridgeSpeedY = -150.0f;
 
@@ -31,13 +29,6 @@ void SinChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
-		
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPanel.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPanel.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Eye.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pyre_On.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Pyre_Off.png");
-		ContentsHelper::LoadFolder("Chapter\\Component", "Sin_Fire");
 
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LShield.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RShield.png");

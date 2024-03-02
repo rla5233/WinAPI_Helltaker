@@ -77,7 +77,6 @@ private:
 	Gear* SinGear = nullptr;
 
 	std::vector<SinComponent*> SinPyre;
-	static const float SinFireInter;
 
 	std::vector<SinComponent*> SinBridge;
 	static const FVector SinBridgeScale;

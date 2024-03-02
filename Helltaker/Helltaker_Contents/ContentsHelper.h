@@ -281,3 +281,10 @@ enum class ESinGearState
 	Working,
 	Stop
 };
+
+enum class ESinHeroLifeState
+{
+	None,
+	Idle,
+	Hit
+};
