@@ -16,10 +16,16 @@ public:
 	Pit& operator=(const Pit& _Other) = delete;
 	Pit& operator=(Pit&& _Other) noexcept = delete;
 
+	void StateChange(ESinPitState _State);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+private:
+
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* L_ImageRenderer = nullptr;

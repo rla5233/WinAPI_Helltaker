@@ -30,8 +30,6 @@ void SinChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPit.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPit.png");
 		
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LPanel.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RPanel.png");
