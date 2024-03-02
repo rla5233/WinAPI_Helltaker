@@ -12,10 +12,10 @@ const FVector SinChapterManager::SinPitScale = { 0.283f, 0.6074f };
 const float SinChapterManager::SinPitSpeedY = -50.0f;
 
 const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
-const float SinChapterManager::SinBridgeSpeedY = -180.0f;
+const float SinChapterManager::SinBridgeSpeedY = -150.0f;
 
 const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1388f };
-const float SinChapterManager::SinChainSpeedY = -180.0f;
+const float SinChapterManager::SinChainSpeedY = -150.0f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -376,10 +376,10 @@ void SinChapterManager::M_CreateThorn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.232f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.15f };
 
-	UpThorn.resize(2);
-	for (int y = 0; y < 2; y++)
+	UpThorn.resize(3);
+	for (int y = 0; y < 3; y++)
 	{
 		float IntervalX = 0.0f;
 		UpThorn[y].reserve(7);
@@ -400,8 +400,8 @@ void SinChapterManager::M_CreateThorn()
 
 	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.875f };
 
-	DownThorn.resize(2);
-	for (int y = 0; y < 2; y++)
+	DownThorn.resize(3);
+	for (int y = 0; y < 3; y++)
 	{
 		float IntervalX = 0.0f;
 		DownThorn[y].reserve(7);
@@ -433,6 +433,8 @@ void SinChapterManager::Phase1Start()
 	SinPitMoveOn();
 	SinBridgeMoveOn();
 	SinChainMoveOn();
+
+	//AllThornMoveOn();
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -524,6 +526,44 @@ void SinChapterManager::SinChainMoveUpdate(float _DeltaTime)
 		}
 
 		Chain->MoveY_Update(SinChainSpeedY, _DeltaTime);
+	}
+}
+
+void SinChapterManager::AllThornMoveOn()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.232f };
+
+	for (std::vector<Sin_Thorn*>& ThornVec : UpThorn)
+	{
+		for (Sin_Thorn* Thorn : ThornVec)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Thorn->SetEndPosY(WinScale.Y * 0.15f);
+			Thorn->SetDownPosY(WinScale.Y * 0.2f);
+			Thorn->SetResetPosY(WinScale.Y * 0.26f + Scale.Y);
+			Thorn->StateChange(EThornState::Move);
+		}
+	}
+
+	//FVector WinScale = ContentsHelper::GetWindowScale();
+
+	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
+	{
+		for (Sin_Thorn* Thorn : ThornVec)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			//Thorn->StateChange(EThornState::Move);
+		}
 	}
 }
 
