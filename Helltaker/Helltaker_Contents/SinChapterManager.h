@@ -5,6 +5,7 @@
 #include <EngineCore/Level.h>
 
 class SinComponent;
+class Sin_Thorn;
 
 // Ό³Έν :
 class SinChapterManager : public ULevel
@@ -82,8 +83,7 @@ private:
 	static const FVector SinChainSCale;
 	static const float SinChainSpeedY;
 
-	std::vector<std::vector<SinComponent*>> UpThorn;
-	static const FVector ThornScale;
+	std::vector<std::vector<Sin_Thorn*>> UpThorn;
 
 
 

@@ -2,6 +2,7 @@
 
 #include "BackGround.h"
 #include "SinComponent.h"
+#include "Sin_Thorn.h"
 
 bool SinChapterManager::IsLoad = false;
 
@@ -374,7 +375,7 @@ void SinChapterManager::M_CreateSinBridge()
 void SinChapterManager::M_CreateThorn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * ThornScale;
+	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
 	FVector Pos = { WinScale.X * 0.345f, WinScale.Y * 0.3f };
 
 	UpThorn.resize(2);
@@ -384,11 +385,10 @@ void SinChapterManager::M_CreateThorn()
 		UpThorn[y].reserve(7);
 		for (int x = 0; x < 7; x++)
 		{
-			UpThorn[y].push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top)));
+			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Top)));
 			UpThorn[y][x]->SetActorLocation({ Pos.X + IntervalX, Pos.Y });
-			UpThorn[y][x]->CreateImageRenderer("Thorn", SinRenderOrder::Top);
-			UpThorn[y][x]->GetImageRenderer("Thorn")->SetImage("Thorn_Idle.png");
-			UpThorn[y][x]->GetImageRenderer("Thorn")->SetTransform({ {0, 0}, Scale });
+			UpThorn[y][x]->StateChange(EThornState::Idle);
+
 			IntervalX += Scale.X * 1.08f;
 
 			AllMapRenderActors.push_back(UpThorn[y][x]);

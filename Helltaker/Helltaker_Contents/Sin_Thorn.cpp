@@ -20,13 +20,13 @@ void Sin_Thorn::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
+		
+		// 수정 (Debug용 삭제 필요)
+		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Up");
+		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Down");
 
 		IsLoad = true;
 	}
-
-	ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
-	ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Up");
-	ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Down");
 
 	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
 	ImageRenderer->SetImage("Thorn_Idle.png");

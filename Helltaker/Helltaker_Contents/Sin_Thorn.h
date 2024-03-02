@@ -16,6 +16,11 @@ public:
 	Sin_Thorn& operator=(const Sin_Thorn& _Other) = delete;
 	Sin_Thorn& operator=(Sin_Thorn&& _Other) noexcept = delete;
 
+	static const FVector& GetThornScale()
+	{
+		return ThornScale;
+	}
+
 	void StateChange(EThornState _State);
 
 protected:
