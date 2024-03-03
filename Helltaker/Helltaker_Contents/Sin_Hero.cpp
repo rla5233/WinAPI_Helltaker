@@ -63,8 +63,6 @@ void Sin_Hero::Idle(float _DeltaTime)
 void Sin_Hero::MoveYStart()
 {
 	IsMoveY = true;
-
-	
 }
 
 void Sin_Hero::MoveY(float _DeltaTime)
