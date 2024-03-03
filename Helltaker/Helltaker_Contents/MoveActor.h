@@ -57,6 +57,11 @@ public:
 		NextLocationPoint = _Point;
 	}
 
+	Point GetPMoveDir() const
+	{
+		return PMoveDir;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;

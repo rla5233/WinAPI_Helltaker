@@ -128,7 +128,16 @@ void Hero::MoveStart()
 
 void Hero::Move(float _DeltaTime)
 {
+	FVector CurLocation = GetActorLocation();
+
 	HeroBase::Move(_DeltaTime);
+
+	FVector NextLocation = GetActorLocation();
+	FVector Diff = NextLocation - CurLocation;
+	if (GetPMoveDir() == Point::Down || GetPMoveDir() == Point::Up)
+	{
+		ChapterCameraPosUpdate(Diff);
+	}
 
 	if (false == IsMove())
 	{
