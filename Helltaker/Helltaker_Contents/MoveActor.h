@@ -62,6 +62,36 @@ public:
 		return PMoveDir;
 	}
 
+	EMoveActorDir GetMoveDir() const
+	{
+		return MoveDir;
+	}
+
+	EActorSeeDir GetSeeDir() const
+	{
+		return SeeDir;
+	}
+
+	void SetTargetPos(const FVector& _Pos)
+	{
+		TargetPos = _Pos;
+	}
+
+	void AddTargetPos(const FVector& _Pos)
+	{
+		TargetPos += _Pos;
+	}
+
+	const FVector& GetStartPos() const
+	{
+		return StartPos;
+	}
+
+	const FVector& GetFMoveDir() const
+	{
+		return FMoveDir;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
@@ -70,9 +100,6 @@ protected:
 
 	virtual void MoveStart();
 	virtual void EffectPosUpdate(const FVector& _Diff);
-
-	EMoveActorDir MoveDir = EMoveActorDir::None;
-	EActorSeeDir SeeDir = EActorSeeDir::None;
 
 	void CreateRandomMoveEffect(EChapterType _ChapType = EChapterType::Default);
 private:
@@ -83,10 +110,14 @@ private:
 	static const FVector MoveEffectScale;
 	static const float MoveEffectInter;
 
-	float MoveTime = 0.0f;
-	static const float MoveTimeWeight;
+	EMoveActorDir MoveDir = EMoveActorDir::None;
+	EActorSeeDir SeeDir = EActorSeeDir::None;
+
 	FVector StartPos = FVector::Zero;
 	FVector TargetPos = FVector::Zero;
+	float MoveTime = 0.0f;
+	static const float MoveTimeWeight;
+
 	FVector FMoveDir = FVector::Zero;
 	Point PMoveDir = Point::Zero;
 	bool IsMoveValue = false;

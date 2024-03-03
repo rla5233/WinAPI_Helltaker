@@ -38,6 +38,7 @@ private:
 	void Idle(float _DeltaTime);
 
 	void MoveYStart();
+	void SetTargetPosY();
 	void MoveY(float _DeltaTime);
 
 	void MoveY_Update(float _DeltaTime);

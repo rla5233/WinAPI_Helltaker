@@ -1,5 +1,7 @@
 #include "Sin_Hero.h"
 
+#include "Sin_Thorn.h"
+
 const float Sin_Hero::SpeedY = -150.0f;
 
 Sin_Hero::Sin_Hero()
@@ -19,7 +21,23 @@ void Sin_Hero::MoveStart()
 {
 	HeroBase::MoveStart();
 
+	SetTargetPosY();
+
 	CreateRandomMoveEffect(EChapterType::Sin);
+}
+
+void Sin_Hero::SetTargetPosY()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float ScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
+
+	switch (GetMoveDir())
+	{
+	case EMoveActorDir::Up:
+	case EMoveActorDir::Down:
+		SetTargetPos(GetStartPos() + (GetFMoveDir() * ScaleY));
+		break;
+	}
 }
 
 void Sin_Hero::KickCheck()
@@ -45,6 +63,8 @@ void Sin_Hero::Idle(float _DeltaTime)
 void Sin_Hero::MoveYStart()
 {
 	IsMoveY = true;
+
+	
 }
 
 void Sin_Hero::MoveY(float _DeltaTime)
@@ -56,6 +76,7 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 {
 	if (true == IsMoveY)
 	{
+		AddTargetPos({ 0.0f, SpeedY * _DeltaTime });
 		AddActorLocation({ 0.0f, SpeedY * _DeltaTime });
 	}
 }

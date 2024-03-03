@@ -19,7 +19,7 @@ void Hero::ActionCheck()
 	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
 	Point CurPoint = GetLocationPoint();
 	
-	switch (MoveDir)
+	switch (GetMoveDir())
 	{
 	case EMoveActorDir::Left:
 		SetNextLocationPoint(CurPoint + Point::Left);
@@ -147,7 +147,7 @@ void Hero::KickStart()
 
 	Point NextPoint = GetNextLocationPoint();
 	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
-	Other->NextStateCheck(MoveDir);
+	Other->NextStateCheck(GetMoveDir());
 }
 
 void Hero::UpdateActionPoint()

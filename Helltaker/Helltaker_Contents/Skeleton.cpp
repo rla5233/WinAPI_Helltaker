@@ -77,7 +77,7 @@ void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 		break;
 	}
 
-	switch (MoveDir)
+	switch (GetMoveDir())
 	{
 	case EMoveActorDir::Left:
 		SetNextLocationPoint(CurPoint + Point::Left);
@@ -138,7 +138,7 @@ void Skeleton::IdleStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale * IdleScale }});
 
-	switch (SeeDir)
+	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
 		ImageRenderer->ChangeAnimation("Skeleton_LIdle");
@@ -188,7 +188,7 @@ void Skeleton::HitStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f) }, { WinScale * HitScale } });
 
-	switch (SeeDir)
+	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
 		ImageRenderer->AnimationReset();

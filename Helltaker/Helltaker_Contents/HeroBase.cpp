@@ -147,7 +147,7 @@ void HeroBase::IdleStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * IdleScale } });
 
-	switch (SeeDir)
+	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
 		ImageRenderer->ChangeAnimation("Hero_LIdle");
@@ -176,7 +176,7 @@ void HeroBase::MoveStart()
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * MoveScale } });
 	CanActionCheck = false;
 
-	switch (SeeDir)
+	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
 		ImageRenderer->AnimationReset();
@@ -203,7 +203,7 @@ void HeroBase::Kick(float _DeltaTime)
 
 	if (2 == ImageRenderer->GetCurAnimationImageFrame())
 	{
-		switch (SeeDir)
+		switch (GetSeeDir())
 		{
 		case EActorSeeDir::Left:
 			ImageRenderer->AnimationReset();
@@ -224,7 +224,7 @@ void HeroBase::KickStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	CanActionCheck = false;
 
-	switch (SeeDir)
+	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
 		ImageRenderer->AnimationReset();
@@ -249,7 +249,7 @@ void HeroBase::VictoryStart()
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.0225f) }, { WinScale * VictoryScale } });
 	AllEffectActiveOff();
 
-	switch (SeeDir)
+	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
 		ImageRenderer->ChangeAnimation("Hero_LVictory");

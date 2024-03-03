@@ -61,7 +61,7 @@ void Stone::NextStateCheck(EMoveActorDir _OtherMoveDir)
 		break;
 	}
 
-	switch (MoveDir)
+	switch (GetMoveDir())
 	{
 	case EMoveActorDir::Left:
 		SetNextLocationPoint(CurPoint + Point::Left);
