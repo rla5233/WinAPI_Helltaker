@@ -34,7 +34,7 @@ private:
 
 	UImageRenderer* LB_ImageRenderer = nullptr;
 	UImageRenderer* RB_ImageRenderer = nullptr;
-
+	static const FVector Scale;
 
 	ESinPistonState State = ESinPistonState::None;
 	static bool IsLoad;

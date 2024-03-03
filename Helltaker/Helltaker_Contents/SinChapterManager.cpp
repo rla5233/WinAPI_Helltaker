@@ -6,8 +6,9 @@
 #include "HeroLife.h"
 #include "Shield.h"
 #include "Bridge.h"
-#include "Gear.h"
+#include "Piston.h"
 #include "Skull.h"
+#include "Gear.h"
 #include "Pit.h"
 
 bool SinChapterManager::IsLoad = false;
@@ -46,6 +47,8 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateSinGear();
 
 	M_CreateSinShield();
+
+	M_CreateSinPiston();
 	M_CreateSinSkull();
 
 	M_CreateSinBridge();
@@ -54,7 +57,6 @@ void SinChapterManager::M_CreateSinMap()
 
 	//
 	M_CreateSinChain();
-	M_CreateSinPiston();
 	//
 	
 	M_CreateSinHeroLife();
@@ -161,44 +163,18 @@ void SinChapterManager::M_CreateSinChain()
 void SinChapterManager::M_CreateSinPiston()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.125f, WinScale.Y * 0.740f };
-	FVector UpPos = { WinScale.X * 0.41f, WinScale.Y * (-0.056f) };
+	float UpPosY = WinScale.Y * (-0.056f);
 
-	UpPiston = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
-	UpPiston->SetActorLocation({ WinScale.hX(), UpPos.Y });
-
-	UpPiston->CreateImageRenderer("Left_Bottom", SinRenderOrder::Bottom);
-	UpPiston->GetImageRenderer("Left_Bottom")->SetImage("Sin_BPiston.png");
-	UpPiston->GetImageRenderer("Left_Bottom")->SetTransform({ { -UpPos.X, 0.0f }, Scale });
+	UpPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Top));
+	UpPiston->SetActorLocation({ WinScale.hX(), UpPosY });
+	UpPiston->StateChange(ESinPistonState::Idle);
 	
-	UpPiston->CreateImageRenderer("Left_Top", SinRenderOrder::Top);
-	UpPiston->GetImageRenderer("Left_Top")->SetImage("Sin_TPiston.png");
-	UpPiston->GetImageRenderer("Left_Top")->SetTransform({ { -UpPos.X, 0.0f }, Scale });
-
-	UpPiston->CreateImageRenderer("Right_Bottom", SinRenderOrder::Bottom);
-	UpPiston->GetImageRenderer("Right_Bottom")->SetImage("Sin_BPiston.png");
-	UpPiston->GetImageRenderer("Right_Bottom")->SetTransform({ { UpPos.X, 0.0f }, Scale });
-
-	UpPiston->CreateImageRenderer("Right_Top", SinRenderOrder::Top);
-	UpPiston->GetImageRenderer("Right_Top")->SetImage("Sin_TPiston.png");
-	UpPiston->GetImageRenderer("Right_Top")->SetTransform({ { UpPos.X, 0.0f }, Scale });
-
 	AllMapRenderActors.push_back(UpPiston);
 
-
-
-	////
-	FVector DownPos = { WinScale.X * 0.41f, WinScale.Y * 1.24f };
-	DownPiston = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom));
-	DownPiston->SetActorLocation({ WinScale.hX(), DownPos.Y });
-
-	DownPiston->CreateImageRenderer("Left", SinRenderOrder::Mid);
-	DownPiston->GetImageRenderer("Left")->SetImage("Sin_TPiston.png");
-	DownPiston->GetImageRenderer("Left")->SetTransform({ { -DownPos.X, 0.0f }, Scale });
-
-	DownPiston->CreateImageRenderer("Right", SinRenderOrder::Mid);
-	DownPiston->GetImageRenderer("Right")->SetImage("Sin_TPiston.png");
-	DownPiston->GetImageRenderer("Right")->SetTransform({ { DownPos.X, 0.0f }, Scale });
+	float DownPosY = WinScale.Y * 1.24f;
+	DownPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Bottom));
+	DownPiston->SetActorLocation({ WinScale.hX(), DownPosY });
+	DownPiston->StateChange(ESinPistonState::Idle);
 
 	AllMapRenderActors.push_back(DownPiston);
 }

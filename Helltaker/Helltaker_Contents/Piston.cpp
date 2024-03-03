@@ -2,6 +2,8 @@
 
 bool Piston::IsLoad = false;
 
+const FVector Piston::Scale = { 0.125f, 0.74f };
+
 Piston::Piston()
 {
 }
@@ -31,7 +33,20 @@ void Piston::BeginPlay()
 
 void Piston::IdleStart()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosX = WinScale.X * 0.41f;
 
+	LT_ImageRenderer->SetImage("Sin_TPiston.png");
+	LT_ImageRenderer->SetTransform({ { -PosX, 0.0f }, WinScale * Scale });
+
+	RT_ImageRenderer->SetImage("Sin_TPiston.png");
+	RT_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
+
+	LB_ImageRenderer->SetImage("Sin_BPiston.png");
+	LB_ImageRenderer->SetTransform({ { -PosX, 0.0f }, WinScale * Scale });
+
+	RB_ImageRenderer->SetImage("Sin_BPiston.png");
+	RB_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
 }
 
 void Piston::Idle(float _DeltaTime)
