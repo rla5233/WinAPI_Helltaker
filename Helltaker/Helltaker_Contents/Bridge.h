@@ -16,6 +16,10 @@ public:
 	Bridge& operator=(const Bridge& _Other) = delete;
 	Bridge& operator=(Bridge&& _Other) noexcept = delete;
 
+	static const FVector& GetScale()
+	{
+		return Scale;
+	}
 
 	void StateChange(ESinBridgeState _State);
 

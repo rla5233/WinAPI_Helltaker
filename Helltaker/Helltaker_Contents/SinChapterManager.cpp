@@ -5,6 +5,7 @@
 #include "Sin_Thorn.h"
 #include "HeroLife.h"
 #include "Shield.h"
+#include "Bridge.h"
 #include "Gear.h"
 #include "Pit.h"
 
@@ -233,6 +234,7 @@ void SinChapterManager::M_CreateSinBridge()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
+	float ScaleY = WinScale.Y * Bridge::GetScale().Y;
 
 	SinBridge.reserve(3);
 	for (int i = 0; i < 3; i++)
@@ -240,7 +242,7 @@ void SinChapterManager::M_CreateSinBridge()
 		SinBridge.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinBridge[i]->SetActorLocation(Pos);
 
-		Pos.Y += Scale.Y;
+		Pos.Y += ScaleY;
 		AllMapRenderActors.push_back(SinBridge[i]);
 	}
 }
