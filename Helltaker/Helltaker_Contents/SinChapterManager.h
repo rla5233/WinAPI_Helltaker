@@ -7,6 +7,7 @@
 class SinComponent;
 class Sin_Thorn;
 class HeroLife;
+class Bridge;
 class Gear;
 class Pit;
 
@@ -66,7 +67,6 @@ private:
 
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
-	void SinBridgeMoveUpdate(float _DeltaTime);
 	void SinChainMoveOn();
 	void SinChainMoveUpdate(float _DeltaTime);
 
@@ -80,12 +80,11 @@ private:
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
 
+	std::vector<Bridge*> SinBridge;
+
 	HeroLife* SinHeroLife = nullptr;
 
-
 	//
-	std::vector<SinComponent*> SinBridge;
-	
 	SinComponent* UpPiston = nullptr;
 	SinComponent* DownPiston = nullptr;
 	SinComponent* Skull = nullptr;

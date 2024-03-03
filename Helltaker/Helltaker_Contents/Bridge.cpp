@@ -41,10 +41,16 @@ void Bridge::Idle(float _DeltaTime)
 
 void Bridge::MoveStart()
 {
+	Bridge->MoveOn();
+
+	float ScaleY = WinScale.Y * SinBridgeScale.Y;
+	Bridge->SetEndPosY(-(ScaleY * 0.5f));
+	Bridge->SetResetPosY(ScaleY * (static_cast<float>(SinBridge.size()) - 0.5f));
 }
 
 void Bridge::Move(float _DeltaTime)
 {
+	MoveY_Update(SpeedY, _DeltaTime);
 }
 
 void Bridge::StopStart()

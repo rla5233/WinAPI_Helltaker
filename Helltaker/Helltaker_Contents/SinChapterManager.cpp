@@ -239,7 +239,7 @@ void SinChapterManager::M_CreateSinBridge()
 	SinBridge.reserve(3);
 	for (int i = 0; i < 3; i++)
 	{
-		SinBridge.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinBridge.push_back(SpawnActor<Bridge>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinBridge[i]->SetActorLocation(Pos);
 
 		Pos.Y += ScaleY;
@@ -338,7 +338,6 @@ void SinChapterManager::Phase1Start()
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
-	SinBridgeMoveUpdate(_DeltaTime);
 	SinChainMoveUpdate(_DeltaTime);
 }
 
@@ -357,32 +356,14 @@ void SinChapterManager::SinPitMoveOn()
 
 void SinChapterManager::SinBridgeMoveOn()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	for (SinComponent* Bridge : SinBridge)
+	for (Bridge* Bridge : SinBridge)
 	{
 		if (nullptr == Bridge)
 		{
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Bridge->MoveOn();
-
-		float ScaleY = WinScale.Y * SinBridgeScale.Y;
-		Bridge->SetEndPosY(-(ScaleY * 0.5f));
-		Bridge->SetResetPosY(ScaleY * (static_cast<float>(SinBridge.size()) - 0.5f));
-	}
-}
-
-void SinChapterManager::SinBridgeMoveUpdate(float _DeltaTime)
-{
-	for (SinComponent* Bridge : SinBridge)
-	{
-		if (nullptr == Bridge)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Bridge->MoveY_Update(SinBridgeSpeedY, _DeltaTime);
+		Bridge->StateChange(ESinBridgeState::Move);
 	}
 }
 
