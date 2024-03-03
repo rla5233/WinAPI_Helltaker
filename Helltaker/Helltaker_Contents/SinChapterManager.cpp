@@ -31,11 +31,6 @@ void SinChapterManager::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
 
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LShield.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RShield.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LShield_Top.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RShield_Top.png");
-
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Skull_001.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Skull_002.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LArm.png");
@@ -124,10 +119,8 @@ void SinChapterManager::M_CreateSinHeroLife()
 void SinChapterManager::M_CreateSinShield()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.406f, WinScale.Y * 0.686f };
 	FVector Pos = { WinScale.X * 0.177f, WinScale.Y * 0.322f };
 
-	FVector TopScale = { WinScale.X * 0.2786f, WinScale.Y * 0.296f };
 	FVector TopPos = { WinScale.X * 0.1132f, WinScale.Y * (-0.1949f) };
 
 	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));

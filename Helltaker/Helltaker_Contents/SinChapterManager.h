@@ -32,10 +32,7 @@ public:
 
 
 	void M_CreateThorn();
-
 	void M_CreateSinHeroLife();
-	
-
 
 	//
 	void M_CreateSinShield();
