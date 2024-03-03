@@ -139,6 +139,9 @@
     <ClInclude Include="ChainLink.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
+    <ClInclude Include="Chain.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -274,6 +277,9 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
     <ClCompile Include="ChainLink.cpp">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="Chain.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>

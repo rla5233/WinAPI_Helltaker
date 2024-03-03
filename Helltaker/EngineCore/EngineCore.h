@@ -66,8 +66,7 @@ public:
 	{
 		return IsDebugValue;
 	}
-	static void EngineDebugSwitch()
-	{
+	static void EngineDebugSwitch() {
 		IsDebugValue = !IsDebugValue;
 	}
 

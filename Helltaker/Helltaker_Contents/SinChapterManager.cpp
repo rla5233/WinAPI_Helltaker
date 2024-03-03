@@ -10,6 +10,7 @@
 #include "Bridge.h"
 #include "Piston.h"
 #include "Skull.h"
+#include "Chain.h"
 #include "Gear.h"
 #include "Pit.h"
 
@@ -57,6 +58,10 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateSinHeroLife();
 
 	M_SpawnHero();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Chain* NewChain = SpawnActor<Chain>(static_cast<int>(SinUpdateOrder::Top));
+	NewChain->SetActorLocation({ WinScale.hX(), WinScale.hY() });
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
