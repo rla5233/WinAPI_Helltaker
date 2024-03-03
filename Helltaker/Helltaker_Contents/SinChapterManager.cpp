@@ -45,17 +45,19 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateSinBG("SinBG");
 	M_CreateSinPit();
 	M_CreateSinGear();
+
 	M_CreateSinShield();
+	M_CreateSinSkull();
+
+	M_CreateSinBridge();
+	M_CreateThorn();
+
 
 	//
-	M_CreateSinBridge();
-	M_CreateSinSkull();
 	M_CreateSinChain();
 	M_CreateSinPiston();
 	//
 	
-	M_CreateThorn();
-
 	M_CreateSinHeroLife();
 }
 
@@ -184,6 +186,9 @@ void SinChapterManager::M_CreateSinPiston()
 
 	AllMapRenderActors.push_back(UpPiston);
 
+
+
+	////
 	FVector DownPos = { WinScale.X * 0.41f, WinScale.Y * 1.24f };
 	DownPiston = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Bottom));
 	DownPiston->SetActorLocation({ WinScale.hX(), DownPos.Y });

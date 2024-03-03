@@ -89,6 +89,9 @@ private:
 	Skull* SinSkull = nullptr;
 	std::vector<Bridge*> SinBridge;
 
+	std::vector<std::vector<Sin_Thorn*>> UpThorn;
+	std::vector<std::vector<Sin_Thorn*>> DownThorn;
+
 	HeroLife* SinHeroLife = nullptr;
 
 	//
@@ -98,10 +101,6 @@ private:
 	std::vector<SinComponent*> SinChain;
 	static const FVector SinChainSCale;
 	static const float SinChainSpeedY;
-
-	std::vector<std::vector<Sin_Thorn*>> UpThorn;
-	std::vector<std::vector<Sin_Thorn*>> DownThorn;
-
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

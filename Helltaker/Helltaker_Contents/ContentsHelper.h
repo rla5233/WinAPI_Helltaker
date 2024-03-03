@@ -302,3 +302,9 @@ enum class ESinSkullState
 	None,
 	Idle
 };
+
+enum class ESinPistonState
+{
+	None,
+	Idle,
+};
