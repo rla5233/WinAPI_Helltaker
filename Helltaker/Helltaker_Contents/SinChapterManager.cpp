@@ -121,38 +121,10 @@ void SinChapterManager::M_CreateSinShield()
 void SinChapterManager::M_CreateSinSkull()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector SkullScale = { WinScale.X * 0.212f, WinScale.Y * 0.396f };
-	FVector SkullPos = { WinScale.X * 0.412f, WinScale.Y * 0.665f };
+	float PosY = WinScale.Y * 0.665f;
 
 	Skull = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
-	Skull->SetActorLocation({ WinScale.hX(), SkullPos.Y });
-
-	Skull->CreateImageRenderer("LSkull_Bottom", SinRenderOrder:: Mid);
-	Skull->GetImageRenderer("LSkull_Bottom")->SetImage("Sin_Skull_001.png");
-	Skull->GetImageRenderer("LSkull_Bottom")->SetTransform({ { -SkullPos.X, 0.0f },  SkullScale });
-
-	Skull->CreateImageRenderer("RSkull_Bottom", SinRenderOrder::Mid);
-	Skull->GetImageRenderer("RSkull_Bottom")->SetImage("Sin_Skull_001.png");
-	Skull->GetImageRenderer("RSkull_Bottom")->SetTransform({ { SkullPos.X, 0.0f },  SkullScale });
-
-	Skull->CreateImageRenderer("LSkull_Top", SinRenderOrder::Top);
-	Skull->GetImageRenderer("LSkull_Top")->SetImage("Sin_Skull_002.png");
-	Skull->GetImageRenderer("LSkull_Top")->SetTransform({ { -SkullPos.X, 0.0f },  SkullScale });
-
-	Skull->CreateImageRenderer("RSkull_Top", SinRenderOrder::Top);
-	Skull->GetImageRenderer("RSkull_Top")->SetImage("Sin_Skull_002.png");
-	Skull->GetImageRenderer("RSkull_Top")->SetTransform({ { SkullPos.X, 0.0f },  SkullScale });
-
-	FVector ArmScale = { WinScale.X * 0.206f, WinScale.Y * 0.17f };
-	FVector ArmPos = { WinScale.X * 0.306f, WinScale.Y * 0.04f };
-
-	Skull->CreateImageRenderer("LArm", SinRenderOrder::Bottom);
-	Skull->GetImageRenderer("LArm")->SetImage("Sin_LArm.png");
-	Skull->GetImageRenderer("LArm")->SetTransform({ { -ArmPos.X, ArmPos.Y },  ArmScale });
-
-	Skull->CreateImageRenderer("RArm", SinRenderOrder::Bottom);
-	Skull->GetImageRenderer("RArm")->SetImage("Sin_RArm.png");
-	Skull->GetImageRenderer("RArm")->SetTransform({ { ArmPos.X, ArmPos.Y },  ArmScale });
+	Skull->SetActorLocation({ WinScale.hX(), PosY });
 
 	AllMapRenderActors.push_back(Skull);
 }

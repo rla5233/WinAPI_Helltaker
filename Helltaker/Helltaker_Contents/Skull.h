@@ -27,6 +27,9 @@ private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
+	void SetSkull();
+	void SetArm();
+
 	void StateUpdate(float _DeltaTime);
 
 private:
@@ -34,9 +37,11 @@ private:
 	UImageRenderer* RB_SkullRenderer = nullptr;
 	UImageRenderer* LT_SkullRenderer = nullptr;
 	UImageRenderer* RT_SkullRenderer = nullptr;
+	static const FVector SkullScale;
 
 	UImageRenderer* L_ArmRenderer = nullptr;
 	UImageRenderer* R_ArmRenderer = nullptr;
+	static const FVector ArmScale;
 
 	ESinSkullState State = ESinSkullState::None;
 	static bool IsLoad;
