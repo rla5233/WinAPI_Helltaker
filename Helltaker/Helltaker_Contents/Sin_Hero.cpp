@@ -44,21 +44,27 @@ void Sin_Hero::Idle(float _DeltaTime)
 
 void Sin_Hero::MoveYStart()
 {
+	IsMoveY = true;
 }
 
 void Sin_Hero::MoveY(float _DeltaTime)
 {
+	MoveY_Update(_DeltaTime);
 }
 
 void Sin_Hero::MoveY_Update(float _DeltaTime)
 {
+	if (true == IsMoveY)
+	{
+		AddActorLocation({ 0.0f, SpeedY * _DeltaTime });
+	}
 }
 
 void Sin_Hero::Tick(float _DeltaTime)
 {
 	HeroBase::Tick(_DeltaTime);
 
-	MoveY_Update(_DeltaTime);
+	StateUpdate(_DeltaTime);
 }
 
 void Sin_Hero::StateUpdate(float _DeltaTime)

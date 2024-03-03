@@ -85,8 +85,6 @@ private:
 	void AllThornMoveOn();
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
-	void HeroMoveOn();
-	void HeroMoveY_Update(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
