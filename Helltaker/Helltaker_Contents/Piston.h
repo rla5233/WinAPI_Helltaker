@@ -29,8 +29,11 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
-	UImageRenderer* L_ImageRenderer = nullptr;
-	UImageRenderer* R_ImageRenderer = nullptr;
+	UImageRenderer* LT_ImageRenderer = nullptr;
+	UImageRenderer* RT_ImageRenderer = nullptr;
+
+	UImageRenderer* LB_ImageRenderer = nullptr;
+	UImageRenderer* RB_ImageRenderer = nullptr;
 
 
 	ESinPistonState State = ESinPistonState::None;

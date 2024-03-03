@@ -31,8 +31,7 @@ void SinChapterManager::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
 
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_BPiston.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_TPiston.png");
+
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LChainLink.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
 
