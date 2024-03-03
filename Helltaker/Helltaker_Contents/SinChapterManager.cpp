@@ -2,13 +2,13 @@
 
 #include "BackGround.h"
 #include "SinComponent.h"
+#include "ChainLink.h"
 #include "Sin_Thorn.h"
 #include "Sin_Hero.h"
 #include "HeroLife.h"
 #include "Shield.h"
 #include "Bridge.h"
 #include "Piston.h"
-#include "Chain.h"
 #include "Skull.h"
 #include "Gear.h"
 #include "Pit.h"
@@ -49,7 +49,7 @@ void SinChapterManager::M_CreateSinMap()
 
 	M_CreateSinPiston();
 	M_CreateSinSkull();
-	M_CreateSinChain();
+	M_CreateSinChainLink();
 
 	M_CreateSinBridge();
 	M_CreateThorn();
@@ -136,16 +136,16 @@ void SinChapterManager::M_CreateSinSkull()
 	AllMapRenderActors.push_back(SinSkull);
 }
 
-void SinChapterManager::M_CreateSinChain()
+void SinChapterManager::M_CreateSinChainLink()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float ScaleY = WinScale.Y * Chain::GetScale().Y;
+	float ScaleY = WinScale.Y * ChainLink::GetScale().Y;
 	float PosY = WinScale.Y * 0.12f;
 
 	SinChain.reserve(8);
 	for (int i = 0; i < 8; i++)
 	{
-		SinChain.push_back(SpawnActor<Chain>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinChain.push_back(SpawnActor<ChainLink>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinChain[i]->SetName("SinChain");
 		SinChain[i]->SetActorLocation({ WinScale.hX(), PosY });
 		SinChain[i]->StateChange(ESinChainState::Idle);
@@ -336,7 +336,7 @@ void SinChapterManager::SinBridgeMoveOn()
 
 void SinChapterManager::SinChainMoveOn()
 {
-	for (Chain* Chain : SinChain)
+	for (ChainLink* Chain : SinChain)
 	{
 		if (nullptr == Chain)
 		{

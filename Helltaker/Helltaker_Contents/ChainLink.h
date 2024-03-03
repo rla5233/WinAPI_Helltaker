@@ -3,18 +3,18 @@
 #include "SinComponent.h"
 
 // Ό³Έν :
-class Chain : public SinComponent
+class ChainLink : public SinComponent
 {
 public:
 	// constructor destructor
-	Chain();
-	~Chain();
+	ChainLink();
+	~ChainLink();
 	
 	// delete Function
-	Chain(const Chain& _Other) = delete;
-	Chain(Chain&& _Other) noexcept = delete;
-	Chain& operator=(const Chain& _Other) = delete;
-	Chain& operator=(Chain&& _Other) noexcept = delete;
+	ChainLink(const ChainLink& _Other) = delete;
+	ChainLink(ChainLink&& _Other) noexcept = delete;
+	ChainLink& operator=(const ChainLink& _Other) = delete;
+	ChainLink& operator=(ChainLink&& _Other) noexcept = delete;
 
 	static const FVector& GetScale()
 	{

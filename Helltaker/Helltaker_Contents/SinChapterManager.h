@@ -5,12 +5,12 @@
 #include <EngineCore/Level.h>
 
 class SinComponent;
+class ChainLink;
 class Sin_Thorn;
 class Sin_Hero;
 class HeroLife;
 class Bridge;
 class Piston;
-class Chain;
 class Skull;
 class Gear;
 class Pit;
@@ -39,7 +39,7 @@ public:
 
 	void M_CreateSinPiston();
 	void M_CreateSinSkull();
-	void M_CreateSinChain();
+	void M_CreateSinChainLink();
 
 	void M_CreateSinBridge();
 
@@ -58,7 +58,7 @@ public:
 		return SinBridge.size();
 	}
 
-	size_t GetSinChainSize() const
+	size_t GetSinChainLinkSize() const
 	{
 		return SinChain.size();
 	}
@@ -99,7 +99,7 @@ private:
 	Piston* UpPiston = nullptr;
 	Piston* DownPiston = nullptr;
 	Skull* SinSkull = nullptr;
-	std::vector<Chain*> SinChain;
+	std::vector<ChainLink*> SinChain;
 
 	std::vector<Bridge*> SinBridge;
 

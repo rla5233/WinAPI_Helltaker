@@ -133,8 +133,10 @@
     <ClInclude Include="Piston.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
-    <ClInclude Include="Chain.h" />
     <ClInclude Include="Sin_Hero.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
+    <ClInclude Include="ChainLink.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
   </ItemGroup>
@@ -268,8 +270,10 @@
     <ClCompile Include="Piston.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
-    <ClCompile Include="Chain.cpp" />
     <ClCompile Include="Sin_Hero.cpp">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="ChainLink.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>

@@ -171,7 +171,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Chain.h">
+    <ClInclude Include="ChainLink.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -357,7 +357,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Chain.cpp">
+    <ClCompile Include="ChainLink.cpp">
       <SubType>
       </SubType>
     </ClCompile>

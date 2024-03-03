@@ -1,21 +1,21 @@
-#include "Chain.h"
+#include "ChainLink.h"
 
 #include "SinChapterManager.h"
 
-bool Chain::IsLoad = false;
+bool ChainLink::IsLoad = false;
 
-const FVector Chain::Scale = { 0.0375f, 0.1388f };
-const float Chain::SpeedY = -150.0f;
+const FVector ChainLink::Scale = { 0.0375f, 0.1388f };
+const float ChainLink::SpeedY = -150.0f;
 
-Chain::Chain()
+ChainLink::ChainLink()
 {
 }
 
-Chain::~Chain()
+ChainLink::~ChainLink()
 {
 }
 
-void Chain::BeginPlay()
+void ChainLink::BeginPlay()
 {
 	SinComponent::BeginPlay();
 
@@ -31,7 +31,7 @@ void Chain::BeginPlay()
 	R_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Mid);
 }
 
-void Chain::IdleStart()
+void ChainLink::IdleStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float PosX = WinScale.X * 0.412f;
@@ -43,36 +43,36 @@ void Chain::IdleStart()
 	R_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
 }
 
-void Chain::Idle(float _DeltaTime)
+void ChainLink::Idle(float _DeltaTime)
 {
 }
 
-void Chain::MoveStart()
+void ChainLink::MoveStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float ScaleY = WinScale.Y * Scale.Y;
 
 	SetEndPosY(-(ScaleY * 0.5f));
 
-	float ChainCount = static_cast<float>(GetSinChapter()->GetSinChainSize());
+	float ChainCount = static_cast<float>(GetSinChapter()->GetSinChainLinkSize());
 	SetResetPosY(ScaleY * (ChainCount - 0.5f));
 
 	MoveOn();
 }
 
-void Chain::Move(float _DeltaTime)
+void ChainLink::Move(float _DeltaTime)
 {
 	MoveY_Update(SpeedY, _DeltaTime);
 }
 
-void Chain::Tick(float _DeltaTime)
+void ChainLink::Tick(float _DeltaTime)
 {
 	SinComponent::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
 
-void Chain::StateUpdate(float _DeltaTime)
+void ChainLink::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
@@ -85,10 +85,10 @@ void Chain::StateUpdate(float _DeltaTime)
 	}
 }
 
-void Chain::StateChange(ESinChainState _State)
+void ChainLink::StateChange(ESinChainState _State)
 {
 	if (State != _State)
-	{	
+	{
 		switch (_State)
 		{
 		case ESinChainState::Idle:
