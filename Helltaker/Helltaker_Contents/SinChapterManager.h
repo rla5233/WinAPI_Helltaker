@@ -88,6 +88,8 @@ private:
 
 	void StateUpdate(float _DeltaTime);
 
+	void DebugMode();
+
 private:
 	std::list<AActor*> AllMapRenderActors;
 

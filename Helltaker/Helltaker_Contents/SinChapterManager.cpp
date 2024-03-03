@@ -13,6 +13,8 @@
 #include "Gear.h"
 #include "Pit.h"
 
+#include <EngineCore/EngineDebug.h>
+
 bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::HeroDelayTime = 0.129f;
@@ -418,6 +420,7 @@ void SinChapterManager::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+	DebugMode();
 }
 
 void SinChapterManager::StateUpdate(float _DeltaTime)
@@ -432,6 +435,21 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 		break;
 	case ESinState::Phase2:
 		break;
+	}
+}
+
+void SinChapterManager::DebugMode()
+{
+	if (UEngineInput::IsDown('B'))
+	{
+		GEngine->EngineDebugSwitch();
+	}
+
+	if (GEngine->IsDebug())
+	{
+		FVector CurPos = PlayerHero->GetActorLocation();
+
+		UEngineDebug::DebugTextPrint("PlayerPos : " + CurPos.ToString(), 20);
 	}
 }
 

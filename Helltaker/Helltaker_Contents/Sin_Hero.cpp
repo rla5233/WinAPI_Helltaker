@@ -14,7 +14,28 @@ Sin_Hero::~Sin_Hero()
 
 void Sin_Hero::ActionCheck()
 {
-	StateChange(EHeroState::Move);
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float Min_X = WinScale.X * 0.35f;
+	float Max_X = WinScale.X * 0.65f;
+
+	if (Min_X >= GetActorLocation().X)
+	{
+		if (EMoveActorDir::Left != GetMoveDir())
+		{
+			StateChange(EHeroState::Move);
+		}
+	}	
+	else if (Max_X <= GetActorLocation().X)
+	{
+		if (EMoveActorDir::Right != GetMoveDir())
+		{
+			StateChange(EHeroState::Move);
+		}
+	}
+	else
+	{
+		StateChange(EHeroState::Move);
+	}
 }
 
 void Sin_Hero::MoveStart()
