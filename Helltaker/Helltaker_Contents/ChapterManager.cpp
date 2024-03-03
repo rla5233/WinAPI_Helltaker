@@ -453,7 +453,6 @@ void ChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 	}
 }
 
-
 void ChapterManager::CutScene(float _DeltaTime)
 {
 	ResetCheck();

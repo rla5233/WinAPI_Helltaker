@@ -39,7 +39,6 @@ void MoveActor::Tick(float _DeltaTime)
 void MoveActor::MoveStart()
 {
 	MovePosCheck();
-	CreateRandomMoveEffect();
 }
 
 void MoveActor::MovePosCheck()
@@ -79,7 +78,6 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		FVector Diff = NextLocation - CurLocation;
 
 		EffectPosUpdate(Diff);
-	
 
 		if (1.0f <= MoveTime)
 		{
@@ -124,9 +122,20 @@ void MoveActor::SeeDirChange(EActorSeeDir _Dir)
 	SeeDir = _Dir;
 }
 
-void MoveActor::CreateRandomMoveEffect()
+void MoveActor::CreateRandomMoveEffect(EChapterType _ChapType /* = EChapterType::Default */)
 {
-	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::RenderActor);
+	UImageRenderer* Renderer = nullptr;
+
+	switch (_ChapType)
+	{
+	case EChapterType::Default:
+		Renderer = CreateImageRenderer(RenderOrder::RenderActor);
+		break;
+	case EChapterType::Sin:
+		Renderer = CreateImageRenderer(SinRenderOrder::Mid);
+		break;
+	}
+	
 	Renderer->SetImage("Move");
 
 	int RandomValue = rand() % 3;

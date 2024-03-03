@@ -111,16 +111,10 @@ void Hero::KickCheck()
 	GetChapter()->M_UpdateHeroActionPoint();
 }
 
-void Hero::ChapterCameraPosUpdate(const FVector& _Diff)
-{
-	HeroBase::ChapterCameraPosUpdate(_Diff);
-
-	GetChapter()->CameraPosUpdate(_Diff);
-}
-
 void Hero::MoveStart()
 {
 	HeroBase::MoveStart();
+	CreateRandomMoveEffect();
 
 	GetChapter()->M_ChangeThornState();
 	UpdateActionPoint();
@@ -136,7 +130,7 @@ void Hero::Move(float _DeltaTime)
 	FVector Diff = NextLocation - CurLocation;
 	if (GetPMoveDir() == Point::Down || GetPMoveDir() == Point::Up)
 	{
-		ChapterCameraPosUpdate(Diff);
+		GetChapter()->CameraPosUpdate(Diff);
 	}
 
 	if (false == IsMove())

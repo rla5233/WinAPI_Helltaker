@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "SinComponent.h"
 #include "Sin_Thorn.h"
+#include "Sin_Hero.h"
 #include "HeroLife.h"
 #include "Shield.h"
 #include "Bridge.h"
@@ -13,6 +14,8 @@
 #include "Pit.h"
 
 bool SinChapterManager::IsLoad = false;
+
+const float SinChapterManager::HeroDelayTime = 0.15f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -44,16 +47,14 @@ void SinChapterManager::M_CreateSinMap()
 
 	M_CreateSinPiston();
 	M_CreateSinSkull();
+	M_CreateSinChain();
 
 	M_CreateSinBridge();
 	M_CreateThorn();
-
-
-	//
-	M_CreateSinChain();
-	//
 	
 	M_CreateSinHeroLife();
+
+	M_SpawnHero();
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
@@ -74,6 +75,7 @@ void SinChapterManager::M_CreateSinPit()
 	for (int i = 0; i < 3; i++)
 	{		
 		SinPit.push_back(SpawnActor<Pit>(static_cast<int>(SinUpdateOrder::UnderBackGround)));
+		SinPit[i]->SetName("SinPit");
 		SinPit[i]->SetActorLocation({WinScale.hX(), PosY });
 		SinPit[i]->StateChange(ESinPitState::Idle);
 		PosY += ScaleY;
@@ -87,6 +89,7 @@ void SinChapterManager::M_CreateSinGear()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float PosY = WinScale.Y * 0.861f;
 	SinGear = SpawnActor<Gear>(static_cast<int>(SinUpdateOrder::Bottom));
+	SinGear->SetName("SinGear");
 	SinGear->SetActorLocation({ WinScale.hX(), PosY });
 	SinGear->StateChange(ESinGearState::Idle);
 	
@@ -99,6 +102,7 @@ void SinChapterManager::M_CreateSinHeroLife()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float PosY = WinScale.Y * 0.962f;
 	SinHeroLife = SpawnActor<HeroLife>(static_cast<int>(SinUpdateOrder::Top));
+	SinHeroLife->SetName("SinHeroLife");
 	SinHeroLife->SetActorLocation({ WinScale.hX(), PosY });
 	SinHeroLife->StateChange(ESinHeroLifeState::Idle);
 
@@ -111,6 +115,7 @@ void SinChapterManager::M_CreateSinShield()
 	float PosY = WinScale.Y * 0.322f;
 
 	Shield* SinShield = SpawnActor<Shield>(static_cast<int>(SinUpdateOrder::Mid));
+	SinShield->SetName("SinShield");
 	SinShield->SetActorLocation({ WinScale.hX(), PosY });
 	
 	AllMapRenderActors.push_back(SinShield);
@@ -122,6 +127,7 @@ void SinChapterManager::M_CreateSinSkull()
 	float PosY = WinScale.Y * 0.665f;
 
 	SinSkull = SpawnActor<Skull>(static_cast<int>(SinUpdateOrder::Top));
+	SinSkull->SetName("SinSkull");
 	SinSkull->SetActorLocation({ WinScale.hX(), PosY });
 	SinSkull->StateChange(ESinSkullState::Idle);
 
@@ -138,6 +144,7 @@ void SinChapterManager::M_CreateSinChain()
 	for (int i = 0; i < 8; i++)
 	{
 		SinChain.push_back(SpawnActor<Chain>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinChain[i]->SetName("SinChain");
 		SinChain[i]->SetActorLocation({ WinScale.hX(), PosY });
 		SinChain[i]->StateChange(ESinChainState::Idle);
 
@@ -153,6 +160,7 @@ void SinChapterManager::M_CreateSinPiston()
 	float UpPosY = WinScale.Y * (-0.056f);
 
 	UpPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Top));
+	UpPiston->SetName("SinPiston");
 	UpPiston->SetActorLocation({ WinScale.hX(), UpPosY });
 	UpPiston->StateChange(ESinPistonState::Idle);
 	
@@ -160,6 +168,7 @@ void SinChapterManager::M_CreateSinPiston()
 
 	float DownPosY = WinScale.Y * 1.24f;
 	DownPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Bottom));
+	DownPiston->SetName("SinPiston");
 	DownPiston->SetActorLocation({ WinScale.hX(), DownPosY });
 	DownPiston->StateChange(ESinPistonState::Idle);
 
@@ -176,6 +185,7 @@ void SinChapterManager::M_CreateSinBridge()
 	for (int i = 0; i < 3; i++)
 	{
 		SinBridge.push_back(SpawnActor<Bridge>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinBridge[i]->SetName("SinBridge");
 		SinBridge[i]->SetActorLocation(Pos);
 		SinBridge[i]->StateChange(ESinBridgeState::Idle);
 
@@ -199,6 +209,7 @@ void SinChapterManager::M_CreateThorn()
 		for (int x = 0; x < 7; x++)
 		{
 			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
+			UpThorn[y][x]->SetName("UpThorn");
 			UpThorn[y][x]->SetActorLocation({ UpPos.X + IntervalX, UpPos.Y });
 
 			if (y == 2)
@@ -229,8 +240,9 @@ void SinChapterManager::M_CreateThorn()
 		for (int x = 0; x < 7; x++)
 		{
 			DownThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
+			DownThorn[y][x]->SetName("DownThorn");
 			DownThorn[y][x]->SetActorLocation({ DownPos.X + IntervalX, DownPos.Y });
-
+			
 			if (y == 0)
 			{
 				DownThorn[y][x]->StateChange(EThornState::Idle);
@@ -250,12 +262,26 @@ void SinChapterManager::M_CreateThorn()
 	}
 }
 
+void SinChapterManager::M_SpawnHero()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = { WinScale.hX(), WinScale.hY() };
+	PlayerHero = SpawnActor<Sin_Hero>(static_cast<int>(SinUpdateOrder::Hero));
+	PlayerHero->SetName("Sin_Hero");
+	PlayerHero->SetActorLocation(Pos);
+	PlayerHero->StateChange(EHeroState::Idle);
+
+	AllMapRenderActors.push_back(PlayerHero);
+}
+
 void SinChapterManager::IntroStart()
 {
 }
 
 void SinChapterManager::Intro(float _DeltaTime)
 {
+	HeroDelayTimeUpdate(_DeltaTime);
+
 	if (UEngineInput::IsDown(VK_SPACE))
 	{
 		M_StateChange(ESinState::Phase1);
@@ -275,6 +301,7 @@ void SinChapterManager::Phase1Start()
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
+	HeroDelayTimeUpdate(_DeltaTime);
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -356,6 +383,21 @@ void SinChapterManager::AllThornMoveOn()
 			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.1f);
 			Thorn->MoveOn();
 		}
+	}
+}
+
+void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
+{
+	if (false == PlayerHero->GetCanActionCheck())
+	{
+		if (0.0f >= HeroDelayTimeCount)
+		{
+			PlayerHero->SetCanActionCheck(true);
+			HeroDelayTimeCount = HeroDelayTime;
+			return;
+		}
+
+		HeroDelayTimeCount -= _DeltaTime;
 	}
 }
 

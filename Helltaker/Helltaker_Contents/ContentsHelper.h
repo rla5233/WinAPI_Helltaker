@@ -125,6 +125,13 @@ enum class RenderOrder
 	Transition
 };
 
+enum class EChapterType
+{
+	None,
+	Default,
+	Sin
+};
+
 enum class EBackGroundType
 {
 	None,

@@ -33,8 +33,6 @@ protected:
 
 	void KickStart() override;
 
-	void ChapterCameraPosUpdate(const FVector& _Diff) override;
-
 private:
 	void ThornHitCheck() override;
 	void ActionCheck();

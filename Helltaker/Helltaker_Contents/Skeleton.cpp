@@ -173,6 +173,7 @@ void Skeleton::Move(float _DeltaTime)
 void Skeleton::MoveStart()
 {
 	MoveActor::MoveStart();
+	CreateRandomMoveEffect();
 
 	HitActorInfoUpdate(EHitActorState::Move);
 }

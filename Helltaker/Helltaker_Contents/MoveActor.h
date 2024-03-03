@@ -66,7 +66,6 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
 
-	virtual void ChapterCameraPosUpdate(const FVector& _Diff) {};
 	virtual void ThornHitCheck() {};
 
 	virtual void MoveStart();
@@ -75,9 +74,9 @@ protected:
 	EMoveActorDir MoveDir = EMoveActorDir::None;
 	EActorSeeDir SeeDir = EActorSeeDir::None;
 
+	void CreateRandomMoveEffect(EChapterType _ChapType = EChapterType::Default);
 private:
 	void MovePosCheck();
-	void CreateRandomMoveEffect();
 
 private:
 	std::list<UImageRenderer*> AllMoveEffectRenderer;

@@ -137,6 +137,7 @@ void Stone::Move(float _DeltaTime)
 void Stone::MoveStart()
 {
 	MoveActor::MoveStart();
+	CreateRandomMoveEffect();
 
 	CreateRandomBigHitEffect();
 	HitActorInfoUpdate(EHitActorState::Move);

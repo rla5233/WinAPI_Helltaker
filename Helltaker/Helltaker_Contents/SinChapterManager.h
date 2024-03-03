@@ -6,6 +6,7 @@
 
 class SinComponent;
 class Sin_Thorn;
+class Sin_Hero;
 class HeroLife;
 class Bridge;
 class Piston;
@@ -38,15 +39,14 @@ public:
 
 	void M_CreateSinPiston();
 	void M_CreateSinSkull();
+	void M_CreateSinChain();
 
 	void M_CreateSinBridge();
 
 	void M_CreateThorn();
 	void M_CreateSinHeroLife();
 
-	
-	void M_CreateSinChain();
-
+	void M_SpawnHero();
 
 	size_t GetSinPitSize() const
 	{
@@ -85,6 +85,8 @@ private:
 
 	void AllThornMoveOn();
 
+	void HeroDelayTimeUpdate(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
@@ -104,6 +106,9 @@ private:
 	std::vector<std::vector<Sin_Thorn*>> DownThorn;
 
 	HeroLife* SinHeroLife = nullptr;
+	Sin_Hero* PlayerHero = nullptr;
+	static const float HeroDelayTime;
+	float HeroDelayTimeCount = HeroDelayTime;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

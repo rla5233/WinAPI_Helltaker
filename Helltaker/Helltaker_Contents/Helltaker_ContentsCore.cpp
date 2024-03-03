@@ -73,6 +73,6 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<SinOpening>("SinOpening");
 	//ChangeLevel("SinOpening");
 
-	//CreateLevel<SinChapter1>("SinChapter1");
-	//ChangeLevel("SinChapter1");
+	CreateLevel<SinChapter1>("SinChapter1");
+	ChangeLevel("SinChapter1");
 }
