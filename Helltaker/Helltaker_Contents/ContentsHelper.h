@@ -296,3 +296,9 @@ enum class ESinBridgeState
 	Move,
 	Stop,
 };
+
+enum class ESinSkullState
+{
+	None,
+	Idle
+};

@@ -33,6 +33,7 @@ public:
 
 	void M_CreateSinShield();
 
+	void M_CreateSinBridge();
 
 	void M_CreateThorn();
 	void M_CreateSinHeroLife();
@@ -42,7 +43,6 @@ public:
 	void M_CreateSinChain();
 	void M_CreateSinPiston();
 
-	void M_CreateSinBridge();
 
 	size_t GetSinPitSize() const
 	{
