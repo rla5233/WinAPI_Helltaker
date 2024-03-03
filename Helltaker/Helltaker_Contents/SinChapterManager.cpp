@@ -7,6 +7,7 @@
 #include "Shield.h"
 #include "Bridge.h"
 #include "Gear.h"
+#include "Skull.h"
 #include "Pit.h"
 
 bool SinChapterManager::IsLoad = false;
@@ -123,10 +124,11 @@ void SinChapterManager::M_CreateSinSkull()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float PosY = WinScale.Y * 0.665f;
 
-	Skull = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Top));
-	Skull->SetActorLocation({ WinScale.hX(), PosY });
+	SinSkull = SpawnActor<Skull>(static_cast<int>(SinUpdateOrder::Top));
+	SinSkull->SetActorLocation({ WinScale.hX(), PosY });
+	SinSkull->StateChange(ESinSkullState::Idle);
 
-	AllMapRenderActors.push_back(Skull);
+	AllMapRenderActors.push_back(SinSkull);
 }
 
 void SinChapterManager::M_CreateSinChain()

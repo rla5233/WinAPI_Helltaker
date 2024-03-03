@@ -62,12 +62,13 @@ void Skull::SetArm()
 	L_ArmRenderer->SetTransform({ { -Pos.X, Pos.Y },  WinScale * ArmScale });
 
 	R_ArmRenderer->SetImage("Sin_RArm.png");
-	R_ArmRenderer->SetTransform({ { -Pos.X, Pos.Y },  WinScale * ArmScale });
+	R_ArmRenderer->SetTransform({ { Pos.X, Pos.Y },  WinScale * ArmScale });
 }
 
 void Skull::IdleStart()
 {
 	SetSkull();
+	SetArm();
 }
 
 void Skull::Idle(float _DeltaTime)
@@ -77,12 +78,31 @@ void Skull::Idle(float _DeltaTime)
 void Skull::Tick(float _DeltaTime)
 {
 	SinComponent::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
 }
 
 void Skull::StateUpdate(float _DeltaTime)
 {
+	switch (State)
+	{
+	case ESinSkullState::Idle:
+		Idle(_DeltaTime);
+		break;
+	}
 }
 
 void Skull::StateChange(ESinSkullState _State)
 {
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case ESinSkullState::Idle:
+			IdleStart();
+			break;
+		}
+	}
+
+	State = _State;
 }

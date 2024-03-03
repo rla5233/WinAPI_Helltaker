@@ -8,6 +8,7 @@ class SinComponent;
 class Sin_Thorn;
 class HeroLife;
 class Bridge;
+class Skull;
 class Gear;
 class Pit;
 
@@ -32,14 +33,14 @@ public:
 	void M_CreateSinGear();
 
 	void M_CreateSinShield();
+	void M_CreateSinSkull();
 
 	void M_CreateSinBridge();
 
 	void M_CreateThorn();
 	void M_CreateSinHeroLife();
 
-	//
-	void M_CreateSinSkull();
+	
 	void M_CreateSinChain();
 	void M_CreateSinPiston();
 
@@ -85,6 +86,7 @@ private:
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
 
+	Skull* SinSkull = nullptr;
 	std::vector<Bridge*> SinBridge;
 
 	HeroLife* SinHeroLife = nullptr;
@@ -92,7 +94,6 @@ private:
 	//
 	SinComponent* UpPiston = nullptr;
 	SinComponent* DownPiston = nullptr;
-	SinComponent* Skull = nullptr;
 
 	std::vector<SinComponent*> SinChain;
 	static const FVector SinChainSCale;
