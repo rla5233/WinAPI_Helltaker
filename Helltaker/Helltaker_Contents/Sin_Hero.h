@@ -23,6 +23,8 @@ protected:
 	void ActionCheck() override;
 	void KickCheck() override;
 
+	void ThornHitCheck() override;
+
 private:
 
 };

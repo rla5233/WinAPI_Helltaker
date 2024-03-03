@@ -50,6 +50,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	virtual void MoveStart() override;
+	virtual void Move(float _DeltaTime);
 	
 	virtual void KickStart();
 	
@@ -61,8 +62,6 @@ protected:
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
-	
-	void Move(float _DeltaTime);
 	
 	void Kick(float _DeltaTime);
 	

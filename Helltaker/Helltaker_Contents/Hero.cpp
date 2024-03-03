@@ -23,11 +23,9 @@ void Hero::ActionCheck()
 	{
 	case EMoveActorDir::Left:
 		SetNextLocationPoint(CurPoint + Point::Left);
-		SeeDirChange(EActorSeeDir::Left);
 		break;
 	case EMoveActorDir::Right:
 		SetNextLocationPoint(CurPoint + Point::Right);
-		SeeDirChange(EActorSeeDir::Right);
 		break;
 	case EMoveActorDir::Up:
 		SetNextLocationPoint(CurPoint + Point::Up);
@@ -115,7 +113,7 @@ void Hero::KickCheck()
 
 void Hero::ChapterCameraPosUpdate(const FVector& _Diff)
 {
-	HitActor::ChapterCameraPosUpdate(_Diff);
+	HeroBase::ChapterCameraPosUpdate(_Diff);
 
 	GetChapter()->CameraPosUpdate(_Diff);
 }
@@ -126,6 +124,16 @@ void Hero::MoveStart()
 
 	GetChapter()->M_ChangeThornState();
 	UpdateActionPoint();
+}
+
+void Hero::Move(float _DeltaTime)
+{
+	HeroBase::Move(_DeltaTime);
+
+	if (false == IsMove())
+	{
+		GetChapter()->M_UpdateHeroActionPoint();
+	}
 }
 
 void Hero::KickStart()

@@ -81,7 +81,7 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 		EffectPosUpdate(Diff);
 		if (PMoveDir == Point::Down || PMoveDir == Point::Up)
 		{
-			ChapterCameraPosUpdate(Diff);
+			//ChapterCameraPosUpdate(Diff);
 		}		
 
 		if (1.0f <= MoveTime)
@@ -89,7 +89,6 @@ void MoveActor::MoveOneBlock(float _DeltaTime)
 			MoveTime = 0.0f;
 			CurLocationPoint += PMoveDir;
 			ThornHitCheck();
-			GetChapter()->M_UpdateHeroActionPoint();
 			IsMoveValue = false;
 		}
 	}

@@ -29,6 +29,8 @@ public:
 
 protected:
 	void MoveStart() override;
+	void Move(float _DeltaTime) override;
+
 	void KickStart() override;
 
 	void ChapterCameraPosUpdate(const FVector& _Diff) override;
