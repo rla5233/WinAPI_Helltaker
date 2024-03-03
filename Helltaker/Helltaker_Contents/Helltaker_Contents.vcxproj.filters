@@ -134,6 +134,9 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
     <ClInclude Include="Chain.h" />
+    <ClInclude Include="Sin_Hero.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -266,6 +269,9 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
     <ClCompile Include="Chain.cpp" />
+    <ClCompile Include="Sin_Hero.cpp">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Manager">

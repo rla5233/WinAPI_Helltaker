@@ -25,8 +25,8 @@ public:
 		ActionPoint = _Value;
 	}
 
-	// Debug
 	void UpdateActionPoint();
+
 protected:
 	void MoveStart() override;
 

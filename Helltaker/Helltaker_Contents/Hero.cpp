@@ -124,13 +124,13 @@ void Hero::MoveStart()
 {
 	HeroBase::MoveStart();
 
+	GetChapter()->M_ChangeThornState();
 	UpdateActionPoint();
 }
 
-// Debug
 void Hero::UpdateActionPoint()
 {
-	// Debug
+	// Cheat
 	if (true == GetCheatMode())
 	{
 		return;

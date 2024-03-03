@@ -176,8 +176,6 @@ void HeroBase::MoveStart()
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * MoveScale } });
 	CanActionCheck = false;
 
-	GetChapter()->M_ChangeThornState();
-
 	switch (SeeDir)
 	{
 	case EActorSeeDir::Left:
