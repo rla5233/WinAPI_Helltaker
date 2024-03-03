@@ -102,8 +102,6 @@ private:
 
 	//
 	std::vector<SinComponent*> SinChain;
-	static const FVector SinChainSCale;
-	static const float SinChainSpeedY;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
