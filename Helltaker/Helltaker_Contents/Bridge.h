@@ -37,7 +37,8 @@ private:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-
+	static const FVector Scale;
+	static const float SpeedY;
 
 	ESinBridgeState State = ESinBridgeState::None;
 	static bool IsLoad;

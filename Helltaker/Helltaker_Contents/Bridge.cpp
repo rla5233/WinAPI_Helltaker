@@ -1,5 +1,10 @@
 #include "Bridge.h"
 
+bool Bridge::IsLoad = false;
+
+const FVector Bridge::Scale = { 0.4912f, 0.5555f };;
+const float Bridge::SpeedY = -150.0f;
+
 Bridge::Bridge()
 {
 }
@@ -10,10 +15,24 @@ Bridge::~Bridge()
 
 void Bridge::BeginPlay()
 {
+	SinComponent::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
+
+		IsLoad = true;
+	}
+
+	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Mid);
 }
 
 void Bridge::IdleStart()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+
+	ImageRenderer->SetImage("Sin_Bridge.png");
+	ImageRenderer->SetTransform({ { 0.0f, 0.0f },  WinScale * Scale });
 }
 
 void Bridge::Idle(float _DeltaTime)

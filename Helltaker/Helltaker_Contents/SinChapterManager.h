@@ -85,8 +85,6 @@ private:
 
 	//
 	std::vector<SinComponent*> SinBridge;
-	static const FVector SinBridgeScale;
-	static const float SinBridgeSpeedY;
 	
 	SinComponent* UpPiston = nullptr;
 	SinComponent* DownPiston = nullptr;

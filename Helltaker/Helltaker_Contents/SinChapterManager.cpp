@@ -10,9 +10,6 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const FVector SinChapterManager::SinBridgeScale = { 0.4912f, 0.5555f };
-const float SinChapterManager::SinBridgeSpeedY = -150.0f;
-
 const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1388f };
 const float SinChapterManager::SinChainSpeedY = -150.0f;
 
@@ -41,9 +38,6 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_TPiston.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LChainLink.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
-
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Bridge.png");
-		
 
 		IsLoad = true;
 	}
@@ -238,7 +232,6 @@ void SinChapterManager::M_CreateSinPiston()
 void SinChapterManager::M_CreateSinBridge()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * SinBridgeScale;
 	FVector Pos = { WinScale.hX(), WinScale.Y * 0.038f };
 
 	SinBridge.reserve(3);
@@ -246,9 +239,6 @@ void SinChapterManager::M_CreateSinBridge()
 	{
 		SinBridge.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinBridge[i]->SetActorLocation(Pos);
-		SinBridge[i]->CreateImageRenderer("Bridge", SinRenderOrder::Mid);
-		SinBridge[i]->GetImageRenderer("Bridge")->SetImage("Sin_Bridge.png");
-		SinBridge[i]->GetImageRenderer("Bridge")->SetTransform({ { 0.0f, 0.0f },  Scale });
 
 		Pos.Y += Scale.Y;
 		AllMapRenderActors.push_back(SinBridge[i]);
