@@ -15,7 +15,7 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const float SinChapterManager::HeroDelayTime = 0.15f;
+const float SinChapterManager::HeroDelayTime = 0.129f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -265,7 +265,7 @@ void SinChapterManager::M_CreateThorn()
 void SinChapterManager::M_SpawnHero()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { WinScale.hX(), WinScale.hY() };
+	FVector Pos = { WinScale.hX(), WinScale.Y * 0.576f };
 	PlayerHero = SpawnActor<Sin_Hero>(static_cast<int>(SinUpdateOrder::Hero));
 	PlayerHero->SetName("Sin_Hero");
 	PlayerHero->SetActorLocation(Pos);
