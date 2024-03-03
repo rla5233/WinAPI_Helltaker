@@ -33,6 +33,9 @@ private:
 	UImageRenderer* RT_ImageRenderer = nullptr;
 	static const FVector T_Scale;
 
+	UImageRenderer* ShadowRenderer = nullptr;
+	static const FVector Shadow_Scale;
+
 	static bool IsLoad;
 };
 

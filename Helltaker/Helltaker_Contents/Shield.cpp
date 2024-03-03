@@ -4,6 +4,7 @@ bool Shield::IsLoad = false;
 
 const FVector Shield::B_Scale = { 0.406f, 0.686f };
 const FVector Shield::T_Scale = { 0.2786f, 0.296f };
+const FVector Shield::Shadow_Scale = { 0.54f, 0.136f };
 
 Shield::Shield()
 {
@@ -23,6 +24,7 @@ void Shield::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RShield.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LTShield.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RTShield.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_Front.png");
 
 		IsLoad = true;
 	}
@@ -31,6 +33,8 @@ void Shield::BeginPlay()
 	RB_ImageRenderer = CreateImageRenderer(SinRenderOrder::Bottom);
 	LT_ImageRenderer = CreateImageRenderer(SinRenderOrder::Top);
 	RT_ImageRenderer = CreateImageRenderer(SinRenderOrder::Top);
+
+	ShadowRenderer = CreateImageRenderer(SinRenderOrder::Top);
 
 	SetShield();
 }
@@ -52,6 +56,9 @@ void Shield::SetShield()
 
 	RT_ImageRenderer->SetImage("Sin_RTShield.png");
 	RT_ImageRenderer->SetTransform({ { T_Pos.X, T_Pos.Y }, WinScale * T_Scale });
+
+	ShadowRenderer->SetImage("Sin_Front.png");
+	ShadowRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * Shadow_Scale });
 }
 
 void Shield::Tick(float _DeltaTime)
