@@ -288,3 +288,11 @@ enum class ESinHeroLifeState
 	Idle,
 	Hit
 };
+
+enum class ESinBridgeState
+{
+	None,
+	Idle,
+	Move,
+	Stop,
+};

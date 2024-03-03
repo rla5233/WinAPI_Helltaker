@@ -124,6 +124,9 @@
     <ClInclude Include="Shield.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -244,6 +247,9 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
     <ClCompile Include="Shield.cpp">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="Bridge.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>

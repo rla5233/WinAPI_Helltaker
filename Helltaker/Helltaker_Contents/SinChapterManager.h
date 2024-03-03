@@ -30,12 +30,13 @@ public:
 	void M_CreateSinPit();
 	void M_CreateSinGear();
 
+	void M_CreateSinShield();
+
 
 	void M_CreateThorn();
 	void M_CreateSinHeroLife();
 
 	//
-	void M_CreateSinShield();
 	void M_CreateSinSkull();
 	void M_CreateSinChain();
 	void M_CreateSinPiston();
