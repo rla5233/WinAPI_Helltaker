@@ -20,7 +20,7 @@ public:
 protected:
 	void MoveStart() override;
 
-	void ActionCheck(float _DeltaTime, int _Key1, int _Key2) override;
+	void ActionCheck() override;
 	void KickCheck() override;
 
 private:

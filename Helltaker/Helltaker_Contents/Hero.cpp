@@ -14,7 +14,7 @@ Hero::Hero()
 Hero::~Hero()
 {}
 
-void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
+void Hero::ActionCheck()
 {
 	const std::vector<std::vector<TileInfo>>& Map = GetChapter()->GetTileInfoVec();
 	Point CurPoint = GetLocationPoint();
@@ -51,7 +51,7 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 				return;
 			}
 
-			NextTileCheck(NextPoint, _DeltaTime, _Key1, _Key2);
+			NextTileCheck(NextPoint);
 			return;
 		}
 	}
@@ -60,12 +60,12 @@ void Hero::ActionCheck(float _DeltaTime, int _Key1, int _Key2)
 	StateChange(EHeroState::Idle);
 }
 
-void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
+void Hero::NextTileCheck(Point _Point)
 {
 	if (true == GetChapter()->IsLockBoxPoint() && IsHaveKey)
 	{
 		StateChange(EHeroState::None);
-		StateChange(EHeroState::Move, _DeltaTime);
+		StateChange(EHeroState::Move);
 		GetChapter()->DeleteLockBox();
 		return;
 	}
@@ -73,7 +73,7 @@ void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 	if (nullptr == GetChapter()->M_GetHitActor(_Point))
 	{
 		StateChange(EHeroState::None);
-		StateChange(EHeroState::Move, _DeltaTime);
+		StateChange(EHeroState::Move);
 
 		if (true == GetChapter()->IsKeyPoint())
 		{
@@ -84,7 +84,7 @@ void Hero::NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2)
 	else
 	{
 		StateChange(EHeroState::None);
-		StateChange(EHeroState::Kick, _DeltaTime, _Key1, _Key2);
+		StateChange(EHeroState::Kick);
 	}
 }
 
@@ -128,6 +128,17 @@ void Hero::MoveStart()
 	UpdateActionPoint();
 }
 
+void Hero::KickStart()
+{
+	HeroBase::KickStart();
+
+	GetChapter()->M_ChangeThornState();
+
+	Point NextPoint = GetNextLocationPoint();
+	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
+	Other->NextStateCheck(MoveDir);
+}
+
 void Hero::UpdateActionPoint()
 {
 	// Cheat
@@ -138,4 +149,3 @@ void Hero::UpdateActionPoint()
 
 	--ActionPoint;
 }
-

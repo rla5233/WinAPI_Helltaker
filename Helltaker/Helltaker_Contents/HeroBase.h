@@ -43,7 +43,7 @@ public:
 
 	void AllEffectActiveOff();
 
-	void StateChange(EHeroState _State, float _DeltaTime = 0, int _Key1 = 0, int _Key2 = 0);
+	void StateChange(EHeroState _State);
 
 protected:
 	void BeginPlay() override;
@@ -51,7 +51,9 @@ protected:
 
 	virtual void MoveStart() override;
 	
-	virtual void ActionCheck(float _DeltaTime, int _Key1, int _Key2) {};
+	virtual void KickStart();
+	
+	virtual void ActionCheck() {};
 	virtual void KickCheck() {};
 	
 	void CreateRandomHitEffect();
@@ -62,7 +64,6 @@ private:
 	
 	void Move(float _DeltaTime);
 	
-	void KickStart(float _DeltaTime, int _Key1, int _Key2);
 	void Kick(float _DeltaTime);
 	
 	void VictoryStart();

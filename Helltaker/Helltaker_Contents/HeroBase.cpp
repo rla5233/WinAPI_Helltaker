@@ -75,24 +75,24 @@ void HeroBase::InputCheck(float _DeltaTime)
 	if (UEngineInput::IsPress('W') || UEngineInput::IsPress(VK_UP))
 	{
 		MoveDirChange(EMoveActorDir::Up);
-		ActionCheck(_DeltaTime, 'W', VK_UP);
+		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('A') || UEngineInput::IsPress(VK_LEFT))
 	{
 		MoveDirChange(EMoveActorDir::Left);
 		SeeDirChange(EActorSeeDir::Left);
-		ActionCheck(_DeltaTime, 'A', VK_LEFT);
+		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('S') || UEngineInput::IsPress(VK_DOWN))
 	{
 		MoveDirChange(EMoveActorDir::Down);
-		ActionCheck(_DeltaTime, 'S', VK_DOWN);
+		ActionCheck();
 	}
 	else if (UEngineInput::IsPress('D') || UEngineInput::IsPress(VK_RIGHT))
 	{
 		MoveDirChange(EMoveActorDir::Right);
 		SeeDirChange(EActorSeeDir::Right);
-		ActionCheck(_DeltaTime, 'D', VK_RIGHT);
+		ActionCheck();
 	}
 
 	// Debug
@@ -219,16 +219,10 @@ void HeroBase::Kick(float _DeltaTime)
 	}
 }
 
-void HeroBase::KickStart(float _DeltaTime, int _Key1, int _Key2)
+void HeroBase::KickStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	CanActionCheck = false;
-
-	GetChapter()->M_ChangeThornState();
-
-	Point NextPoint = GetNextLocationPoint();
-	HitActor* Other = GetChapter()->M_GetHitActor(NextPoint);
-	Other->NextStateCheck(MoveDir);
 
 	switch (SeeDir)
 	{
@@ -312,7 +306,7 @@ void HeroBase::StateUpdate(float _DeltaTime)
 	}
 }
 
-void HeroBase::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _Key2)
+void HeroBase::StateChange(EHeroState _State)
 {
 	if (State != _State)
 	{
@@ -325,7 +319,7 @@ void HeroBase::StateChange(EHeroState _State, float _DeltaTime, int _Key1, int _
 			MoveStart();
 			break;
 		case EHeroState::Kick:
-			KickStart(_DeltaTime, _Key1, _Key2);
+			KickStart();
 			break;
 		case EHeroState::Victory:
 			VictoryStart();

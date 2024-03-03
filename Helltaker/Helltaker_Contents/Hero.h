@@ -29,14 +29,15 @@ public:
 
 protected:
 	void MoveStart() override;
+	void KickStart() override;
 
 	void ChapterCameraPosUpdate(const FVector& _Diff) override;
 
 private:
 	void ThornHitCheck() override;
-	void ActionCheck(float _DeltaTime, int _Key1, int _Key2);
+	void ActionCheck();
 	void KickCheck() override;
-	void NextTileCheck(Point _Point, float _DeltaTime, int _Key1, int _Key2);
+	void NextTileCheck(Point _Point);
 
 private:
 	int ActionPoint = -1;
