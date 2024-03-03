@@ -119,29 +119,11 @@ void SinChapterManager::M_CreateSinHeroLife()
 void SinChapterManager::M_CreateSinShield()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { WinScale.X * 0.177f, WinScale.Y * 0.322f };
-
-	FVector TopPos = { WinScale.X * 0.1132f, WinScale.Y * (-0.1949f) };
+	float PosY = WinScale.Y * 0.322f;
 
 	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
-	SinShield->SetActorLocation({ WinScale.hX(), Pos.Y });
-	SinShield->CreateImageRenderer("LShield", SinRenderOrder::Bottom);
-	SinShield->GetImageRenderer("LShield")->SetImage("Sin_LShield.png");
-	SinShield->GetImageRenderer("LShield")->SetTransform({ { -Pos.X, 0.0f },  Scale });
-
-	SinShield->SetActorLocation({ WinScale.hX(), Pos.Y });
-	SinShield->CreateImageRenderer("RShield", SinRenderOrder::Bottom);
-	SinShield->GetImageRenderer("RShield")->SetImage("Sin_RShield.png");
-	SinShield->GetImageRenderer("RShield")->SetTransform({ { Pos.X, 0.0f },  Scale });
-
-	SinShield->CreateImageRenderer("LShield_Top", SinRenderOrder::Top);
-	SinShield->GetImageRenderer("LShield_Top")->SetImage("Sin_LShield_Top.png");
-	SinShield->GetImageRenderer("LShield_Top")->SetTransform({ { -TopPos.X, TopPos.Y },  TopScale });
-
-	SinShield->CreateImageRenderer("RShield_Top", SinRenderOrder::Top);
-	SinShield->GetImageRenderer("RShield_Top")->SetImage("Sin_RShield_Top.png");
-	SinShield->GetImageRenderer("RShield_Top")->SetTransform({ { TopPos.X, TopPos.Y },  TopScale });
-
+	SinShield->SetActorLocation({ WinScale.hX(), PosY });
+	
 	AllMapRenderActors.push_back(SinShield);
 }
 
