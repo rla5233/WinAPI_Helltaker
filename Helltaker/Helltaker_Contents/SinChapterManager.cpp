@@ -241,6 +241,7 @@ void SinChapterManager::M_CreateSinBridge()
 	{
 		SinBridge.push_back(SpawnActor<Bridge>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinBridge[i]->SetActorLocation(Pos);
+		SinBridge[i]->StateChange(ESinBridgeState::Idle);
 
 		Pos.Y += ScaleY;
 		AllMapRenderActors.push_back(SinBridge[i]);

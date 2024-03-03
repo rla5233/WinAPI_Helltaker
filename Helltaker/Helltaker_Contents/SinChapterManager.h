@@ -49,6 +49,11 @@ public:
 		return SinPit.size();
 	}
 
+	size_t GetSinBridgeSize() const
+	{
+		return SinBridge.size();
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);

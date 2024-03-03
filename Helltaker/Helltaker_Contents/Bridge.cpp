@@ -1,5 +1,7 @@
 #include "Bridge.h"
 
+#include "SinChapterManager.h"
+
 bool Bridge::IsLoad = false;
 
 const FVector Bridge::Scale = { 0.4912f, 0.5555f };;
@@ -41,11 +43,15 @@ void Bridge::Idle(float _DeltaTime)
 
 void Bridge::MoveStart()
 {
-	Bridge->MoveOn();
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float ScaleY = WinScale.Y * Scale.Y;
 
-	float ScaleY = WinScale.Y * SinBridgeScale.Y;
-	Bridge->SetEndPosY(-(ScaleY * 0.5f));
-	Bridge->SetResetPosY(ScaleY * (static_cast<float>(SinBridge.size()) - 0.5f));
+	SetEndPosY(-(ScaleY * 0.5f));
+
+	float BridgeCount = static_cast<float>(GetSinChapter()->GetSinBridgeSize());
+	SetResetPosY(ScaleY * (BridgeCount - 0.5f));
+
+	MoveOn();
 }
 
 void Bridge::Move(float _DeltaTime)
