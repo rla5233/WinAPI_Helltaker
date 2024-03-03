@@ -268,17 +268,22 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 	FTransform RendererTrans = GetRenderTransForm();
 
 	EWIndowImageType ImageType = Image->GetImageType();
+	const UImageInfo& Info = Image->ImageInfo(InfoIndex);
 
 	switch (SortType)
 	{
 	case EImageSortType::Left:
 	{
-		const UImageInfo& Info = Image->ImageInfo(InfoIndex);
 		RendererTrans.AddPosition({ RendererTrans.GetScale().hX() , 0.0f });
 		break;
 	}
 	default:
 		break;
+	}
+
+	if (true == AutoImageScaleValue)
+	{
+		RendererTrans.SetScale(Info.CuttingTrans.GetScale());
 	}
 
 	switch (ImageType)
