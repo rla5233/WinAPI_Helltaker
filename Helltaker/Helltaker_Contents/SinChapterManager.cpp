@@ -7,14 +7,12 @@
 #include "Shield.h"
 #include "Bridge.h"
 #include "Piston.h"
+#include "Chain.h"
 #include "Skull.h"
 #include "Gear.h"
 #include "Pit.h"
 
 bool SinChapterManager::IsLoad = false;
-
-const FVector SinChapterManager::SinChainSCale = { 0.0375f, 0.1388f };
-const float SinChapterManager::SinChainSpeedY = -150.0f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -31,10 +29,6 @@ void SinChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
-
-
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LChainLink.png");
-		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RChainLink.png");
 
 		IsLoad = true;
 	}
@@ -137,24 +131,17 @@ void SinChapterManager::M_CreateSinSkull()
 void SinChapterManager::M_CreateSinChain()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * SinChainSCale;
-	FVector Pos = { WinScale.X * 0.412f, WinScale.Y * 0.12f };
+	float ScaleY = WinScale.Y * Chain::GetScale().Y;
+	float PosY = WinScale.Y * 0.12f;
 
 	SinChain.reserve(8);
 	for (int i = 0; i < 8; i++)
 	{
-		SinChain.push_back(SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid)));
-		SinChain[i]->SetActorLocation({WinScale.hX(), Pos.Y});
+		SinChain.push_back(SpawnActor<Chain>(static_cast<int>(SinUpdateOrder::Mid)));
+		SinChain[i]->SetActorLocation({ WinScale.hX(), PosY });
+		SinChain[i]->StateChange(ESinChainState::Idle);
 
-		SinChain[i]->CreateImageRenderer("Left", SinRenderOrder::Mid);
-		SinChain[i]->GetImageRenderer("Left")->SetImage("Sin_LChainLink.png");
-		SinChain[i]->GetImageRenderer("Left")->SetTransform({ { -Pos.X, 0.0f }, Scale });
-
-		SinChain[i]->CreateImageRenderer("Right", SinRenderOrder::Mid);
-		SinChain[i]->GetImageRenderer("Right")->SetImage("Sin_RChainLink.png");
-		SinChain[i]->GetImageRenderer("Right")->SetTransform({ { Pos.X, 0.0f }, Scale });
-
-		Pos.Y += Scale.Y;
+		PosY += ScaleY;
 
 		AllMapRenderActors.push_back(SinChain[i]);
 	}
@@ -288,7 +275,6 @@ void SinChapterManager::Phase1Start()
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
-	SinChainMoveUpdate(_DeltaTime);
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -319,32 +305,14 @@ void SinChapterManager::SinBridgeMoveOn()
 
 void SinChapterManager::SinChainMoveOn()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	for (SinComponent* Chain : SinChain)
+	for (Chain* Chain : SinChain)
 	{
 		if (nullptr == Chain)
 		{
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Chain->MoveOn();
-
-		float ScaleY = WinScale.Y * SinChainSCale.Y;
-		Chain->SetEndPosY(-(ScaleY * 0.5f));
-		Chain->SetResetPosY(ScaleY * (static_cast<float>(SinChain.size()) - 0.5f));
-	}
-}
-
-void SinChapterManager::SinChainMoveUpdate(float _DeltaTime)
-{
-	for (SinComponent* Chain : SinChain)
-	{
-		if (nullptr == Chain)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Chain->MoveY_Update(SinChainSpeedY, _DeltaTime);
+		Chain->StateChange(ESinChainState::Move);
 	}
 }
 

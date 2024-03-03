@@ -16,6 +16,11 @@ public:
 	Chain& operator=(const Chain& _Other) = delete;
 	Chain& operator=(Chain&& _Other) noexcept = delete;
 
+	static const FVector& GetScale()
+	{
+		return Scale;
+	}
+
 	void StateChange(ESinChainState _State);
 
 protected:
@@ -34,8 +39,8 @@ private:
 private:
 	UImageRenderer* L_ImageRenderer = nullptr;
 	UImageRenderer* R_ImageRenderer = nullptr;
-	static const FVector SinChainSCale;
-	static const float SinChainSpeedY;
+	static const FVector Scale;
+	static const float SpeedY;
 
 	ESinChainState State = ESinChainState::None;
 	static bool IsLoad;

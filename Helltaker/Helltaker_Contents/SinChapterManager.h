@@ -9,6 +9,7 @@ class Sin_Thorn;
 class HeroLife;
 class Bridge;
 class Piston;
+class Chain;
 class Skull;
 class Gear;
 class Pit;
@@ -57,6 +58,11 @@ public:
 		return SinBridge.size();
 	}
 
+	size_t GetSinChainSize() const
+	{
+		return SinChain.size();
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);
@@ -76,7 +82,6 @@ private:
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
 	void SinChainMoveOn();
-	void SinChainMoveUpdate(float _DeltaTime);
 
 	void AllThornMoveOn();
 
@@ -91,6 +96,7 @@ private:
 	Piston* UpPiston = nullptr;
 	Piston* DownPiston = nullptr;
 	Skull* SinSkull = nullptr;
+	std::vector<Chain*> SinChain;
 
 	std::vector<Bridge*> SinBridge;
 
@@ -98,10 +104,6 @@ private:
 	std::vector<std::vector<Sin_Thorn*>> DownThorn;
 
 	HeroLife* SinHeroLife = nullptr;
-
-
-	//
-	std::vector<SinComponent*> SinChain;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
