@@ -180,6 +180,13 @@ enum class EHeroState
 	Death
 };
 
+enum class ESinHeroState
+{
+	None,
+	Idle,
+	MoveY,
+};
+
 enum class EDemonState
 {
 	None,

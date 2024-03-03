@@ -16,8 +16,16 @@ public:
 	Sin_Hero& operator=(const Sin_Hero& _Other) = delete;
 	Sin_Hero& operator=(Sin_Hero&& _Other) noexcept = delete;
 
+	void MoveY_On()
+	{
+		IsMoveY = true;
+	}
+
+	void SinHero_StateChange(ESinHeroState _State);
 
 protected:
+	void Tick(float _DeltaTime);
+
 	void MoveStart() override;
 
 	void ActionCheck() override;
@@ -26,6 +34,20 @@ protected:
 	void ThornHitCheck() override;
 
 private:
+	void IdleStart();
+	void Idle(float _DeltaTime);
 
+	void MoveYStart();
+	void MoveY(float _DeltaTime);
+
+	void MoveY_Update(float _DeltaTime);
+
+	void StateUpdate(float _DeltaTime);
+
+private:
+	bool IsMoveY = false;
+	static const float SpeedY;
+
+	ESinHeroState State = ESinHeroState::None;
 };
 

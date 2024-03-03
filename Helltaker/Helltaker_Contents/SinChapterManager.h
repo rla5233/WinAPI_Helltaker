@@ -82,10 +82,11 @@ private:
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
 	void SinChainMoveOn();
-
 	void AllThornMoveOn();
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
+	void HeroMoveOn();
+	void HeroMoveY_Update(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 

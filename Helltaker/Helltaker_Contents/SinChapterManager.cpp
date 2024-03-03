@@ -302,6 +302,7 @@ void SinChapterManager::Phase1Start()
 void SinChapterManager::Phase1(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
+	HeroMoveY_Update(_DeltaTime);
 }
 
 void SinChapterManager::SinPitMoveOn()
@@ -398,6 +399,25 @@ void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 		}
 
 		HeroDelayTimeCount -= _DeltaTime;
+	}
+}
+
+void SinChapterManager::HeroMoveOn()
+{
+	PlayerHero->MoveY_On();
+}
+
+void SinChapterManager::HeroMoveY_Update(float _DeltaTime)
+{
+	if (true == HeroMove)
+	{
+		AddActorLocation({ 0.0f, _Speed * _DeltaTime });
+
+		if (EndPosY >= GetActorLocation().Y)
+		{
+			float Diff = GetActorLocation().Y - EndPosY;
+			SetActorLocation({ GetActorLocation().X, ResetPosY + Diff });
+		}
 	}
 }
 
