@@ -4,6 +4,7 @@
 #include "SinComponent.h"
 #include "Sin_Thorn.h"
 #include "HeroLife.h"
+#include "Shield.h"
 #include "Gear.h"
 #include "Pit.h"
 
@@ -53,9 +54,9 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateSinBG("SinBG");
 	M_CreateSinPit();
 	M_CreateSinGear();
+	M_CreateSinShield();
 
 	//
-	M_CreateSinShield();
 	M_CreateSinBridge();
 	M_CreateSinSkull();
 	M_CreateSinChain();
@@ -121,7 +122,7 @@ void SinChapterManager::M_CreateSinShield()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float PosY = WinScale.Y * 0.322f;
 
-	SinComponent* SinShield = SpawnActor<SinComponent>(static_cast<int>(SinUpdateOrder::Mid));
+	Shield* SinShield = SpawnActor<Shield>(static_cast<int>(SinUpdateOrder::Mid));
 	SinShield->SetActorLocation({ WinScale.hX(), PosY });
 	
 	AllMapRenderActors.push_back(SinShield);

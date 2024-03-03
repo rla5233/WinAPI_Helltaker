@@ -48,10 +48,10 @@ void Shield::SetShield()
 	RB_ImageRenderer->SetTransform({ { B_PosX, 0.0f }, WinScale * B_Scale });
 
 	LT_ImageRenderer->SetImage("Sin_LTShield.png");
-	LT_ImageRenderer->SetTransform({ { -T_Pos.X, T_Pos.Y }, WinScale * B_Scale });
+	LT_ImageRenderer->SetTransform({ { -T_Pos.X, T_Pos.Y }, WinScale * T_Scale });
 
 	RT_ImageRenderer->SetImage("Sin_RTShield.png");
-	RT_ImageRenderer->SetTransform({ { T_Pos.X, T_Pos.Y }, WinScale * B_Scale });
+	RT_ImageRenderer->SetTransform({ { T_Pos.X, T_Pos.Y }, WinScale * T_Scale });
 }
 
 void Shield::Tick(float _DeltaTime)
