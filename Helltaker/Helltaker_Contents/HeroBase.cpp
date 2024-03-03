@@ -2,6 +2,8 @@
 
 #include "ChapterManager.h"
 
+#include "EngineBase/EngineRandom.h"
+
 bool HeroBase::IsLoad = false;
 
 const FVector HeroBase::HitScale = { 0.092f, 0.1185f };
@@ -111,7 +113,7 @@ void HeroBase::CreateRandomHitEffect()
 	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
 	Renderer->SetImage("Hit");
 
-	int RandomValue = rand() % 3;
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(0, 2);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector TransPos = { WinScale.X * 0.005f, WinScale.Y * (-0.08f) };

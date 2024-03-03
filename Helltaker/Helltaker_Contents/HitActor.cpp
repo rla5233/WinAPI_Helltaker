@@ -2,6 +2,8 @@
 
 #include "ChapterManager.h"
 
+#include "EngineBase/EngineRandom.h"
+
 bool HitActor::IsLoad = false;
 
 const FVector HitActor::BigHitScale = { 0.091f, 0.187f };
@@ -64,7 +66,7 @@ void HitActor::CreateRandomBigHitEffect()
 	UImageRenderer*	Renderer = CreateImageRenderer(RenderOrder::Effect);
 	Renderer->SetImage("Hit");
 
-	int RandomValue = rand() % 2;
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(0, 1);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	switch (RandomValue)
@@ -89,10 +91,10 @@ void HitActor::CreateRandomSmallHitEffect()
 	UImageRenderer* Renderer = CreateImageRenderer(RenderOrder::Effect);
 	Renderer->SetImage("Hit");
 
-	int RandomValue = rand() % 2;
-	int RandomValueX = (rand() % 10) - 4;	// -4 ~ 5
-	int RandomValueY = (rand() % 10) - 4;	// -4 ~ 5
-	
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(0, 1);
+	int RandomValueX = UEngineRandom::MainRandom.RandomInt(-4, 5);
+	int RandomValueY = UEngineRandom::MainRandom.RandomInt(-4, 5);	
+
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector RandomPos = { WinScale.X * (RandomValueX * 0.002f + 0.002f), WinScale.Y * (RandomValueY * 0.002f - 0.015f)};
 	switch (RandomValue)

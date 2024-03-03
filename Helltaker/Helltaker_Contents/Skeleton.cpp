@@ -2,6 +2,8 @@
 
 #include "ChapterManager.h"
 
+#include <EngineBase/EngineRandom.h>
+
 bool Skeleton::IsLoad = false;
 const FVector Skeleton::IdleScale = { 0.047f, 0.083f };
 const float Skeleton::IdleInter = 0.06f;
@@ -259,7 +261,7 @@ void Skeleton::CreateRandomDeathParicle()
 	DeathParticle NewDeathParticle = DeathParticle();
 	NewDeathParticle.DeathParticleRenderer = CreateImageRenderer(RenderOrder::Effect);
 
-	int RandomValue = (rand() % 7) + 1;
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 7);
 	std::string Name = "Skel_Particle_00";
 	Name += RandomValue + '0';
 	Name += ".png";
@@ -268,9 +270,9 @@ void Skeleton::CreateRandomDeathParicle()
 	NewDeathParticle.DeathParticleRenderer->SetImage(Name);
 	NewDeathParticle.DeathParticleRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.012f)}, WinScale * DeathParticle::Scale });
 	
-	int SpeedX = rand() % 451 + 50;
-	int SpeedY = -(rand() % 1251 + 1000) ;
-	if (1 == (rand() % 2))
+	int SpeedX = UEngineRandom::MainRandom.RandomInt(50, 500);
+	int SpeedY = UEngineRandom::MainRandom.RandomInt(-2250, -1000);
+	if (1 == UEngineRandom::MainRandom.RandomInt(0, 1))
 	{
 		SpeedX *= -1;
 	}

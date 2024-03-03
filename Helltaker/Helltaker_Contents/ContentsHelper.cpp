@@ -1,5 +1,6 @@
 #include "ContentsHelper.h"
 
+#include <EngineBase/EngineRandom.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineCore/EngineResourcesManager.h>
@@ -74,16 +75,11 @@ FVector ContentsHelper::RandomCirclePoint(FVector _Center, float _Radius)
 		return _Center;
 	}
 
-	float RandomValue = static_cast<float>(rand());
-	float Random_X = fmodf(RandomValue, _Radius);
-	if (1 == (rand() % 2))
-	{
-		Random_X *= -1;
-	}
+	float Random_X = UEngineRandom::MainRandom.RandomFloat(-_Radius, _Radius);
 	Random_X += _Center.X;
 
 	float Random_Y = 0.0f;
-	if (1 == (rand() % 2))
+	if (1 == (UEngineRandom::MainRandom.RandomInt(0, 1)))
 	{
 		Random_Y = _Center.Y + sqrtf(powf(_Radius, 2) - powf((Random_X - _Center.X), 2));
 	}

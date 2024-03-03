@@ -4,6 +4,7 @@
 #include "ChapterManager.h"
 
 #include <EnginePlatform/EngineInput.h>
+#include <EngineBase/EngineRandom.h>
 
 bool MoveActor::IsLoad = false;
 const FVector MoveActor::MoveEffectScale = { 0.0375f, 0.0444f };
@@ -137,8 +138,8 @@ void MoveActor::CreateRandomMoveEffect(EChapterType _ChapType /* = EChapterType:
 	}
 	
 	Renderer->SetImage("Move");
-
-	int RandomValue = rand() % 3;
+	
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(0, 2);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	switch (RandomValue)
