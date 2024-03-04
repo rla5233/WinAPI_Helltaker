@@ -16,6 +16,11 @@ public:
 	Piston& operator=(const Piston& _Other) = delete;
 	Piston& operator=(Piston&& _Other) noexcept = delete;
 
+	ESinPistonState GetState() const
+	{
+		return State;
+	}
+
 	void StateChange(ESinPistonState _State);
 
 protected:

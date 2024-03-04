@@ -16,6 +16,11 @@ public:
 	Skull& operator=(const Skull& _Other) = delete;
 	Skull& operator=(Skull&& _Other) noexcept = delete;
 
+	ESinSkullState GetState() const
+	{
+		return State;
+	}
+
 	void StateChange(ESinSkullState _State, const FVector& _MoveDistance = FVector::Zero);
 
 protected:
