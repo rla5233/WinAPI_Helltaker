@@ -47,6 +47,7 @@ void CutSceneManager::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_button_confirm.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_button_focus.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "bad_end_screen.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_success.wav");
 		
 		IsLoad = true;
 	}
@@ -394,6 +395,8 @@ void CutSceneManager::SuccessStart()
 	Booper->GetImageRenderer()->ChangeAnimation("Scene_Success");
 	Booper->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.0275f }, { WinScale.X * 0.572f, WinScale.Y * 0.185f } });
 	Booper->GetImageRenderer()->ActiveOn();
+
+	UEngineSound::SoundPlay("dialogue_success.wav");
 }
 
 
