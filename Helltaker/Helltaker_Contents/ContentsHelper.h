@@ -331,3 +331,17 @@ enum class ESinChainLinkState
 	Idle,
 	Move
 };
+
+enum class ESinSmallChainType
+{
+	None,
+	Ver,
+	Hor
+};
+
+enum class ESinSmallChainState
+{
+	None,
+	Idle,
+	Hit
+};

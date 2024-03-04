@@ -16,16 +16,19 @@ public:
 	SmallChain& operator=(const SmallChain& _Other) = delete;
 	SmallChain& operator=(SmallChain&& _Other) noexcept = delete;
 
-	void StateChange();
+	void StateChange(ESinSmallChainState _State);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime);
 
+private:
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
+	ESinSmallChainType Type = ESinSmallChainType::None;
+	ESinSmallChainState State = ESinSmallChainState::None;
 	static bool IsLoad;
 };
