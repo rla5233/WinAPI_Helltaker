@@ -25,6 +25,9 @@ protected:
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
+
+	void MoveStart();
+	void Move(float _DeltaTime);
 	
 	void StateUpdate(float _DeltaTime);
 
@@ -35,6 +38,7 @@ private:
 	UImageRenderer* LB_ImageRenderer = nullptr;
 	UImageRenderer* RB_ImageRenderer = nullptr;
 	static const FVector Scale;
+	static const float TurnInter;
 
 	ESinPistonState State = ESinPistonState::None;
 	static bool IsLoad;

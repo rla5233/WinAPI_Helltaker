@@ -3,6 +3,7 @@
 bool Piston::IsLoad = false;
 
 const FVector Piston::Scale = { 0.125f, 0.74f };
+const float Piston::TurnInter = 0.02f;
 
 Piston::Piston()
 {
@@ -21,14 +22,27 @@ void Piston::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_BPiston.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_TPiston.png");
 
+		ContentsHelper::LoadFolder("Chapter\\Component\\Sin_Piston", "Sin_LPiston");
+		ContentsHelper::LoadFolder("Chapter\\Component\\Sin_Piston", "Sin_RPiston");
+
 		IsLoad = true;
 	}
 
 	LT_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
+	LT_ImageRenderer->SetImage("Sin_LPiston");
+	LT_ImageRenderer->CreateAnimation("LT_Turn", "Sin_LPiston", 6, 11, TurnInter, false);
+	
 	RT_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
+	RT_ImageRenderer->SetImage("Sin_RPiston");
+	RT_ImageRenderer->CreateAnimation("RT_Turn", "Sin_RPiston", 6, 11, TurnInter, false);
 
 	LB_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Bottom);
+	LB_ImageRenderer->SetImage("Sin_LPiston");
+	LB_ImageRenderer->CreateAnimation("LB_Turn", "Sin_LPiston", 0, 5, TurnInter, false);
+	
 	RB_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Bottom);
+	RB_ImageRenderer->SetImage("Sin_RPiston");
+	RB_ImageRenderer->CreateAnimation("RT_Turn", "Sin_RPiston", 0, 5, TurnInter, false);
 }
 
 void Piston::IdleStart()
@@ -51,6 +65,17 @@ void Piston::IdleStart()
 
 void Piston::Idle(float _DeltaTime)
 {
+
+}
+
+void Piston::MoveStart()
+{
+	
+}
+
+void Piston::Move(float _DeltaTime)
+{
+
 }
 
 void Piston::Tick(float _DeltaTime)
@@ -67,6 +92,9 @@ void Piston::StateUpdate(float _DeltaTime)
 	case ESinPistonState::Idle:
 		Idle(_DeltaTime);
 		break;
+	case ESinPistonState::Move:
+		Move(_DeltaTime);
+		break;
 	}
 }
 
@@ -78,6 +106,9 @@ void Piston::StateChange(ESinPistonState _State)
 		{
 		case ESinPistonState::Idle:
 			IdleStart();
+			break;
+		case ESinPistonState::Move:
+			MoveStart();
 			break;
 		}
 	}
