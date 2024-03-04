@@ -30,19 +30,19 @@ void Piston::BeginPlay()
 
 	LT_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
 	LT_ImageRenderer->SetImage("Sin_LPiston");
-	LT_ImageRenderer->CreateAnimation("LT_Turn", "Sin_LPiston", 6, 11, TurnInter, false);
+	LT_ImageRenderer->CreateAnimation("LT_Turn", "Sin_LPiston", 7, 13, TurnInter, false);
 	
 	RT_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
 	RT_ImageRenderer->SetImage("Sin_RPiston");
-	RT_ImageRenderer->CreateAnimation("RT_Turn", "Sin_RPiston", 6, 11, TurnInter, false);
+	RT_ImageRenderer->CreateAnimation("RT_Turn", "Sin_RPiston", 7, 13, TurnInter, false);
 
 	LB_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Bottom);
 	LB_ImageRenderer->SetImage("Sin_LPiston");
-	LB_ImageRenderer->CreateAnimation("LB_Turn", "Sin_LPiston", 0, 5, TurnInter, false);
+	LB_ImageRenderer->CreateAnimation("LB_Turn", "Sin_LPiston", 0, 6, TurnInter, false);
 	
 	RB_ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Bottom);
 	RB_ImageRenderer->SetImage("Sin_RPiston");
-	RB_ImageRenderer->CreateAnimation("RT_Turn", "Sin_RPiston", 0, 5, TurnInter, false);
+	RB_ImageRenderer->CreateAnimation("RB_Turn", "Sin_RPiston", 0, 6, TurnInter, false);
 }
 
 void Piston::IdleStart()
@@ -52,6 +52,7 @@ void Piston::IdleStart()
 
 	LT_ImageRenderer->SetImage("Sin_TPiston.png");
 	LT_ImageRenderer->SetTransform({ { -PosX, 0.0f }, WinScale * Scale });
+	LT_ImageRenderer->ChangeAnimation("LT_Turn");
 
 	RT_ImageRenderer->SetImage("Sin_TPiston.png");
 	RT_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
