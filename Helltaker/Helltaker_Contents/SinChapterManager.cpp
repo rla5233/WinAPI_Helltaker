@@ -150,8 +150,8 @@ void SinChapterManager::M_CreateSinChainLink()
 	float ScaleY = WinScale.Y * ChainLink::GetScale().Y;
 	float PosY = WinScale.Y * 0.12f;
 
-	SinChain.reserve(8);
-	for (int i = 0; i < 8; i++)
+	SinChain.reserve(2);
+	for (int i = 0; i < 2; i++)
 	{
 		SinChain.push_back(SpawnActor<ChainLink>(static_cast<int>(SinUpdateOrder::Mid)));
 		SinChain[i]->SetName("SinChain");

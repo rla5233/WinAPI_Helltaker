@@ -4,7 +4,7 @@
 
 bool ChainLink::IsLoad = false;
 
-const FVector ChainLink::Scale = { 0.0375f, 0.1388f };
+const FVector ChainLink::Scale = { 0.0375f, 0.97f };
 
 ChainLink::ChainLink()
 {
