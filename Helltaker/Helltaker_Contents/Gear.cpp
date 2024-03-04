@@ -2,7 +2,8 @@
 
 bool Gear::IsLoad = false;
 const FVector Gear::Scale = { 0.208f, 0.278f };
-const float Gear::WorkingInter = 0.01f;
+const float Gear::WorkingInter = 0.016f;
+const float Gear::WorkingSlowInter = 0.08f;
 
 Gear::Gear()
 {
@@ -59,20 +60,50 @@ void Gear::Activate(float _DeltaTime)
 void Gear::WorkingStart()
 {
 	L_ImageRenderer->CreateAnimation("L_Working", "Sin_LGear", 0, 14, WorkingInter, true);
+	L_ImageRenderer->CreateAnimation("L_WorkingSlow", "Sin_LGear", 0, 14, WorkingSlowInter, true);
 	L_ImageRenderer->AnimationReset();
-	L_ImageRenderer->ChangeAnimation("L_Working");
+	L_ImageRenderer->ChangeAnimation("L_WorkingSlow");
 
 	R_ImageRenderer->CreateAnimation("R_Working", "Sin_RGear", 0, 14, WorkingInter, true);
+	R_ImageRenderer->CreateAnimation("R_WorkingSlow", "Sin_RGear", 0, 14, WorkingSlowInter, true);
 	R_ImageRenderer->AnimationReset();
-	R_ImageRenderer->ChangeAnimation("R_Working");
+	R_ImageRenderer->ChangeAnimation("R_WorkingSlow");
+
+	WorkOrder = 0;
 }
 
 void Gear::Working(float _DeltaTime)
+{
+	switch (WorkOrder)
+	{
+	case 0:
+		Working1();
+		break;
+	case 1:
+		Working2();
+		break;
+	}
+}
+
+void Gear::Working1()
+{
+	if (8 == L_ImageRenderer->GetCurAnimationFrame())
+	{
+		L_ImageRenderer->AnimationReset();
+		L_ImageRenderer->ChangeAnimation("L_Working", false, 9);	
+		
+		R_ImageRenderer->AnimationReset();
+		R_ImageRenderer->ChangeAnimation("R_Working", false, 9);
+	}
+}
+
+void Gear::Working2()
 {
 }
 
 void Gear::StopStart()
 {
+
 }
 
 void Gear::Stop(float _DeltaTime)

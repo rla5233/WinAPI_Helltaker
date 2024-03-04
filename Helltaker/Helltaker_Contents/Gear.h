@@ -31,6 +31,8 @@ private:
 
 	void WorkingStart();
 	void Working(float _DeltaTime);
+	void Working1();
+	void Working2();
 
 	void StopStart();
 	void Stop(float _DeltaTime);
@@ -42,6 +44,8 @@ private:
 	UImageRenderer* R_ImageRenderer = nullptr;
 	static const FVector Scale;
 	static const float WorkingInter;
+	static const float WorkingSlowInter;
+	int WorkOrder = -1;
 
 	ESinGearState State = ESinGearState::None;
 	static bool IsLoad;
