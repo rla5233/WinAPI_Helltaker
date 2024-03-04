@@ -341,13 +341,10 @@ void SinChapterManager::Intro(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
 
-	if (ESinSkullState::Idle == SinSkull->GetState() &&
-		ESinPistonState::Idle == UpPiston->GetState())
+	if (ESinSkullState::Move == SinSkull->GetState() &&
+		ESinPistonState::Move == UpPiston->GetState())
 	{
-		if (UEngineInput::IsDown(VK_SPACE))
-		{
-			M_StateChange(ESinState::Phase1);
-		}
+		M_StateChange(ESinState::Phase1);
 	}
 }
 
