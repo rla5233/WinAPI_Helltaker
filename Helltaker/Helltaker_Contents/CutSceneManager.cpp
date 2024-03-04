@@ -46,6 +46,7 @@ void CutSceneManager::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_start.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_button_confirm.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_button_focus.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "bad_end_screen.wav");
 		
 		IsLoad = true;
 	}
@@ -288,7 +289,11 @@ void CutSceneManager::Enter(float _DeltaTime)
 void CutSceneManager::Select()
 {
 	ResetCheck();
-	FocusMenuBarCheck();
+	
+	if (true == FocusMenuBarCheck())
+	{
+		UEngineSound::SoundPlay("dialogue_button_focus.wav");
+	}
 }
 
 void CutSceneManager::SelectStart()
@@ -308,6 +313,7 @@ void CutSceneManager::BadEndStart()
 	C_MenubarRenderActiveOff();
 
 	FailOrder = 0;
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 }
 
 void CutSceneManager::BadEndSetting()
@@ -322,6 +328,7 @@ void CutSceneManager::BadEndSetting()
 	Booper->GetImageRenderer()->ActiveOff();
 	
 	ChapterManager::M_StateChange(EChapterState::None);
+	UEngineSound::SoundPlay("bad_end_screen.wav");
 	++FailOrder;
 }
 
