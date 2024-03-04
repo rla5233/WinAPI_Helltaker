@@ -27,20 +27,19 @@ private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
-	void MoveStart();
-	void Move(float _DeltaTime);
-
 	void ShowStart();
 	void Show(float _DeltaTime);
 
 	void ShowAnimation(float _DeltaTime);
 	void VerShowAnimation(float _DeltaTime);
+	void HorShowAnimation(float _DeltaTime);
 
 	void HitStart();
 	void Hit(float _DeltaTime);
 
 	void HitAnimation(float _DeltaTime);
 	void VerHitAnimation(float _DeltaTime);
+	void HorHitAnimation(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
