@@ -17,7 +17,7 @@ Pit::~Pit()
 
 void Pit::BeginPlay()
 {
-	SinComponent::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -75,7 +75,7 @@ void Pit::Stop(float _DeltaTime)
 
 void Pit::Tick(float _DeltaTime)
 {
-	SinComponent::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }

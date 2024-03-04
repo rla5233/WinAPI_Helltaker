@@ -109,9 +109,6 @@
     <ClInclude Include="Sin_Thorn.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
-    <ClInclude Include="SinComponent.h">
-      <Filter>Object\Actor\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Gear.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
@@ -141,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="Chain.h">
       <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
+    <ClInclude Include="SinMoveActor.h">
+      <Filter>Object\Actor\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,9 +249,6 @@
     <ClCompile Include="Sin_Thorn.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
-    <ClCompile Include="SinComponent.cpp">
-      <Filter>Object\Actor\Base</Filter>
-    </ClCompile>
     <ClCompile Include="Gear.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
@@ -281,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="Chain.cpp">
       <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="SinMoveActor.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

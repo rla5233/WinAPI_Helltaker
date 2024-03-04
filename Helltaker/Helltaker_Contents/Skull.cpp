@@ -15,7 +15,7 @@ Skull::~Skull()
 
 void Skull::BeginPlay()
 {
-	SinComponent::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -77,7 +77,7 @@ void Skull::Idle(float _DeltaTime)
 
 void Skull::Tick(float _DeltaTime)
 {
-	SinComponent::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }

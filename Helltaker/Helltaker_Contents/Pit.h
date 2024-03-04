@@ -1,9 +1,9 @@
 #pragma once
 
-#include "SinComponent.h"
+#include "SinMoveActor.h"
 
 // Ό³Έν :
-class Pit : public SinComponent
+class Pit : public SinMoveActor
 {
 public:
 	// constructor destructor

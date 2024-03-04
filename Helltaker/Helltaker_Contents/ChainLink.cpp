@@ -17,7 +17,7 @@ ChainLink::~ChainLink()
 
 void ChainLink::BeginPlay()
 {
-	SinComponent::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -67,7 +67,7 @@ void ChainLink::Move(float _DeltaTime)
 
 void ChainLink::Tick(float _DeltaTime)
 {
-	SinComponent::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }

@@ -1,7 +1,7 @@
 #include "SinChapterManager.h"
 
 #include "BackGround.h"
-#include "SinComponent.h"
+#include "SinMoveActor.h"
 #include "ChainLink.h"
 #include "Sin_Thorn.h"
 #include "Sin_Hero.h"

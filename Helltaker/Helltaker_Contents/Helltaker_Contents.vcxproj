@@ -307,11 +307,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SinComponent.h">
+    <ClInclude Include="SinCutSceneManager.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SinCutSceneManager.h">
+    <ClInclude Include="SinMoveActor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -493,11 +493,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="SinComponent.cpp">
+    <ClCompile Include="SinCutSceneManager.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="SinCutSceneManager.cpp">
+    <ClCompile Include="SinMoveActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

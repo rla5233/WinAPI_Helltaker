@@ -17,7 +17,7 @@ Bridge::~Bridge()
 
 void Bridge::BeginPlay()
 {
-	SinComponent::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -69,7 +69,7 @@ void Bridge::Stop(float _DeltaTime)
 
 void Bridge::Tick(float _DeltaTime)
 {
-	SinComponent::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }

@@ -16,7 +16,7 @@ Sin_Thorn::~Sin_Thorn()
 
 void Sin_Thorn::BeginPlay()
 {
-	SinComponent::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -37,7 +37,7 @@ void Sin_Thorn::BeginPlay()
 
 void Sin_Thorn::Tick(float _DeltaTime)
 {
-	SinComponent::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }

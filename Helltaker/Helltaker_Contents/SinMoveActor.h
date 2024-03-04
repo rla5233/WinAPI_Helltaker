@@ -3,18 +3,18 @@
 #include "RenderActor.h"
 
 // Ό³Έν :
-class SinComponent : public RenderActor
+class SinMoveActor : public RenderActor
 {
 public:
 	// constructor destructor
-	SinComponent();
-	~SinComponent();
-	
+	SinMoveActor();
+	~SinMoveActor();
+
 	// delete Function
-	SinComponent(const SinComponent& _Other) = delete;
-	SinComponent(SinComponent&& _Other) noexcept = delete;
-	SinComponent& operator=(const SinComponent& _Other) = delete;
-	SinComponent& operator=(SinComponent&& _Other) noexcept = delete;
+	SinMoveActor(const SinMoveActor& _Other) = delete;
+	SinMoveActor(SinMoveActor&& _Other) noexcept = delete;
+	SinMoveActor& operator=(const SinMoveActor& _Other) = delete;
+	SinMoveActor& operator=(SinMoveActor&& _Other) noexcept = delete;
 
 	void MoveOn()
 	{
@@ -51,20 +51,28 @@ public:
 		EndPosY = _PosY;
 	}
 
-	void CreateImageRenderer(std::string_view _KeyName, SinRenderOrder _Order);
-	UImageRenderer* GetImageRenderer(std::string_view _KeyName) const 
+	void LerfMoveOn()
 	{
-		return ImageRenderers.find(_KeyName.data())->second;
+		IsLerfMove = true;
 	}
+
+	bool IsLerfMoveOn() const
+	{
+		return IsLerfMove;
+	}
+
+	void MoveLerfUpdate(float _DeltaTime, float _TimeWeight);
 
 	void MoveY_Update(float _Speed, float _DeltaTime);
 protected:
 
 private:
-	std::map<std::string, UImageRenderer*> ImageRenderers;
+	FVector StartPos = FVector::Zero;
+	FVector TargetPos = FVector::Zero;
+	float LerfMoveTime = 0.0f;
+	bool IsLerfMove = false;
 
 	float EndPosY = 0.0f;
 	float ResetPosY = 0.0f;
 	bool IsMove = false;
 };
-

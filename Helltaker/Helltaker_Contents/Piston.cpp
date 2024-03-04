@@ -14,7 +14,7 @@ Piston::~Piston()
 
 void Piston::BeginPlay()
 {
-	SinComponent::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -55,7 +55,7 @@ void Piston::Idle(float _DeltaTime)
 
 void Piston::Tick(float _DeltaTime)
 {
-	SinComponent::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 	
 	StateUpdate(_DeltaTime);
 }
