@@ -402,6 +402,8 @@ void CutSceneManager::SuccessStart()
 
 void CutSceneManager::SuccessEnd()
 {
+	UEngineSound::SoundPlay("booper_click.wav");
+
 	for (AActor* Actor : AllCutSceneActors)
 	{
 		if (nullptr == Actor)

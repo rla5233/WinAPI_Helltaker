@@ -5,6 +5,8 @@
 #include "Character.h"
 #include "Scene.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 bool Chapter8::IsLoad = false;
 const float Chapter8::SkeletonRenderDelay = 0.2f;
 const float Chapter8::SkeletonCreateDelay = 0.07f;
@@ -54,6 +56,10 @@ void Chapter8::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Happy.png");
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Lu_Swirl");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "lucifer_intro_swirl.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "lucifer_intro_skeleton.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "lucifer_intro_dialogue_start.wav");
 
 		AddChapterSet("Chapter8");
 		IsLoad = true;
@@ -159,7 +165,7 @@ void Chapter8::CutSceneStart()
 	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
 	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.1f), Pos.Y }, Pos);
-	
+
 	CutSceneManager::CutSceneStart();
 }
 
@@ -219,6 +225,7 @@ void Chapter8::EnterOrder0(float _DeltaTime)
 	{
 		if (0.0f >= TimeCount)
 		{
+			UEngineSound::SoundPlay("lucifer_intro_swirl.wav");
 			C_ChangeCharacterAnimation("Lu_Swirl_1");
 			TimeCount = SkeletonCreateDelay;
 			++EnterOrder;
@@ -245,6 +252,7 @@ void Chapter8::EnterOrder1(float _DeltaTime)
 			SkeletonMan[0]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
 			SkeletonMan[0]->ImageRendererFadeInOn();
 
+			UEngineSound::SoundPlay("lucifer_intro_skeleton.wav");
 			TimeCount = SkeletonRenderDelay;
 			++EnterOrder;
 			return;
@@ -298,6 +306,7 @@ void Chapter8::EnterOrder4(float _DeltaTime)
 			C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Idle.png");
 			C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.017f) }, {WinScale.X * 0.222f, WinScale.Y * 0.639f} });
 			C_GetSceneCharacter()->GetNameRenderer()->SetText(Chap8_Script[0]);
+			UEngineSound::SoundPlay("lucifer_intro_dialogue_start.wav");
 
 			C_SpawnBooper();
 			C_BooperTextSet(Chap8_Script[1]);
@@ -314,6 +323,7 @@ void Chapter8::EnterOrder5()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		C_BooperTextSet(Chap8_Script[2]);
 		++EnterOrder;
 		SelectOrder = -1;
@@ -324,6 +334,7 @@ void Chapter8::EnterOrder6()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		++SelectOrder;
 		C_StateChange(ECutSceneState::Select);
 	}
@@ -374,6 +385,8 @@ void Chapter8::BadEndStart()
 		C_BooperSetTextPosition(1);
 		break;
 	}
+
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 }
 
 void Chapter8::BadEndSetting()
@@ -409,6 +422,8 @@ void Chapter8::SuccessStart()
 		SuccessStart2();
 		break;
 	}
+
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 }
 
 void Chapter8::SuccessStart1()
@@ -475,6 +490,7 @@ void Chapter8::SuccessEndScene()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FTransform BooperTrans = { {0, 0}, { WinScale.X * 0.027f, WinScale.Y * 0.022f } };
+		UEngineSound::SoundPlay("booper_click.wav");
 		C_BooperChangeAnimation("Booper_Idle");
 		C_BooperSetTransform(BooperTrans);
 		C_BooperTextSet(Chap8_Script[14]);
