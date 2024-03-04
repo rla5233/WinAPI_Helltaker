@@ -63,6 +63,11 @@ public:
 		return SinChain.size();
 	}
 
+	Skull* GetSkull() const
+	{
+		return SinSkull;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);

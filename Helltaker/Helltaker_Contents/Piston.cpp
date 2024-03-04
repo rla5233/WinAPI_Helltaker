@@ -1,5 +1,6 @@
 #include "Piston.h"
 
+#include "Skull.h"
 #include "SinChapterManager.h"
 
 bool Piston::IsLoad = false;
@@ -74,7 +75,7 @@ void Piston::MoveStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector CurPos = GetActorLocation();
-	FVector TargetPos = { CurPos.X, WinScale.Y * 0.25f };
+	FVector TargetPos = { CurPos.X, WinScale.Y * 0.2f };
 	SetLerfStartPos(CurPos);
 	SetLerfTargetPos(TargetPos);
 	LerfMoveOn();
@@ -127,7 +128,8 @@ void Piston::Move2(float _DeltaTime)
 		SwitchLerfPos();
 		LerfMoveOn();
 
-		GetSinChapter();
+		FVector MoveDistance = GetLerfTargetPos() - GetLerfStartPos();
+		GetSinChapter()->GetSkull()->StateChange(ESinSkullState::Move, MoveDistance);
 
 		++MoveOrder;
 	}

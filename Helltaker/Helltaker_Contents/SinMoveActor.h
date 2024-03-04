@@ -78,6 +78,16 @@ public:
 		TargetPos = TempPos;
 	}
 
+	const FVector& GetLerfStartPos() const
+	{
+		return StartPos;
+	}
+
+	const FVector& GetLerfTargetPos() const
+	{
+		return TargetPos;
+	}
+
 	void LerfMoveUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
 
 	void MoveY_Update(float _Speed, float _DeltaTime);
