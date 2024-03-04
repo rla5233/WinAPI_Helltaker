@@ -98,7 +98,7 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 {
 	if (true == IsMoveY)
 	{ 
-		float SpeedY = SinChapterManager::M_GetSpeedY();
+		float SpeedY = GetSinChapter()->M_GetSpeedY();
 		AddTargetPos({ 0.0f, SpeedY * _DeltaTime });
 		AddActorLocation({ 0.0f, SpeedY * _DeltaTime });
 	}

@@ -24,7 +24,7 @@ const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::Phase1_DelayTime = 0.43f;
 
-const float SinChapterManager::SpeedY = -150.0f;
+const float SinChapterManager::MaxSpeedY = -150.0f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -371,6 +371,7 @@ void SinChapterManager::Phase1(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
 	MoveYSum += SpeedY * _DeltaTime;
+	SpeedY_Update(_DeltaTime);
 
 	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
 	{
@@ -401,6 +402,19 @@ void SinChapterManager::Phase1SmallChainUpdate(float _DeltaTime)
 	}
 
 	PhaseDelayTimeCount -= _DeltaTime;
+}
+
+void SinChapterManager::SpeedY_Update(float _DeltaTime)
+{
+	if (MaxSpeedY < SpeedY)
+	{
+		SpeedY += -90.0f * _DeltaTime;
+
+		if (MaxSpeedY >= SpeedY)
+		{
+			SpeedY = MaxSpeedY;
+		}
+	}
 }
 
 void SinChapterManager::SinPitMoveOn()

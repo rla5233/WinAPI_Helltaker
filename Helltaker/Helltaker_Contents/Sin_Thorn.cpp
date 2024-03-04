@@ -79,7 +79,7 @@ void Sin_Thorn::MoveUpdate(float _DeltaTime)
 {
 	if (true == IsMoveOn())
 	{
-		AddActorLocation({ 0.0f, SinChapterManager::M_GetSpeedY() * _DeltaTime });
+		AddActorLocation({ 0.0f, GetSinChapter()->M_GetSpeedY() * _DeltaTime });
 
 		if (GetEndPosY() >= GetActorLocation().Y)
 		{

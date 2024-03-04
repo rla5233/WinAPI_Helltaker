@@ -222,7 +222,7 @@ void SmallChain::MoveY_Update(float _DeltaTime)
 {
 	if (ESinSmallChainType::Hor == Type)
 	{
-		AddActorLocation({ 0.0f, SinChapterManager::M_GetSpeedY() * _DeltaTime });
+		AddActorLocation({ 0.0f, GetSinChapter()->M_GetSpeedY() * _DeltaTime });
 	}
 }
 

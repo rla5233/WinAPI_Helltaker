@@ -61,7 +61,7 @@ void ChainLink::MoveStart()
 
 void ChainLink::Move(float _DeltaTime)
 {
-	MoveY_Update(SinChapterManager::M_GetSpeedY(), _DeltaTime);
+	MoveY_Update(GetSinChapter()->M_GetSpeedY(), _DeltaTime);
 }
 
 void ChainLink::Tick(float _DeltaTime)

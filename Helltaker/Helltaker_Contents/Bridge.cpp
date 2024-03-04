@@ -55,7 +55,7 @@ void Bridge::MoveStart()
 
 void Bridge::Move(float _DeltaTime)
 {
-	MoveY_Update(SinChapterManager::M_GetSpeedY(), _DeltaTime);
+	MoveY_Update(GetSinChapter()->M_GetSpeedY(), _DeltaTime);
 }
 
 void Bridge::StopStart()

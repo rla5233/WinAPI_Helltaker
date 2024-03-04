@@ -61,7 +61,7 @@ void Pit::MoveStart()
 
 void Pit::Move(float _DeltaTime)
 {
-	MoveY_Update(SinChapterManager::M_GetSpeedY() * 0.3f, _DeltaTime);
+	MoveY_Update(GetSinChapter()->M_GetSpeedY() * 0.3f, _DeltaTime);
 }
 
 void Pit::StopStart()
