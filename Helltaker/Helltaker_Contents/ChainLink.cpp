@@ -76,25 +76,25 @@ void ChainLink::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case ESinChainState::Idle:
+	case ESinChainLinkState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case ESinChainState::Move:
+	case ESinChainLinkState::Move:
 		Move(_DeltaTime);
 		break;
 	}
 }
 
-void ChainLink::StateChange(ESinChainState _State)
+void ChainLink::StateChange(ESinChainLinkState _State)
 {
 	if (State != _State)
 	{
 		switch (_State)
 		{
-		case ESinChainState::Idle:
+		case ESinChainLinkState::Idle:
 			IdleStart();
 			break;
-		case ESinChainState::Move:
+		case ESinChainLinkState::Move:
 			MoveStart();
 			break;
 		}

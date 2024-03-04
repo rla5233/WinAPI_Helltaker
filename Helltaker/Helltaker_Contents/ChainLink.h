@@ -21,7 +21,7 @@ public:
 		return Scale;
 	}
 
-	void StateChange(ESinChainState _State);
+	void StateChange(ESinChainLinkState _State);
 
 protected:
 	void BeginPlay() override;
@@ -42,7 +42,7 @@ private:
 	static const FVector Scale;
 	static const float SpeedY;
 
-	ESinChainState State = ESinChainState::None;
+	ESinChainLinkState State = ESinChainLinkState::None;
 	static bool IsLoad;
 };
 

@@ -136,11 +136,11 @@
     <ClInclude Include="ChainLink.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
-    <ClInclude Include="Chain.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
     <ClInclude Include="SinMoveActor.h">
       <Filter>Object\Actor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallChain.h">
+      <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -276,11 +276,11 @@
     <ClCompile Include="ChainLink.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
-    <ClCompile Include="Chain.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
     <ClCompile Include="SinMoveActor.cpp">
       <Filter>Object\Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallChain.cpp">
+      <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

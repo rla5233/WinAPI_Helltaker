@@ -325,7 +325,7 @@ enum class ESinPistonState
 	Move
 };
 
-enum class ESinChainState
+enum class ESinChainLinkState
 {
 	None,
 	Idle,
