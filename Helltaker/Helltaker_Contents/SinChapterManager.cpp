@@ -1,7 +1,8 @@
 #include "SinChapterManager.h"
 
-#include "BackGround.h"
 #include "SinMoveActor.h"
+#include "BackGround.h"
+#include "SmallChain.h"
 #include "ChainLink.h"
 #include "Sin_Thorn.h"
 #include "Sin_Hero.h"
@@ -275,6 +276,52 @@ void SinChapterManager::M_SpawnHero()
 	PlayerHero->StateChange(EHeroState::Idle);
 
 	AllMapRenderActors.push_back(PlayerHero);
+}
+
+void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float TileScaleX = ContentsHelper::GetTileScale().X;
+	float TileScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
+
+	SmallChain* NewSmallChain = SpawnActor<SmallChain>(static_cast<int>(SinUpdateOrder::Mid));
+	
+	switch (_Type)
+	{
+	case ESinSmallChainType::Ver:
+		NewSmallChain->SetActorLocation({ WinScale.hX() + TileScaleX * _PosIndex , WinScale.hY() });
+		break;
+	case ESinSmallChainType::Hor:
+		NewSmallChain->SetActorLocation({ WinScale.hX(), WinScale.hY() + TileScaleY * _PosIndex });
+		break;
+	}
+
+	NewSmallChain->CreateImageRenderer(_Type);
+
+	switch (_PhaseNum)
+	{
+	case 1:
+		Phase1_SmallChain[_VecIndex].push_back(NewSmallChain);
+		break;
+	case 2:
+		Phase2_SmallChain[_VecIndex].push_back(NewSmallChain);
+		break;
+	}
+
+	AllMapRenderActors.push_back(NewSmallChain);
+}
+
+void SinChapterManager::M_SetSmallChainVecSize(int _Size, int _PhaseNum)
+{
+	switch (_PhaseNum)
+	{
+	case 1:
+		Phase1_SmallChain.resize(_Size);
+		break;
+	case 2:
+		Phase2_SmallChain.resize(_Size);
+		break;
+	}
 }
 
 void SinChapterManager::IntroStart()

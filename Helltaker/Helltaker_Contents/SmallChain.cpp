@@ -26,6 +26,42 @@ void SmallChain::BeginPlay()
 	}
 }
 
+void SmallChain::CreateImageRenderer(ESinSmallChainType _Type)
+{
+	switch (_Type)
+	{
+	case ESinSmallChainType::Ver:
+		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::SmallVChain);
+		break;
+	case ESinSmallChainType::Hor:
+		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
+		break;
+	}
+
+	Type = _Type;
+}
+
+void SmallChain::IdleStart()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+
+	switch (Type)
+	{
+	case ESinSmallChainType::Ver:
+		ImageRenderer->SetImage("Sin_VChain.png");
+		ImageRenderer->SetTransform({ { 0.0f, 0.0f }, { WinScale * V_Scale } });
+		break;
+	case ESinSmallChainType::Hor:
+		ImageRenderer->SetImage("Sin_HChain.png");
+		ImageRenderer->SetTransform({ { 0.0f, 0.0f }, { WinScale * H_Scale } });
+		break;
+	}
+}
+
+void SmallChain::Idle(float _DeltaTime)
+{
+}
+
 void SmallChain::Tick(float _DeltaTime)
 {
 	SinMoveActor::Tick(_DeltaTime);
@@ -38,7 +74,7 @@ void SmallChain::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case ESinSmallChainState::Idle:
-
+		Idle(_DeltaTime);
 		break;
 	case ESinSmallChainState::Hit:
 
@@ -53,7 +89,7 @@ void SmallChain::StateChange(ESinSmallChainState _State)
 		switch (_State)
 		{
 		case ESinSmallChainState::Idle:
-
+			IdleStart();
 			break;
 		case ESinSmallChainState::Hit:
 			
@@ -64,15 +100,3 @@ void SmallChain::StateChange(ESinSmallChainState _State)
 	State = _State;
 }
 
-void SmallChain::CreateImageRenderer()
-{
-	switch (Type)
-	{
-	case ESinSmallChainType::Ver:
-		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::SmallVChain);
-		break;
-	case ESinSmallChainType::Hor:
-		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
-		break;
-	}
-}

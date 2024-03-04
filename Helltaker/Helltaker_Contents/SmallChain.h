@@ -17,13 +17,16 @@ public:
 	SmallChain& operator=(SmallChain&& _Other) noexcept = delete;
 
 	void StateChange(ESinSmallChainState _State);
-	void CreateImageRenderer();
+	void CreateImageRenderer(ESinSmallChainType _Type);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime);
 
 private:
+	void IdleStart();
+	void Idle(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:

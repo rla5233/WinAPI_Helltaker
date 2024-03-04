@@ -5,6 +5,7 @@
 #include <EngineCore/Level.h>
 
 class SinComponent;
+class SmallChain;
 class ChainLink;
 class Sin_Thorn;
 class Sin_Hero;
@@ -47,6 +48,9 @@ public:
 	void M_CreateSinHeroLife();
 
 	void M_SpawnHero();
+
+	void M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex);
+	void M_SetSmallChainVecSize(int _Size, int _PhaseNum);
 
 	size_t GetSinPitSize() const
 	{
@@ -115,6 +119,12 @@ private:
 	Sin_Hero* PlayerHero = nullptr;
 	static const float HeroDelayTime;
 	float HeroDelayTimeCount = HeroDelayTime;
+
+	std::vector<std::list<SmallChain*>> Phase1_SmallChain;
+	int Phase1_SmallChainVecSize = -1;
+	
+	std::vector<std::list<SmallChain*>> Phase2_SmallChain;
+	int Phase2_SmallChainVecSize = -1;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
