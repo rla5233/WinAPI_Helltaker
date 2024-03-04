@@ -120,6 +120,7 @@ private:
 	static const float HeroDelayTime;
 	float HeroDelayTimeCount = HeroDelayTime;
 
+	static const FVector SmallChainStartPos;
 	std::vector<std::list<SmallChain*>> Phase1_SmallChain;
 	int Phase1_SmallChainVecSize = -1;
 	

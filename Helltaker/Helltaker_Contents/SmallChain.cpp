@@ -2,7 +2,7 @@
 
 bool SmallChain::IsLoad = false;
 
-const FVector SmallChain::V_Scale = { 0.052f, 1.527f };
+const FVector SmallChain::V_Scale = { 0.025f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.527f, 0.052f };
 
 SmallChain::SmallChain()

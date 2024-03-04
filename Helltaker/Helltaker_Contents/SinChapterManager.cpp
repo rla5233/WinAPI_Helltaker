@@ -20,6 +20,8 @@ bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::HeroDelayTime = 0.129f;
 
+const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.3f };
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -281,6 +283,7 @@ void SinChapterManager::M_SpawnHero()
 void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector StartPos = WinScale * SmallChainStartPos;
 	float TileScaleX = ContentsHelper::GetTileScale().X;
 	float TileScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
 
@@ -289,14 +292,15 @@ void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseN
 	switch (_Type)
 	{
 	case ESinSmallChainType::Ver:
-		NewSmallChain->SetActorLocation({ WinScale.hX() + TileScaleX * _PosIndex , WinScale.hY() });
+		NewSmallChain->SetActorLocation({ StartPos.X + TileScaleX * _PosIndex , WinScale.hY() });
 		break;
 	case ESinSmallChainType::Hor:
-		NewSmallChain->SetActorLocation({ WinScale.hX(), WinScale.hY() + TileScaleY * _PosIndex });
+		NewSmallChain->SetActorLocation({ WinScale.hX(), StartPos.Y + TileScaleY * _PosIndex });
 		break;
 	}
 
 	NewSmallChain->CreateImageRenderer(_Type);
+	NewSmallChain->StateChange(ESinSmallChainState::Idle);
 
 	switch (_PhaseNum)
 	{
@@ -350,6 +354,11 @@ void SinChapterManager::Phase1Start()
 	
 	PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
 	SinGear->StateChange(ESinGearState::Working);
+
+
+	//
+	M_SetSmallChainVecSize(10, 1);
+	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 0, 0);
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
