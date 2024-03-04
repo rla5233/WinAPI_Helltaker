@@ -2,7 +2,8 @@
 
 #include "ChapterManager.h"
 
-#include "EngineBase/EngineRandom.h"
+#include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
 
 bool HeroBase::IsLoad = false;
 
@@ -45,6 +46,9 @@ void HeroBase::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Kick");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Victory");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Death");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "player_move.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "player_death.wav");
 
 		IsLoad = true;
 	}
@@ -191,6 +195,8 @@ void HeroBase::MoveStart()
 	}
 
 	HitActor::MoveStart();
+
+	UEngineSound::SoundPlay("player_move.wav");
 }
 
 void HeroBase::Kick(float _DeltaTime)
@@ -277,6 +283,7 @@ void HeroBase::DeathStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ {0.0f, (WinScale.Y * 1.15f) * (-0.25f)}, {WinScale.X * 0.375f, WinScale.Y * 1.15f} });
 	ImageRenderer->ChangeAnimation("Hero_Death");
+	UEngineSound::SoundPlay("player_death.wav");
 }
 
 void HeroBase::Tick(float _DeltaTime)

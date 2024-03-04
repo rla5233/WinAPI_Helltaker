@@ -70,7 +70,6 @@ private:
 	void DialogueMoveUpdate(float _DeltaTime);
 
 private:
-	UEngineSoundPlayer BGMPlayer;
 	int NewGameOrder = -1;
 	int SelectChapterNum = -1;
 	float DialogueMoveSum = 0.0f;
@@ -79,6 +78,8 @@ private:
 	int FocusSC_MenuIndex = -1;
 	std::vector<UI*> SC_MenuBar;
 	
+	UEngineSoundPlayer MainMenuBGMPlayer;
+
 	EMainMenuState State = EMainMenuState::None;
 
 	static const std::vector<const char*> MainMenu_Script;

@@ -3,6 +3,7 @@
 #include "ChapterManager.h"
 
 #include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
 
 bool Skeleton::IsLoad = false;
 const FVector Skeleton::IdleScale = { 0.047f, 0.083f };
@@ -38,6 +39,13 @@ void Skeleton::BeginPlay()
 		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_005.png");
 		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_006.png");
 		ContentsHelper::LoadImg("Effect\\Particle", "Skel_Particle_007.png");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "enemy_kick_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "enemy_kick_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "enemy_kick_003.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "enemy_die_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "enemy_die_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "enemy_die_003.wav");
 		
 		IsLoad = true;
 	}
@@ -105,6 +113,20 @@ void Skeleton::NextStateCheck(EMoveActorDir _OtherMoveDir)
 			NextTileCheck(NextPoint);
 			return;
 		}
+	}
+
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("enemy_kick_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("enemy_kick_002.wav");
+		break;
+	case 3:
+		UEngineSound::SoundPlay("enemy_kick_003.wav");
+		break;
 	}
 
 	StateChange(EHitActorState::Death);
@@ -202,6 +224,20 @@ void Skeleton::HitStart()
 		break;
 	}
 
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("enemy_kick_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("enemy_kick_002.wav");
+		break;
+	case 3:
+		UEngineSound::SoundPlay("enemy_kick_003.wav");
+		break;
+	}
+
 	CreateRandomBigHitEffect();
 }
 
@@ -227,6 +263,20 @@ void Skeleton::DeathStart()
 	}
 
 	HitActorInfoUpdate(EHitActorState::Death);
+
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("enemy_die_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("enemy_die_002.wav");
+		break;
+	case 3:
+		UEngineSound::SoundPlay("enemy_die_003.wav");
+		break;
+	}
 }
 
 void Skeleton::DeathParticleMoveUpdate(float _DeltaTime)

@@ -2,7 +2,7 @@
 
 #include "ChapterManager.h"
 
-#include "EngineBase/EngineRandom.h"
+#include <EngineBase/EngineRandom.h>
 
 bool HitActor::IsLoad = false;
 
@@ -27,6 +27,8 @@ void HitActor::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadFolder("Effect", "Hit");
+
+
 
 		IsLoad = true;
 	}

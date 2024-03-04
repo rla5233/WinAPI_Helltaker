@@ -7,6 +7,7 @@
 
 #include <EngineCore/Level.h>
 
+class UEngineSoundPlayer;
 class KeyComponent;
 class BackGround;
 class FTransform;
@@ -188,6 +189,8 @@ private:
 
 	KeyComponent* LockBox = nullptr;
 	KeyComponent* Key = nullptr;
+
+	static UEngineSoundPlayer ChapterBGMPlayer;
 
 	EChapterState State = EChapterState::None;
 

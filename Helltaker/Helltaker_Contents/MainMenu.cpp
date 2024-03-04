@@ -80,15 +80,13 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "booper_click.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "menu_button_focus.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "menu_button_confirm.wav");
-		ContentsHelper::LoadSound("Sound\\Effect", "transition_on.wav");
-		ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
 
 		IsLoad = true;
 	}
 
-	BGMPlayer = UEngineSound::SoundPlay("Apropos.wav");
-	BGMPlayer.Loop();
-	BGMPlayer.Off();
+	MainMenuBGMPlayer = UEngineSound::SoundPlay("Apropos.wav");
+	MainMenuBGMPlayer.Loop();
+	MainMenuBGMPlayer.Off();
 }
 
 void MainMenu::LevelStart(ULevel* _PrevLevel)
@@ -107,7 +105,7 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	C_SpawnBooper();	
 	CreateTransition();
 
-	BGMPlayer.On();
+	MainMenuBGMPlayer.On();
 	StateChange(EMainMenuState::Begin);
 }
 
@@ -624,5 +622,5 @@ void MainMenu::LevelEnd(ULevel* _NextLevel)
 {
 	CutSceneManager::LevelEnd(_NextLevel);
 
-	BGMPlayer.Off();
+	MainMenuBGMPlayer.Off();
 }

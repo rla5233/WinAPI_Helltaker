@@ -27,6 +27,8 @@ const float ChapterManager::TransitionInter = 0.0435f;
 const float ChapterManager::HeroDelayTime = 0.15f;
 std::set<std::string> ChapterManager::ChapterSet;
 
+UEngineSoundPlayer ChapterManager::ChapterBGMPlayer;
+
 ChapterManager::ChapterManager()
 {
 }
@@ -43,7 +45,15 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("Debuging", "GreenPoint.png");
 		ContentsHelper::LoadImg("Debuging", "RedPoint.png");
 		ContentsHelper::LoadFolder("Scene", "Transition");
+
+		ContentsHelper::LoadSound("Sound\\BGM", "Vitality.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "transition_on.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
 		
+		ChapterBGMPlayer = UEngineSound::SoundPlay("Vitality.wav");
+		ChapterBGMPlayer.Loop();
+		ChapterBGMPlayer.Off();
+
 		IsLoad = true;
 	}
 }
@@ -413,6 +423,7 @@ void ChapterManager::IdleStart()
 	PlayerHero->SeeDirChange(EActorSeeDir::Right);
 	PlayerHero->StateChange(EHeroState::Idle);
 	UEngineSound::SoundPlay("transition_off.wav");
+	ChapterBGMPlayer.On();
 }
 
 void ChapterManager::HeroDeath(float _DeltaTime)
@@ -514,9 +525,7 @@ void ChapterManager::Reset(float _DeltaTime)
 
 void ChapterManager::ResetStart()
 {
-	TransitionActor->GetImageRenderer()->ActiveOn();
-	TransitionActor->GetImageRenderer()->AnimationReset();
-	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+	TransitionOn();
 }
 
 void ChapterManager::ResetCheck()
