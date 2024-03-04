@@ -7,6 +7,7 @@ bool Piston::IsLoad = false;
 
 const FVector Piston::Scale = { 0.125f, 0.74f };
 const float Piston::TurnInter = 0.02f;
+const float Piston::TurnDelayTime = 0.1f;
 
 Piston::Piston()
 {
@@ -80,6 +81,7 @@ void Piston::MoveStart()
 	SetLerfTargetPos(TargetPos);
 	LerfMoveOn();
 
+	TimeCount = TurnDelayTime;
 	MoveOrder = 0;
 }
 
@@ -104,17 +106,23 @@ void Piston::Move1(float _DeltaTime)
 	LerfMoveUpdate(_DeltaTime, 4.0f);
 	if (false == IsLerfMoveOn())
 	{
-		LT_ImageRenderer->AnimationReset();
-		LT_ImageRenderer->ChangeAnimation("LT_Turn");
-		RT_ImageRenderer->AnimationReset();
-		RT_ImageRenderer->ChangeAnimation("RT_Turn");
+		if (0.0f >= TimeCount)
+		{
+			LT_ImageRenderer->AnimationReset();
+			LT_ImageRenderer->ChangeAnimation("LT_Turn");
+			RT_ImageRenderer->AnimationReset();
+			RT_ImageRenderer->ChangeAnimation("RT_Turn");
 
-		LB_ImageRenderer->AnimationReset();
-		LB_ImageRenderer->ChangeAnimation("LB_Turn");
-		RB_ImageRenderer->AnimationReset();
-		RB_ImageRenderer->ChangeAnimation("RB_Turn");
+			LB_ImageRenderer->AnimationReset();
+			LB_ImageRenderer->ChangeAnimation("LB_Turn");
+			RB_ImageRenderer->AnimationReset();
+			RB_ImageRenderer->ChangeAnimation("RB_Turn");
+			
+			++MoveOrder;
+			return;
+		}
 
-		++MoveOrder;
+		TimeCount -= _DeltaTime;
 	}
 }
 

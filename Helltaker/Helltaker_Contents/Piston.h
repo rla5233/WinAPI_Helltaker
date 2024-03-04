@@ -47,6 +47,8 @@ private:
 	UImageRenderer* RB_ImageRenderer = nullptr;
 	static const FVector Scale;
 	static const float TurnInter;
+	static const float TurnDelayTime;
+	float TimeCount = 0.0f;
 
 	int MoveOrder = -1;
 
