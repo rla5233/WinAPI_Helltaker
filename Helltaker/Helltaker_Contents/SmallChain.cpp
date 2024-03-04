@@ -3,7 +3,7 @@
 bool SmallChain::IsLoad = false;
 
 const FVector SmallChain::V_Scale = { 0.025f, 1.0f };
-const FVector SmallChain::H_Scale = { 1.527f, 0.052f };
+const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
 
 SmallChain::SmallChain()
 {
@@ -56,6 +56,8 @@ void SmallChain::IdleStart()
 		ImageRenderer->SetTransform({ { 0.0f, 0.0f }, { WinScale * H_Scale } });
 		break;
 	}
+
+	ImageRenderer->SetAlpha(0.5);
 }
 
 void SmallChain::Idle(float _DeltaTime)

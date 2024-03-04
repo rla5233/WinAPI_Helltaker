@@ -20,7 +20,7 @@ bool SinChapterManager::IsLoad = false;
 
 const float SinChapterManager::HeroDelayTime = 0.129f;
 
-const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.3f };
+const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 SinChapterManager::SinChapterManager()
 {
@@ -346,19 +346,27 @@ void SinChapterManager::Intro(float _DeltaTime)
 
 void SinChapterManager::Phase1Start()
 {
-	SinBridgeMoveOn();
-	SinChainMoveOn();
-
-	SinPitMoveOn();
-	AllThornMoveOn();
-	
-	PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
-	SinGear->StateChange(ESinGearState::Working);
+	//SinBridgeMoveOn();
+	//SinChainMoveOn();
+	//
+	//SinPitMoveOn();
+	//AllThornMoveOn();
+	//
+	//PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
+	//SinGear->StateChange(ESinGearState::Working);
 
 
 	//
 	M_SetSmallChainVecSize(10, 1);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 0, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 0, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 1, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 2, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 3, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 4, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 5, 0);
+	//M_CreateSmallChain(ESinSmallChainType::Ver, 1, 6, 0);
+
+	M_CreateSmallChain(ESinSmallChainType::Hor, 1, 0, 0);
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
