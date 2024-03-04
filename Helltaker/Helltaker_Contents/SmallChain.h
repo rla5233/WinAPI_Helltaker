@@ -17,6 +17,7 @@ public:
 	SmallChain& operator=(SmallChain&& _Other) noexcept = delete;
 
 	void StateChange(ESinSmallChainState _State);
+	void CreateImageRenderer();
 
 protected:
 	void BeginPlay() override;
@@ -27,6 +28,8 @@ private:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
+	static const FVector V_Scale;
+	static const FVector H_Scale;
 
 	ESinSmallChainType Type = ESinSmallChainType::None;
 	ESinSmallChainState State = ESinSmallChainState::None;

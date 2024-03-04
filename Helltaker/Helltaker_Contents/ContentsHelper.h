@@ -274,8 +274,9 @@ enum class SinRenderOrder
 	BackGround,
 	Bottom,
 	Mid,
-	Top,
 	Hero,
+	SmallVChain,
+	Top,
 	Transition
 };
 

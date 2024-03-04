@@ -53,10 +53,11 @@ void SinChapterManager::M_CreateSinMap()
 
 	M_CreateSinBridge();
 	M_CreateThorn();
+	M_SpawnHero();
 	
 	M_CreateSinHeroLife();
 
-	M_SpawnHero();
+
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)

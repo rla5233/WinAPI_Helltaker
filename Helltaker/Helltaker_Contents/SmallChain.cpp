@@ -2,6 +2,9 @@
 
 bool SmallChain::IsLoad = false;
 
+const FVector SmallChain::V_Scale = { 0.052f, 1.527f };
+const FVector SmallChain::H_Scale = { 1.527f, 0.052f };
+
 SmallChain::SmallChain()
 {
 }
@@ -21,7 +24,6 @@ void SmallChain::BeginPlay()
 
 		IsLoad = true;
 	}
-
 }
 
 void SmallChain::Tick(float _DeltaTime)
@@ -59,5 +61,18 @@ void SmallChain::StateChange(ESinSmallChainState _State)
 		}
 	}
 
-	State = _State
+	State = _State;
+}
+
+void SmallChain::CreateImageRenderer()
+{
+	switch (Type)
+	{
+	case ESinSmallChainType::Ver:
+		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::SmallVChain);
+		break;
+	case ESinSmallChainType::Hor:
+		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Top);
+		break;
+	}
 }
