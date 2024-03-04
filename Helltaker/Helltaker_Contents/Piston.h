@@ -43,7 +43,6 @@ private:
 	static const FVector Scale;
 	static const float TurnInter;
 
-	FVector TempPos = FVector::Zero;
 	int MoveOrder = -1;
 
 	ESinPistonState State = ESinPistonState::None;

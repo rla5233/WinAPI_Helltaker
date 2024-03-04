@@ -314,7 +314,8 @@ enum class ESinBridgeState
 enum class ESinSkullState
 {
 	None,
-	Idle
+	Idle,
+	Move
 };
 
 enum class ESinPistonState

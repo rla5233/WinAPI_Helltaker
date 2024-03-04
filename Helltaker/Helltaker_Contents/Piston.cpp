@@ -1,5 +1,7 @@
 #include "Piston.h"
 
+#include "SinChapterManager.h"
+
 bool Piston::IsLoad = false;
 
 const FVector Piston::Scale = { 0.125f, 0.74f };
@@ -71,9 +73,9 @@ void Piston::Idle(float _DeltaTime)
 void Piston::MoveStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	TempPos = GetActorLocation();
-	FVector TargetPos = { TempPos.X, WinScale.Y * 0.25f };
-	SetLerfStartPos(TempPos);
+	FVector CurPos = GetActorLocation();
+	FVector TargetPos = { CurPos.X, WinScale.Y * 0.25f };
+	SetLerfStartPos(CurPos);
 	SetLerfTargetPos(TargetPos);
 	LerfMoveOn();
 
@@ -122,9 +124,10 @@ void Piston::Move2(float _DeltaTime)
 		true == RT_ImageRenderer->IsCurAnimationEnd() &&
 		true == RB_ImageRenderer->IsCurAnimationEnd())
 	{
-		SetLerfStartPos(GetActorLocation());
-		SetLerfTargetPos(TempPos);
+		SwitchLerfPos();
 		LerfMoveOn();
+
+		GetSinChapter();
 
 		++MoveOrder;
 	}

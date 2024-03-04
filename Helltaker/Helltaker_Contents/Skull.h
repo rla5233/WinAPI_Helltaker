@@ -16,8 +16,7 @@ public:
 	Skull& operator=(const Skull& _Other) = delete;
 	Skull& operator=(Skull&& _Other) noexcept = delete;
 
-
-	void StateChange(ESinSkullState _State);
+	void StateChange(ESinSkullState _State, const FVector& _MoveDistance = FVector::Zero);
 
 protected:
 	void BeginPlay() override;
@@ -26,6 +25,9 @@ protected:
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
+
+	void MoveStart(const FVector& _MoveDistance);
+	void Move(float _DeltaTime);
 
 	void SetSkull();
 	void SetArm();

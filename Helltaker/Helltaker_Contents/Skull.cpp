@@ -75,6 +75,24 @@ void Skull::Idle(float _DeltaTime)
 {
 }
 
+void Skull::MoveStart(const FVector& _MoveDistance)
+{
+	FVector CurPos = GetActorLocation();
+	SetLerfStartPos(CurPos);
+	SetLerfTargetPos(CurPos + _MoveDistance);
+
+	LerfMoveOn();
+}
+
+void Skull::Move(float _DeltaTime)
+{
+	LerfMoveUpdate(_DeltaTime, 4.0f);
+	if (false == IsLerfMoveOn())
+	{
+		StateChange(ESinSkullState::Idle);
+	}
+}
+
 void Skull::Tick(float _DeltaTime)
 {
 	SinMoveActor::Tick(_DeltaTime);
@@ -89,10 +107,13 @@ void Skull::StateUpdate(float _DeltaTime)
 	case ESinSkullState::Idle:
 		Idle(_DeltaTime);
 		break;
+	case ESinSkullState::Move:
+		Move(_DeltaTime);
+		break;
 	}
 }
 
-void Skull::StateChange(ESinSkullState _State)
+void Skull::StateChange(ESinSkullState _State, const FVector& _MoveDistance)
 {
 	if (State != _State)
 	{
@@ -100,6 +121,9 @@ void Skull::StateChange(ESinSkullState _State)
 		{
 		case ESinSkullState::Idle:
 			IdleStart();
+			break;
+		case ESinSkullState::Move:
+			MoveStart(_MoveDistance);
 			break;
 		}
 	}

@@ -70,6 +70,13 @@ public:
 	{
 		TargetPos = _Pos;
 	}
+	
+	void SwitchLerfPos()
+	{
+		FVector TempPos = StartPos;
+		StartPos = TargetPos;
+		TargetPos = TempPos;
+	}
 
 	void LerfMoveUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
 
