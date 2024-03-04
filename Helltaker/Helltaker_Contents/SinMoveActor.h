@@ -61,6 +61,16 @@ public:
 		return IsLerfMove;
 	}
 
+	void SetLerfStartPos(const FVector& _Pos)
+	{
+		StartPos = _Pos;
+	}
+
+	void SetLerfTargetPos(const FVector& _Pos)
+	{
+		TargetPos = _Pos;
+	}
+
 	void MoveLerfUpdate(float _DeltaTime, float _TimeWeight);
 
 	void MoveY_Update(float _Speed, float _DeltaTime);
