@@ -77,9 +77,18 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("UI", "Select_010.png");
 
 		ContentsHelper::LoadSound("Sound\\BGM", "Apropos.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "booper_click.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "menu_button_focus.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "menu_button_confirm.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "transition_on.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
 
 		IsLoad = true;
 	}
+
+	BGMPlayer = UEngineSound::SoundPlay("Apropos.wav");
+	BGMPlayer.Loop();
+	BGMPlayer.Off();
 }
 
 void MainMenu::LevelStart(ULevel* _PrevLevel)
@@ -98,6 +107,7 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	C_SpawnBooper();	
 	CreateTransition();
 
+	BGMPlayer.On();
 	StateChange(EMainMenuState::Begin);
 }
 
@@ -106,6 +116,7 @@ void MainMenu::Begin(float _DeltaTime)
 	DialogueMoveUpdate(_DeltaTime);
 	if (UEngineInput::IsPress(VK_SPACE) || UEngineInput::IsPress(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		StateChange(EMainMenuState::Enter);
 	}
 }
@@ -124,6 +135,7 @@ void MainMenu::Enter(float _DeltaTime)
 	if ((false == C_GetSceneCharacter()->GetIsImageRendererMoveValue())
 	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		StateChange(EMainMenuState::Select);
 	}
 }
@@ -197,6 +209,7 @@ void MainMenu::NewGame(float _DeltaTime)
 	case 5:
 		if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		{
+			UEngineSound::SoundPlay("booper_click.wav");
 			StateChange(EMainMenuState::EnterChapter);
 		}
 		break;
@@ -208,6 +221,7 @@ void MainMenu::NewGameOrder1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_BooperTextSet(MainMenu_Script[7]);
+		UEngineSound::SoundPlay("booper_click.wav");
 		++NewGameOrder;
 	}
 }
@@ -219,6 +233,7 @@ void MainMenu::NewGameOrder2()
 		C_GetDialogue()->AllRenderersActiveOff();
 		C_GetSceneCharacter()->AllRenderersActiveOff();
 		C_BooperTextSet(MainMenu_Script[8]);
+		UEngineSound::SoundPlay("booper_click.wav");
 		++NewGameOrder;
 	}
 }
@@ -238,6 +253,7 @@ void MainMenu::NewGameLastOrder()
 		Pos = { 0.0f, WinScale.Y * (-0.0995f) };
 		C_BooperSetTextPosition(Pos);
 		SelectChapterNum = 1;
+		UEngineSound::SoundPlay("booper_click.wav");
 		++NewGameOrder;
 	}
 }
@@ -387,12 +403,14 @@ void MainMenu::FocusSC_MenuBarCheck()
 		AutoSC_UnSelectMenuImage();
 		SetFocusSC_MenuIndex(FocusSC_MenuIndex - 1);
 		AutoSC_SelectMenuImage();
+		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 	else if (UEngineInput::IsDown('D') || UEngineInput::IsDown(VK_RIGHT))
 	{
 		AutoSC_UnSelectMenuImage();
 		SetFocusSC_MenuIndex(FocusSC_MenuIndex + 1);
 		AutoSC_SelectMenuImage();
+		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
@@ -605,4 +623,6 @@ void MainMenu::StateChange(EMainMenuState _State)
 void MainMenu::LevelEnd(ULevel* _NextLevel)
 {
 	CutSceneManager::LevelEnd(_NextLevel);
+
+	BGMPlayer.Off();
 }

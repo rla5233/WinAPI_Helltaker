@@ -17,6 +17,7 @@
 #include "Chapter2.h"
 #include "RenderActor.h"
 
+#include <EnginePlatform/EngineSound.h>
 #include <math.h>
 #include <vector>
 
@@ -169,6 +170,7 @@ void ChapterManager::TransitionOn()
 	TransitionActor->GetImageRenderer()->ActiveOn();
 	TransitionActor->GetImageRenderer()->AnimationReset();
 	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+	UEngineSound::SoundPlay("transition_on.wav");
 }
 
 void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
@@ -410,6 +412,7 @@ void ChapterManager::IdleStart()
 	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
 	PlayerHero->SeeDirChange(EActorSeeDir::Right);
 	PlayerHero->StateChange(EHeroState::Idle);
+	UEngineSound::SoundPlay("transition_off.wav");
 }
 
 void ChapterManager::HeroDeath(float _DeltaTime)

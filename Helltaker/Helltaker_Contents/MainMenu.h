@@ -2,6 +2,8 @@
 
 #include "CutSceneManager.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 // Ό³Έν :
 class MainMenu : public CutSceneManager
 {
@@ -68,6 +70,7 @@ private:
 	void DialogueMoveUpdate(float _DeltaTime);
 
 private:
+	UEngineSoundPlayer BGMPlayer;
 	int NewGameOrder = -1;
 	int SelectChapterNum = -1;
 	float DialogueMoveSum = 0.0f;

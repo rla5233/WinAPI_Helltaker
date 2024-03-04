@@ -13,6 +13,8 @@
 #include "Text.h"
 #include "UI.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 bool CutSceneManager::IsLoad = false;
 const FVector CutSceneManager::FocusMenuScale = { 0.501f, 0.074f };
 const FVector CutSceneManager::UnFocusMenuScale = { 0.475f, 0.065f };
@@ -489,6 +491,7 @@ void CutSceneManager::FocusMenuBarCheck()
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
@@ -500,9 +503,11 @@ void CutSceneManager::FocusMenuBarCheck()
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("menu_button_confirm.wav");
 		SelectMenu();
 	}
 }
