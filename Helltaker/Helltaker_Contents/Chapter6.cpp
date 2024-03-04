@@ -5,7 +5,7 @@
 #include "UI.h"
 #include "Chapter7.h"
 
-
+#include <EnginePlatform/EngineSound.h>
 
 bool Chapter6::IsLoad = false;
 
@@ -156,7 +156,7 @@ void Chapter6::FailOrderCheck()
 		break;
 	case 3:
 		ChapterRestart();
-		return;
+		break;
 	}
 }
 
@@ -182,6 +182,7 @@ void Chapter6::BadEndSetting1()
 	Booper->AllRenderersActiveOn();
 	C_BooperTextSet(Chap6_Script[5]);
 	C_BooperSetTextPosition(1);
+	UEngineSound::SoundPlay("booper_click.wav");
 	C_AddFailOrder(1);
 }
 
@@ -194,6 +195,7 @@ void Chapter6::BadEndSetting2()
 		C_ChangeDialogue("CutScene_AngelEnd.png", { {0, 0}, Scale });
 
 		C_BooperTextSet(Chap6_Script[6]);
+		UEngineSound::SoundPlay("booper_click.wav");
 		C_AddFailOrder(1);
 	}
 }
