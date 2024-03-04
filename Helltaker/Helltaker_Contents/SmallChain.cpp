@@ -1,5 +1,7 @@
 #include "SmallChain.h"
 
+bool SmallChain::IsLoad = false;
+
 SmallChain::SmallChain()
 {
 }
@@ -9,7 +11,18 @@ SmallChain::~SmallChain()
 }
 
 void SmallChain::BeginPlay()
-{}
+{
+	SinMoveActor::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_VChain.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "Sin_HChain.png");
+
+		IsLoad = true;
+	}
+
+}
 
 void SmallChain::Tick(float _DeltaTime)
 {
