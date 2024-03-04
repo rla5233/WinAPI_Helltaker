@@ -77,7 +77,7 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("UI", "Select_010.png");
 
 		ContentsHelper::LoadSound("Sound\\BGM", "Apropos.wav");
-		ContentsHelper::LoadSound("Sound\\Effect", "booper_click.wav");
+		
 		ContentsHelper::LoadSound("Sound\\Effect", "menu_button_focus.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "menu_button_confirm.wav");
 
@@ -155,7 +155,10 @@ void MainMenu::EnterStart()
 void MainMenu::Select(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
-	FocusMenuBarCheck();
+	if (true == FocusMenuBarCheck())
+	{
+		UEngineSound::SoundPlay("menu_button_focus.wav");
+	}
 }
 
 void MainMenu::SelectStart()
@@ -173,6 +176,7 @@ void MainMenu::SelectStart()
 
 void MainMenu::SelectMenu()
 {
+	UEngineSound::SoundPlay("menu_button_confirm.wav");
 	switch (C_GetFocusMenuIndex())
 	{
 	case 0:
@@ -528,6 +532,7 @@ void MainMenu::ExitStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
 	C_BooperSetTextPosition(Pos);
+	UEngineSound::SoundPlay("booper_click.wav");
 }
 
 void MainMenu::DialogueMoveUpdate(float _DeltaTime)

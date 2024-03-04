@@ -41,6 +41,11 @@ void CutSceneManager::BeginPlay()
 		ContentsHelper::LoadFolder("UI", "Booper");
 		ContentsHelper::LoadFolder("Scene\\Dialogue", "Death");
 		ContentsHelper::LoadFolder("Scene\\Dialogue", "Success");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "booper_click.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_start.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_button_confirm.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "dialogue_button_focus.wav");
 		
 		IsLoad = true;
 	}
@@ -276,6 +281,7 @@ void CutSceneManager::Enter(float _DeltaTime)
 	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
 		C_StateChange(ECutSceneState::Select);
+		UEngineSound::SoundPlay("booper_click.wav");
 	}
 }
 
@@ -408,6 +414,8 @@ void CutSceneManager::CutSceneStart()
 
 	C_StateChange(ECutSceneState::None);
 	C_StateChange(ECutSceneState::Enter);
+	
+	UEngineSound::SoundPlay("dialogue_start.wav");
 }
 
 void CutSceneManager::Tick(float _DeltaTime)
@@ -479,7 +487,7 @@ void CutSceneManager::LevelEnd(ULevel* _NextLevel)
 	AllCutSceneActors.clear();
 }
 
-void CutSceneManager::FocusMenuBarCheck()
+bool CutSceneManager::FocusMenuBarCheck()
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
 	{
@@ -491,7 +499,7 @@ void CutSceneManager::FocusMenuBarCheck()
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-		UEngineSound::SoundPlay("menu_button_focus.wav");
+		return true;
 	}
 	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
 	{
@@ -503,13 +511,14 @@ void CutSceneManager::FocusMenuBarCheck()
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
 		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
 		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
-		UEngineSound::SoundPlay("menu_button_focus.wav");
+		return true;
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		UEngineSound::SoundPlay("menu_button_confirm.wav");
 		SelectMenu();
 	}
+
+	return false;
 }
 
 void CutSceneManager::SetFocusMenuIndex(int _Index)
