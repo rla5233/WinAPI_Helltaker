@@ -2,6 +2,9 @@
 
 #include "ChapterManager.h"
 
+#include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
+
 bool Stone::IsLoad = false;
 const FVector Stone::StoneScale = { 0.043f, 0.081f };
 
@@ -103,6 +106,19 @@ void Stone::Idle(float _DeltaTime)
 
 void Stone::HitStart()
 {
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("stone_kick_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("stone_kick_002.wav");
+		break;
+	case 3:
+		UEngineSound::SoundPlay("stone_kick_003.wav");
+		break;
+	}
 }
 
 void Stone::Hit(float _DeltaTime)
@@ -141,6 +157,20 @@ void Stone::MoveStart()
 
 	CreateRandomBigHitEffect();
 	HitActorInfoUpdate(EHitActorState::Move);
+
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("stone_move_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("stone_move_002.wav");
+		break;
+	case 3:
+		UEngineSound::SoundPlay("stone_move_003.wav");
+		break;
+	}
 }
 
 void Stone::SetStoneImg(std::string_view _Name)

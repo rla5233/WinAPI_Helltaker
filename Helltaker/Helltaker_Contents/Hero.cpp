@@ -1,12 +1,6 @@
 #include "Hero.h"
 
 #include "ChapterManager.h"
-#include "ContentsHelper.h"
-#include "Skeleton.h"
-
-#include <EngineCore/EngineCore.h>
-#include <EngineBase/EngineDirectory.h>
-#include <EngineCore/EngineResourcesManager.h>
 
 Hero::Hero()
 {}

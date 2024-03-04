@@ -28,7 +28,13 @@ void HitActor::BeginPlay()
 	{
 		ContentsHelper::LoadFolder("Effect", "Hit");
 
+		ContentsHelper::LoadSound("Sound\\Effect", "stone_kick_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "stone_kick_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "stone_kick_003.wav");
 
+		ContentsHelper::LoadSound("Sound\\Effect", "stone_move_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "stone_move_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "stone_move_003.wav");
 
 		IsLoad = true;
 	}
