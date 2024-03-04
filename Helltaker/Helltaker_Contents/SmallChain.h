@@ -33,6 +33,9 @@ private:
 	void ShowStart();
 	void Show(float _DeltaTime);
 
+	void ShowAnimation(float _DeltaTime);
+	void VerShowAnimation(float _DeltaTime);
+
 	void HitStart();
 	void Hit(float _DeltaTime);
 
@@ -43,6 +46,9 @@ private:
 	static const FVector V_Scale;
 	static const FVector H_Scale;
 	static const float SpeedY;
+
+	bool IsShow = false;
+	float ShowTime = 0.0f;
 
 	float timecount = 0.0f;
 

@@ -79,31 +79,66 @@ void SmallChain::Move(float _DeltaTime)
 void SmallChain::ShowStart()
 {
 	ImageRenderer->ActiveOn();
-	timecount = 1.0f;
+	IsShow = true;
+	ShowTime = 0.0f;
 }
 
 void SmallChain::Show(float _DeltaTime)
 {
-	if (0.0f >= timecount)
+	ShowAnimation(_DeltaTime);
+
+	if (false == IsShow)
 	{
 		StateChange(ESinSmallChainState::Hit);
-		return;
 	}
+}
 
-	timecount -= _DeltaTime;
+void SmallChain::ShowAnimation(float _DeltaTime)
+{
+	if (true == IsShow)
+	{
+		switch (Type)
+		{
+		case ESinSmallChainType::Ver:
+			VerShowAnimation(_DeltaTime);
+			break;
+		case ESinSmallChainType::Hor:
+			break;
+		}
+	}
+}
+
+void SmallChain::VerShowAnimation(float _DeltaTime)
+{
+	if (true)
+	{
+		ShowTime += _DeltaTime * 3.5f;
+
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, ShowTime);
+		ImageRenderer->SetScale({ WinScale.X * ScaleX, WinScale.Y * V_Scale.Y });
+
+		if (1.0f <= ShowTime)
+		{
+			ShowTime = 0.0f;
+			IsShow = false;
+		}
+	}
 }
 
 void SmallChain::HitStart()
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	ImageRenderer->SetScale({ WinScale * V_Scale });
 	ImageRenderer->SetAlpha(1);
-	timecount = 1.0f;
+	timecount = 0.5f;
 }
 
 void SmallChain::Hit(float _DeltaTime)
 {
 	if (0.0f >= timecount)
 	{
-		ImageRenderer->ActiveOff();
+		Destroy();
 		return;
 	}
 
