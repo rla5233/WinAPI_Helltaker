@@ -58,7 +58,7 @@ void SmallChain::IdleStart()
 		break;
 	}
 
-	ImageRenderer->SetAlpha(0.5);
+	ImageRenderer->SetAlpha(0.25);
 	ImageRenderer->ActiveOff();
 }
 
@@ -80,7 +80,7 @@ void SmallChain::ShowStart()
 {
 	ImageRenderer->ActiveOn();
 	IsShow = true;
-	ShowTime = 0.0f;
+	TimeCount = 0.0f;
 }
 
 void SmallChain::Show(float _DeltaTime)
@@ -112,15 +112,15 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 {
 	if (true)
 	{
-		ShowTime += _DeltaTime * 3.5f;
+		TimeCount += _DeltaTime * 3.5f;
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, ShowTime);
+		float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, TimeCount);
 		ImageRenderer->SetScale({ WinScale.X * ScaleX, WinScale.Y * V_Scale.Y });
 
-		if (1.0f <= ShowTime)
+		if (1.0f <= TimeCount)
 		{
-			ShowTime = 0.0f;
+			TimeCount = 0.0f;
 			IsShow = false;
 		}
 	}
@@ -128,21 +128,81 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 
 void SmallChain::HitStart()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	ImageRenderer->SetScale({ WinScale * V_Scale });
 	ImageRenderer->SetAlpha(1);
-	timecount = 0.5f;
+	IsHit1 = true;
+	TimeCount = 0.0f;
 }
 
 void SmallChain::Hit(float _DeltaTime)
 {
-	if (0.0f >= timecount)
+	HitAnimation1(_DeltaTime);
+	HitAnimation2(_DeltaTime);
+
+	if (false == IsHit1 && false == IsHit2)
 	{
 		Destroy();
-		return;
 	}
+}
 
-	timecount -= _DeltaTime;
+void SmallChain::HitAnimation1(float _DeltaTime)
+{
+	if (true == IsHit1)
+	{
+		switch (Type)
+		{
+		case ESinSmallChainType::Ver:
+			VerHitAnimation1(_DeltaTime);
+			break;
+		case ESinSmallChainType::Hor:
+			break;
+		}
+	}
+}
+
+void SmallChain::VerHitAnimation1(float _DeltaTime)
+{
+	TimeCount += _DeltaTime * 7.0f;
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float ScaleX = ContentsHelper::LerpClampf(0.0f, V_Scale.X, TimeCount);
+	ImageRenderer->SetScale({ WinScale.X * ScaleX, WinScale.Y * V_Scale.Y });
+
+	if (1.0f <= TimeCount)
+	{
+		TimeCount = 0.0f;
+		IsHit1 = false;
+		IsHit2 = true;
+	}
+}
+
+void SmallChain::HitAnimation2(float _DeltaTime)
+{
+	if (true == IsHit2)
+	{
+		switch (Type)
+		{
+		case ESinSmallChainType::Ver:
+			VerHitAnimation2(_DeltaTime);
+			break;
+		case ESinSmallChainType::Hor:
+			break;
+		}
+	}
+}
+
+void SmallChain::VerHitAnimation2(float _DeltaTime)
+{
+	TimeCount += _DeltaTime * 7.0f;
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, TimeCount);
+	ImageRenderer->SetScale({ WinScale.X * ScaleX, WinScale.Y * V_Scale.Y });
+
+	if (1.0f <= TimeCount)
+	{
+		TimeCount = 0.0f;
+		IsHit2 = false;
+	}
 }
 
 void SmallChain::Tick(float _DeltaTime)

@@ -39,6 +39,12 @@ private:
 	void HitStart();
 	void Hit(float _DeltaTime);
 
+	void HitAnimation1(float _DeltaTime);
+	void VerHitAnimation1(float _DeltaTime);
+
+	void HitAnimation2(float _DeltaTime);
+	void VerHitAnimation2(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
@@ -48,9 +54,9 @@ private:
 	static const float SpeedY;
 
 	bool IsShow = false;
-	float ShowTime = 0.0f;
-
-	float timecount = 0.0f;
+	bool IsHit1 = false;
+	bool IsHit2 = false;
+	float TimeCount = 0.0f;
 
 	ESinSmallChainType Type = ESinSmallChainType::None;
 	ESinSmallChainState State = ESinSmallChainState::None;
