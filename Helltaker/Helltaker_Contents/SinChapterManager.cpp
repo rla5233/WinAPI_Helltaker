@@ -169,7 +169,6 @@ void SinChapterManager::M_CreateSinPiston()
 	UpPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Top));
 	UpPiston->SetName("SinPiston");
 	UpPiston->SetActorLocation({ WinScale.hX(), UpPosY });
-	UpPiston->SetLerfStartPos(UpPiston->GetActorLocation());
 	UpPiston->StateChange(ESinPistonState::Idle);
 	
 	AllMapRenderActors.push_back(UpPiston);
@@ -178,7 +177,6 @@ void SinChapterManager::M_CreateSinPiston()
 	DownPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Bottom));
 	DownPiston->SetName("SinPiston");
 	DownPiston->SetActorLocation({ WinScale.hX(), DownPosY });
-	DownPiston->SetLerfStartPos(DownPiston->GetActorLocation());
 	DownPiston->StateChange(ESinPistonState::Idle);
 
 	AllMapRenderActors.push_back(DownPiston);
@@ -285,7 +283,7 @@ void SinChapterManager::M_SpawnHero()
 
 void SinChapterManager::IntroStart()
 {
-	
+	UpPiston->StateChange(ESinPistonState::Move);
 }
 
 void SinChapterManager::Intro(float _DeltaTime)

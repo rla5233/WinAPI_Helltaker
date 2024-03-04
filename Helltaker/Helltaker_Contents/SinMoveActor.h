@@ -71,7 +71,7 @@ public:
 		TargetPos = _Pos;
 	}
 
-	void MoveLerfUpdate(float _DeltaTime, float _TimeWeight);
+	void LerfMoveUpdate(float _DeltaTime, float _TimeWeight = 1.0f);
 
 	void MoveY_Update(float _Speed, float _DeltaTime);
 protected:

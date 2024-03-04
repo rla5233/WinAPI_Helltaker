@@ -8,12 +8,13 @@ SinMoveActor::~SinMoveActor()
 {
 }
 
-void SinMoveActor::MoveLerfUpdate(float _DeltaTime, float _TimeWeight)
+void SinMoveActor::LerfMoveUpdate(float _DeltaTime, float _TimeWeight /* = 1.0f */)
 {
 	if (true == IsLerfMove)
 	{
-		LerfMoveTime += _DeltaTime + _TimeWeight;
+		LerfMoveTime += _DeltaTime * _TimeWeight;
 		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, LerfMoveTime);
+		SetActorLocation(NextPos);
 
 		if (1.0f <= LerfMoveTime)
 		{

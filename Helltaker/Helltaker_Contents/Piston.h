@@ -28,7 +28,10 @@ private:
 
 	void MoveStart();
 	void Move(float _DeltaTime);
-	
+	void Move1(float _DeltaTime);
+	void Move2(float _DeltaTime);
+	void Move3(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
@@ -39,6 +42,9 @@ private:
 	UImageRenderer* RB_ImageRenderer = nullptr;
 	static const FVector Scale;
 	static const float TurnInter;
+
+	FVector TempPos = FVector::Zero;
+	int MoveOrder = -1;
 
 	ESinPistonState State = ESinPistonState::None;
 	static bool IsLoad;

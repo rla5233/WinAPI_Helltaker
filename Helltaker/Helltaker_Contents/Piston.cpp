@@ -52,7 +52,6 @@ void Piston::IdleStart()
 
 	LT_ImageRenderer->SetImage("Sin_TPiston.png");
 	LT_ImageRenderer->SetTransform({ { -PosX, 0.0f }, WinScale * Scale });
-	LT_ImageRenderer->ChangeAnimation("LT_Turn");
 
 	RT_ImageRenderer->SetImage("Sin_TPiston.png");
 	RT_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
@@ -71,12 +70,74 @@ void Piston::Idle(float _DeltaTime)
 
 void Piston::MoveStart()
 {
-	
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	TempPos = GetActorLocation();
+	FVector TargetPos = { TempPos.X, WinScale.Y * 0.25f };
+	SetLerfStartPos(TempPos);
+	SetLerfTargetPos(TargetPos);
+	LerfMoveOn();
+
+	MoveOrder = 0;
 }
 
 void Piston::Move(float _DeltaTime)
 {
+	switch (MoveOrder)
+	{
+	case 0 :
+		Move1(_DeltaTime);
+		break;
+	case 1:
+		Move2(_DeltaTime);
+		break;
+	case 2:
+		Move3(_DeltaTime);
+		break;
+	}
+}
 
+void Piston::Move1(float _DeltaTime)
+{
+	LerfMoveUpdate(_DeltaTime, 4.0f);
+	if (false == IsLerfMoveOn())
+	{
+		LT_ImageRenderer->AnimationReset();
+		LT_ImageRenderer->ChangeAnimation("LT_Turn");
+		RT_ImageRenderer->AnimationReset();
+		RT_ImageRenderer->ChangeAnimation("RT_Turn");
+
+		LB_ImageRenderer->AnimationReset();
+		LB_ImageRenderer->ChangeAnimation("LB_Turn");
+		RB_ImageRenderer->AnimationReset();
+		RB_ImageRenderer->ChangeAnimation("RB_Turn");
+
+		++MoveOrder;
+	}
+}
+
+void Piston::Move2(float _DeltaTime)
+{
+	if (true == LT_ImageRenderer->IsCurAnimationEnd() &&
+		true == LB_ImageRenderer->IsCurAnimationEnd() &&
+		true == RT_ImageRenderer->IsCurAnimationEnd() &&
+		true == RB_ImageRenderer->IsCurAnimationEnd())
+	{
+		SetLerfStartPos(GetActorLocation());
+		SetLerfTargetPos(TempPos);
+		LerfMoveOn();
+
+		++MoveOrder;
+	}
+}
+	
+void Piston::Move3(float _DeltaTime)
+{
+	LerfMoveUpdate(_DeltaTime, 4.0f);
+
+	if (false == IsLerfMoveOn())
+	{
+		StateChange(ESinPistonState::Idle);
+	}
 }
 
 void Piston::Tick(float _DeltaTime)
