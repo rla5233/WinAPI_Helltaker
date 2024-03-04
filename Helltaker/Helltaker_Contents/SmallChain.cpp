@@ -2,7 +2,7 @@
 
 bool SmallChain::IsLoad = false;
 
-const FVector SmallChain::V_Scale = { 0.025f, 1.0f };
+const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
 const float SmallChain::SpeedY = -150.0f;
 
@@ -129,29 +129,28 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 void SmallChain::HitStart()
 {
 	ImageRenderer->SetAlpha(1);
-	IsHit1 = true;
+	IsHit = true;
 	TimeCount = 0.0f;
 }
 
 void SmallChain::Hit(float _DeltaTime)
 {
-	HitAnimation1(_DeltaTime);
-	HitAnimation2(_DeltaTime);
+	HitAnimation(_DeltaTime);
 
-	if (false == IsHit1 && false == IsHit2)
+	if (false == IsHit)
 	{
 		Destroy();
 	}
 }
 
-void SmallChain::HitAnimation1(float _DeltaTime)
+void SmallChain::HitAnimation(float _DeltaTime)
 {
-	if (true == IsHit1)
+	if (true == IsHit)
 	{
 		switch (Type)
 		{
 		case ESinSmallChainType::Ver:
-			VerHitAnimation1(_DeltaTime);
+			VerHitAnimation(_DeltaTime);
 			break;
 		case ESinSmallChainType::Hor:
 			break;
@@ -159,38 +158,7 @@ void SmallChain::HitAnimation1(float _DeltaTime)
 	}
 }
 
-void SmallChain::VerHitAnimation1(float _DeltaTime)
-{
-	TimeCount += _DeltaTime * 7.0f;
-
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	float ScaleX = ContentsHelper::LerpClampf(0.0f, V_Scale.X, TimeCount);
-	ImageRenderer->SetScale({ WinScale.X * ScaleX, WinScale.Y * V_Scale.Y });
-
-	if (1.0f <= TimeCount)
-	{
-		TimeCount = 0.0f;
-		IsHit1 = false;
-		IsHit2 = true;
-	}
-}
-
-void SmallChain::HitAnimation2(float _DeltaTime)
-{
-	if (true == IsHit2)
-	{
-		switch (Type)
-		{
-		case ESinSmallChainType::Ver:
-			VerHitAnimation2(_DeltaTime);
-			break;
-		case ESinSmallChainType::Hor:
-			break;
-		}
-	}
-}
-
-void SmallChain::VerHitAnimation2(float _DeltaTime)
+void SmallChain::VerHitAnimation(float _DeltaTime)
 {
 	TimeCount += _DeltaTime * 7.0f;
 
@@ -201,7 +169,7 @@ void SmallChain::VerHitAnimation2(float _DeltaTime)
 	if (1.0f <= TimeCount)
 	{
 		TimeCount = 0.0f;
-		IsHit2 = false;
+		IsHit = false;
 	}
 }
 
