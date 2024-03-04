@@ -57,8 +57,6 @@ void ContentsHelper::LoadSound(std::string_view _Path, std::string_view _Name)
 	ResourcesPath.Move("Resources");
 	ResourcesPath.Move(_Path);
 	UEngineSound::Load(ResourcesPath.AppendPath(_Name), _Name);
-
-	//ContentsHelper::LoadSound("Sound", "Vitality.wav");
 }
 
 void ContentsHelper::SoundPlay(std::string_view _Name)

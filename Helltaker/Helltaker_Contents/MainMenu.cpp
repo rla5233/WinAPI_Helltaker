@@ -76,6 +76,8 @@ void MainMenu::BeginPlay()
 		ContentsHelper::LoadImg("UI", "Select_009.png");
 		ContentsHelper::LoadImg("UI", "Select_010.png");
 
+		ContentsHelper::LoadSound("Sound\\BGM", "Apropos.wav");
+
 		IsLoad = true;
 	}
 }

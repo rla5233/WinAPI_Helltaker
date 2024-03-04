@@ -1,10 +1,12 @@
 #include "EngineSerializer.h"
 
 UEngineSerializer::UEngineSerializer()
-{}
+{
+}
 
 UEngineSerializer::~UEngineSerializer()
-{}
+{
+}
 
 void UEngineSerializer::BufferResize(int _Size)
 {

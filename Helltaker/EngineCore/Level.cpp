@@ -5,7 +5,8 @@
 #include "EngineCore.h"
 
 ULevel::ULevel()
-{}
+{
+}
 
 ULevel::~ULevel()
 {

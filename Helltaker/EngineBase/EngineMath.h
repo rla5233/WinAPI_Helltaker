@@ -171,10 +171,13 @@ public:
 	void Normalize2D()
 	{
 		float Size = Size2D();
-		X /= Size;
-		Y /= Size;
-		Z = 0.0f;
-		W = 0.0f;
+		if (0.0f < Size && false == isnan(Size))
+		{
+			X /= Size;
+			Y /= Size;
+			Z = 0.0f;
+			W = 0.0f;
+		}
 	}
 
 	// 나는 변화하지 않고 길이 1짜리로 변한 나와 방향이 같은 벡터를 리턴하는 함수

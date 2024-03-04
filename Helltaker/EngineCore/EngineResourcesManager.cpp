@@ -9,7 +9,8 @@
 //UEngineResourcesManager* UEngineResourcesManager::pInst = nullptr;
 
 UEngineResourcesManager::UEngineResourcesManager()
-{}
+{
+}
 
 UEngineResourcesManager::~UEngineResourcesManager()
 {

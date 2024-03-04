@@ -54,10 +54,12 @@ void UEngineSound::ResourcesRelease()
 }
 
 UEngineSound::UEngineSound()
-{}
+{
+}
 
 UEngineSound::~UEngineSound()
-{}
+{
+}
 
 
 void UEngineSound::ResLoad(std::string_view _Path)

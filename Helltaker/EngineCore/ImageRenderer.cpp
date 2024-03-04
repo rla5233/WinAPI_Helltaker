@@ -283,7 +283,7 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 
 	if (true == AutoImageScaleValue)
 	{
-		RendererTrans.SetScale(Info.CuttingTrans.GetScale());
+		RendererTrans.SetScale(Info.CuttingTrans.GetScale() * AutoImageScaleRatio);
 	}
 
 	switch (ImageType)
