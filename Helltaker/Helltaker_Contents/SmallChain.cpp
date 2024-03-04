@@ -55,6 +55,7 @@ void SmallChain::IdleStart()
 	case ESinSmallChainType::Hor:
 		ImageRenderer->SetImage("Sin_HChain.png");
 		ImageRenderer->SetTransform({ { 0.0f, 0.0f }, { WinScale * H_Scale } });
+		MoveOn();
 		break;
 	}
 
@@ -68,11 +69,6 @@ void SmallChain::Idle(float _DeltaTime)
 
 void SmallChain::ShowStart()
 {
-	if (ESinSmallChainType::Hor == Type)
-	{
-	//	MoveOn();
-	}
-
 	ImageRenderer->ActiveOn();
 	IsShow = true;
 	TimeCount = 0.0f;
