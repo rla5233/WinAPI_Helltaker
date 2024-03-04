@@ -1,10 +1,12 @@
 #include "SmallChain.h"
 
+#include "SinChapterManager.h"
+#include "Sin_Thorn.h"	
+
 bool SmallChain::IsLoad = false;
 
 const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
-const float SmallChain::SpeedY = -150.0f;
 
 SmallChain::SmallChain()
 {
@@ -69,6 +71,14 @@ void SmallChain::Idle(float _DeltaTime)
 
 void SmallChain::ShowStart()
 {
+	if (ESinSmallChainType::Hor == Type)
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		float ScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
+		float a = GetSinChapter()->M_GetMoveYSum();
+		AddActorLocation({ 0.0f, fmodf(GetSinChapter()->M_GetMoveYSum(), ScaleY) });
+	}
+
 	ImageRenderer->ActiveOn();
 	IsShow = true;
 	TimeCount = 0.0f;
@@ -76,8 +86,8 @@ void SmallChain::ShowStart()
 
 void SmallChain::Show(float _DeltaTime)
 {
-	MoveY_Update(SpeedY, _DeltaTime);
 	ShowAnimation(_DeltaTime);
+	MoveY_Update(_DeltaTime);
 
 	if (false == IsShow)
 	{
@@ -119,7 +129,6 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 	}
 }
 
-// y축 시작 위치를 보정?
 void SmallChain::HorShowAnimation(float _DeltaTime)
 {
 	if (true)
@@ -147,12 +156,12 @@ void SmallChain::HitStart()
 
 void SmallChain::Hit(float _DeltaTime)
 {
-	MoveY_Update(SpeedY, _DeltaTime);
 	HitAnimation(_DeltaTime);
+	MoveY_Update(_DeltaTime);
 
 	if (false == IsHit)
 	{
-		//Destroy();
+		Destroy();
 	}
 }
 
@@ -174,7 +183,7 @@ void SmallChain::HitAnimation(float _DeltaTime)
 
 void SmallChain::VerHitAnimation(float _DeltaTime)
 {
-	TimeCount += _DeltaTime * 7.0f;
+	TimeCount += _DeltaTime * 5.0f;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, TimeCount);
@@ -189,10 +198,10 @@ void SmallChain::VerHitAnimation(float _DeltaTime)
 
 void SmallChain::HorHitAnimation(float _DeltaTime)
 {
-	TimeCount += _DeltaTime * 7.0f;
+	TimeCount += _DeltaTime * 5.0f;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, H_Scale.Y, TimeCount);
+	float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, 0.0f, TimeCount);
 	ImageRenderer->SetScale({ WinScale.X * H_Scale.X, WinScale.Y * ScaleY });
 
 	if (1.0f <= TimeCount)
@@ -207,6 +216,14 @@ void SmallChain::Tick(float _DeltaTime)
 	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+}
+
+void SmallChain::MoveY_Update(float _DeltaTime)
+{
+	if (ESinSmallChainType::Hor == Type)
+	{
+		AddActorLocation({ 0.0f, SinChapterManager::M_GetSpeedY() * _DeltaTime });
+	}
 }
 
 void SmallChain::StateUpdate(float _DeltaTime)

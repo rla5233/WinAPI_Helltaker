@@ -5,7 +5,6 @@
 bool ChainLink::IsLoad = false;
 
 const FVector ChainLink::Scale = { 0.0375f, 0.1388f };
-const float ChainLink::SpeedY = -150.0f;
 
 ChainLink::ChainLink()
 {
@@ -62,7 +61,7 @@ void ChainLink::MoveStart()
 
 void ChainLink::Move(float _DeltaTime)
 {
-	MoveY_Update(SpeedY, _DeltaTime);
+	MoveY_Update(SinChapterManager::M_GetSpeedY(), _DeltaTime);
 }
 
 void ChainLink::Tick(float _DeltaTime)

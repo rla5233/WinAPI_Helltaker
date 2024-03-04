@@ -1,10 +1,11 @@
 #include "Sin_Thorn.h"
 
+#include "SinChapterManager.h"
+
 bool Sin_Thorn::IsLoad = false;
 
 const FVector Sin_Thorn::ThornScale = { 0.0479f, 0.0851f };
 const float Sin_Thorn::ChangeInter = 0.05f;
-const float Sin_Thorn::SpeedY = -150.0f;;
 
 Sin_Thorn::Sin_Thorn()
 {
@@ -78,7 +79,7 @@ void Sin_Thorn::MoveUpdate(float _DeltaTime)
 {
 	if (true == IsMoveOn())
 	{
-		AddActorLocation({ 0.0f, SpeedY * _DeltaTime });
+		AddActorLocation({ 0.0f, SinChapterManager::M_GetSpeedY() * _DeltaTime });
 
 		if (GetEndPosY() >= GetActorLocation().Y)
 		{

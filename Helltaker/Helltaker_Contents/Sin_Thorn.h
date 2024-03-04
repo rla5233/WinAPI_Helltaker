@@ -63,7 +63,6 @@ private:
 	static const FVector ThornScale;
 	static const float ChangeInter;
 
-	static const float SpeedY;
 	float DownPosY = 0.0f;
 	float UpPosY = 0.0f;
 

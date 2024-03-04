@@ -43,7 +43,6 @@ private:
 	UImageRenderer* L_ImageRenderer = nullptr;
 	UImageRenderer* R_ImageRenderer = nullptr;
 	static const FVector Scale;
-	static const float SpeedY;
 
 	ESinPitState State = ESinPitState::None;
 	static bool IsLoad;

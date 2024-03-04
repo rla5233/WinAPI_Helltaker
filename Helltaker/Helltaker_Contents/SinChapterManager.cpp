@@ -24,6 +24,8 @@ const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::Phase1_DelayTime = 0.43f;
 
+const float SinChapterManager::SpeedY = -150.0f;
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -351,15 +353,16 @@ void SinChapterManager::Intro(float _DeltaTime)
 
 void SinChapterManager::Phase1Start()
 {
-	//SinBridgeMoveOn();
-	//SinChainMoveOn();
+	SinBridgeMoveOn();
+	SinChainMoveOn();
 	
-	//SinPitMoveOn();
-	//AllThornMoveOn();
+	SinPitMoveOn();
+	AllThornMoveOn();
 	
-	//PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
-	//SinGear->StateChange(ESinGearState::Working);
+	PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
+	SinGear->StateChange(ESinGearState::Working);
 
+	MoveYSum = 0;
 	PhaseSmallChainVec_Index = 0;
 	PhaseDelayTimeCount = Phase1_DelayTime;
 }
@@ -367,6 +370,7 @@ void SinChapterManager::Phase1Start()
 void SinChapterManager::Phase1(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
+	MoveYSum += SpeedY * _DeltaTime;
 
 	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
 	{

@@ -5,7 +5,6 @@
 bool Pit::IsLoad = false;
 
 const FVector Pit::Scale = { 0.283f, 0.6074f };
-const float Pit::SpeedY = -50.0f;
 
 Pit::Pit()
 {
@@ -62,7 +61,7 @@ void Pit::MoveStart()
 
 void Pit::Move(float _DeltaTime)
 {
-	MoveY_Update(SpeedY, _DeltaTime);
+	MoveY_Update(SinChapterManager::M_GetSpeedY() * 0.3f, _DeltaTime);
 }
 
 void Pit::StopStart()

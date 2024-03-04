@@ -29,7 +29,7 @@ private:
 
 	void ShowStart();
 	void Show(float _DeltaTime);
-
+	
 	void ShowAnimation(float _DeltaTime);
 	void VerShowAnimation(float _DeltaTime);
 	void HorShowAnimation(float _DeltaTime);
@@ -41,14 +41,14 @@ private:
 	void VerHitAnimation(float _DeltaTime);
 	void HorHitAnimation(float _DeltaTime);
 
+	void MoveY_Update(float _DeltaTime);
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 	static const FVector V_Scale;
 	static const FVector H_Scale;
-	static const float SpeedY;
-
+	
 	bool IsShow = false;
 	bool IsHit = false;
 	float TimeCount = 0.0f;

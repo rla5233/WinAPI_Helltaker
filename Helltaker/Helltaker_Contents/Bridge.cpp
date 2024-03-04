@@ -5,7 +5,6 @@
 bool Bridge::IsLoad = false;
 
 const FVector Bridge::Scale = { 0.4912f, 0.5555f };;
-const float Bridge::SpeedY = -150.0f;
 
 Bridge::Bridge()
 {
@@ -56,7 +55,7 @@ void Bridge::MoveStart()
 
 void Bridge::Move(float _DeltaTime)
 {
-	MoveY_Update(SpeedY, _DeltaTime);
+	MoveY_Update(SinChapterManager::M_GetSpeedY(), _DeltaTime);
 }
 
 void Bridge::StopStart()

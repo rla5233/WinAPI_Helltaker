@@ -40,7 +40,6 @@ private:
 	UImageRenderer* L_ImageRenderer = nullptr;
 	UImageRenderer* R_ImageRenderer = nullptr;
 	static const FVector Scale;
-	static const float SpeedY;
 
 	ESinChainLinkState State = ESinChainLinkState::None;
 	static bool IsLoad;

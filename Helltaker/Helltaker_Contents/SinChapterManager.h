@@ -52,6 +52,16 @@ public:
 	void M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex);
 	void M_SetSmallChainVecSize(int _Size, int _PhaseNum);
 
+	static float M_GetSpeedY()
+	{
+		return SpeedY;
+	}
+
+	float M_GetMoveYSum() const
+	{
+		return MoveYSum;
+	}
+
 	size_t GetSinPitSize() const
 	{
 		return SinPit.size();
@@ -132,6 +142,9 @@ private:
 	static const float Phase1_DelayTime;
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
+	
+	static const float SpeedY;
+	float MoveYSum = 0;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
