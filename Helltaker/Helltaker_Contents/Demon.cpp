@@ -2,6 +2,8 @@
 
 #include "ContentsHelper.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 bool Demon::IsLoad = false;
 const FVector Demon::IdleScale = { 0.9f, 0.9f };
 const float Demon::IdleInter = 0.065f;
@@ -10,11 +12,12 @@ const float Demon::LoveSignY_Location = 0.9f;
 const float Demon::LoveSignY_MaxLocation = 1.1f;
 
 const int Demon::StarEffectCount = 20;
+const float Demon::StarEffectDelay = 0.3f;
 FVector StarEffect::TargetPos = FVector::Zero;
 
 const FVector Demon::LovePlosionScale = { 0.169f, 0.287f };
 const float Demon::LovePlosionInter = 0.08f;
-const float Demon::LovePlosionDelay = 0.7f;
+const float Demon::LovePlosionDelay = 0.55f;
 
 Demon::Demon()
 {
@@ -33,6 +36,8 @@ void Demon::BeginPlay()
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
 		ContentsHelper::LoadImg("Effect\\Particle", "LoveStar.png");
 		ContentsHelper::LoadFolder("Effect", "LovePlosion");
+		ContentsHelper::LoadSound("Sound\\Effect", "demon_capture.wav");
+
 		IsLoad = true; 
 	}
 
@@ -98,7 +103,9 @@ void Demon::VictoryStart()
 
 	LoveSignRenderer->ActiveOff();
 	EffectCount = StarEffectCount;
+	DelayTimeCount = StarEffectDelay;
 	VictoryOrder = 0;
+	UEngineSound::SoundPlay("demon_capture.wav");
 }
 
 void Demon::Victory(float _DeltaTime)
@@ -119,6 +126,12 @@ void Demon::Victory(float _DeltaTime)
 
 void Demon::StarEffectUpdate(float _DeltaTime)
 {
+	if (0.0f <= DelayTimeCount)
+	{
+		DelayTimeCount -= _DeltaTime;
+		return;
+	}
+
 	if (1 <= EffectCount)
 	{
 		CreateStarEffect();
@@ -171,7 +184,7 @@ void Demon::StarEffectMoveUpdate(float _DeltaTime)
 		}
 		else
 		{
-			Iter->StarEffectMove(this, _DeltaTime, 0.01f);
+			Iter->StarEffectMove(this, _DeltaTime, 2.5f);
 			++Iter;
 		}
 	}
@@ -181,7 +194,7 @@ void StarEffect::StarEffectMove(const Demon* const _Demon, float _DeltaTime, flo
 {
 	if (true == IsMove)
 	{
-		MoveTime += _DeltaTime + _TimeWeight;
+		MoveTime += _DeltaTime * _TimeWeight;
 
 		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
 		EffectRenderer->SetPosition(NextPos);

@@ -2,6 +2,9 @@
 
 #include "ChapterManager.h"
 
+#include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
+
 Hero::Hero()
 {}
 
@@ -94,6 +97,18 @@ void Hero::ThornHitCheck()
 	if (true == GetChapter()->GetTileInfoVec()[CurPoint.Y][CurPoint.X].IsThorn)
 	{
 		CreateRandomHitEffect();
+		
+		int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 2);
+		switch (RandomValue)
+		{
+		case 1:
+			UEngineSound::SoundPlay("player_damage_001.wav");
+			break;
+		case 2:
+			UEngineSound::SoundPlay("player_damage_002.wav");
+			break;
+		}
+		
 		--ActionPoint;
 	}
 }

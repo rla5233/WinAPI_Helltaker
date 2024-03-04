@@ -1,5 +1,8 @@
 #include "KeyComponent.h"
 
+#include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
+
 bool KeyComponent::IsLoad = false;
 const float KeyComponent::Key_IdleInter = 0.06f;
 
@@ -24,6 +27,12 @@ void KeyComponent::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Component", "Key");
 		ContentsHelper::LoadImg("Chapter\\Component", "LockBox.png");
 		ContentsHelper::LoadFolder("Effect", "KeyComp");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "key_pick_up.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "lockbox_kick_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "lockbox_kick_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "lockbox_kick_003.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "lockbox_open.wav");
 
 		IsLoad = true;
 	}
@@ -77,10 +86,17 @@ void KeyComponent::DeathStart()
 	EffectRenderer->CreateAnimation("KeyComp_Death", "KeyComp", 0, 8, Death_EffectInter, false);
 	EffectRenderer->ChangeAnimation("KeyComp_Death");
 
-	if (EKeyComponentType::LockBox == Type)
+
+	switch (Type)
 	{
+	case EKeyComponentType::Key:
+		UEngineSound::SoundPlay("key_pick_up.wav");
+		break;
+	case EKeyComponentType::LockBox:
 		HitActorInfoUpdate(EHitActorState::Death);
-	}	
+		UEngineSound::SoundPlay("lockbox_open.wav");
+		break;
+	}
 }
 
 void KeyComponent::Hit(float _DeltaTime)
@@ -94,6 +110,20 @@ void KeyComponent::Hit(float _DeltaTime)
 void KeyComponent::HitStart()
 {
 	CreateRandomSmallHitEffect();
+
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("lockbox_kick_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("lockbox_kick_002.wav");
+		break;
+	case 3:
+		UEngineSound::SoundPlay("lockbox_kick_003.wav");
+		break;
+	}
 }
 
 void KeyComponent::Tick(float _DeltaTime)

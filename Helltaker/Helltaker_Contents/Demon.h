@@ -75,6 +75,7 @@ private:
 	int EffectCount = 0;
 	float DelayTimeCount = 0.0f;
 	std::list<StarEffect> AllStarEffect;
+	static const float StarEffectDelay;
 	static const int StarEffectCount;
 
 	UImageRenderer* LovePlosionRenderer = nullptr;

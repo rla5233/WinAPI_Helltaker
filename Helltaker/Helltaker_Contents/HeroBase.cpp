@@ -49,6 +49,8 @@ void HeroBase::BeginPlay()
 
 		ContentsHelper::LoadSound("Sound\\Effect", "player_move.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "player_death.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "player_damage_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "player_damage_002.wav");
 
 		IsLoad = true;
 	}
