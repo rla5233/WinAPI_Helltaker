@@ -27,12 +27,16 @@ private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
+	void MoveStart();
+	void Move(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 	static const FVector V_Scale;
 	static const FVector H_Scale;
+	static const float SpeedY;
 
 	ESinSmallChainType Type = ESinSmallChainType::None;
 	ESinSmallChainState State = ESinSmallChainState::None;

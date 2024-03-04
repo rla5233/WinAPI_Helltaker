@@ -4,6 +4,7 @@ bool SmallChain::IsLoad = false;
 
 const FVector SmallChain::V_Scale = { 0.025f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
+const float SmallChain::SpeedY = -150.0f;
 
 SmallChain::SmallChain()
 {
@@ -64,6 +65,16 @@ void SmallChain::Idle(float _DeltaTime)
 {
 }
 
+void SmallChain::MoveStart()
+{
+	MoveOn();
+}
+
+void SmallChain::Move(float _DeltaTime)
+{
+	MoveY_Update(SpeedY, _DeltaTime);
+}
+
 void SmallChain::Tick(float _DeltaTime)
 {
 	SinMoveActor::Tick(_DeltaTime);
@@ -77,6 +88,9 @@ void SmallChain::StateUpdate(float _DeltaTime)
 	{
 	case ESinSmallChainState::Idle:
 		Idle(_DeltaTime);
+		break;
+	case ESinSmallChainState::Move:
+		Move(_DeltaTime);
 		break;
 	case ESinSmallChainState::Hit:
 
@@ -92,6 +106,9 @@ void SmallChain::StateChange(ESinSmallChainState _State)
 		{
 		case ESinSmallChainState::Idle:
 			IdleStart();
+			break;
+		case ESinSmallChainState::Move:
+			MoveStart();
 			break;
 		case ESinSmallChainState::Hit:
 			
