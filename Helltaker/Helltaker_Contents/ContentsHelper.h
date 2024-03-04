@@ -345,5 +345,6 @@ enum class ESinSmallChainState
 	None,
 	Idle,
 	Move,
+	Show,
 	Hit
 };

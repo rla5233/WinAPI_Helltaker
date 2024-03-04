@@ -59,6 +59,7 @@ void SmallChain::IdleStart()
 	}
 
 	ImageRenderer->SetAlpha(0.5);
+	ImageRenderer->ActiveOff();
 }
 
 void SmallChain::Idle(float _DeltaTime)
@@ -73,6 +74,40 @@ void SmallChain::MoveStart()
 void SmallChain::Move(float _DeltaTime)
 {
 	MoveY_Update(SpeedY, _DeltaTime);
+}
+
+void SmallChain::ShowStart()
+{
+	ImageRenderer->ActiveOn();
+	timecount = 1.0f;
+}
+
+void SmallChain::Show(float _DeltaTime)
+{
+	if (0.0f >= timecount)
+	{
+		StateChange(ESinSmallChainState::Hit);
+		return;
+	}
+
+	timecount -= _DeltaTime;
+}
+
+void SmallChain::HitStart()
+{
+	ImageRenderer->SetAlpha(1);
+	timecount = 1.0f;
+}
+
+void SmallChain::Hit(float _DeltaTime)
+{
+	if (0.0f >= timecount)
+	{
+		ImageRenderer->ActiveOff();
+		return;
+	}
+
+	timecount -= _DeltaTime;
 }
 
 void SmallChain::Tick(float _DeltaTime)
@@ -92,8 +127,11 @@ void SmallChain::StateUpdate(float _DeltaTime)
 	case ESinSmallChainState::Move:
 		Move(_DeltaTime);
 		break;
+	case ESinSmallChainState::Show:
+		Show(_DeltaTime);
+		break;
 	case ESinSmallChainState::Hit:
-
+		Hit(_DeltaTime);
 		break;
 	}
 }
@@ -110,8 +148,11 @@ void SmallChain::StateChange(ESinSmallChainState _State)
 		case ESinSmallChainState::Move:
 			MoveStart();
 			break;
+		case ESinSmallChainState::Show:
+			ShowStart();
+			break;
 		case ESinSmallChainState::Hit:
-			
+			HitStart();
 			break;
 		}
 	}

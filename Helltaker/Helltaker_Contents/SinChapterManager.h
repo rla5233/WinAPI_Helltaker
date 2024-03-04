@@ -79,11 +79,13 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
+	virtual void Phase1Start();
+
 	void M_StateChange(ESinState _State);
 
 private:
-	void Phase1Start();
 	void Phase1(float _DeltaTime);
+	void Phase1SmallChainUpdate(float _DeltaTime);
 
 	void IntroStart();
 	void Intro(float _DeltaTime);
@@ -126,6 +128,10 @@ private:
 	
 	std::vector<std::list<SmallChain*>> Phase2_SmallChain;
 	int Phase2_SmallChainVecSize = -1;
+
+	static const float Phase1_DelayTime;
+	float PhaseDelayTimeCount = 0.0f;
+	int PhaseSmallChainVec_Index = -1;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

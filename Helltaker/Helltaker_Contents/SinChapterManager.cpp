@@ -22,6 +22,8 @@ const float SinChapterManager::HeroDelayTime = 0.129f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
+const float SinChapterManager::Phase1_DelayTime = 0.5f;
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -355,26 +357,43 @@ void SinChapterManager::Phase1Start()
 	PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
 	SinGear->StateChange(ESinGearState::Working);
 
-
-	//
-	M_SetSmallChainVecSize(10, 1);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 0, 0);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 1, 0);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 2, 0);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 3, 0);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 4, 0);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 5, 0);
-	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 6, 0);
-
-	M_CreateSmallChain(ESinSmallChainType::Hor, 1, 0, 0);
-	M_CreateSmallChain(ESinSmallChainType::Hor, 1, 1, 0);
-	M_CreateSmallChain(ESinSmallChainType::Hor, 1, 2, 0);
-	M_CreateSmallChain(ESinSmallChainType::Hor, 1, 3, 0);
+	PhaseSmallChainVec_Index = 0;
+	PhaseDelayTimeCount = Phase1_DelayTime;
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
+
+	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
+	{
+		Phase1SmallChainUpdate(_DeltaTime);
+	}
+}
+
+void SinChapterManager::Phase1SmallChainUpdate(float _DeltaTime)
+{
+	if (0.0f >= PhaseDelayTimeCount)
+	{
+		std::list<SmallChain*>& SmallChainVec = Phase1_SmallChain[PhaseSmallChainVec_Index];
+
+		for (SmallChain* SmallChain : SmallChainVec)
+		{
+			if (nullptr == SmallChain)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			SmallChain->StateChange(ESinSmallChainState::Show);
+		}
+
+		++PhaseSmallChainVec_Index;
+		PhaseDelayTimeCount = Phase1_DelayTime;
+
+		return;
+	}
+
+	PhaseDelayTimeCount -= _DeltaTime;
 }
 
 void SinChapterManager::SinPitMoveOn()

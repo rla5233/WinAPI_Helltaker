@@ -30,6 +30,12 @@ private:
 	void MoveStart();
 	void Move(float _DeltaTime);
 
+	void ShowStart();
+	void Show(float _DeltaTime);
+
+	void HitStart();
+	void Hit(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
@@ -37,6 +43,8 @@ private:
 	static const FVector V_Scale;
 	static const FVector H_Scale;
 	static const float SpeedY;
+
+	float timecount = 0.0f;
 
 	ESinSmallChainType Type = ESinSmallChainType::None;
 	ESinSmallChainState State = ESinSmallChainState::None;
