@@ -22,7 +22,7 @@ const float SinChapterManager::HeroDelayTime = 0.129f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
-const float SinChapterManager::Phase1_DelayTime = 0.5f;
+const float SinChapterManager::Phase1_DelayTime = 0.43f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -342,20 +342,23 @@ void SinChapterManager::Intro(float _DeltaTime)
 	if (ESinSkullState::Idle == SinSkull->GetState() &&
 		ESinPistonState::Idle == UpPiston->GetState())
 	{
-		M_StateChange(ESinState::Phase1);
+		if (UEngineInput::IsDown(VK_SPACE))
+		{
+			M_StateChange(ESinState::Phase1);
+		}
 	}
 }
 
 void SinChapterManager::Phase1Start()
 {
-	SinBridgeMoveOn();
-	SinChainMoveOn();
+	//SinBridgeMoveOn();
+	//SinChainMoveOn();
 	
-	SinPitMoveOn();
-	AllThornMoveOn();
+	//SinPitMoveOn();
+	//AllThornMoveOn();
 	
-	PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
-	SinGear->StateChange(ESinGearState::Working);
+	//PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
+	//SinGear->StateChange(ESinGearState::Working);
 
 	PhaseSmallChainVec_Index = 0;
 	PhaseDelayTimeCount = Phase1_DelayTime;

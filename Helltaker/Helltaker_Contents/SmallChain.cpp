@@ -70,7 +70,7 @@ void SmallChain::ShowStart()
 {
 	if (ESinSmallChainType::Hor == Type)
 	{
-		MoveOn();
+	//	MoveOn();
 	}
 
 	ImageRenderer->ActiveOn();
@@ -123,6 +123,7 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 	}
 }
 
+// y축 시작 위치를 보정?
 void SmallChain::HorShowAnimation(float _DeltaTime)
 {
 	if (true)
@@ -155,7 +156,7 @@ void SmallChain::Hit(float _DeltaTime)
 
 	if (false == IsHit)
 	{
-		Destroy();
+		//Destroy();
 	}
 }
 
@@ -195,7 +196,7 @@ void SmallChain::HorHitAnimation(float _DeltaTime)
 	TimeCount += _DeltaTime * 7.0f;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, 0.0f, TimeCount);
+	float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, H_Scale.Y, TimeCount);
 	ImageRenderer->SetScale({ WinScale.X * H_Scale.X, WinScale.Y * ScaleY });
 
 	if (1.0f <= TimeCount)

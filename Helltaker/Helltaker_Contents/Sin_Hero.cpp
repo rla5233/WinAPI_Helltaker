@@ -102,9 +102,9 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 
 void Sin_Hero::Tick(float _DeltaTime)
 {
-	HeroBase::Tick(_DeltaTime);
-
 	StateUpdate(_DeltaTime);
+	
+	HeroBase::Tick(_DeltaTime);
 }
 
 void Sin_Hero::StateUpdate(float _DeltaTime)
