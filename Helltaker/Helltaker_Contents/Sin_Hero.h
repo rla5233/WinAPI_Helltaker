@@ -41,13 +41,14 @@ private:
 	void SetTargetPosY();
 	void MoveY(float _DeltaTime);
 
+	void PointXUpdate();
 	void MoveY_Update(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
 private:
 	bool IsMoveY = false;
-	static const float SpeedY;
+	int PointX = 0;
 
 	ESinHeroState State = ESinHeroState::None;
 };

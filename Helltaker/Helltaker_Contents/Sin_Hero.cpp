@@ -1,8 +1,7 @@
 #include "Sin_Hero.h"
 
 #include "Sin_Thorn.h"
-
-const float Sin_Hero::SpeedY = -150.0f;
+#include "SinChapterManager.h"
 
 Sin_Hero::Sin_Hero()
 {
@@ -14,25 +13,15 @@ Sin_Hero::~Sin_Hero()
 
 void Sin_Hero::ActionCheck()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	float Min_X = WinScale.X * 0.35f;
-	float Max_X = WinScale.X * 0.65f;
-
-	if (Min_X >= GetActorLocation().X)
+	if (-3 == PointX && EMoveActorDir::Left != GetMoveDir())
 	{
-		if (EMoveActorDir::Left != GetMoveDir())
-		{
-			StateChange(EHeroState::Move);
-		}
-	}	
-	else if (Max_X <= GetActorLocation().X)
-	{
-		if (EMoveActorDir::Right != GetMoveDir())
-		{
-			StateChange(EHeroState::Move);
-		}
+		StateChange(EHeroState::Move);
 	}
-	else
+	else if (3 == PointX && EMoveActorDir::Right != GetMoveDir())
+	{
+		StateChange(EHeroState::Move);
+	}
+	else if (-3 < PointX && 3 > PointX)
 	{
 		StateChange(EHeroState::Move);
 	}
@@ -42,6 +31,7 @@ void Sin_Hero::MoveStart()
 {
 	HeroBase::MoveStart();
 
+	PointXUpdate();
 	SetTargetPosY();
 
 	CreateRandomMoveEffect(EChapterType::Sin);
@@ -57,6 +47,19 @@ void Sin_Hero::SetTargetPosY()
 	case EMoveActorDir::Up:
 	case EMoveActorDir::Down:
 		SetTargetPos(GetStartPos() + (GetFMoveDir() * ScaleY));
+		break;
+	}
+}
+
+void Sin_Hero::PointXUpdate()
+{
+	switch (GetMoveDir())
+	{
+	case EMoveActorDir::Right:
+		++PointX;
+		break;
+	case EMoveActorDir::Left:
+		--PointX;
 		break;
 	}
 }
@@ -94,7 +97,8 @@ void Sin_Hero::MoveY(float _DeltaTime)
 void Sin_Hero::MoveY_Update(float _DeltaTime)
 {
 	if (true == IsMoveY)
-	{
+	{ 
+		float SpeedY = SinChapterManager::M_GetSpeedY();
 		AddTargetPos({ 0.0f, SpeedY * _DeltaTime });
 		AddActorLocation({ 0.0f, SpeedY * _DeltaTime });
 	}
