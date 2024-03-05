@@ -185,6 +185,7 @@ enum class ESinHeroState
 	None,
 	Idle,
 	MoveY,
+	Hit
 };
 
 enum class EDemonState
@@ -301,7 +302,7 @@ enum class ESinHeroLifeState
 {
 	None,
 	Idle,
-	Hit
+	HeroHit
 };
 
 enum class ESinBridgeState

@@ -1,5 +1,8 @@
 #include "HeroLife.h"
 
+#include "SinChapterManager.h"
+#include "Sin_Hero.h"
+
 bool HeroLife::IsLoad = false;
 
 const FVector HeroLife::PanelScale = { 0.39f, 0.133f };
@@ -142,12 +145,18 @@ void HeroLife::Idle(float _DeltaTime)
 {
 }
 
-void HeroLife::HitStart()
+void HeroLife::HeroHitStart()
 {
+	int HeroLife = GetSinChapter()->GetPlayerHero()->GetLife();
+	int idx = static_cast<int>(PyreRenderer.size()) - HeroLife - 1;
+
+	PyreRenderer[idx]->SetImage("Sin_Pyre_Off.png");
+	FireRenderer[idx]->ActiveOff();
 }
 
-void HeroLife::Hit(float _DeltaTime)
+void HeroLife::HeroHit(float _DeltaTime)
 {
+	State = ESinHeroLifeState::Idle;
 }
 
 void HeroLife::Tick(float _DeltaTime)
@@ -164,8 +173,8 @@ void HeroLife::StateUpdate(float _DeltaTime)
 	case ESinHeroLifeState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case ESinHeroLifeState::Hit:
-		Hit(_DeltaTime);
+	case ESinHeroLifeState::HeroHit:
+		HeroHit(_DeltaTime);
 		break;
 	}
 }
@@ -179,8 +188,8 @@ void HeroLife::StateChange(ESinHeroLifeState _State)
 		case ESinHeroLifeState::Idle:
 			IdleStart();
 			break;
-		case ESinHeroLifeState::Hit:
-			HitStart();
+		case ESinHeroLifeState::HeroHit:
+			HeroHitStart();
 			break;
 		}
 	}

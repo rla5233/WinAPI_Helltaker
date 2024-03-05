@@ -85,6 +85,16 @@ public:
 		return SinSkull;
 	}
 
+	HeroLife* GetSinHeroLife() const
+	{
+		return SinHeroLife;
+	}
+
+	Sin_Hero* GetPlayerHero() const
+	{
+		return PlayerHero;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);

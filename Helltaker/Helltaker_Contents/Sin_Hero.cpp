@@ -1,5 +1,6 @@
 #include "Sin_Hero.h"
 
+#include "HeroLife.h"
 #include "Sin_Thorn.h"
 #include "SinChapterManager.h"
 
@@ -74,6 +75,7 @@ void Sin_Hero::ThornHitCheck()
 {
 	HeroBase::ThornHitCheck();
 
+
 }
 
 void Sin_Hero::IdleStart()
@@ -104,9 +106,33 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 	}
 }
 
+void Sin_Hero::HitStart()
+{
+	CreateRandomHitEffect();
+	--Life;
+
+	if (0 >= Life)
+	{
+		StateChange(EHeroState::Death);
+		return;
+	}
+
+	GetSinChapter()->GetSinHeroLife()->StateChange(ESinHeroLifeState::HeroHit);
+}
+
+void Sin_Hero::Hit(float _DeltaTime)
+{
+	SinHero_StateChange(ESinHeroState::Idle);
+}
+
 void Sin_Hero::Tick(float _DeltaTime)
 {
 	StateUpdate(_DeltaTime);
+
+	if (UEngineInput::IsDown('H'))
+	{
+		SinHero_StateChange(ESinHeroState::Hit);
+	}
 	
 	HeroBase::Tick(_DeltaTime);
 }
@@ -120,6 +146,9 @@ void Sin_Hero::StateUpdate(float _DeltaTime)
 		break;
 	case ESinHeroState::MoveY:
 		MoveY(_DeltaTime);
+		break;
+	case ESinHeroState::Hit:
+		Hit(_DeltaTime);
 		break;
 	}
 }
@@ -135,6 +164,9 @@ void Sin_Hero::SinHero_StateChange(ESinHeroState _State)
 			break;
 		case ESinHeroState::MoveY:
 			MoveYStart();
+			break;
+		case ESinHeroState::Hit:
+			HitStart();
 			break;
 		}
 	}

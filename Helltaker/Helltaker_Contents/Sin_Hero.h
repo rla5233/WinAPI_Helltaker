@@ -21,6 +21,11 @@ public:
 		IsMoveY = true;
 	}
 
+	int GetLife() const
+	{
+		return Life;
+	}
+
 	void SinHero_StateChange(ESinHeroState _State);
 
 protected:
@@ -44,11 +49,15 @@ private:
 	void PointXUpdate();
 	void MoveY_Update(float _DeltaTime);
 
+	void HitStart();
+	void Hit(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
 	bool IsMoveY = false;
 	int PointX = 0;
+	int Life = 4;
 
 	ESinHeroState State = ESinHeroState::None;
 };

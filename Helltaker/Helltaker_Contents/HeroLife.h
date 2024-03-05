@@ -31,8 +31,8 @@ private:
 	void SetPyre();
 	void SetFire();
 
-	void HitStart();
-	void Hit(float _DeltaTime);
+	void HeroHitStart();
+	void HeroHit(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
