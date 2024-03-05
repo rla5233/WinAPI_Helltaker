@@ -36,7 +36,7 @@ public:
 		return ImageRenderer;
 	}
 
-	bool GetCheatMode() const
+	bool IsCheatOn() const
 	{
 		return CheatMode;
 	}

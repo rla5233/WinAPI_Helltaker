@@ -88,7 +88,7 @@ void Hero::ThornHitCheck()
 	HitActor::ThornHitCheck();
 
 	// Cheat
-	if (true == GetCheatMode())
+	if (true == IsCheatOn())
 	{
 		return;
 	}
@@ -162,7 +162,7 @@ void Hero::KickStart()
 void Hero::UpdateActionPoint()
 {
 	// Cheat
-	if (true == GetCheatMode())
+	if (true == IsCheatOn())
 	{
 		return;
 	}

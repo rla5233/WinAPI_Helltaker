@@ -131,6 +131,12 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 
 void Sin_Hero::HitStart()
 {
+	// Cheat
+	if (true == IsCheatOn())
+	{
+		return;
+	}
+
 	CreateRandomHitEffect();
 	--Life;
 

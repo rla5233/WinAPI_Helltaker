@@ -73,6 +73,11 @@ public:
 		return MoveYSum;
 	}
 
+	void AddBridgeResetCount(int _Count)
+	{
+		BridgeResetCount += _Count;
+	}
+
 	size_t GetSinPitSize() const
 	{
 		return SinPit.size();
@@ -120,8 +125,10 @@ private:
 	void Intro(float _DeltaTime);
 
 	void Phase1(float _DeltaTime);
-	void Phase1SmallChainUpdate(float _DeltaTime);
-	void Phase1SpeedY_Update(float _DeltaTime);
+	void Phase1_SmallChainUpdate(float _DeltaTime);
+	void Phase1_SpeedY_Update1(float _DeltaTime);
+	void Phase1_SpeedY_Update2(float _DeltaTime);
+	void BridgeResetCheck();
 
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
@@ -129,9 +136,6 @@ private:
 	void AllThornMoveOn();
 
 	void Phase2(float _DeltaTime);
-	void Phase2SpeedY_Update(float _DeltaTime);
-	void AllMoveActorMoveOff();
-	void AllMoveActorDiffMove();
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
@@ -152,6 +156,7 @@ private:
 	std::vector<ChainLink*> SinChain;
 
 	std::vector<Bridge*> SinBridge;
+	int BridgeResetCount = 0;
 
 	std::vector<std::vector<Sin_Thorn*>> UpThorn;
 	std::vector<std::vector<Sin_Thorn*>> DownThorn;
@@ -163,12 +168,14 @@ private:
 
 	static const FVector SmallChainStartPos;
 	std::vector<std::list<SmallChain*>> Phase1_SmallChain; //
+	static const float Phase1_DelayTime;
 	int Phase1_SmallChainVecSize = -1;
+	int Phase1_Order = -1;
+	float AccY = 0.0f;
 	
 	std::vector<std::list<SmallChain*>> Phase2_SmallChain; //
 	int Phase2_SmallChainVecSize = -1;
 
-	static const float Phase1_DelayTime;
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
 

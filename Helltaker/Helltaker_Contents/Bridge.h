@@ -33,6 +33,7 @@ private:
 
 	void MoveStart();
 	void Move(float _DeltaTime);
+	void MoveY_Update(float _DeltaTime);
 
 	void StopStart();
 	void Stop(float _DeltaTime);

@@ -71,7 +71,7 @@ private:
 
 	int HitCount = 6;
 	static const float HitDelayTime;
-	float HitDelayTimeCount;
+	float HitDelayTimeCount = 0.0f;
 	bool CanHit = true;
 
 	SinTile CurPoint = { 0, 0 };

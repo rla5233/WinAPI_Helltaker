@@ -210,7 +210,7 @@ void SinChapterManager::M_CreateThorn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.23f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.214f };
 
 	UpThorn.resize(3);
 	for (int y = 0; y < 3; y++)
@@ -238,10 +238,10 @@ void SinChapterManager::M_CreateThorn()
 			AllMapRenderActors.push_back(UpThorn[y][x]);
 		}
 
-		UpPos.Y += Scale.Y * 1.1f;
+		UpPos.Y += Scale.Y * 1.15f;
 	}
 
-	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.782f };
+	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
 
 	DownThorn.resize(3);
 	for (int y = 0; y < 3; y++)
@@ -270,7 +270,7 @@ void SinChapterManager::M_CreateThorn()
 			AllMapRenderActors.push_back(DownThorn[y][x]);
 		}
 
-		DownPos.Y += Scale.Y * 1.1f;
+		DownPos.Y += Scale.Y * 1.15f;
 	}
 }
 
@@ -400,13 +400,12 @@ void SinChapterManager::Intro(float _DeltaTime)
 	if (ESinSkullState::Move == SinSkull->GetState() &&
 		ESinPistonState::Move == UpPiston->GetState())
 	{
-		M_StateChange(ESinState::Phase1);
+		//M_StateChange(ESinState::Phase1);
 	}
 
 	if (UEngineInput::IsDown(VK_SPACE))
 	{
-		//M_StateChange(ESinState::Phase1);
-		//PlayerHero->Phase2_Start();
+		M_StateChange(ESinState::Phase1);
 	}
 }
 
@@ -424,22 +423,24 @@ void SinChapterManager::Phase1Start()
 	MoveYSum = 0;
 	PhaseSmallChainVec_Index = 0;
 	PhaseDelayTimeCount = Phase1_DelayTime;
+	Phase1_Order = 0;
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
 	MoveYSum += SpeedY * _DeltaTime;
-	Phase1SpeedY_Update(_DeltaTime);
-
-	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
+	Phase1_SmallChainUpdate(_DeltaTime);
+	
+	switch (Phase1_Order)
 	{
-		Phase1SmallChainUpdate(_DeltaTime);
-	}
-	else
-	{
-		Phase1_SmallChain.clear();
-		M_StateChange(ESinState::Phase2);
+	case 0:
+		BridgeResetCheck();
+		Phase1_SpeedY_Update1(_DeltaTime);
+		break;
+	case 1:
+		Phase1_SpeedY_Update2(_DeltaTime);
+		break;
 	}
 	
 	// Debug
@@ -450,8 +451,13 @@ void SinChapterManager::Phase1(float _DeltaTime)
 	}
 }
 
-void SinChapterManager::Phase1SmallChainUpdate(float _DeltaTime)
+void SinChapterManager::Phase1_SmallChainUpdate(float _DeltaTime)
 {
+	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
+	{
+		return;
+	}
+
 	if (0.0f >= PhaseDelayTimeCount)
 	{
 		std::list<SmallChain*>& SmallChainVec = Phase1_SmallChain[PhaseSmallChainVec_Index];
@@ -475,7 +481,7 @@ void SinChapterManager::Phase1SmallChainUpdate(float _DeltaTime)
 	PhaseDelayTimeCount -= _DeltaTime;
 }
 
-void SinChapterManager::Phase1SpeedY_Update(float _DeltaTime)
+void SinChapterManager::Phase1_SpeedY_Update1(float _DeltaTime)
 {
 	if (MaxSpeedY < SpeedY)
 	{
@@ -485,6 +491,37 @@ void SinChapterManager::Phase1SpeedY_Update(float _DeltaTime)
 		{
 			SpeedY = MaxSpeedY;
 		}
+	}
+}
+
+void SinChapterManager::Phase1_SpeedY_Update2(float _DeltaTime)
+{
+	if (0.0f > SpeedY)
+	{
+		SpeedY += AccY * _DeltaTime;
+
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		float CurPosY = SinBridge[0]->GetActorLocation().Y;
+		float TarGetPosY = WinScale.Y * (0.04f + Bridge::GetScale().Y);
+
+		if (0.0f <= SpeedY)
+		{
+			SpeedY = 0.0f;
+		}
+	}
+}
+
+void SinChapterManager::BridgeResetCheck()
+{
+	if (5 == BridgeResetCount)
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+
+		float CurPosY = SinBridge[0]->GetActorLocation().Y;
+		float TarGetPosY = WinScale.Y * (0.03f + Bridge::GetScale().Y);
+
+		AccY = -(SpeedY * SpeedY) / (2 * (TarGetPosY - CurPosY));
+		++Phase1_Order;
 	}
 }
 
@@ -573,56 +610,14 @@ void SinChapterManager::AllThornMoveOn()
 
 void SinChapterManager::Phase2Start()
 {
-	//AllMoveActorMoveOff();
-	//AllMoveActorDiffMove();
-	//PlayerHero->Phase2_Start();
+
 }
 
 void SinChapterManager::Phase2(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
-	Phase2SpeedY_Update(_DeltaTime);
 }
 
-void SinChapterManager::Phase2SpeedY_Update(float _DeltaTime)
-{
-	if (0.0f < SpeedY)
-	{
-
-		SpeedY -= _DeltaTime;
-
-		if (0.0 >= SpeedY)
-		{
-			SpeedY = 0;
-		}
-	}
-}
-
-void SinChapterManager::AllMoveActorMoveOff()
-{
-	for (AActor* Actor : AllMapRenderActors)
-	{
-		if (nullptr == Actor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		SinMoveActor* Sin_MActor = dynamic_cast<SinMoveActor*>(Actor);
-		if (nullptr != Sin_MActor)
-		{
-			Sin_MActor->MoveOff();
-		}
-	}
-
-	PlayerHero->MoveY_Off();
-}
-
-void SinChapterManager::AllMoveActorDiffMove()
-{
-
-
-
-}
 
 void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 {

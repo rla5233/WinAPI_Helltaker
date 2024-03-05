@@ -4,7 +4,7 @@
 
 bool Bridge::IsLoad = false;
 
-const FVector Bridge::Scale = { 0.4912f, 0.5555f };;
+const FVector Bridge::Scale = { 0.4912f, 0.5555f };
 
 Bridge::Bridge()
 {
@@ -55,7 +55,22 @@ void Bridge::MoveStart()
 
 void Bridge::Move(float _DeltaTime)
 {
-	MoveY_Update(GetSinChapter()->M_GetSpeedY(), _DeltaTime);
+	MoveY_Update(_DeltaTime);
+}
+
+void Bridge::MoveY_Update(float _DeltaTime)
+{
+	if (true == IsMoveOn())
+	{
+		AddActorLocation({ 0.0f, GetSinChapter()->M_GetSpeedY() * _DeltaTime });
+
+		if (GetEndPosY() >= GetActorLocation().Y)
+		{
+			float Diff = GetActorLocation().Y - GetEndPosY();
+			SetActorLocation({ GetActorLocation().X, GetResetPosY() + Diff});
+			GetSinChapter()->AddBridgeResetCount(1);
+		}
+	}
 }
 
 void Bridge::StopStart()
