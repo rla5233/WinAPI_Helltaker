@@ -66,22 +66,35 @@ void HitChain::Move(float _DeltaTime)
 
 void HitChain::HitStart()
 {
-
+	--HitCount;
 }
 
 void HitChain::Hit(float _DeltaTime)
 {
-
+	if (0 >= HitCount)
+	{
+		StateChange(ESinHitChainState::Death);
+	}
 }
 
 void HitChain::DeathStart()
 {
+	switch (Type)
+	{
+	case ESinHitChainType::Left:
+		ImageRenderer->SetImage("Sin_LBrokenChain.png");
+		break;
+	case ESinHitChainType::Right:
+		ImageRenderer->SetImage("Sin_RBrokenChain.png");
+		break;
+	}
 
+	GetSinChapter()->HitChainDeathUpdate(CurPoint);
 }
 
 void HitChain::Death(float _DeltaTime)
 {
-
+	Destroy();
 }
 
 void HitChain::Tick(float _DeltaTime)

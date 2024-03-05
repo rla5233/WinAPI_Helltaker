@@ -21,6 +21,11 @@ public:
 		Type = _Type;
 	}
 
+	void SetCurPoint(SinTile _Point)
+	{
+		CurPoint = _Point;
+	}
+
 	void StateChange(ESinHitChainState _State);
 
 protected:
@@ -47,6 +52,9 @@ private:
 	std::list<UImageRenderer*> AllHitEffectRenderer;
 	static const FVector Scale;
 
+	int HitCount = 6;
+
+	SinTile CurPoint = { 0, 0 };
 	ESinHitChainType Type = ESinHitChainType::None;
 	ESinHitChainState State = ESinHitChainState::None;
 	static bool IsLoad;

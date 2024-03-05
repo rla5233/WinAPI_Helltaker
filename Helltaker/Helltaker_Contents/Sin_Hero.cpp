@@ -19,7 +19,7 @@ void Sin_Hero::ActionCheck()
 		switch (GetMoveDir())
 		{
 		case EMoveActorDir::Left:
-			KickCheck();
+			HitChainCheck();
 			break;
 		default:
 			StateChange(EHeroState::Move);
@@ -31,7 +31,7 @@ void Sin_Hero::ActionCheck()
 		switch (GetMoveDir())
 		{
 		case EMoveActorDir::Right:
-			KickCheck();
+			HitChainCheck();
 			break;
 		default:
 			StateChange(EHeroState::Move);
@@ -81,10 +81,8 @@ void Sin_Hero::CurPointUpdate()
 	}
 }
 
-void Sin_Hero::KickCheck()
+void Sin_Hero::HitChainCheck()
 {
-	HeroBase::KickCheck();
-
 	UpdateCurPosY();
 	if (true == GetSinChapter()->HitChainHitCheck(CurPoint))
 	{

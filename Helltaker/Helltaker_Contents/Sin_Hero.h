@@ -48,8 +48,6 @@ protected:
 	void MoveStart() override;
 
 	void ActionCheck() override;
-	void KickCheck() override;
-
 	void ThornHitCheck() override;
 
 private:
@@ -65,6 +63,8 @@ private:
 
 	void HitStart();
 	void Hit(float _DeltaTime);
+
+	void HitChainCheck();
 
 	void StateUpdate(float _DeltaTime);
 

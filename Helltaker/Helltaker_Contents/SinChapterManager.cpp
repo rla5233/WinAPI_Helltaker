@@ -19,7 +19,7 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const float SinChapterManager::HeroDelayTime = 0.129f;
+const float SinChapterManager::HeroDelayTime = 0.15f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
@@ -353,6 +353,7 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 		break;
 	}
 
+	NewHitChain->SetCurPoint(LocationPoint);
 	NewHitChain->SetName("HitChain");
 	NewHitChain->SetType(_Type);
 
@@ -366,13 +367,22 @@ bool SinChapterManager::HitChainHitCheck(SinTile _Point)
 {
 	if (true == AllHitChain.contains(_Point.Key))
 	{
-		AllHitChain[_Point.Key]->AllRenderersActiveOff();
-
-
+		AllHitChain[_Point.Key]->StateChange(ESinHitChainState::None);
+		AllHitChain[_Point.Key]->StateChange(ESinHitChainState::Hit);
 		return true;
 	}
 
 	return false;
+}
+
+void SinChapterManager::HitChainDeathUpdate(SinTile _Point)
+{
+	if (false == AllHitChain.contains(_Point.Key))
+	{
+		MsgBoxAssert("Fatal Error");
+	}
+
+	AllHitChain.erase(_Point.Key);
 }
 
 void SinChapterManager::IntroStart()
