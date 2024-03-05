@@ -5,6 +5,8 @@
 const FVector HitChain::Scale = { 0.2656f, 0.898f };
 bool HitChain::IsLoad = false;
 
+const float HitChain::HitDelayTime = 0.19f;
+
 HitChain::HitChain()
 {
 }
@@ -48,7 +50,7 @@ void HitChain::IdleStart()
 
 void HitChain::Idle(float _DeltaTime)
 {
-	
+	HitDelayCheck(_DeltaTime);
 }
 
 void HitChain::MoveStart()
@@ -67,6 +69,8 @@ void HitChain::Move(float _DeltaTime)
 void HitChain::HitStart()
 {
 	--HitCount;
+	HitDelayTimeCount = HitDelayTime;
+	CanHit = false;
 }
 
 void HitChain::Hit(float _DeltaTime)
@@ -74,6 +78,26 @@ void HitChain::Hit(float _DeltaTime)
 	if (0 >= HitCount)
 	{
 		StateChange(ESinHitChainState::Death);
+		return;
+	}
+	else
+	{
+		State = ESinHitChainState::Idle;
+	}
+
+	HitDelayCheck(_DeltaTime);
+}
+
+void HitChain::HitDelayCheck(float _DeltaTime)
+{
+	if (false == CanHit)
+	{
+		HitDelayTimeCount -= _DeltaTime;
+
+		if (0.0f >= HitDelayTimeCount)
+		{
+			CanHit = true;
+		}
 	}
 }
 

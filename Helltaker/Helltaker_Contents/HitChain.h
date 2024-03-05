@@ -36,6 +36,11 @@ public:
 		return HitCount;
 	}
 
+	bool IsCanHit() const
+	{
+		return CanHit;
+	}
+
 	void StateChange(ESinHitChainState _State);
 
 protected:
@@ -55,6 +60,8 @@ private:
 	void DeathStart();
 	void Death(float _DeltaTime);
 
+	void HitDelayCheck(float _DeltaTime);
+
 	void StateUpdate(float _DeltaTime);
 
 private:
@@ -63,6 +70,9 @@ private:
 	static const FVector Scale;
 
 	int HitCount = 6;
+	static const float HitDelayTime;
+	float HitDelayTimeCount;
+	bool CanHit = true;
 
 	SinTile CurPoint = { 0, 0 };
 	ESinHitChainType Type = ESinHitChainType::None;

@@ -4,6 +4,9 @@
 #include "Sin_Thorn.h"
 #include "SinChapterManager.h"
 
+#include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
+
 Sin_Hero::Sin_Hero()
 {
 }
@@ -50,7 +53,6 @@ void Sin_Hero::MoveStart()
 
 	CurPointUpdate();
 	SetTargetPosY();
-
 	CreateRandomMoveEffect(EChapterType::Sin);
 }
 
@@ -131,6 +133,17 @@ void Sin_Hero::HitStart()
 {
 	CreateRandomHitEffect();
 	--Life;
+
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 2);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("player_damage_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("player_damage_002.wav");
+		break;
+	}
 
 	if (0 >= Life)
 	{
