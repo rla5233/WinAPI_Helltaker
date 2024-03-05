@@ -31,6 +31,9 @@ private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
+	void MoveStart();
+	void Move(float _DeltaTime);
+
 	void HitStart();
 	void Hit(float _DeltaTime);
 

@@ -9,6 +9,7 @@ class SmallChain;
 class ChainLink;
 class Sin_Thorn;
 class Sin_Hero;
+class HitChain;
 class HeroLife;
 class Bridge;
 class Piston;
@@ -51,6 +52,8 @@ public:
 
 	void M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex);
 	void M_SetSmallChainVecSize(int _Size, int _PhaseNum);
+
+	void M_CreateHitChain(ESinHitChainType _Type, int _PointY);
 
 	float M_GetSpeedY() const
 	{
@@ -117,6 +120,7 @@ private:
 
 private:
 	std::list<AActor*> AllMapRenderActors;
+	std::map<__int64, HitChain*> AllHitChain;
 
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
@@ -146,7 +150,7 @@ private:
 	static const float Phase1_DelayTime;
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
-	
+
 	static const float MaxSpeedY;
 	float SpeedY = 50.0f;
 	

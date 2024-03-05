@@ -7,6 +7,7 @@
 #include "Sin_Thorn.h"
 #include "Sin_Hero.h"
 #include "HeroLife.h"
+#include "HitChain.h"
 #include "Shield.h"
 #include "Bridge.h"
 #include "Piston.h"
@@ -303,6 +304,7 @@ void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseN
 		break;
 	}
 
+	NewSmallChain->SetName("SmallChain");
 	NewSmallChain->CreateImageRenderer(_Type);
 	NewSmallChain->StateChange(ESinSmallChainState::Idle);
 
@@ -330,6 +332,32 @@ void SinChapterManager::M_SetSmallChainVecSize(int _Size, int _PhaseNum)
 		Phase2_SmallChain.resize(_Size);
 		break;
 	}
+}
+
+void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = { WinScale.X * 0.333f, WinScale.Y * 0.008f };
+	float ScaleY = WinScale.Y * 0.182f;
+	HitChain* NewHitChain = SpawnActor<HitChain>(static_cast<int>(SinUpdateOrder::Top));
+	
+	switch (_Type)
+	{
+	case ESinHitChainType::Left:
+		NewHitChain->SetActorLocation({ WinScale.hX() - Pos.X, Pos.Y + (ScaleY * _PointY)});
+		break;
+	case ESinHitChainType::Right:
+		NewHitChain->SetActorLocation({ WinScale.hX() + Pos.X, Pos.Y + (ScaleY * _PointY) });
+		break;
+	}
+
+	NewHitChain->SetName("HitChain");
+	NewHitChain->SetType(_Type);
+
+	NewHitChain->StateChange(ESinHitChainState::Idle);
+	NewHitChain->StateChange(ESinHitChainState::Move);
+
+	AllHitChain[reinterpret_cast<__int64>(NewHitChain)] = NewHitChain;
 }
 
 void SinChapterManager::IntroStart()
@@ -510,6 +538,7 @@ void SinChapterManager::AllThornMoveOn()
 void SinChapterManager::Phase2Start()
 {
 
+
 }
 
 void SinChapterManager::Phase2(float _DeltaTime)
@@ -562,6 +591,7 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 		Phase1(_DeltaTime);
 		break;
 	case ESinState::Phase2:
+		Phase2(_DeltaTime);
 		break;
 	}
 }
@@ -594,6 +624,7 @@ void SinChapterManager::M_StateChange(ESinState _State)
 			Phase1Start();
 			break;
 		case ESinState::Phase2:
+			Phase2Start();
 			break;
 		}
 	}
