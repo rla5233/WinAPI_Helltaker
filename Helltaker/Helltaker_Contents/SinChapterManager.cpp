@@ -22,7 +22,7 @@ const float SinChapterManager::HeroDelayTime = 0.129f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
-const float SinChapterManager::Phase1_DelayTime = 0.43f;
+const float SinChapterManager::Phase1_DelayTime = 0.5f;
 
 const float SinChapterManager::MaxSpeedY = -150.0f;
 
@@ -344,6 +344,11 @@ void SinChapterManager::Intro(float _DeltaTime)
 	if (ESinSkullState::Move == SinSkull->GetState() &&
 		ESinPistonState::Move == UpPiston->GetState())
 	{
+		//M_StateChange(ESinState::Phase1);
+	}
+
+	if (UEngineInput::IsDown(VK_SPACE))
+	{
 		M_StateChange(ESinState::Phase1);
 	}
 }
@@ -373,6 +378,11 @@ void SinChapterManager::Phase1(float _DeltaTime)
 	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
 	{
 		Phase1SmallChainUpdate(_DeltaTime);
+	}
+	else
+	{
+		Phase1_SmallChain.clear();
+		M_StateChange(ESinState::Phase2);
 	}
 }
 
@@ -453,6 +463,7 @@ void SinChapterManager::SinChainMoveOn()
 	}
 }
 
+// 수정 (리팩토링 가능?)
 void SinChapterManager::AllThornMoveOn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();

@@ -94,17 +94,19 @@ protected:
 	void M_StateChange(ESinState _State);
 
 private:
+	void IntroStart();
+	void Intro(float _DeltaTime);
+
 	void Phase1(float _DeltaTime);
 	void Phase1SmallChainUpdate(float _DeltaTime);
 	void SpeedY_Update(float _DeltaTime);
-
-	void IntroStart();
-	void Intro(float _DeltaTime);
 
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
 	void SinChainMoveOn();
 	void AllThornMoveOn();
+
+	
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
