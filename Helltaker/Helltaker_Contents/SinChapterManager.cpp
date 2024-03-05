@@ -507,6 +507,17 @@ void SinChapterManager::AllThornMoveOn()
 	}
 }
 
+void SinChapterManager::Phase2Start()
+{
+
+}
+
+void SinChapterManager::Phase2(float _DeltaTime)
+{
+	HeroDelayTimeUpdate(_DeltaTime);
+
+}
+
 void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 {
 	if (false == PlayerHero->GetCanActionCheck())

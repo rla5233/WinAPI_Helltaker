@@ -90,6 +90,7 @@ protected:
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void Phase1Start();
+	virtual void Phase2Start();
 
 	void M_StateChange(ESinState _State);
 
@@ -106,7 +107,7 @@ private:
 	void SinChainMoveOn();
 	void AllThornMoveOn();
 
-	
+	void Phase2(float _DeltaTime);
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
