@@ -21,6 +21,11 @@ public:
 		IsMoveY = true;
 	}
 
+	void MoveY_Off()
+	{
+		IsMoveY = false;
+	}
+
 	int GetLife() const
 	{
 		return Life;

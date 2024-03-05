@@ -64,6 +64,7 @@ void Bridge::StopStart()
 
 void Bridge::Stop(float _DeltaTime)
 {
+	LerfMoveUpdate(_DeltaTime);
 }
 
 void Bridge::Tick(float _DeltaTime)

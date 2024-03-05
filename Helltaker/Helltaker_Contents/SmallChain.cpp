@@ -8,7 +8,7 @@ bool SmallChain::IsLoad = false;
 
 const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
-const float SmallChain::HitTime = 0.15f;
+const float SmallChain::HitTime = 0.125f;
 
 SmallChain::SmallChain()
 {
@@ -117,7 +117,7 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 {
 	if (true)
 	{
-		TimeCount += _DeltaTime * 2.75f;
+		TimeCount += _DeltaTime * 2.5f;
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, TimeCount);
@@ -135,7 +135,7 @@ void SmallChain::HorShowAnimation(float _DeltaTime)
 {
 	if (true)
 	{
-		TimeCount += _DeltaTime * 2.75f;
+		TimeCount += _DeltaTime * 2.5f;
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, 0.0f, TimeCount);
@@ -224,14 +224,14 @@ void SmallChain::HeroHitCheck(float _DeltaTime)
 		switch (Type)
 		{
 		case ESinSmallChainType::Ver:
-			if (30.0f > abs(HeroPos.X - Pos.X))
+			if (25.0f > abs(HeroPos.X - Pos.X))
 			{
 				GetSinChapter()->GetPlayerHero()->SinHero_StateChange(ESinHeroState::Hit);
 				HitTimeCount = 0.0f;
 			}
 			break;
 		case ESinSmallChainType::Hor:
-			if (30.0f > abs(HeroPos.Y - Pos.Y))
+			if (25.0f > abs(HeroPos.Y - Pos.Y))
 			{
 				GetSinChapter()->GetPlayerHero()->SinHero_StateChange(ESinHeroState::Hit);
 				HitTimeCount = 0.0f;

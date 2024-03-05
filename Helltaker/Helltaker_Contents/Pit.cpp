@@ -70,6 +70,7 @@ void Pit::StopStart()
 
 void Pit::Stop(float _DeltaTime)
 {
+	LerfMoveUpdate(_DeltaTime);
 }
 
 void Pit::Tick(float _DeltaTime)

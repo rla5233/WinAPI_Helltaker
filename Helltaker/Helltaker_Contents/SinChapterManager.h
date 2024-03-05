@@ -113,7 +113,7 @@ private:
 
 	void Phase1(float _DeltaTime);
 	void Phase1SmallChainUpdate(float _DeltaTime);
-	void SpeedY_Update(float _DeltaTime);
+	void Phase1SpeedY_Update(float _DeltaTime);
 
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
@@ -121,6 +121,8 @@ private:
 	void AllThornMoveOn();
 
 	void Phase2(float _DeltaTime);
+	void AllMoveActorMoveOff();
+	void AllMoveActorDiffMove();
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
