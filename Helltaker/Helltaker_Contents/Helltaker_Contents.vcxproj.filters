@@ -106,44 +106,44 @@
     <ClInclude Include="SinChapter1.h">
       <Filter>Object\Level\Sin</Filter>
     </ClInclude>
-    <ClInclude Include="Sin_Thorn.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="Gear.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="Pit.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="HeroLife.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="Shield.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="Bridge.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="Skull.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="Piston.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
     <ClInclude Include="Sin_Hero.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
-    <ClInclude Include="ChainLink.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
     <ClInclude Include="SinMoveActor.h">
       <Filter>Object\Actor\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="ChainLink.h">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Pit.h">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sin_Thorn.h">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClInclude>
     <ClInclude Include="SmallChain.h">
-      <Filter>Object\Actor\Sin</Filter>
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Gear.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroLife.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClInclude>
     <ClInclude Include="HitChain.h">
-      <Filter>Object\Actor\Sin</Filter>
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Piston.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Skull.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,44 +249,44 @@
     <ClCompile Include="SinChapter1.cpp">
       <Filter>Object\Level\Sin</Filter>
     </ClCompile>
-    <ClCompile Include="Sin_Thorn.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="Gear.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="Pit.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="HeroLife.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="Shield.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="Bridge.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="Skull.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="Piston.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
     <ClCompile Include="Sin_Hero.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
-    <ClCompile Include="ChainLink.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
     <ClCompile Include="SinMoveActor.cpp">
       <Filter>Object\Actor\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="ChainLink.cpp">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Pit.cpp">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sin_Thorn.cpp">
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClCompile>
     <ClCompile Include="SmallChain.cpp">
-      <Filter>Object\Actor\Sin</Filter>
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Gear.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroLife.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClCompile>
     <ClCompile Include="HitChain.cpp">
-      <Filter>Object\Actor\Sin</Filter>
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Piston.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Skull.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +325,12 @@
     </Filter>
     <Filter Include="Object\Actor\Sin">
       <UniqueIdentifier>{d89c5fa3-005a-4654-8f69-a32c510c86da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Sin\MoveComponent">
+      <UniqueIdentifier>{5465f5f1-3a48-4c53-b126-c8b866da6758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Sin\Component">
+      <UniqueIdentifier>{157a171b-bb7d-4a6d-8814-ddff1873977d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
