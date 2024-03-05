@@ -434,6 +434,7 @@ void ChapterManager::HeroDeath(float _DeltaTime)
 	}
 }
 
+// 수정 (Hero 이펙트 제거 가능?)
 void ChapterManager::HeroDeathStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)

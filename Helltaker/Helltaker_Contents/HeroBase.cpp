@@ -285,6 +285,7 @@ void HeroBase::DeathStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ {0.0f, (WinScale.Y * 1.15f) * (-0.25f)}, {WinScale.X * 0.375f, WinScale.Y * 1.15f} });
 	ImageRenderer->ChangeAnimation("Hero_Death");
+	AllEffectActiveOff();
 	UEngineSound::SoundPlay("player_death.wav");
 }
 
