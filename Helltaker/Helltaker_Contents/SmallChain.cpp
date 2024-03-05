@@ -2,11 +2,13 @@
 
 #include "SinChapterManager.h"
 #include "Sin_Thorn.h"	
+#include "Sin_Hero.h"
 
 bool SmallChain::IsLoad = false;
 
 const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
+const float SmallChain::HitTime = 0.15f;
 
 SmallChain::SmallChain()
 {
@@ -115,7 +117,7 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 {
 	if (true)
 	{
-		TimeCount += _DeltaTime * 3.0f;
+		TimeCount += _DeltaTime * 2.75f;
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		float ScaleX = ContentsHelper::LerpClampf(V_Scale.X, 0.0f, TimeCount);
@@ -133,7 +135,7 @@ void SmallChain::HorShowAnimation(float _DeltaTime)
 {
 	if (true)
 	{
-		TimeCount += _DeltaTime * 3.0f;
+		TimeCount += _DeltaTime * 2.75f;
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, 0.0f, TimeCount);
@@ -152,12 +154,14 @@ void SmallChain::HitStart()
 	ImageRenderer->SetAlpha(1);
 	IsHit = true;
 	TimeCount = 0.0f;
+	HitTimeCount = HitTime;
 }
 
 void SmallChain::Hit(float _DeltaTime)
 {
 	HitAnimation(_DeltaTime);
 	MoveY_Update(_DeltaTime);
+	HeroHitCheck(_DeltaTime);
 
 	if (false == IsHit)
 	{
@@ -208,6 +212,34 @@ void SmallChain::HorHitAnimation(float _DeltaTime)
 	{
 		TimeCount = 0.0f;
 		IsHit = false;
+	}
+}
+
+void SmallChain::HeroHitCheck(float _DeltaTime)
+{
+	if (0.0f < HitTimeCount)
+	{
+		FVector HeroPos = GetSinChapter()->GetPlayerHero()->GetActorLocation();
+		FVector Pos = GetActorLocation();
+		switch (Type)
+		{
+		case ESinSmallChainType::Ver:
+			if (30.0f > abs(HeroPos.X - Pos.X))
+			{
+				GetSinChapter()->GetPlayerHero()->SinHero_StateChange(ESinHeroState::Hit);
+				HitTimeCount = 0.0f;
+			}
+			break;
+		case ESinSmallChainType::Hor:
+			if (30.0f > abs(HeroPos.Y - Pos.Y))
+			{
+				GetSinChapter()->GetPlayerHero()->SinHero_StateChange(ESinHeroState::Hit);
+				HitTimeCount = 0.0f;
+			}
+			break;
+		}
+
+		HitTimeCount -= _DeltaTime;
 	}
 }
 

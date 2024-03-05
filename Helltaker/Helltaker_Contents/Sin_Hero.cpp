@@ -122,7 +122,14 @@ void Sin_Hero::HitStart()
 
 void Sin_Hero::Hit(float _DeltaTime)
 {
-	SinHero_StateChange(ESinHeroState::Idle);
+	if (true == IsMoveY)
+	{
+		SinHero_StateChange(ESinHeroState::MoveY);
+	}
+	else
+	{
+		SinHero_StateChange(ESinHeroState::Idle);
+	}
 }
 
 void Sin_Hero::Tick(float _DeltaTime)
