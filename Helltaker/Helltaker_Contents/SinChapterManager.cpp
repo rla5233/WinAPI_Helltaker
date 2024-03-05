@@ -26,7 +26,7 @@ const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 const float SinChapterManager::Phase1_DelayTime = 0.5f;
 
 const float SinChapterManager::StartPosY = 0.388f;
-const float SinChapterManager::MaxSpeedY = -150.0f;
+const float SinChapterManager::MaxSpeedY = -180.0f;
 
 SinChapterManager::SinChapterManager()
 {
@@ -210,7 +210,7 @@ void SinChapterManager::M_CreateThorn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.214f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.222f };
 
 	UpThorn.resize(3);
 	for (int y = 0; y < 3; y++)
@@ -238,7 +238,7 @@ void SinChapterManager::M_CreateThorn()
 			AllMapRenderActors.push_back(UpThorn[y][x]);
 		}
 
-		UpPos.Y += Scale.Y * 1.15f;
+		UpPos.Y += Scale.Y * 1.088f;
 	}
 
 	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
@@ -270,7 +270,7 @@ void SinChapterManager::M_CreateThorn()
 			AllMapRenderActors.push_back(DownThorn[y][x]);
 		}
 
-		DownPos.Y += Scale.Y * 1.15f;
+		DownPos.Y += Scale.Y * 1.088f;
 	}
 }
 
@@ -291,7 +291,7 @@ void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseN
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector StartPos = WinScale * SmallChainStartPos;
 	float TileScaleX = ContentsHelper::GetTileScale().X;
-	float TileScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
+	float TileScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.088f;
 
 	SmallChain* NewSmallChain = SpawnActor<SmallChain>(static_cast<int>(SinUpdateOrder::Mid));
 	
@@ -400,7 +400,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 	if (ESinSkullState::Move == SinSkull->GetState() &&
 		ESinPistonState::Move == UpPiston->GetState())
 	{
-		//M_StateChange(ESinState::Phase1);
+		M_StateChange(ESinState::Phase1);
 	}
 
 	if (UEngineInput::IsDown(VK_SPACE))
@@ -453,7 +453,7 @@ void SinChapterManager::Phase1(float _DeltaTime)
 
 void SinChapterManager::Phase1_SmallChainUpdate(float _DeltaTime)
 {
-	if (PhaseSmallChainVec_Index < Phase1_SmallChain.size())
+	if (PhaseSmallChainVec_Index >= Phase1_SmallChain.size())
 	{
 		return;
 	}
@@ -518,7 +518,7 @@ void SinChapterManager::BridgeResetCheck()
 		FVector WinScale = ContentsHelper::GetWindowScale();
 
 		float CurPosY = SinBridge[0]->GetActorLocation().Y;
-		float TarGetPosY = WinScale.Y * (0.03f + Bridge::GetScale().Y);
+		float TarGetPosY = WinScale.Y * (0.038f + Bridge::GetScale().Y);
 
 		AccY = -(SpeedY * SpeedY) / (2 * (TarGetPosY - CurPosY));
 		++Phase1_Order;
@@ -569,7 +569,7 @@ void SinChapterManager::AllThornMoveOn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.23f };
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.222f };
 
 	for (std::vector<Sin_Thorn*>& ThornVec : UpThorn)
 	{
@@ -580,15 +580,15 @@ void SinChapterManager::AllThornMoveOn()
 				MsgBoxAssert("Actor is nullptr");
 			}
 
-			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.1f);
+			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.088f);
 			Thorn->SetDownPosY(UpPos.Y);
-			Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.5f);
-			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.1f);
+			Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.3f);
+			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.088f);
 			Thorn->MoveOn();
 		}
 	}
 
-	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.782f };
+	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
 
 	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
 	{
@@ -599,10 +599,10 @@ void SinChapterManager::AllThornMoveOn()
 				MsgBoxAssert("Actor is nullptr");
 			}
 
-			Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.1f);
-			Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.6f);
-			Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.1f);
-			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.1f);
+			Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.088f);
+			Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.7f);
+			Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
+			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
 			Thorn->MoveOn();
 		}
 	}

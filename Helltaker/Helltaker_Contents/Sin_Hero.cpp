@@ -59,7 +59,7 @@ void Sin_Hero::MoveStart()
 void Sin_Hero::SetTargetPosY()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float ScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
+	float ScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.088f;
 
 	switch (GetMoveDir())
 	{

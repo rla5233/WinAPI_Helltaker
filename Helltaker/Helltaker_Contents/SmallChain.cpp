@@ -76,7 +76,7 @@ void SmallChain::ShowStart()
 	if (ESinSmallChainType::Hor == Type)
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		float ScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
+		float ScaleY = WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.088f;
 		float a = GetSinChapter()->M_GetMoveYSum();
 		AddActorLocation({ 0.0f, fmodf(GetSinChapter()->M_GetMoveYSum(), ScaleY) });
 	}
