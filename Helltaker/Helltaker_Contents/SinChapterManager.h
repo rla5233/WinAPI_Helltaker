@@ -133,7 +133,7 @@ private:
 
 private:
 	std::list<AActor*> AllMapRenderActors;
-	std::map<Point, HitChain*> AllHitChain;
+	std::map<__int64, HitChain*> AllHitChain;
 
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;

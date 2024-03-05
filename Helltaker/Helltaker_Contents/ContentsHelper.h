@@ -50,6 +50,20 @@ public:
 	static const Point Down;
 };
 
+struct SinTile
+{
+	union
+	{
+		struct
+		{
+			int X;
+			int Y;
+		};
+
+		__int64 Key;
+	};
+};
+
 
 // Ό³Έν :
 class ContentsHelper

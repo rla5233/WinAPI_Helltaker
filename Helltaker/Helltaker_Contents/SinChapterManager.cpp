@@ -338,7 +338,7 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	FVector Pos = { WinScale.X * 0.333f, WinScale.Y * 0.008f };
 	float ScaleY = WinScale.Y * 0.182f;
 	HitChain* NewHitChain = SpawnActor<HitChain>(static_cast<int>(SinUpdateOrder::Top));
-	Point LocationPoint = Point::Zero;
+	SinTile LocationPoint = { 0, _PointY * 2 };
 
 	switch (_Type)
 	{
@@ -358,7 +358,7 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	NewHitChain->StateChange(ESinHitChainState::Idle);
 	NewHitChain->StateChange(ESinHitChainState::Move);
 
-	//AllHitChain[] = NewHitChain;
+	AllHitChain[LocationPoint.Key] = NewHitChain;
 }
 
 void SinChapterManager::IntroStart()
@@ -378,7 +378,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 
 	if (UEngineInput::IsDown(VK_SPACE))
 	{
-		M_StateChange(ESinState::Phase1);
+		//M_StateChange(ESinState::Phase1);
 	}
 }
 
