@@ -41,7 +41,7 @@ void HitChain::IdleStart()
 	}
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	ImageRenderer->SetTransform({ {0.0f} {} })
+	//ImageRenderer->SetTransform({ {0.0f} {} })
 }
 
 void HitChain::Idle(float _DeltaTime)
