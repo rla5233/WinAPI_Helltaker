@@ -51,7 +51,7 @@ private:
 	void SetTargetPosY();
 	void MoveY(float _DeltaTime);
 
-	void PointXUpdate();
+	void CurPointUpdate();
 	void MoveY_Update(float _DeltaTime);
 
 	void HitStart();
@@ -60,8 +60,8 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
+	SinTile CurPoint = { 3, 0 };
 	bool IsMoveY = false;
-	int PointX = 3;
 	int Life = 4;
 
 	ESinHeroState State = ESinHeroState::None;

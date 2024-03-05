@@ -132,8 +132,8 @@ private:
 	void DebugMode();
 
 private:
-	std::list<AActor*> AllMapRenderActors;
-	std::map<__int64, HitChain*> AllHitChain;
+	std::list<AActor*> AllMapRenderActors; //
+	std::map<__int64, HitChain*> AllHitChain; //
 
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
@@ -154,16 +154,17 @@ private:
 	float HeroDelayTimeCount = HeroDelayTime;
 
 	static const FVector SmallChainStartPos;
-	std::vector<std::list<SmallChain*>> Phase1_SmallChain;
+	std::vector<std::list<SmallChain*>> Phase1_SmallChain; //
 	int Phase1_SmallChainVecSize = -1;
 	
-	std::vector<std::list<SmallChain*>> Phase2_SmallChain;
+	std::vector<std::list<SmallChain*>> Phase2_SmallChain; //
 	int Phase2_SmallChainVecSize = -1;
 
 	static const float Phase1_DelayTime;
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
 
+	static const float StartY;
 	static const float MaxSpeedY;
 	float SpeedY = 50.0f;
 	

@@ -14,15 +14,15 @@ Sin_Hero::~Sin_Hero()
 
 void Sin_Hero::ActionCheck()
 {
-	if (0 == PointX && EMoveActorDir::Left != GetMoveDir())
+	if (0 == CurPoint.X && EMoveActorDir::Left != GetMoveDir())
 	{
 		StateChange(EHeroState::Move);
 	}
-	else if (6 == PointX && EMoveActorDir::Right != GetMoveDir())
+	else if (6 == CurPoint.X && EMoveActorDir::Right != GetMoveDir())
 	{
 		StateChange(EHeroState::Move);
 	}
-	else if (0 < PointX && 6 > PointX)
+	else if (0 < CurPoint.X && 6 > CurPoint.X)
 	{
 		StateChange(EHeroState::Move);
 	}
@@ -32,7 +32,7 @@ void Sin_Hero::MoveStart()
 {
 	HeroBase::MoveStart();
 
-	PointXUpdate();
+	CurPointUpdate();
 	SetTargetPosY();
 
 	CreateRandomMoveEffect(EChapterType::Sin);
@@ -52,15 +52,21 @@ void Sin_Hero::SetTargetPosY()
 	}
 }
 
-void Sin_Hero::PointXUpdate()
+void Sin_Hero::CurPointUpdate()
 {
 	switch (GetMoveDir())
 	{
 	case EMoveActorDir::Right:
-		++PointX;
+		++CurPoint.X;
 		break;
 	case EMoveActorDir::Left:
-		--PointX;
+		--CurPoint.X;
+		break;
+	case EMoveActorDir::Up:
+		--CurPoint.Y;
+		break;
+	case EMoveActorDir::Down:
+		++CurPoint.Y;
 		break;
 	}
 }

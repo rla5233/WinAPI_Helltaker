@@ -25,6 +25,7 @@ const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::Phase1_DelayTime = 0.5f;
 
+const float SinChapterManager::StartY = 0.388f;
 const float SinChapterManager::MaxSpeedY = -150.0f;
 
 SinChapterManager::SinChapterManager()
