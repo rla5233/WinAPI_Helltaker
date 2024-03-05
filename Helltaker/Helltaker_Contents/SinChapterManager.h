@@ -55,6 +55,8 @@ public:
 
 	void M_CreateHitChain(ESinHitChainType _Type, int _PointY);
 
+	bool HitChainHitCheck(SinTile _Point);
+
 	static float GetStartPosY()
 	{
 		return StartPosY;

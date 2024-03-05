@@ -14,13 +14,29 @@ Sin_Hero::~Sin_Hero()
 
 void Sin_Hero::ActionCheck()
 {
-	if (0 == CurPoint.X && EMoveActorDir::Left != GetMoveDir())
+	if (0 == CurPoint.X)
 	{
-		StateChange(EHeroState::Move);
+		switch (GetMoveDir())
+		{
+		case EMoveActorDir::Left:
+			KickCheck();
+			break;
+		default:
+			StateChange(EHeroState::Move);
+			break;
+		}
 	}
-	else if (6 == CurPoint.X && EMoveActorDir::Right != GetMoveDir())
+	else if (6 == CurPoint.X)
 	{
-		StateChange(EHeroState::Move);
+		switch (GetMoveDir())
+		{
+		case EMoveActorDir::Right:
+			KickCheck();
+			break;
+		default:
+			StateChange(EHeroState::Move);
+			break;
+		}
 	}
 	else if (0 < CurPoint.X && 6 > CurPoint.X)
 	{
@@ -62,12 +78,6 @@ void Sin_Hero::CurPointUpdate()
 	case EMoveActorDir::Left:
 		--CurPoint.X;
 		break;
-	case EMoveActorDir::Up:
-		--CurPoint.Y;
-		break;
-	case EMoveActorDir::Down:
-		++CurPoint.Y;
-		break;
 	}
 }
 
@@ -75,6 +85,12 @@ void Sin_Hero::KickCheck()
 {
 	HeroBase::KickCheck();
 
+	UpdateCurPosY();
+	if (true == GetSinChapter()->HitChainHitCheck(CurPoint))
+	{
+		StateChange(EHeroState::None);
+		StateChange(EHeroState::Kick);
+	}
 }
 
 void Sin_Hero::ThornHitCheck()
@@ -164,6 +180,16 @@ void Sin_Hero::StateUpdate(float _DeltaTime)
 		Hit(_DeltaTime);
 		break;
 	}
+}
+
+void Sin_Hero::UpdateCurPosY()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector CurPos = GetActorLocation();
+	float StartPosY = SinChapterManager::GetStartPosY() * WinScale.Y;
+	float ScaleY = Sin_Thorn::GetThornScale().Y * WinScale.Y;
+
+	CurPoint.Y = std::lround((CurPos.Y - StartPosY) / ScaleY);
 }
 
 void Sin_Hero::Phase2_Start()

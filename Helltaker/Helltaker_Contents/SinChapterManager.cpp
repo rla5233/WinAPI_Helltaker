@@ -362,9 +362,29 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	AllHitChain[LocationPoint.Key] = NewHitChain;
 }
 
+bool SinChapterManager::HitChainHitCheck(SinTile _Point)
+{
+	if (true == AllHitChain.contains(_Point.Key))
+	{
+		AllHitChain[_Point.Key]->AllRenderersActiveOff();
+
+
+		return true;
+	}
+
+	return false;
+}
+
 void SinChapterManager::IntroStart()
 {
 	UpPiston->StateChange(ESinPistonState::Move);
+
+	M_CreateHitChain(ESinHitChainType::Left, 0);
+	M_CreateHitChain(ESinHitChainType::Right, 0);
+	M_CreateHitChain(ESinHitChainType::Left, 1);
+	M_CreateHitChain(ESinHitChainType::Right, 1);
+	M_CreateHitChain(ESinHitChainType::Left, 2);
+	M_CreateHitChain(ESinHitChainType::Right, 2);
 }
 
 void SinChapterManager::Intro(float _DeltaTime)
@@ -374,7 +394,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 	if (ESinSkullState::Move == SinSkull->GetState() &&
 		ESinPistonState::Move == UpPiston->GetState())
 	{
-		M_StateChange(ESinState::Phase1);
+		//M_StateChange(ESinState::Phase1);
 	}
 
 	if (UEngineInput::IsDown(VK_SPACE))
