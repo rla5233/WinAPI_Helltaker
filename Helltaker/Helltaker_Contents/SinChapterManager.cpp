@@ -25,7 +25,7 @@ const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::Phase1_DelayTime = 0.5f;
 
-const float SinChapterManager::StartY = 0.388f;
+const float SinChapterManager::StartPosY = 0.388f;
 const float SinChapterManager::MaxSpeedY = -150.0f;
 
 SinChapterManager::SinChapterManager()
@@ -374,12 +374,13 @@ void SinChapterManager::Intro(float _DeltaTime)
 	if (ESinSkullState::Move == SinSkull->GetState() &&
 		ESinPistonState::Move == UpPiston->GetState())
 	{
-		//M_StateChange(ESinState::Phase1);
+		M_StateChange(ESinState::Phase1);
 	}
 
 	if (UEngineInput::IsDown(VK_SPACE))
 	{
 		//M_StateChange(ESinState::Phase1);
+		//PlayerHero->Phase2_Start();
 	}
 }
 
@@ -548,6 +549,7 @@ void SinChapterManager::Phase2Start()
 {
 	//AllMoveActorMoveOff();
 	//AllMoveActorDiffMove();
+	//PlayerHero->Phase2_Start();
 }
 
 void SinChapterManager::Phase2(float _DeltaTime)
@@ -655,8 +657,12 @@ void SinChapterManager::DebugMode()
 	if (GEngine->IsDebug())
 	{
 		FVector CurPos = PlayerHero->GetActorLocation();
+		SinTile CurPoint= PlayerHero->GetCurPoint();
+		std::string CPoint = "[ ";
+		CPoint += std::to_string(CurPoint.X) + ", " + std::to_string(CurPoint.Y) + " ]";
 
 		UEngineDebug::DebugTextPrint("PlayerPos : " + CurPos.ToString(), 20);
+		UEngineDebug::DebugTextPrint("PlayerPoint : " + CPoint, 20);
 	}
 }
 

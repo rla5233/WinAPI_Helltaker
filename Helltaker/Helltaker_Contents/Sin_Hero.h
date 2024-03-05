@@ -31,6 +31,13 @@ public:
 		return Life;
 	}
 
+	SinTile GetCurPoint() const
+	{
+		return CurPoint;
+	}
+
+	void Phase2_Start();
+
 	void SinHero_StateChange(ESinHeroState _State);
 
 protected:

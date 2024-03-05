@@ -166,6 +166,16 @@ void Sin_Hero::StateUpdate(float _DeltaTime)
 	}
 }
 
+void Sin_Hero::Phase2_Start()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector CurPos = GetActorLocation();
+	float StartPosY = SinChapterManager::GetStartPosY() * WinScale.Y;
+	float ScaleY = Sin_Thorn::GetThornScale().Y * WinScale.Y;
+
+	CurPoint.Y = static_cast<int>((CurPos.Y - StartPosY) / ScaleY);
+}
+
 void Sin_Hero::SinHero_StateChange(ESinHeroState _State)
 {
 	if (State != _State)

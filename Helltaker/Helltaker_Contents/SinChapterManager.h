@@ -55,6 +55,11 @@ public:
 
 	void M_CreateHitChain(ESinHitChainType _Type, int _PointY);
 
+	static float GetStartPosY()
+	{
+		return StartPosY;
+	}
+
 	float M_GetSpeedY() const
 	{
 		return SpeedY;
@@ -164,7 +169,7 @@ private:
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
 
-	static const float StartY;
+	static const float StartPosY;
 	static const float MaxSpeedY;
 	float SpeedY = 50.0f;
 	
