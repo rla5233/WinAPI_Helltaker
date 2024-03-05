@@ -353,7 +353,13 @@ enum class ESinHitChainState
 {
 	None,
 	Idle,
-	Move,
 	Hit,
 	Death
+};
+
+enum class ESinHitChainType
+{
+	None,
+	Left,
+	Right
 };

@@ -16,6 +16,11 @@ public:
 	HitChain& operator=(const HitChain& _Other) = delete;
 	HitChain& operator=(HitChain&& _Other) noexcept = delete;
 
+	void SetType(ESinHitChainType _Type)
+	{
+		Type = _Type;
+	}
+
 	void StateChange(ESinHitChainState _State);
 
 protected:
@@ -25,9 +30,6 @@ protected:
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
-
-	void MoveStart();
-	void Move(float _DeltaTime);
 
 	void HitStart();
 	void Hit(float _DeltaTime);
@@ -39,9 +41,10 @@ private:
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
-	std::list<UImageRenderer*> EffectRenderer;
-	const FVector Scale;
+	std::list<UImageRenderer*> AllHitEffectRenderer;
+	static const FVector Scale;
 
+	ESinHitChainType Type = ESinHitChainType::None;
 	ESinHitChainState State = ESinHitChainState::None;
 	static bool IsLoad;
 };
