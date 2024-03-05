@@ -14,15 +14,15 @@ Sin_Hero::~Sin_Hero()
 
 void Sin_Hero::ActionCheck()
 {
-	if (-3 == PointX && EMoveActorDir::Left != GetMoveDir())
+	if (0 == PointX && EMoveActorDir::Left != GetMoveDir())
 	{
 		StateChange(EHeroState::Move);
 	}
-	else if (3 == PointX && EMoveActorDir::Right != GetMoveDir())
+	else if (6 == PointX && EMoveActorDir::Right != GetMoveDir())
 	{
 		StateChange(EHeroState::Move);
 	}
-	else if (-3 < PointX && 3 > PointX)
+	else if (0 < PointX && 6 > PointX)
 	{
 		StateChange(EHeroState::Move);
 	}

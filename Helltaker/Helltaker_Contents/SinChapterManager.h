@@ -121,6 +121,7 @@ private:
 	void AllThornMoveOn();
 
 	void Phase2(float _DeltaTime);
+	void Phase2SpeedY_Update(float _DeltaTime);
 	void AllMoveActorMoveOff();
 	void AllMoveActorDiffMove();
 
@@ -132,7 +133,7 @@ private:
 
 private:
 	std::list<AActor*> AllMapRenderActors;
-	std::map<__int64, HitChain*> AllHitChain;
+	std::map<Point, HitChain*> AllHitChain;
 
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;

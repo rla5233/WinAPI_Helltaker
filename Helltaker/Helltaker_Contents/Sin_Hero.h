@@ -61,7 +61,7 @@ private:
 
 private:
 	bool IsMoveY = false;
-	int PointX = 0;
+	int PointX = 3;
 	int Life = 4;
 
 	ESinHeroState State = ESinHeroState::None;

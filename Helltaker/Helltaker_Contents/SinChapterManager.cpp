@@ -338,14 +338,17 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	FVector Pos = { WinScale.X * 0.333f, WinScale.Y * 0.008f };
 	float ScaleY = WinScale.Y * 0.182f;
 	HitChain* NewHitChain = SpawnActor<HitChain>(static_cast<int>(SinUpdateOrder::Top));
-	
+	Point LocationPoint = Point::Zero;
+
 	switch (_Type)
 	{
 	case ESinHitChainType::Left:
 		NewHitChain->SetActorLocation({ WinScale.hX() - Pos.X, Pos.Y + (ScaleY * _PointY)});
+		LocationPoint.X = 0;
 		break;
 	case ESinHitChainType::Right:
 		NewHitChain->SetActorLocation({ WinScale.hX() + Pos.X, Pos.Y + (ScaleY * _PointY) });
+		LocationPoint.X = 6;
 		break;
 	}
 
@@ -355,7 +358,7 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	NewHitChain->StateChange(ESinHitChainState::Idle);
 	NewHitChain->StateChange(ESinHitChainState::Move);
 
-	AllHitChain[reinterpret_cast<__int64>(NewHitChain)] = NewHitChain;
+	//AllHitChain[] = NewHitChain;
 }
 
 void SinChapterManager::IntroStart()
@@ -542,13 +545,28 @@ void SinChapterManager::AllThornMoveOn()
 
 void SinChapterManager::Phase2Start()
 {
-	AllMoveActorMoveOff();
-	AllMoveActorDiffMove();
+	//AllMoveActorMoveOff();
+	//AllMoveActorDiffMove();
 }
 
 void SinChapterManager::Phase2(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
+	Phase2SpeedY_Update(_DeltaTime);
+}
+
+void SinChapterManager::Phase2SpeedY_Update(float _DeltaTime)
+{
+	if (0.0f < SpeedY)
+	{
+
+		SpeedY -= _DeltaTime;
+
+		if (0.0 >= SpeedY)
+		{
+			SpeedY = 0;
+		}
+	}
 }
 
 void SinChapterManager::AllMoveActorMoveOff()
@@ -572,38 +590,7 @@ void SinChapterManager::AllMoveActorMoveOff()
 
 void SinChapterManager::AllMoveActorDiffMove()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	float Diff = fmodf(MoveYSum, WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f);
-	Diff += WinScale.Y * Sin_Thorn::GetThornScale().Y * 1.1f;
-	Diff *= -1;
 
-	for (Pit* PitActor : SinPit)
-	{
-		if (nullptr == PitActor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		FVector CurPos = PitActor->GetActorLocation();
-		PitActor->SetLerfStartPos(CurPos);
-		PitActor->SetLerfTargetPos({ CurPos.X, CurPos.Y + (Diff * 0.3f) });
-		PitActor->LerfMoveOn();
-		PitActor->StateChange(ESinPitState::Stop);
-	}
-
-	for (Bridge* BridgeActor : SinBridge)
-	{
-		if (nullptr == BridgeActor)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		FVector CurPos = BridgeActor->GetActorLocation();
-		BridgeActor->SetLerfStartPos(CurPos);
-		BridgeActor->SetLerfTargetPos({ CurPos.X, CurPos.Y + (Diff * 0.3f) });
-		BridgeActor->LerfMoveOn();
-		BridgeActor->StateChange(ESinBridgeState::Stop);
-	}
 
 
 }
