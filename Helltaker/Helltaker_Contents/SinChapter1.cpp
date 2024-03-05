@@ -24,9 +24,9 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 	M_StateChange(ESinState::Intro);
 }
 
-void SinChapter1::Phase1Start()
+void SinChapter1::Phase1_Start()
 {
-	SinChapterManager::Phase1Start();
+	SinChapterManager::Phase1_Start();
 
 	M_SetSmallChainVecSize(26, 1);
 	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 0, 0);
@@ -60,6 +60,14 @@ void SinChapter1::Phase1Start()
 	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 0, 25);
 	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 3, 25);
 	M_CreateSmallChain(ESinSmallChainType::Ver, 1, 6, 25);
+}
+
+void SinChapter1::Phase2_Start()
+{
+	SinChapterManager::Phase2_Start();
+
+	M_CreateHitChain(ESinHitChainType::Left, 1);
+	M_CreateHitChain(ESinHitChainType::Right, 1);
 }
 
 void SinChapter1::Tick(float _DeltaTime)

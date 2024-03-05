@@ -409,7 +409,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 	}
 }
 
-void SinChapterManager::Phase1Start()
+void SinChapterManager::Phase1_Start()
 {
 	SinBridgeMoveOn();
 	SinChainMoveOn();
@@ -507,6 +507,7 @@ void SinChapterManager::Phase1_SpeedY_Update2(float _DeltaTime)
 		if (0.0f <= SpeedY)
 		{
 			SpeedY = 0.0f;
+			M_StateChange(ESinState::Phase2);
 		}
 	}
 }
@@ -608,7 +609,7 @@ void SinChapterManager::AllThornMoveOn()
 	}
 }
 
-void SinChapterManager::Phase2Start()
+void SinChapterManager::Phase2_Start()
 {
 
 }
@@ -708,10 +709,10 @@ void SinChapterManager::M_StateChange(ESinState _State)
 			IntroStart();
 			break;
 		case ESinState::Phase1:
-			Phase1Start();
+			Phase1_Start();
 			break;
 		case ESinState::Phase2:
-			Phase2Start();
+			Phase2_Start();
 			break;
 		}
 	}

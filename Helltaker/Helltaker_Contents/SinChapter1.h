@@ -24,7 +24,8 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
-	void Phase1Start() override;
+	void Phase1_Start() override;
+	void Phase2_Start() override;
 
 private:
 

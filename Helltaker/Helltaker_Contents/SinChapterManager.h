@@ -115,8 +115,8 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 
-	virtual void Phase1Start();
-	virtual void Phase2Start();
+	virtual void Phase1_Start();
+	virtual void Phase2_Start();
 
 	void M_StateChange(ESinState _State);
 
