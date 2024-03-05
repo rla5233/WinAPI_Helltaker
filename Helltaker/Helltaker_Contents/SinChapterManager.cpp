@@ -19,7 +19,7 @@
 
 bool SinChapterManager::IsLoad = false;
 
-const float SinChapterManager::HeroDelayTime = 0.15f;
+const float SinChapterManager::HeroDelayTime = 0.13f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
@@ -693,6 +693,17 @@ void SinChapterManager::DebugMode()
 
 		UEngineDebug::DebugTextPrint("PlayerPos : " + CurPos.ToString(), 20);
 		UEngineDebug::DebugTextPrint("PlayerPoint : " + CPoint, 20);
+
+		for (std::pair<const __int64, HitChain*>& Chain : AllHitChain)
+		{
+			SinTile point = Chain.second->GetCurPoint();
+			int count = Chain.second->GetHitCount();
+
+			std::string CPoint = "( ";
+			CPoint += std::to_string(point.X) + ", " + std::to_string(point.Y) + " )";
+
+			UEngineDebug::DebugTextPrint("HitChain : " + CPoint + ", " + std::to_string(count), 20);
+		}
 	}
 }
 

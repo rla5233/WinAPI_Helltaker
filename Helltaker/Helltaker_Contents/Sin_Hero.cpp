@@ -81,6 +81,7 @@ void Sin_Hero::CurPointUpdate()
 	}
 }
 
+// 수정 (HitChain 딜레이 필요)
 void Sin_Hero::HitChainCheck()
 {
 	UpdateCurPosY();

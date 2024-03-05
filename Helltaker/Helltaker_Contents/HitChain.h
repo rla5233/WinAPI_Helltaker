@@ -26,6 +26,16 @@ public:
 		CurPoint = _Point;
 	}
 
+	SinTile GetCurPoint() const
+	{
+		return CurPoint;
+	}
+
+	int GetHitCount() const
+	{
+		return HitCount;
+	}
+
 	void StateChange(ESinHitChainState _State);
 
 protected:
