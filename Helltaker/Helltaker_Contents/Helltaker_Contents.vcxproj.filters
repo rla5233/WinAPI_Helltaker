@@ -142,6 +142,9 @@
     <ClInclude Include="SmallChain.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
+    <ClInclude Include="HitChain.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -280,6 +283,9 @@
       <Filter>Object\Actor\Base</Filter>
     </ClCompile>
     <ClCompile Include="SmallChain.cpp">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="HitChain.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>

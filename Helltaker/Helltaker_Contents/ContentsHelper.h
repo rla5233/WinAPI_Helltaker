@@ -348,3 +348,12 @@ enum class ESinSmallChainState
 	Show,
 	Hit
 };
+
+enum class ESinHitChainState
+{
+	None,
+	Idle,
+	Move,
+	Hit,
+	Death
+};
