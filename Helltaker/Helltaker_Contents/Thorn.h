@@ -49,5 +49,4 @@ private:
 
 	static const FVector IdleScale;
 	static const float ChangeInter;
-	static bool IsLoad;
 };

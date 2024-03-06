@@ -190,14 +190,14 @@ private:
 
 	HitChainHp* SinHitChainHp = nullptr;
 
-	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;
 
 	Piston* UpPiston = nullptr;
 	Piston* DownPiston = nullptr;
 	Skull* SinSkull = nullptr;
-	std::vector<ChainLink*> SinChainLink;
 
+	std::vector<Pit*> SinPit;
+	std::vector<ChainLink*> SinChainLink;
 	std::vector<Bridge*> SinBridge;
 	int BridgeResetCount = 0;
 

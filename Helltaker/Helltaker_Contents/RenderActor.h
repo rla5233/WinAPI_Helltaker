@@ -52,11 +52,14 @@ public:
 	void VibrationEffect(UImageRenderer* _Renderer);
 
 protected:
+	void BeginPlay() override;
 	
 private:
 	bool IsFadeIn = false;
 	bool IsFadeOut = false;
 
 	float TimeCount = 0.0f;
+
+	static bool IsLoad;
 };
 

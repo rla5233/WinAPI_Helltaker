@@ -68,6 +68,5 @@ private:
 
 	EThornState State = EThornState::None;
 	static const int ThornCount;
-	static bool IsLoad;
 };
 

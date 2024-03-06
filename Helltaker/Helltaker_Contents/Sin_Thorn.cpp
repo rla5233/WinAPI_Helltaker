@@ -2,8 +2,6 @@
 
 #include "SinChapterManager.h"
 
-bool Sin_Thorn::IsLoad = false;
-
 const int Sin_Thorn::ThornCount = 7;;
 const FVector Sin_Thorn::ThornScale = { 0.0479f, 0.0851f };
 const float Sin_Thorn::ChangeInter = 0.05f;
@@ -19,17 +17,6 @@ Sin_Thorn::~Sin_Thorn()
 void Sin_Thorn::BeginPlay()
 {
 	SinMoveActor::BeginPlay();
-
-	if (false == IsLoad)
-	{
-		ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
-		
-		// 수정 (Debug용 삭제 필요)
-		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Up");
-		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Down");
-
-		IsLoad = true;
-	}
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * ThornScale;

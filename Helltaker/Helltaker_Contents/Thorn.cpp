@@ -4,8 +4,6 @@
 #include "ChapterManager.h"
 #include "Skeleton.h"
 
-bool Thorn::IsLoad = false;
-
 const FVector Thorn::IdleScale = { 0.048f, 0.085f };
 const float Thorn::ChangeInter = 0.05f;
 
@@ -20,15 +18,6 @@ Thorn::~Thorn()
 void Thorn::BeginPlay()
 {
 	RenderActor::BeginPlay();
-
-	if (false == IsLoad)
-	{
-		ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
-		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Up");
-		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Down");
-
-		IsLoad = true;
-	}
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer = CreateImageRenderer(RenderOrder::RenderActor);

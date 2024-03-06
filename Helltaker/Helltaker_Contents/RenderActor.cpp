@@ -3,12 +3,26 @@
 #include "ChapterManager.h"
 #include "SinChapterManager.h"
 
+bool RenderActor::IsLoad = false; 
+
 RenderActor::RenderActor()
 {
 }
 
 RenderActor::~RenderActor()
 {
+}
+
+void RenderActor::BeginPlay()
+{
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("Chapter\\Component\\Thorn", "Thorn_Idle.png");
+		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Up");
+		ContentsHelper::LoadFolder("Chapter\\Component\\Thorn", "Thorn_Down");
+
+		IsLoad = true;
+	}
 }
 
 UImageRenderer* RenderActor::CreateImageRenderer(RenderOrder _Order)

@@ -469,7 +469,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 		TransitionCheck();
 		break;
 	case 1:
-		//Phase1_Check();
+		Phase1_Check();
 		break;
 	}
 
@@ -512,7 +512,10 @@ void SinChapterManager::Phase1_Start()
 	PlayerHero->SinHero_StateChange(ESinHeroState::MoveY);
 	SinGear->StateChange(ESinGearState::Working);
 
+	SpeedY = 50.0f;
 	MoveYSum = 0;
+	BridgeResetCount = 0;
+
 	PhaseSmallChainVec_Index = 0;
 	PhaseDelayTimeCount = Phase1_DelayTime;
 	Phase1_Order = 0;
