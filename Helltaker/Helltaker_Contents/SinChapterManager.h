@@ -137,6 +137,8 @@ protected:
 private:
 	void IntroStart();
 	void Intro(float _DeltaTime);
+	void TransitionCheck();
+	void Phase1_Check();
 
 	void Phase1(float _DeltaTime);
 	void Phase1_SmallChainUpdate(float _DeltaTime);
@@ -194,6 +196,8 @@ private:
 	Sin_Hero* PlayerHero = nullptr;
 	static const float HeroDelayTime;
 	float HeroDelayTimeCount = HeroDelayTime;
+
+	int Intro_Order = -1;
 
 	static const FVector SmallChainStartPos;
 	static const float Phase1_DelayTime;

@@ -458,20 +458,49 @@ void SinChapterManager::HitChainDeathUpdate(SinTile _Point)
 
 void SinChapterManager::IntroStart()
 {
-	UpPiston->StateChange(ESinPistonState::Move);
+	TransitionActor->GetImageRenderer()->ActiveOn();
+	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
+	PlayerHero->SeeDirChange(EActorSeeDir::Right);
+	PlayerHero->StateChange(EHeroState::Idle);
+	UEngineSound::SoundPlay("transition_off.wav");
+	Intro_Order = 0;
 }
 
 void SinChapterManager::Intro(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
 
-	if (ESinSkullState::Move == SinSkull->GetState() &&
-		ESinPistonState::Move == UpPiston->GetState())
+	switch (Intro_Order)
+	{
+	case 0:
+		TransitionCheck();
+		break;
+	case 1:
+		Phase1_Check();
+		break;
+	}
+
+	// Debug
+	if (UEngineInput::IsDown(VK_SPACE))
 	{
 		M_StateChange(ESinState::Phase1);
 	}
+}
 
-	if (UEngineInput::IsDown(VK_SPACE))
+void SinChapterManager::TransitionCheck()
+{
+	if (true == TransitionActor->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		TransitionActor->GetImageRenderer()->ActiveOff();
+		UpPiston->StateChange(ESinPistonState::Move);
+		++Intro_Order;
+	}
+}
+
+void SinChapterManager::Phase1_Check()
+{
+	if (ESinSkullState::Move == SinSkull->GetState() &&
+		ESinPistonState::Move == UpPiston->GetState())
 	{
 		M_StateChange(ESinState::Phase1);
 	}
