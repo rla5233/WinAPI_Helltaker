@@ -67,7 +67,7 @@ void HitChain::Idle(float _DeltaTime)
 
 void HitChain::FadeOutCheck(float _DeltaTime)
 {
-	if (false == FadeOutUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.7f, 0.3f))
+	if (false == FadeOutUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.6f, 0.3f))
 	{
 		FadeInOn();
 		++IdleOrder;
@@ -76,7 +76,7 @@ void HitChain::FadeOutCheck(float _DeltaTime)
 
 void HitChain::FadeInCheck(float _DeltaTime)
 {
-	if (false == FadeInUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.3f, 0.7f))
+	if (false == FadeInUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.3f, 0.6f))
 	{
 		FadeOutOn();
 		--IdleOrder;
@@ -98,6 +98,7 @@ void HitChain::Move(float _DeltaTime)
 
 void HitChain::HitStart()
 {
+	ImageRenderer->SetAlpha(1.0f);
 	--HitCount;
 	HitDelayTimeCount = HitDelayTime;
 	CanHit = false;
@@ -143,12 +144,16 @@ void HitChain::DeathStart()
 		break;
 	}
 
-	GetSinChapter()->HitChainDeathUpdate(CurPoint);
+	FadeOutOn();
 }
 
 void HitChain::Death(float _DeltaTime)
 {
-	Destroy();
+	if (false == FadeOutUpdate(ImageRenderer, _DeltaTime, 1.5f))
+	{
+		GetSinChapter()->HitChainDeathUpdate(CurPoint);
+		Destroy();
+	}
 }
 
 void HitChain::Tick(float _DeltaTime)
