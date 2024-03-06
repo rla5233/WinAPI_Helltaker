@@ -16,11 +16,23 @@ public:
 	HitChainHp& operator=(const HitChainHp& _Other) = delete;
 	HitChainHp& operator=(HitChainHp&& _Other) noexcept = delete;
 
-
+	void StateChange(ESinHitChainHpState _State);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+private:
+	void IdleStart();
+	void Idle(float _DeltaTime);
+	
+	void HitStart();
+	void Hit(float _DeltaTime);
+	
+	void DeathStart();
+	void Death(float _DeltaTime);
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* L_ImageRenderer = nullptr;
@@ -28,4 +40,5 @@ private:
 	UImageRenderer* Hp_Renderer = nullptr;
 	UImageRenderer* TextRenderer = nullptr;
 
+	ESinHitChainHpState State = ESinHitChainHpState::None;
 };
