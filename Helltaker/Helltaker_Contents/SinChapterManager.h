@@ -111,6 +111,11 @@ public:
 		return PlayerHero;
 	}
 
+	HitChainHp* GetHitChainHp() const
+	{
+		return SinHitChainHp;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);

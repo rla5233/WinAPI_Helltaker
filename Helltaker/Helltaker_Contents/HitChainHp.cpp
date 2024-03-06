@@ -28,6 +28,7 @@ void HitChainHp::BeginPlay()
 	R_ImageRenderer->SetTransform({ { ImgPosX, 0.0f }, WinScale * ImageScale });
 	Hp_Renderer->SetImage("White_Bar.png");
 	Hp_Renderer->SetTransform({ { 0.0f, -2.0f }, WinScale * HpScale });
+	Hp_Renderer->SetSortType(EImageSortType::Left);
 }
 
 void HitChainHp::IdleStart()
@@ -38,11 +39,14 @@ void HitChainHp::Idle(float _DeltaTime)
 
 void HitChainHp::HitStart()
 {
-
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Hp_Renderer->AddScale({ WinScale.X * (-HpScale.X / TotalHitCount), 0.0f });
 }
 
 void HitChainHp::Hit(float _DeltaTime)
-{}
+{
+	StateChange(ESinHitChainHpState::Idle);
+}
 
 void HitChainHp::DeathStart()
 {}

@@ -1,6 +1,7 @@
 #include "HitChain.h"
 
 #include "SinChapterManager.h"
+#include "HitChainHp.h"
 
 const FVector HitChain::Scale = { 0.2656f, 0.898f };
 bool HitChain::IsLoad = false;
@@ -98,6 +99,7 @@ void HitChain::Move(float _DeltaTime)
 
 void HitChain::HitStart()
 {
+	GetSinChapter()->GetHitChainHp()->StateChange(ESinHitChainHpState::Hit);
 	ImageRenderer->SetAlpha(1.0f);
 	--HitCount;
 	HitDelayTimeCount = HitDelayTime;
