@@ -58,6 +58,9 @@ private:
 	int SinChapterNum = -1;
 	static const FVector WheelScale;
 	bool IsWheelTurn = false;
+	float TurnTime = 0.0f;
+	float StartAngle = 0.0f;
+	float TargetAngle = 0.0f;
 
 	UImageRenderer* EyeRenderer = nullptr;
 	static const FVector EyeScale;
@@ -68,7 +71,6 @@ private:
 	std::vector<UImageRenderer*> FireRenderer;
 	static const FVector FireScale;
 	static const float FireInter;
-
 
 	ESinHeroLifeState State = ESinHeroLifeState::None;
 	static bool IsLoad;

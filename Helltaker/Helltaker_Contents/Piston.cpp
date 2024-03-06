@@ -1,7 +1,8 @@
 #include "Piston.h"
 
-#include "Skull.h"
 #include "SinChapterManager.h"
+#include "HeroLife.h"
+#include "Skull.h"
 
 bool Piston::IsLoad = false;
 
@@ -152,6 +153,7 @@ void Piston::Move2(float _DeltaTime)
 
 			FVector MoveDistance = GetLerfTargetPos() - GetLerfStartPos();
 			GetSinChapter()->GetSkull()->StateChange(ESinSkullState::Move, MoveDistance);
+			GetSinChapter()->GetSinHeroLife()->WheelTurnOn();
 
 			++MoveOrder;
 			return;

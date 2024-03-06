@@ -149,8 +149,16 @@ void HeroLife::SetWheel()
 	WheelRenderer->SetImage("Sin_Wheel.png");
 	WheelRenderer->SetTransform({ { 0.0f, PosY }, WinScale * WheelScale });
 
-	float Angle = (360.0f / -5.0f) * (SinChapterNum - 1.0f) + 1.0f;
-	WheelRenderer->SetAngle(Angle);
+	StartAngle = (360.0f / -5.0f) * (SinChapterNum - 1.0f);
+	TargetAngle = (360.0f / -5.0f) * SinChapterNum;
+	TurnTime = 0.0f;
+	
+	if (1 == SinChapterNum)
+	{
+		StartAngle = 1.0f;
+	}
+	
+	WheelRenderer->SetAngle(StartAngle);
 }
 
 void HeroLife::IdleStart()
@@ -169,7 +177,18 @@ void HeroLife::Idle(float _DeltaTime)
 
 void HeroLife::WheelTurnUpdate(float _DeltaTime)
 {
+	if (true == IsWheelTurn)
+	{
+		TurnTime += _DeltaTime * 5.0f;
+		float NextAngle = ContentsHelper::LerpClampf(StartAngle, TargetAngle, TurnTime);
+		WheelRenderer->SetAngle(NextAngle);
 
+		if (1.0f <= TurnTime)
+		{
+			TurnTime = 0.0f;
+			IsWheelTurn = false;
+		}
+	}
 }
 
 void HeroLife::HeroHitStart()
