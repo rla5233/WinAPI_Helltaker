@@ -16,6 +16,7 @@ class Piston;
 class Skull;
 class Gear;
 class Pit;
+class UI;
 
 // Ό³Έν :
 class SinChapterManager : public ULevel
@@ -179,11 +180,11 @@ private:
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
 
-	static const float StartPosY;
 	static const float MaxSpeedY;
 	float SpeedY = 50.0f;
-	
 	float MoveYSum = 0;
+
+	static const float StartPosY;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

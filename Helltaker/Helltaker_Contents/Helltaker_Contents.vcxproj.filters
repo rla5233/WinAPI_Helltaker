@@ -145,6 +145,9 @@
     <ClInclude Include="Skull.h">
       <Filter>Object\Actor\Sin\Component</Filter>
     </ClInclude>
+    <ClInclude Include="HitChainHp.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -286,6 +289,9 @@
       <Filter>Object\Actor\Sin\Component</Filter>
     </ClCompile>
     <ClCompile Include="Skull.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="HitChainHp.cpp">
       <Filter>Object\Actor\Sin\Component</Filter>
     </ClCompile>
   </ItemGroup>

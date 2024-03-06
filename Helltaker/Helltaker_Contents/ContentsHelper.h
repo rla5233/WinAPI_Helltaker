@@ -373,6 +373,14 @@ enum class ESinHitChainState
 	Death
 };
 
+enum class ESinHitChainHpState
+{
+	None,
+	Idle,
+	Hit,
+	Death
+};
+
 enum class ESinHitChainType
 {
 	None,

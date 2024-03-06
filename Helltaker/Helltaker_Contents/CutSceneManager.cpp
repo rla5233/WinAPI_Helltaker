@@ -38,6 +38,8 @@ void CutSceneManager::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Hell.png");
 		ContentsHelper::LoadImg("UI", "MenuBar_UnSelected.png");
 		ContentsHelper::LoadImg("UI", "MenuBar_Selected.png");
+		ContentsHelper::LoadImg("UI", "Small_LButton.png");
+		ContentsHelper::LoadImg("UI", "Small_RButton.png");
 		ContentsHelper::LoadFolder("UI", "Booper");
 		ContentsHelper::LoadFolder("Scene\\Dialogue", "Death");
 		ContentsHelper::LoadFolder("Scene\\Dialogue", "Success");
