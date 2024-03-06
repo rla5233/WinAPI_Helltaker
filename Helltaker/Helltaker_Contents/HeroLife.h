@@ -30,6 +30,7 @@ private:
 	void SetEye();
 	void SetPyre();
 	void SetFire();
+	void SetWheel();
 
 	void HeroHitStart();
 	void HeroHit(float _DeltaTime);
@@ -41,6 +42,9 @@ private:
 	UImageRenderer* R_PanelRenderer = nullptr;
 	static const FVector PanelScale;
 
+	UImageRenderer* WheelRenderer = nullptr;
+	static const FVector WheelScale;
+
 	UImageRenderer* EyeRenderer = nullptr;
 	static const FVector EyeScale;
 	
@@ -50,6 +54,7 @@ private:
 	std::vector<UImageRenderer*> FireRenderer;
 	static const FVector FireScale;
 	static const float FireInter;
+
 
 	ESinHeroLifeState State = ESinHeroLifeState::None;
 	static bool IsLoad;
