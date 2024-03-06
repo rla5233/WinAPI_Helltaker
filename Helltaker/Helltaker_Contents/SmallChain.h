@@ -16,6 +16,11 @@ public:
 	SmallChain& operator=(const SmallChain& _Other) = delete;
 	SmallChain& operator=(SmallChain&& _Other) noexcept = delete;
 
+	void SetPhase(ESinPhase _Phase)
+	{
+		Phase = _Phase;
+	};
+
 	void StateChange(ESinSmallChainState _State);
 	void CreateImageRenderer(ESinSmallChainType _Type);
 
@@ -60,8 +65,8 @@ private:
 	static const float HitTime;
 	float HitTimeCount = 0.0f;
 
+	ESinPhase Phase = ESinPhase::None;
 	ESinSmallChainType Type = ESinSmallChainType::None;
-	ESinSmallChainPhase Phase = ESinSmallChainPhase::None;
 	ESinSmallChainState State = ESinSmallChainState::None;
 	static bool IsLoad;
 };

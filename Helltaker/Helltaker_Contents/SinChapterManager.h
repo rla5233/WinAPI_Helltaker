@@ -58,8 +58,12 @@ public:
 	void M_SpawnHero();
 	void M_SpawnDemon();
 
-	void M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex);
-	void M_SetSmallChainVecSize(int _Size, int _PhaseNum);
+	void M_CreateSmallChain(
+		ESinSmallChainType _Type,
+		ESinPhase _Phase,
+		int _PosIndex, 
+		int _VecIndex);
+	void M_SetSmallChainVecSize(int _Size, ESinPhase _Phase);
 
 	void M_CreateHitChain(ESinHitChainType _Type, int _PointY);
 	void M_CreateHitChainHp(std::string_view _Name = " ");

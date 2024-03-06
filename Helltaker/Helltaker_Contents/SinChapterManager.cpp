@@ -337,7 +337,11 @@ void SinChapterManager::M_SpawnDemon()
 	Judge->StateChange(EDemonState::Sin_Appear);
 }
 
-void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex)
+void SinChapterManager::M_CreateSmallChain(
+	ESinSmallChainType _Type,
+	ESinPhase _Phase,
+	int _PosIndex, 
+	int _VecIndex)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector StartPos = WinScale * SmallChainStartPos;
@@ -356,29 +360,30 @@ void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseN
 		break;
 	}
 
+	NewSmallChain->SetPhase(_Phase);
 	NewSmallChain->SetName("SmallChain");
 	NewSmallChain->CreateImageRenderer(_Type);
 	NewSmallChain->StateChange(ESinSmallChainState::Idle);
 
-	switch (_PhaseNum)
+	switch (_Phase)
 	{
-	case 1:
+	case ESinPhase::Phase1:
 		Phase1_SmallChain[_VecIndex].push_back(NewSmallChain);
 		break;
-	case 2:
+	case ESinPhase::Phase2:
 		Phase2_SmallChain[_VecIndex].push_back(NewSmallChain);
 		break;
 	}
 }
 
-void SinChapterManager::M_SetSmallChainVecSize(int _Size, int _PhaseNum)
+void SinChapterManager::M_SetSmallChainVecSize(int _Size, ESinPhase _Phase)
 {
-	switch (_PhaseNum)
+	switch (_Phase)
 	{
-	case 1:
+	case ESinPhase::Phase1:
 		Phase1_SmallChain.resize(_Size);
 		break;
-	case 2:
+	case ESinPhase::Phase2:
 		Phase2_SmallChain.resize(_Size);
 		break;
 	}

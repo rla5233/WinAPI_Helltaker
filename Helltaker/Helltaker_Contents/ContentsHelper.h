@@ -363,7 +363,7 @@ enum class ESinSmallChainType
 	Hor
 };
 
-enum class ESinSmallChainPhase
+enum class ESinPhase
 {
 	None,
 	Phase1,
