@@ -295,7 +295,12 @@ void SinChapterManager::M_SpawnHero()
 
 void SinChapterManager::M_SpawnDemon()
 {
-
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosY = WinScale.Y * 0.12f;
+	Judge = SpawnActor<Sin_Demon>(static_cast<int>(SinUpdateOrder::Top));
+	Judge->SetActorLocation({ WinScale.hX(), PosY });
+	Judge->SetDemon("Judge", { { 0.0f, 0.0f }, WinScale * Sin_Demon::GetIdleScale() });
+	Judge->StateChange(EDemonState::Sin_Appear);
 }
 
 void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex)
@@ -662,13 +667,7 @@ void SinChapterManager::HitChainCheck()
 {
 	if (true == AllHitChain.empty())
 	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		float PosY = WinScale.Y * 0.12f;
-		Judge = SpawnActor<Sin_Demon>(static_cast<int>(SinUpdateOrder::Top));
-		Judge->SetActorLocation({ WinScale.hX(), PosY });
-		Judge->SetDemon("Judge", { { 0.0f, 0.0f }, WinScale * Sin_Demon::GetIdleScale() });
-		Judge->StateChange(EDemonState::Sin_Appear);
-		
+		M_SpawnDemon();
 		CutSceneDelayTimeCount = CutSceneDelayTime;
 		++Phase2_Order;
 	}
