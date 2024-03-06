@@ -18,7 +18,7 @@ public:
 
 	void SetTotalHitCount(int _Count)
 	{
-		TotalHitCount = _Count;
+		TotalHitCount = _Count * 6;
 	}
 
 	UImageRenderer* GetTextRenderer() const
