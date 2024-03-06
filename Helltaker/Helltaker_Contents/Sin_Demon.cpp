@@ -48,9 +48,9 @@ void Sin_Demon::Sin_AppearStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->CreateAnimation("Judge_Appear", "Judge_Jump", 0, 8, IdleInter, false);
 	ImageRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * AppearScale });
+	ImageRenderer->AnimationReset();
+	ImageRenderer->ChangeAnimation("Judge_Appear");
 }
 
 void Sin_Demon::Sin_Appear(float _DeltaTime)
-{
-	int a = 0;
-}
+{}

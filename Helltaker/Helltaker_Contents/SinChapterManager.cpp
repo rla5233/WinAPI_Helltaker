@@ -661,10 +661,10 @@ void SinChapterManager::HitChainCheck()
 	if (true == AllHitChain.empty())
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		float PosY = WinScale.Y * 0.3f;
+		float PosY = WinScale.Y * 0.12f;
 		Judge = SpawnActor<Sin_Demon>(static_cast<int>(SinUpdateOrder::Top));
 		Judge->SetActorLocation({ WinScale.hX(), PosY });
-		//Judge->SetDemon("Judge")
+		Judge->SetDemon("Judge", { { 0.0f, 0.0f }, WinScale * Sin_Demon::GetIdleScale() });
 		Judge->StateChange(EDemonState::Sin_Appear);
 		
 		++Phase2_Order;
@@ -673,7 +673,10 @@ void SinChapterManager::HitChainCheck()
 
 void SinChapterManager::JudgeAppear()
 {
-
+	if (true == Judge->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		
+	}
 }
 
 void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)

@@ -16,6 +16,11 @@ public:
 	Sin_Demon& operator=(const Sin_Demon& _Other) = delete;
 	Sin_Demon& operator=(Sin_Demon&& _Other) noexcept = delete;
 
+	static const FVector& GetIdleScale()
+	{
+		return Scale;
+	}
+	
 	void SetDemon(std::string_view _Name, const FTransform& _FTransform) override;
 
 protected:
