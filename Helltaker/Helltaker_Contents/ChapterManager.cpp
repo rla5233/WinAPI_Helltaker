@@ -372,9 +372,14 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
 
-	AllChapterDemon.clear();
+	for (size_t i = 0; i < TileInfoVec.size(); i++)
+	{
+		TileInfoVec[i].clear();
+	}
 	TileInfoVec.clear();
+
 	AllThorn.clear();
+	AllChapterDemon.clear();
 
 	for (std::pair<const __int64, AActor*>& Actor : AllMapActors)
 	{

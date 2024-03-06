@@ -64,8 +64,8 @@ void Gear::WorkingStart()
 	L_ImageRenderer->AnimationReset();
 	L_ImageRenderer->ChangeAnimation("L_WorkingSlow");
 
-	R_ImageRenderer->CreateAnimation("R_Working", "Sin_RGear", 0, 14, WorkingInter, true);
-	R_ImageRenderer->CreateAnimation("R_WorkingSlow", "Sin_RGear", 0, 14, WorkingSlowInter, true);
+	R_ImageRenderer->CreateAnimation("R_Working", "Sin_RGear", 0, 14, WorkingInter, false);
+	R_ImageRenderer->CreateAnimation("R_WorkingSlow", "Sin_RGear", 0, 14, WorkingSlowInter, false);
 	R_ImageRenderer->AnimationReset();
 	R_ImageRenderer->ChangeAnimation("R_WorkingSlow");
 

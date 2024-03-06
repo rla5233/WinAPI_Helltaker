@@ -14,13 +14,16 @@
 #include "Bridge.h"
 #include "Piston.h"
 #include "Skull.h"
+#include "Scene.h"
 #include "Gear.h"
 #include "Pit.h"
 
 #include <EngineCore/EngineDebug.h>
+#include <EnginePlatform/EngineSound.h>
 
 bool SinChapterManager::IsLoad = false;
 
+const float SinChapterManager::TransitionInter = 0.0435f;
 const float SinChapterManager::HeroDelayTime = 0.13f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
@@ -53,8 +56,37 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("UI", "Small_LButton.png");
 		ContentsHelper::LoadImg("UI", "Small_RButton.png");
 
+		ContentsHelper::LoadFolder("Scene", "Transition");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "transition_on.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
+
 		IsLoad = true;
 	}
+}
+
+void SinChapterManager::CreateTransition()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	TransitionActor = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Transition));
+	TransitionActor->SetName("Transition");
+	TransitionActor->CreateImageRenderer(RenderOrder::Transition);
+	TransitionActor->SetActorLocation(WinScale.Half2D());
+	TransitionActor->GetImageRenderer()->SetTransform({ { 0, 0 }, WinScale });
+	TransitionActor->GetImageRenderer()->SetImage("Transition");
+	TransitionActor->GetImageRenderer()->CreateAnimation("Transition", "Transition", 0, 28, TransitionInter, false);
+	TransitionActor->GetImageRenderer()->CameraEffectOff();
+	TransitionActor->GetImageRenderer()->ActiveOff();
+	
+	AllMapRenderActors.push_back(TransitionActor);
+}
+
+void SinChapterManager::TransitionOn()
+{
+	TransitionActor->GetImageRenderer()->ActiveOn();
+	TransitionActor->GetImageRenderer()->AnimationReset();
+	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");
+	UEngineSound::SoundPlay("transition_on.wav");
 }
 
 void SinChapterManager::M_CreateSinMap()
@@ -629,11 +661,95 @@ void SinChapterManager::CutScene(float _DeltaTime)
 void SinChapterManager::LevelStart(ULevel* _PrevLevel)
 {
 	ULevel::LevelStart(_PrevLevel);
+
+	CreateTransition();
 }
 
 void SinChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
+
+	for (size_t i = 0; i < UpThorn.size(); i++)
+	{
+		UpThorn[i].clear();
+	}
+	UpThorn.clear();
+
+	for (size_t i = 0; i < DownThorn.size(); i++)
+	{
+		DownThorn[i].clear();
+	}
+	DownThorn.clear();
+
+	SinPit.clear();
+	SinChainLink.clear();
+	SinBridge.clear();
+
+	for (AActor* Actor : AllMapRenderActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy();
+		Actor = nullptr;
+	}
+
+	for (std::pair<const __int64, HitChain*> Actor : AllHitChain)
+	{
+		if (nullptr == Actor.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor.second->Destroy();
+		Actor.second = nullptr;
+	}
+
+	for (std::list<SmallChain*>& SmallChainList : Phase1_SmallChain)
+	{
+		for (SmallChain* Actor : SmallChainList)
+		{
+			if (nullptr == Actor)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Actor->Destroy();
+			Actor = nullptr;
+		}
+	}
+
+	for (std::list<SmallChain*>& SmallChainList : Phase2_SmallChain)
+	{
+		for (SmallChain* Actor : SmallChainList)
+		{
+			if (nullptr == Actor)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Actor->Destroy();
+			Actor = nullptr;
+		}
+	}
+
+
+	AllMapRenderActors.clear();
+	AllHitChain.clear();
+
+	for (size_t i = 0; i < Phase1_SmallChain.size(); i++)
+	{
+		Phase1_SmallChain[i].clear();
+	}
+	Phase1_SmallChain.clear();
+
+	for (size_t i = 0; i < Phase2_SmallChain.size(); i++)
+	{
+		Phase2_SmallChain[i].clear();
+	}
+	Phase2_SmallChain.clear();
 }
 
 void SinChapterManager::Tick(float _DeltaTime)

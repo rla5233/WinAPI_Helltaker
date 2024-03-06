@@ -163,8 +163,10 @@ private:
 	void M_StateUpdate(float _DeltaTime);
 
 private:
-	std::vector<std::vector<TileInfo>> TileInfoVec;
+	// Manager
 	std::map<__int64, AActor*> AllMapActors;
+
+	std::vector<std::vector<TileInfo>> TileInfoVec;
 	std::list<Thorn*> AllThorn;
 	std::list<Demon*> AllChapterDemon;
 

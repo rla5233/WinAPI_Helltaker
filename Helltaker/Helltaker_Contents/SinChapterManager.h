@@ -16,6 +16,7 @@ class HeroLife;
 class Bridge;
 class Piston;
 class Skull;
+class Scene;
 class Gear;
 class Pit;
 class UI;
@@ -34,6 +35,9 @@ public:
 	SinChapterManager& operator=(const SinChapterManager& _Other) = delete;
 	SinChapterManager& operator=(SinChapterManager&& _Other) noexcept = delete;
 
+	void CreateTransition();
+	void TransitionOn();
+	
 	void M_CreateSinMap();
 
 	void M_CreateSinBG(std::string_view _Name);
@@ -164,8 +168,12 @@ private:
 	void DebugMode();
 
 private:
-	std::list<AActor*> AllMapRenderActors; //
-	std::map<__int64, HitChain*> AllHitChain; //
+	// Manager
+	std::list<AActor*> AllMapRenderActors;
+	std::map<__int64, HitChain*> AllHitChain;
+	std::vector<std::list<SmallChain*>> Phase1_SmallChain;
+	std::vector<std::list<SmallChain*>> Phase2_SmallChain;
+
 	HitChainHp* SinHitChainHp = nullptr;
 
 	std::vector<Pit*> SinPit;
@@ -188,13 +196,11 @@ private:
 	float HeroDelayTimeCount = HeroDelayTime;
 
 	static const FVector SmallChainStartPos;
-	std::vector<std::list<SmallChain*>> Phase1_SmallChain; //
 	static const float Phase1_DelayTime;
 	int Phase1_SmallChainVecSize = -1;
 	int Phase1_Order = -1;
 	float AccY = 0.0f;
 	
-	std::vector<std::list<SmallChain*>> Phase2_SmallChain; //
 	int Phase2_SmallChainVecSize = -1;
 	int Phase2_Order = -1;
 
@@ -211,6 +217,9 @@ private:
 	static const float StartPosY;
 
 	Sin_Demon* Judge = nullptr;
+
+	Scene* TransitionActor = nullptr;
+	static const float TransitionInter;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
