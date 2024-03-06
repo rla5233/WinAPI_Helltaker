@@ -16,6 +16,8 @@ void HitChainHp::BeginPlay()
 	R_ImageRenderer = CreateImageRenderer(SinRenderOrder::Top);
 	Hp_Renderer = CreateImageRenderer(SinRenderOrder::Top);
 	TextRenderer = CreateImageRenderer(SinRenderOrder::Top);
+
+
 }
 
 void HitChainHp::IdleStart()

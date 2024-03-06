@@ -43,6 +43,7 @@ void SinChapterManager::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
+		ContentsHelper::LoadImg("UI", "White_Bar.png");
 
 		IsLoad = true;
 	}
