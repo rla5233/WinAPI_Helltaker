@@ -301,8 +301,7 @@ enum class ESinPitState
 {
 	None,
 	Idle,
-	Move,
-	Stop,
+	Move
 };
 
 enum class ESinGearState
@@ -325,8 +324,7 @@ enum class ESinBridgeState
 {
 	None,
 	Idle,
-	Move,
-	Stop,
+	Move
 };
 
 enum class ESinSkullState

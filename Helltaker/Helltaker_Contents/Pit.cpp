@@ -40,6 +40,8 @@ void Pit::IdleStart()
 
 	R_ImageRenderer->SetImage("Sin_RPit.png");
 	R_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
+
+	MoveOff();
 }
 
 void Pit::Idle(float _DeltaTime)
@@ -64,15 +66,6 @@ void Pit::Move(float _DeltaTime)
 	MoveY_Update(GetSinChapter()->M_GetSpeedY() * 0.3f, _DeltaTime);
 }
 
-void Pit::StopStart()
-{
-}
-
-void Pit::Stop(float _DeltaTime)
-{
-	LerfMoveUpdate(_DeltaTime);
-}
-
 void Pit::Tick(float _DeltaTime)
 {
 	SinMoveActor::Tick(_DeltaTime);
@@ -90,9 +83,6 @@ void Pit::StateUpdate(float _DeltaTime)
 	case ESinPitState::Move:
 		Move(_DeltaTime);
 		break;
-	case ESinPitState::Stop:
-		Stop(_DeltaTime);
-		break;
 	}
 }
 
@@ -107,9 +97,6 @@ void Pit::StateChange(ESinPitState _State)
 			break;
 		case ESinPitState::Move:
 			MoveStart();
-			break;
-		case ESinPitState::Stop:
-			StopStart();
 			break;
 		}
 	}

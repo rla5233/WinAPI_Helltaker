@@ -645,6 +645,16 @@ void SinChapterManager::AllThornMoveOn()
 
 void SinChapterManager::Phase2_Start()
 {
+	for (int i = 0; i < SinPit.size(); i++)
+	{
+		SinPit[i]->StateChange(ESinPitState::Idle);
+	}
+
+	for (int i = 0; i < SinBridge.size(); i++)
+	{
+		SinBridge[i]->StateChange(ESinBridgeState::Idle);
+	}
+
 	Phase2_Order = 0;
 }
 

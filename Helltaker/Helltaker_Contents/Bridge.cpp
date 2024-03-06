@@ -34,6 +34,8 @@ void Bridge::IdleStart()
 
 	ImageRenderer->SetImage("Sin_Bridge.png");
 	ImageRenderer->SetTransform({ { 0.0f, 0.0f },  WinScale * Scale });
+
+	MoveOff();
 }
 
 void Bridge::Idle(float _DeltaTime)
@@ -73,15 +75,6 @@ void Bridge::MoveY_Update(float _DeltaTime)
 	}
 }
 
-void Bridge::StopStart()
-{
-}
-
-void Bridge::Stop(float _DeltaTime)
-{
-	LerfMoveUpdate(_DeltaTime);
-}
-
 void Bridge::Tick(float _DeltaTime)
 {
 	SinMoveActor::Tick(_DeltaTime);
@@ -99,9 +92,6 @@ void Bridge::StateUpdate(float _DeltaTime)
 	case ESinBridgeState::Move:
 		Move(_DeltaTime);
 		break;
-	case ESinBridgeState::Stop:
-		Stop(_DeltaTime);
-		break;
 	}
 }
 
@@ -116,9 +106,6 @@ void Bridge::StateChange(ESinBridgeState _State)
 			break;
 		case ESinBridgeState::Move:
 			MoveStart();
-			break;
-		case ESinBridgeState::Stop:
-			StopStart();
 			break;
 		}
 	}
