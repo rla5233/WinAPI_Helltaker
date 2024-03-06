@@ -40,6 +40,8 @@ void ChainLink::IdleStart()
 
 	R_ImageRenderer->SetImage("Sin_RChainLink.png");
 	R_ImageRenderer->SetTransform({ { PosX, 0.0f }, WinScale * Scale });
+
+	MoveOff();
 }
 
 void ChainLink::Idle(float _DeltaTime)

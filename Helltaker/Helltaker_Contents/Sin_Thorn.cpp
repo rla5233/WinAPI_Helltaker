@@ -73,8 +73,6 @@ void Sin_Thorn::Move(float _DeltaTime)
 	{
 		StateChange(EThornState::Down);
 	}
-
-
 }
 
 void Sin_Thorn::MoveUpdate(float _DeltaTime)

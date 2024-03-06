@@ -95,7 +95,7 @@ public:
 
 	size_t GetSinChainLinkSize() const
 	{
-		return SinChain.size();
+		return SinChainLink.size();
 	}
 
 	Skull* GetSkull() const
@@ -169,7 +169,7 @@ private:
 	Piston* UpPiston = nullptr;
 	Piston* DownPiston = nullptr;
 	Skull* SinSkull = nullptr;
-	std::vector<ChainLink*> SinChain;
+	std::vector<ChainLink*> SinChainLink;
 
 	std::vector<Bridge*> SinBridge;
 	int BridgeResetCount = 0;
