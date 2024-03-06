@@ -26,16 +26,14 @@ private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
-	void ActivateStart();
-	void Activate(float _DeltaTime);
-
 	void WorkingStart();
 	void Working(float _DeltaTime);
 	void Working1();
-	void Working2();
 
 	void StopStart();
 	void Stop(float _DeltaTime);
+	void Stop1();
+	void Stop2();
 
 	void StateUpdate(float _DeltaTime);
 
@@ -44,8 +42,8 @@ private:
 	UImageRenderer* R_ImageRenderer = nullptr;
 	static const FVector Scale;
 	static const float WorkingInter;
-	static const float WorkingSlowInter;
 	int WorkOrder = -1;
+	int StopOrder = -1;
 
 	ESinGearState State = ESinGearState::None;
 	static bool IsLoad;

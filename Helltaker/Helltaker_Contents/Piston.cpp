@@ -7,7 +7,8 @@ bool Piston::IsLoad = false;
 
 const FVector Piston::Scale = { 0.125f, 0.74f };
 const float Piston::TurnInter = 0.02f;
-const float Piston::TurnDelayTime = 0.1f;
+const float Piston::TurnDelayTime = 0.15f;
+const float Piston::Move2DelayTime = 0.15f;
 
 Piston::Piston()
 {
@@ -82,10 +83,10 @@ void Piston::MoveStart()
 	switch (Type)
 	{
 	case ESinPistonType::Up:
-		TargetPos = { CurPos.X, WinScale.Y * 0.2f };
+		TargetPos = { CurPos.X, WinScale.Y * 0.15f };
 		break;
 	case ESinPistonType::Down:
-		TargetPos = { CurPos.X, WinScale.Y * 0.98f };
+		TargetPos = { CurPos.X, WinScale.Y * 1.03f };
 		break;
 	}
 	SetLerfTargetPos(TargetPos);
@@ -128,6 +129,7 @@ void Piston::Move1(float _DeltaTime)
 			RB_ImageRenderer->AnimationReset();
 			RB_ImageRenderer->ChangeAnimation("RB_Turn");
 			
+			TimeCount = Move2DelayTime;
 			++MoveOrder;
 			return;
 		}
@@ -143,13 +145,19 @@ void Piston::Move2(float _DeltaTime)
 		true == RT_ImageRenderer->IsCurAnimationEnd() &&
 		true == RB_ImageRenderer->IsCurAnimationEnd())
 	{
-		SwitchLerfPos();
-		LerfMoveOn();
+		if (0.0f >= TimeCount)
+		{
+			SwitchLerfPos();
+			LerfMoveOn();
 
-		FVector MoveDistance = GetLerfTargetPos() - GetLerfStartPos();
-		GetSinChapter()->GetSkull()->StateChange(ESinSkullState::Move, MoveDistance);
+			FVector MoveDistance = GetLerfTargetPos() - GetLerfStartPos();
+			GetSinChapter()->GetSkull()->StateChange(ESinSkullState::Move, MoveDistance);
 
-		++MoveOrder;
+			++MoveOrder;
+			return;
+		}
+
+		TimeCount -= _DeltaTime;
 	}
 }
 	

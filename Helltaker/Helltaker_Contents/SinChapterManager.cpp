@@ -28,8 +28,8 @@ const float SinChapterManager::HeroDelayTime = 0.13f;
 
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
+const float SinChapterManager::IntroDelayTime = 0.9f;
 const float SinChapterManager::Phase1_DelayTime = 0.5f;
-
 const float SinChapterManager::CutSceneDelayTime = 0.5f;
 
 const float SinChapterManager::StartPosY = 0.388f;
@@ -456,6 +456,8 @@ void SinChapterManager::IntroStart()
 	PlayerHero->SeeDirChange(EActorSeeDir::Right);
 	PlayerHero->StateChange(EHeroState::Idle);
 	UEngineSound::SoundPlay("transition_off.wav");
+	
+	TimeCount = IntroDelayTime;
 	Intro_Order = 0;
 }
 
@@ -466,7 +468,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 	switch (Intro_Order)
 	{
 	case 0:
-		TransitionCheck();
+		TransitionCheck(_DeltaTime);
 		break;
 	case 1:
 		Phase1_Check();
@@ -480,14 +482,22 @@ void SinChapterManager::Intro(float _DeltaTime)
 	}
 }
 
-void SinChapterManager::TransitionCheck()
+void SinChapterManager::TransitionCheck(float _DeltaTime)
 {
 	if (true == TransitionActor->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		ResetCheck();
 		TransitionActor->GetImageRenderer()->ActiveOff();
-		UpPiston->StateChange(ESinPistonState::Move);
-		++Intro_Order;
+		ResetCheck();
+
+		if (0.0f > TimeCount)
+		{
+			UpPiston->StateChange(ESinPistonState::Move);
+			++Intro_Order;
+
+			return;
+		}
+
+		TimeCount -= _DeltaTime;
 	}
 }
 
@@ -629,7 +639,8 @@ void SinChapterManager::Phase2_Start()
 	AllThornMoveOff();
 
 	DownPiston->StateChange(ESinPistonState::Move);
-	
+	SinGear->StateChange(ESinGearState::Stop);
+
 	PlayerHero->MoveY_Off();
 	PlayerHero->SinHero_StateChange(ESinHeroState::Idle);
 
@@ -665,7 +676,7 @@ void SinChapterManager::HitChainCheck()
 	if (true == AllHitChain.empty())
 	{
 		M_SpawnDemon();
-		CutSceneDelayTimeCount = CutSceneDelayTime;
+		TimeCount = CutSceneDelayTime;
 		++Phase2_Order;
 	}
 }
@@ -674,13 +685,13 @@ void SinChapterManager::JudgeAppear(float _DeltaTime)
 {
 	if (true == Judge->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		if (0.0f > CutSceneDelayTimeCount)
+		if (0.0f > TimeCount)
 		{
 			M_StateChange(ESinState::CutScene);
 			return;
 		}
 
-		CutSceneDelayTimeCount -= _DeltaTime;
+		TimeCount -= _DeltaTime;
 	}
 }
 

@@ -146,7 +146,7 @@ protected:
 private:
 	void IntroStart();
 	void Intro(float _DeltaTime);
-	void TransitionCheck();
+	void TransitionCheck(float _DeltaTime);
 	void Phase1_Check();
 
 	void Phase1(float _DeltaTime);
@@ -209,6 +209,7 @@ private:
 	static const float HeroDelayTime;
 	float HeroDelayTimeCount = HeroDelayTime;
 
+	static const float IntroDelayTime;
 	int Intro_Order = -1;
 
 	static const FVector SmallChainStartPos;
@@ -224,7 +225,7 @@ private:
 	int PhaseSmallChainVec_Index = -1;
 
 	static const float CutSceneDelayTime;
-	float CutSceneDelayTimeCount = 0.0f;
+	float TimeCount = 0.0f;
 
 	static const float MaxSpeedY;
 	float SpeedY = 50.0f;

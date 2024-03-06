@@ -53,8 +53,10 @@ private:
 	static const FVector Scale;
 	static const float TurnInter;
 	static const float TurnDelayTime;
-	float TimeCount = 0.0f;
+	static const float Move2DelayTime;
 
+	float TimeCount = 0.0f;
+	
 	int MoveOrder = -1;
 
 	ESinPistonType Type = ESinPistonType::None;
