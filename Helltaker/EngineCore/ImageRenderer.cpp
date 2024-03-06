@@ -5,12 +5,10 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{
-}
+{}
 
 UImageRenderer::~UImageRenderer()
-{
-}
+{}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -30,6 +28,11 @@ void UImageRenderer::SetOrder(int _Order)
 
 int UAnimationInfo::Update(float _DeltaTime)
 {
+	if (false == Loop && true == IsEnd)
+	{
+		return Indexs[CurFrame];
+	}
+
 	IsEnd = false;
 	CurTime -= _DeltaTime;
 
@@ -42,9 +45,14 @@ int UAnimationInfo::Update(float _DeltaTime)
 		{
 			IsEnd = true;
 		}
+
+		if (false == Loop && Indexs.size() <= CurFrame)
+		{
+			IsEnd = true;
+		}
 	}
 
-	//  6                 6
+
 	if (Indexs.size() <= CurFrame)
 	{
 		if (1 < Indexs.size())
@@ -53,15 +61,10 @@ int UAnimationInfo::Update(float _DeltaTime)
 		}
 		if (true == Loop)
 		{
-			// //            0  1  2  3  4  5 
-			//    Indexs => 20 21 22 23 24 25
 			CurFrame = 0;
 		}
 		else
 		{
-			//                               
-			//               0  1  2  3  4  5 
-			//    Indexs => 20 21 22 23 24 25
 			--CurFrame;
 		}
 	}
@@ -78,7 +81,8 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else {
+	else
+	{
 		ImageRender(_DeltaTime);
 	}
 
