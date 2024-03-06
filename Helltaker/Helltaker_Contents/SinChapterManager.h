@@ -6,6 +6,7 @@
 
 class SinComponent;
 class SmallChain;
+class HitChainHp;
 class ChainLink;
 class Sin_Thorn;
 class Sin_Hero;
@@ -55,6 +56,7 @@ public:
 	void M_SetSmallChainVecSize(int _Size, int _PhaseNum);
 
 	void M_CreateHitChain(ESinHitChainType _Type, int _PointY);
+	void M_CreateHitChainHp(std::string_view _Name = " ");
 
 	bool HitChainHitCheck(SinTile _Point);
 	void HitChainDeathUpdate(SinTile _Point);
@@ -147,6 +149,7 @@ private:
 private:
 	std::list<AActor*> AllMapRenderActors; //
 	std::map<__int64, HitChain*> AllHitChain; //
+	HitChainHp* SinHitChainHp = nullptr;
 
 	std::vector<Pit*> SinPit;
 	Gear* SinGear = nullptr;

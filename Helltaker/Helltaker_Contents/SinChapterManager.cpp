@@ -2,6 +2,7 @@
 
 #include "SinMoveActor.h"
 #include "BackGround.h"
+#include "HitChainHp.h"
 #include "SmallChain.h"
 #include "ChainLink.h"
 #include "Sin_Thorn.h"
@@ -359,6 +360,19 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	NewHitChain->StateChange(ESinHitChainState::Idle);
 
 	AllHitChain[LocationPoint.Key] = NewHitChain;
+}
+
+void SinChapterManager::M_CreateHitChainHp(std::string_view _Name /* = " " */)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosY = WinScale.Y * 0.01f;
+	
+	SinHitChainHp = SpawnActor<HitChainHp>(static_cast<int>(SinUpdateOrder::Top));
+	SinHitChainHp->SetActorLocation({ WinScale.hX(), PosY });
+	SinHitChainHp->GetTextRenderer()->SetText(_Name);
+
+
+	AllMapRenderActors.push_back(SinHitChainHp);
 }
 
 bool SinChapterManager::HitChainHitCheck(SinTile _Point)
