@@ -374,6 +374,10 @@ void SinChapterManager::M_CreateHitChainHp(std::string_view _Name /* = " " */)
 	SinHitChainHp = SpawnActor<HitChainHp>(static_cast<int>(SinUpdateOrder::Top));
 	SinHitChainHp->SetActorLocation({ WinScale.hX(), PosY });
 	SinHitChainHp->GetTextRenderer()->SetText(_Name);
+	SinHitChainHp->GetTextRenderer()->SetTextSize(40);
+	SinHitChainHp->GetTextRenderer()->SetTextColor(Color8Bit::White);
+	SinHitChainHp->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
+	SinHitChainHp->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * (-0.06f) });
 	SinHitChainHp->SetTotalHitCount(static_cast<int>(AllHitChain.size()));
 	SinHitChainHp->StateChange(ESinHitChainHpState::Idle);
 

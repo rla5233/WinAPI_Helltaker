@@ -68,7 +68,7 @@ void SinChapter1::Phase2_Start()
 
 	M_CreateHitChain(ESinHitChainType::Left, 1);
 	M_CreateHitChain(ESinHitChainType::Right, 1);
-	M_CreateHitChainHp("Test");
+	M_CreateHitChainHp("교만의 사슬");
 }
 
 void SinChapter1::Tick(float _DeltaTime)
