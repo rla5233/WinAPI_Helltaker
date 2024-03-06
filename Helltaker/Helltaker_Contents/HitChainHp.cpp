@@ -27,7 +27,7 @@ void HitChainHp::BeginPlay()
 	R_ImageRenderer->SetImage("Small_RButton.png");
 	R_ImageRenderer->SetTransform({ { ImgPosX, 0.0f }, WinScale * ImageScale });
 	Hp_Renderer->SetImage("White_Bar.png");
-	Hp_Renderer->SetTransform({ { 0.0f, -2.0f }, WinScale * HpScale });
+	Hp_Renderer->SetTransform({ { WinScale.X * HpScale.X * (-0.5f) , -2.0f}, WinScale * HpScale});
 	Hp_Renderer->SetSortType(EImageSortType::Left);
 }
 
@@ -41,15 +41,25 @@ void HitChainHp::HitStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Hp_Renderer->AddScale({ WinScale.X * (-HpScale.X / TotalHitCount), 0.0f });
+	--HitCount;
 }
 
 void HitChainHp::Hit(float _DeltaTime)
 {
-	StateChange(ESinHitChainHpState::Idle);
+	if (HitCount > 0)
+	{
+		StateChange(ESinHitChainHpState::Idle);
+	}
+	else
+	{
+		StateChange(ESinHitChainHpState::Death);
+	}
 }
 
 void HitChainHp::DeathStart()
-{}
+{
+	AllRenderersActiveOff();
+}
 
 void HitChainHp::Death(float _DeltaTime)
 {}

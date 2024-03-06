@@ -19,6 +19,7 @@ public:
 	void SetTotalHitCount(int _Count)
 	{
 		TotalHitCount = _Count * 6;
+		HitCount = TotalHitCount;
 	}
 
 	UImageRenderer* GetTextRenderer() const
@@ -52,6 +53,7 @@ private:
 	static const FVector HpScale;
 	static const FVector ImageScale;
 
+	int HitCount = 0;
 	int TotalHitCount = 0;
 	ESinHitChainHpState State = ESinHitChainHpState::None;
 };
