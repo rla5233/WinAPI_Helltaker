@@ -21,6 +21,11 @@ public:
 		Phase = _Phase;
 	};
 
+	void SetPhase1_Idx(int _Index)
+	{
+		Phase1_Idx = _Index;
+	}
+
 	void StateChange(ESinSmallChainState _State);
 	void CreateImageRenderer(ESinSmallChainType _Type);
 
@@ -65,6 +70,7 @@ private:
 	static const float HitTime;
 	float HitTimeCount = 0.0f;
 
+	int Phase1_Idx = -1;
 	ESinPhase Phase = ESinPhase::None;
 	ESinSmallChainType Type = ESinSmallChainType::None;
 	ESinSmallChainState State = ESinSmallChainState::None;

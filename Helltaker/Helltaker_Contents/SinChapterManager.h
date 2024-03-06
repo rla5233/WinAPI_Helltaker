@@ -63,7 +63,10 @@ public:
 		ESinPhase _Phase,
 		int _PosIndex, 
 		int _VecIndex);
+
 	void M_SetSmallChainVecSize(int _Size, ESinPhase _Phase);
+
+	void M_SmallChainDeathCall(int _VecIndex);
 
 	void M_CreateHitChain(ESinHitChainType _Type, int _PointY);
 	void M_CreateHitChainHp(std::string_view _Name = " ");

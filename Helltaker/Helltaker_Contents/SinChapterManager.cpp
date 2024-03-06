@@ -368,6 +368,7 @@ void SinChapterManager::M_CreateSmallChain(
 	switch (_Phase)
 	{
 	case ESinPhase::Phase1:
+		NewSmallChain->SetPhase1_Idx(_VecIndex);
 		Phase1_SmallChain[_VecIndex].push_back(NewSmallChain);
 		break;
 	case ESinPhase::Phase2:
@@ -387,6 +388,11 @@ void SinChapterManager::M_SetSmallChainVecSize(int _Size, ESinPhase _Phase)
 		Phase2_SmallChain.resize(_Size);
 		break;
 	}
+}
+
+void SinChapterManager::M_SmallChainDeathCall(int _VecIndex)
+{
+	Phase1_SmallChain[_VecIndex].clear();
 }
 
 void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)

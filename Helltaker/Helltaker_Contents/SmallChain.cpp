@@ -191,7 +191,16 @@ void SmallChain::VerHitAnimation(float _DeltaTime)
 	if (1.0f <= TimeCount)
 	{
 		TimeCount = 0.0f;
-		StateChange(ESinSmallChainState::Death);
+		
+		switch (Phase)
+		{
+		case ESinPhase::Phase1:
+			StateChange(ESinSmallChainState::Death);
+			break;
+		case ESinPhase::Phase2:
+			StateChange(ESinSmallChainState::Idle);
+			break;
+		}
 	}
 }
 
@@ -206,7 +215,16 @@ void SmallChain::HorHitAnimation(float _DeltaTime)
 	if (1.0f <= TimeCount)
 	{
 		TimeCount = 0.0f;
-		StateChange(ESinSmallChainState::Death);
+
+		switch (Phase)
+		{
+		case ESinPhase::Phase1:
+			StateChange(ESinSmallChainState::Death);
+			break;
+		case ESinPhase::Phase2:
+			StateChange(ESinSmallChainState::Idle);
+			break;
+		}
 	}
 }
 
@@ -244,6 +262,7 @@ void SmallChain::DeathStart()
 
 void SmallChain::Death(float _DeltaTime)
 {
+	GetSinChapter()->M_SmallChainDeathCall(Phase1_Idx);
 	Destroy();
 }
 
@@ -275,6 +294,9 @@ void SmallChain::StateUpdate(float _DeltaTime)
 	case ESinSmallChainState::Hit:
 		Hit(_DeltaTime);
 		break;
+	case ESinSmallChainState::Death:
+		Death(_DeltaTime);
+		break;
 	}
 }
 
@@ -292,6 +314,9 @@ void SmallChain::StateChange(ESinSmallChainState _State)
 			break;
 		case ESinSmallChainState::Hit:
 			HitStart();
+			break;
+		case ESinSmallChainState::Death:
+			DeathStart();
 			break;
 		}
 	}
