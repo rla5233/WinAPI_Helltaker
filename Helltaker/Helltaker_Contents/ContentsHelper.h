@@ -206,7 +206,8 @@ enum class EDemonState
 {
 	None,
 	Idle,
-	Victory
+	Victory,
+	Sin_Appear
 };
 
 enum class EHitActorState

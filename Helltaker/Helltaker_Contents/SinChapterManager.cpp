@@ -6,6 +6,7 @@
 #include "SmallChain.h"
 #include "ChainLink.h"
 #include "Sin_Thorn.h"
+#include "Sin_Demon.h"
 #include "Sin_Hero.h"
 #include "HeroLife.h"
 #include "HitChain.h"
@@ -288,6 +289,11 @@ void SinChapterManager::M_SpawnHero()
 	PlayerHero->StateChange(EHeroState::Idle);
 
 	AllMapRenderActors.push_back(PlayerHero);
+}
+
+void SinChapterManager::M_SpawnDemon()
+{
+
 }
 
 void SinChapterManager::M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex)
@@ -632,14 +638,43 @@ void SinChapterManager::AllThornMoveOn()
 
 void SinChapterManager::Phase2_Start()
 {
-
+	Phase2_Order = 0;
 }
 
 void SinChapterManager::Phase2(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
+	
+	switch (Phase2_Order)
+	{
+	case 0:
+		HitChainCheck();
+		break;
+	case 1:
+		JudgeAppear();
+		break;
+	}
 }
 
+void SinChapterManager::HitChainCheck()
+{
+	if (true == AllHitChain.empty())
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		float PosY = WinScale.Y * 0.3f;
+		Judge = SpawnActor<Sin_Demon>(static_cast<int>(SinUpdateOrder::Top));
+		Judge->SetActorLocation({ WinScale.hX(), PosY });
+		//Judge->SetDemon("Judge")
+		Judge->StateChange(EDemonState::Sin_Appear);
+		
+		++Phase2_Order;
+	}
+}
+
+void SinChapterManager::JudgeAppear()
+{
+
+}
 
 void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 {

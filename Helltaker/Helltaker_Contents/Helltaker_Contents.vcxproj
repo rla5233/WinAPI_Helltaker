@@ -323,6 +323,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Sin_Demon.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Sin_Hero.h">
       <SubType>
       </SubType>
@@ -514,6 +518,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SinOpening.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Sin_Demon.cpp">
       <SubType>
       </SubType>
     </ClCompile>

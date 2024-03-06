@@ -9,6 +9,7 @@ class SmallChain;
 class HitChainHp;
 class ChainLink;
 class Sin_Thorn;
+class Sin_Demon;
 class Sin_Hero;
 class HitChain;
 class HeroLife;
@@ -51,6 +52,7 @@ public:
 	void M_CreateSinHeroLife();
 
 	void M_SpawnHero();
+	void M_SpawnDemon();
 
 	void M_CreateSmallChain(ESinSmallChainType _Type, int _PhaseNum, int _PosIndex, int _VecIndex);
 	void M_SetSmallChainVecSize(int _Size, int _PhaseNum);
@@ -144,6 +146,8 @@ private:
 	void AllThornMoveOn();
 
 	void Phase2(float _DeltaTime);
+	void HitChainCheck();
+	void JudgeAppear();
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
@@ -184,6 +188,7 @@ private:
 	
 	std::vector<std::list<SmallChain*>> Phase2_SmallChain; //
 	int Phase2_SmallChainVecSize = -1;
+	int Phase2_Order = -1;
 
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
@@ -193,6 +198,8 @@ private:
 	float MoveYSum = 0;
 
 	static const float StartPosY;
+
+	Sin_Demon* Judge = nullptr;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

@@ -254,6 +254,8 @@ void Demon::StateUpdate(float _DeltaTime)
 	case EDemonState::Victory:
 		Victory(_DeltaTime);
 		break;
+	case EDemonState::Sin_Appear:
+		Sin_Appear(_DeltaTime);
 	}
 }
 
@@ -269,6 +271,8 @@ void Demon::StateChange(EDemonState _State)
 		case EDemonState::Victory:
 			VictoryStart();
 			break;
+		case EDemonState::Sin_Appear:
+			Sin_AppearStart();
 		}
 	}
 

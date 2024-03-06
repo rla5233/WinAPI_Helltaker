@@ -3,10 +3,12 @@
 #include "RenderActor.h"
 
 class StarEffect;
+class Sin_Demon;
 
 // Ό³Έν :
 class Demon : public RenderActor
 {
+	friend Sin_Demon;
 public:
 	// constructor destructor
 	Demon();
@@ -18,7 +20,7 @@ public:
 	Demon& operator=(const Demon& _Other) = delete;
 	Demon& operator=(Demon&& _Other) noexcept = delete;
 
-	void SetDemon(std::string_view _Name, const FTransform& _FTransform);
+	virtual void SetDemon(std::string_view _Name, const FTransform& _FTransform);
 	void LoveSignAnimation(float _DeltaTime);
 
 	void SetLocationPoint(Point _Point)
@@ -41,6 +43,9 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+	virtual void Sin_AppearStart() {};
+	virtual void Sin_Appear(float _DeltaTime) {};
 
 private:
 	void IdleStart();
@@ -91,6 +96,7 @@ private:
 class StarEffect
 {
 	friend Demon;
+	friend Sin_Demon;
 public:
 	void StarEffectMove(const Demon* const _Demon, float _DeltaTime, float _TimeWeight = 0.0f);
 
