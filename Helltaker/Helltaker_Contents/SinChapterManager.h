@@ -38,7 +38,7 @@ public:
 	void CreateTransition();
 	void TransitionOn();
 	
-	void M_CreateSinMap();
+	void M_CreateSinMap(int _ChapterNum);
 
 	void M_CreateSinBG(std::string_view _Name);
 	void M_CreateSinPit();
@@ -53,7 +53,7 @@ public:
 	void M_CreateSinBridge();
 
 	void M_CreateThorn();
-	void M_CreateSinHeroLife();
+	void M_CreateSinHeroLife(int _ChapterNum);
 
 	void M_SpawnHero();
 	void M_SpawnDemon();

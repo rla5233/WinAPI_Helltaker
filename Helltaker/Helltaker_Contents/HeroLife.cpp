@@ -8,7 +8,7 @@
 bool HeroLife::IsLoad = false;
 
 const FVector HeroLife::PanelScale = { 0.39f, 0.133f };
-const FVector HeroLife::WheelScale = { 0.26f, 0.463f };
+const FVector HeroLife::WheelScale = { 0.2604f, 0.463f };
 const FVector HeroLife::EyeScale = { 0.167f, 0.167f };
 const FVector HeroLife::PyreScale = { 0.13f, 0.111f };
 const FVector HeroLife::FireScale = { 0.0625f, 0.107f };
@@ -144,11 +144,13 @@ void HeroLife::SetFire()
 void HeroLife::SetWheel()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	//float PosY = WinScal
+	float PosY = WinScale.Y * 0.152f;
 	
 	WheelRenderer->SetImage("Sin_Wheel.png");
-	WheelRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * WheelScale });
-	WheelRenderer->SetAngle(1);
+	WheelRenderer->SetTransform({ { 0.0f, PosY }, WinScale * WheelScale });
+
+	float Angle = (360.0f / -5.0f) * (SinChapterNum - 1.0f) + 1.0f;
+	WheelRenderer->SetAngle(Angle);
 }
 
 void HeroLife::IdleStart()
@@ -162,6 +164,12 @@ void HeroLife::IdleStart()
 
 void HeroLife::Idle(float _DeltaTime)
 {
+	WheelTurnUpdate(_DeltaTime);
+}
+
+void HeroLife::WheelTurnUpdate(float _DeltaTime)
+{
+
 }
 
 void HeroLife::HeroHitStart()

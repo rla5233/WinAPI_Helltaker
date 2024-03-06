@@ -91,7 +91,7 @@ void SinChapterManager::TransitionOn()
 	UEngineSound::SoundPlay("transition_on.wav");
 }
 
-void SinChapterManager::M_CreateSinMap()
+void SinChapterManager::M_CreateSinMap(int _ChapterNum)
 {
 	M_CreateSinBG("SinBG");
 	M_CreateSinPit();
@@ -107,7 +107,7 @@ void SinChapterManager::M_CreateSinMap()
 	M_CreateThorn();
 	M_SpawnHero();
 	
-	M_CreateSinHeroLife();
+	M_CreateSinHeroLife(_ChapterNum);
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
@@ -150,13 +150,14 @@ void SinChapterManager::M_CreateSinGear()
 }
 
 
-void SinChapterManager::M_CreateSinHeroLife()
+void SinChapterManager::M_CreateSinHeroLife(int _ChapterNum)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float PosY = WinScale.Y * 0.962f;
 	SinHeroLife = SpawnActor<HeroLife>(static_cast<int>(SinUpdateOrder::Top));
 	SinHeroLife->SetName("SinHeroLife");
 	SinHeroLife->SetActorLocation({ WinScale.hX(), PosY });
+	SinHeroLife->SetSinChapterNum(_ChapterNum);
 	SinHeroLife->StateChange(ESinHeroLifeState::Idle);
 
 	AllMapRenderActors.push_back(SinHeroLife);

@@ -19,7 +19,7 @@ void SinChapter1::LevelStart(ULevel* _PrevLevel)
 {
 	SinChapterManager::LevelStart(_PrevLevel);
 
-	M_CreateSinMap();
+	M_CreateSinMap(1);
 
 	M_StateChange(ESinState::Intro);
 }

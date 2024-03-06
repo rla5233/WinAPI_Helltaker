@@ -16,6 +16,16 @@ public:
 	HeroLife& operator=(const HeroLife& _Other) = delete;
 	HeroLife& operator=(HeroLife&& _Other) noexcept = delete;
 
+	void SetSinChapterNum(int _Number)
+	{
+		SinChapterNum = _Number;
+	}
+
+	void WheelTurnOn()
+	{
+		IsWheelTurn = true;
+	}
+
 	void StateChange(ESinHeroLifeState _State);
 
 protected:
@@ -32,6 +42,8 @@ private:
 	void SetFire();
 	void SetWheel();
 
+	void WheelTurnUpdate(float _DeltaTime);
+
 	void HeroHitStart();
 	void HeroHit(float _DeltaTime);
 
@@ -43,7 +55,9 @@ private:
 	static const FVector PanelScale;
 
 	UImageRenderer* WheelRenderer = nullptr;
+	int SinChapterNum = -1;
 	static const FVector WheelScale;
+	bool IsWheelTurn = false;
 
 	UImageRenderer* EyeRenderer = nullptr;
 	static const FVector EyeScale;
