@@ -356,7 +356,6 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 	NewHitChain->SetType(_Type);
 
 	NewHitChain->StateChange(ESinHitChainState::Idle);
-	NewHitChain->StateChange(ESinHitChainState::Move);
 
 	AllHitChain[LocationPoint.Key] = NewHitChain;
 }

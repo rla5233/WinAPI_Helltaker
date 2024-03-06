@@ -51,6 +51,9 @@ private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
+	void FadeInCheck(float _DeltaTime);
+	void FadeOutCheck(float _DeltaTime);
+
 	void MoveStart();
 	void Move(float _DeltaTime);
 
@@ -68,6 +71,8 @@ private:
 	UImageRenderer* ImageRenderer = nullptr;
 	std::list<UImageRenderer*> AllHitEffectRenderer;
 	static const FVector Scale;
+
+	int IdleOrder = -1;
 
 	int HitCount = 6;
 	static const float HitDelayTime;

@@ -43,12 +43,17 @@ SinChapterManager* RenderActor::GetSinChapter()
 	return Ptr;
 }
 
-bool RenderActor::FadeInUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight /* = 1.0f*/)
+bool RenderActor::FadeInUpdate(
+	UImageRenderer* const _Renderer, 
+	float _DeltaTime,
+	float _TimeWeight /* = 1.0f*/,
+	float _Start /* = 0.0f */,
+	float _End /* = 1.0f */)
 {
 	if (true == IsFadeIn)
 	{
 		TimeCount += _DeltaTime * _TimeWeight;
-		float NextAlpha = ContentsHelper::LerpClampf(0, 1, TimeCount);
+		float NextAlpha = ContentsHelper::LerpClampf(_Start, _End, TimeCount);
 		_Renderer->SetAlpha(NextAlpha);
 
 		if (1.0f <= TimeCount)
@@ -61,12 +66,17 @@ bool RenderActor::FadeInUpdate(UImageRenderer* const _Renderer, float _DeltaTime
 	return IsFadeIn;
 }
 
-bool RenderActor::FadeOutUpdate(UImageRenderer* const _Renderer, float _DeltaTime, float _TimeWeight)
+bool RenderActor::FadeOutUpdate(
+	UImageRenderer* const _Renderer, 
+	float _DeltaTime, 
+	float _TimeWeight /* = 1.0f*/,
+	float _Start/* = 1.0f */,
+	float _End /* = 0.0f */)
 {
 	if (true == IsFadeOut)
 	{
 		TimeCount += _DeltaTime * _TimeWeight;
-		float NextAlpha = ContentsHelper::LerpClampf(1, 0, TimeCount);
+		float NextAlpha = ContentsHelper::LerpClampf(_Start, _End, TimeCount);
 		_Renderer->SetAlpha(NextAlpha);
 
 		if (1.0f <= TimeCount)

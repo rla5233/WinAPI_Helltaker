@@ -46,16 +46,46 @@ void HitChain::IdleStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * Scale });
+	FadeOutOn();
+	IdleOrder = 0;
 }
 
 void HitChain::Idle(float _DeltaTime)
 {
 	HitDelayCheck(_DeltaTime);
+
+	switch (IdleOrder)
+	{
+	case 0:
+		FadeOutCheck(_DeltaTime);
+		break;
+	case 1:
+		FadeInCheck(_DeltaTime);
+		break;
+	}
+}
+
+void HitChain::FadeOutCheck(float _DeltaTime)
+{
+	if (false == FadeOutUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.7f, 0.3f))
+	{
+		FadeInOn();
+		++IdleOrder;
+	}
+}
+
+void HitChain::FadeInCheck(float _DeltaTime)
+{
+	if (false == FadeInUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.3f, 0.7f))
+	{
+		FadeOutOn();
+		--IdleOrder;
+	}
 }
 
 void HitChain::MoveStart()
 {
-	//MoveOn();
+	MoveOn();
 }
 
 void HitChain::Move(float _DeltaTime)
