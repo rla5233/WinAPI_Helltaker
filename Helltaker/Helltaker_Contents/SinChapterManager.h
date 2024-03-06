@@ -64,6 +64,9 @@ public:
 		int _PosIndex, 
 		int _VecIndex);
 
+	void M_CreateSmallVerChain_P1(int _PosIndex, int _VecIndex);
+	void M_CreateSmallHorChain_P1(int _PosIndex, int _VecIndex);
+
 	void M_SetSmallChainVecSize(int _Size, ESinPhase _Phase);
 
 	void M_SmallChainDeathCall(int _VecIndex);
@@ -223,7 +226,6 @@ private:
 
 	float PhaseTimeCount = 0.0f;
 	int SmallChainVec_Index = -1;
-
 
 	static const float Phase1_StartDelayTime;
 	static const float CutSceneDelayTime;

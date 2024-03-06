@@ -361,6 +361,16 @@ void SinChapterManager::M_CreateSmallChain(
 	}
 }
 
+void SinChapterManager::M_CreateSmallVerChain_P1(int _PosIndex, int _VecIndex)
+{
+	M_CreateSmallChain(ESinSmallChainType::Ver, ESinPhase::Phase1, _PosIndex, _VecIndex);
+}
+
+void SinChapterManager::M_CreateSmallHorChain_P1(int _PosIndex, int _VecIndex)
+{
+	M_CreateSmallChain(ESinSmallChainType::Hor, ESinPhase::Phase1, _PosIndex, _VecIndex);
+}
+
 void SinChapterManager::M_SetSmallChainVecSize(int _Size, ESinPhase _Phase)
 {
 	switch (_Phase)

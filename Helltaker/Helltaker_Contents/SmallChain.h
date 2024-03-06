@@ -65,7 +65,7 @@ private:
 	
 	bool IsShow = false;
 	bool IsHit = false;
-	static const float HitDelay;
+	static const float HitStartDelay;
 	float TimeCount = 0.0f;
 
 	static const float HitTime;

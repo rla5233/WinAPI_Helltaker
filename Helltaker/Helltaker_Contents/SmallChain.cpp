@@ -8,8 +8,8 @@ bool SmallChain::IsLoad = false;
 
 const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
+const float SmallChain::HitStartDelay = 0.06f;
 const float SmallChain::HitTime = 0.125f;
-const float SmallChain::HitDelay = 0.06f;
 
 SmallChain::SmallChain()
 {
@@ -132,7 +132,7 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 
 		if (1.0f <= TimeCount)
 		{
-			TimeCount = HitDelay;
+			TimeCount = HitStartDelay;
 			IsShow = false;
 		}
 	}
@@ -150,7 +150,7 @@ void SmallChain::HorShowAnimation(float _DeltaTime)
 
 		if (1.0f <= TimeCount)
 		{
-			TimeCount = HitDelay;
+			TimeCount = HitStartDelay;
 			IsShow = false;
 		}
 	}
@@ -190,7 +190,6 @@ void SmallChain::HitAnimation(float _DeltaTime)
 void SmallChain::VerHitAnimation(float _DeltaTime)
 {
 	TimeCount += _DeltaTime * 5.0f;
-	//TimeCount += _DeltaTime * 0.0f;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	float ScaleX = ContentsHelper::LerpClampf(V_Scale.X * 1.1f, 0.0f, TimeCount);
@@ -217,7 +216,7 @@ void SmallChain::HorHitAnimation(float _DeltaTime)
 	TimeCount += _DeltaTime * 5.0f;
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y, 0.0f, TimeCount);
+	float ScaleY = ContentsHelper::LerpClampf(H_Scale.Y * 1.1f, 0.0f, TimeCount);
 	ImageRenderer->SetScale({ WinScale.X * H_Scale.X, WinScale.Y * ScaleY });
 
 	if (1.0f <= TimeCount)
