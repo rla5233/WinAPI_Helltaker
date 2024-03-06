@@ -557,7 +557,6 @@ void SinChapterManager::Phase1(float _DeltaTime)
 	// Debug
 	if (UEngineInput::IsDown(VK_SPACE))
 	{
-		Phase1_SmallChain.clear();
 		M_StateChange(ESinState::Phase2);
 	}
 }
