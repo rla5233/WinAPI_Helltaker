@@ -18,6 +18,11 @@ public:
 
 	void StateChange(ESinHitChainHpState _State);
 
+	UImageRenderer* GetTextRenderer() const
+	{
+		return TextRenderer;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -39,6 +44,8 @@ private:
 	UImageRenderer* R_ImageRenderer = nullptr;
 	UImageRenderer* Hp_Renderer = nullptr;
 	UImageRenderer* TextRenderer = nullptr;
+	static const FVector HpScale;
+	static const FVector ImageScale;
 
 	ESinHitChainHpState State = ESinHitChainHpState::None;
 };
