@@ -76,8 +76,18 @@ void Piston::MoveStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector CurPos = GetActorLocation();
-	FVector TargetPos = { CurPos.X, WinScale.Y * 0.2f };
 	SetLerfStartPos(CurPos);
+	
+	FVector TargetPos = FVector::Zero;
+	switch (Type)
+	{
+	case ESinPistonType::Up:
+		TargetPos = { CurPos.X, WinScale.Y * 0.2f };
+		break;
+	case ESinPistonType::Down:
+		TargetPos = { CurPos.X, WinScale.Y * 0.98f };
+		break;
+	}
 	SetLerfTargetPos(TargetPos);
 	LerfMoveOn();
 

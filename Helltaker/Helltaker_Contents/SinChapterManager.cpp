@@ -181,6 +181,7 @@ void SinChapterManager::M_CreateSinPiston()
 	UpPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Top));
 	UpPiston->SetName("SinPiston");
 	UpPiston->SetActorLocation({ WinScale.hX(), UpPosY });
+	UpPiston->SetType(ESinPistonType::Up);
 	UpPiston->StateChange(ESinPistonState::Idle);
 	
 	AllMapRenderActors.push_back(UpPiston);
@@ -189,6 +190,7 @@ void SinChapterManager::M_CreateSinPiston()
 	DownPiston = SpawnActor<Piston>(static_cast<int>(SinUpdateOrder::Bottom));
 	DownPiston->SetName("SinPiston");
 	DownPiston->SetActorLocation({ WinScale.hX(), DownPosY });
+	DownPiston->SetType(ESinPistonType::Down);
 	DownPiston->StateChange(ESinPistonState::Idle);
 
 	AllMapRenderActors.push_back(DownPiston);
@@ -446,7 +448,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 void SinChapterManager::Phase1_Start()
 {
 	SinBridgeMoveOn();
-	SinChainMoveOn();
+	SinChainLinkMoveOn();
 	
 	SinPitMoveOn();
 	AllThornMoveOn();
@@ -560,147 +562,18 @@ void SinChapterManager::BridgeResetCheck()
 	}
 }
 
-void SinChapterManager::SinPitMoveOn()
-{
-	for (Pit* Pit : SinPit)
-	{
-		if (nullptr == Pit)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Pit->StateChange(ESinPitState::Move);
-	}
-}
-
-void SinChapterManager::SinBridgeMoveOn()
-{
-	for (Bridge* Bridge : SinBridge)
-	{
-		if (nullptr == Bridge)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Bridge->StateChange(ESinBridgeState::Move);
-	}
-}
-
-void SinChapterManager::SinChainMoveOn()
-{
-	for (ChainLink* Chain : SinChainLink)
-	{
-		if (nullptr == Chain)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		Chain->StateChange(ESinChainLinkState::Move);
-	}
-}
-
-// 수정 (리팩토링 가능?)
-void SinChapterManager::AllThornMoveOn()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
-	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.222f };
-
-	for (std::vector<Sin_Thorn*>& ThornVec : UpThorn)
-	{
-		for (Sin_Thorn* Thorn : ThornVec)
-		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.088f);
-			Thorn->SetDownPosY(UpPos.Y);
-			Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.3f);
-			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.088f);
-			Thorn->MoveOn();
-		}
-	}
-
-	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
-
-	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
-	{
-		for (Sin_Thorn* Thorn : ThornVec)
-		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.088f);
-			Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.7f);
-			Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
-			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
-			Thorn->MoveOn();
-		}
-	}
-}
-
 void SinChapterManager::Phase2_Start()
 {
-	for (Pit* _Pit : SinPit)
-	{
-		if (nullptr == _Pit)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
+	SinPitMoveOff();
+	SinBridgeMoveOff();
+	SinChainLinkMoveOff();
+	AllThornMoveOff();
 
-		_Pit->StateChange(ESinPitState::Idle);
-	}
-
-	for (Bridge* _Bridge : SinBridge)
-	{
-		if (nullptr == _Bridge)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		_Bridge->StateChange(ESinBridgeState::Idle);
-	}
-
-	for (ChainLink* _ChainLink : SinChainLink)
-	{
-		if (nullptr == _ChainLink)
-		{
-			MsgBoxAssert("Actor is nullptr");
-		}
-
-		_ChainLink->StateChange(ESinChainLinkState::Idle);
-	}
-
-	for (std::vector<Sin_Thorn*>& UpThornVec : UpThorn)
-	{
-		for (Sin_Thorn* Thorn : UpThornVec)
-		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->MoveOff();
-		}
-	}
-
-	for (std::vector<Sin_Thorn*>& DownThornVec : DownThorn)
-	{
-		for (Sin_Thorn* Thorn : DownThornVec)
-		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->MoveOff();
-		}
-	}
+	DownPiston->StateChange(ESinPistonState::Move);
 	
+	PlayerHero->MoveY_Off();
+	PlayerHero->SinHero_StateChange(ESinHeroState::Idle);
+
 	Phase2_Order = 0;
 }
 
@@ -814,7 +687,6 @@ void SinChapterManager::M_StateChange(ESinState _State)
 	State = _State;
 }
 
-
 void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 {
 	if (false == PlayerHero->GetCanActionCheck())
@@ -827,6 +699,158 @@ void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
 		}
 
 		HeroDelayTimeCount -= _DeltaTime;
+	}
+}
+
+
+void SinChapterManager::SinPitMoveOn()
+{
+	for (Pit* Pit : SinPit)
+	{
+		if (nullptr == Pit)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Pit->StateChange(ESinPitState::Move);
+	}
+}
+
+void SinChapterManager::SinBridgeMoveOn()
+{
+	for (Bridge* Bridge : SinBridge)
+	{
+		if (nullptr == Bridge)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Bridge->StateChange(ESinBridgeState::Move);
+	}
+}
+
+void SinChapterManager::SinChainLinkMoveOn()
+{
+	for (ChainLink* Chain : SinChainLink)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Chain->StateChange(ESinChainLinkState::Move);
+	}
+}
+
+// 수정 (리팩토링 가능?)
+void SinChapterManager::AllThornMoveOn()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
+	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.222f };
+
+	for (std::vector<Sin_Thorn*>& ThornVec : UpThorn)
+	{
+		for (Sin_Thorn* Thorn : ThornVec)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.088f);
+			Thorn->SetDownPosY(UpPos.Y);
+			Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.3f);
+			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.088f);
+			Thorn->MoveOn();
+		}
+	}
+
+	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
+
+	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
+	{
+		for (Sin_Thorn* Thorn : ThornVec)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.088f);
+			Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.7f);
+			Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
+			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
+			Thorn->MoveOn();
+		}
+	}
+}
+
+void SinChapterManager::SinPitMoveOff()
+{
+	for (Pit* _Pit : SinPit)
+	{
+		if (nullptr == _Pit)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		_Pit->StateChange(ESinPitState::Idle);
+	}
+}
+
+void SinChapterManager::SinBridgeMoveOff()
+{
+	for (Bridge* _Bridge : SinBridge)
+	{
+		if (nullptr == _Bridge)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		_Bridge->StateChange(ESinBridgeState::Idle);
+	}
+}
+
+void SinChapterManager::SinChainLinkMoveOff()
+{
+	for (ChainLink* _ChainLink : SinChainLink)
+	{
+		if (nullptr == _ChainLink)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		_ChainLink->StateChange(ESinChainLinkState::Idle);
+	}
+}
+
+void SinChapterManager::AllThornMoveOff()
+{
+	for (std::vector<Sin_Thorn*>& UpThornVec : UpThorn)
+	{
+		for (Sin_Thorn* Thorn : UpThornVec)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Thorn->MoveOff();
+		}
+	}
+
+	for (std::vector<Sin_Thorn*>& DownThornVec : DownThorn)
+	{
+		for (Sin_Thorn* Thorn : DownThornVec)
+		{
+			if (nullptr == Thorn)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Thorn->MoveOff();
+		}
 	}
 }
 

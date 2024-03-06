@@ -341,6 +341,13 @@ enum class ESinPistonState
 	Move
 };
 
+enum class ESinPistonType
+{
+	None,
+	Up,
+	Down
+};
+
 enum class ESinChainLinkState
 {
 	None,

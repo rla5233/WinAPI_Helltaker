@@ -142,8 +142,13 @@ private:
 
 	void SinPitMoveOn();
 	void SinBridgeMoveOn();
-	void SinChainMoveOn();
+	void SinChainLinkMoveOn();
 	void AllThornMoveOn();
+
+	void SinPitMoveOff();
+	void SinBridgeMoveOff();
+	void SinChainLinkMoveOff();
+	void AllThornMoveOff();
 
 	void Phase2(float _DeltaTime);
 	void HitChainCheck();

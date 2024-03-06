@@ -21,6 +21,11 @@ public:
 		return State;
 	}
 
+	void SetType(ESinPistonType _Type)
+	{
+		Type = _Type;
+	}
+
 	void StateChange(ESinPistonState _State);
 
 protected:
@@ -52,6 +57,7 @@ private:
 
 	int MoveOrder = -1;
 
+	ESinPistonType Type = ESinPistonType::None;
 	ESinPistonState State = ESinPistonState::None;
 	static bool IsLoad;
 };

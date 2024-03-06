@@ -96,8 +96,6 @@ void Sin_Hero::HitChainCheck()
 void Sin_Hero::ThornHitCheck()
 {
 	HeroBase::ThornHitCheck();
-
-
 }
 
 void Sin_Hero::IdleStart()

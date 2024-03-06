@@ -117,7 +117,6 @@ void Sin_Thorn::DownStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = WinScale * ThornScale;
 
-	
 	ImageRenderer->AnimationReset();
 	ImageRenderer->ChangeAnimation("Thorn_Down");
 	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
