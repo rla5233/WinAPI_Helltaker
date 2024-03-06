@@ -201,8 +201,8 @@ private:
 	std::vector<Bridge*> SinBridge;
 	int BridgeResetCount = 0;
 
-	std::vector<std::vector<Sin_Thorn*>> UpThorn;
-	std::vector<std::vector<Sin_Thorn*>> DownThorn;
+	std::vector<Sin_Thorn*> UpThorn;
+	std::vector<Sin_Thorn*> DownThorn;
 
 	HeroLife* SinHeroLife = nullptr;
 	Sin_Hero* PlayerHero = nullptr;

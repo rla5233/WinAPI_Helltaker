@@ -4,6 +4,7 @@
 
 bool Sin_Thorn::IsLoad = false;
 
+const int Sin_Thorn::ThornCount = 7;;
 const FVector Sin_Thorn::ThornScale = { 0.0479f, 0.0851f };
 const float Sin_Thorn::ChangeInter = 0.05f;
 
@@ -30,10 +31,21 @@ void Sin_Thorn::BeginPlay()
 		IsLoad = true;
 	}
 
-	ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::Mid);
-	ImageRenderer->SetImage("Thorn_Idle.png");
-	ImageRenderer->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);
-	ImageRenderer->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, ChangeInter, false);
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = WinScale * ThornScale;
+	float PosX = 0.0f;
+
+	ImageRenderer.reserve(ThornCount);
+	for (int i = 0; i < ThornCount; i++)
+	{
+		ImageRenderer.push_back(RenderActor::CreateImageRenderer(SinRenderOrder::Mid));
+		ImageRenderer[i]->SetImage("Thorn_Idle.png");
+		ImageRenderer[i]->CreateAnimation("Thorn_Down", "Thorn_Down", 0, 4, ChangeInter, false);
+		ImageRenderer[i]->CreateAnimation("Thorn_Up", "Thorn_Up", 0, 3, ChangeInter, false);
+		ImageRenderer[i]->SetTransform({{ PosX, 0.0f }, Scale });
+		ImageRenderer[i]->ActiveOff();
+		PosX += Scale.X * 1.088f;
+	}
 }
 
 void Sin_Thorn::Tick(float _DeltaTime)
@@ -45,11 +57,11 @@ void Sin_Thorn::Tick(float _DeltaTime)
 
 void Sin_Thorn::IdleStart()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * ThornScale;
-
-	ImageRenderer->SetImage("Thorn_Idle.png");
-	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
+	for (int i = 0; i < ThornCount; i++)
+	{
+		ImageRenderer[i]->SetImage("Thorn_Idle.png");
+		ImageRenderer[i]->ActiveOn();
+	}
 }
 
 void Sin_Thorn::Idle(float _DeltaTime)
@@ -92,13 +104,12 @@ void Sin_Thorn::MoveUpdate(float _DeltaTime)
 
 void Sin_Thorn::UpStart()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * ThornScale;
-
-	ImageRenderer->AnimationReset();
-	ImageRenderer->ChangeAnimation("Thorn_Up");
-	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
-	ImageRenderer->ActiveOn();
+	for (int i = 0; i < ThornCount; i++)
+	{
+		ImageRenderer[i]->AnimationReset();
+		ImageRenderer[i]->ChangeAnimation("Thorn_Up");
+		ImageRenderer[i]->ActiveOn();
+	}
 }
 
 void Sin_Thorn::Up(float _DeltaTime)
@@ -114,21 +125,23 @@ void Sin_Thorn::Up(float _DeltaTime)
 
 void Sin_Thorn::DownStart()
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = WinScale * ThornScale;
-
-	ImageRenderer->AnimationReset();
-	ImageRenderer->ChangeAnimation("Thorn_Down");
-	ImageRenderer->SetTransform({ { 0, 0 }, Scale });
+	for (int i = 0; i < ThornCount; i++)
+	{
+		ImageRenderer[i]->AnimationReset();
+		ImageRenderer[i]->ChangeAnimation("Thorn_Down");
+	}
 }
 
 void Sin_Thorn::Down(float _DeltaTime)
 {
 	MoveUpdate(_DeltaTime);
 
-	if (true == ImageRenderer->IsCurAnimationEnd())
+	for (int i = 0; i < ThornCount; i++)
 	{
-		ImageRenderer->ActiveOff();
+		if (true == ImageRenderer[i]->IsCurAnimationEnd())
+		{
+			ImageRenderer[i]->ActiveOff();
+		}
 	}
 }
 

@@ -59,7 +59,7 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
-	UImageRenderer* ImageRenderer = nullptr;
+	std::vector<UImageRenderer*> ImageRenderer;
 	static const FVector ThornScale;
 	static const float ChangeInter;
 
@@ -67,6 +67,7 @@ private:
 	float UpPosY = 0.0f;
 
 	EThornState State = EThornState::None;
+	static const int ThornCount;
 	static bool IsLoad;
 };
 

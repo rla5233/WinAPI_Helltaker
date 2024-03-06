@@ -403,9 +403,7 @@ void ChapterManager::Idle(float _DeltaTime)
 	}
 
 	HeroDelayTimeUpdate(_DeltaTime);
-	
 	ResetCheck();
-
 	CutSceneCheck();
 
 	// Debug

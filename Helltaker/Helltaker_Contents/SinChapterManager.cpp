@@ -253,65 +253,47 @@ void SinChapterManager::M_CreateThorn()
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
 	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.222f };
 
-	UpThorn.resize(3);
-	for (int y = 0; y < 3; y++)
+	UpThorn.reserve(3);
+	for (int i = 0; i < 3; i++)
 	{
-		float IntervalX = 0.0f;
-		UpThorn[y].reserve(7);
+		UpThorn.push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
+		UpThorn[i]->SetName("UpThorn");
+		UpThorn[i]->SetActorLocation({ UpPos.X, UpPos.Y });
 
-		for (int x = 0; x < 7; x++)
+		if (i == 2)
 		{
-			UpThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
-			UpThorn[y][x]->SetName("UpThorn");
-			UpThorn[y][x]->SetActorLocation({ UpPos.X + IntervalX, UpPos.Y });
-
-			if (y == 2)
-			{
-				UpThorn[y][x]->SetState(EThornState::Up);
-			}
-			else
-			{
-				UpThorn[y][x]->StateChange(EThornState::Idle);
-			}
-
-			IntervalX += Scale.X * 1.08f;
-
-			AllMapRenderActors.push_back(UpThorn[y][x]);
+			UpThorn[i]->SetState(EThornState::Up);
+		}
+		else
+		{
+			UpThorn[i]->StateChange(EThornState::Idle);
 		}
 
 		UpPos.Y += Scale.Y * 1.088f;
+		AllMapRenderActors.push_back(UpThorn[i]);
 	}
 
 	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
-
-	DownThorn.resize(3);
-	for (int y = 0; y < 3; y++)
+	
+	DownThorn.reserve(3);
+	for (int i = 0; i < 3; i++)
 	{
-		float IntervalX = 0.0f;
-		DownThorn[y].reserve(7);
-		
-		for (int x = 0; x < 7; x++)
-		{
-			DownThorn[y].push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
-			DownThorn[y][x]->SetName("DownThorn");
-			DownThorn[y][x]->SetActorLocation({ DownPos.X + IntervalX, DownPos.Y });
-			
-			if (y == 0)
-			{
-				DownThorn[y][x]->StateChange(EThornState::Idle);
-				DownThorn[y][x]->AllRenderersActiveOff(); 
-			}
-			else
-			{
-				DownThorn[y][x]->StateChange(EThornState::Idle);
-			}
-			
-			IntervalX += Scale.X * 1.08f;
+		DownThorn.push_back(SpawnActor<Sin_Thorn>(static_cast<int>(SinUpdateOrder::Mid)));
+		DownThorn[i]->SetName("DownThorn");
+		DownThorn[i]->SetActorLocation({ DownPos.X, DownPos.Y });
 
-			AllMapRenderActors.push_back(DownThorn[y][x]);
+		if (i == 0)
+		{
+			DownThorn[i]->SetState(EThornState::Idle);
+			DownThorn[i]->AllRenderersActiveOff();
+		}
+		else
+		{
+			DownThorn[i]->StateChange(EThornState::Idle);
 		}
 
 		DownPos.Y += Scale.Y * 1.088f;
+		AllMapRenderActors.push_back(DownThorn[i]);
 	}
 }
 
@@ -487,7 +469,7 @@ void SinChapterManager::Intro(float _DeltaTime)
 		TransitionCheck();
 		break;
 	case 1:
-		Phase1_Check();
+		//Phase1_Check();
 		break;
 	}
 
@@ -734,18 +716,8 @@ void SinChapterManager::LevelEnd(ULevel* _NextLevel)
 {
 	ULevel::LevelEnd(_NextLevel);
 
-	for (size_t i = 0; i < UpThorn.size(); i++)
-	{
-		UpThorn[i].clear();
-	}
 	UpThorn.clear();
-
-	for (size_t i = 0; i < DownThorn.size(); i++)
-	{
-		DownThorn[i].clear();
-	}
 	DownThorn.clear();
-
 	SinPit.clear();
 	SinChainLink.clear();
 	SinBridge.clear();
@@ -936,40 +908,34 @@ void SinChapterManager::AllThornMoveOn()
 	FVector Scale = WinScale * Sin_Thorn::GetThornScale();
 	FVector UpPos = { WinScale.X * 0.345f, WinScale.Y * 0.222f };
 
-	for (std::vector<Sin_Thorn*>& ThornVec : UpThorn)
+	for (Sin_Thorn* Thorn : UpThorn)
 	{
-		for (Sin_Thorn* Thorn : ThornVec)
+		if (nullptr == Thorn)
 		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.088f);
-			Thorn->SetDownPosY(UpPos.Y);
-			Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.3f);
-			Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.088f);
-			Thorn->MoveOn();
+			MsgBoxAssert("Actor is nullptr");
 		}
+
+		Thorn->SetEndPosY(UpPos.Y - Scale.Y * 1.088f);
+		Thorn->SetDownPosY(UpPos.Y);
+		Thorn->SetUpPosY(UpPos.Y + Scale.Y * 1.3f);
+		Thorn->SetResetPosY(UpPos.Y + 2.0f * Scale.Y * 1.088f);
+		Thorn->MoveOn();
 	}
 
 	FVector DownPos = { WinScale.X * 0.345f, WinScale.Y * 0.784f };
 
-	for (std::vector<Sin_Thorn*>& ThornVec : DownThorn)
+	for (Sin_Thorn* Thorn : DownThorn)
 	{
-		for (Sin_Thorn* Thorn : ThornVec)
+		if (nullptr == Thorn)
 		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.088f);
-			Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.7f);
-			Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
-			Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
-			Thorn->MoveOn();
+			MsgBoxAssert("Actor is nullptr");
 		}
+
+		Thorn->SetEndPosY(DownPos.Y - Scale.Y * 1.088f);
+		Thorn->SetDownPosY(DownPos.Y + Scale.Y * 0.7f);
+		Thorn->SetUpPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
+		Thorn->SetResetPosY(DownPos.Y + 2.0f * Scale.Y * 1.088f);
+		Thorn->MoveOn();
 	}
 }
 
@@ -1014,30 +980,24 @@ void SinChapterManager::SinChainLinkMoveOff()
 
 void SinChapterManager::AllThornMoveOff()
 {
-	for (std::vector<Sin_Thorn*>& UpThornVec : UpThorn)
+	for (Sin_Thorn* Thorn : UpThorn)
 	{
-		for (Sin_Thorn* Thorn : UpThornVec)
+		if (nullptr == Thorn)
 		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->MoveOff();
+			MsgBoxAssert("Actor is nullptr");
 		}
+
+		Thorn->MoveOff();
 	}
 
-	for (std::vector<Sin_Thorn*>& DownThornVec : DownThorn)
+	for (Sin_Thorn* Thorn : DownThorn)
 	{
-		for (Sin_Thorn* Thorn : DownThornVec)
+		if (nullptr == Thorn)
 		{
-			if (nullptr == Thorn)
-			{
-				MsgBoxAssert("Actor is nullptr");
-			}
-
-			Thorn->MoveOff();
+			MsgBoxAssert("Actor is nullptr");
 		}
+
+		Thorn->MoveOff();
 	}
 }
 
