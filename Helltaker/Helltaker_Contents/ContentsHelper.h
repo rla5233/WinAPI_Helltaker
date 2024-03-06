@@ -180,7 +180,8 @@ enum class ESinState
 	None,
 	Intro,
 	Phase1,
-	Phase2
+	Phase2,
+	CutScene
 };
 
 enum class EHeroState

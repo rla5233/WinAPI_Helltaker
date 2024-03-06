@@ -27,6 +27,8 @@ const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::Phase1_DelayTime = 0.5f;
 
+const float SinChapterManager::CutSceneDelayTime = 0.5f;
+
 const float SinChapterManager::StartPosY = 0.388f;
 const float SinChapterManager::MaxSpeedY = -180.0f;
 
@@ -651,7 +653,7 @@ void SinChapterManager::Phase2(float _DeltaTime)
 		HitChainCheck();
 		break;
 	case 1:
-		JudgeAppear();
+		JudgeAppear(_DeltaTime);
 		break;
 	}
 }
@@ -667,31 +669,33 @@ void SinChapterManager::HitChainCheck()
 		Judge->SetDemon("Judge", { { 0.0f, 0.0f }, WinScale * Sin_Demon::GetIdleScale() });
 		Judge->StateChange(EDemonState::Sin_Appear);
 		
+		CutSceneDelayTimeCount = CutSceneDelayTime;
 		++Phase2_Order;
 	}
 }
 
-void SinChapterManager::JudgeAppear()
+void SinChapterManager::JudgeAppear(float _DeltaTime)
 {
 	if (true == Judge->GetImageRenderer()->IsCurAnimationEnd())
 	{
-		
-	}
-}
-
-void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
-{
-	if (false == PlayerHero->GetCanActionCheck())
-	{
-		if (0.0f >= HeroDelayTimeCount)
+		if (0.0f > CutSceneDelayTimeCount)
 		{
-			PlayerHero->SetCanActionCheck(true);
-			HeroDelayTimeCount = HeroDelayTime;
+			M_StateChange(ESinState::CutScene);
 			return;
 		}
 
-		HeroDelayTimeCount -= _DeltaTime;
+		CutSceneDelayTimeCount -= _DeltaTime;
 	}
+}
+
+void SinChapterManager::CutSceneStart()
+{
+	int a = 0;
+}
+
+void SinChapterManager::CutScene(float _DeltaTime)
+{
+
 }
 
 void SinChapterManager::LevelStart(ULevel* _PrevLevel)
@@ -725,36 +729,9 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	case ESinState::Phase2:
 		Phase2(_DeltaTime);
 		break;
-	}
-}
-
-void SinChapterManager::DebugMode()
-{
-	if (UEngineInput::IsDown('B'))
-	{
-		GEngine->EngineDebugSwitch();
-	}
-
-	if (GEngine->IsDebug())
-	{
-		FVector CurPos = PlayerHero->GetActorLocation();
-		SinTile CurPoint= PlayerHero->GetCurPoint();
-		std::string CPoint = "[ ";
-		CPoint += std::to_string(CurPoint.X) + ", " + std::to_string(CurPoint.Y) + " ]";
-
-		UEngineDebug::DebugTextPrint("PlayerPos : " + CurPos.ToString(), 20);
-		UEngineDebug::DebugTextPrint("PlayerPoint : " + CPoint, 20);
-
-		for (std::pair<const __int64, HitChain*>& Chain : AllHitChain)
-		{
-			SinTile point = Chain.second->GetCurPoint();
-			int count = Chain.second->GetHitCount();
-
-			std::string CPoint = "( ";
-			CPoint += std::to_string(point.X) + ", " + std::to_string(point.Y) + " )";
-
-			UEngineDebug::DebugTextPrint("HitChain : " + CPoint + ", " + std::to_string(count), 20);
-		}
+	case ESinState::CutScene:
+		CutScene(_DeltaTime);
+		break;
 	}
 }
 
@@ -773,8 +750,57 @@ void SinChapterManager::M_StateChange(ESinState _State)
 		case ESinState::Phase2:
 			Phase2_Start();
 			break;
+		case ESinState::CutScene:
+			CutSceneStart();
+			break;
 		}
 	}
 
 	State = _State;
+}
+
+
+void SinChapterManager::HeroDelayTimeUpdate(float _DeltaTime)
+{
+	if (false == PlayerHero->GetCanActionCheck())
+	{
+		if (0.0f >= HeroDelayTimeCount)
+		{
+			PlayerHero->SetCanActionCheck(true);
+			HeroDelayTimeCount = HeroDelayTime;
+			return;
+		}
+
+		HeroDelayTimeCount -= _DeltaTime;
+	}
+}
+
+void SinChapterManager::DebugMode()
+{
+	if (UEngineInput::IsDown('B'))
+	{
+		GEngine->EngineDebugSwitch();
+	}
+
+	if (GEngine->IsDebug())
+	{
+		FVector CurPos = PlayerHero->GetActorLocation();
+		SinTile CurPoint = PlayerHero->GetCurPoint();
+		std::string CPoint = "[ ";
+		CPoint += std::to_string(CurPoint.X) + ", " + std::to_string(CurPoint.Y) + " ]";
+
+		UEngineDebug::DebugTextPrint("PlayerPos : " + CurPos.ToString(), 20);
+		UEngineDebug::DebugTextPrint("PlayerPoint : " + CPoint, 20);
+
+		for (std::pair<const __int64, HitChain*>& Chain : AllHitChain)
+		{
+			SinTile point = Chain.second->GetCurPoint();
+			int count = Chain.second->GetHitCount();
+
+			std::string CPoint = "( ";
+			CPoint += std::to_string(point.X) + ", " + std::to_string(point.Y) + " )";
+
+			UEngineDebug::DebugTextPrint("HitChain : " + CPoint + ", " + std::to_string(count), 20);
+		}
+	}
 }

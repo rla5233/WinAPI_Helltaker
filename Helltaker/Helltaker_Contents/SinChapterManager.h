@@ -147,7 +147,10 @@ private:
 
 	void Phase2(float _DeltaTime);
 	void HitChainCheck();
-	void JudgeAppear();
+	void JudgeAppear(float _DeltaTime);
+
+	void CutSceneStart();
+	void CutScene(float _DeltaTime);
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
@@ -192,6 +195,9 @@ private:
 
 	float PhaseDelayTimeCount = 0.0f;
 	int PhaseSmallChainVec_Index = -1;
+
+	static const float CutSceneDelayTime;
+	float CutSceneDelayTimeCount = 0.0f;
 
 	static const float MaxSpeedY;
 	float SpeedY = 50.0f;
