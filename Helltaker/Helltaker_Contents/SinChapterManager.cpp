@@ -65,8 +65,6 @@ void SinChapterManager::M_CreateSinMap()
 	M_SpawnHero();
 	
 	M_CreateSinHeroLife();
-
-
 }
 
 void SinChapterManager::M_CreateSinBG(std::string_view _Name)
