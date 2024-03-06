@@ -213,7 +213,7 @@ private:
 	int Intro_Order = -1;
 
 	static const FVector SmallChainStartPos;
-	static const float Phase1_DelayTime;
+	static float SmallChainDelayTime;
 	int Phase1_SmallChainVecSize = -1;
 	int Phase1_Order = -1;
 	float AccY = 0.0f;
@@ -221,9 +221,11 @@ private:
 	int Phase2_SmallChainVecSize = -1;
 	int Phase2_Order = -1;
 
-	float PhaseDelayTimeCount = 0.0f;
-	int PhaseSmallChainVec_Index = -1;
+	float PhaseTimeCount = 0.0f;
+	int SmallChainVec_Index = -1;
 
+
+	static const float Phase1_StartDelayTime;
 	static const float CutSceneDelayTime;
 	float TimeCount = 0.0f;
 

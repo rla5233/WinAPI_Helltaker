@@ -29,8 +29,10 @@ const float SinChapterManager::HeroDelayTime = 0.13f;
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::IntroDelayTime = 0.9f;
-const float SinChapterManager::Phase1_DelayTime = 0.5f;
+const float SinChapterManager::Phase1_StartDelayTime = 2.6f;
 const float SinChapterManager::CutSceneDelayTime = 0.5f;
+
+float SinChapterManager::SmallChainDelayTime = 0.0f;
 
 const float SinChapterManager::StartPosY = 0.388f;
 const float SinChapterManager::MaxSpeedY = -180.0f;
@@ -526,8 +528,11 @@ void SinChapterManager::Phase1_Start()
 	MoveYSum = 0;
 	BridgeResetCount = 0;
 
-	PhaseSmallChainVec_Index = 0;
-	PhaseDelayTimeCount = Phase1_DelayTime;
+	SmallChainVec_Index = 0;
+	SmallChainDelayTime = 0.6f;
+	PhaseTimeCount = SmallChainDelayTime;
+
+	TimeCount = Phase1_StartDelayTime;
 	Phase1_Order = 0;
 }
 
@@ -536,6 +541,7 @@ void SinChapterManager::Phase1(float _DeltaTime)
 	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
 	MoveYSum += SpeedY * _DeltaTime;
+	
 	Phase1_SmallChainUpdate(_DeltaTime);
 	
 	switch (Phase1_Order)
@@ -558,14 +564,20 @@ void SinChapterManager::Phase1(float _DeltaTime)
 
 void SinChapterManager::Phase1_SmallChainUpdate(float _DeltaTime)
 {
-	if (PhaseSmallChainVec_Index >= Phase1_SmallChain.size())
+	if (0.0f < TimeCount)
+	{
+		TimeCount -= _DeltaTime;
+		return;
+	}
+
+	if (SmallChainVec_Index >= Phase1_SmallChain.size())
 	{
 		return;
 	}
 
-	if (0.0f >= PhaseDelayTimeCount)
+	if (0.0f >= PhaseTimeCount)
 	{
-		std::list<SmallChain*>& SmallChainVec = Phase1_SmallChain[PhaseSmallChainVec_Index];
+		std::list<SmallChain*>& SmallChainVec = Phase1_SmallChain[SmallChainVec_Index];
 
 		for (SmallChain* SmallChain : SmallChainVec)
 		{
@@ -577,13 +589,13 @@ void SinChapterManager::Phase1_SmallChainUpdate(float _DeltaTime)
 			SmallChain->StateChange(ESinSmallChainState::Show);
 		}
 
-		++PhaseSmallChainVec_Index;
-		PhaseDelayTimeCount = Phase1_DelayTime;
+		++SmallChainVec_Index;
+		PhaseTimeCount = SmallChainDelayTime;
 
 		return;
 	}
 
-	PhaseDelayTimeCount -= _DeltaTime;
+	PhaseTimeCount -= _DeltaTime;
 }
 
 void SinChapterManager::Phase1_SpeedY_Update1(float _DeltaTime)
