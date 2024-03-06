@@ -46,6 +46,10 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
 		ContentsHelper::LoadImg("UI", "White_Bar.png");
 
+		// 수정 (제거)
+		ContentsHelper::LoadImg("UI", "Small_LButton.png");
+		ContentsHelper::LoadImg("UI", "Small_RButton.png");
+
 		IsLoad = true;
 	}
 }
@@ -365,12 +369,13 @@ void SinChapterManager::M_CreateHitChain(ESinHitChainType _Type, int _PointY)
 void SinChapterManager::M_CreateHitChainHp(std::string_view _Name /* = " " */)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float PosY = WinScale.Y * 0.01f;
+	float PosY = WinScale.Y * 0.125f;
 	
 	SinHitChainHp = SpawnActor<HitChainHp>(static_cast<int>(SinUpdateOrder::Top));
 	SinHitChainHp->SetActorLocation({ WinScale.hX(), PosY });
 	SinHitChainHp->GetTextRenderer()->SetText(_Name);
-
+	SinHitChainHp->SetTotalHitCount(static_cast<int>(AllHitChain.size()));
+	SinHitChainHp->StateChange(ESinHitChainHpState::Idle);
 
 	AllMapRenderActors.push_back(SinHitChainHp);
 }

@@ -16,13 +16,18 @@ public:
 	HitChainHp& operator=(const HitChainHp& _Other) = delete;
 	HitChainHp& operator=(HitChainHp&& _Other) noexcept = delete;
 
-	void StateChange(ESinHitChainHpState _State);
+	void SetTotalHitCount(int _Count)
+	{
+		TotalHitCount = _Count;
+	}
 
 	UImageRenderer* GetTextRenderer() const
 	{
 		return TextRenderer;
 	}
 
+	void StateChange(ESinHitChainHpState _State);
+	
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -47,5 +52,6 @@ private:
 	static const FVector HpScale;
 	static const FVector ImageScale;
 
+	int TotalHitCount = 0;
 	ESinHitChainHpState State = ESinHitChainHpState::None;
 };
