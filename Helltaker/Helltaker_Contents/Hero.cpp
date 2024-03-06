@@ -159,6 +159,13 @@ void Hero::KickStart()
 	Other->NextStateCheck(GetMoveDir());
 }
 
+void Hero::DeathStart()
+{
+	HeroBase::DeathStart();
+
+	GetChapter()->M_StateChange(EChapterState::HeroDeath);
+}
+
 void Hero::UpdateActionPoint()
 {
 	// Cheat

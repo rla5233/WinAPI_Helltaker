@@ -406,12 +406,6 @@ void ChapterManager::Idle(float _DeltaTime)
 	
 	ResetCheck();
 
-	// 수정 (Hero 에서 보내기 가능?)
-	if (EHeroState::Death == PlayerHero->GetHeroState())
-	{
-		M_StateChange(EChapterState::HeroDeath);
-	}	
-
 	CutSceneCheck();
 
 	// Debug

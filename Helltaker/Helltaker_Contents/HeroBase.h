@@ -53,6 +53,8 @@ protected:
 	virtual void Move(float _DeltaTime);
 	
 	virtual void KickStart();
+
+	virtual void DeathStart();
 	
 	virtual void ActionCheck() {};
 	virtual void KickCheck() {};
@@ -68,7 +70,6 @@ private:
 	void VictoryStart();
 	void Victory(float _DeltaTime);
 
-	void DeathStart();
 	void Death(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);

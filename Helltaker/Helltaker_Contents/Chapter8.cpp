@@ -12,7 +12,7 @@ const float Chapter8::SkeletonRenderDelay = 0.2f;
 const float Chapter8::SkeletonCreateDelay = 0.07f;
 const float Chapter8::LuSwirl1RenderDelay = 0.39f;
 const float Chapter8::LuSwirl2RenderDelay = 0.6f;
-const float Chapter8::LuIdleRenderDelay = 0.075f;
+const float Chapter8::LuIdleRenderDelay = 0.75f;
 
 const std::vector<const char*> Chapter8::Chap8_Script
 {

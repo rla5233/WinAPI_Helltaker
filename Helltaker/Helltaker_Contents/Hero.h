@@ -32,6 +32,8 @@ protected:
 	void Move(float _DeltaTime) override;
 
 	void KickStart() override;
+	
+	void DeathStart() override;
 
 private:
 	void ThornHitCheck() override;
