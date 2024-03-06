@@ -162,11 +162,6 @@ void SmallChain::Hit(float _DeltaTime)
 	HitAnimation(_DeltaTime);
 	MoveY_Update(_DeltaTime);
 	HeroHitCheck(_DeltaTime);
-
-	if (false == IsHit)
-	{
-		Destroy();
-	}
 }
 
 void SmallChain::HitAnimation(float _DeltaTime)
@@ -196,7 +191,7 @@ void SmallChain::VerHitAnimation(float _DeltaTime)
 	if (1.0f <= TimeCount)
 	{
 		TimeCount = 0.0f;
-		IsHit = false;
+		StateChange(ESinSmallChainState::Death);
 	}
 }
 
@@ -211,7 +206,7 @@ void SmallChain::HorHitAnimation(float _DeltaTime)
 	if (1.0f <= TimeCount)
 	{
 		TimeCount = 0.0f;
-		IsHit = false;
+		StateChange(ESinSmallChainState::Death);
 	}
 }
 
@@ -241,6 +236,15 @@ void SmallChain::HeroHitCheck(float _DeltaTime)
 
 		HitTimeCount -= _DeltaTime;
 	}
+}
+
+void SmallChain::DeathStart()
+{
+}
+
+void SmallChain::Death(float _DeltaTime)
+{
+	Destroy();
 }
 
 void SmallChain::Tick(float _DeltaTime)

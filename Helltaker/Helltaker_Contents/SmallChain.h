@@ -37,6 +37,9 @@ private:
 	void HitStart();
 	void Hit(float _DeltaTime);
 
+	void DeathStart();
+	void Death(float _DeltaTime);
+
 	void HitAnimation(float _DeltaTime);
 	void VerHitAnimation(float _DeltaTime);
 	void HorHitAnimation(float _DeltaTime);
@@ -58,6 +61,7 @@ private:
 	float HitTimeCount = 0.0f;
 
 	ESinSmallChainType Type = ESinSmallChainType::None;
+	ESinSmallChainPhase Phase = ESinSmallChainPhase::None;
 	ESinSmallChainState State = ESinSmallChainState::None;
 	static bool IsLoad;
 };

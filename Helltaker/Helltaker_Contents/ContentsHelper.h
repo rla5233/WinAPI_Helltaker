@@ -181,7 +181,8 @@ enum class ESinState
 	Intro,
 	Phase1,
 	Phase2,
-	CutScene
+	CutScene,
+	Reset
 };
 
 enum class EHeroState
@@ -362,13 +363,21 @@ enum class ESinSmallChainType
 	Hor
 };
 
+enum class ESinSmallChainPhase
+{
+	None,
+	Phase1,
+	Phase2
+};
+
 enum class ESinSmallChainState
 {
 	None,
 	Idle,
 	Move,
 	Show,
-	Hit
+	Hit,
+	Death
 };
 
 enum class ESinHitChainState

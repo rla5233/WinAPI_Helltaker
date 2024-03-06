@@ -132,6 +132,8 @@ protected:
 	virtual void Phase1_Start();
 	virtual void Phase2_Start();
 
+	virtual void ResetCheck();
+
 	void M_StateChange(ESinState _State);
 
 private:
@@ -162,6 +164,9 @@ private:
 
 	void CutSceneStart();
 	void CutScene(float _DeltaTime);
+
+	void ResetStart();
+	void Reset(float _DeltaTime);
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 

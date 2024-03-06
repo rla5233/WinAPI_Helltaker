@@ -491,6 +491,7 @@ void SinChapterManager::TransitionCheck()
 {
 	if (true == TransitionActor->GetImageRenderer()->IsCurAnimationEnd())
 	{
+		ResetCheck();
 		TransitionActor->GetImageRenderer()->ActiveOff();
 		UpPiston->StateChange(ESinPistonState::Move);
 		++Intro_Order;
@@ -499,6 +500,7 @@ void SinChapterManager::TransitionCheck()
 
 void SinChapterManager::Phase1_Check()
 {
+	ResetCheck();
 	if (ESinSkullState::Move == SinSkull->GetState() &&
 		ESinPistonState::Move == UpPiston->GetState())
 	{
@@ -525,6 +527,7 @@ void SinChapterManager::Phase1_Start()
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
+	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
 	MoveYSum += SpeedY * _DeltaTime;
 	Phase1_SmallChainUpdate(_DeltaTime);
@@ -638,8 +641,17 @@ void SinChapterManager::Phase2_Start()
 	Phase2_Order = 0;
 }
 
+void SinChapterManager::ResetCheck()
+{
+	if (UEngineInput::IsPress('R'))
+	{
+		M_StateChange(ESinState::Reset);
+	}
+}
+
 void SinChapterManager::Phase2(float _DeltaTime)
 {
+	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
 	
 	switch (Phase2_Order)
@@ -685,6 +697,20 @@ void SinChapterManager::CutSceneStart()
 void SinChapterManager::CutScene(float _DeltaTime)
 {
 
+}
+
+void SinChapterManager::ResetStart()
+{
+	TransitionOn();
+}
+
+void SinChapterManager::Reset(float _DeltaTime)
+{
+	if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
+	{
+		LevelEnd(nullptr);
+		LevelStart(nullptr);
+	}
 }
 
 void SinChapterManager::LevelStart(ULevel* _PrevLevel)
@@ -805,6 +831,9 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	case ESinState::CutScene:
 		CutScene(_DeltaTime);
 		break;
+	case ESinState::Reset:
+		Reset(_DeltaTime);
+		break;
 	}
 }
 
@@ -825,6 +854,9 @@ void SinChapterManager::M_StateChange(ESinState _State)
 			break;
 		case ESinState::CutScene:
 			CutSceneStart();
+			break;
+		case ESinState::Reset:
+			ResetStart();
 			break;
 		}
 	}
