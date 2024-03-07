@@ -31,14 +31,14 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 void Helltaker_ContentsCore::BeginPlay()
 {
 	UEngineCore::BeginPlay();
-	MainWindow.SetWindowScale({ 1920, 1080 });
-	//MainWindow.SetWindowScale({ 1280, 720 });
-
 	MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
+	MainWindow.SetWindowScale({ 1920, 1080 });
 	SetFrame(60);
 
-    CreateLevel<Opening>("Opening");
-    ChangeLevel("Opening");
+	//MainWindow.SetWindowScale({ 1280, 720 });
+
+    //CreateLevel<Opening>("Opening");
+    //ChangeLevel("Opening");
 
 	//CreateLevel<MainMenu>("MainMenu");
 	//ChangeLevel("MainMenu");
@@ -46,8 +46,8 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter1>("Chapter1");
 	//ChangeLevel("Chapter1");
 
-	//CreateLevel<Chapter2>("Chapter2");
-	//ChangeLevel("Chapter2");
+	CreateLevel<Chapter2>("Chapter2");
+	ChangeLevel("Chapter2");
 
 	//CreateLevel<Chapter3>("Chapter3");
 	//ChangeLevel("Chapter3");
