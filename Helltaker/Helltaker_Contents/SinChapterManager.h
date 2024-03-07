@@ -142,6 +142,8 @@ protected:
 	virtual void Phase1_Start();
 	virtual void Phase2_Start();
 
+	virtual void CutSceneStart();
+
 	virtual void ResetCheck();
 
 	void M_StateChange(ESinState _State);
@@ -172,7 +174,6 @@ private:
 	void HitChainCheck();
 	void JudgeAppear(float _DeltaTime);
 
-	void CutSceneStart();
 	void CutScene(float _DeltaTime);
 
 	void ResetStart();

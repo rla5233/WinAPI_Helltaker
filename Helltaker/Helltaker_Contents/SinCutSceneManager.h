@@ -17,14 +17,15 @@ public:
 	SinCutSceneManager& operator=(SinCutSceneManager&& _Other) noexcept = delete;
 
 	void C_CreateSceneBG();
-
-	void CutSceneStart();
+	void C_CreateDialogue();
 
 	void C_StateChange(ESinSceneState _State);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+	virtual void CutSceneStart() override;
 
 private:
 	void EnterStart();
@@ -33,9 +34,10 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
+	// Manager
 	std::list<AActor*> AllCutSceneActors;
 
-
+	std::list<Scene*> Dialogue;
 
 	ESinSceneState State = ESinSceneState::None;
 	static bool IsLoad;

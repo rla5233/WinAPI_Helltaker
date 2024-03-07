@@ -124,6 +124,7 @@ private:
 	void SetFocusMenuIndex(int _Index);
 
 private:
+	// Manager
 	std::list<AActor*> AllCutSceneActors;
 
 	Character* SceneCharacter = nullptr;

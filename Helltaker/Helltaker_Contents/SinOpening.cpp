@@ -39,4 +39,6 @@ void SinOpening::BeginPlay()
 void SinOpening::LevelStart(ULevel * _PrevLevel)
 {
 	SinManager::LevelStart(_PrevLevel);
+
+	CutSceneStart();
 }

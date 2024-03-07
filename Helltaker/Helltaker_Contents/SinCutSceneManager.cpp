@@ -19,6 +19,8 @@ void SinCutSceneManager::BeginPlay()
 	if (false == IsLoad)
 	{
 
+		// 수정 (제거)
+		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
 
 		IsLoad = true;
 	}
@@ -27,25 +29,37 @@ void SinCutSceneManager::BeginPlay()
 void SinCutSceneManager::C_CreateSceneBG()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector UpScale = { 1.0f, 0.2f };
-	float UpPosY = WinScale.Y * 0.3f;
-	BackGround* Up_BG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
+	FVector UpScale = { 1.0f, 0.15f };
+	float UpPosY = WinScale.Y * UpScale.Y * 0.5f;
+	BackGround* Up_BG = SpawnActor<BackGround>(SinUpdateOrder::BackGround);
 	Up_BG->SetActorLocation({ WinScale.hX(), UpPosY });
 	Up_BG->CreateImageRenderer(SinRenderOrder::BackGround);
 	Up_BG->GetImageRenderer()->SetImage("DefaultBG.png");
 	Up_BG->GetImageRenderer()->SetScale(WinScale * UpScale);
-
 	AllCutSceneActors.push_back(Up_BG);
+
+	FVector DownScale = { 1.0f, 0.4f };
+	float DownPosY = WinScale.Y * (1.0f - DownScale.Y * 0.5f);
+	BackGround* Down_BG = SpawnActor<BackGround>(SinUpdateOrder::BackGround);
+	Down_BG->SetActorLocation({ WinScale.hX(), DownPosY });
+	Down_BG->CreateImageRenderer(SinRenderOrder::BackGround);
+	Down_BG->GetImageRenderer()->SetImage("DefaultBG.png");
+	Down_BG->GetImageRenderer()->SetScale(WinScale * DownScale);
+	AllCutSceneActors.push_back(Down_BG);
 }
 
 void SinCutSceneManager::CutSceneStart()
 {
-	// 검은색 배경 생성
-
+	C_CreateSceneBG();
 	
 
 
 	// 컷신 상태 변경
+
+}
+
+void SinCutSceneManager::C_CreateDialogue()
+{
 
 }
 
