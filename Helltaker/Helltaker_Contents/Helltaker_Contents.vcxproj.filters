@@ -152,7 +152,10 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
     <ClInclude Include="Sin_Dialogue.h">
-      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+      <Filter>Object\Actor\Sin\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Judge.h">
+      <Filter>Object\Actor\Sin\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +307,10 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
     <ClCompile Include="Sin_Dialogue.cpp">
-      <Filter>Object\Actor\Sin\MoveComponent</Filter>
+      <Filter>Object\Actor\Sin\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Judge.cpp">
+      <Filter>Object\Actor\Sin\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +355,9 @@
     </Filter>
     <Filter Include="Object\Actor\Sin\Component">
       <UniqueIdentifier>{157a171b-bb7d-4a6d-8814-ddff1873977d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Sin\Scene">
+      <UniqueIdentifier>{93109b38-ab4d-4561-974b-4673d81a857a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
