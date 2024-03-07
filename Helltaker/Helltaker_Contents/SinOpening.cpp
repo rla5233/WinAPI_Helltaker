@@ -129,6 +129,8 @@ void SinOpening::Enter3()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		GetDialogue()->StateChange(ESinDialogueState::Lightning);
+		GetBooper()->AllRenderersActiveOff();
+		GetJudge()->GetNameRenderer()->ActiveOff();
 		++EnterOrder;
 	}
 }
