@@ -3,18 +3,18 @@
 #include "Character.h"
 
 // Ό³Έν :
-class Judge : public Character
+class Sin_Judge : public Character
 {
 public:
 	// constructor destructor
-	Judge();
-	~Judge();
-
+	Sin_Judge();
+	~Sin_Judge();
+	
 	// delete Function
-	Judge(const Judge& _Other) = delete;
-	Judge(Judge&& _Other) noexcept = delete;
-	Judge& operator=(const Judge& _Other) = delete;
-	Judge& operator=(Judge&& _Other) noexcept = delete;
+	Sin_Judge(const Sin_Judge& _Other) = delete;
+	Sin_Judge(Sin_Judge&& _Other) noexcept = delete;
+	Sin_Judge& operator=(const Sin_Judge& _Other) = delete;
+	Sin_Judge& operator=(Sin_Judge&& _Other) noexcept = delete;
 
 	void StateChange(ESinJudgeState _State);
 
@@ -30,8 +30,6 @@ private:
 
 private:
 
-
-
 	ESinJudgeState State = ESinJudgeState::None;
-	static bool IsLoad;
 };
+

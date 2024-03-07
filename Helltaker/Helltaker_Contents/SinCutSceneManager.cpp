@@ -3,6 +3,7 @@
 #include "Sin_Dialogue.h"
 #include "BackGround.h"
 #include "Character.h"
+#include "Sin_Judge.h"
 #include "UI.h"
 
 const FVector SinCutSceneManager::FocusMenuScale = { 0.501f, 0.074f };
@@ -67,6 +68,27 @@ void SinCutSceneManager::C_SpawnDialogue(int _PosType)
 	AllCutSceneActors.push_back(Dialogue);
 }
 
+void SinCutSceneManager::C_SpawnJudge(std::string_view _ImgName, std::string_view _Text /* = " " */)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Judge = SpawnActor<Sin_Judge>(SinUpdateOrder::Mid);
+	Judge->SetActorLocation({ WinScale.hX(), WinScale.Y * WinScale.Y * 0.387f });
+	Judge->SetName("Sin_Judge");
+	Judge->CreateImageRenderer(SinRenderOrder::Mid);
+	Judge->CreateNameRenderer(SinRenderOrder::Top);
+
+	Judge->GetImageRenderer()->SetImage(_ImgName);
+
+	Judge->GetNameRenderer()->SetText(_Text);
+	Judge->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
+	Judge->GetNameRenderer()->SetTextSize(40);
+	Judge->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
+	Judge->GetNameRenderer()->SetTextColor(HELLTAKER_RED1);
+	Judge->GetNameRenderer()->SetTextEffect(2);
+
+	AllCutSceneActors.push_back(Judge);
+}
+
 void SinCutSceneManager::C_SpawnBooper()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -91,6 +113,17 @@ void SinCutSceneManager::C_SpawnBooper()
 void SinCutSceneManager::C_BooperTextSet(std::string_view _Text)
 {
 	Booper->GetTextRenderer()->SetText(_Text);
+
+	int LineCount = 1;
+	for (size_t i = 0; i < _Text.size(); i++)
+	{
+		if ('\n' == _Text[i])
+		{
+			++LineCount;
+		}
+	}
+
+	C_BooperSetTextPosition(LineCount);
 }
 
 void SinCutSceneManager::C_BooperSetTextPosition(int _LineCount)

@@ -26,6 +26,19 @@ SinOpening::~SinOpening()
 {
 }
 
+void SinOpening::BeginPlay()
+{
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "L_Arm");
+		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "R_Arm");
+
+		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
+
+		IsLoad = true;
+	}
+}
+
 void SinOpening::LevelStart(ULevel * _PrevLevel)
 {
 	SinManager::LevelStart(_PrevLevel);
@@ -44,6 +57,8 @@ void SinOpening::CutSceneStart()
 	C_SpawnBooper();
 	C_BooperTextSet(SinOpening_Script[2]);
 	C_BooperSetTextPosition(2);
+
+	C_SpawnJudge("Jud_Intro", SinOpening_Script[0]);
 
 	C_StateChange(ESinSceneState::Enter);
 }

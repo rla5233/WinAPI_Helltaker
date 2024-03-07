@@ -87,7 +87,6 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 	SceneCharacter->SetName(_Name);
 	SceneCharacter->CreateImageRenderer(RenderOrder::Character);
 	SceneCharacter->CreateNameRenderer(RenderOrder::Text);
-	AllCutSceneActors.push_back(SceneCharacter);
 
 	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
 	SceneCharacter->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
@@ -100,6 +99,8 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED1);
 	SceneCharacter->GetNameRenderer()->SetTextEffect(2);
 	SceneCharacter->GetNameRenderer()->CameraEffectOff();
+
+	AllCutSceneActors.push_back(SceneCharacter);
 }
 
 void CutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)

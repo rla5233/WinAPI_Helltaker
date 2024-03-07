@@ -4,6 +4,7 @@
 
 class Sin_Dialogue;
 class Character;
+class Sin_Judge;
 class UI;
 
 // 설명 :
@@ -23,7 +24,7 @@ public:
 	void C_CreateSceneBG();
 
 	void C_SpawnDialogue(int _PosType);
-	// 수정 (캐릭터 스폰 추가)
+	void C_SpawnJudge(std::string_view _ImgName, std::string_view _Text = " ");
 	void C_SpawnBooper();
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
@@ -65,7 +66,7 @@ private:
 	// Manager
 	std::list<AActor*> AllCutSceneActors;
 
-	//Character* SceneCharacter = nullptr;
+	Sin_Judge* Judge = nullptr;
 	Sin_Dialogue* Dialogue = nullptr;
 	UI* Booper = nullptr;
 

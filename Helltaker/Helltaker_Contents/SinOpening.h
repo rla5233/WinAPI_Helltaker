@@ -17,6 +17,7 @@ public:
 	SinOpening& operator=(SinOpening&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
 	// Chapter
