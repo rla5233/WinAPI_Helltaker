@@ -1,5 +1,8 @@
 #include "Sin_Dialogue.h"
 
+#include "SinCutSceneManager.h"
+#include "Sin_Judge.h"
+
 bool Sin_Dialogue::IsLoad = false;
 
 const FVector Sin_Dialogue::HellScale = { 1.021f, 0.7592f };
@@ -97,8 +100,7 @@ void Sin_Dialogue::Lightning(float _DeltaTime)
 	{
 		LitHell_Renderer->ActiveOff();
  		
-		// 수정 (캐릭터 State 바꾸기 추가)
-
+		GetSinCutSceneChapter()->GetJudge()->StateChange(ESinJudgeState::Intro_Appear);
  		StateChange(ESinDialogueState::Move);
 	}
 }

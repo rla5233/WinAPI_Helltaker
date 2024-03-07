@@ -1,6 +1,7 @@
 #include "SinOpening.h"
 
 #include "Sin_Dialogue.h"
+#include "Sin_Judge.h"
 #include "Character.h"
 #include "Scene.h"
 #include "UI.h"
@@ -58,7 +59,7 @@ void SinOpening::CutSceneStart()
 	C_BooperTextSet(SinOpening_Script[2]);
 	C_BooperSetTextPosition(2);
 
-	C_SpawnJudge("Jud_Intro", SinOpening_Script[0]);
+	C_SpawnJudge("Jud_Intro");
 
 	C_StateChange(ESinSceneState::Enter);
 }
@@ -105,6 +106,8 @@ void SinOpening::Enter1()
 	{
 		C_CreateSceneBG();
 		C_SpawnDialogue(0);
+		
+		GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[0]);
 		// 수정 (캐릭터 추가)
 
 		C_BooperTextSet(SinOpening_Script[3]);

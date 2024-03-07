@@ -2,6 +2,7 @@
 
 #include "ChapterManager.h"
 #include "SinChapterManager.h"
+#include "SinCutSceneManager.h"
 
 bool RenderActor::IsLoad = false; 
 
@@ -39,6 +40,17 @@ ChapterManager* RenderActor::GetChapter()
 SinChapterManager* RenderActor::GetSinChapter()
 {
 	SinChapterManager* Ptr = dynamic_cast<SinChapterManager*>(GetWorld());
+	if (nullptr == Ptr)
+	{
+		MsgBoxAssert("Chapter is nullptr");
+	}
+
+	return Ptr;
+}
+
+SinCutSceneManager* RenderActor::GetSinCutSceneChapter()
+{
+	SinCutSceneManager* Ptr = dynamic_cast<SinCutSceneManager*>(GetWorld());
 	if (nullptr == Ptr)
 	{
 		MsgBoxAssert("Chapter is nullptr");

@@ -72,7 +72,7 @@ void SinCutSceneManager::C_SpawnJudge(std::string_view _ImgName, std::string_vie
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Judge = SpawnActor<Sin_Judge>(SinUpdateOrder::Mid);
-	Judge->SetActorLocation({ WinScale.hX(), WinScale.Y * WinScale.Y * 0.387f });
+	Judge->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
 	Judge->SetName("Sin_Judge");
 	Judge->CreateImageRenderer(SinRenderOrder::Mid);
 	Judge->CreateNameRenderer(SinRenderOrder::Top);

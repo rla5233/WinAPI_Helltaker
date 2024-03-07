@@ -36,6 +36,11 @@ public:
 		return Dialogue;
 	}
 
+	Sin_Judge* GetJudge() const
+	{
+		return Judge;
+	}
+
 	UI* GetBooper() const
 	{
 		return Booper;

@@ -6,6 +6,7 @@
 
 class ChapterManager;
 class SinChapterManager;
+class SinCutSceneManager;
 
 // Ό³Έν :
 class RenderActor : public AActor
@@ -23,6 +24,8 @@ public:
 
 	ChapterManager* GetChapter();
 	SinChapterManager* GetSinChapter();
+	SinCutSceneManager* GetSinCutSceneChapter();
+	
 	
 	void FadeInUpdate(
 		UImageRenderer* const _Renderer,
