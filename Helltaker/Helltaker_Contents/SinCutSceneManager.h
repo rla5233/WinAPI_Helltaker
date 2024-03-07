@@ -17,7 +17,7 @@ public:
 	SinCutSceneManager& operator=(SinCutSceneManager&& _Other) noexcept = delete;
 
 	void C_CreateSceneBG();
-	void C_CreateDialogue();
+	void C_CreateDialogue(int _InitType);
 
 	void C_StateChange(ESinSceneState _State);
 

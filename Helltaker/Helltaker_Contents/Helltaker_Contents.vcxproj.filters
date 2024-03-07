@@ -151,6 +151,9 @@
     <ClInclude Include="Sin_Demon.h">
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
+    <ClInclude Include="Sin_Dialogue.h">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -298,6 +301,9 @@
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Sin_Demon.cpp">
+      <Filter>Object\Actor\Sin</Filter>
+    </ClCompile>
+    <ClCompile Include="Sin_Dialogue.cpp">
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "SinCutSceneManager.h"
 
 #include "BackGround.h"
+#include "Scene.h"
 
 bool SinCutSceneManager::IsLoad = false;
 
@@ -18,6 +19,7 @@ void SinCutSceneManager::BeginPlay()
 
 	if (false == IsLoad)
 	{
+
 
 		// 수정 (제거)
 		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
@@ -58,9 +60,21 @@ void SinCutSceneManager::CutSceneStart()
 
 }
 
-void SinCutSceneManager::C_CreateDialogue()
+void SinCutSceneManager::C_CreateDialogue(int _InitType)
 {
+	FVector WinScale = ContentsHelper::GetWindowScale();
 
+	float UpPosY = 0.0f, DownPosY = 0.0f;
+	switch (_InitType)
+	{
+	case 0:
+		UpPosY = WinScale.Y * 0.4f;
+
+		break;
+	case 1:
+
+		break;
+	}
 }
 
 void SinCutSceneManager::EnterStart()
