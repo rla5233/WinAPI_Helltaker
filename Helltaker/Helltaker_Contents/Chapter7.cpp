@@ -101,16 +101,13 @@ void Chapter7::CutSceneStart()
 	CutSceneManager::CutSceneStart();
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
-	C_SpawnCharacter("Jus", "Jus_Curious.png", Chap7_Script[0]);
+
+	FVector Scale = { 0.228f, 0.567f };
+	FVector Pos = { -0.005f, 0.02f };
+	C_SpawnCharacter("Jus", "Jus_Curious.png", Chap7_Script[0], Pos, Scale);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
 	C_SpawnBooper();
-
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.228f, WinScale.Y * 0.567f };
-	FVector Pos = { WinScale.X * (-0.005f), WinScale.Y * 0.02f};
-	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-	//C_GetSceneCharacter()->ImageRendererFadeInOn();
-
 	C_BooperTextSet(Chap7_Script[1]);
 	C_BooperSetTextPosition(1);
 }
