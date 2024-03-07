@@ -45,7 +45,19 @@ public:
 		return NameRenderer;
 	}
 
+	void StateChange(ECharacterState _State);
+
 protected:
+	void Tick(float _DeltaTime) override;
+
+private:
+	void IdleStart();
+	void Idle(float _DeltaTime);
+
+	void AppearStart();
+	void Appear(float _DeltaTime);
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
@@ -55,4 +67,6 @@ private:
 	FVector TargetPos = FVector::Zero;
 	float MoveTime = 0.0f;
 	bool IsImageMoveValue = false;
+
+	ECharacterState State = ECharacterState::None;
 };

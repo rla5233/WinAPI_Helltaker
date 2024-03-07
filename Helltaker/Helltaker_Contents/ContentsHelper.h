@@ -213,6 +213,13 @@ enum class EHeroState
 	Death
 };
 
+enum class ECharacterState
+{
+	None,
+	Idle,
+	Appear
+};
+
 enum class ESinHeroState
 {
 	None,
@@ -416,4 +423,9 @@ enum class ESinDialogueState
 	Idle,
 	Lightning,
 	Move,
+};
+
+enum class ESinJudgeState
+{
+	None,
 };

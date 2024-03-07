@@ -17,7 +17,13 @@ public:
 	Judge& operator=(Judge&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 
+
+	static bool IsLoad;
 };
