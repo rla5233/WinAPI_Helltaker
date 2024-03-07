@@ -463,14 +463,14 @@ void SinChapterManager::IntroStart()
 	UEngineSound::SoundPlay("transition_off.wav");
 	
 	TimeCount = IntroDelayTime;
-	Intro_Order = 0;
+	OrderCount = 0;
 }
 
 void SinChapterManager::Intro(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
 
-	switch (Intro_Order)
+	switch (OrderCount)
 	{
 	case 0:
 		TransitionCheck(_DeltaTime);
@@ -497,7 +497,7 @@ void SinChapterManager::TransitionCheck(float _DeltaTime)
 		if (0.0f > TimeCount)
 		{
 			UpPiston->StateChange(ESinPistonState::Move);
-			++Intro_Order;
+			++OrderCount;
 
 			return;
 		}
@@ -536,7 +536,7 @@ void SinChapterManager::Phase1_Start()
 	PhaseTimeCount = SmallChainDelayTime;
 
 	TimeCount = Phase1_StartDelayTime;
-	Phase1_Order = 0;
+	OrderCount = 0;
 }
 
 void SinChapterManager::Phase1(float _DeltaTime)
@@ -547,7 +547,7 @@ void SinChapterManager::Phase1(float _DeltaTime)
 	
 	Phase1_SmallChainUpdate(_DeltaTime);
 	
-	switch (Phase1_Order)
+	switch (OrderCount)
 	{
 	case 0:
 		BridgeResetCheck();
@@ -642,7 +642,7 @@ void SinChapterManager::BridgeResetCheck()
 		float TarGetPosY = WinScale.Y * (0.038f + Bridge::GetScale().Y);
 
 		AccY = -(SpeedY * SpeedY) / (2 * (TarGetPosY - CurPosY));
-		++Phase1_Order;
+		++OrderCount;
 	}
 }
 
@@ -659,7 +659,7 @@ void SinChapterManager::Phase2_Start()
 	PlayerHero->MoveY_Off();
 	PlayerHero->SinHero_StateChange(ESinHeroState::Idle);
 
-	Phase2_Order = 0;
+	OrderCount = 0;
 }
 
 void SinChapterManager::ResetCheck()
@@ -675,7 +675,7 @@ void SinChapterManager::Phase2(float _DeltaTime)
 	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
 	
-	switch (Phase2_Order)
+	switch (OrderCount)
 	{
 	case 0:
 		HitChainCheck();
@@ -692,7 +692,7 @@ void SinChapterManager::HitChainCheck()
 	{
 		M_SpawnDemon();
 		TimeCount = CutSceneDelayTime;
-		++Phase2_Order;
+		++OrderCount;
 	}
 }
 
@@ -731,6 +731,30 @@ void SinChapterManager::Reset(float _DeltaTime)
 	{
 		LevelEnd(nullptr);
 		LevelStart(nullptr);
+	}
+}
+
+void SinChapterManager::SinChageStart()
+{
+	// 수정 (엑터 정리 추가)
+
+	OrderCount = 0; 
+}
+
+void SinChapterManager::SinChage(float _DeltaTime)
+{
+	switch (OrderCount)
+	{
+	case 0:
+		TransitionOn();
+		++OrderCount;
+		break;
+	case 1:
+		if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
+		{
+			ChangeChapter();
+		}
+		break;
 	}
 }
 
@@ -845,6 +869,9 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	case ESinState::Reset:
 		Reset(_DeltaTime);
 		break;
+	case ESinState::SinChage:
+		SinChage(_DeltaTime);
+		break;
 	}
 }
 
@@ -868,6 +895,9 @@ void SinChapterManager::M_StateChange(ESinState _State)
 			break;
 		case ESinState::Reset:
 			ResetStart();
+			break;
+		case ESinState::SinChage:
+			SinChageStart();
 			break;
 		}
 	}

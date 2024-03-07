@@ -172,6 +172,7 @@ protected:
 	virtual void CutSceneStart();
 	virtual void CutScene(float _DeltaTime);
 
+
 	virtual void ResetCheck();
 
 	virtual void ChangeChapter() {};
@@ -204,6 +205,9 @@ private:
 
 	void ResetStart();
 	void Reset(float _DeltaTime);
+
+	void SinChageStart();
+	void SinChage(float _DeltaTime);
 
 	void HeroDelayTimeUpdate(float _DeltaTime);
 
@@ -240,16 +244,14 @@ private:
 	float HeroDelayTimeCount = HeroDelayTime;
 
 	static const float IntroDelayTime;
-	int Intro_Order = -1;
+	int OrderCount = -1;
 
 	static const FVector SmallChainStartPos;
 	static float SmallChainDelayTime;
 	int Phase1_SmallChainVecSize = -1;
-	int Phase1_Order = -1;
 	float AccY = 0.0f;
 	
 	int Phase2_SmallChainVecSize = -1;
-	int Phase2_Order = -1;
 
 	float PhaseTimeCount = 0.0f;
 	int SmallChainVec_Index = -1;

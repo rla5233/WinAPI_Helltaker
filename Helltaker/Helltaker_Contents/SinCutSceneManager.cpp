@@ -186,7 +186,8 @@ void SinCutSceneManager::End(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		ChangeChapter();
+		M_StateChange(ESinState::SinChage);
+		C_StateChange(ESinSceneState::None);
 	}
 }
 

@@ -192,7 +192,8 @@ enum class ESinState
 	Phase1,
 	Phase2,
 	CutScene,
-	Reset
+	Reset,
+	SinChage
 };
 
 enum class ESinSceneState
