@@ -13,12 +13,6 @@
     <ClInclude Include="Hero.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="Opening.h">
-      <Filter>Object\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Object\Level</Filter>
-    </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Object\Actor</Filter>
     </ClInclude>
@@ -157,6 +151,12 @@
     <ClInclude Include="RenderActor.h">
       <Filter>Object\Actor\Base\Level1</Filter>
     </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Object\Level\Opening</Filter>
+    </ClInclude>
+    <ClInclude Include="Opening.h">
+      <Filter>Object\Level\Opening</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -173,12 +173,6 @@
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
       <Filter>Object\Actor\Chapter</Filter>
-    </ClCompile>
-    <ClCompile Include="Opening.cpp">
-      <Filter>Object\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Object\Level</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Object\Actor</Filter>
@@ -312,6 +306,12 @@
     <ClCompile Include="RenderActor.cpp">
       <Filter>Object\Actor\Base\Level1</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Object\Level\Opening</Filter>
+    </ClCompile>
+    <ClCompile Include="Opening.cpp">
+      <Filter>Object\Level\Opening</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Manager">
@@ -361,6 +361,9 @@
     </Filter>
     <Filter Include="Object\Actor\Base\Level1">
       <UniqueIdentifier>{ebef01ce-2ade-4ceb-b388-e6324cad554e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Level\Opening">
+      <UniqueIdentifier>{5282ab7e-f32b-4666-9144-d17c259febb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

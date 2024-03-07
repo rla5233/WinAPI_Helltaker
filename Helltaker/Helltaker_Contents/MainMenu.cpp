@@ -109,6 +109,11 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	StateChange(EMainMenuState::Begin);
 }
 
+void MainMenu::BeginStart()
+{
+	C_BooperTextSet(MainMenu_Script[1]);
+}
+
 void MainMenu::Begin(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
@@ -119,45 +124,25 @@ void MainMenu::Begin(float _DeltaTime)
 	}
 }
 
-void MainMenu::BeginStart()
+void MainMenu::EnterStart()
 {
-	C_BooperTextSet(MainMenu_Script[1]);
+	FVector Scale = { 1.04f, 0.693f };
+	FVector Pos = { 0.0f, -0.0445f };
+	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0], Pos, Scale);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(MainMenu_Script[2]);
 }
 
 void MainMenu::Enter(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
-	//C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime, 3.5f);
-	//C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
 
 	if ((false == C_GetSceneCharacter()->IsImgMoveOn())	
 	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
 		UEngineSound::SoundPlay("booper_click.wav");
 		StateChange(EMainMenuState::Select);
-	}
-}
-
-void MainMenu::EnterStart()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 1.04f, WinScale.Y * 0.693f };
-	FVector Pos = { 0.0f, WinScale.Y * (-0.0445f) };
-	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
-	C_GetSceneCharacter()->GetImageRenderer()->SetAlpha(0.0f);
-	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.04f), Pos.Y}, Pos);
-	//C_GetSceneCharacter()->FadeInOn();
-
-	C_BooperTextSet(MainMenu_Script[2]);
-}
-
-void MainMenu::Select(float _DeltaTime)
-{
-	DialogueMoveUpdate(_DeltaTime);
-	if (true == FocusMenuBarCheck())
-	{
-		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 }
 
@@ -170,8 +155,17 @@ void MainMenu::SelectStart()
 	C_MenubarTextSet(0, MainMenu_Script[3]);
 	C_MenubarTextSet(1, MainMenu_Script[4]);
 	C_MenubarTextSet(2, MainMenu_Script[5]);
-	
+
 	SpawnSC_MenuBar(10);
+}
+
+void MainMenu::Select(float _DeltaTime)
+{
+	DialogueMoveUpdate(_DeltaTime);
+	if (true == FocusMenuBarCheck())
+	{
+		UEngineSound::SoundPlay("menu_button_focus.wav");
+	}
 }
 
 void MainMenu::SelectMenu()
@@ -189,6 +183,18 @@ void MainMenu::SelectMenu()
 		StateChange(EMainMenuState::Exit);
 		break;
 	}
+}
+
+void MainMenu::NewGameStart()
+{
+	C_MenubarRenderActiveOff();
+	C_BooperImageRendererOn();
+	C_BooperTextSet(MainMenu_Script[6]);
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
+	C_BooperSetTextPosition(Pos);
+	NewGameOrder = 0;
 }
 
 void MainMenu::NewGame(float _DeltaTime)
@@ -260,16 +266,12 @@ void MainMenu::NewGameLastOrder()
 	}
 }
 
-void MainMenu::NewGameStart()
+void MainMenu::SelectChapterStart()
 {
 	C_MenubarRenderActiveOff();
-	C_BooperImageRendererOn();
-	C_BooperTextSet(MainMenu_Script[6]);
+	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
-	C_BooperSetTextPosition(Pos);
-	NewGameOrder = 0;
+	SC_MenuBarOn();
 }
 
 void MainMenu::SelectChapter(float _DeltaTime)
@@ -282,14 +284,6 @@ void MainMenu::SelectChapter(float _DeltaTime)
 	{
 		ReturnSelect();
 	}
-}
-
-void MainMenu::SelectChapterStart()
-{
-	C_MenubarRenderActiveOff();
-	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
-
-	SC_MenuBarOn();
 }
 
 void MainMenu::SpawnSC_MenuBar(int _IndexCount)
@@ -468,6 +462,11 @@ void MainMenu::ReturnSelect()
 	State = EMainMenuState::Select;
 }
 
+void MainMenu::EnterChapterStart()
+{
+	TransitionOn();
+}
+
 void MainMenu::EnterChapter()
 {
 	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
@@ -507,11 +506,6 @@ void MainMenu::EnterChapter()
 
 		GEngine->ChangeLevel(Chapter);
 	}
-}
-
-void MainMenu::EnterChapterStart()
-{
-	TransitionOn();
 }
 
 void MainMenu::Exit(float _DeltaTime)

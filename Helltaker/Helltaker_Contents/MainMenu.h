@@ -31,8 +31,6 @@ protected:
 	void SelectMenu() override;
 
 private:
-	void StateUpdate(float _DeltaTime);
-
 	void BeginStart();
 	void Begin(float _DeltaTime);
 
@@ -52,11 +50,11 @@ private:
 	void SelectChapter(float _DeltaTime);
 	void SelectChapterMenu();
 
-	void EnterChapter();
 	void EnterChapterStart();
+	void EnterChapter();
 
-	void Exit(float _DeltaTime);
 	void ExitStart();
+	void Exit(float _DeltaTime);
 
 	void SpawnSC_MenuBar(int _IndexCount);
 	void SC_MenuBarOn();
@@ -68,6 +66,8 @@ private:
 	void SetFocusSC_MenuIndex(int _Index);
 
 	void DialogueMoveUpdate(float _DeltaTime);
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	int NewGameOrder = -1;
