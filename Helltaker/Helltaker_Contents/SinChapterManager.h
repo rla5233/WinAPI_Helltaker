@@ -3,6 +3,7 @@
 #include "ContentsHelper.h"
 
 #include <EngineCore/Level.h>
+#include <set>
 
 class SinComponent;
 class SmallChain;
@@ -137,6 +138,27 @@ public:
 		return TransitionActor;
 	}
 
+	template<typename Chapter>
+	void CreateChapter(std::string_view _Name)
+	{
+		if (false == ChapterSet.contains(_Name.data()))
+		{
+			GEngine->CreateLevel<Chapter>(_Name);
+		}
+	}
+
+	void AddChapterSet(std::string _Name)
+	{
+		if (true == ChapterSet.contains(_Name))
+		{
+			MsgBoxAssert("Chapter Already Exist");
+		}
+
+		ChapterSet.insert(_Name);
+	}
+
+	void M_StateChange(ESinState _State);
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);
@@ -152,7 +174,7 @@ protected:
 
 	virtual void ResetCheck();
 
-	void M_StateChange(ESinState _State);
+	virtual void ChangeChapter() {};
 
 private:
 	void IntroStart();
@@ -249,5 +271,6 @@ private:
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;
+	static std::set<std::string> ChapterSet;
 };
 

@@ -182,7 +182,6 @@ enum class ECutSceneState
 	Select,
 	BadEnd,
 	Success,
-	Reset
 };
 
 enum class ESinState
@@ -199,7 +198,8 @@ enum class ESinState
 enum class ESinSceneState
 {
 	None,
-	Enter
+	Enter,
+	End
 };
 
 enum class EHeroState

@@ -56,12 +56,16 @@ protected:
 
 	virtual void EnterStart() {};
 	virtual void Enter(float _DeltaTime);
+	
+	virtual void EndStart() {};
 
 	virtual void SelectMenu() {};
 
 	void ResetCheck() override;
 
 private:
+	void End(float _DeltaTime);
+
 	bool FocusMenuBarCheck();
 	void SetFocusMenuIndex(int _Index);
 

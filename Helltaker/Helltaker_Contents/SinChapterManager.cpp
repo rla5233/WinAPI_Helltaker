@@ -22,6 +22,7 @@
 #include <EnginePlatform/EngineSound.h>
 
 bool SinChapterManager::IsLoad = false;
+std::set<std::string> SinChapterManager::ChapterSet;
 
 const float SinChapterManager::TransitionInter = 0.0435f;
 const float SinChapterManager::HeroDelayTime = 0.13f;

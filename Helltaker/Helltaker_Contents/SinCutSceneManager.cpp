@@ -182,6 +182,14 @@ void SinCutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 	SetFocusMenuIndex(0);
 }
 
+void SinCutSceneManager::End(float _DeltaTime)
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+
+	}
+}
+
 bool SinCutSceneManager::FocusMenuBarCheck()
 {
 	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))

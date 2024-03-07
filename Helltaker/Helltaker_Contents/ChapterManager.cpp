@@ -22,10 +22,10 @@
 #include <vector>
 
 bool ChapterManager::IsLoad = false;
+std::set<std::string> ChapterManager::ChapterSet;
 
 const float ChapterManager::TransitionInter = 0.0435f;
 const float ChapterManager::HeroDelayTime = 0.15f;
-std::set<std::string> ChapterManager::ChapterSet;
 
 UEngineSoundPlayer ChapterManager::ChapterBGMPlayer;
 

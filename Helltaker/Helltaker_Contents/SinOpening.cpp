@@ -6,6 +6,8 @@
 #include "Scene.h"
 #include "UI.h"
 
+#include "SinChapter1.h"
+
 #include <EnginePlatform/EngineSound.h>
 
 bool SinOpening::IsLoad = false;
@@ -36,6 +38,7 @@ void SinOpening::BeginPlay()
 
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
 
+		AddChapterSet("SinOpening");
 		IsLoad = true;
 	}
 }
@@ -133,4 +136,13 @@ void SinOpening::Enter3()
 		GetJudge()->GetNameRenderer()->ActiveOff();
 		++EnterOrder;
 	}
+}
+
+
+void SinOpening::ChangeChapter()
+{
+	SinChapterManager::ChangeChapter();
+
+	CreateChapter<SinChapter1>("SinChapter1");
+	GEngine->ChangeLevel("SinChapter1");
 }
