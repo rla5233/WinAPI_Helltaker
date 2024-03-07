@@ -22,6 +22,10 @@ protected:
 
 	// Chapter
 	void CutSceneStart() override;
+
+	// CutScene
+	void EnterStart() override;
+	void Enter(float _DeltaTime) override;
 	
 private:
 

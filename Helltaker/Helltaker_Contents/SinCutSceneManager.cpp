@@ -99,6 +99,25 @@ void SinCutSceneManager::C_SpawnBooper()
 	AllCutSceneActors.push_back(Booper);
 }
 
+void SinCutSceneManager::C_BooperTextSet(std::string_view _Text)
+{
+	Booper->GetTextRenderer()->SetText(_Text);
+}
+
+void SinCutSceneManager::C_BooperSetTextPosition(int _LineCount)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	switch (_LineCount)
+	{
+	case 1:
+		Booper->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * (-0.12f) });
+		break;
+	case 2:
+		Booper->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * (-0.1f) });
+		break;
+	}
+}
+
 void SinCutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 {
 	float interval = 0.0f;
@@ -190,13 +209,19 @@ void SinCutSceneManager::SetFocusMenuIndex(int _Index)
 	}
 }
 
-
-void SinCutSceneManager::EnterStart()
-{
-}
-
 void SinCutSceneManager::Enter(float _DeltaTime)
 {
+	ResetCheck();
+}
+
+void SinCutSceneManager::ResetCheck()
+{
+	SinChapterManager::ResetCheck();
+
+	if (UEngineInput::IsPress('R'))
+	{
+		C_StateChange(ESinSceneState::None);
+	}
 }
 
 void SinCutSceneManager::Tick(float _DeltaTime)

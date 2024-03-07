@@ -27,6 +27,9 @@ public:
 	void C_SpawnBooper();
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
+	void C_BooperTextSet(std::string_view _Text);
+	void C_BooperSetTextPosition(int _LineCount);
+
 	UI* GetBooper() const
 	{
 		return Booper;
@@ -40,12 +43,14 @@ protected:
 
 	virtual void CutSceneStart() override;
 
+	virtual void EnterStart() {};
+	virtual void Enter(float _DeltaTime);
+
 	virtual void SelectMenu() {};
 
-private:
-	void EnterStart();
-	void Enter(float _DeltaTime);
+	void ResetCheck() override;
 
+private:
 	bool FocusMenuBarCheck();
 	void SetFocusMenuIndex(int _Index);
 

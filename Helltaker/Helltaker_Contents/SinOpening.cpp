@@ -2,6 +2,7 @@
 
 #include "Character.h"
 #include "Scene.h"
+#include "UI.h"
 
 #include <EnginePlatform/EngineSound.h>
 
@@ -53,7 +54,18 @@ void SinOpening::CutSceneStart()
 {
 	SinChapterManager::CutSceneStart();
 
-	
+	C_SpawnBooper();
+	C_BooperTextSet(SinOpening_Script[2]);
+	C_BooperSetTextPosition(2);
+}
+
+void SinOpening::EnterStart()
+{
+
+}
+
+void SinOpening::Enter(float _DeltaTime)
+{
 
 }
 

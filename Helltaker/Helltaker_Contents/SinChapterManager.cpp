@@ -716,7 +716,7 @@ void SinChapterManager::CutSceneStart()
 
 void SinChapterManager::CutScene(float _DeltaTime)
 {
-
+	ResetCheck();
 }
 
 void SinChapterManager::ResetStart()
