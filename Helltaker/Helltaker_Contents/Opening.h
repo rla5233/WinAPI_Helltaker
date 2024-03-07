@@ -27,6 +27,12 @@ protected:
 	void LevelEnd(ULevel* _NextLevel) override;
 
 private:
+	void LogoFadeIn(float _DeltaTime);
+	void DelayTime(float _DeltaTime);
+	void LogoFadeOut(float _DeltaTime);
+	void EnterMainMenu();
+
+private:
 	BackGround* OpeningBG = nullptr;
 	Scene* UnityLogo = nullptr;
 	

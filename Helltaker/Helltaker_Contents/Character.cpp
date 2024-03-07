@@ -13,52 +13,13 @@ Character::~Character()
 {
 }
 
-void Character::CreateImageRenderer(RenderOrder _Order)
-{
-	ImageRenderer = RenderActor::CreateImageRenderer(_Order);
-}
-
-void Character::CreateNameRenderer(RenderOrder _Order)
-{
-	NameRenderer = RenderActor::CreateImageRenderer(_Order);
-}
-
-void Character::ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight/* = 4.0f */)
-{
-	if (true == IsImageMoveValue)
-	{
-		MoveTime += _DeltaTime * _TimeWeight;
-
-		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
-		ImageRenderer->SetPosition(NextPos);
-
-		if (1.0f <= MoveTime)
-		{
-			MoveTime = 0.0f;
-			IsImageMoveValue = false;
-		}
-	}
-}
-
-void Character::ImageRendererMoveOn()
+void Character::SetImageRendererMove()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector CurPos = ImageRenderer->GetPosition();
 
 	StartPos = CurPos + FVector(WinScale.X * 0.08f, 0.0f);
 	TargetPos = CurPos;
-	IsImageMoveValue = true;
-}
-
-void Character::ImageRendererFadeInOn()
-{
-	ImageRenderer->SetAlpha(0.0f);
-	FadeInOn();
-}
-
-bool Character::ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight)
-{
-	return RenderActor::FadeInUpdate(ImageRenderer, _DeltaTime, _TimeWeight);
 }
 
 void Character::IdleStart()
@@ -69,15 +30,17 @@ void Character::Idle(float _DeltaTime)
 
 void Character::AppearStart()
 {
-	ImageRendererFadeInOn();
-	ImageRendererMoveOn();
+	SetImageRendererMove();
+	ImgMoveOn();
+	FadeInOn();
 }
 
 void Character::Appear(float _DeltaTime)
 {
-	ImageRendererMoveUpdate(_DeltaTime);
+	FadeInUpdate(ImageRenderer, _DeltaTime, 4.0f);
+	ImgMoveUpdate(ImageRenderer, StartPos, TargetPos, _DeltaTime, 4.0f);
 
-	if (false == FadeInUpdate(ImageRenderer, _DeltaTime, 4.0f) && false == IsImageMoveValue)
+	if (false == IsFadeInOn() && false == IsImgMoveOn())
 	{
 		StateChange(ECharacterState::Idle);
 	}
@@ -102,7 +65,6 @@ void Character::StateUpdate(float _DeltaTime)
 		break;
 	}
 }
-
 
 void Character::StateChange(ECharacterState _State)
 {

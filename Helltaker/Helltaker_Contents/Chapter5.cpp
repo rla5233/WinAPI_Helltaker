@@ -108,8 +108,8 @@ void Chapter5::CutSceneStart()
 	FVector Scale = { WinScale.X * 0.256f, WinScale.Y * 0.567f };
 	FVector Pos = { WinScale.X * 0.014f, WinScale.Y * 0.021f };
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-	C_GetSceneCharacter()->ImageRendererFadeInOn();
+	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+	//C_GetSceneCharacter()->ImageRendererFadeInOn();
 	
 	C_BooperTextSet(Chap5_Script[1]);
 	C_BooperSetTextPosition(1);

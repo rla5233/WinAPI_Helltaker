@@ -16,25 +16,19 @@ public:
 	Character& operator=(const Character& _Other) = delete;
 	Character& operator=(Character&& _Other) noexcept = delete;
 
-	void CreateImageRenderer(RenderOrder _Order);
-	void CreateNameRenderer(RenderOrder _Order);
-
-	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 4.0f);
-	void ImageRendererMoveOn();
-	void ImageRendererMoveOn(const FVector& _StartPos, const FVector& _TargetPos)
+	template<typename EnumType>
+	void CreateImageRenderer(EnumType _Order)
 	{
-		StartPos = _StartPos;
-		TargetPos = _TargetPos;
-		IsImageMoveValue = true;
+		ImageRenderer = AActor::CreateImageRenderer(_Order);
 	}
 
-	bool GetIsImageRendererMoveValue() const
+	template<typename EnumType>
+	void CreateNameRenderer(EnumType _Order)
 	{
-		return IsImageMoveValue;
+		NameRenderer = AActor::CreateImageRenderer(_Order);
 	}
 
-	bool ImageRendererFadeInUpdate(float _DeltaTime, float _TimeWeight = 4.0f);
-	void ImageRendererFadeInOn();
+	void SetImageRendererMove();
 
 	UImageRenderer* GetImageRenderer() const
 	{
@@ -66,8 +60,6 @@ private:
 
 	FVector StartPos = FVector::Zero;
 	FVector TargetPos = FVector::Zero;
-	float MoveTime = 0.0f;
-	bool IsImageMoveValue = false;
 
 	ECharacterState State = ECharacterState::None;
 };

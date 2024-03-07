@@ -127,10 +127,10 @@ void MainMenu::BeginStart()
 void MainMenu::Enter(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
-	C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime, 3.5f);
-	C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
+	//C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime, 3.5f);
+	//C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
 
-	if ((false == C_GetSceneCharacter()->GetIsImageRendererMoveValue())
+	if ((false == C_GetSceneCharacter()->IsImgMoveOn())	
 	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
 		UEngineSound::SoundPlay("booper_click.wav");
@@ -146,8 +146,8 @@ void MainMenu::EnterStart()
 	C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0]);
 	C_GetSceneCharacter()->GetImageRenderer()->SetAlpha(0.0f);
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.04f), Pos.Y}, Pos);
-	C_GetSceneCharacter()->FadeInOn();
+	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.04f), Pos.Y}, Pos);
+	//C_GetSceneCharacter()->FadeInOn();
 
 	C_BooperTextSet(MainMenu_Script[2]);
 }

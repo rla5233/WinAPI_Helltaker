@@ -75,7 +75,9 @@ void Sin_Dialogue::LightningStart()
 
 void Sin_Dialogue::Lightning(float _DeltaTime)
 {
-	if (false == FadeOutUpdate(LitHell_Renderer, _DeltaTime))
+	FadeOutUpdate(LitHell_Renderer, _DeltaTime);
+
+	if (false == IsFadeOutOn())
 	{
 		LitHell_Renderer->ActiveOff();
  		

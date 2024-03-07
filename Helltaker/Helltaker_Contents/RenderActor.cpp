@@ -47,7 +47,7 @@ SinChapterManager* RenderActor::GetSinChapter()
 	return Ptr;
 }
 
-bool RenderActor::FadeInUpdate(
+void RenderActor::FadeInUpdate(
 	UImageRenderer* const _Renderer, 
 	float _DeltaTime,
 	float _TimeWeight /* = 1.0f*/,
@@ -66,11 +66,9 @@ bool RenderActor::FadeInUpdate(
 			IsFadeIn = false;
 		}
 	}
-
-	return IsFadeIn;
 }
 
-bool RenderActor::FadeOutUpdate(
+void RenderActor::FadeOutUpdate(
 	UImageRenderer* const _Renderer, 
 	float _DeltaTime, 
 	float _TimeWeight /* = 1.0f*/,
@@ -89,11 +87,9 @@ bool RenderActor::FadeOutUpdate(
 			IsFadeOut = false;
 		}
 	}
-
-	return IsFadeOut;
 }
 
-bool RenderActor::ImgMoveUpdate(
+void RenderActor::ImgMoveUpdate(
 	UImageRenderer* const _Renderer, 
 	const FVector& _StartPos, 
 	const FVector& _TargetPos, 
@@ -109,17 +105,7 @@ bool RenderActor::ImgMoveUpdate(
 		if (1.0f <= MoveTimeCount)
 		{
 			MoveTimeCount = 0.0f;
-			IsFadeOut = false;
+			IsImgMove = false;
 		}
 	}
-
-	return IsImgMove;
-}
-
-void RenderActor::VibrationEffect(UImageRenderer* _Renderer)
-{
-	FTransform OrgTransform = _Renderer->GetTransform();
-
-
-	_Renderer->SetTransform(OrgTransform);
 }

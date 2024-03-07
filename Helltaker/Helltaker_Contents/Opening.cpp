@@ -29,31 +29,55 @@ void Opening::Tick(float _DeltaTime)
 	switch (OpeningOrder)
 	{
 	case 0:
-		if (false == UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.9f))
-		{
-			UnityLogo->FadeOutOn();
-			DelayTimeCount = FadeOutDelayTime;
-			++OpeningOrder;
-		}
+		LogoFadeIn(_DeltaTime);
 		break;
 	case 1:
-		if (0.0f >= DelayTimeCount)
-		{
-			++OpeningOrder;
-		}
-		DelayTimeCount -= _DeltaTime;
+		DelayTime(_DeltaTime);
 		break;
 	case 2:
-		if (false == UnityLogo->FadeOutUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.9f))
-		{
-			++OpeningOrder;
-		}
+		LogoFadeOut(_DeltaTime);
 		break;
 	case 3:
-		GEngine->CreateLevel<MainMenu>("MainMenu");
-		GEngine->ChangeLevel("MainMenu");
+		EnterMainMenu();
 		break;
 	}
+}
+
+void Opening::LogoFadeIn(float _DeltaTime)
+{
+	UnityLogo->FadeInUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.9f);
+	if (false == UnityLogo->IsFadeInOn())
+	{
+		UnityLogo->FadeOutOn();
+		DelayTimeCount = FadeOutDelayTime;
+		++OpeningOrder;
+	}
+}
+
+void Opening::DelayTime(float _DeltaTime)
+{
+	if (0.0f >= DelayTimeCount)
+	{
+		++OpeningOrder;
+		return;
+	}
+
+	DelayTimeCount -= _DeltaTime;
+}
+
+void Opening::LogoFadeOut(float _DeltaTime)
+{
+	UnityLogo->FadeOutUpdate(UnityLogo->GetImageRenderer(), _DeltaTime, 0.9f);
+	if (false == UnityLogo->IsFadeOutOn())
+	{
+		++OpeningOrder;
+	}
+}
+
+void Opening::EnterMainMenu()
+{
+	GEngine->CreateLevel<MainMenu>("MainMenu");
+	GEngine->ChangeLevel("MainMenu");
 }
 
 void Opening::LevelStart(ULevel* _PrevLevel)

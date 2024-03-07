@@ -278,11 +278,10 @@ void CutSceneManager::C_ChangeDialogue(std::string_view _ImageName, const FTrans
 void CutSceneManager::Enter(float _DeltaTime)
 {
 	ResetCheck();
-	SceneCharacter->ImageRendererFadeInUpdate(_DeltaTime);
-	SceneCharacter->ImageRendererMoveUpdate(_DeltaTime);
-
-	if ((false == SceneCharacter->GetIsImageRendererMoveValue())
-	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
+	
+	// 수정 (리팩토링)
+	if ( //(false == SceneCharacter->GetIsImageRendererMoveValue()) &&
+	 (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
 		C_StateChange(ECutSceneState::Select);
 		UEngineSound::SoundPlay("booper_click.wav");

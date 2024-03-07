@@ -24,7 +24,7 @@ public:
 	ChapterManager* GetChapter();
 	SinChapterManager* GetSinChapter();
 	
-	bool FadeInUpdate(
+	void FadeInUpdate(
 		UImageRenderer* const _Renderer,
 		float _DeltaTime, 
 		float _TimeWeight = 1.0f,
@@ -36,7 +36,12 @@ public:
 		IsFadeIn = true;
 	}
 
-	bool FadeOutUpdate(
+	bool IsFadeInOn() const
+	{
+		return IsFadeIn;
+	}
+
+	void FadeOutUpdate(
 		UImageRenderer* const _Renderer,
 		float _DeltaTime,
 		float _TimeWeight = 1.0f,
@@ -48,7 +53,12 @@ public:
 		IsFadeOut = true;
 	}
 
-	bool ImgMoveUpdate(
+	bool IsFadeOutOn() const
+	{
+		return IsFadeOut;
+	}
+
+	void ImgMoveUpdate(
 		UImageRenderer* const _Renderer,
 		const FVector& _StartPos,
 		const FVector& _TargetPos,
@@ -61,7 +71,10 @@ public:
 		IsImgMove = true;
 	}
 
-	void VibrationEffect(UImageRenderer* _Renderer);
+	bool IsImgMoveOn() const
+	{
+		return IsImgMove;
+	}
 
 protected:
 	void BeginPlay() override;

@@ -68,7 +68,9 @@ void HitChain::Idle(float _DeltaTime)
 
 void HitChain::FadeOutCheck(float _DeltaTime)
 {
-	if (false == FadeOutUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.6f, 0.3f))
+	FadeOutUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.6f, 0.3f);
+
+	if (false == IsFadeOutOn())
 	{
 		FadeInOn();
 		++IdleOrder;
@@ -77,7 +79,8 @@ void HitChain::FadeOutCheck(float _DeltaTime)
 
 void HitChain::FadeInCheck(float _DeltaTime)
 {
-	if (false == FadeInUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.3f, 0.6f))
+	FadeInUpdate(ImageRenderer, _DeltaTime, 1.0f, 0.3f, 0.6f);
+	if (false == IsFadeInOn())
 	{
 		FadeOutOn();
 		--IdleOrder;
@@ -151,7 +154,9 @@ void HitChain::DeathStart()
 
 void HitChain::Death(float _DeltaTime)
 {
-	if (false == FadeOutUpdate(ImageRenderer, _DeltaTime, 1.5f))
+	FadeOutUpdate(ImageRenderer, _DeltaTime, 1.5f);
+
+	if (false == IsFadeOutOn())
 	{
 		GetSinChapter()->HitChainDeathUpdate(CurPoint);
 		Destroy();

@@ -164,7 +164,7 @@ void Chapter8::CutSceneStart()
 	FVector Scale = { WinScale.X * 0.242f, WinScale.Y * 0.619f };
 	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
 	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.1f), Pos.Y }, Pos);
+	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.1f), Pos.Y }, Pos);
 
 	CutSceneManager::CutSceneStart();
 }
@@ -179,8 +179,8 @@ void Chapter8::EnterStart()
 void Chapter8::Enter(float _DeltaTime)
 {
 	ResetCheck();
-	C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
-	C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime);
+	//C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
+	//C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime);
 
 	for (Character* Skeleton : SkeletonMan)
 	{
@@ -189,8 +189,8 @@ void Chapter8::Enter(float _DeltaTime)
 			MsgBoxAssert("Acotr is nullptr");
 		}
 
-		Skeleton->ImageRendererMoveUpdate(_DeltaTime);
-		Skeleton->ImageRendererFadeInUpdate(_DeltaTime);
+		//Skeleton->ImageRendererMoveUpdate(_DeltaTime);
+		//Skeleton->ImageRendererFadeInUpdate(_DeltaTime);
 	}
 
 	switch (EnterOrder)
@@ -221,7 +221,7 @@ void Chapter8::Enter(float _DeltaTime)
 
 void Chapter8::EnterOrder0(float _DeltaTime)
 {
-	if (false == C_GetSceneCharacter()->GetIsImageRendererMoveValue())
+	if (false == C_GetSceneCharacter()->IsImgMoveOn())
 	{
 		if (0.0f >= TimeCount)
 		{
@@ -249,8 +249,8 @@ void Chapter8::EnterOrder1(float _DeltaTime)
 			FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
 			FVector Pos = { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) };
 			SkeletonMan[0]->GetImageRenderer()->SetScale(Scale);
-			SkeletonMan[0]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-			SkeletonMan[0]->ImageRendererFadeInOn();
+			//SkeletonMan[0]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+			//SkeletonMan[0]->ImageRendererFadeInOn();
 
 			UEngineSound::SoundPlay("lucifer_intro_skeleton.wav");
 			TimeCount = SkeletonRenderDelay;
@@ -270,8 +270,8 @@ void Chapter8::EnterOrder2(float _DeltaTime)
 		FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
 		FVector Pos = { WinScale.X * 0.211f, WinScale.Y * (-0.025f) };
 		SkeletonMan[1]->GetImageRenderer()->SetScale(Scale);
-		SkeletonMan[1]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-		SkeletonMan[1]->ImageRendererFadeInOn();
+		//SkeletonMan[1]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
+		//SkeletonMan[1]->ImageRendererFadeInOn();
 
 		TimeCount = LuSwirl2RenderDelay;
 		++EnterOrder;
