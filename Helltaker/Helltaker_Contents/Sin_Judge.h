@@ -25,10 +25,14 @@ protected:
 private:
 	void Intro_AppearStart();
 	void Intro_Appear(float _DeltaTime);
+	void Intro_Appear1(float _DeltaTime);
+	void Intro_Appear2(float _DeltaTime);
+
 
 	void StateUpdate(float _DeltaTime);
 
 private:
+	int OrderCount = -1;
 
 	ESinJudgeState State = ESinJudgeState::None;
 };

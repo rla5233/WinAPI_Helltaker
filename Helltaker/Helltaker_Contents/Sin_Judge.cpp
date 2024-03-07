@@ -26,7 +26,7 @@ void Sin_Judge::Intro_AppearStart()
 		"Jud_Intro", 
 		"Jud_Intro", 
 		{ 0, 1, 2, 3 },	
-		{ 0.08f, 0.16f, 0.32f, 0.64f },	
+		{ 0.08f, 0.16f, 0.32f, 0.32f },
 		false);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -35,15 +35,47 @@ void Sin_Judge::Intro_AppearStart()
 	GetImageRenderer()->AnimationReset();
 	GetImageRenderer()->ChangeAnimation("Jud_Intro");
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
+
+	OrderCount = 0;
 }
 
 void Sin_Judge::Intro_Appear(float _DeltaTime)
+{
+	switch (OrderCount)
+	{
+	case 0:
+		Intro_Appear1(_DeltaTime);
+		break;
+	case 1:
+		Intro_Appear2(_DeltaTime);
+		break;
+	}
+
+}
+
+void Sin_Judge::Intro_Appear1(float _DeltaTime)
+{
+	++OrderCount;
+}
+
+void Sin_Judge::Intro_Appear2(float _DeltaTime)
 {
 	if (1 == GetImageRenderer()->GetCurAnimationFrame())
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.558f, 0.692f };
 		GetImageRenderer()->SetScale(WinScale * Scale);
+	}
+
+	if (2 == GetImageRenderer()->GetCurAnimationFrame())
+	{
+		GetNameRenderer()->ActiveOn();
+		
+	}
+
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		StateChange(ESinJudgeState::None);
 	}
 }
 
