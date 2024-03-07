@@ -25,143 +25,18 @@ SinOpening::~SinOpening()
 
 void SinOpening::BeginPlay()
 {
-	HellTakerManager::BeginPlay();
+	SinManager::BeginPlay();
 
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Sin.png");
-		ContentsHelper::LoadImg("Scene\\Dialogue", "DialBG_DarkHell.png");
-		ContentsHelper::LoadImg("Scene\\Dialogue", "DialBG_LitHell.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_LArm_001.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_LArm_002.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_LArm_003.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_RArm_001.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_RArm_002.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_RArm_003.png");
 
-		IsLoad = true;
+
+
+		IsLoad = false;
 	}
 }
 
 void SinOpening::LevelStart(ULevel * _PrevLevel)
 {
-	HellTakerManager::LevelStart(_PrevLevel);
-
-	GetTransitionActor()->GetImageRenderer()->ActiveOn();
-	GetTransitionActor()->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
-
-	M_StateChange(EChapterState::CutScene);
+	SinManager::LevelStart(_PrevLevel);
 }
-
-void SinOpening::SpawnDialogue(Scene*& _Dial, std::string_view _Name, std::string_view _ImageName)
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	_Dial = SpawnActor<Scene>(static_cast<int>(UpdateOrder::Scene));
-	_Dial->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.408f });
-	_Dial->SetName(_Name);
-	_Dial->CreateImageRenderer(RenderOrder::Scene);
-	_Dial->GetImageRenderer()->SetImage(_ImageName);
-
-	FVector ImgScale = _Dial->GetImageRenderer()->GetImage()->GetScale();
-	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * 0.504f };
-	_Dial->GetImageRenderer()->GetImage()->SetCuttingTransform({ {0, 0}, Scale });
-	_Dial->GetImageRenderer()->SetTransform({ {0, 0}, Scale });
-}
-
-void SinOpening::CutSceneStart()
-{
-	CutSceneManager::CutSceneStart();
-	
-	C_SpawnBooper();
-
-	C_BooperTextSet(SinOpening_Script[2]);
-	C_BooperSetTextPosition(2);
-	EnterOrder = 0;
-}
-
-void SinOpening::Enter(float _DeltaTime)
-{
-	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
-	{
-		GetTransitionActor()->GetImageRenderer()->ActiveOff();
-	}
-
-	switch (EnterOrder)
-	{
-	case 0:
-		EnterOrder1();
-		break;
-	case 1:
-		EnterOrder2();
-		break;
-	case 2:
-		EnterOrder3();
-		break;
-	case 3:
-		EnterOrder4(_DeltaTime);
-		break;
-	}
-
-	// Sample
-	//{
-	//	FVector WinScale = ContentsHelper::GetWindowScale();
-	//	FVector ImgScale = DialBG_Sin->GetImageRenderer()->GetImage()->GetScale();
-	//	FVector Scale = { WinScale.X * (ImgScale.X / 1920), WinScale.Y * 0.504f };
-	//	DialBG_Sin->GetImageRenderer()->GetImage()->SetCuttingTransform({ {0, count}, Scale });
-	//	++count;
-	//}
-}
-
-void SinOpening::EnterOrder1()
-{
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		SpawnDialogue(DialBG_DHell, "DialBG_DHell", "DialBG_DarkHell.png");
-		SpawnDialogue(DialBG_LHell, "DialBG_LHell", "DialBG_LitHell.png");
-		DialBG_LHell->GetImageRenderer()->SetAlpha(0);
-		SpawnDialogue(DialBG_Sin, "DialBG_Sin", "DialogueBG_Sin.png");
-
-		C_SpawnCharacter("???", "DefaultBG.png", SinOpening_Script[0]);
-		C_GetSceneCharacter()->GetImageRenderer()->ActiveOff();
-		C_BooperTextSet(SinOpening_Script[3]);
-		C_BooperSetTextPosition(2);
-		++EnterOrder;
-	}
-}
-
-void SinOpening::EnterOrder2()
-{
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		C_BooperTextSet(SinOpening_Script[4]);
-		C_BooperSetTextPosition(1);
-		++EnterOrder;
-	}
-}
-
-void SinOpening::EnterOrder3()
-{
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		DialBG_LHell->GetImageRenderer()->SetAlpha(1);
-		DialBG_LHell->FadeOutOn();
-		C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
-		C_BooperImageRendererOff();
-		C_BooperTextSet(" ");
-		++EnterOrder;
-	}
-}
-
-void SinOpening::EnterOrder4(float _DeltaTime)
-{
-	if (false == DialBG_LHell->FadeOutUpdate(DialBG_LHell->GetImageRenderer(), _DeltaTime))
-	{
-
-	}
-}
-
-void SinOpening::ChangeChapter()
-{
-
-}
-

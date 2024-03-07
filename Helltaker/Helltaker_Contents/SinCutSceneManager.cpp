@@ -1,5 +1,7 @@
 #include "SinCutSceneManager.h"
 
+#include "BackGround.h"
+
 bool SinCutSceneManager::IsLoad = false;
 
 SinCutSceneManager::SinCutSceneManager()
@@ -22,11 +24,29 @@ void SinCutSceneManager::BeginPlay()
 	}
 }
 
-void SinCutSceneManager::Tick(float _DeltaTime)
+void SinCutSceneManager::C_CreateSceneBG()
 {
-	SinChapterManager::Tick(_DeltaTime);
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector UpScale = { 1.0f, 0.2f };
+	float UpPosY = WinScale.Y * 0.3f;
+	BackGround* Up_BG = SpawnActor<BackGround>(static_cast<int>(SinUpdateOrder::BackGround));
+	Up_BG->SetActorLocation({ WinScale.hX(), UpPosY });
+	Up_BG->CreateImageRenderer(SinRenderOrder::BackGround);
+	Up_BG->GetImageRenderer()->SetImage("DefaultBG.png");
+	Up_BG->GetImageRenderer()->SetScale(WinScale * UpScale);
 
-	StateUpdate(_DeltaTime);
+	AllCutSceneActors.push_back(Up_BG);
+}
+
+void SinCutSceneManager::CutSceneStart()
+{
+	// 검은색 배경 생성
+
+	
+
+
+	// 컷신 상태 변경
+
 }
 
 void SinCutSceneManager::EnterStart()
@@ -35,6 +55,13 @@ void SinCutSceneManager::EnterStart()
 
 void SinCutSceneManager::Enter(float _DeltaTime)
 {
+}
+
+void SinCutSceneManager::Tick(float _DeltaTime)
+{
+	SinChapterManager::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
 }
 
 void SinCutSceneManager::StateUpdate(float _DeltaTime)

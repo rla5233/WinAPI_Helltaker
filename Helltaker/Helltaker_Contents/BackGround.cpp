@@ -14,6 +14,11 @@ BackGround::~BackGround()
 {
 }
 
+void BackGround::CreateImageRenderer(SinRenderOrder _Order)
+{
+	ImageRenderer = RenderActor::CreateImageRenderer(_Order);
+}
+
 void BackGround::CreateBackGround(std::string_view _Name, EBackGroundType _Type)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -23,10 +28,10 @@ void BackGround::CreateBackGround(std::string_view _Name, EBackGroundType _Type)
 	switch (_Type)
 	{
 	case EBackGroundType::Default:
-		ImageRenderer = CreateImageRenderer(RenderOrder::BackGround);
+		ImageRenderer = RenderActor::CreateImageRenderer(RenderOrder::BackGround);
 		break;
 	case EBackGroundType::Sin:
-		ImageRenderer = CreateImageRenderer(SinRenderOrder::BackGround);
+		ImageRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::BackGround);
 		break;
 	}
 	ImageRenderer->SetImage(GetName() + ".png");
@@ -41,7 +46,7 @@ void BackGround::CreateSceneBackGround(std::string_view _Name)
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	SetActorLocation({ WinScale.Half2D() });
 	SetName(_Name);
-	ImageRenderer = CreateImageRenderer(RenderOrder::SceneBackGround);
+	ImageRenderer = RenderActor::CreateImageRenderer(RenderOrder::SceneBackGround);
 	ImageRenderer->SetImage(GetName() + ".png");
 
 	FVector ImgScale = ImageRenderer->GetImage()->GetScale();

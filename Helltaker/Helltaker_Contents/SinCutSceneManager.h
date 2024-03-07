@@ -16,6 +16,10 @@ public:
 	SinCutSceneManager& operator=(const SinCutSceneManager& _Other) = delete;
 	SinCutSceneManager& operator=(SinCutSceneManager&& _Other) noexcept = delete;
 
+	void C_CreateSceneBG();
+
+	void CutSceneStart();
+
 	void C_StateChange(ESinSceneState _State);
 
 protected:
@@ -29,6 +33,7 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
+	std::list<AActor*> AllCutSceneActors;
 
 
 
