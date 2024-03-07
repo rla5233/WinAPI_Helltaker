@@ -40,6 +40,16 @@ void Character::ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight/* = 
 	}
 }
 
+void Character::ImageRendererMoveOn()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector CurPos = ImageRenderer->GetPosition();
+
+	StartPos = CurPos + FVector(WinScale.X * 0.08f, 0.0f);
+	TargetPos = CurPos;
+	IsImageMoveValue = true;
+}
+
 void Character::ImageRendererFadeInOn()
 {
 	ImageRenderer->SetAlpha(0.0f);
@@ -60,6 +70,7 @@ void Character::Idle(float _DeltaTime)
 void Character::AppearStart()
 {
 	ImageRendererFadeInOn();
+	ImageRendererMoveOn();
 }
 
 void Character::Appear(float _DeltaTime)

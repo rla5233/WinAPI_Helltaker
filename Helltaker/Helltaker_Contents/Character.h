@@ -20,6 +20,7 @@ public:
 	void CreateNameRenderer(RenderOrder _Order);
 
 	void ImageRendererMoveUpdate(float _DeltaTime, float _TimeWeight = 4.0f);
+	void ImageRendererMoveOn();
 	void ImageRendererMoveOn(const FVector& _StartPos, const FVector& _TargetPos)
 	{
 		StartPos = _StartPos;
