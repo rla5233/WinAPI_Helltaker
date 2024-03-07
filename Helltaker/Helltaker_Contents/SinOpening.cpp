@@ -23,20 +23,6 @@ SinOpening::SinOpening()
 
 SinOpening::~SinOpening()
 {
-
-}
-
-void SinOpening::BeginPlay()
-{
-	SinManager::BeginPlay();
-
-	if (false == IsLoad)
-	{
-
-
-
-		IsLoad = false;
-	}
 }
 
 void SinOpening::LevelStart(ULevel * _PrevLevel)
@@ -57,16 +43,45 @@ void SinOpening::CutSceneStart()
 	C_SpawnBooper();
 	C_BooperTextSet(SinOpening_Script[2]);
 	C_BooperSetTextPosition(2);
+
+	C_StateChange(ESinSceneState::Enter);
 }
+
+void SinOpening::CutScene(float _DeltaTime)
+{}
 
 void SinOpening::EnterStart()
 {
-
+	EnterOrder = 0;
 }
 
 void SinOpening::Enter(float _DeltaTime)
 {
+	switch (EnterOrder)
+	{
+	case 0 :
+		TransitionCheck();
+		break;
+	case 1:
+		Enter1(_DeltaTime);
+		break;
+	}
 
+
+}
+
+void SinOpening::Enter1(float _DeltaTime)
+{
+	int a = 0;
+}
+
+void SinOpening::TransitionCheck()
+{
+	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetTransitionActor()->GetImageRenderer()->ActiveOff();
+		++EnterOrder;
+	}
 }
 
 

@@ -17,18 +17,23 @@ public:
 	SinOpening& operator=(SinOpening&& _Other) noexcept = delete;
 
 protected:
-	void BeginPlay() override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
 	// Chapter
 	void CutSceneStart() override;
+	void CutScene(float _DeltaTime) override;
 
 	// CutScene
 	void EnterStart() override;
 	void Enter(float _DeltaTime) override;
-	
-private:
 
+private:
+	void Enter1(float _DeltaTime);
+
+	void TransitionCheck();
+
+private:
+	int EnterOrder = -1;
 
 	static const std::vector<const char*> SinOpening_Script;
 	static bool IsLoad;

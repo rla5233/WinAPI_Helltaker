@@ -148,6 +148,7 @@ protected:
 	virtual void Phase2_Start();
 
 	virtual void CutSceneStart();
+	virtual void CutScene(float _DeltaTime);
 
 	virtual void ResetCheck();
 
@@ -178,8 +179,6 @@ private:
 	void Phase2(float _DeltaTime);
 	void HitChainCheck();
 	void JudgeAppear(float _DeltaTime);
-
-	void CutScene(float _DeltaTime);
 
 	void ResetStart();
 	void Reset(float _DeltaTime);
