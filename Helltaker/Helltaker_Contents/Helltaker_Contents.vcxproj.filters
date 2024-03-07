@@ -28,9 +28,6 @@
     <ClInclude Include="Character.h">
       <Filter>Object\Actor\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="RenderActor.h">
-      <Filter>Object\Actor\Base</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsHelper.h">
       <Filter>Helper</Filter>
     </ClInclude>
@@ -157,6 +154,9 @@
     <ClInclude Include="Judge.h">
       <Filter>Object\Actor\Sin\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="RenderActor.h">
+      <Filter>Object\Actor\Base\Level1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -188,9 +188,6 @@
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Object\Actor\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderActor.cpp">
-      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>Helper</Filter>
@@ -312,6 +309,9 @@
     <ClCompile Include="Judge.cpp">
       <Filter>Object\Actor\Sin\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="RenderActor.cpp">
+      <Filter>Object\Actor\Base\Level1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Manager">
@@ -358,6 +358,9 @@
     </Filter>
     <Filter Include="Object\Actor\Sin\Scene">
       <UniqueIdentifier>{93109b38-ab4d-4561-974b-4673d81a857a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Base\Level1">
+      <UniqueIdentifier>{ebef01ce-2ade-4ceb-b388-e6324cad554e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

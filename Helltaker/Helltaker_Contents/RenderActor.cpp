@@ -25,16 +25,6 @@ void RenderActor::BeginPlay()
 	}
 }
 
-UImageRenderer* RenderActor::CreateImageRenderer(RenderOrder _Order)
-{
-	return AActor::CreateImageRenderer(static_cast<int>(_Order));
-}
-
-UImageRenderer* RenderActor::CreateImageRenderer(SinRenderOrder _Order)
-{
-	return AActor::CreateImageRenderer(static_cast<int>(_Order));
-}
-
 ChapterManager* RenderActor::GetChapter()
 {
 	ChapterManager* Ptr = dynamic_cast<ChapterManager*>(GetWorld());
@@ -66,13 +56,13 @@ bool RenderActor::FadeInUpdate(
 {
 	if (true == IsFadeIn)
 	{
-		TimeCount += _DeltaTime * _TimeWeight;
-		float NextAlpha = ContentsHelper::LerpClampf(_Start, _End, TimeCount);
+		FadeTimeCount += _DeltaTime * _TimeWeight;
+		float NextAlpha = ContentsHelper::LerpClampf(_Start, _End, FadeTimeCount);
 		_Renderer->SetAlpha(NextAlpha);
 
-		if (1.0f <= TimeCount)
+		if (1.0f <= FadeTimeCount)
 		{
-			TimeCount = 0.0f;
+			FadeTimeCount = 0.0f;
 			IsFadeIn = false;
 		}
 	}
@@ -89,18 +79,41 @@ bool RenderActor::FadeOutUpdate(
 {
 	if (true == IsFadeOut)
 	{
-		TimeCount += _DeltaTime * _TimeWeight;
-		float NextAlpha = ContentsHelper::LerpClampf(_Start, _End, TimeCount);
+		FadeTimeCount += _DeltaTime * _TimeWeight;
+		float NextAlpha = ContentsHelper::LerpClampf(_Start, _End, FadeTimeCount);
 		_Renderer->SetAlpha(NextAlpha);
 
-		if (1.0f <= TimeCount)
+		if (1.0f <= FadeTimeCount)
 		{
-			TimeCount = 0.0f;
+			FadeTimeCount = 0.0f;
 			IsFadeOut = false;
 		}
 	}
 
 	return IsFadeOut;
+}
+
+bool RenderActor::ImgMoveUpdate(
+	UImageRenderer* const _Renderer, 
+	const FVector& _StartPos, 
+	const FVector& _TargetPos, 
+	float _DeltaTime, 
+	float _TimeWeight /* = 1.0f */)
+{
+	if (true == IsImgMove)
+	{
+		MoveTimeCount += _DeltaTime * _TimeWeight;
+		FVector NextPos = FVector::LerpClamp(_StartPos, _TargetPos, MoveTimeCount);
+		_Renderer->SetPosition(NextPos);
+
+		if (1.0f <= MoveTimeCount)
+		{
+			MoveTimeCount = 0.0f;
+			IsFadeOut = false;
+		}
+	}
+
+	return IsImgMove;
 }
 
 void RenderActor::VibrationEffect(UImageRenderer* _Renderer)
