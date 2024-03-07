@@ -3,6 +3,7 @@
 #include "SinChapterManager.h"
 
 class Sin_Dialogue;
+class UI;
 
 // Ό³Έν :
 class SinCutSceneManager : public SinChapterManager
@@ -20,6 +21,12 @@ public:
 
 	void C_CreateSceneBG();
 	void C_CreateDialogue();
+	void C_SpawnBooper();
+
+	UI* GetBooper() const
+	{
+		return Booper;
+	}
 
 	void C_StateChange(ESinSceneState _State);
 
@@ -40,6 +47,8 @@ private:
 	std::list<AActor*> AllCutSceneActors;
 
 	Sin_Dialogue* Dialogue = nullptr;
+	UI* Booper = nullptr;
+	
 
 	ESinSceneState State = ESinSceneState::None;
 	static bool IsLoad;

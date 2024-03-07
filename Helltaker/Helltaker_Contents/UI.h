@@ -16,7 +16,9 @@ public:
 	UI& operator=(const UI& _Other) = delete;
 	UI& operator=(UI&& _Other) noexcept = delete;
 	
+	void CreateImageRenderer(SinRenderOrder _Order);
 	void CreateImageRenderer(RenderOrder _Order);
+	void CreateTextRenderer(SinRenderOrder _Order);
 	void CreateTextRenderer(RenderOrder _Order);
 
 	UImageRenderer* GetImageRenderer() const

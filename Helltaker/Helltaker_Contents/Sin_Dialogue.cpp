@@ -43,7 +43,6 @@ void Sin_Dialogue::SetHell()
 	float PosY = WinScale .Y *  (-0.01f);
 	DarkHell_Renderer->SetImage("DialBG_DarkHell.png");
 	DarkHell_Renderer->SetTransform({ { 0.0f, PosY }, WinScale * HellScale });
-	DarkHell_Renderer->ActiveOff();
 
 	LitHell_Renderer->SetImage("DialBG_LitHell.png");
 	LitHell_Renderer->SetTransform({ { 0.0f, PosY }, WinScale * HellScale });
@@ -53,7 +52,7 @@ void Sin_Dialogue::SetHell()
 void Sin_Dialogue::SetSin()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float UpPosY = WinScale.Y * (-0.5f);
+	float UpPosY = WinScale.Y * (-0.3f);
 	Up_ImageRenderer->SetImage("DialogueBG_Sin_001.png");
 	Up_ImageRenderer->SetTransform({ { 0.0f, UpPosY }, WinScale * UpSinScale });
 	

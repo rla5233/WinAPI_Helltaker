@@ -2,6 +2,7 @@
 
 #include "Sin_Dialogue.h"
 #include "BackGround.h"
+#include "UI.h"
 
 bool SinCutSceneManager::IsLoad = false;
 
@@ -23,6 +24,7 @@ void SinCutSceneManager::BeginPlay()
 
 		// ¼öÁ¤ (Á¦°Å)
 		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		ContentsHelper::LoadFolder("UI", "Booper");
 
 		IsLoad = true;
 	}
@@ -52,10 +54,10 @@ void SinCutSceneManager::C_CreateSceneBG()
 
 void SinCutSceneManager::CutSceneStart()
 {
-	//C_CreateSceneBG();
-	
-	C_CreateDialogue();
+	C_CreateSceneBG();
 
+	C_CreateDialogue();
+	C_SpawnBooper();
 	// ÄÆ½Å »óÅÂ º¯°æ
 
 }
@@ -68,6 +70,26 @@ void SinCutSceneManager::C_CreateDialogue()
 	Dialogue->SetName("Sin_Dialogue");
 
 	AllCutSceneActors.push_back(Dialogue);
+}
+
+void SinCutSceneManager::C_SpawnBooper()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Booper = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
+	Booper->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.87f });
+	Booper->SetName("Booper");
+	Booper->CreateImageRenderer(SinRenderOrder::Top);
+	Booper->GetImageRenderer()->SetImage(Booper->GetName());
+	Booper->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.027f, WinScale.Y * 0.022f } });
+	Booper->GetImageRenderer()->CreateAnimation("Booper_Idle", "Booper", 0, 16, 0.05f, true);
+	Booper->GetImageRenderer()->ChangeAnimation("Booper_Idle");
+	Booper->CreateTextRenderer(SinRenderOrder::Top);
+	Booper->GetTextRenderer()->SetTransform({ { 0.0f, WinScale.Y * (-0.0995f) }, { 0, 0 } });
+	Booper->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
+	Booper->GetTextRenderer()->SetTextSize(35);
+	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
+	Booper->GetTextRenderer()->SetText(" ");
+	AllCutSceneActors.push_back(Booper);
 }
 
 void SinCutSceneManager::EnterStart()
