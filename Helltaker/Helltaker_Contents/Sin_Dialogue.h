@@ -1,9 +1,9 @@
 #pragma once
 
-#include "RenderActor.h"
+#include "SinMoveActor.h"
 
 // Ό³Έν :
-class Sin_Dialogue : public RenderActor
+class Sin_Dialogue : public SinMoveActor
 {
 public:
 	// constructor destructor
@@ -15,7 +15,7 @@ public:
 	Sin_Dialogue(Sin_Dialogue&& _Other) noexcept = delete;
 	Sin_Dialogue& operator=(const Sin_Dialogue& _Other) = delete;
 	Sin_Dialogue& operator=(Sin_Dialogue&& _Other) noexcept = delete;
-
+	 
 	void StateChange(ESinDialogueState _State);
 
 protected:
@@ -25,12 +25,15 @@ protected:
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
-	
-	void SetHell();
-	void SetSin();
+
+	void LightningStart();
+	void Lightning(float _DeltaTime);
 
 	void MoveStart();
 	void Move(float _DeltaTime);
+	
+	void SetHell();
+	void SetSin();
 	
 	void StateUpdate(float _DeltaTime);
 

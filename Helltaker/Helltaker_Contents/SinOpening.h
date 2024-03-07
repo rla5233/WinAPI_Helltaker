@@ -28,7 +28,9 @@ protected:
 	void Enter(float _DeltaTime) override;
 
 private:
-	void Enter1(float _DeltaTime);
+	void Enter1();
+	void Enter2();
+	void Enter3();
 
 	void TransitionCheck();
 

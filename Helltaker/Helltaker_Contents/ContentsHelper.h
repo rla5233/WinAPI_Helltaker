@@ -414,5 +414,6 @@ enum class ESinDialogueState
 {
 	None,
 	Idle,
-	Move
+	Lightning,
+	Move,
 };

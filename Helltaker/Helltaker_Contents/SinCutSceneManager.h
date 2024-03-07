@@ -30,6 +30,11 @@ public:
 	void C_BooperTextSet(std::string_view _Text);
 	void C_BooperSetTextPosition(int _LineCount);
 
+	Sin_Dialogue* GetDialogue() const
+	{
+		return Dialogue;
+	}
+
 	UI* GetBooper() const
 	{
 		return Booper;

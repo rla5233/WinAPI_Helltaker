@@ -16,7 +16,7 @@ Sin_Dialogue::~Sin_Dialogue()
 
 void Sin_Dialogue::BeginPlay()
 {
-	RenderActor::BeginPlay();
+	SinMoveActor::BeginPlay();
 
 	if (false == IsLoad)
 	{
@@ -62,11 +62,28 @@ void Sin_Dialogue::SetSin()
 }
 
 void Sin_Dialogue::IdleStart()
-{
-}
+{}
 
 void Sin_Dialogue::Idle(float _DeltaTime)
 {}
+
+void Sin_Dialogue::LightningStart()
+{
+	LitHell_Renderer->ActiveOn();
+	FadeOutOn();
+}
+
+void Sin_Dialogue::Lightning(float _DeltaTime)
+{
+	if (false == FadeOutUpdate(LitHell_Renderer, _DeltaTime))
+	{
+		LitHell_Renderer->ActiveOff();
+ 		
+		// 수정 (캐릭터 State 바꾸기 추가)
+
+		StateChange(ESinDialogueState::Idle);
+	}
+}
 
 void Sin_Dialogue::MoveStart()
 {}
@@ -76,7 +93,7 @@ void Sin_Dialogue::Move(float _DeltaTime)
 
 void Sin_Dialogue::Tick(float _DeltaTime)
 {
-	RenderActor::Tick(_DeltaTime);
+	SinMoveActor::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
 }
@@ -87,6 +104,9 @@ void Sin_Dialogue::StateUpdate(float _DeltaTime)
 	{
 	case ESinDialogueState::Idle:
 		Idle(_DeltaTime);
+		break;
+	case ESinDialogueState::Lightning:
+		Lightning(_DeltaTime);
 		break;
 	case ESinDialogueState::Move:
 		Move(_DeltaTime);
@@ -102,6 +122,9 @@ void Sin_Dialogue::StateChange(ESinDialogueState _State)
 		{
 		case ESinDialogueState::Idle:
 			IdleStart();
+			break;
+		case ESinDialogueState::Lightning:
+			LightningStart();
 			break;
 		case ESinDialogueState::Move:
 			MoveStart();

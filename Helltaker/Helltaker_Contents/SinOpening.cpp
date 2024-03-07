@@ -1,5 +1,6 @@
 #include "SinOpening.h"
 
+#include "Sin_Dialogue.h"
 #include "Character.h"
 #include "Scene.h"
 #include "UI.h"
@@ -63,16 +64,15 @@ void SinOpening::Enter(float _DeltaTime)
 		TransitionCheck();
 		break;
 	case 1:
-		Enter1(_DeltaTime);
+		Enter1();
+		break;
+	case 2:
+		Enter2();
+		break;
+	case 3:
+		Enter3();
 		break;
 	}
-
-
-}
-
-void SinOpening::Enter1(float _DeltaTime)
-{
-	int a = 0;
 }
 
 void SinOpening::TransitionCheck()
@@ -84,4 +84,33 @@ void SinOpening::TransitionCheck()
 	}
 }
 
+void SinOpening::Enter1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_CreateSceneBG();
+		C_SpawnDialogue();
+		// 수정 (캐릭터 추가)
 
+		C_BooperTextSet(SinOpening_Script[3]);
+		++EnterOrder;
+	}
+}
+
+void SinOpening::Enter2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(SinOpening_Script[4]);
+		++EnterOrder;
+	}
+}
+
+void SinOpening::Enter3()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		GetDialogue()->StateChange(ESinDialogueState::Lightning);
+		++EnterOrder;
+	}
+}

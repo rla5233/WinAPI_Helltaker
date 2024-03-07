@@ -33,6 +33,7 @@ public:
 		float _TimeWeight = 1.0f,
 		float _Start = 0.0f, 
 		float _End = 1.0f);
+
 	void FadeInOn()
 	{
 		IsFadeIn = true;
