@@ -76,7 +76,6 @@ private:
 	static const FVector UnFocusMenuScale;
 	
 	ESinSceneState State = ESinSceneState::None;
-	static bool IsLoad;
 };
 
 using SinManager = SinCutSceneManager;

@@ -5,7 +5,6 @@
 #include "Character.h"
 #include "UI.h"
 
-bool SinCutSceneManager::IsLoad = false;
 const FVector SinCutSceneManager::FocusMenuScale = { 0.501f, 0.074f };
 const FVector SinCutSceneManager::UnFocusMenuScale = { 0.475f, 0.065f };
 
@@ -20,23 +19,12 @@ SinCutSceneManager::~SinCutSceneManager()
 void SinCutSceneManager::BeginPlay()
 {
 	SinChapterManager::BeginPlay();
-
-	if (false == IsLoad)
-	{
-
-
-		// 수정 (제거)
-		//ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
-		//ContentsHelper::LoadFolder("UI", "Booper");
-
-		IsLoad = true;
-	}
 }
 
 void SinCutSceneManager::C_CreateSceneBG()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector UpScale = { 1.0f, 0.15f };
+	FVector UpScale = { 1.0f, 0.154f };
 	float UpPosY = WinScale.Y * UpScale.Y * 0.5f;
 	BackGround* Up_BG = SpawnActor<BackGround>(SinUpdateOrder::BackGround);
 	Up_BG->SetActorLocation({ WinScale.hX(), UpPosY });
@@ -45,7 +33,7 @@ void SinCutSceneManager::C_CreateSceneBG()
 	Up_BG->GetImageRenderer()->SetScale(WinScale * UpScale);
 	AllCutSceneActors.push_back(Up_BG);
 
-	FVector DownScale = { 1.0f, 0.4f };
+	FVector DownScale = { 1.0f, 0.34f };
 	float DownPosY = WinScale.Y * (1.0f - DownScale.Y * 0.5f);
 	BackGround* Down_BG = SpawnActor<BackGround>(SinUpdateOrder::BackGround);
 	Down_BG->SetActorLocation({ WinScale.hX(), DownPosY });

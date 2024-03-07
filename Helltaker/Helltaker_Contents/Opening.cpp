@@ -1,8 +1,8 @@
 #include "Opening.h"
 
-#include "BackGround.h"
+#include "BackGround.h" 
+#include "MainMenu.h" 
 #include "Scene.h"
-#include "MainMenu.h"
 
 const float Opening::FadeOutDelayTime = 0.3f;
 
