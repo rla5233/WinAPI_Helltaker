@@ -16,14 +16,22 @@ public:
 	Judge& operator=(const Judge& _Other) = delete;
 	Judge& operator=(Judge&& _Other) noexcept = delete;
 
+	void StateChange(ESinJudgeState _State);
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+private:
+	void Intro_AppearStart();
+	void Intro_Appear(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
 private:
 
 
+
+	ESinJudgeState State = ESinJudgeState::None;
 	static bool IsLoad;
 };

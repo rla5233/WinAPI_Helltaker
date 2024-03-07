@@ -111,11 +111,12 @@ void Sin_Dialogue::MoveStart()
 void Sin_Dialogue::Move(float _DeltaTime)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	ImgMoveUpdate(
+	ImgMoveUpdate(	
 		{ Up_ImageRenderer , Down_ImageRenderer }, 
 		{ StartPos, {StartPos.X, StartPos.Y + WinScale.Y * (0.564f)} },
 		{ TargetPos, {TargetPos.X, TargetPos.Y + WinScale.Y * (0.564f)} },
-		_DeltaTime, 4.0f);
+		_DeltaTime, 
+		4.0f);
 
 	if (false == IsImgMoveOn())
 	{

@@ -428,4 +428,5 @@ enum class ESinDialogueState
 enum class ESinJudgeState
 {
 	None,
+	Intro_Appear
 };
