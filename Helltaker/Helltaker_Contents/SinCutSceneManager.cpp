@@ -2,9 +2,12 @@
 
 #include "Sin_Dialogue.h"
 #include "BackGround.h"
+#include "Character.h"
 #include "UI.h"
 
 bool SinCutSceneManager::IsLoad = false;
+const FVector SinCutSceneManager::FocusMenuScale = { 0.501f, 0.074f };
+const FVector SinCutSceneManager::UnFocusMenuScale = { 0.475f, 0.065f };
 
 SinCutSceneManager::SinCutSceneManager()
 {
@@ -23,8 +26,8 @@ void SinCutSceneManager::BeginPlay()
 
 
 		// ¼öÁ¤ (Á¦°Å)
-		ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
-		ContentsHelper::LoadFolder("UI", "Booper");
+		//ContentsHelper::LoadImg("BackGround", "DefaultBG.png");
+		//ContentsHelper::LoadFolder("UI", "Booper");
 
 		IsLoad = true;
 	}
@@ -56,13 +59,15 @@ void SinCutSceneManager::CutSceneStart()
 {
 	C_CreateSceneBG();
 
-	C_CreateDialogue();
+	C_SpawnDialogue();
 	C_SpawnBooper();
+
+	C_SpawnMenubar();
 	// ÄÆ½Å »óÅÂ º¯°æ
 
 }
 
-void SinCutSceneManager::C_CreateDialogue()
+void SinCutSceneManager::C_SpawnDialogue()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Dialogue = SpawnActor<Sin_Dialogue>(SinUpdateOrder::UnderBackGround);
@@ -89,8 +94,101 @@ void SinCutSceneManager::C_SpawnBooper()
 	Booper->GetTextRenderer()->SetTextSize(35);
 	Booper->GetTextRenderer()->SetTextColor(Color8Bit(255, 255, 255, 0));
 	Booper->GetTextRenderer()->SetText(" ");
+
 	AllCutSceneActors.push_back(Booper);
 }
+
+void SinCutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
+{
+	float interval = 0.0f;
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Pos = WinScale * _Pos;
+
+	MenuBarCount = _MenuBarCount;
+	MenuBar.reserve(MenuBarCount);
+	for (int i = 0; i < MenuBarCount; i++)
+	{
+		MenuBar.push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
+		MenuBar[i]->SetActorLocation({ Pos.X, Pos.Y + interval });
+		MenuBar[i]->SetName("MenuBar");
+
+		MenuBar[i]->CreateImageRenderer(RenderOrder::UI);
+
+		MenuBar[i]->CreateTextRenderer(RenderOrder::Text);
+		MenuBar[i]->GetTextRenderer()->SetTransform({ {0, -1}, {0, 0} });
+		MenuBar[i]->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
+		MenuBar[i]->GetTextRenderer()->SetTextSize(30);
+		MenuBar[i]->GetTextRenderer()->SetText(" ");
+
+		if (i == 0)
+		{
+			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+			MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
+			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		}
+		else
+		{
+			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+			MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
+			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		}
+
+		interval += WinScale.Y * 0.074f;
+		AllCutSceneActors.push_back(MenuBar[i]);
+	}
+
+	SetFocusMenuIndex(0);
+}
+
+bool SinCutSceneManager::FocusMenuBarCheck()
+{
+	if (UEngineInput::IsDown('W') || UEngineInput::IsDown(VK_UP))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		SetFocusMenuIndex(FocusMenuIndex - 1);
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		return true;
+	}
+	else if (UEngineInput::IsDown('S') || UEngineInput::IsDown(VK_DOWN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		SetFocusMenuIndex(FocusMenuIndex + 1);
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+		MenuBar[FocusMenuIndex]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
+		MenuBar[FocusMenuIndex]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		return true;
+	}
+	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		SelectMenu();
+	}
+
+	return false;
+}
+
+void SinCutSceneManager::SetFocusMenuIndex(int _Index)
+{
+	FocusMenuIndex = _Index;
+
+	if (FocusMenuIndex < 0)
+	{
+		FocusMenuIndex = MenuBarCount - 1;
+	}
+
+	if (FocusMenuIndex >= MenuBarCount)
+	{
+		FocusMenuIndex = 0;
+	}
+}
+
 
 void SinCutSceneManager::EnterStart()
 {

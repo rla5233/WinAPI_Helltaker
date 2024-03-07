@@ -55,13 +55,13 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("UI", "White_Bar.png");
 
 		// 수정 (제거)
-		ContentsHelper::LoadImg("UI", "Small_LButton.png");
-		ContentsHelper::LoadImg("UI", "Small_RButton.png");
-
-		ContentsHelper::LoadFolder("Scene", "Transition");
-
-		ContentsHelper::LoadSound("Sound\\Effect", "transition_on.wav");
-		ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
+		//ContentsHelper::LoadImg("UI", "Small_LButton.png");
+		//ContentsHelper::LoadImg("UI", "Small_RButton.png");
+		//
+		//ContentsHelper::LoadFolder("Scene", "Transition");
+		//
+		//ContentsHelper::LoadSound("Sound\\Effect", "transition_on.wav");
+		//ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
 
 		IsLoad = true;
 	}

@@ -101,6 +101,7 @@ protected:
 	virtual void SelectStart();
 	virtual void Select();
 	virtual void SelectMenu() {};
+	bool FocusMenuBarCheck();
 
 	virtual void BadEndStart();
 	virtual void BadEndSetting();
@@ -113,8 +114,6 @@ protected:
 	virtual void SuccessStart();
 	virtual void Success(float _DeltaTime);
 	virtual void SuccessEnd();
-
-	bool FocusMenuBarCheck();
 
 private:
 	void C_StateUpdate(float _DeltaTime);

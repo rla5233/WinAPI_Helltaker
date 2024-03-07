@@ -3,6 +3,7 @@
 #include "SinChapterManager.h"
 
 class Sin_Dialogue;
+class Character;
 class UI;
 
 // 설명 :
@@ -20,8 +21,11 @@ public:
 	SinCutSceneManager& operator=(SinCutSceneManager&& _Other) noexcept = delete;
 
 	void C_CreateSceneBG();
-	void C_CreateDialogue();
+
+	void C_SpawnDialogue();
+	// 수정 (캐릭터 스폰 추가)
 	void C_SpawnBooper();
+	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
 	UI* GetBooper() const
 	{
@@ -36,9 +40,14 @@ protected:
 
 	virtual void CutSceneStart() override;
 
+	virtual void SelectMenu() {};
+
 private:
 	void EnterStart();
 	void Enter(float _DeltaTime);
+
+	bool FocusMenuBarCheck();
+	void SetFocusMenuIndex(int _Index);
 
 	void StateUpdate(float _DeltaTime);
 
@@ -46,8 +55,15 @@ private:
 	// Manager
 	std::list<AActor*> AllCutSceneActors;
 
+	//Character* SceneCharacter = nullptr;
 	Sin_Dialogue* Dialogue = nullptr;
 	UI* Booper = nullptr;
+
+	std::vector<UI*> MenuBar;
+	int MenuBarCount = -1;
+	int FocusMenuIndex = -1;
+	static const FVector FocusMenuScale;
+	static const FVector UnFocusMenuScale;
 	
 
 	ESinSceneState State = ESinSceneState::None;
