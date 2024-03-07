@@ -279,9 +279,8 @@ void CutSceneManager::Enter(float _DeltaTime)
 {
 	ResetCheck();
 	
-	// 수정 (리팩토링)
-	if ( //(false == SceneCharacter->GetIsImageRendererMoveValue()) &&
-	 (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
+	if ( (false == SceneCharacter->IsImgMoveOn())
+	&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
 	{
 		C_StateChange(ECutSceneState::Select);
 		UEngineSound::SoundPlay("booper_click.wav");
