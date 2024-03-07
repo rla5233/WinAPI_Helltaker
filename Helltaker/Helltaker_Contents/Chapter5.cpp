@@ -101,16 +101,13 @@ void Chapter5::CutSceneStart()
 	CutSceneManager::CutSceneStart();
 
 	C_SpawnDialogue("DialogueBG_Hell.png");
-	C_SpawnCharacter("Zd", "Zd_Idle.png", Chap5_Script[0]);
-	C_SpawnBooper();
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.256f, WinScale.Y * 0.567f };
-	FVector Pos = { WinScale.X * 0.014f, WinScale.Y * 0.021f };
-	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-	//C_GetSceneCharacter()->ImageRendererFadeInOn();
+	FVector Scale = { 0.256f, 0.567f };
+	FVector Pos = { 0.014f, 0.021f };
+	C_SpawnCharacter("Zd", "Zd_Idle.png", Chap5_Script[0], Pos, Scale);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 	
+	C_SpawnBooper();
 	C_BooperTextSet(Chap5_Script[1]);
 	C_BooperSetTextPosition(1);
 }
