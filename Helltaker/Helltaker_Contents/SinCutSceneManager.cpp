@@ -1,7 +1,7 @@
 #include "SinCutSceneManager.h"
 
+#include "Sin_Dialogue.h"
 #include "BackGround.h"
-#include "Scene.h"
 
 bool SinCutSceneManager::IsLoad = false;
 
@@ -52,29 +52,22 @@ void SinCutSceneManager::C_CreateSceneBG()
 
 void SinCutSceneManager::CutSceneStart()
 {
-	C_CreateSceneBG();
+	//C_CreateSceneBG();
 	
-
+	C_CreateDialogue();
 
 	// 컷신 상태 변경
 
 }
 
-void SinCutSceneManager::C_CreateDialogue(int _InitType)
+void SinCutSceneManager::C_CreateDialogue()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	Dialogue = SpawnActor<Sin_Dialogue>(SinUpdateOrder::UnderBackGround);
+	Dialogue->SetActorLocation(WinScale.Half2D());
+	Dialogue->SetName("Sin_Dialogue");
 
-	float UpPosY = 0.0f, DownPosY = 0.0f;
-	switch (_InitType)
-	{
-	case 0:
-		UpPosY = WinScale.Y * 0.4f;
-
-		break;
-	case 1:
-
-		break;
-	}
+	AllCutSceneActors.push_back(Dialogue);
 }
 
 void SinCutSceneManager::EnterStart()

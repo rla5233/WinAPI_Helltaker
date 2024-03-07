@@ -408,3 +408,10 @@ enum class ESinHitChainType
 	Left,
 	Right
 };
+
+enum class ESinDialogueState
+{
+	None,
+	Idle,
+	Move
+};

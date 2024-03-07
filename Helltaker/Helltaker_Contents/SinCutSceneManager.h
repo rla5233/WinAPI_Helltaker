@@ -2,6 +2,8 @@
 
 #include "SinChapterManager.h"
 
+class Sin_Dialogue;
+
 // Ό³Έν :
 class SinCutSceneManager : public SinChapterManager
 {
@@ -17,7 +19,7 @@ public:
 	SinCutSceneManager& operator=(SinCutSceneManager&& _Other) noexcept = delete;
 
 	void C_CreateSceneBG();
-	void C_CreateDialogue(int _InitType);
+	void C_CreateDialogue();
 
 	void C_StateChange(ESinSceneState _State);
 
@@ -37,7 +39,7 @@ private:
 	// Manager
 	std::list<AActor*> AllCutSceneActors;
 
-	std::list<Scene*> Dialogue;
+	Sin_Dialogue* Dialogue = nullptr;
 
 	ESinSceneState State = ESinSceneState::None;
 	static bool IsLoad;

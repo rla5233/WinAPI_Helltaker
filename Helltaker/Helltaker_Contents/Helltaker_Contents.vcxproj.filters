@@ -152,7 +152,7 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClInclude>
     <ClInclude Include="Sin_Dialogue.h">
-      <Filter>Object\Actor\Sin</Filter>
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +304,7 @@
       <Filter>Object\Actor\Sin</Filter>
     </ClCompile>
     <ClCompile Include="Sin_Dialogue.cpp">
-      <Filter>Object\Actor\Sin</Filter>
+      <Filter>Object\Actor\Sin\MoveComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
