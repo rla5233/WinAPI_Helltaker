@@ -100,7 +100,7 @@ public:
 	template<typename EnumType>
 	void SetTimeScale(EnumType _Value, float _Scale)
 	{
-		SetTimeScale(_Value, _Scale);
+		SetTimeScale(static_cast<int>(_Value), _Scale);
 	}
 
 	void SetTimeScale(int _Value, float _Scale)

@@ -175,6 +175,16 @@ enum class EChapterState
 	End
 };
 
+enum class ECutSceneState
+{
+	None,
+	Enter,
+	Select,
+	BadEnd,
+	Success,
+	Reset
+};
+
 enum class ESinState
 {
 	None,
@@ -183,6 +193,12 @@ enum class ESinState
 	Phase2,
 	CutScene,
 	Reset
+};
+
+enum class ESinSceneState
+{
+	None,
+	Enter
 };
 
 enum class EHeroState
@@ -259,16 +275,6 @@ enum class EMoveActorDir
 	Right,
 	Up,
 	Down
-};
-
-enum class ECutSceneState
-{
-	None,
-	Enter,
-	Select,
-	BadEnd,
-	Success,
-	Reset
 };
 
 
