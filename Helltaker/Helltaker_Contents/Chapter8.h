@@ -55,7 +55,7 @@ private:
 	void SuccessEndScene();
 
 	void CreateDefaultBG();
-	void SpawnSkeletonMan();
+	void SpawnSkeletonMan(const FVector& _Pos);
 
 private:
 	BackGround* M_DefaultBackGround = nullptr;

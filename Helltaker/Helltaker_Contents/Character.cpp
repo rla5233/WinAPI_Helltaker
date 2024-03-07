@@ -15,6 +15,8 @@ void Character::SetImageRendererMove()
 
 	StartPos = CurPos + FVector(WinScale.X * 0.08f, 0.0f);
 	TargetPos = CurPos;
+
+	ImgMoveOn();
 }
 
 void Character::IdleStart()
@@ -26,7 +28,6 @@ void Character::Idle(float _DeltaTime)
 void Character::AppearStart()
 {
 	SetImageRendererMove();
-	ImgMoveOn();
 	FadeInOn();
 }
 

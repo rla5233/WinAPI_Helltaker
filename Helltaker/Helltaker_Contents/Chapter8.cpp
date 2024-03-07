@@ -125,19 +125,22 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 
 void Chapter8::CreateDefaultBG()
 {
-	M_DefaultBackGround = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::BackGround));
+	M_DefaultBackGround = SpawnActor<BackGround>(UpdateOrder::BackGround);
 	M_DefaultBackGround->CreateBackGround("DefaultBG");
 	M_DefaultBackGround->GetImageRenderer()->CameraEffectOff();
 }
 
-void Chapter8::SpawnSkeletonMan()
+void Chapter8::SpawnSkeletonMan(const FVector& _Pos)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	Character* Skeleton = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	Skeleton->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
+	FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
+
+	Character* Skeleton = SpawnActor<Character>(UpdateOrder::Character);
+	Skeleton->SetActorLocation(WinScale * _Pos);
 	Skeleton->SetName("Skeleton_Man");
 	Skeleton->CreateImageRenderer(RenderOrder::Scene);
 	Skeleton->GetImageRenderer()->SetImage("Man_Skeleton.png");
+	Skeleton->GetImageRenderer()->SetScale(Scale);
 	Skeleton->GetImageRenderer()->CameraEffectOff();
 	SkeletonMan.push_back(Skeleton);
 }
@@ -156,15 +159,14 @@ void Chapter8::CutSceneStart()
 	M_DefaultBackGround->AllRenderersActiveOff();
 
 	C_SpawnDialogue("DialogueBG_Throne.png");
-	C_SpawnCharacter("Lu", "Lu_Swirl_Idle.png");
+
+	FVector Scale = { 0.242f, 0.619f };
+	FVector Pos = { 0.0f, 0.0f };
+	C_SpawnCharacter("Lu", "Lu_Swirl_Idle.png", " ", Pos, Scale);
 	C_CreateCharacterAnimation("Lu_Swirl_1", "Lu_Swirl", 0, 9, 0.15f, false);
 	C_CreateCharacterAnimation("Lu_Swirl_2", "Lu_Swirl", 10, 13, 0.15f, false);
-
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { WinScale.X * 0.242f, WinScale.Y * 0.619f };
-	FVector Pos = { 0.0f, WinScale.Y * 0.0f };
-	C_GetSceneCharacter()->GetImageRenderer()->SetScale(Scale);
-	//C_GetSceneCharacter()->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.1f), Pos.Y }, Pos);
+	C_GetSceneCharacter()->SetImageRendererMove();
+	C_GetSceneCharacter()->SetState(ECharacterState::Appear);
 
 	CutSceneManager::CutSceneStart();
 }
@@ -179,19 +181,6 @@ void Chapter8::EnterStart()
 void Chapter8::Enter(float _DeltaTime)
 {
 	ResetCheck();
-	//C_GetSceneCharacter()->ImageRendererMoveUpdate(_DeltaTime, 3.5f);
-	//C_GetSceneCharacter()->ImageRendererFadeInUpdate(_DeltaTime);
-
-	for (Character* Skeleton : SkeletonMan)
-	{
-		if (nullptr == Skeleton)
-		{
-			MsgBoxAssert("Acotr is nullptr");
-		}
-
-		//Skeleton->ImageRendererMoveUpdate(_DeltaTime);
-		//Skeleton->ImageRendererFadeInUpdate(_DeltaTime);
-	}
 
 	switch (EnterOrder)
 	{
@@ -242,15 +231,9 @@ void Chapter8::EnterOrder1(float _DeltaTime)
 	{
 		if (0.0f >= TimeCount)
 		{
-			SpawnSkeletonMan();
-			SpawnSkeletonMan();
-
-			FVector WinScale = ContentsHelper::GetWindowScale();
-			FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
-			FVector Pos = { WinScale.X * (-0.211f),  WinScale.Y * (-0.025f) };
-			SkeletonMan[0]->GetImageRenderer()->SetScale(Scale);
-			//SkeletonMan[0]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-			//SkeletonMan[0]->ImageRendererFadeInOn();
+			FVector Pos = { 0.289f, 0.364f };
+			SpawnSkeletonMan(Pos);
+			SkeletonMan[0]->StateChange(ECharacterState::Appear);
 
 			UEngineSound::SoundPlay("lucifer_intro_skeleton.wav");
 			TimeCount = SkeletonRenderDelay;
@@ -266,12 +249,9 @@ void Chapter8::EnterOrder2(float _DeltaTime)
 {
 	if (0.0f >= TimeCount)
 	{
-		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector Scale = { WinScale.X * 0.3375f, WinScale.Y * 0.664f };
-		FVector Pos = { WinScale.X * 0.211f, WinScale.Y * (-0.025f) };
-		SkeletonMan[1]->GetImageRenderer()->SetScale(Scale);
-		//SkeletonMan[1]->ImageRendererMoveOn({ Pos.X + (WinScale.X * 0.08f), Pos.Y }, Pos);
-		//SkeletonMan[1]->ImageRendererFadeInOn();
+		FVector Pos = { 0.711f, 0.364f };
+		SpawnSkeletonMan(Pos);
+		SkeletonMan[1]->StateChange(ECharacterState::Appear);
 
 		TimeCount = LuSwirl2RenderDelay;
 		++EnterOrder;

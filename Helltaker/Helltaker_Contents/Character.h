@@ -40,6 +40,11 @@ public:
 		return NameRenderer;
 	}
 
+	void SetState(ECharacterState _State)
+	{
+		State = _State;
+	}
+	
 	void StateChange(ECharacterState _State);
 
 protected:
