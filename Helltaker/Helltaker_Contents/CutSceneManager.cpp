@@ -171,6 +171,17 @@ void CutSceneManager::C_SpawnBooper()
 void CutSceneManager::C_BooperTextSet(std::string_view _Text)
 {
 	Booper->GetTextRenderer()->SetText(_Text);
+	
+	int LineCount = 1;
+	for (size_t i = 0; i < _Text.size(); i++)
+	{
+		if ('\n' == _Text[i])
+		{
+			++LineCount;
+		}
+	}
+
+	C_BooperSetTextPosition(LineCount);
 }
 
 void CutSceneManager::C_BooperChangeAnimation(std::string_view _AnimationName)
@@ -181,11 +192,6 @@ void CutSceneManager::C_BooperChangeAnimation(std::string_view _AnimationName)
 void CutSceneManager::C_BooperSetTransform(const FTransform& _Trans)
 {
 	Booper->GetImageRenderer()->SetTransform(_Trans);
-}
-
-void CutSceneManager::C_BooperSetTextPosition(const FVector& _Pos)
-{
-	Booper->GetTextRenderer()->SetPosition(_Pos);
 }
 
 void CutSceneManager::C_BooperSetTextPosition(int _LineCount)

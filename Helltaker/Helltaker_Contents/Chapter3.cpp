@@ -107,7 +107,6 @@ void Chapter3::CutSceneStart()
 	
 	C_SpawnBooper();
 	C_BooperTextSet(Chap3_Script[1]);
-	C_BooperSetTextPosition(1);
 }
 
 void Chapter3::SelectStart()
@@ -136,7 +135,6 @@ void Chapter3::BadEndStart()
 	CutSceneManager::BadEndStart();
 
 	C_BooperTextSet(Chap3_Script[4]);
-	C_BooperSetTextPosition(2);
 }
 
 void Chapter3::BadEndSetting()

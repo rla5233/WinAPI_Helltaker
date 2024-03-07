@@ -148,14 +148,14 @@
     <ClInclude Include="Judge.h">
       <Filter>Object\Actor\Sin\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="RenderActor.h">
-      <Filter>Object\Actor\Base\Level1</Filter>
-    </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Object\Level\Opening</Filter>
     </ClInclude>
     <ClInclude Include="Opening.h">
       <Filter>Object\Level\Opening</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderActor.h">
+      <Filter>Object\Actor\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -303,14 +303,14 @@
     <ClCompile Include="Judge.cpp">
       <Filter>Object\Actor\Sin\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="RenderActor.cpp">
-      <Filter>Object\Actor\Base\Level1</Filter>
-    </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Object\Level\Opening</Filter>
     </ClCompile>
     <ClCompile Include="Opening.cpp">
       <Filter>Object\Level\Opening</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderActor.cpp">
+      <Filter>Object\Actor\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,9 +358,6 @@
     </Filter>
     <Filter Include="Object\Actor\Sin\Scene">
       <UniqueIdentifier>{93109b38-ab4d-4561-974b-4673d81a857a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Actor\Base\Level1">
-      <UniqueIdentifier>{ebef01ce-2ade-4ceb-b388-e6324cad554e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Level\Opening">
       <UniqueIdentifier>{5282ab7e-f32b-4666-9144-d17c259febb8}</UniqueIdentifier>

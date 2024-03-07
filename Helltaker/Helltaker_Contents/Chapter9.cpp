@@ -107,7 +107,6 @@ void Chapter9::CutSceneStart()
 	
 	C_SpawnBooper();
 	C_BooperTextSet(Chap9_Script[1]);
-	C_BooperSetTextPosition(1);
 }
 
 void Chapter9::EnterStart()

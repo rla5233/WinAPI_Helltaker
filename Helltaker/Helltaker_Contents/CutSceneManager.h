@@ -40,7 +40,6 @@ public:
 	void C_BooperTextSet(std::string_view _Text);
 	void C_BooperChangeAnimation(std::string_view _AnimationName);
 	void C_BooperSetTransform(const FTransform& _Trans);
-	void C_BooperSetTextPosition(const FVector& _Pos);
 	void C_BooperSetTextPosition(int _LineCount);
 	void C_BooperImageRendererOn();
 	void C_BooperImageRendererOff();

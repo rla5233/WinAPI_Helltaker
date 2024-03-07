@@ -109,7 +109,6 @@ void Chapter7::CutSceneStart()
 
 	C_SpawnBooper();
 	C_BooperTextSet(Chap7_Script[1]);
-	C_BooperSetTextPosition(1);
 }
 
 void Chapter7::SelectStart()
@@ -148,7 +147,6 @@ void Chapter7::SuccessStart()
 		break;
 	case 1:
 		C_BooperTextSet(Chap7_Script[5]); 
-		C_BooperSetTextPosition(2);
 		break;
 	}
 	

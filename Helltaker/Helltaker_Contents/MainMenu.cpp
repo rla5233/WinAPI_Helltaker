@@ -191,9 +191,6 @@ void MainMenu::NewGameStart()
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
-	C_BooperSetTextPosition(Pos);
 	NewGameOrder = 0;
 }
 
@@ -258,8 +255,6 @@ void MainMenu::NewGameLastOrder()
 		C_ChangeDialogue(ImgName, { Pos, Scale });
 
 		C_BooperTextSet(MainMenu_Script[NewGameOrder + 7]);
-		Pos = { 0.0f, WinScale.Y * (-0.0995f) };
-		C_BooperSetTextPosition(Pos);
 		SelectChapterNum = 1;
 		UEngineSound::SoundPlay("booper_click.wav");
 		++NewGameOrder;
@@ -523,9 +518,6 @@ void MainMenu::ExitStart()
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[12]);
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Pos = { 0.0f, WinScale.Y * (-0.12f) };
-	C_BooperSetTextPosition(Pos);
 	UEngineSound::SoundPlay("booper_click.wav");
 }
 

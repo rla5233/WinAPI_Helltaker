@@ -136,7 +136,6 @@ void Chapter4::BadEndStart()
 	CutSceneManager::BadEndStart();
 
 	C_BooperTextSet(Chap4_Script[4]);
-	C_BooperSetTextPosition(1);
 }
 
 void Chapter4::BadEndSetting()
@@ -144,7 +143,6 @@ void Chapter4::BadEndSetting()
 	CutSceneManager::BadEndSetting();
 
 	C_BooperTextSet(Chap4_Script[5]);
-	C_BooperSetTextPosition(2);
 }
 
 void Chapter4::SuccessStart()

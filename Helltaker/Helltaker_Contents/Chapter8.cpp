@@ -290,7 +290,6 @@ void Chapter8::EnterOrder4(float _DeltaTime)
 
 			C_SpawnBooper();
 			C_BooperTextSet(Chap8_Script[1]);
-			C_BooperSetTextPosition(1);
 
 			++EnterOrder;
 		}
@@ -358,11 +357,9 @@ void Chapter8::BadEndStart()
 	{
 	case 0:
 		C_BooperTextSet(Chap8_Script[5]);
-		C_BooperSetTextPosition(1);
 		break;
 	case 1:
 		C_BooperTextSet(Chap8_Script[10]);
-		C_BooperSetTextPosition(1);
 		break;
 	}
 
@@ -382,11 +379,9 @@ void Chapter8::BadEndSetting()
 	{
 	case 0 :
 		C_BooperTextSet(Chap8_Script[6]);
-		C_BooperSetTextPosition(2);
 		break;
 	case 1:
 		C_BooperTextSet(Chap8_Script[11]);
-		C_BooperSetTextPosition(2);
 		break;
 	}
 }
@@ -411,7 +406,6 @@ void Chapter8::SuccessStart1()
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(Chap8_Script[7]); 
-	C_BooperSetTextPosition(1);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_CharacterSetTransform({ { WinScale.X * 0.015f, WinScale.Y * 0.02f }, { WinScale.X * 0.247f, WinScale.Y * 0.561f } });
@@ -423,7 +417,6 @@ void Chapter8::SuccessStart2()
 	C_MenubarRenderActiveOff();
 	C_BooperImageRendererOn();
 	C_BooperTextSet(Chap8_Script[12]);
-	C_BooperSetTextPosition(2);
 }
 
 void Chapter8::Success(float _DeltaTime)
@@ -459,7 +452,6 @@ void Chapter8::SuccessEnter()
 		C_GetSceneCharacter()->GetImageRenderer()->SetImage("Lu_Happy.png");
 		C_GetSceneCharacter()->GetImageRenderer()->SetTransform({ CharPos, CharScale });
 		C_BooperTextSet(Chap8_Script[13]);
-		C_BooperSetTextPosition(1);
 		++SelectOrder;
 	}	
 }
@@ -474,7 +466,6 @@ void Chapter8::SuccessEndScene()
 		C_BooperChangeAnimation("Booper_Idle");
 		C_BooperSetTransform(BooperTrans);
 		C_BooperTextSet(Chap8_Script[14]);
-		C_BooperSetTextPosition(2);
 		++SelectOrder;
 	}
 }

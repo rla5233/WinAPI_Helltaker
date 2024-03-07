@@ -178,7 +178,6 @@ void Chapter6::BadEndSetting1()
 
 	Booper->AllRenderersActiveOn();
 	C_BooperTextSet(Chap6_Script[5]);
-	C_BooperSetTextPosition(1);
 	UEngineSound::SoundPlay("booper_click.wav");
 	C_AddFailOrder(1);
 }

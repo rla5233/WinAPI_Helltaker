@@ -109,7 +109,6 @@ void Chapter5::CutSceneStart()
 	
 	C_SpawnBooper();
 	C_BooperTextSet(Chap5_Script[1]);
-	C_BooperSetTextPosition(1);
 }
 
 void Chapter5::SelectStart()
@@ -145,7 +144,6 @@ void Chapter5::BadEndSetting()
 	CutSceneManager::BadEndSetting();
 
 	C_BooperTextSet(Chap5_Script[5]);
-	C_BooperSetTextPosition(2);
 }
 
 void Chapter5::SuccessStart()
