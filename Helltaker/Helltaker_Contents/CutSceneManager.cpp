@@ -78,30 +78,6 @@ void CutSceneManager::C_SpawnDialogue(std::string_view _Name)
 	AllCutSceneActors.push_back(Dialogue);
 }
 
-void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text)
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-
-	SceneCharacter = SpawnActor<Character>(static_cast<int>(UpdateOrder::Character));
-	SceneCharacter->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
-	SceneCharacter->SetName(_Name);
-	SceneCharacter->CreateImageRenderer(RenderOrder::Character);
-	SceneCharacter->CreateNameRenderer(RenderOrder::Text);
-	AllCutSceneActors.push_back(SceneCharacter);
-
-	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
-	SceneCharacter->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.255f, WinScale.Y * 0.611f} });
-	SceneCharacter->GetImageRenderer()->CameraEffectOff();
-
-	SceneCharacter->GetNameRenderer()->SetText(_Text);
-	SceneCharacter->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
-	SceneCharacter->GetNameRenderer()->SetTextSize(40);
-	SceneCharacter->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
-	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED1);
-	SceneCharacter->GetNameRenderer()->SetTextEffect(2);
-	SceneCharacter->GetNameRenderer()->CameraEffectOff();
-}
-
 void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text, const FVector& _Pos, const FVector& _Scale)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -114,7 +90,7 @@ void CutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view 
 	AllCutSceneActors.push_back(SceneCharacter);
 
 	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
-	SceneCharacter->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * _Scale });
+	SceneCharacter->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
 	SceneCharacter->GetImageRenderer()->CameraEffectOff();
 
 	SceneCharacter->GetNameRenderer()->SetText(_Text);

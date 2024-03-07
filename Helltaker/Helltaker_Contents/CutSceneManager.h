@@ -27,13 +27,12 @@ public:
 	void C_CreateSceneBG();
 
 	void C_SpawnDialogue(std::string_view _Name);
-	void C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text = " ");
 	void C_SpawnCharacter(
 		std::string_view _Name,
 		std::string_view _ImgName,
-		std::string_view _Text,
-		const FVector& _Pos,
-		const FVector& _Scale);
+		std::string_view _Text = " ",
+		const FVector& _Pos = { 0.0f, 0.0f },
+		const FVector& _Scale = { 0.255f, 0.611f });
 
 	void C_SpawnBooper();
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
