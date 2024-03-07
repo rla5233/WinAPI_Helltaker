@@ -57,13 +57,14 @@ void SinCutSceneManager::C_CreateSceneBG()
 
 void SinCutSceneManager::CutSceneStart()
 {
-	C_CreateSceneBG();
+	SinChapterManager::CutSceneStart();
 
+	C_CreateSceneBG();
 	C_SpawnDialogue();
 	C_SpawnBooper();
-
 	C_SpawnMenubar();
-	// 컷신 상태 변경
+
+	// State 변경 추가
 
 }
 

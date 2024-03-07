@@ -132,6 +132,11 @@ public:
 		return SinHitChainHp;
 	}
 
+	Scene* GetTransitionActor() const
+	{
+		return TransitionActor;
+	}
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime);

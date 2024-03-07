@@ -3,6 +3,8 @@
 #include "Character.h"
 #include "Scene.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 bool SinOpening::IsLoad = false;
 const std::vector<const char*> SinOpening::SinOpening_Script =
 {
@@ -40,5 +42,19 @@ void SinOpening::LevelStart(ULevel * _PrevLevel)
 {
 	SinManager::LevelStart(_PrevLevel);
 
-	CutSceneStart();
+	GetTransitionActor()->GetImageRenderer()->ActiveOn();
+	GetTransitionActor()->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
+	UEngineSound::SoundPlay("transition_off.wav");
+
+	M_StateChange(ESinState::CutScene);
 }
+
+void SinOpening::CutSceneStart()
+{
+	SinChapterManager::CutSceneStart();
+
+	
+
+}
+
+

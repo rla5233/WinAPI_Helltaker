@@ -20,10 +20,9 @@ protected:
 	void BeginPlay() override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
+	// Chapter
+	void CutSceneStart() override;
 	
-private:
-	
-
 private:
 
 

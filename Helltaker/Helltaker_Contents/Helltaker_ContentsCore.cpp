@@ -34,6 +34,7 @@ void Helltaker_ContentsCore::BeginPlay()
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	//MainWindow.SetWindowScale({ 1280, 720 });
 
+	MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
 	SetFrame(60);
 
     //CreateLevel<Opening>("Opening");
@@ -66,11 +67,11 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter8>("Chapter8");
 	//ChangeLevel("Chapter8");
 		
-	//CreateLevel<Chapter9>("Chapter9");
-	//ChangeLevel("Chapter9");
+	CreateLevel<Chapter9>("Chapter9");
+	ChangeLevel("Chapter9");
 
-	CreateLevel<SinOpening>("SinOpening");
-	ChangeLevel("SinOpening");
+	//CreateLevel<SinOpening>("SinOpening");
+	//ChangeLevel("SinOpening");
 
 	//CreateLevel<SinChapter1>("SinChapter1");
 	//ChangeLevel("SinChapter1");

@@ -188,6 +188,7 @@ enum class ECutSceneState
 enum class ESinState
 {
 	None,
+	Opening,
 	Intro,
 	Phase1,
 	Phase2,

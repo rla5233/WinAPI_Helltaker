@@ -65,7 +65,6 @@ private:
 	static const FVector FocusMenuScale;
 	static const FVector UnFocusMenuScale;
 	
-
 	ESinSceneState State = ESinSceneState::None;
 	static bool IsLoad;
 };
