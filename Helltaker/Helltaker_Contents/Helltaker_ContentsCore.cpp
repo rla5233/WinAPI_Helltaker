@@ -31,7 +31,7 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 void Helltaker_ContentsCore::BeginPlay()
 {
 	UEngineCore::BeginPlay();
-	//MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
+	MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	SetFrame(60);
 

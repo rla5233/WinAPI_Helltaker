@@ -66,6 +66,14 @@ public:
 		float _TimeWeight = 1.0f
 	);
 
+	void ImgMoveUpdate(
+		const std::vector<UImageRenderer*>& _Renderer,
+		const std::vector<FVector>& _StartPos,
+		const std::vector<FVector>& _TargetPos,
+		float _DeltaTime,
+		float _TimeWeight = 1.0f
+	);
+
 	void ImgMoveOn()
 	{
 		IsImgMove = true;

@@ -48,7 +48,7 @@ void SinCutSceneManager::CutSceneStart()
 	SinChapterManager::CutSceneStart();
 
 	C_CreateSceneBG();
-	C_SpawnDialogue();
+	
 	C_SpawnBooper();
 	C_SpawnMenubar();
 
@@ -56,12 +56,13 @@ void SinCutSceneManager::CutSceneStart()
 
 }
 
-void SinCutSceneManager::C_SpawnDialogue()
+void SinCutSceneManager::C_SpawnDialogue(int _PosType)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Dialogue = SpawnActor<Sin_Dialogue>(SinUpdateOrder::UnderBackGround);
 	Dialogue->SetActorLocation(WinScale.Half2D());
 	Dialogue->SetName("Sin_Dialogue");
+	Dialogue->SetSin(_PosType);
 
 	AllCutSceneActors.push_back(Dialogue);
 }

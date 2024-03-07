@@ -109,3 +109,28 @@ void RenderActor::ImgMoveUpdate(
 		}
 	}
 }
+
+void RenderActor::ImgMoveUpdate(
+	const std::vector<UImageRenderer*>& _Renderer, 
+	const std::vector<FVector>& _StartPos, 
+	const std::vector<FVector>& _TargetPos, 
+	float _DeltaTime, 
+	float _TimeWeight /* = 1.0f */)
+{
+	if (true == IsImgMove)
+	{
+		MoveTimeCount += _DeltaTime * _TimeWeight;
+		
+		for (size_t i = 0; i < _Renderer.size(); i++)
+		{
+			FVector NextPos = FVector::LerpClamp(_StartPos[i], _TargetPos[i], MoveTimeCount);
+			_Renderer[i]->SetPosition(NextPos);
+		}
+
+		if (1.0f <= MoveTimeCount)
+		{
+			MoveTimeCount = 0.0f;
+			IsImgMove = false;
+		}
+	}
+}

@@ -40,7 +40,7 @@ void SinOpening::LevelStart(ULevel * _PrevLevel)
 void SinOpening::CutSceneStart()
 {
 	SinChapterManager::CutSceneStart();
-
+	
 	C_SpawnBooper();
 	C_BooperTextSet(SinOpening_Script[2]);
 	C_BooperSetTextPosition(2);
@@ -89,7 +89,7 @@ void SinOpening::Enter1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_CreateSceneBG();
-		C_SpawnDialogue();
+		C_SpawnDialogue(0);
 		// 수정 (캐릭터 추가)
 
 		C_BooperTextSet(SinOpening_Script[3]);

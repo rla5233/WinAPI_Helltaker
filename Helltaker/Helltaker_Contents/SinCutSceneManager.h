@@ -22,7 +22,7 @@ public:
 
 	void C_CreateSceneBG();
 
-	void C_SpawnDialogue();
+	void C_SpawnDialogue(int _PosType);
 	// 수정 (캐릭터 스폰 추가)
 	void C_SpawnBooper();
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
