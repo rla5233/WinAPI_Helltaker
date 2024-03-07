@@ -28,6 +28,8 @@ protected:
 	void EnterStart() override;
 	void Enter(float _DeltaTime) override;
 
+	void EndStart() override;
+
 	void ChangeChapter() override;
 
 private:

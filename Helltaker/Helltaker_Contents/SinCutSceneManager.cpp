@@ -186,7 +186,7 @@ void SinCutSceneManager::End(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-
+		ChangeChapter();
 	}
 }
 
@@ -268,8 +268,10 @@ void SinCutSceneManager::StateUpdate(float _DeltaTime)
 	case ESinSceneState::Enter:
 		Enter(_DeltaTime);
 		break;
-	default:
+	case ESinSceneState::End:
+		End(_DeltaTime);
 		break;
+
 	}
 }
 
@@ -282,7 +284,8 @@ void SinCutSceneManager::C_StateChange(ESinSceneState _State)
 		case ESinSceneState::Enter:
 			EnterStart();
 			break;
-		default:
+		case ESinSceneState::End:
+			EndStart();
 			break;
 		}
 	}

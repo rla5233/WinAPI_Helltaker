@@ -138,6 +138,16 @@ void SinOpening::Enter3()
 	}
 }
 
+void SinOpening::EndStart()
+{
+	SinCutSceneManager::EndStart();
+
+	GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[1]);
+	GetJudge()->GetNameRenderer()->ActiveOn();
+
+	C_BooperTextSet(SinOpening_Script[5]);
+	GetBooper()->AllRenderersActiveOn();
+}
 
 void SinOpening::ChangeChapter()
 {

@@ -1,5 +1,7 @@
 #include "Sin_Judge.h"
 
+#include "SinCutSceneManager.h"
+
 Sin_Judge::Sin_Judge()
 {
 }
@@ -26,7 +28,7 @@ void Sin_Judge::Intro_AppearStart()
 		"Jud_Intro", 
 		"Jud_Intro", 
 		{ 0, 1, 2, 3 },	
-		{ 0.08f, 0.16f, 0.32f, 0.32f },
+		{ 0.08f, 0.08f, 0.32f, 0.0f },
 		false);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -65,12 +67,12 @@ void Sin_Judge::Intro_Appear2(float _DeltaTime)
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.558f, 0.692f };
 		GetImageRenderer()->SetScale(WinScale * Scale);
+		GetSinCutSceneChapter()->C_StateChange(ESinSceneState::End);
 	}
 
-	if (2 == GetImageRenderer()->GetCurAnimationFrame())
+	if (3 == GetImageRenderer()->GetCurAnimationFrame())
 	{
-		GetNameRenderer()->ActiveOn();
-		
+		GetSinCutSceneChapter()->C_StateChange(ESinSceneState::End);
 	}
 
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
