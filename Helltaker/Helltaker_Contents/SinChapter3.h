@@ -30,6 +30,10 @@ protected:
 	void EnterStart() override;
 	void Enter(float _DeltaTime) override;
 
+	void SelectStart() override;
+	void Select(float _DeltaTime) override;
+	void SelectMenu() override;
+
 	void ChangeChapter() override;
 
 private:

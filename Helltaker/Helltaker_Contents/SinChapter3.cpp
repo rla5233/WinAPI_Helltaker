@@ -11,7 +11,7 @@ const std::vector<const char*> SinChapter3::SinChap3_Script =
 	/* 3 Script 3  */ "그리고 절망의 사슬이 가장 즐거운 법이지.",
 	/* 4 Script 4  */ "그래! 네가 행한 모든 것들을 후회하라!",
 
-	/* 5 MenuBar 1  */ "네 헤어 스타일이 마음에 드는데.",
+	/* 5 MenuBar 1  */ "니 헤어 스타일이 마음에 드는데.",
   	/* 6 MenuBar 2  */ "그 옷 끝내주는데! 10점 만점에 10점!",
 	/* 7 Script 1   */ "거짓말! 기만으로 네 운명을 벗어날 수는 없다!",
 
@@ -319,8 +319,29 @@ void SinChapter3::Enter7()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_StateChange();
+		C_StateChange(ESinSceneState::Select);
 	}
+}
+
+void SinChapter3::SelectStart()
+{
+	SinCutSceneManager::SelectStart();
+
+	C_MenubarTextSet(0, SinChap3_Script[5]);
+	C_MenubarTextSet(1, SinChap3_Script[6]);
+	OrderCount = 0;
+}
+
+void SinChapter3::Select(float _DeltaTime)
+{
+	SinCutSceneManager::Select(_DeltaTime);
+
+	int a = 0;
+}
+
+void SinChapter3::SelectMenu()
+{
+	++OrderCount;
 }
 
 void SinChapter3::ChangeChapter()

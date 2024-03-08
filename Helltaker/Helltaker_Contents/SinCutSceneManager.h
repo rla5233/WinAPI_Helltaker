@@ -55,6 +55,10 @@ public:
 	void C_BooperTextSet(std::string_view _Text);
 	void C_BooperSetTextPosition(int _LineCount);
 
+	void C_MenubarTextSet(int _Index, std::string_view _Text);
+	void C_MenubarRenderActiveOff();
+	void C_MenubarRenderActiveOn();
+
 	Sin_Dialogue* C_GetDialogue() const
 	{
 		return Dialogue;
@@ -89,6 +93,8 @@ protected:
 	
 	virtual void EndStart() {};
 
+	virtual void SelectStart();
+	virtual void Select(float _DeltaTime);
 	virtual void SelectMenu() {};
 
 	void ResetCheck() override;

@@ -6,6 +6,8 @@
 #include "Sin_Judge.h"
 #include "UI.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 const FVector SinCutSceneManager::FocusMenuScale = { 0.501f, 0.074f };
 const FVector SinCutSceneManager::UnFocusMenuScale = { 0.475f, 0.065f };
 
@@ -197,6 +199,27 @@ void SinCutSceneManager::C_BooperSetTextPosition(int _LineCount)
 	}
 }
 
+void SinCutSceneManager::C_MenubarTextSet(int _Index, std::string_view _Text)
+{
+	MenuBar[_Index]->GetTextRenderer()->SetText(_Text);
+}
+
+void SinCutSceneManager::C_MenubarRenderActiveOff()
+{
+	for (UI* Menu : MenuBar)
+	{
+		Menu->AllRenderersActiveOff();
+	}
+}
+
+void SinCutSceneManager::C_MenubarRenderActiveOn()
+{
+	for (UI* Menu : MenuBar)
+	{
+		Menu->AllRenderersActiveOn();
+	}
+}
+
 void SinCutSceneManager::C_SpawnMenubar(FVector _Pos, int _MenuBarCount)
 {
 	float interval = 0.0f;
@@ -302,6 +325,22 @@ void SinCutSceneManager::Enter(float _DeltaTime)
 	ResetCheck();
 }
 
+void SinCutSceneManager::SelectStart()
+{
+	Booper->GetImageRenderer()->ActiveOff();
+	C_SpawnMenubar();
+}
+
+void SinCutSceneManager::Select(float _DeltaTime)
+{
+	ResetCheck();
+
+	if (true == FocusMenuBarCheck())
+	{
+		UEngineSound::SoundPlay("dialogue_button_focus.wav");
+	}
+}
+
 void SinCutSceneManager::ResetCheck()
 {
 	SinChapterManager::ResetCheck();
@@ -326,6 +365,9 @@ void SinCutSceneManager::StateUpdate(float _DeltaTime)
 	case ESinSceneState::Enter:
 		Enter(_DeltaTime);
 		break;
+	case ESinSceneState::Select:
+		Select(_DeltaTime);
+		break;
 	case ESinSceneState::End:
 		End(_DeltaTime);
 		break;
@@ -340,6 +382,9 @@ void SinCutSceneManager::C_StateChange(ESinSceneState _State)
 		{
 		case ESinSceneState::Enter:
 			EnterStart();
+			break;
+		case ESinSceneState::Select:
+			SelectStart();
 			break;
 		case ESinSceneState::End:
 			EndStart();
