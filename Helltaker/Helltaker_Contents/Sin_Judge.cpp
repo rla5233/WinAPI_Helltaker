@@ -24,12 +24,7 @@ void Sin_Judge::Tick(float _DeltaTime)
 
 void Sin_Judge::Intro_AppearStart()
 {
-	GetImageRenderer()->CreateAnimation(
-		"Jud_Intro", 
-		"Jud_Intro", 
-		{ 0, 1, 2, 3 },	
-		{ 0.08f, 0.08f, 0.32f, 0.0f },
-		false);
+	GetImageRenderer()->CreateAnimation("Jud_Intro", "Jud_Intro", { 0, 1, 2, 3 }, { 0.08f, 0.08f, 0.32f, 0.0f }, false);
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 1.0f, 0.692f };

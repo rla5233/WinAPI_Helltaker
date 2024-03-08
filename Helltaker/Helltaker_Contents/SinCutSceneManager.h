@@ -49,8 +49,9 @@ public:
 	void C_StateChange(ESinSceneState _State);
 
 protected:
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
+	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
+	virtual void LevelEnd(ULevel* _NextLevel) override;
 
 	virtual void CutSceneStart() override;
 

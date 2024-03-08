@@ -136,9 +136,6 @@
     <ClInclude Include="Demon.h">
       <Filter>Object\Actor\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="Sin_Demon.h">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClInclude>
     <ClInclude Include="Sin_Dialogue.h">
       <Filter>Object\Actor\Sin\Scene</Filter>
     </ClInclude>
@@ -156,6 +153,9 @@
     </ClInclude>
     <ClInclude Include="Sin_Judge.h">
       <Filter>Object\Actor\Sin\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sin_Demon.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -291,9 +291,6 @@
     <ClCompile Include="Demon.cpp">
       <Filter>Object\Actor\Chapter</Filter>
     </ClCompile>
-    <ClCompile Include="Sin_Demon.cpp">
-      <Filter>Object\Actor\Sin</Filter>
-    </ClCompile>
     <ClCompile Include="Sin_Dialogue.cpp">
       <Filter>Object\Actor\Sin\Scene</Filter>
     </ClCompile>
@@ -311,6 +308,9 @@
     </ClCompile>
     <ClCompile Include="Sin_Judge.cpp">
       <Filter>Object\Actor\Sin\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sin_Demon.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

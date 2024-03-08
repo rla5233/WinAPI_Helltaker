@@ -736,25 +736,14 @@ void SinChapterManager::Reset(float _DeltaTime)
 
 void SinChapterManager::SinChageStart()
 {
-	// 수정 (엑터 정리 추가)
-
-	OrderCount = 0; 
+	TransitionOn();
 }
 
 void SinChapterManager::SinChage(float _DeltaTime)
 {
-	switch (OrderCount)
+	if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
 	{
-	case 0:
-		TransitionOn();
-		++OrderCount;
-		break;
-	case 1:
-		if (19 == TransitionActor->GetImageRenderer()->GetCurAnimationFrame())
-		{
-			ChangeChapter();
-		}
-		break;
+		ChangeChapter();
 	}
 }
 

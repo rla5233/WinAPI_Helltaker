@@ -272,7 +272,6 @@ void SinCutSceneManager::StateUpdate(float _DeltaTime)
 	case ESinSceneState::End:
 		End(_DeltaTime);
 		break;
-
 	}
 }
 
@@ -292,4 +291,20 @@ void SinCutSceneManager::C_StateChange(ESinSceneState _State)
 	}
 
 	State = _State;
+}
+
+void SinCutSceneManager::LevelEnd(ULevel* _NextLevel)
+{
+	SinChapterManager::LevelEnd(_NextLevel);
+
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->Destroy();
+		Actor = nullptr;
+	}
 }
