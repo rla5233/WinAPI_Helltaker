@@ -2,6 +2,8 @@
 
 #include "Sin_Judge.h"
 
+#include "SinChapter3.h"
+
 bool SinChapter2::IsLoad = false;
 const std::vector<const char*> SinChapter2::SinChap2_Script =
 {
@@ -12,7 +14,7 @@ const std::vector<const char*> SinChapter2::SinChap2_Script =
 
 	/* 4  Demon	    */ "지옥의 CEO 루시퍼",
 	/* 5  Script 1  */ "그만! 고위 기소관, 즉시 물러날 것을 명한다!",
-	/* 6 Script 2  */ "이 망할 놈들아! 내가 지옥의 여왕이라고! 왜 아무도 내말을\n안듣는거야!",
+	/* 6  Script 2  */ "이 망할 놈들아! 내가 지옥의 여왕이라고! 왜 아무도 내말을\n안듣는거야!",
 
 	/* 7  Demon	    */ "끝내주는 악마 저스티스",
 	/* 8  Script 1  */ "저지먼트, 계속 해 봐! 잘 나가는데!",
@@ -36,6 +38,7 @@ void SinChapter2::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Laugh.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Rustled.png");
 
 		AddChapterSet("SinChapter2");
 
@@ -190,6 +193,18 @@ void SinChapter2::Enter(float _DeltaTime)
 	case 1:
 		Enter2();
 		break;
+	case 2:
+		Enter3();
+		break;
+	case 3:
+		Enter4();
+		break;
+	case 4:
+		Enter5();
+		break;
+	case 5:
+		Enter6();
+		break;
 	}
 }
 
@@ -206,13 +221,92 @@ void SinChapter2::Enter2()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(SinChap2_Script[2]);
+		C_GetJudge()->AllRenderersActiveOff();
+
+		FVector Scale = { 0.247f, 0.561f };
+		FVector Pos = { 0.015f, 0.02f };
+		C_SpawnCharacter("Lu", "Lu_Angry.png", SinChap2_Script[4], Pos, Scale);
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap2_Script[5]);
 		++OrderCount;
+	}
+}
+
+void SinChapter2::Enter3()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_GetSceneCharacter()->AllRenderersActiveOff();
+
+		FVector Scale = { 0.4666f, 0.692f };
+		FVector Pos = { 0.0f, -0.042f };
+		C_JudgeChange("Jud_Angry.png", Pos, Scale);
+		C_GetJudge()->AllRenderersActiveOn();
+		C_GetJudge()->Character::StateChange(ECharacterState::None);
+		C_GetJudge()->Character::StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap2_Script[3]);
+		++OrderCount;
+	}
+}
+
+void SinChapter2::Enter4()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_GetJudge()->AllRenderersActiveOff();
+			
+		FVector Scale = { 0.22f, 0.612f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_CharacterChange("Jus", "Jus_Idle.png", SinChap2_Script[7], Pos, Scale);
+		C_GetSceneCharacter()->AllRenderersActiveOn();
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap2_Script[8]);
+		++OrderCount;
+	}
+}
+
+void SinChapter2::Enter5()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector Scale = { 0.211f, 0.516f };
+		FVector Pos = { -0.007f, 0.03f };
+		C_CharacterChange("Az", "Az_Note.png", SinChap2_Script[9], Pos, Scale);
+		
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap2_Script[10]);
+		++OrderCount;
+	}
+}
+
+void SinChapter2::Enter6()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector Scale = { 0.279f, 0.692f };
+		FVector Pos = { 0.0f, -0.04f };
+		C_CharacterChange("Lu", "Lu_Rustled.png", SinChap2_Script[4], Pos, Scale);
+
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap2_Script[6]);
+		C_StateChange(ESinSceneState::End);
 	}
 }
 
 void SinChapter2::ChangeChapter()
 {
+	SinChapterManager::ChangeChapter();
 
+	CreateChapter<SinChapter3>("SinChapter3");
+	GEngine->ChangeLevel("SinChapter3");
 }
 

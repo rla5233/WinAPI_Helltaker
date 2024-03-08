@@ -3,18 +3,18 @@
 #include "SinCutSceneManager.h"
 
 // Ό³Έν :
-class SinChapter2 : public SinManager
+class SinChapter3 : public SinCutSceneManager
 {
 public:
 	// constructor destructor
-	SinChapter2();
-	~SinChapter2();
+	SinChapter3();
+	~SinChapter3();
 
 	// delete Function
-	SinChapter2(const SinChapter2& _Other) = delete;
-	SinChapter2(SinChapter2&& _Other) noexcept = delete;
-	SinChapter2& operator=(const SinChapter2& _Other) = delete;
-	SinChapter2& operator=(SinChapter2&& _Other) noexcept = delete;
+	SinChapter3(const SinChapter3& _Other) = delete;
+	SinChapter3(SinChapter3&& _Other) noexcept = delete;
+	SinChapter3& operator=(const SinChapter3& _Other) = delete;
+	SinChapter3& operator=(SinChapter3&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;
@@ -33,16 +33,11 @@ protected:
 	void ChangeChapter() override;
 
 private:
-	void Enter1();
-	void Enter2();
-	void Enter3();
-	void Enter4();
-	void Enter5();
-	void Enter6();
+
 
 private:
 	int OrderCount = -1;
 
-	static const std::vector<const char*> SinChap2_Script;
+	static const std::vector<const char*> SinChap3_Script;
 	static bool IsLoad;
 };
