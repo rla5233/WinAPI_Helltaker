@@ -40,6 +40,7 @@ void SinChapter3::LevelStart(ULevel * _PrevLevel)
 void SinChapter3::Phase1_Start()
 {
 	SinChapterManager::Phase1_Start();
+	SetPhase1_StartDelayTime(2.0f);
 
 	M_SetSmallChainVecSize(28, ESinPhase::Phase1);
 
@@ -127,6 +128,7 @@ void SinChapter3::Phase1_Start()
 
 void SinChapter3::Phase2_Start()
 {
+	SinChapterManager::Phase2_Start();
 }
 
 void SinChapter3::CutSceneStart()

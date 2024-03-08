@@ -30,7 +30,7 @@ const float SinChapterManager::HeroDelayTime = 0.13f;
 const FVector SinChapterManager::SmallChainStartPos = { 0.345f, 0.48f };
 
 const float SinChapterManager::IntroDelayTime = 0.9f;
-const float SinChapterManager::Phase1_StartDelayTime = 2.6f;
+float SinChapterManager::Phase1_StartDelayTime = 2.6f;
 const float SinChapterManager::CutSceneDelayTime = 0.5f;
 
 float SinChapterManager::SmallChainDelayTime = 0.0f;

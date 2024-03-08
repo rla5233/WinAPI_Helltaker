@@ -81,6 +81,11 @@ public:
 	bool HitChainHitCheck(SinTile _Point);
 	void HitChainDeathUpdate(SinTile _Point);
 
+	void SetPhase1_StartDelayTime(float _Time)
+	{
+		TimeCount = _Time;
+	}
+
 	static float GetStartPosY()
 	{
 		return StartPosY;
@@ -259,7 +264,7 @@ private:
 	float PhaseTimeCount = 0.0f;
 	int SmallChainVec_Index = -1;
 
-	static const float Phase1_StartDelayTime;
+	static float Phase1_StartDelayTime;
 	static const float CutSceneDelayTime;
 	float TimeCount = 0.0f;
 
