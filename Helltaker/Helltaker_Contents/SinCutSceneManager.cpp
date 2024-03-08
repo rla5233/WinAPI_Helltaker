@@ -92,6 +92,29 @@ void SinCutSceneManager::C_SpawnJudge(
 	AllCutSceneActors.push_back(Judge);
 }
 
+void SinCutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text, const FVector& _Pos, const FVector& _Scale)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+
+	SceneCharacter = SpawnActor<Character>(SinUpdateOrder::Mid);
+	SceneCharacter->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.387f });
+	SceneCharacter->SetName(_Name);
+	SceneCharacter->CreateImageRenderer(SinRenderOrder::Mid);
+	SceneCharacter->CreateNameRenderer(SinRenderOrder::Top);
+
+	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
+	SceneCharacter->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
+
+	SceneCharacter->GetNameRenderer()->SetText(_Text);
+	SceneCharacter->GetNameRenderer()->SetFont("¸¼Àº °íµñ");
+	SceneCharacter->GetNameRenderer()->SetTextSize(40);
+	SceneCharacter->GetNameRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.317f }, { 0, 0 } });
+	SceneCharacter->GetNameRenderer()->SetTextColor(HELLTAKER_RED1);
+	SceneCharacter->GetNameRenderer()->SetTextEffect(2);
+		
+	AllCutSceneActors.push_back(SceneCharacter);
+}
+
 void SinCutSceneManager::C_SpawnBooper()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();

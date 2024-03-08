@@ -77,6 +77,7 @@ void SinChapterManager::CreateTransition()
 
 void SinChapterManager::TransitionOn()
 {
+	TransitionActor->ActiveOn();
 	TransitionActor->GetImageRenderer()->ActiveOn();
 	TransitionActor->GetImageRenderer()->AnimationReset();
 	TransitionActor->GetImageRenderer()->ChangeAnimation("Transition");

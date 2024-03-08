@@ -116,16 +116,33 @@ void SinChapter1::CutSceneStart()
 }
 
 void SinChapter1::EnterStart()
-{}
+{
+	++OrderCount;
+}
 
 void SinChapter1::Enter(float _DeltaTime)
-{}
+{
+	SinCutSceneManager::Enter(_DeltaTime);
+
+	switch (OrderCount)
+	{
+	case 0:
+		Enter1();
+		break;
+	}
+}
+
+void SinChapter1::Enter1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(SinChap1_Script[2]);
+		++OrderCount;
+	}
+}
 
 void SinChapter1::EndStart()
 {}
 
 void SinChapter1::ChangeChapter()
-{}
-
-void SinChapter1::Enter1()
 {}

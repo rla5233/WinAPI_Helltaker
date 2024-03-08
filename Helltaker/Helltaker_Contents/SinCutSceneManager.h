@@ -29,6 +29,14 @@ public:
 		std::string_view _Text = " ", 
 		const FVector& _Pos = { 0.0f , 0.0f },
 		const FVector& _Scale = { 0.0f , 0.0f });
+
+	void C_SpawnCharacter(
+		std::string_view _Name,
+		std::string_view _ImgName,
+		std::string_view _Text = " ",
+		const FVector& _Pos = { 0.0f, 0.0f },
+		const FVector& _Scale = { 0.255f, 0.611f });
+
 	void C_SpawnBooper();
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
@@ -43,6 +51,11 @@ public:
 	Sin_Judge* C_GetJudge() const
 	{
 		return Judge;
+	}
+
+	Character* C_GetSceneCharacter() const
+	{
+		return SceneCharacter;
 	}
 
 	UI* C_GetBooper() const
@@ -81,6 +94,7 @@ private:
 	std::list<AActor*> AllCutSceneActors;
 
 	Sin_Judge* Judge = nullptr;
+	Character* SceneCharacter = nullptr;
 	Sin_Dialogue* Dialogue = nullptr;
 	UI* Booper = nullptr;
 
