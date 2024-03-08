@@ -1,11 +1,25 @@
 #include "Character.h"
 
+bool Character::IsLoad = false; 
+
 Character::Character()
 {
 }
 
 Character::~Character()
 {
+}
+
+void Character::BeginPlay()
+{
+	RenderActor::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Idle.png");
+
+		IsLoad = true;
+	}
 }
 
 void Character::SetImageRendererMove()

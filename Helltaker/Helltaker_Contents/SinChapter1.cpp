@@ -129,6 +129,9 @@ void SinChapter1::Enter(float _DeltaTime)
 	case 0:
 		Enter1();
 		break;
+	case 1:
+		Enter2();
+		break;
 	}
 }
 
@@ -137,6 +140,37 @@ void SinChapter1::Enter1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_BooperTextSet(SinChap1_Script[2]);
+		++OrderCount;
+	}
+}
+
+void SinChapter1::Enter2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_GetJudge()->AllRenderersActiveOff();
+
+		FVector Scale = { 0.503f, 0.576f };
+		FVector Pos = { 0.0f, 0.0175f };
+		C_SpawnCharacter("Cer", "Cer_Idle.png", SinChap1_Script[5], Pos, Scale);
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap1_Script[6]);
+		++OrderCount;
+	}
+}
+
+void SinChapter1::Enter3()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector Scale = { 0.503f, 0.576f };
+		FVector Pos = { 0.0f, 0.0175f };
+		C_SpawnCharacter("Cer", "Cer_Idle.png", SinChap1_Script[5], Pos, Scale);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap1_Script[6]);
 		++OrderCount;
 	}
 }

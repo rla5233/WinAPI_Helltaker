@@ -48,7 +48,8 @@ public:
 	void StateChange(ECharacterState _State);
 
 protected:
-	void Tick(float _DeltaTime) override;
+	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
 
 private:
 	void IdleStart();
@@ -67,4 +68,5 @@ private:
 	FVector TargetPos = FVector::Zero;
 
 	ECharacterState State = ECharacterState::None;
+	static bool IsLoad;
 };

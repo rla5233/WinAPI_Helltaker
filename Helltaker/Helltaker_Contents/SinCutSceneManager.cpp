@@ -92,7 +92,12 @@ void SinCutSceneManager::C_SpawnJudge(
 	AllCutSceneActors.push_back(Judge);
 }
 
-void SinCutSceneManager::C_SpawnCharacter(std::string_view _Name, std::string_view _ImgName, std::string_view _Text, const FVector& _Pos, const FVector& _Scale)
+void SinCutSceneManager::C_SpawnCharacter(
+	std::string_view _Name, 
+	std::string_view _ImgName,
+	std::string_view _Text,
+	const FVector& _Pos, 
+	const FVector& _Scale)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 
@@ -134,6 +139,22 @@ void SinCutSceneManager::C_SpawnBooper()
 	Booper->GetTextRenderer()->SetText(" ");
 
 	AllCutSceneActors.push_back(Booper);
+}
+
+void SinCutSceneManager::C_CharacterChange(
+	std::string_view _Name, 
+	std::string_view _ImgName, 
+	std::string_view _Text,
+	const FVector& _Pos, 
+	const FVector& _Scale)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	SceneCharacter->SetName(_Name);
+
+	SceneCharacter->GetImageRenderer()->SetImage(_ImgName);
+	SceneCharacter->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
+
+	SceneCharacter->GetNameRenderer()->SetText(_Text);
 }
 
 void SinCutSceneManager::C_BooperTextSet(std::string_view _Text)

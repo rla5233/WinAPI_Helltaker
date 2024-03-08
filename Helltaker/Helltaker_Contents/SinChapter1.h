@@ -37,6 +37,8 @@ protected:
 
 private:
 	void Enter1();
+	void Enter2();
+	void Enter3();
 
 private:
 	int OrderCount = -1;
