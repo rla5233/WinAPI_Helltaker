@@ -336,7 +336,14 @@ void SinChapterManager::M_CreateSmallChain(
 		NewSmallChain->SetActorLocation({ StartPos.X + TileScaleX * _PosIndex , WinScale.hY() });
 		break;
 	case ESinSmallChainType::Hor:
-		NewSmallChain->SetActorLocation({ WinScale.hX(), StartPos.Y + TileScaleY * _PosIndex });
+		if (ESinPhase::Phase2 == _Phase)
+		{
+			NewSmallChain->SetActorLocation({ WinScale.hX(), StartPos.Y + TileScaleY * (_PosIndex - 1) });
+		}
+		else
+		{
+			NewSmallChain->SetActorLocation({ WinScale.hX(), StartPos.Y + TileScaleY * _PosIndex });
+		}
 		break;
 	}
 
@@ -676,6 +683,7 @@ void SinChapterManager::Phase2_Start()
 	SmallChainDelayTime = 0.8f;
 	PhaseTimeCount = SmallChainDelayTime;
 
+	MoveYSum = 0.0f;
 	OrderCount = 0;
 }
 

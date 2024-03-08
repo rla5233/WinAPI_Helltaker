@@ -129,6 +129,26 @@ void SinChapter3::Phase1_Start()
 void SinChapter3::Phase2_Start()
 {
 	SinChapterManager::Phase2_Start();
+
+	M_CreateHitChain(ESinHitChainType::Left, 0);
+	M_CreateHitChain(ESinHitChainType::Right, 2);
+	M_CreateHitChainHp("¿åÁ¤ÀÇ »ç½½");
+
+	M_SetSmallChainVecSize(4, ESinPhase::Phase2);
+
+	M_CreateSmallVerChain_P2(0, 0);
+	M_CreateSmallVerChain_P2(1, 0);
+	M_CreateSmallHorChain_P2(0, 0);
+
+	M_CreateSmallHorChain_P2(0, 1);
+	M_CreateSmallHorChain_P2(4, 1);
+
+	M_CreateSmallVerChain_P2(5, 2);
+	M_CreateSmallVerChain_P2(6, 2);
+	M_CreateSmallHorChain_P2(4, 2);
+
+	M_CreateSmallVerChain_P2(0, 3);
+	M_CreateSmallVerChain_P2(6, 3);
 }
 
 void SinChapter3::CutSceneStart()
