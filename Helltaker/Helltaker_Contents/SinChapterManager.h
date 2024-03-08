@@ -256,10 +256,7 @@ private:
 
 	static const FVector SmallChainStartPos;
 	static float SmallChainDelayTime;
-	int Phase1_SmallChainVecSize = -1;
 	float AccY = 0.0f;
-	
-	int Phase2_SmallChainVecSize = -1;
 
 	float PhaseTimeCount = 0.0f;
 	int SmallChainVec_Index = -1;

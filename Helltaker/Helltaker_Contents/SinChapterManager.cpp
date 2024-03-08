@@ -714,6 +714,11 @@ void SinChapterManager::Phase2(float _DeltaTime)
 
 void SinChapterManager::Phase2_SmallChainUpdate(float _DeltaTime)
 {
+	if (true == Phase2_SmallChain.empty())
+	{
+		return;
+	}
+
 	if (0.0f >= PhaseTimeCount)
 	{
 		std::list<SmallChain*>& SmallChainVec = Phase2_SmallChain[SmallChainVec_Index];
