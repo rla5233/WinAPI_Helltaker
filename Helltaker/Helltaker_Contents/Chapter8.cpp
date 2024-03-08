@@ -52,7 +52,6 @@ void Chapter8::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_Skeleton.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Swirl_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Idle.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Angry.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Happy.png");
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Lu_Swirl");

@@ -1,5 +1,6 @@
 #include "SinChapter1.h"
 
+#include "SinChapter2.h"
 #include "Sin_Judge.h"
 
 bool SinChapter1::IsLoad = false;
@@ -138,6 +139,12 @@ void SinChapter1::Enter(float _DeltaTime)
 	case 3:
 		Enter4();
 		break;
+	case 4:
+		Enter5();
+		break;
+	case 5:
+		Enter6();
+		break;
 	}
 }
 
@@ -188,19 +195,58 @@ void SinChapter1::Enter4()
 	{
 		C_GetSceneCharacter()->AllRenderersActiveOff();
 
-		FVector Scale = { 0.255f, 0.611f };
-		FVector Pos = { -0.009f, 0.0f };
-		C_CharacterChange("Pand", "Pand_Flust.png", SinChap1_Script[7], Pos, Scale);
-		C_GetSceneCharacter()->StateChange(ECharacterState::None);
-		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+		FVector Scale = { 0.4667f, 0.692f };
+		FVector Pos = { 0.0f, -0.0418f };
+		C_JudgeChange("Jud_Back.png", Pos, Scale);
+		C_GetJudge()->AllRenderersActiveOn();
+		C_GetJudge()->Character::StateChange(ECharacterState::None);
+		C_GetJudge()->Character::StateChange(ECharacterState::Appear);
 
 		C_BooperTextSet(SinChap1_Script[3]);
 		++OrderCount;
 	}
 }
 
-void SinChapter1::EndStart()
-{}
+void SinChapter1::Enter5()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_GetJudge()->AllRenderersActiveOff();
+
+		FVector Scale = { 0.247f, 0.561f };
+		FVector Pos = { 0.015f, 0.02f };
+		C_CharacterChange("Lu", "Lu_Angry.png", SinChap1_Script[9], Pos, Scale);
+		C_GetSceneCharacter()->AllRenderersActiveOn();
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap1_Script[10]);
+		++OrderCount;
+	}
+}
+
+void SinChapter1::Enter6()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_GetSceneCharacter()->AllRenderersActiveOff();
+
+		FVector Scale = { 0.4666f, 0.692f };
+		FVector Pos = { 0.0f, -0.042f };
+		C_JudgeChange("Jud_Angry.png", Pos, Scale);
+		C_GetJudge()->AllRenderersActiveOn();
+		C_GetJudge()->Character::StateChange(ECharacterState::None);
+		C_GetJudge()->Character::StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap1_Script[4]);
+		C_StateChange(ESinSceneState::End);
+	}
+}
 
 void SinChapter1::ChangeChapter()
-{}
+{
+	SinChapterManager::ChangeChapter();
+
+	CreateChapter<SinChapter2>("SinChapter2");
+	GEngine->ChangeLevel("SinChapter2");
+}

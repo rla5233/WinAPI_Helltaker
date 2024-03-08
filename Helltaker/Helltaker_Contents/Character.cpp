@@ -18,6 +18,8 @@ void Character::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Scene\\Characters", "Pand_Flust.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Idle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Angry.png");
+
 
 		IsLoad = true;
 	}
