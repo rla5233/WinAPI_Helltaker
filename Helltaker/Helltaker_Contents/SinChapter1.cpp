@@ -132,6 +132,9 @@ void SinChapter1::Enter(float _DeltaTime)
 	case 1:
 		Enter2();
 		break;
+	case 2:
+		Enter3();
+		break;
 	}
 }
 
@@ -165,12 +168,13 @@ void SinChapter1::Enter3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		FVector Scale = { 0.503f, 0.576f };
-		FVector Pos = { 0.0f, 0.0175f };
-		C_SpawnCharacter("Cer", "Cer_Idle.png", SinChap1_Script[5], Pos, Scale);
+		FVector Scale = { 0.255f, 0.611f };
+		FVector Pos = { -0.009f, 0.0f };
+		C_CharacterChange("Pand", "Pand_Flust.png", SinChap1_Script[7], Pos, Scale);
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap1_Script[6]);
+		C_BooperTextSet(SinChap1_Script[8]);
 		++OrderCount;
 	}
 }
