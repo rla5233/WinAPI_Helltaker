@@ -261,6 +261,13 @@ void UImageRenderer::TextRender(float _DeltaTime)
 	}
 }
 
+bool UImageRenderer::IsAnimation(std::string_view _Name)
+{
+	std::string UpperAniName = UEngineString::ToUpper(_Name);
+
+	return AnimationInfos.contains(UpperAniName);
+}
+
 void UImageRenderer::ImageRender(float _DeltaTime)
 {
 

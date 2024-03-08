@@ -49,6 +49,8 @@ public:
 	// 이미지를 세팅하는 역할만 하고
 	void SetImage(std::string_view _Name, int _InfoIndex = 0);
 
+	bool IsAnimation(std::string_view _Name);
+
 	void SetImageIndex(int _InfoIndex)
 	{
 		InfoIndex = _InfoIndex;
