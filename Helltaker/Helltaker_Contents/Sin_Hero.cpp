@@ -202,17 +202,7 @@ void Sin_Hero::UpdateCurPosY()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector CurPos = GetActorLocation();
 	float StartPosY = SinChapterManager::GetStartPosY() * WinScale.Y;
-	float ScaleY = Sin_Thorn::GetThornScale().Y * WinScale.Y;
-
-	CurPoint.Y = std::lround((CurPos.Y - StartPosY) / ScaleY);
-}
-
-void Sin_Hero::Phase2_Start()
-{
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector CurPos = GetActorLocation();
-	float StartPosY = SinChapterManager::GetStartPosY() * WinScale.Y;
-	float ScaleY = Sin_Thorn::GetThornScale().Y * WinScale.Y;
+	float ScaleY = Sin_Thorn::GetThornScale().Y * WinScale.Y * 1.088f;
 
 	CurPoint.Y = std::lround((CurPos.Y - StartPosY) / ScaleY);
 }

@@ -20,6 +20,7 @@ void SinChapter2::BeginPlay()
 
 	if (false == IsLoad)
 	{
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Laugh.png");
 
 		AddChapterSet("SinChapter2");
 
@@ -144,7 +145,9 @@ void SinChapter2::Phase2_Start()
 }
 
 void SinChapter2::CutSceneStart()
-{}
+{
+	SinChapterManager::CutSceneStart();
+}
 
 void SinChapter2::EnterStart()
 {}

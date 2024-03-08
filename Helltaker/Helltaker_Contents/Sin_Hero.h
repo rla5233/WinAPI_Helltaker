@@ -36,9 +36,7 @@ public:
 		return CurPoint;
 	}
 
-	// 수정 (필요한거 남기기)
 	void UpdateCurPosY();
-	void Phase2_Start();
 
 	void SinHero_StateChange(ESinHeroState _State);
 
