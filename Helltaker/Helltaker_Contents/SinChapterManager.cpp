@@ -312,6 +312,8 @@ void SinChapterManager::M_SpawnDemon()
 	Judge->SetActorLocation({ WinScale.hX(), PosY });
 	Judge->SetDemon("Judge", { { 0.0f, 0.0f }, WinScale * Sin_Demon::GetIdleScale() });
 	Judge->StateChange(EDemonState::Sin_Appear);
+
+	AllMapRenderActors.push_back(Judge);
 }
 
 void SinChapterManager::M_CreateSmallChain(
@@ -712,7 +714,30 @@ void SinChapterManager::JudgeAppear(float _DeltaTime)
 
 void SinChapterManager::CutSceneStart()
 {
-	int a = 0;
+	for (AActor* Actor : AllMapRenderActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr.");
+		}
+
+		Actor->AllRenderersActiveOff();
+		Actor->ActiveOff();
+	}
+
+	for (size_t i = 0; i < Phase2_SmallChain.size(); i++)
+	{
+		for (SmallChain* Actor : Phase2_SmallChain[i])
+		{
+			if (nullptr == Actor)
+			{
+				MsgBoxAssert("Actor is nullptr.");
+			}
+
+			Actor->AllRenderersActiveOff();
+			Actor->ActiveOff();
+		}
+	}
 }
 
 void SinChapterManager::CutScene(float _DeltaTime)

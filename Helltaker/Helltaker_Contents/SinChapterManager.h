@@ -172,7 +172,6 @@ protected:
 	virtual void CutSceneStart();
 	virtual void CutScene(float _DeltaTime);
 
-
 	virtual void ResetCheck();
 
 	virtual void ChangeChapter() {};

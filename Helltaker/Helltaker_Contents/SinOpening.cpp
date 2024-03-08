@@ -57,6 +57,8 @@ void SinOpening::LevelStart(ULevel * _PrevLevel)
 void SinOpening::CutSceneStart()
 {
 	SinChapterManager::CutSceneStart();
+	GetTransitionActor()->AllRenderersActiveOn();
+	GetTransitionActor()->ActiveOn();
 	
 	C_SpawnBooper();
 	C_BooperTextSet(SinOpening_Script[2]);
