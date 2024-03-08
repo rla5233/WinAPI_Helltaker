@@ -250,7 +250,7 @@ void UImageRenderer::TextRender(float _DeltaTime)
 	switch (TextEffect)
 	{
 	case 1:
-		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2);
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, SortOption1, SortOption2, TextColor, TextColor2);
 		break;
 	case 2:
 		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
@@ -286,6 +286,11 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 	case EImageSortType::Left:
 	{
 		RendererTrans.AddPosition({ RendererTrans.GetScale().hX() , 0.0f });
+		break;
+	}
+	case EImageSortType::Right:
+	{
+		RendererTrans.AddPosition({ -RendererTrans.GetScale().hX() , 0.0f });
 		break;
 	}
 	default:

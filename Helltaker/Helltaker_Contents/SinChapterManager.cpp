@@ -672,6 +672,10 @@ void SinChapterManager::Phase2_Start()
 	PlayerHero->MoveY_Off();
 	PlayerHero->SinHero_StateChange(ESinHeroState::Idle);
 
+	SmallChainVec_Index = 0;
+	SmallChainDelayTime = 0.8f;
+	PhaseTimeCount = SmallChainDelayTime;
+
 	OrderCount = 0;
 }
 
@@ -691,12 +695,44 @@ void SinChapterManager::Phase2(float _DeltaTime)
 	switch (OrderCount)
 	{
 	case 0:
+		Phase2_SmallChainUpdate(_DeltaTime);
 		HitChainCheck();
 		break;
 	case 1:
 		JudgeAppear(_DeltaTime);
 		break;
 	}
+}
+
+void SinChapterManager::Phase2_SmallChainUpdate(float _DeltaTime)
+{
+	if (0.0f >= PhaseTimeCount)
+	{
+		std::list<SmallChain*>& SmallChainVec = Phase2_SmallChain[SmallChainVec_Index];
+
+		for (SmallChain* SmallChain : SmallChainVec)
+		{
+			if (nullptr == SmallChain)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			SmallChain->StateChange(ESinSmallChainState::Show);
+		}
+
+		++SmallChainVec_Index;
+
+		if (static_cast<int>(Phase2_SmallChain.size()) <= SmallChainVec_Index)
+		{
+			SmallChainVec_Index = 0;
+		}
+
+		PhaseTimeCount = SmallChainDelayTime;
+
+		return;
+	}
+
+	PhaseTimeCount -= _DeltaTime;
 }
 
 void SinChapterManager::HitChainCheck()

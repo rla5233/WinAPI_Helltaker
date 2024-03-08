@@ -202,6 +202,7 @@ private:
 	void AllThornMoveOff();
 
 	void Phase2(float _DeltaTime);
+	void Phase2_SmallChainUpdate(float _DeltaTime);
 	void HitChainCheck();
 	void JudgeAppear(float _DeltaTime);
 
