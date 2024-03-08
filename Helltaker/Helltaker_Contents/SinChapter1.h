@@ -29,5 +29,7 @@ protected:
 
 private:
 
+
+	static bool IsLoad;
 };
 

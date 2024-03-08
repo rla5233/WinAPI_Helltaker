@@ -1,6 +1,6 @@
 #include "SinChapter1.h"
 
-#include "BackGround.h"
+bool SinChapter1::IsLoad = false;
 
 SinChapter1::SinChapter1()
 {
@@ -13,6 +13,15 @@ SinChapter1::~SinChapter1()
 void SinChapter1::BeginPlay()
 {
 	SinChapterManager::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Back.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Angry.png");
+
+		AddChapterSet("SinChapter1");
+		IsLoad = true;
+	}
 }
 
 void SinChapter1::LevelStart(ULevel* _PrevLevel)
