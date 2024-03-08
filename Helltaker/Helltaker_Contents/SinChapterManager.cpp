@@ -772,6 +772,70 @@ void SinChapterManager::JudgeAppear(float _DeltaTime)
 	}
 }
 
+void SinChapterManager::HeroDeathStart()
+{
+	for (AActor* Actor : AllMapRenderActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->AllRenderersActiveOff();
+		Actor->ActiveOff();
+	}
+
+	for (size_t i = 0; i < Phase1_SmallChain.size(); i++)
+	{
+		for (AActor* Actor : Phase1_SmallChain[i])
+		{
+			if (nullptr == Actor)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Actor->AllRenderersActiveOff();
+			Actor->ActiveOff();
+		}
+	}
+
+	for (size_t i = 0; i < Phase2_SmallChain.size(); i++)
+	{
+		for (AActor* Actor : Phase2_SmallChain[i])
+		{
+			if (nullptr == Actor)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+
+			Actor->AllRenderersActiveOff();
+			Actor->ActiveOff();
+		}
+	}
+
+	for (std::pair<const __int64, HitChain*>& Actor : AllHitChain)
+	{
+		if (nullptr == Actor.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor.second->AllRenderersActiveOff();
+		Actor.second->ActiveOff();
+	}
+
+	PlayerHero->ActiveOn();
+	PlayerHero->GetImageRenderer()->ActiveOn();
+}
+
+void SinChapterManager::HeroDeath(float _DeltaTime)
+{
+	if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		M_StateChange(ESinState::Reset);
+	}
+}
+
 void SinChapterManager::CutSceneStart()
 {
 	for (AActor* Actor : AllMapRenderActors)
@@ -945,6 +1009,9 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	case ESinState::CutScene:
 		CutScene(_DeltaTime);
 		break;
+	case ESinState::HeroDeath:
+		HeroDeath(_DeltaTime);
+		break;
 	case ESinState::Reset:
 		Reset(_DeltaTime);
 		break;
@@ -971,6 +1038,9 @@ void SinChapterManager::M_StateChange(ESinState _State)
 			break;
 		case ESinState::CutScene:
 			CutSceneStart();
+			break;
+		case ESinState::HeroDeath:
+			HeroDeathStart();
 			break;
 		case ESinState::Reset:
 			ResetStart();

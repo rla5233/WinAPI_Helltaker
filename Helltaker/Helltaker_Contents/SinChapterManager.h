@@ -211,6 +211,9 @@ private:
 	void HitChainCheck();
 	void JudgeAppear(float _DeltaTime);
 
+	void HeroDeathStart();
+	void HeroDeath(float _DeltaTime);
+
 	void ResetStart();
 	void Reset(float _DeltaTime);
 

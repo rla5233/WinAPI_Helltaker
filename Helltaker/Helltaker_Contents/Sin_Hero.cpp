@@ -47,15 +47,6 @@ void Sin_Hero::ActionCheck()
 	}
 }
 
-void Sin_Hero::MoveStart()
-{
-	HeroBase::MoveStart();
-
-	CurPointUpdate();
-	SetTargetPosY();
-	CreateRandomMoveEffect(EChapterType::Sin);
-}
-
 void Sin_Hero::SetTargetPosY()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -169,10 +160,28 @@ void Sin_Hero::Hit(float _DeltaTime)
 	}
 }
 
+void Sin_Hero::MoveStart()
+{
+	HeroBase::MoveStart();
+
+	CurPointUpdate();
+	SetTargetPosY();
+	CreateRandomMoveEffect(EChapterType::Sin);
+}
+
+void Sin_Hero::DeathStart()
+{
+	HeroBase::DeathStart();
+
+	MoveY_Off();
+	GetSinChapter()->M_StateChange(ESinState::HeroDeath);
+}
+
 void Sin_Hero::Tick(float _DeltaTime)
 {
 	StateUpdate(_DeltaTime);
 
+	// 수정 (제거)
 	if (UEngineInput::IsDown('H'))
 	{
 		SinHero_StateChange(ESinHeroState::Hit);

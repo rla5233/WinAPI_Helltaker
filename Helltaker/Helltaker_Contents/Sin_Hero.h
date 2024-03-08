@@ -45,6 +45,8 @@ protected:
 
 	void MoveStart() override;
 
+	void DeathStart() override; 
+
 	void ActionCheck() override;
 	void ThornHitCheck() override;
 

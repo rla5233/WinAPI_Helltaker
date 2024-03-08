@@ -192,6 +192,7 @@ enum class ESinState
 	Phase1,
 	Phase2,
 	CutScene,
+	HeroDeath,
 	Reset,
 	SinChage
 };
