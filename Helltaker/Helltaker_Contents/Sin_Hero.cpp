@@ -181,12 +181,6 @@ void Sin_Hero::Tick(float _DeltaTime)
 {
 	StateUpdate(_DeltaTime);
 
-	// 수정 (제거)
-	if (UEngineInput::IsDown('H'))
-	{
-		SinHero_StateChange(ESinHeroState::Hit);
-	}
-	
 	HeroBase::Tick(_DeltaTime);
 }
 

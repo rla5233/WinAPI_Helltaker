@@ -5,6 +5,29 @@
 bool SinChapter3::IsLoad = false;
 const std::vector<const char*> SinChapter3::SinChap3_Script =
 {
+	/* 0  Demon	   */ "고위 기소관 저지먼트",
+	/* 1 Script 1  */ "진정 사슬을 부수고 빠져나갈 수 있을 것 같느냐?",
+	/* 2 Script 2  */ "희망은 실망을, 그리고 실망은 절망을 낳는다.",
+	/* 3 Script 3  */ "그리고 절망의 사슬이 가장 즐거운 법이지.",
+	/* 4 Script 4  */ "그래! 네가 행한 모든 것들을 후회하라!",
+
+	/* 5 MenuBar 1  */ "네 헤어 스타일이 마음에 드는데.",
+  	/* 6 MenuBar 2  */ "그 옷 끝내주는데! 10점 만점에 10점!",
+	/* 7 Script 1   */ "거짓말! 기만으로 네 운명을 벗어날 수는 없다!",
+
+	/* 8 MenuBar 1  */ "알아. 그래서 내가 솔직한 거지.",
+	/* 9 MenuBar 2  */ "그 손톱도 마음에 들어!",
+	/* 10 Script 1  */ "그래? 그렇다면, '고맙다!'라고 해야겠지?",
+	/* 11 Script 2  */ "이제 다시 시련을 시작한다!",
+
+	/* 12  Demon	*/ "상스러운 악마 즈드라다",
+	/* 13 Script 1  */ "말린카는 재수도 없지. 기껏 찾은 겜스퍼거 친구가 죽게\n생겼네.",
+
+	/* 14  Demon	*/ "시큰둥한 악마 말리나",
+	/* 15 Script 1  */ "내 운수가 이러니 쟤가 네크로폴리스를 하게 됐어.",
+
+	/* 16 Demon	    */ "음란한 악마 모데우스",
+	/* 17 Script 1  */ "차라리 나 혼자 독차지할 걸...",
 };
 
 SinChapter3::SinChapter3()
@@ -21,6 +44,7 @@ void SinChapter3::BeginPlay()
 
 	if (false == IsLoad)
 	{
+
 
 		AddChapterSet("SinChapter3");
 
@@ -153,10 +177,21 @@ void SinChapter3::Phase2_Start()
 
 void SinChapter3::CutSceneStart()
 {
+	SinCutSceneManager::CutSceneStart();
+
+	C_SpawnDialogue(1);
+
+	FVector Scale = { 0.416f, 0.693f };
+	FVector Pos = { 0.0f, -0.0502f };
+	C_SpawnJudge("Jud_Laugh.png", SinChap3_Script[0], Pos, Scale);
+	C_GetJudge()->Character::StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(SinChap3_Script[1]);
 }
 
 void SinChapter3::EnterStart()
 {
+
 }
 
 void SinChapter3::Enter(float _DeltaTime)
