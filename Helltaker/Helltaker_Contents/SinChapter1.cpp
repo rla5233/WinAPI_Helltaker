@@ -140,7 +140,7 @@ void SinChapter1::CutSceneStart()
 
 void SinChapter1::EnterStart()
 {
-	++OrderCount;
+	OrderCount = 0;
 }
 
 void SinChapter1::Enter(float _DeltaTime)

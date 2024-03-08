@@ -1,5 +1,7 @@
 #include "SinChapter2.h"
 
+#include "Sin_Judge.h"
+
 bool SinChapter2::IsLoad = false;
 const std::vector<const char*> SinChapter2::SinChap2_Script =
 {
@@ -159,14 +161,58 @@ void SinChapter2::Phase2_Start()
 
 void SinChapter2::CutSceneStart()
 {
-	SinChapterManager::CutSceneStart();
+	SinCutSceneManager::CutSceneStart();
+
+	C_SpawnDialogue(1);
+
+	FVector Scale = { 0.416f, 0.693f };
+	FVector Pos = { 0.0f, -0.0502f };
+	C_SpawnJudge("Jud_Laugh.png", SinChap2_Script[0], Pos, Scale);
+	C_GetJudge()->Character::StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(SinChap2_Script[1]);
 }
 
 void SinChapter2::EnterStart()
-{}
+{
+	OrderCount = 0;
+}
 
 void SinChapter2::Enter(float _DeltaTime)
-{}
+{
+	SinCutSceneManager::Enter(_DeltaTime);
+
+	switch (OrderCount)
+	{
+	case 0:
+		Enter1();
+		break;
+	case 1:
+		Enter2();
+		break;
+	}
+}
+
+void SinChapter2::Enter1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(SinChap2_Script[2]);
+		++OrderCount;
+	}
+}
+
+void SinChapter2::Enter2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(SinChap2_Script[2]);
+		++OrderCount;
+	}
+}
 
 void SinChapter2::ChangeChapter()
-{}
+{
+
+}
+

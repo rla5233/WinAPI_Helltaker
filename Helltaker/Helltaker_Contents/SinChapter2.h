@@ -33,7 +33,8 @@ protected:
 	void ChangeChapter() override;
 
 private:
-
+	void Enter1();
+	void Enter2();
 
 private:
 	int OrderCount = -1;
