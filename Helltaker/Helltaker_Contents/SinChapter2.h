@@ -38,6 +38,6 @@ private:
 private:
 	int OrderCount = -1;
 
-	static const std::vector<const char*> SinChap1_Script;
+	static const std::vector<const char*> SinChap2_Script;
 	static bool IsLoad;
 };

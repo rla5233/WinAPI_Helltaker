@@ -1,9 +1,22 @@
 #include "SinChapter2.h"
 
 bool SinChapter2::IsLoad = false;
-const std::vector<const char*> SinChapter2::SinChap1_Script =
+const std::vector<const char*> SinChapter2::SinChap2_Script =
 {
-	
+	/* 0  Demon	    */ "고위 기소관 저지먼트",
+	/* 1  Script 1  */ "너를 이곳으로 이끌었던 것들이 사슬이 되어 너를 휘감지.",
+	/* 2  Script 2  */ "너의 교만, 탐욕, 그리고 욕정. 네 고통은 자초한 거다.",
+	/* 3  Script 3  */ "그 어떤 권위도 형벌을 넘어설 수 없다!",
+
+	/* 4  Demon	    */ "지옥의 CEO 루시퍼",
+	/* 5  Script 1  */ "그만! 고위 기소관, 즉시 물러날 것을 명한다!",
+	/* 6 Script 2  */ "이 망할 놈들아! 내가 지옥의 여왕이라고! 왜 아무도 내말을\n안듣는거야!",
+
+	/* 7  Demon	    */ "끝내주는 악마 저스티스",
+	/* 8  Script 1  */ "저지먼트, 계속 해 봐! 잘 나가는데!",
+				   
+	/* 9  Demon	    */ "호기심 많은 천사 아자젤",
+	/* 10 Script 1  */ "그래요, 계속하세요. 이거 분명 A+ 받을 만한 소재에요.",
 };
 
 SinChapter2::SinChapter2()
