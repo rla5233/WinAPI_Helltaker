@@ -68,6 +68,9 @@ public:
 	void M_CreateSmallVerChain_P1(int _PosIndex, int _VecIndex);
 	void M_CreateSmallHorChain_P1(int _PosIndex, int _VecIndex);
 
+	void M_CreateSmallVerChain_P2(int _PosIndex, int _VecIndex);
+	void M_CreateSmallHorChain_P2(int _PosIndex, int _VecIndex);
+
 	void M_SetSmallChainVecSize(int _Size, ESinPhase _Phase);
 
 	void M_SmallChainDeathCall(int _VecIndex);
