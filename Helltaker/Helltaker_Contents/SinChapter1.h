@@ -1,9 +1,9 @@
 #pragma once
 
-#include "SinChapterManager.h"
+#include "SinCutSceneManager.h"
 
 // Ό³Έν :
-class SinChapter1 : public SinChapterManager
+class SinChapter1 : public SinManager
 {
 public:
 	// constructor destructor
@@ -18,18 +18,29 @@ public:
 
 
 protected:
-	virtual void BeginPlay() override;
-	virtual void Tick(float _DeltaTime);
+	void BeginPlay() override;
+	void LevelStart(ULevel* _PrevLevel) override;
 
-	virtual void LevelStart(ULevel* _PrevLevel) override;
-	virtual void LevelEnd(ULevel* _NextLevel) override;
-
+	// Chapter
 	void Phase1_Start() override;
 	void Phase2_Start() override;
+
+	void CutSceneStart() override;
+	void CutScene(float _DeltaTime) override;
+
+
+	// CutScene
+	void EnterStart() override;
+	void Enter(float _DeltaTime) override;
+
+	void EndStart() override;
+
+	void ChangeChapter() override;
 
 private:
 
 
+	static const std::vector<const char*> SinChap1_Script;
 	static bool IsLoad;
 };
 

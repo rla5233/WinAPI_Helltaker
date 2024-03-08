@@ -1,6 +1,23 @@
 #include "SinChapter1.h"
 
 bool SinChapter1::IsLoad = false;
+const std::vector<const char*> SinChapter1::SinChap1_Script =
+{
+	/* 0  Demon	    */ "고위 기소관 저지먼트",
+	/* 1  Script 1  */ "침입자야, 죄악의 기계가 마음에 드느냐?",
+	/* 2  Script 2  */ "이만 굴복하고 삼켜져라!",
+	/* 3  Script 3  */ "희망을 버려라! 저 녀석의 운명은 이미 정해졌다!",
+	/* 4  Script 4  */ "정숙하라! 이제 진짜 시작이다!",
+
+	/* 5  Demon	    */ "세 쌍둥이 악마 케르베로스",
+	/* 6  Script 1  */ "안돼, 포기하지 마! 우릴 데리고 나가야지!",
+
+	/* 7  Demon	    */ "피곤한 악마 판데모니카",
+	/* 8  Script 1  */ "그리고 커피도 타 주셔야죠.",
+
+	/* 9  Demon	    */ "지옥의 CEO 루시퍼",
+	/* 10 Script 1  */ "이런, 저지먼트. 이 녀석은 모르고 있겠지만, 내 거야. 그냥\n내버려 둘 수는 없어?",
+};
 
 SinChapter1::SinChapter1()
 {
@@ -81,12 +98,20 @@ void SinChapter1::Phase2_Start()
 	M_CreateHitChainHp("교만의 사슬");
 }
 
-void SinChapter1::Tick(float _DeltaTime)
-{
-	SinChapterManager::Tick(_DeltaTime);
-}
+void SinChapter1::CutSceneStart()
+{}
 
-void SinChapter1::LevelEnd(ULevel* _NextLevel)
-{
-	SinChapterManager::LevelEnd(_NextLevel);
-}
+void SinChapter1::CutScene(float _DeltaTime)
+{}
+
+void SinChapter1::EnterStart()
+{}
+
+void SinChapter1::Enter(float _DeltaTime)
+{}
+
+void SinChapter1::EndStart()
+{}
+
+void SinChapter1::ChangeChapter()
+{}
