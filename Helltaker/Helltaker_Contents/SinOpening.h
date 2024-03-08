@@ -40,7 +40,7 @@ private:
 	void TransitionCheck();
 
 private:
-	int EnterOrder = -1;
+	int OrderCount = -1;
 
 	static const std::vector<const char*> SinOpening_Script;
 	static bool IsLoad;

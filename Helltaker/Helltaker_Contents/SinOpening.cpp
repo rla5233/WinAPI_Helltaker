@@ -73,12 +73,12 @@ void SinOpening::CutScene(float _DeltaTime)
 
 void SinOpening::EnterStart()
 {
-	EnterOrder = 0;
+	OrderCount = 0;
 }
 
 void SinOpening::Enter(float _DeltaTime)
 {
-	switch (EnterOrder)
+	switch (OrderCount)
 	{
 	case 0 :
 		TransitionCheck();
@@ -100,7 +100,7 @@ void SinOpening::TransitionCheck()
 	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
 	{
 		GetTransitionActor()->GetImageRenderer()->ActiveOff();
-		++EnterOrder;
+		++OrderCount;
 	}
 }
 
@@ -115,7 +115,7 @@ void SinOpening::Enter1()
 		// 수정 (캐릭터 추가)
 
 		C_BooperTextSet(SinOpening_Script[3]);
-		++EnterOrder;
+		++OrderCount;
 	}
 }
 
@@ -124,7 +124,7 @@ void SinOpening::Enter2()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_BooperTextSet(SinOpening_Script[4]);
-		++EnterOrder;
+		++OrderCount;
 	}
 }
 
@@ -135,7 +135,7 @@ void SinOpening::Enter3()
 		C_GetDialogue()->StateChange(ESinDialogueState::Lightning);
 		C_GetBooper()->AllRenderersActiveOff();
 		C_GetJudge()->GetNameRenderer()->ActiveOff();
-		++EnterOrder;
+		++OrderCount;
 	}
 }
 

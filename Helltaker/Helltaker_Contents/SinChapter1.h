@@ -26,8 +26,6 @@ protected:
 	void Phase2_Start() override;
 
 	void CutSceneStart() override;
-	void CutScene(float _DeltaTime) override;
-
 
 	// CutScene
 	void EnterStart() override;
@@ -38,7 +36,10 @@ protected:
 	void ChangeChapter() override;
 
 private:
+	void Enter1();
 
+private:
+	int OrderCount = -1;
 
 	static const std::vector<const char*> SinChap1_Script;
 	static bool IsLoad;

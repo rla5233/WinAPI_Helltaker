@@ -115,9 +115,6 @@ void SinChapter1::CutSceneStart()
 	C_BooperTextSet(SinChap1_Script[1]);
 }
 
-void SinChapter1::CutScene(float _DeltaTime)
-{}
-
 void SinChapter1::EnterStart()
 {}
 
@@ -128,4 +125,7 @@ void SinChapter1::EndStart()
 {}
 
 void SinChapter1::ChangeChapter()
+{}
+
+void SinChapter1::Enter1()
 {}
