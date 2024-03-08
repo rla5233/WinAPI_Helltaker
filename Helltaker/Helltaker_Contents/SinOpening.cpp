@@ -62,7 +62,6 @@ void SinOpening::CutSceneStart()
 	
 	C_SpawnBooper();
 	C_BooperTextSet(SinOpening_Script[2]);
-	C_BooperSetTextPosition(2);
 
 	C_SpawnJudge("Jud_Intro");
 
@@ -112,7 +111,7 @@ void SinOpening::Enter1()
 		C_CreateSceneBG();
 		C_SpawnDialogue(0);
 		
-		GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[0]);
+		C_GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[0]);
 		// 수정 (캐릭터 추가)
 
 		C_BooperTextSet(SinOpening_Script[3]);
@@ -133,9 +132,9 @@ void SinOpening::Enter3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		GetDialogue()->StateChange(ESinDialogueState::Lightning);
-		GetBooper()->AllRenderersActiveOff();
-		GetJudge()->GetNameRenderer()->ActiveOff();
+		C_GetDialogue()->StateChange(ESinDialogueState::Lightning);
+		C_GetBooper()->AllRenderersActiveOff();
+		C_GetJudge()->GetNameRenderer()->ActiveOff();
 		++EnterOrder;
 	}
 }
@@ -144,11 +143,11 @@ void SinOpening::EndStart()
 {
 	SinCutSceneManager::EndStart();
 
-	GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[1]);
-	GetJudge()->GetNameRenderer()->ActiveOn();
-
+	C_GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[1]);
+	C_GetJudge()->GetNameRenderer()->ActiveOn();
+	
 	C_BooperTextSet(SinOpening_Script[5]);
-	GetBooper()->AllRenderersActiveOn();
+	C_GetBooper()->AllRenderersActiveOn();
 }
 
 void SinOpening::ChangeChapter()

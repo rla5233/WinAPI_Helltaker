@@ -49,12 +49,10 @@ void SinCutSceneManager::CutSceneStart()
 	SinChapterManager::CutSceneStart();
 
 	C_CreateSceneBG();
-	
 	C_SpawnBooper();
-	C_SpawnMenubar();
 
-	// State º¯°æ Ãß°¡
-
+	C_StateChange(ESinSceneState::None);
+	C_StateChange(ESinSceneState::Enter);
 }
 
 void SinCutSceneManager::C_SpawnDialogue(int _PosType)
@@ -68,7 +66,11 @@ void SinCutSceneManager::C_SpawnDialogue(int _PosType)
 	AllCutSceneActors.push_back(Dialogue);
 }
 
-void SinCutSceneManager::C_SpawnJudge(std::string_view _ImgName, std::string_view _Text /* = " " */)
+void SinCutSceneManager::C_SpawnJudge(
+	std::string_view _ImgName, 
+	std::string_view _Text, /* = " " */
+	const FVector& _Pos /* = { 0.0f, 0.0f} */,
+	const FVector& _Scale /* = { 0.0f, 0.0f} */)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Judge = SpawnActor<Sin_Judge>(SinUpdateOrder::Mid);
@@ -78,6 +80,7 @@ void SinCutSceneManager::C_SpawnJudge(std::string_view _ImgName, std::string_vie
 	Judge->CreateNameRenderer(SinRenderOrder::Top);
 
 	Judge->GetImageRenderer()->SetImage(_ImgName);
+	Judge->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
 
 	Judge->GetNameRenderer()->SetText(_Text);
 	Judge->GetNameRenderer()->SetFont("¸¼Àº °íµñ");

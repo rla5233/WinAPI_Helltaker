@@ -24,24 +24,28 @@ public:
 	void C_CreateSceneBG();
 
 	void C_SpawnDialogue(int _PosType);
-	void C_SpawnJudge(std::string_view _ImgName, std::string_view _Text = " ");
+	void C_SpawnJudge(
+		std::string_view _ImgName, 
+		std::string_view _Text = " ", 
+		const FVector& _Pos = { 0.0f , 0.0f },
+		const FVector& _Scale = { 0.0f , 0.0f });
 	void C_SpawnBooper();
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
 	void C_BooperTextSet(std::string_view _Text);
 	void C_BooperSetTextPosition(int _LineCount);
 
-	Sin_Dialogue* GetDialogue() const
+	Sin_Dialogue* C_GetDialogue() const
 	{
 		return Dialogue;
 	}
 
-	Sin_Judge* GetJudge() const
+	Sin_Judge* C_GetJudge() const
 	{
 		return Judge;
 	}
 
-	UI* GetBooper() const
+	UI* C_GetBooper() const
 	{
 		return Booper;
 	}

@@ -1,5 +1,7 @@
 #include "SinChapter1.h"
 
+#include "Sin_Judge.h"
+
 bool SinChapter1::IsLoad = false;
 const std::vector<const char*> SinChapter1::SinChap1_Script =
 {
@@ -29,10 +31,11 @@ SinChapter1::~SinChapter1()
 
 void SinChapter1::BeginPlay()
 {
-	SinChapterManager::BeginPlay();
+	SinManager::BeginPlay();
 
 	if (false == IsLoad)
 	{
+		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Intro", "Jud_Intro_004.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Back.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Angry.png");
 
@@ -43,7 +46,7 @@ void SinChapter1::BeginPlay()
 
 void SinChapter1::LevelStart(ULevel* _PrevLevel)
 {
-	SinChapterManager::LevelStart(_PrevLevel);
+	SinManager::LevelStart(_PrevLevel);
 
 	M_CreateSinMap(1);
 
@@ -99,7 +102,18 @@ void SinChapter1::Phase2_Start()
 }
 
 void SinChapter1::CutSceneStart()
-{}
+{
+	SinCutSceneManager::CutSceneStart();
+	
+	C_SpawnDialogue(1);
+
+	FVector Scale = { 0.558f, 0.693f };
+	FVector Pos = { 0.0f, -0.0402f };
+	C_SpawnJudge("Jud_Intro_004.png", SinChap1_Script[0], Pos, Scale);
+	C_GetJudge()->Character::StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(SinChap1_Script[1]);
+}
 
 void SinChapter1::CutScene(float _DeltaTime)
 {}

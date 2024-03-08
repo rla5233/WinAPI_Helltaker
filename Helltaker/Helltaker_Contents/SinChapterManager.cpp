@@ -862,6 +862,11 @@ void SinChapterManager::Tick(float _DeltaTime)
 
 	StateUpdate(_DeltaTime);
 	DebugMode();
+	// Debug
+	if (UEngineInput::IsPress('P'))
+	{
+		M_StateChange(ESinState::CutScene);
+	}
 }
 
 void SinChapterManager::StateUpdate(float _DeltaTime)
