@@ -135,6 +135,9 @@ void SinChapter1::Enter(float _DeltaTime)
 	case 2:
 		Enter3();
 		break;
+	case 3:
+		Enter4();
+		break;
 	}
 }
 
@@ -175,6 +178,23 @@ void SinChapter1::Enter3()
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
 		C_BooperTextSet(SinChap1_Script[8]);
+		++OrderCount;
+	}
+}
+
+void SinChapter1::Enter4()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_GetSceneCharacter()->AllRenderersActiveOff();
+
+		FVector Scale = { 0.255f, 0.611f };
+		FVector Pos = { -0.009f, 0.0f };
+		C_CharacterChange("Pand", "Pand_Flust.png", SinChap1_Script[7], Pos, Scale);
+		C_GetSceneCharacter()->StateChange(ECharacterState::None);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(SinChap1_Script[3]);
 		++OrderCount;
 	}
 }

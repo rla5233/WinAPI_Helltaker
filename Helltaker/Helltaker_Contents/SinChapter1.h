@@ -39,6 +39,7 @@ private:
 	void Enter1();
 	void Enter2();
 	void Enter3();
+	void Enter4();
 
 private:
 	int OrderCount = -1;

@@ -141,6 +141,16 @@ void SinCutSceneManager::C_SpawnBooper()
 	AllCutSceneActors.push_back(Booper);
 }
 
+void SinCutSceneManager::C_JudgeChange(
+	std::string_view _ImgName, 
+	const FVector& _Pos, 
+	const FVector& _Scale)
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Judge->GetImageRenderer()->SetImage(_ImgName);
+	Judge->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
+}
+
 void SinCutSceneManager::C_CharacterChange(
 	std::string_view _Name, 
 	std::string_view _ImgName, 
