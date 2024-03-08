@@ -201,6 +201,7 @@ enum class ESinSceneState
 {
 	None,
 	Enter,
+	Select,
 	End
 };
 

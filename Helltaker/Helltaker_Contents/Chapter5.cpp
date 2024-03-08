@@ -31,7 +31,6 @@ void Chapter5::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_005.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Laugh.png");
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Zdrada");
 

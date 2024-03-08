@@ -21,6 +21,9 @@ void Character::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Angry.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jus_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Az_Note.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Idle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Puzzled.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Idle.png");
 
 		IsLoad = true;
 	}

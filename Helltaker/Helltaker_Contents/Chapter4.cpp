@@ -32,7 +32,6 @@ void Chapter4::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_004.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Idle.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Puzzled.png");
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Malina");
 
 		AddChapterSet("Chapter4");
