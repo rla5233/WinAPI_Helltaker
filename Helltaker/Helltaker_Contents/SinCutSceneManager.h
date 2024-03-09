@@ -94,7 +94,7 @@ protected:
 	virtual void EndStart() {};
 
 	virtual void SelectStart();
-	virtual void Select(float _DeltaTime);
+	virtual void Select();
 	virtual void SelectMenu() {};
 
 	void ResetCheck() override;

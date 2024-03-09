@@ -331,7 +331,7 @@ void SinCutSceneManager::SelectStart()
 	C_SpawnMenubar();
 }
 
-void SinCutSceneManager::Select(float _DeltaTime)
+void SinCutSceneManager::Select()
 {
 	ResetCheck();
 
@@ -366,7 +366,7 @@ void SinCutSceneManager::StateUpdate(float _DeltaTime)
 		Enter(_DeltaTime);
 		break;
 	case ESinSceneState::Select:
-		Select(_DeltaTime);
+		Select();
 		break;
 	case ESinSceneState::End:
 		End(_DeltaTime);

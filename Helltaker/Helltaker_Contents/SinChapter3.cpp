@@ -1,6 +1,7 @@
 #include "SinChapter3.h"
 
 #include "Sin_Judge.h"
+#include "UI.h"
 
 bool SinChapter3::IsLoad = false;
 const std::vector<const char*> SinChapter3::SinChap3_Script =
@@ -46,8 +47,10 @@ void SinChapter3::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindAnim_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindAnim_002.png");
+		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Pose", "Jud_PoseAnim_001.png");
 
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_BindAnim");
+		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Pose");
 
 		AddChapterSet("SinChapter3");
 
@@ -332,16 +335,50 @@ void SinChapter3::SelectStart()
 	OrderCount = 0;
 }
 
-void SinChapter3::Select(float _DeltaTime)
-{
-	SinCutSceneManager::Select(_DeltaTime);
-
-	int a = 0;
-}
-
 void SinChapter3::SelectMenu()
 {
-	++OrderCount;
+	switch (OrderCount)
+	{
+	case 0:
+		Select1();
+		break;
+	case 1:
+		Select2();
+		break;
+	case 2:
+		Select3();
+		break;
+	}
+}
+
+
+void SinChapter3::Select1()
+{
+	C_MenubarRenderActiveOff();
+	C_BooperTextSet(SinChap3_Script[7]);
+	C_GetBooper()->AllRenderersActiveOn();
+	OrderCount++;
+}
+
+void SinChapter3::Select2()
+{
+	C_GetBooper()->GetImageRenderer()->ActiveOff();
+	C_MenubarTextSet(0, SinChap3_Script[8]);
+	C_MenubarTextSet(1, SinChap3_Script[9]);
+	C_MenubarRenderActiveOn();
+	OrderCount++;
+}
+
+void SinChapter3::Select3()
+{
+	C_GetBooper()->GetImageRenderer()->ActiveOn();
+
+	FVector Scale = { 0.39f, 0.693f };
+	FVector Pos = { 0.0f, -0.04f };
+	C_JudgeChange("Jud_PoseAnim_001.png", Pos, Scale);
+	C_BooperTextSet(SinChap3_Script[10]);
+	C_MenubarRenderActiveOff();
+	OrderCount++;
 }
 
 void SinChapter3::ChangeChapter()

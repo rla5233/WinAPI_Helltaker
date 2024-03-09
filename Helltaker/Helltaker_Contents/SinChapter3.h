@@ -31,7 +31,6 @@ protected:
 	void Enter(float _DeltaTime) override;
 
 	void SelectStart() override;
-	void Select(float _DeltaTime) override;
 	void SelectMenu() override;
 
 	void ChangeChapter() override;
@@ -44,6 +43,10 @@ private:
 	void Enter5();
 	void Enter6();
 	void Enter7();
+
+	void Select1();
+	void Select2();
+	void Select3();
 
 private:
 	int OrderCount = -1;
