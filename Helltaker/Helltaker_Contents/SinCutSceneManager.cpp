@@ -29,7 +29,7 @@ void SinCutSceneManager::C_CreateSceneBG()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector UpScale = { 1.0f, 0.154f };
 	float UpPosY = WinScale.Y * UpScale.Y * 0.5f;
-	BackGround* Up_BG = SpawnActor<BackGround>(SinUpdateOrder::BackGround);
+	Up_BG = SpawnActor<BackGround>(SinUpdateOrder::BackGround);
 	Up_BG->SetActorLocation({ WinScale.hX(), UpPosY });
 	Up_BG->CreateImageRenderer(SinRenderOrder::BackGround);
 	Up_BG->GetImageRenderer()->SetImage("DefaultBG.png");
@@ -409,4 +409,7 @@ void SinCutSceneManager::LevelEnd(ULevel* _NextLevel)
 		Actor->Destroy();
 		Actor = nullptr;
 	}
+
+	AllCutSceneActors.clear();
+	MenuBar.clear();
 }

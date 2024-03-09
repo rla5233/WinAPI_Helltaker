@@ -2,6 +2,7 @@
 
 #include "SinCutSceneManager.h"
 #include "Sin_Dialogue.h"
+#include "BackGround.h"
 
 Sin_Judge::Sin_Judge()
 {
@@ -77,7 +78,7 @@ void Sin_Judge::Intro_Appear2()
 }
 
 void Sin_Judge::Chap3_FlyStart()
-{
+{	
 	GetImageRenderer()->CreateAnimation("Jud_Pose", "Jud_Pose", 0, 2, 0.02f, false);
 	GetImageRenderer()->CreateAnimation("Jud_Fly", "Jud_Fly", 0, 4, 0.01f, false);
 
@@ -106,7 +107,15 @@ void Sin_Judge::Chap3_Fly1()
 		GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
 		GetImageRenderer()->AnimationReset();
 		GetImageRenderer()->ChangeAnimation("Jud_Fly");
+
+		FVector EffectScale = { 0.885f, 1.574f };
+		EffectRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
+		EffectRenderer->SetImage("PentaGraphic.png");
+		EffectRenderer->SetTransform({ WinScale * Pos, WinScale * EffectScale });
+
 		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
+		GetSinCutSceneChapter()->C_GetUpBG()->AllRenderersActiveOff();
+
 		++OrderCount;
 	}
 }

@@ -36,6 +36,7 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
+	UImageRenderer* EffectRenderer = nullptr;
 	int OrderCount = -1;
 
 	ESinJudgeState State = ESinJudgeState::None;

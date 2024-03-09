@@ -3,6 +3,7 @@
 #include "SinChapterManager.h"
 
 class Sin_Dialogue;
+class BackGround;
 class Character;
 class Sin_Judge;
 class UI;
@@ -59,6 +60,11 @@ public:
 	void C_MenubarRenderActiveOff();
 	void C_MenubarRenderActiveOn();
 
+	BackGround* C_GetUpBG() const
+	{
+		return Up_BG;
+	}
+
 	Sin_Dialogue* C_GetDialogue() const
 	{
 		return Dialogue;
@@ -111,6 +117,7 @@ private:
 	// Manager
 	std::list<AActor*> AllCutSceneActors;
 
+	BackGround* Up_BG = nullptr;
 	Sin_Judge* Judge = nullptr;
 	Character* SceneCharacter = nullptr;
 	Sin_Dialogue* Dialogue = nullptr;
