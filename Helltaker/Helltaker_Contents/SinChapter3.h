@@ -47,6 +47,7 @@ private:
 	void Select1();
 	void Select2();
 	void Select3();
+	void Select4();
 
 private:
 	int OrderCount = -1;

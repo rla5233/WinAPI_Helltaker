@@ -24,10 +24,14 @@ protected:
 
 private:
 	void Intro_AppearStart();
-	void Intro_Appear(float _DeltaTime);
-	void Intro_Appear1(float _DeltaTime);
-	void Intro_Appear2(float _DeltaTime);
+	void Intro_Appear();
+	void Intro_Appear1();
+	void Intro_Appear2();
 
+	void Chap3_FlyStart();
+	void Chap3_Fly();
+	void Chap3_Fly1();
+	
 
 	void StateUpdate(float _DeltaTime);
 

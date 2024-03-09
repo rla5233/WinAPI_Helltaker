@@ -51,6 +51,7 @@ void SinChapter3::BeginPlay()
 
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_BindAnim");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Pose");
+		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Fly");
 
 		AddChapterSet("SinChapter3");
 
@@ -348,6 +349,9 @@ void SinChapter3::SelectMenu()
 	case 2:
 		Select3();
 		break;
+	case 3:
+		Select4();
+		break;
 	}
 }
 
@@ -357,7 +361,7 @@ void SinChapter3::Select1()
 	C_MenubarRenderActiveOff();
 	C_BooperTextSet(SinChap3_Script[7]);
 	C_GetBooper()->AllRenderersActiveOn();
-	OrderCount++;
+	++OrderCount;
 }
 
 void SinChapter3::Select2()
@@ -366,7 +370,7 @@ void SinChapter3::Select2()
 	C_MenubarTextSet(0, SinChap3_Script[8]);
 	C_MenubarTextSet(1, SinChap3_Script[9]);
 	C_MenubarRenderActiveOn();
-	OrderCount++;
+	++OrderCount;
 }
 
 void SinChapter3::Select3()
@@ -378,7 +382,14 @@ void SinChapter3::Select3()
 	C_JudgeChange("Jud_PoseAnim_001.png", Pos, Scale);
 	C_BooperTextSet(SinChap3_Script[10]);
 	C_MenubarRenderActiveOff();
-	OrderCount++;
+	++OrderCount;
+}
+
+void SinChapter3::Select4()
+{
+	C_BooperTextSet(SinChap3_Script[11]);
+	C_GetJudge()->StateChange(ESinJudgeState::Chap3_Fly);
+	++OrderCount;
 }
 
 void SinChapter3::ChangeChapter()

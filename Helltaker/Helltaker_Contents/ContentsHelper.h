@@ -431,5 +431,6 @@ enum class ESinDialogueState
 enum class ESinJudgeState
 {
 	None,
-	Intro_Appear
+	Intro_Appear,
+	Chap3_Fly
 };
