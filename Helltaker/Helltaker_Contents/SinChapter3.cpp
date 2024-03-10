@@ -3,6 +3,8 @@
 #include "Sin_Judge.h"
 #include "UI.h"
 
+#include "SinChapter4.h"
+
 bool SinChapter3::IsLoad = false;
 const std::vector<const char*> SinChapter3::SinChap3_Script =
 {
@@ -390,8 +392,13 @@ void SinChapter3::Select4()
 {
 	C_BooperTextSet(SinChap3_Script[11]);
 	C_GetJudge()->StateChange(ESinJudgeState::Chap3_Fly);
-	++OrderCount;
+	C_StateChange(ESinSceneState::End);
 }
 
 void SinChapter3::ChangeChapter()
-{}
+{
+	SinChapterManager::ChangeChapter();
+
+	CreateChapter<SinChapter4>("SinChapter4");
+	GEngine->ChangeLevel("SinChapter4");
+}

@@ -94,6 +94,9 @@ void Sin_Judge::Chap3_Fly()
 	case 0:
 		Chap3_Fly1();
 		break;
+	case 1 :
+		StateChange(ESinJudgeState::None);
+		break;
 	}
 }
 
