@@ -40,6 +40,15 @@ private:
 	void Select2();
 	void Select3();
 	void Select4();
+	void Select5();
+	void Select6();
+	void Select7();
+	void Select8();
+	void Select9();
+	void Select10();
+	void Select11();
+	void Select12();
+	void Select13();
 
 private:
 	int OrderCount = -1;

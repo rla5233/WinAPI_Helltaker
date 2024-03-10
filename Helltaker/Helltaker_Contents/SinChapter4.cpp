@@ -47,8 +47,7 @@ void SinChapter4::BeginPlay()
 
 	if (false == IsLoad)
 	{
-
-
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Resign.png");
 
 		AddChapterSet("SinChapter4");
 
@@ -255,6 +254,33 @@ void SinChapter4::SelectMenu()
 	case 3:
 		Select4();
 		break;
+	case 4:
+		Select5();
+		break;
+	case 5:
+		Select6();
+		break;
+	case 6:
+		Select7();
+		break;
+	case 7:
+		Select8();
+		break;
+	case 8:
+		Select9();
+		break;
+	case 9:
+		Select10();
+		break;
+	case 10:
+		Select11();
+		break;
+	case 11:
+		Select12();
+		break;	
+	case 12:
+		Select13();
+		break;
 	}
 }
 
@@ -262,7 +288,7 @@ void SinChapter4::Select1()
 {
 	C_MenubarRenderActiveOff();
 	C_BooperTextSet(SinChap4_Script[4]);
-	C_GetBooper()->AllRenderersActiveOn();
+	C_GetBooper()->GetImageRenderer()->ActiveOn();
 
 	++OrderCount;
 }
@@ -279,11 +305,90 @@ void SinChapter4::Select2()
 
 void SinChapter4::Select3()
 {
+	FVector Scale = { 0.466f, 0.693f };
+	FVector Pos = { 0.0f, -0.042f };
+	C_JudgeChange("Jud_Resign.png", Pos, Scale);
 
+	C_MenubarRenderActiveOff();
+	C_BooperTextSet(SinChap4_Script[7]);
+	C_GetBooper()->GetImageRenderer()->ActiveOn();
+
+	++OrderCount;
 }
 
 void SinChapter4::Select4()
 {
+	C_BooperTextSet(SinChap4_Script[8]);
+	++OrderCount;
+}
+
+void SinChapter4::Select5()
+{
+	C_BooperTextSet(SinChap4_Script[9]);
+	++OrderCount;
+}
+
+void SinChapter4::Select6()
+{
+	FVector Scale = { 0.558f, 0.693f };
+	FVector Pos = { 0.0f, -0.0402f };
+	C_JudgeChange("Jud_Intro_004.png", Pos, Scale);
+	C_BooperTextSet(SinChap4_Script[10]);
+	++OrderCount;
+}
+
+void SinChapter4::Select7()
+{
+	C_BooperTextSet(SinChap4_Script[11]);
+	++OrderCount;
+}
+
+void SinChapter4::Select8()
+{
+	C_BooperTextSet(SinChap4_Script[12]);
+	++OrderCount;
+}
+
+void SinChapter4::Select9()
+{
+	C_BooperTextSet(SinChap4_Script[13]);
+	++OrderCount;
+}
+
+void SinChapter4::Select10()
+{
+	FVector Scale = { 0.4666f, 0.692f };
+	FVector Pos = { 0.0f, -0.042f };
+	C_JudgeChange("Jud_Angry.png", Pos, Scale);
+
+	C_BooperTextSet(SinChap4_Script[14]);
+	++OrderCount;
+}
+
+void SinChapter4::Select11()
+{
+	C_BooperTextSet(SinChap4_Script[15]);
+	++OrderCount;
+}
+
+void SinChapter4::Select12()
+{
+	FVector Scale = { 0.466f, 0.693f };
+	FVector Pos = { 0.0f, -0.042f };
+	C_JudgeChange("Jud_Resign.png", Pos, Scale);
+
+	C_BooperTextSet(SinChap4_Script[16]);
+	++OrderCount;
+}
+
+void SinChapter4::Select13()
+{
+	C_MenubarRenderActiveOn();
+	C_MenubarTextSet(0, SinChap4_Script[17]);
+	C_MenubarTextSet(1, SinChap4_Script[18]);
+	C_GetBooper()->GetImageRenderer()->ActiveOff();
+
+	++OrderCount;
 }
 
 void SinChapter4::ChangeChapter()
