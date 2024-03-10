@@ -21,6 +21,8 @@ void Epilogue::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
 
+
+
 		AddChapterSet("Epilogue");
 		IsLoad = true;
 	}
@@ -47,6 +49,11 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	CreateBG("ChapterBG_Epilogue");
 
 	M_SpawnEpilHero({ 14, 1 });
+
+
+
+
+
 
 	M_StateChange(EChapterState::Idle);
 	GetChapterBGM().Off();

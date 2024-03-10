@@ -32,7 +32,6 @@ void Chapter1::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Pand_Idle.png");
-		ContentsHelper::LoadFolder("Chapter\\Demon", "PandeMonica");
 
 		AddChapterSet("Chapter1");
 		IsLoad = true;

@@ -21,7 +21,6 @@ void Sin_Demon::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Judge_Jump");
-		ContentsHelper::LoadFolder("Chapter\\Demon", "Judge");
 
 		IsLoad = true;
 	}

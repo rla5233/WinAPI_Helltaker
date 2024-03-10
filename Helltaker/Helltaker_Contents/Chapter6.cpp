@@ -38,7 +38,6 @@ void Chapter6::BeginPlay()
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_006.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Az_Idle.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene_AngelEnd.png");
-		ContentsHelper::LoadFolder("Chapter\\Demon", "Azazel");
 
 		AddChapterSet("Chapter6");
 		IsLoad = true;

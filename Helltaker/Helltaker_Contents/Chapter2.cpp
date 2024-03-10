@@ -32,7 +32,6 @@ void Chapter2::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_002.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Close.png");
-		ContentsHelper::LoadFolder("Chapter\\Demon", "Modeus");
 
 		AddChapterSet("Chapter2");
 		IsLoad = true;

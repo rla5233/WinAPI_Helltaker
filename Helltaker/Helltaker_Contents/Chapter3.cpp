@@ -32,7 +32,6 @@ void Chapter3::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_003.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Happy.png");
-		ContentsHelper::LoadFolder("Chapter\\Demon", "Cerberus");
 
 		AddChapterSet("Chapter3");
 		IsLoad = true;

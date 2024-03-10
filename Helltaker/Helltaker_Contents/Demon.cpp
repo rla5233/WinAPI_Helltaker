@@ -33,6 +33,16 @@ void Demon::BeginPlay()
 
 	if (false == IsLoad)
 	{
+		ContentsHelper::LoadFolder("Chapter\\Demon", "PandeMonica");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Modeus");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Cerberus");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Malina");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Zdrada");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Azazel");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Justice");
+		ContentsHelper::LoadFolder("Chapter\\Demon", "Judge");
+
+
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
 		ContentsHelper::LoadImg("Effect\\Particle", "LoveStar.png");
 		ContentsHelper::LoadFolder("Effect", "LovePlosion");

@@ -32,7 +32,6 @@ void Chapter5::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_005.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Laugh.png");
-		ContentsHelper::LoadFolder("Chapter\\Demon", "Zdrada");
 
 		AddChapterSet("Chapter5");
 		IsLoad = true;
