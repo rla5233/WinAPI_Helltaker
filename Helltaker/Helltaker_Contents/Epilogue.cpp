@@ -38,6 +38,18 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 {
 	HellTakerManager::LevelStart(_PrevLevel);
 
+	StateChange(EEpilogueState::Enter);
+}
+
+void Epilogue::Tick(float _DeltaTime)
+{
+	HellTakerManager::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
+}
+
+void Epilogue::EnterStart()
+{
 	C_SpawnBooper();
 
 	C_BooperTextSet(Epilogue_Script[0]);
@@ -46,6 +58,59 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	GetTransitionActor()->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
 	UEngineSound::SoundPlay("transition_off.wav");
 
+	OrderCount = 0;
+}
 
+void Epilogue::Enter(float _DeltaTime)
+{
+	switch (OrderCount)
+	{
+	case 0:
+		Enter1();
+		break;
+	case 1:
+		Enter2();
+		break;
+
+	}
+}
+
+void Epilogue::Enter1()
+{
+	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetTransitionActor()->GetImageRenderer()->ActiveOff();
+		++OrderCount;
+	}
+}
+
+void Epilogue::Enter2()
+{
+
+}
+
+void Epilogue::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case EEpilogueState::Enter:
+		Enter(_DeltaTime);
+		break;
+	}
+}
+
+void Epilogue::StateChange(EEpilogueState _State)
+{
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case EEpilogueState::Enter:
+			EnterStart();
+			break;
+		}
+	}
+
+	State = _State;
 }
 

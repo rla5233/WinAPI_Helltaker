@@ -16,13 +16,27 @@ public:
 	Epilogue& operator=(const Epilogue& _Other) = delete;
 	Epilogue& operator=(Epilogue&& _Other) noexcept = delete;
 
+	void StateChange(EEpilogueState _State);
 
 protected:
 	void BeginPlay() override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
+	void Tick(float _DeltaTime) override;
+
 private:
+	void EnterStart();
+	void Enter(float _DeltaTime);
+
+	void Enter1();
+	void Enter2();
+
+	void StateUpdate(float _DeltaTime);
+
+private:
+	int OrderCount = -1;
 	
+	EEpilogueState State = EEpilogueState::None;
 
 	static const std::vector<const char*> Epilogue_Script;
 	static bool IsLoad;
