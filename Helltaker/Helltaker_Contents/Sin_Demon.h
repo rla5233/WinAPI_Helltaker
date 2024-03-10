@@ -30,6 +30,10 @@ protected:
 	void Sin_AppearStart() override;
 	void Sin_Appear(float _DeltaTime) override;
 
+	void VictoryStart() override;
+	void CreateStarEffect();
+	void CreateLovePlosion(float _DeltaTime);
+
 private:
 	static const FVector Scale;
 	static const FVector AppearScale;

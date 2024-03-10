@@ -899,9 +899,14 @@ void SinChapterManager::SinEndStart()
 		}
 	}
 
-	SinHitChainHp->AllRenderersActiveOff();
-	SinHitChainHp->ActiveOff();
+	if (nullptr != SinHitChainHp)
+	{
+		SinHitChainHp->AllRenderersActiveOff();
+		SinHitChainHp->ActiveOff();
+	}
 
+	PlayerHero->StateChange(EHeroState::Victory);
+	Judge->StateChange(EDemonState::Victory);
 }
 
 void SinChapterManager::SinEnd()

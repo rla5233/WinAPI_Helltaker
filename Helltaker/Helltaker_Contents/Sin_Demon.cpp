@@ -43,6 +43,37 @@ void Sin_Demon::Tick(float _DeltaTime)
 	Demon::Tick(_DeltaTime);
 }
 
+void Sin_Demon::VictoryStart()
+{
+	Demon::VictoryStart();
+	
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { 0.052f, 0.093f };
+	FVector Pos = { 0.0f, 0.0f };
+	ImageRenderer->AnimationReset();
+	ImageRenderer->CreateAnimation("Jud_Idle", "Judge", 0, 11, IdleInter, true);
+	ImageRenderer->ChangeAnimation("Jud_Idle");
+	ImageRenderer->SetTransform({ WinScale * Pos, WinScale * Scale });
+
+	
+}
+
+void Sin_Demon::CreateStarEffect()
+{
+	Demon::CreateStarEffect();
+	AllStarEffect.rbegin()->EffectRenderer->SetOrder(static_cast<int>(SinRenderOrder::Top));
+}
+
+void Sin_Demon::CreateLovePlosion(float _DeltaTime)
+{
+	Demon::CreateLovePlosion(_DeltaTime);
+	
+	if (nullptr != LovePlosionRenderer)
+	{
+		LovePlosionRenderer->SetOrder(static_cast<int>(SinRenderOrder::Top));
+	}
+}
+
 void Sin_Demon::Sin_AppearStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();

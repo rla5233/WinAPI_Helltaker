@@ -47,19 +47,20 @@ protected:
 	virtual void Sin_AppearStart() {};
 	virtual void Sin_Appear(float _DeltaTime) {};
 
+	virtual void VictoryStart();
+	virtual void CreateStarEffect();
+	virtual void CreateLovePlosion(float _DeltaTime);
+
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
 
-	void VictoryStart();
 	void Victory(float _DeltaTime);
 
 	void StarEffectUpdate(float _DeltaTime);
-	void CreateStarEffect();
 	void StarEffectMoveUpdate(float _DeltaTime);
 
 	void LovePlosionUpdate();
-	void CreateLovePlosion(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
