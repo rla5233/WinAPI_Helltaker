@@ -554,3 +554,18 @@ void CutSceneManager::SetFocusMenuIndex(int _Index)
 		FocusMenuIndex = 0;
 	}
 }
+
+
+void CutSceneManager::AllCutSceneActorOff()
+{
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->AllRenderersActiveOff();
+		Actor->ActiveOff();
+	}
+}

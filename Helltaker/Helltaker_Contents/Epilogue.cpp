@@ -75,9 +75,6 @@ void Epilogue::Enter()
 	case 0:
 		Enter1();
 		break;
-	case 4:
-		StateChange(EEpilogueState::Idle);
-		break;
 	default:
 		EnterCutScene();
 		break;
@@ -97,6 +94,12 @@ void Epilogue::EnterCutScene()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		if (4 == OrderCount)
+		{
+			StateChange(EEpilogueState::Idle);
+			return;
+		}
+
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.67f, 0.6f };
 		FVector Pos = { 0.0f, -0.02f };
@@ -122,11 +125,38 @@ void Epilogue::EnterCutScene()
 
 void Epilogue::IdleStart()
 {
+	AllCutSceneActorOff();
+	TransitionOn();
 
+	std::vector<std::vector<bool>> Map =
+	{
+		{ false, false, false, false, true , true , false },
+		{ false, true , true , true , true , true , false },
+		{ false, true , true , true , true , false, false },
+		{ true , true , false, false, false, false, false },
+		{ true , true , true , true , true , true , false },
+		{ true , true , true , true , true , true , true  }
+	};
+
+	M_CreateTileInfoVec(Map);
+	M_SetChapterStartLocation({ 0.32f, 0.208f });
+
+	CreateBG("ChapterBG_001");
+	M_SpawnHero({ 5, 0 });
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { WinScale.X * 0.049f, WinScale.Y * 0.08f };
+	FVector Pos = { WinScale.X * (-0.003f), WinScale.Y * (-0.01f) };
+	M_SpawnDemon({ 6, 5 }, "PandeMonica", { Pos, Scale });
 }
 
 void Epilogue::Idle()
 {
+	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetTransitionActor()->GetImageRenderer()->ActiveOff();
+	}
+
 
 }
 

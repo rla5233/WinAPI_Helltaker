@@ -91,6 +91,8 @@ public:
 		return Dialogue;
 	}
 
+	void AllCutSceneActorOff();
+
 	void C_StateChange(ECutSceneState _State);
 
 protected:

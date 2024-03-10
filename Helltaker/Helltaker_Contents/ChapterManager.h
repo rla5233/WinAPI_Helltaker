@@ -64,6 +64,7 @@ public:
 
 	void M_CreateChapterUI(int _ChapterNumber);
 	void M_SpawnHero(Point _Point, int _ActionPoint);
+	void M_SpawnHero(Point _Point);
 	void M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform);
 	void M_SpawnSkeleton(Point _Point);
 	void M_SpawnStone(Point _Point, std::string_view _Name);

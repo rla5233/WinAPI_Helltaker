@@ -196,6 +196,18 @@ void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 	AllMapActors[reinterpret_cast<__int64>(PlayerHero)] = PlayerHero;
 }
 
+void ChapterManager::M_SpawnHero(Point _Point)
+{
+	FVector TileScale = ContentsHelper::GetTileScale();
+	PlayerHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
+	PlayerHero->SetName("Hero");
+	PlayerHero->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
+	PlayerHero->IsCheatOn();
+	PlayerHero->SetLocationPoint({ _Point.X, _Point.Y });
+	PlayerHero->StateChange(EHeroState::Idle);
+	AllMapActors[reinterpret_cast<__int64>(PlayerHero)] = PlayerHero;
+}
+
 void ChapterManager::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
