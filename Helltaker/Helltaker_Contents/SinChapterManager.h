@@ -180,6 +180,9 @@ protected:
 	virtual void CutSceneStart();
 	virtual void CutScene(float _DeltaTime);
 
+	void SinEndStart();
+	void SinEnd();
+
 	virtual void ResetCheck();
 
 	virtual void ChangeChapter() {};

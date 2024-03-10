@@ -361,8 +361,20 @@ void SinCutSceneManager::Success(float _DeltaTime)
 
 void SinCutSceneManager::SuccessEnd()
 {
+	UEngineSound::SoundPlay("booper_click.wav");
 
+	for (AActor* Actor : AllCutSceneActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
 
+		Actor->AllRenderersActiveOff();
+	}
+
+	SinChapterManager::M_StateChange(ESinState::SinEnd);
+	C_StateChange(ESinSceneState::None);
 }
 
 void SinCutSceneManager::ResetCheck()

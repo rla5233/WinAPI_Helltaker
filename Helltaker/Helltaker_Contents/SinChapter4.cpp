@@ -437,7 +437,10 @@ void SinChapter4::Success1()
 
 void SinChapter4::Success2()
 {
-	int a = 0;
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		SuccessEnd();
+	}
 }
 
 void SinChapter4::ChangeChapter()

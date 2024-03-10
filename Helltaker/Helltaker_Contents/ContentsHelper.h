@@ -194,7 +194,8 @@ enum class ESinState
 	CutScene,
 	HeroDeath,
 	Reset,
-	SinChage
+	SinChage,
+	SinEnd
 };
 
 enum class ESinSceneState

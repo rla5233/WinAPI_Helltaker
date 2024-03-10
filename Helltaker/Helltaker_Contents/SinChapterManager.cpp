@@ -869,6 +869,32 @@ void SinChapterManager::CutScene(float _DeltaTime)
 	ResetCheck();
 }
 
+void SinChapterManager::SinEndStart()
+{
+	for (AActor* Actor : AllMapRenderActors)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		Actor->AllRenderersActiveOn();
+		Actor->ActiveOn();
+	}
+
+	TransitionActor->AllRenderersActiveOff();
+	TransitionActor->ActiveOff();
+
+
+
+
+}
+
+void SinChapterManager::SinEnd()
+{
+
+}
+
 void SinChapterManager::ResetStart()
 {
 	TransitionOn();
@@ -1019,6 +1045,9 @@ void SinChapterManager::StateUpdate(float _DeltaTime)
 	case ESinState::SinChage:
 		SinChage(_DeltaTime);
 		break;
+	case ESinState::SinEnd:
+		SinEnd();
+		break;
 	}
 }
 
@@ -1048,6 +1077,9 @@ void SinChapterManager::M_StateChange(ESinState _State)
 			break;
 		case ESinState::SinChage:
 			SinChageStart();
+			break;
+		case ESinState::SinEnd:
+			SinEndStart();
 			break;
 		}
 	}
