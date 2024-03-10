@@ -39,7 +39,7 @@ protected:
 private:
 	int OrderCount = -1;
 
-	static const std::vector<const char*> SinChap3_Script;
+	static const std::vector<const char*> SinChap4_Script;
 	static bool IsLoad;
 };
 

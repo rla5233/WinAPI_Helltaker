@@ -267,7 +267,7 @@ void SinChapter1::Enter6()
 
 void SinChapter1::ChangeChapter()
 {
-	SinChapterManager::ChangeChapter();
+	SinManager::ChangeChapter();
 
 	CreateChapter<SinChapter2>("SinChapter2");
 	GEngine->ChangeLevel("SinChapter2");
