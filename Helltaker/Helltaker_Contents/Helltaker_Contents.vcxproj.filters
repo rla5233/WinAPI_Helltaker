@@ -79,9 +79,6 @@
     <ClInclude Include="SinOpening.h">
       <Filter>Object\Level\Sin</Filter>
     </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>Object\Level\Sin</Filter>
-    </ClInclude>
     <ClInclude Include="SinChapterManager.h">
       <Filter>Manager</Filter>
     </ClInclude>

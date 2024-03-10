@@ -295,10 +295,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Script.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Shield.h">
       <SubType>
       </SubType>
