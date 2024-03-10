@@ -93,6 +93,6 @@ void Helltaker_ContentsCore::BeginPlay()
 	CreateLevel<EpilogueOpening>("EpilogueOpening");
 	ChangeLevel("EpilogueOpening");
 
-	//CreateLevel<Epilogue>("Epilogue");
-	//ChangeLevel("Epilogue");
+	CreateLevel<Epilogue>("Epilogue");
+	ChangeLevel("Epilogue");
 }

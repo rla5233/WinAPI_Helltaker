@@ -196,14 +196,14 @@ void ChapterManager::M_SpawnHero(Point _Point, int _ActionPoint)
 	AllMapActors[reinterpret_cast<__int64>(PlayerHero)] = PlayerHero;
 }
 
-void ChapterManager::M_SpawnHero(Point _Point)
+void ChapterManager::M_SpawnEpilHero(Point _Point)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 	PlayerHero = SpawnActor<Hero>(static_cast<int>(UpdateOrder::Hero));
 	PlayerHero->SetName("Hero");
 	PlayerHero->SetActorLocation(ChapterPointToLocation(_Point) + TileScale.Half2D());
-	PlayerHero->IsCheatOn();
 	PlayerHero->SetLocationPoint({ _Point.X, _Point.Y });
+	PlayerHero->SetEpilHero();
 	PlayerHero->StateChange(EHeroState::Idle);
 	AllMapActors[reinterpret_cast<__int64>(PlayerHero)] = PlayerHero;
 }
@@ -630,6 +630,11 @@ void ChapterManager::CameraPosUpdate(const FVector& _Pos)
 	{
 		AddCameraPos(_Pos);
 	}
+}
+
+UEngineSoundPlayer ChapterManager::GetChapterBGM()
+{
+	return ChapterBGMPlayer;
 }
 
 void ChapterManager::M_StateChange(EChapterState _State)

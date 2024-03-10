@@ -40,7 +40,7 @@ void Hero::ActionCheck()
 	{
 		if (true == Map[NextPoint.Y][NextPoint.X].IsVaild)
 		{
-			if (0 >= ActionPoint)
+			if (0 >= ActionPoint && false == IsEpil)
 			{
 				StateChange(EHeroState::Death);
 				return;
@@ -142,7 +142,7 @@ void Hero::Move(float _DeltaTime)
 		GetChapter()->CameraPosUpdate(Diff);
 	}
 
-	if (false == IsMove())
+	if (false == IsMove() && false == IsEpil)
 	{
 		GetChapter()->M_UpdateHeroActionPoint();
 	}

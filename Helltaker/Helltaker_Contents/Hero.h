@@ -25,6 +25,11 @@ public:
 		ActionPoint = _Value;
 	}
 
+	void SetEpilHero()
+	{
+		IsEpil = true;
+	}
+
 	void UpdateActionPoint();
 
 protected:
@@ -44,6 +49,7 @@ private:
 private:
 	int ActionPoint = -1;
 	bool IsHaveKey = false;
+	bool IsEpil = false;
 	
 	static bool IsLoad;
 };
