@@ -19,6 +19,7 @@
 #include "SinChapter1.h"
 #include "SinChapter2.h"
 #include "SinChapter3.h"
+#include "SinChapter4.h"
 
 // 수정 (스크립트 문자 재확인), (매개 변수 안쓰는거 정리)
 Helltaker_ContentsCore::Helltaker_ContentsCore()
@@ -83,4 +84,7 @@ void Helltaker_ContentsCore::BeginPlay()
 	
 	CreateLevel<SinChapter3>("SinChapter3");
 	ChangeLevel("SinChapter3");
+
+	CreateLevel<SinChapter4>("SinChapter4");
+	ChangeLevel("SinChapter4");
 }
