@@ -103,6 +103,10 @@ protected:
 	virtual void Select();
 	virtual void SelectMenu() {};
 
+	virtual void SuccessStart();
+	virtual void Success(float _DeltaTime);
+	virtual void SuccessEnd();
+
 	void ResetCheck() override;
 
 private:

@@ -202,6 +202,7 @@ enum class ESinSceneState
 	None,
 	Enter,
 	Select,
+	Success,
 	End
 };
 

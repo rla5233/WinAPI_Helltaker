@@ -33,6 +33,8 @@ protected:
 	void SelectStart() override;
 	void SelectMenu() override;
 
+	void Success(float _DeltaTime) override;
+
 	void ChangeChapter() override;
 
 private:
@@ -49,6 +51,10 @@ private:
 	void Select11();
 	void Select12();
 	void Select13();
+	void Select14();
+
+	void Success1();
+	void Success2();
 
 private:
 	int OrderCount = -1;

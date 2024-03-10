@@ -48,6 +48,7 @@ void SinChapter4::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Resign.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Shock.png");
 
 		AddChapterSet("SinChapter4");
 
@@ -281,6 +282,24 @@ void SinChapter4::SelectMenu()
 	case 12:
 		Select13();
 		break;
+	case 13:
+		Select14();
+		break;
+	}
+}
+
+void SinChapter4::Success(float _DeltaTime)
+{
+	SinCutSceneManager::Success(_DeltaTime);
+
+	switch (OrderCount)
+	{
+	case 0:
+		Success1();
+		break;
+	case 1:
+		Success2();
+		break;
 	}
 }
 
@@ -389,6 +408,36 @@ void SinChapter4::Select13()
 	C_GetBooper()->GetImageRenderer()->ActiveOff();
 
 	++OrderCount;
+}
+
+void SinChapter4::Select14()
+{
+	FVector Scale = { 0.466f, 0.693f };
+	FVector Pos = { 0.0f, -0.042f };
+	C_JudgeChange("Jud_Shock.png", Pos, Scale);
+	C_BooperTextSet(SinChap4_Script[19]);
+
+	OrderCount = 0;
+	C_StateChange(ESinSceneState::Success);
+}
+
+void SinChapter4::Success1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(SinChap4_Script[20]);
+
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_GetBooper()->GetImageRenderer()->ChangeAnimation("Booper_Idle");
+		C_GetBooper()->GetImageRenderer()->SetTransform({ {0, 0}, { WinScale.X * 0.027f, WinScale.Y * 0.022f } });
+
+		++OrderCount;
+	}
+}
+
+void SinChapter4::Success2()
+{
+	int a = 0;
 }
 
 void SinChapter4::ChangeChapter()

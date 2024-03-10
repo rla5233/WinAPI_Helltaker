@@ -341,6 +341,30 @@ void SinCutSceneManager::Select()
 	}
 }
 
+void SinCutSceneManager::SuccessStart()
+{
+	C_MenubarRenderActiveOff();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Booper->GetImageRenderer()->CreateAnimation("Scene_GSuccess", "Success", 8, 15, 0.05f, false);
+	Booper->GetImageRenderer()->ChangeAnimation("Scene_GSuccess");
+	Booper->GetImageRenderer()->SetTransform({ { 0.0f, WinScale.Y * 0.0275f }, { WinScale.X * 0.572f, WinScale.Y * 0.185f } });
+	Booper->GetImageRenderer()->ActiveOn();
+
+	UEngineSound::SoundPlay("dialogue_success.wav");
+}
+
+void SinCutSceneManager::Success(float _DeltaTime)
+{
+	ResetCheck();
+}
+
+void SinCutSceneManager::SuccessEnd()
+{
+
+
+}
+
 void SinCutSceneManager::ResetCheck()
 {
 	SinChapterManager::ResetCheck();
@@ -371,6 +395,9 @@ void SinCutSceneManager::StateUpdate(float _DeltaTime)
 	case ESinSceneState::End:
 		End(_DeltaTime);
 		break;
+	case ESinSceneState::Success:
+		Success(_DeltaTime);
+		break;
 	}
 }
 
@@ -388,6 +415,9 @@ void SinCutSceneManager::C_StateChange(ESinSceneState _State)
 			break;
 		case ESinSceneState::End:
 			EndStart();
+			break;
+		case ESinSceneState::Success:
+			SuccessStart();
 			break;
 		}
 	}
