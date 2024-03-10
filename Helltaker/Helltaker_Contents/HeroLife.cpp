@@ -197,7 +197,7 @@ void HeroLife::HeroHitStart()
 	int idx = static_cast<int>(PyreRenderer.size()) - HeroLife - 1;
 
 	PyreRenderer[idx]->SetImage("Sin_Pyre_Off.png");
-	FireRenderer[idx]->ActiveOff();
+	FireRenderer[idx]->Destroy();
 }
 
 void HeroLife::HeroHit(float _DeltaTime)

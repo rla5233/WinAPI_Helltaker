@@ -905,6 +905,8 @@ void SinChapterManager::SinEndStart()
 		SinHitChainHp->ActiveOff();
 	}
 
+
+
 	PlayerHero->StateChange(EHeroState::Victory);
 	Judge->StateChange(EDemonState::Victory);
 }
