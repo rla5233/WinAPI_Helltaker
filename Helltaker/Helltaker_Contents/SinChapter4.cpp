@@ -3,7 +3,7 @@
 #include "Sin_Judge.h"
 #include "UI.h"
 
-#include "Epilogue.h"
+#include "EpilogueOpening.h"
 
 bool SinChapter4::IsLoad = false;
 const std::vector<const char*> SinChapter4::SinChap4_Script =
@@ -449,8 +449,8 @@ void SinChapter4::ChangeChapter()
 {
 	SinManager::ChangeChapter();
 	
-	CreateChapter<Epilogue>("Epilogue");
-	GEngine->ChangeLevel("Epilogue");
+	CreateChapter<EpilogueOpening>("EpilogueOpening");
+	GEngine->ChangeLevel("EpilogueOpening");
 }
 
 

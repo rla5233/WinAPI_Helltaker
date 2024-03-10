@@ -147,6 +147,8 @@ protected:
 		ChapterEndOrder = 0;
 	}
 
+	void HeroDelayTimeUpdate(float _DeltaTime);
+
 private:
 	void IdleStart();
 	void Idle(float _DeltaTime);
@@ -154,7 +156,6 @@ private:
 	void HeroDeathStart();
 	void HeroDeath(float _DeltaTime);
 
-	void HeroDelayTimeUpdate(float _DeltaTime);
 
 	void CutScene(float _DeltaTime);
 

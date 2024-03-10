@@ -235,6 +235,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EpilogueOpening.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Gear.h">
       <SubType>
       </SubType>
@@ -454,6 +458,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Epilogue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EpilogueOpening.cpp">
       <SubType>
       </SubType>
     </ClCompile>
