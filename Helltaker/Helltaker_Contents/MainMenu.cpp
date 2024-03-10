@@ -103,7 +103,6 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	C_GetDialogue()->GetImageRenderer()->SetTransform({ Pos, Scale });
 	
 	C_SpawnBooper();	
-	CreateTransition();
 
 	MainMenuBGMPlayer.On();
 	StateChange(EMainMenuState::Begin);

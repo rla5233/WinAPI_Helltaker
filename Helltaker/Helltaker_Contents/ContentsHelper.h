@@ -165,6 +165,12 @@ enum class EMainMenuState
 	Exit
 };
 
+enum class EEpilogueState
+{
+	None,
+	Enter,
+};
+
 enum class EChapterState
 {
 	None,

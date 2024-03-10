@@ -163,6 +163,9 @@
     <ClInclude Include="SinChapter4.h">
       <Filter>Object\Level\Sin</Filter>
     </ClInclude>
+    <ClInclude Include="Epilogue.h">
+      <Filter>Object\Level\Ending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -327,6 +330,9 @@
     <ClCompile Include="SinChapter4.cpp">
       <Filter>Object\Level\Sin</Filter>
     </ClCompile>
+    <ClCompile Include="Epilogue.cpp">
+      <Filter>Object\Level\Ending</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Manager">
@@ -376,6 +382,9 @@
     </Filter>
     <Filter Include="Object\Level\Opening">
       <UniqueIdentifier>{5282ab7e-f32b-4666-9144-d17c259febb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Level\Ending">
+      <UniqueIdentifier>{f5fe4cf1-c451-4079-a993-c2223af70ed2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
