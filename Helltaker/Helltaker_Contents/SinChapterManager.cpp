@@ -899,6 +899,8 @@ void SinChapterManager::SinEndStart()
 		}
 	}
 
+	SinHitChainHp->AllRenderersActiveOff();
+	SinHitChainHp->ActiveOff();
 
 }
 
