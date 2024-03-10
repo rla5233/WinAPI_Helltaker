@@ -446,7 +446,7 @@ void SinChapter4::Success2()
 void SinChapter4::ChangeChapter()
 {
 	SinManager::ChangeChapter();
-
+	
 }
 
 

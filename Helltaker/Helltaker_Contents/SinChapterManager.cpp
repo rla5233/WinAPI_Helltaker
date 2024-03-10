@@ -911,7 +911,10 @@ void SinChapterManager::SinEndStart()
 
 void SinChapterManager::SinEnd()
 {
-
+	if (true == PlayerHero->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		M_StateChange(ESinState::SinChage);
+	}
 }
 
 void SinChapterManager::ResetStart()
