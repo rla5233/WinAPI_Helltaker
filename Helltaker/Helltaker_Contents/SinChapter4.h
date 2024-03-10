@@ -28,13 +28,18 @@ protected:
 	void CutSceneStart() override;
 
 	// CutScene
-	void EnterStart() override;
 	void Enter(float _DeltaTime) override;
 
 	void SelectStart() override;
 	void SelectMenu() override;
 
 	void ChangeChapter() override;
+
+private:
+	void Select1();
+	void Select2();
+	void Select3();
+	void Select4();
 
 private:
 	int OrderCount = -1;

@@ -1,5 +1,8 @@
 #include "SinChapter4.h"
 
+#include "Sin_Judge.h"
+#include "UI.h"
+
 bool SinChapter4::IsLoad = false;
 const std::vector<const char*> SinChapter4::SinChap4_Script =
 {
@@ -209,22 +212,77 @@ void SinChapter4::CutSceneStart()
 
 	C_SpawnDialogue(1);
 
+	FVector Scale = { 0.558f, 0.693f };
+	FVector Pos = { 0.0f, -0.0402f };
+	C_SpawnJudge("Jud_Intro_004.png", SinChap4_Script[0], Pos, Scale);
+	C_GetJudge()->Character::StateChange(ECharacterState::Appear);
 
-}
-
-void SinChapter4::EnterStart()
-{
+	C_BooperTextSet(SinChap4_Script[1]);
 }
 
 void SinChapter4::Enter(float _DeltaTime)
 {
+	SinCutSceneManager::Enter(_DeltaTime);
+
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_StateChange(ESinSceneState::Select);
+	}
 }
 
 void SinChapter4::SelectStart()
 {
+	SinCutSceneManager::SelectStart();
+
+	C_MenubarTextSet(0, SinChap4_Script[2]);
+	C_MenubarTextSet(1, SinChap4_Script[3]);
+	OrderCount = 0;
 }
 
 void SinChapter4::SelectMenu()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		Select1();
+		break;
+	case 1:
+		Select2();
+		break;
+	case 2:
+		Select3();
+		break;
+	case 3:
+		Select4();
+		break;
+	}
+}
+
+void SinChapter4::Select1()
+{
+	C_MenubarRenderActiveOff();
+	C_BooperTextSet(SinChap4_Script[4]);
+	C_GetBooper()->AllRenderersActiveOn();
+
+	++OrderCount;
+}
+
+void SinChapter4::Select2()
+{
+	C_MenubarRenderActiveOn();
+	C_MenubarTextSet(0, SinChap4_Script[5]);
+	C_MenubarTextSet(1, SinChap4_Script[6]);
+	C_GetBooper()->GetImageRenderer()->ActiveOff();
+
+	++OrderCount;
+}
+
+void SinChapter4::Select3()
+{
+
+}
+
+void SinChapter4::Select4()
 {
 }
 
@@ -233,3 +291,5 @@ void SinChapter4::ChangeChapter()
 	SinManager::ChangeChapter();
 
 }
+
+
