@@ -9,6 +9,8 @@ bool Epilogue::IsLoad = false;
 const std::vector<const char*> Epilogue::Epilogue_Script =
 {
 	/* 0  Script 1 */ "그리하여 당신의 여정은 끝이 났다.",
+	/* 1  Script 2 */ "악마들을 지옥에서 무사히 데려왔다.\n그리고 헬테이커라고 알려지게 됐지.",
+	
 
 
 };
@@ -27,6 +29,7 @@ void Epilogue::BeginPlay()
 
 	if (false == IsLoad)
 	{
+		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene_Epil_001.png");
 
 		AddChapterSet("Epilogue");
 
@@ -86,7 +89,19 @@ void Epilogue::Enter1()
 
 void Epilogue::Enter2()
 {
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.67f, 0.6f };
+		FVector Pos = { 0.0f, -0.02f };
 
+		C_SpawnDialogue("CutScene_Epil_001.png");
+		C_GetDialogue()->GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
+
+		C_BooperTextSet(Epilogue_Script[1]);
+
+		++OrderCount;
+	}
 }
 
 void Epilogue::StateUpdate(float _DeltaTime)
