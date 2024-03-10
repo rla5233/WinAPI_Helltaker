@@ -26,10 +26,13 @@ protected:
 
 private:
 	void EnterStart();
-	void Enter(float _DeltaTime);
+	void Enter();
 
 	void Enter1();
-	void Enter2();
+	void EnterCutScene();
+
+	void IdleStart();
+	void Idle();
 
 	void StateUpdate(float _DeltaTime);
 

@@ -169,6 +169,7 @@ enum class EEpilogueState
 {
 	None,
 	Enter,
+	Idle
 };
 
 enum class EChapterState
