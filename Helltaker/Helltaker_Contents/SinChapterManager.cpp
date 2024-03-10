@@ -885,7 +885,19 @@ void SinChapterManager::SinEndStart()
 	TransitionActor->AllRenderersActiveOff();
 	TransitionActor->ActiveOff();
 
+	for (Sin_Thorn* Thorn : UpThorn)
+	{
+		if (nullptr == Thorn)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
 
+		if (EThornState::Move != Thorn->GetState())
+		{
+			Thorn->AllRenderersActiveOff();
+			Thorn->ActiveOff();
+		}
+	}
 
 
 }

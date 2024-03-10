@@ -31,6 +31,11 @@ public:
 		return ThornScale;
 	}
 
+	EThornState GetState()
+	{
+		return State;
+	}
+
 	void SetState(EThornState _State)
 	{
 		State = _State;
