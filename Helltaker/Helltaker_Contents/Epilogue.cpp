@@ -106,6 +106,7 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 
 	M_StateChange(EChapterState::Idle);
 	GetChapterBGM().Off();
+	State = EEpilogueState::None;
 
 #ifdef DEBUG
 	ShowLocationPoint();
@@ -156,9 +157,13 @@ void Epilogue::CutSceneStart()
 {
 	CutSceneManager::CutSceneStart();	
 
-	if ("LUCY_EPIL" == DemonKeyName)
+	if (UEngineString::ToUpper("Lucy_Epil") == DemonKeyName)
 	{
 		StateChange(EEpilogueState::LucyCutScene);
+	}
+	else if (UEngineString::ToUpper("Modeus") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::ModCutScene);
 	}
 }
 
@@ -177,6 +182,7 @@ void Epilogue::GoBackChapter()
 
 void Epilogue::Enter(float _DeltaTime)
 {
+	ResetCheck();
 }
 
 void Epilogue::EnterStart()
@@ -197,7 +203,7 @@ void Epilogue::LucyCutSceneStart()
 	C_BooperTextSet(Lucy_Script[1]);
 }
 
-void Epilogue::LucyCutScene(float _DeltaTime)
+void Epilogue::LucyCutScene()
 {
 	switch (OrderCount)
 	{
@@ -331,6 +337,12 @@ void Epilogue::LucyCutScene7()
 	}
 }
 
+void Epilogue::ModCutSceneStart()
+{}
+
+void Epilogue::ModCutScene()
+{}
+
 void Epilogue::Tick(float _DeltaTime)
 {
 	HellTakerManager::Tick(_DeltaTime);
@@ -343,7 +355,10 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case EEpilogueState::LucyCutScene:
-		LucyCutScene(_DeltaTime);
+		LucyCutScene();
+		break;
+	case EEpilogueState::ModCutScene:
+		ModCutScene();
 		break;
 	}
 }
@@ -356,6 +371,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 		{
 		case EEpilogueState::LucyCutScene:
 			LucyCutSceneStart();
+			break;
+		case EEpilogueState::ModCutScene:
+			ModCutSceneStart();
 			break;
 		}
 	}

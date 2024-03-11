@@ -734,6 +734,11 @@ void ChapterManager::ReturnToChap(std::string_view _DemonName)
 		{
 			Actor->LoveSignOff();
 		}
+
+		if (UEngineString::ToUpper("Police") == Actor->GetName())
+		{
+			Actor->GetImageRenderer()->ActiveOff();
+		}
 	}
 
 	PlayerHero->AllMoveEffectDestory();

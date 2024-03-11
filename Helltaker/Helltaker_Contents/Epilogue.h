@@ -33,7 +33,7 @@ protected:
 
 private:
 	void LucyCutSceneStart();
-	void LucyCutScene(float _DeltaTime);
+	void LucyCutScene( );
 	void LucyCutScene1();
 	void LucyCutScene2();
 	void LucyCutScene3();
@@ -42,7 +42,8 @@ private:
 	void LucyCutScene6();
 	void LucyCutScene7();
 
-
+	void ModCutSceneStart();
+	void ModCutScene();
 
 	void SpawnPolice();
 	void GoBackChapter();

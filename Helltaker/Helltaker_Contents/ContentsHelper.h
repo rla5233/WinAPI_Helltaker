@@ -170,6 +170,7 @@ enum class EEpilogueState
 	None,
 	Enter,
 	LucyCutScene,
+	ModCutScene,
 	Change
 };
 
