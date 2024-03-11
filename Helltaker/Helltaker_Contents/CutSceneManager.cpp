@@ -278,6 +278,7 @@ void CutSceneManager::C_CreateCharacterAnimation(
 
 void CutSceneManager::C_ChangeCharacterAnimation(std::string_view _AnimationName)
 {
+	SceneCharacter->GetImageRenderer()->AnimationReset();
 	SceneCharacter->GetImageRenderer()->ChangeAnimation(_AnimationName);
 }
 

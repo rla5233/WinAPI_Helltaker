@@ -40,6 +40,11 @@ public:
 		return NameRenderer;
 	}
 
+	ECharacterState GetState() const
+	{
+		return State;
+	}
+
 	void SetState(ECharacterState _State)
 	{
 		State = _State;

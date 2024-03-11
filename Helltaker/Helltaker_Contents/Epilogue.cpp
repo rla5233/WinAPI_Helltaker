@@ -44,6 +44,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Bottle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_PreBottle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Snap.png");
+		ContentsHelper::LoadImg("Scene\\Characters\\Zd_Ignite", "Zd_Ignite_001.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
@@ -1010,7 +1011,7 @@ void Epilogue::ZdCutSceneStart()
 	C_BooperTextSet(Zd_Script[5]);
 }
 
-void Epilogue::ZdCutScene()
+void Epilogue::ZdCutScene(float _DeltaTime)
 {
 	switch (OrderCount)
 	{
@@ -1018,7 +1019,7 @@ void Epilogue::ZdCutScene()
 		ZdCutScene1();
 		break;
 	case 1:
-		ZdCutScene2();
+		ZdCutScene2(_DeltaTime);
 		break;
 	case 2:
 		ZdCutScene3();
@@ -1033,10 +1034,37 @@ void Epilogue::ZdCutScene()
 }
 
 void Epilogue::ZdCutScene1()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.214f, 0.5935f };
+		FVector Pos = { 0.0f, 0.0f };
+		
 
-void Epilogue::ZdCutScene2()
-{}
+		C_CreateCharacterAnimation("Zd_Ignite", "Zd_Ignite", 0, 3, 0.04f, false);
+		C_CreateCharacterAnimation("Zd_Ignite_Double", "Zd_Ignite", 0, 7, 0.04f, false);
+		C_ChangeCharactrer("Zd_Ignite_001.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Zd_Script[1]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::ZdCutScene2(float _DeltaTime)
+{
+	RepeatZdAnim(_DeltaTime);
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+
+		C_BooperTextSet(Zd_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::ZdCutScene3()
 {}
@@ -1046,6 +1074,42 @@ void Epilogue::ZdCutScene4()
 
 void Epilogue::ZdCutScene5()
 {}
+
+void Epilogue::RepeatZdAnim(float _DeltaTime)
+{
+	if ((ECharacterState::Appear != C_GetSceneCharacter()->GetState())
+		&& (nullptr == C_GetSceneCharacter()->GetImageRenderer()->GetCurAnimation()))
+	{
+		C_ChangeCharacterAnimation("Zd_Ignite");
+		ZdAnimOrder = 1;
+		TimeCount = ZdAnimDelay;
+		return;
+	}
+
+	if ((nullptr != C_GetSceneCharacter()->GetImageRenderer()->GetCurAnimation())
+		&& true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		if (0.0f >= TimeCount)
+		{
+			switch (ZdAnimOrder)
+			{
+			case 0:
+			case 1:
+				C_ChangeCharacterAnimation("Zd_Ignite");
+				++ZdAnimOrder;
+				break;
+			case 2:
+				C_ChangeCharacterAnimation("Zd_Ignite_Double");
+				ZdAnimOrder = 0;
+				break;
+			}
+
+			TimeCount = ZdAnimDelay;
+		}
+
+		TimeCount -= _DeltaTime;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {
@@ -1074,7 +1138,7 @@ void Epilogue::StateUpdate(float _DeltaTime)
 		MalCutScene();
 		break;
 	case EEpilogueState::ZdCutScene:
-		ZdCutScene();
+		ZdCutScene(_DeltaTime);
 		break;
 	}
 }

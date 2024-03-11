@@ -85,12 +85,13 @@ private:
 	void MalCutScene5();
 
 	void ZdCutSceneStart();
-	void ZdCutScene();
+	void ZdCutScene(float _DeltaTime);
 	void ZdCutScene1();
-	void ZdCutScene2();
+	void ZdCutScene2(float _DeltaTime);
 	void ZdCutScene3();
 	void ZdCutScene4();
 	void ZdCutScene5();
+	void RepeatZdAnim(float _DeltaTime);
 
 	void SpawnPolice();
 	void GoBackChapter();
@@ -99,6 +100,10 @@ private:
 
 private:
 	int OrderCount = -1;
+	float TimeCount = 0.0f;
+
+	float ZdAnimDelay = 1.5f;
+	int ZdAnimOrder = -1;
 
 	std::map<std::string, bool> CanCutScene;
 	std::string DemonKeyName = "";
