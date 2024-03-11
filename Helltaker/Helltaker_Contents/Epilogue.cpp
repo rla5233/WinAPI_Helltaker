@@ -1005,11 +1005,12 @@ void Epilogue::MalCutScene()
 
 void Epilogue::MalCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.193f, 0.551f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.002f, 0.028f };
 		C_ChangeCharactrer("Mal_Phone.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1022,7 +1023,8 @@ void Epilogue::MalCutScene1()
 
 void Epilogue::MalCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_BooperTextSet(Mal_Script[2]);
 
@@ -1047,11 +1049,12 @@ void Epilogue::MalCutScene3()
 
 void Epilogue::MalCutScene4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.1875f, 0.481f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.001f, 0.064f };
 		C_ChangeCharactrer("Mal_PreBottle.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1064,11 +1067,12 @@ void Epilogue::MalCutScene4()
 
 void Epilogue::MalCutScene5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.2292f, 0.481f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.001f, 0.064f };
 		C_ChangeCharactrer("Mal_Bottle.png", { WinScale * Pos , WinScale * Scale });
 
 		C_BooperTextSet(Mal_Script[4]);
