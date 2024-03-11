@@ -240,14 +240,20 @@ void CutSceneManager::C_MenubarRenderActiveOn()
 	}
 }
 
+void CutSceneManager::C_ChangeCharactrer(std::string_view _Name, const FTransform& _Trans)
+{
+	SceneCharacter->GetImageRenderer()->SetImage(_Name);
+	SceneCharacter->GetImageRenderer()->SetTransform(_Trans);
+}
+
 void CutSceneManager::C_CharacterSetImage(std::string_view _Name)
 {
 	SceneCharacter->GetImageRenderer()->SetImage(_Name);
 }
 
-void CutSceneManager::C_CharacterSetTransform(FTransform _FTransform)
+void CutSceneManager::C_CharacterSetTransform(const FTransform& _Trans)
 {
-	SceneCharacter->GetImageRenderer()->SetTransform(_FTransform);
+	SceneCharacter->GetImageRenderer()->SetTransform(_Trans);
 }
 
 void CutSceneManager::C_CreateCharacterAnimation(

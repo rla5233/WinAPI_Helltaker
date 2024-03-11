@@ -46,8 +46,9 @@ public:
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
 	void C_MenubarRenderActiveOff();
 	void C_MenubarRenderActiveOn();
+	void C_ChangeCharactrer(std::string_view _Name, const FTransform& _Trans);
 	void C_CharacterSetImage(std::string_view _Name);
-	void C_CharacterSetTransform(FTransform _FTransform);
+	void C_CharacterSetTransform(const FTransform& _Trans);
 	void C_CreateCharacterAnimation(
 		std::string_view _AnimationName, 
 		std::string_view _ImageName,

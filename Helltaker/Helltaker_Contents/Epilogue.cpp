@@ -154,10 +154,6 @@ void Epilogue::CutSceneStart()
 
 void Epilogue::Enter(float _DeltaTime)
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
-	{
-		++OrderCount;
-	}
 }
 
 void Epilogue::EnterStart()
@@ -180,8 +176,24 @@ void Epilogue::LucyCutScene(float _DeltaTime)
 {
 	switch (OrderCount)
 	{
-	default:
+	case 0:
+		LucyCutScene1();
 		break;
+	}
+}
+
+void Epilogue::LucyCutScene1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector Scale = { 0.233f, 0.632f };
+		FVector Pos = { -0.015f, 0.0f };
+		
+
+		C_SpawnBooper();
+		C_BooperTextSet(Epilogue_Script[2]);
+
+		++OrderCount;
 	}
 }
 
