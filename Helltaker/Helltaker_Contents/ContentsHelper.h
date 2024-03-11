@@ -179,6 +179,7 @@ enum class EEpilogueState
 	CerCutScene,
 	JudCutScene,
 	PolCutScene,
+	Ending,
 	Change
 };
 

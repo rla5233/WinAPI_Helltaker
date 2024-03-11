@@ -32,8 +32,6 @@ public:
 
 	void UpdateActionPoint();
 
-	void MoveOneBlock(float _DeltaTime) override;
-
 protected:
 	void MoveStart() override;
 	void Move(float _DeltaTime) override;

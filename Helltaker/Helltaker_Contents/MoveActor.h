@@ -14,7 +14,7 @@ public:
 	MoveActor& operator=(const MoveActor& _Other) = delete;
 	MoveActor& operator=(MoveActor&& _Other) noexcept = delete;
 
-	virtual void MoveOneBlock(float _DeltaTime);
+	void MoveOneBlock(float _DeltaTime);
 
 	void MoveDirChange(EMoveActorDir _Dir);
 	void MoveDirCheck();

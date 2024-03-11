@@ -148,19 +148,6 @@ void Hero::Move(float _DeltaTime)
 	}
 }
 
-void Hero::MoveOneBlock(float _DeltaTime)
-{
-	if (true == IsMove() && 1.0f <= GetMoveTime() + _DeltaTime + MoveActor::GetMoveTimeWeight())
-	{
-		if (true == IsEpil)
-		{
-			GetChapter()->Epil_ResetPolCheck();
-		}
-	}
-
-	HeroBase::MoveOneBlock(_DeltaTime);
-}
-
 void Hero::KickStart()
 {
 	HeroBase::KickStart();

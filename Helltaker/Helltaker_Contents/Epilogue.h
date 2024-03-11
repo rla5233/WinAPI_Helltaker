@@ -31,8 +31,6 @@ protected:
 	void Enter(float _DeltaTime) override;
 	void EnterStart() override;
 
-	void Epil_ResetPolCheck() override;
-
 private:
 	void LucyCutSceneStart();
 	void LucyCutScene();
@@ -125,9 +123,15 @@ private:
 	void PolCutScene();
 	void PolCutScene1();
 	void PolCutScene2();
-	void PolCutScene3();
+	void PolEndCutScene1();
+	void PolEndCutScene2();
+	void PolEndCutScene3();
 	void PolGoBackChap();
 	void SelectMenu() override;
+
+	void EndingStart();
+	void Ending();
+	void Ending1();
 
 	void SpawnPolice();
 	void GoBackChapter();
@@ -143,7 +147,6 @@ private:
 
 	std::map<std::string, bool> CanCutScene;
 	std::string DemonKeyName = "";
-	bool Pol_Check = false;
 	
 	EEpilogueState State = EEpilogueState::None;
 

@@ -137,7 +137,6 @@ public:
 
 	void CameraPosUpdate(const FVector& _Pos);
 	virtual void CutSceneCheck();
-	virtual void Epil_ResetPolCheck() {}
 	
 	// Debug
 	void ShowLocationPoint();

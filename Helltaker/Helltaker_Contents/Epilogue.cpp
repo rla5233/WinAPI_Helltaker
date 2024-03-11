@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Scene.h"
 #include "Demon.h"
+#include "Hero.h"
 
 #include <EnginePlatform/EngineSound.h>
 
@@ -167,10 +168,7 @@ void Epilogue::CutSceneCheck()
 
 			if (true == CanCutScene[DemonKeyName])
 			{
-				if (false == Pol_Check)
-				{
-					M_StateChange(EChapterState::CutScene);
-				}
+				M_StateChange(EChapterState::CutScene);
 
 				if (UEngineString::ToUpper("Police") != DemonKeyName)
 				{
@@ -1644,13 +1642,12 @@ void Epilogue::PolCutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 0.416f, 0.584f };
-	FVector Pos = { 0.0f, 0.0f };
+	FVector Pos = { 0.006f, 0.014f };
 	C_ChangeCharactrer("Police_001.png", { WinScale * Pos , WinScale * Scale });
 	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[0]);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
 	C_BooperTextSet(Pol_Script[1]);
-	Pol_Check = true;
 }
 
 void Epilogue::PolCutScene()
@@ -1666,12 +1663,19 @@ void Epilogue::PolCutScene()
 	case 1:
 		PolCutScene2();
 		break;
+	case 2:
+		PolEndCutScene2();
+		break;
+	case 3:
+		PolEndCutScene3();
+		break;
 	}
 }
 
 void Epilogue::PolCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_MenubarRenderActiveOn();
 		C_BooperImageRendererOff();
@@ -1682,14 +1686,51 @@ void Epilogue::PolCutScene1()
 	}
 }
 
+void Epilogue::PolEndCutScene1()
+{
+	C_MenubarRenderActiveOff();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[6]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Pol_Script[7]);
+	C_BooperImageRendererOn();
+
+	++OrderCount;
+}
+
+void Epilogue::PolEndCutScene2()
+{
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.376f, 0.625f };
+		FVector Pos = { 0.001f, -0.004f };
+		C_ChangeCharactrer("Police_002.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Pol_Script[4]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::PolEndCutScene3()
+{
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
+	{
+		StateChange(EEpilogueState::Ending);
+	}
+}
+
 void Epilogue::PolCutScene2()
 {
 	FocusMenuBarCheck();
-}
-
-void Epilogue::PolCutScene3()
-{
-
 }
 
 void Epilogue::SelectMenu()
@@ -1697,12 +1738,25 @@ void Epilogue::SelectMenu()
 	switch (C_GetFocusMenuIndex())
 	{
 	case 0:
-		
+		PolEndCutScene1();
 		break;
 	case 1:
 		PolGoBackChap();
 		break;
 	}
+}
+
+void Epilogue::EndingStart()
+{
+	OrderCount = 0;
+}
+
+void Epilogue::Ending()
+{
+}
+
+void Epilogue::Ending1()
+{
 }
 
 void Epilogue::PolGoBackChap()
@@ -1713,13 +1767,12 @@ void Epilogue::PolGoBackChap()
 		C_BooperImageRendererOn();
 		C_BooperTextSet(Pol_Script[5]);
 
+		FVector TileScale = ContentsHelper::GetTileScale();
+		PlayerHero->SetLocationPoint(PlayerHero->GetLocationPoint() + Point::Up);
+		PlayerHero->AddActorLocation(FVector::Up * TileScale.Y);
+
 		OrderCount = -1;
 	}
-}
-
-void Epilogue::Epil_ResetPolCheck()
-{
-	Pol_Check = false;
 }
 
 void Epilogue::Tick(float _DeltaTime)
@@ -1763,6 +1816,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::PolCutScene:
 		PolCutScene();
 		break;
+	case EEpilogueState::Ending:
+		Ending();
+		break;
 	}
 }
 
@@ -1801,6 +1857,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::PolCutScene:
 			PolCutSceneStart();
+			break;
+		case EEpilogueState::Ending:
+			EndingStart();
 			break;
 		}
 	}
@@ -1940,6 +1999,5 @@ const std::vector<const char*> Epilogue::Pol_Script =
 	/* 5 Script 3  */ "안에 계신 거 압니다! 빨리 문 여십시오!",
 
 	/* 6 Man	   */ "헬테이커",
-	/* 7 Script 1  */ "팬케이크라도 드시겠습니까?",
-	/* 8 Script 2  */ "그럴 필요 없어. 내가 할게."
+	/* 7 Script 1  */ "팬케이크라도 드시겠습니까?"
 };
