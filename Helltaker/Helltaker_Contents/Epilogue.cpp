@@ -43,8 +43,10 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Phone.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Bottle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_PreBottle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Snap.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
+		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
 
 		AddChapterSet("Epilogue");
 		IsLoad = true;
@@ -182,6 +184,10 @@ void Epilogue::CutSceneStart()
 	else if (UEngineString::ToUpper("Malina") == DemonKeyName)
 	{
 		StateChange(EEpilogueState::MalCutScene);
+	}
+	else if (UEngineString::ToUpper("Zdrada") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::ZdCutScene);
 	}
 }
 
