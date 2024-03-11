@@ -1592,7 +1592,7 @@ void Epilogue::JudCutScene1()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.467f, 0.693f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, -0.042f };
 		C_ChangeCharactrer("Jud_Angry.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1626,7 +1626,7 @@ void Epilogue::JudCutScene3()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.415f, 0.682f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.026f, -0.036f };
 		C_ChangeCharactrer("Jud_PanCake.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
