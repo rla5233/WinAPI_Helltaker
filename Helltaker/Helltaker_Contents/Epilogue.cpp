@@ -1025,10 +1025,13 @@ void Epilogue::ZdCutScene(float _DeltaTime)
 		ZdCutScene3();
 		break;
 	case 3:
-		ZdCutScene4();
+		ZdCutScene4(_DeltaTime);
 		break;
 	case 4:
 		ZdCutScene5();
+		break;
+	case 5:
+		GoBackChapter();
 		break;
 	}
 }
@@ -1057,6 +1060,28 @@ void Epilogue::ZdCutScene2(float _DeltaTime)
 	RepeatZdAnim(_DeltaTime);
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[4]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Zd_Script[6]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::ZdCutScene3()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.216f, 0.5935f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Zd_Ignite_001.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
 		C_BooperTextSet(Zd_Script[2]);
 
@@ -1064,14 +1089,39 @@ void Epilogue::ZdCutScene2(float _DeltaTime)
 	}
 }
 
-void Epilogue::ZdCutScene3()
-{}
+void Epilogue::ZdCutScene4(float _DeltaTime)
+{
+	RepeatZdAnim(_DeltaTime);
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[4]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-void Epilogue::ZdCutScene4()
-{}
+		C_BooperTextSet(Zd_Script[7]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::ZdCutScene5()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.207f, 0.596f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Zd_Snap.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Zd_Script[3]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::RepeatZdAnim(float _DeltaTime)
 {

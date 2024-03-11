@@ -89,7 +89,7 @@ private:
 	void ZdCutScene1();
 	void ZdCutScene2(float _DeltaTime);
 	void ZdCutScene3();
-	void ZdCutScene4();
+	void ZdCutScene4(float _DeltaTime);
 	void ZdCutScene5();
 	void RepeatZdAnim(float _DeltaTime);
 
