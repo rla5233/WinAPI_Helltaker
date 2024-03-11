@@ -41,6 +41,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Unsure.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Talk.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -193,6 +194,21 @@ void Epilogue::LucyCutScene(float _DeltaTime)
 	case 1:
 		LucyCutScene2();
 		break;
+	case 2:
+		LucyCutScene3();
+		break;
+	case 3:
+		LucyCutScene4();
+		break;
+	case 4:
+		LucyCutScene5();
+		break;
+	case 5:
+		LucyCutScene6();
+		break;
+	case 6:
+		LucyCutScene7();
+		break;
 	}
 }
 
@@ -230,7 +246,73 @@ void Epilogue::LucyCutScene2()
 
 void Epilogue::LucyCutScene3()
 {
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.258f, 0.642f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Lu_Unsure.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
+		C_BooperTextSet(Lucy_Script[3]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::LucyCutScene4()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Lucy_Script[4]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::LucyCutScene5()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Lucy_Script[5]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::LucyCutScene6()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Lucy_Script[9]);
+
+		++OrderCount;
+	}	
+}
+
+void Epilogue::LucyCutScene7()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.277f, 0.644f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Lu_Talk.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Lucy_Script[6]);
+
+		++OrderCount;
+	}
 }
 
 void Epilogue::Tick(float _DeltaTime)

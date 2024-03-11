@@ -37,6 +37,10 @@ private:
 	void LucyCutScene1();
 	void LucyCutScene2();
 	void LucyCutScene3();
+	void LucyCutScene4();
+	void LucyCutScene5();
+	void LucyCutScene6();
+	void LucyCutScene7();
 
 	void SpawnPolice();
 
