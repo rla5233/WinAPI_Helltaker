@@ -168,7 +168,12 @@ void Epilogue::CutSceneCheck()
 
 void Epilogue::CutSceneStart()
 {
-	CutSceneManager::CutSceneStart();	
+	ChapterManager::CutSceneStart();	
+
+	C_StateChange(ECutSceneState::None);
+	C_StateChange(ECutSceneState::Enter);
+
+	UEngineSound::SoundPlay("dialogue_start.wav");
 
 	if (UEngineString::ToUpper("Lucy_Epil") == DemonKeyName)
 	{
@@ -205,6 +210,7 @@ void Epilogue::EnterStart()
 
 void Epilogue::LucyCutSceneStart()
 {
+	C_CreateSceneBG();
 	C_SpawnDialogue("DialogueBG_Home.png");
 	
 	FVector Scale = { 0.233f, 0.632f };
@@ -352,7 +358,18 @@ void Epilogue::LucyCutScene7()
 
 void Epilogue::ModCutSceneStart()
 {
-
+	AllCutSceneActorOn();
+	//C_CreateSceneBG();
+	
+	//C_SpawnDialogue("DialogueBG_Home.png");
+	//
+	//FVector Scale = { 0.233f, 0.632f };
+	//FVector Pos = { -0.015f, 0.0f };
+	//C_SpawnCharacter("Lu", "Lu_PanCake.png", Lucy_Script[0], Pos, Scale);
+	//C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+	//
+	//C_SpawnBooper();
+	//C_BooperTextSet(Lucy_Script[1]);
 }
 
 void Epilogue::ModCutScene()

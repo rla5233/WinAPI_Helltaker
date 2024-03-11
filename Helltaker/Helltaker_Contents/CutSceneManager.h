@@ -92,6 +92,7 @@ public:
 		return Dialogue;
 	}
 
+	void AllCutSceneActorOn();
 	void AllCutSceneActorOff();
 
 	void C_StateChange(ECutSceneState _State);
@@ -133,7 +134,7 @@ private:
 private:
 	// Manager
 	std::list<AActor*> AllCutSceneActors;
-
+	
 	Character* SceneCharacter = nullptr;
 	Scene* Dialogue = nullptr;
 	UI* Booper = nullptr;
