@@ -24,6 +24,8 @@ protected:
 
 	void Tick(float _DeltaTime) override;
 
+	void CutSceneCheck() override;
+
 private:
 	void EnterStart();
 	void Enter();
