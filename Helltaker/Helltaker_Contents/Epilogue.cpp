@@ -1469,11 +1469,12 @@ void Epilogue::CerCutScene()
 
 void Epilogue::CerCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.47f, 0.563f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.024f };
 		C_ChangeCharactrer("Cer_Bad.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1486,7 +1487,8 @@ void Epilogue::CerCutScene1()
 
 void Epilogue::CerCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1501,11 +1503,12 @@ void Epilogue::CerCutScene2()
 
 void Epilogue::CerCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.47f, 0.563f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.024f };
 		C_ChangeCharactrer("Cer_Bad.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1518,7 +1521,8 @@ void Epilogue::CerCutScene3()
 
 void Epilogue::CerCutScene4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1533,11 +1537,12 @@ void Epilogue::CerCutScene4()
 
 void Epilogue::CerCutScene5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.47f, 0.563f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.024f };
 		C_ChangeCharactrer("Cer_Bad.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1582,7 +1587,8 @@ void Epilogue::JudCutScene()
 
 void Epilogue::JudCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.467f, 0.693f };
@@ -1599,7 +1605,8 @@ void Epilogue::JudCutScene1()
 
 void Epilogue::JudCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1614,7 +1621,8 @@ void Epilogue::JudCutScene2()
 
 void Epilogue::JudCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.415f, 0.682f };
