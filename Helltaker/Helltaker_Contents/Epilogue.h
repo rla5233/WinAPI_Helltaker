@@ -63,6 +63,19 @@ private:
 	void JusCutScene8();
 	void JusCutScene9();
 
+	void PandCutSceneStart();
+	void PandCutScene();
+	void PandCutScene1();
+	void PandCutScene2();
+	void PandCutScene3();
+	void PandCutScene4();
+	void PandCutScene5();
+	void PandCutScene6();
+	void PandCutScene7();
+	void PandCutScene8();
+	void PandCutScene9();
+	void PandCutScene10();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
@@ -76,9 +89,14 @@ private:
 	
 	EEpilogueState State = EEpilogueState::None;
 
+	static const FVector ManScale;
+	static const FVector ManPos;
+
+
 	static const std::vector<const char*> Lucy_Script;
 	static const std::vector<const char*> Mod_Script;
 	static const std::vector<const char*> Jus_Script;
+	static const std::vector<const char*> Pand_Script;
 	static bool IsLoad;
 };
 
