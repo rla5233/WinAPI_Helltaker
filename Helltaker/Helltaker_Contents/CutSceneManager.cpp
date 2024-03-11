@@ -561,7 +561,6 @@ void CutSceneManager::SetFocusMenuIndex(int _Index)
 	}
 }
 
-
 void CutSceneManager::AllCutSceneActorOff()
 {
 	for (AActor* Actor : AllCutSceneActors)

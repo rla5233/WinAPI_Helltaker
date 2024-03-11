@@ -20,6 +20,7 @@ public:
 	void MoveDirCheck();
 	bool MoveEffectEndCheck();
 	void AllMoveEffectActiveOff();
+	void AllMoveEffectDestory();
 	void SeeDirChange(EActorSeeDir _Dir);
 	
 	bool IsMove() const

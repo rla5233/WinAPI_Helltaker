@@ -128,6 +128,8 @@ public:
 	void DeleteKey();
 	void DeleteLockBox();
 
+	void ReturnToChap(std::string_view _DemonName);
+
 	void CameraPosUpdate(const FVector& _Pos);
 	
 	// Debug

@@ -206,3 +206,18 @@ void MoveActor::AllMoveEffectActiveOff()
 		Renderer->ActiveOff();
 	}
 }
+
+void MoveActor::AllMoveEffectDestory()
+{
+	for (UImageRenderer* Renderer : AllMoveEffectRenderer)
+	{
+		if (nullptr == Renderer)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		Renderer->Destroy();
+	}
+
+	AllMoveEffectRenderer.clear();
+}

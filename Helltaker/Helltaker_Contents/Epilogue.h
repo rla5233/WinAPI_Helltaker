@@ -42,7 +42,10 @@ private:
 	void LucyCutScene6();
 	void LucyCutScene7();
 
+
+
 	void SpawnPolice();
+	void GoBackChapter();
 
 	void StateUpdate(float _DeltaTime);
 

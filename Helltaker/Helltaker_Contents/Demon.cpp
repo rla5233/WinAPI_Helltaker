@@ -92,6 +92,11 @@ void Demon::LoveSignAnimation(float _DeltaTime)
 	}
 }
 
+void Demon::LoveSignOff()
+{
+	LoveSignRenderer->ActiveOff();
+}
+
 void Demon::IdleStart()
 {
 	FVector TileScale = ContentsHelper::GetTileScale();

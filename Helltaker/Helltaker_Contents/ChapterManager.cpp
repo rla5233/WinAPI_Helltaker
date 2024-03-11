@@ -707,6 +707,39 @@ void ChapterManager::DeleteLockBox()
 	LockBox = nullptr;
 }
 
+void ChapterManager::ReturnToChap(std::string_view _DemonName)
+{
+	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
+	{
+		if (nullptr == MapActors.second)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		MapActors.second->AllRenderersActiveOn();
+		MapActors.second->ActiveOn();
+	}
+
+	TransitionActor->GetImageRenderer()->ActiveOff();
+	ChapterBG->BackGroundChange(ChapterBG->GetName() + ".png");
+
+	for (Demon* Actor : AllChapterDemon)
+	{
+		if (nullptr == Actor)
+		{
+			MsgBoxAssert("Actor is nullptr");
+		}
+
+		if (_DemonName == Actor->GetName())
+		{
+			Actor->LoveSignOff();
+		}
+	}
+
+	PlayerHero->AllMoveEffectDestory();
+	State = EChapterState::Idle;
+}
+
 // 디버그용
 void ChapterManager::ShowLocationPoint()
 {

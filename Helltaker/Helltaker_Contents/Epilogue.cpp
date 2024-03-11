@@ -133,7 +133,7 @@ void Epilogue::SpawnPolice()
 void Epilogue::CutSceneCheck()
 {
 	Point HeroCurPoint = M_GetHeroLocationPoint();
-	for (Demon* Demon : AllChapterDemon)	
+	for (Demon* Demon : AllChapterDemon)
 	{
 		Point DemonPoint = Demon->GetLocationPoint();
 		if (DemonPoint + Point::Left == HeroCurPoint ||
@@ -159,6 +159,19 @@ void Epilogue::CutSceneStart()
 	if ("LUCY_EPIL" == DemonKeyName)
 	{
 		StateChange(EEpilogueState::LucyCutScene);
+	}
+}
+
+void Epilogue::GoBackChapter()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		StateChange(EEpilogueState::None);
+
+		AllCutSceneActorOff();
+		C_StateChange(ECutSceneState::None);
+		ReturnToChap(DemonKeyName);
+		DemonKeyName = "";
 	}
 }
 
@@ -208,6 +221,9 @@ void Epilogue::LucyCutScene(float _DeltaTime)
 		break;
 	case 6:
 		LucyCutScene7();
+		break;
+	case 7:
+		GoBackChapter();
 		break;
 	}
 }
