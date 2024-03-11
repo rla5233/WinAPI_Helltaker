@@ -24,7 +24,7 @@ const float HeroBase::DeathInter = 0.05f;
 const FVector HeroBase::VictoryScale = { 0.052f, 0.111f };
 const float HeroBase::VictoryInter = 0.125f;
 
-const FVector HeroBase::AScale = { 0.052f, 0.083f };
+const FVector HeroBase::AScale = { 0.052f, 0.093f };
 
 HeroBase::HeroBase()
 {}
@@ -172,6 +172,11 @@ void HeroBase::IdleStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * IdleScale } });
 
+	if ("EPILOGUE" == GetWorld()->GetName())
+	{
+		ImageRenderer->SetScale(WinScale * AScale);
+	}
+
 	switch (GetSeeDir())
 	{
 	case EActorSeeDir::Left:
@@ -200,7 +205,10 @@ void HeroBase::MoveStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * MoveScale } });
 
-	// Ãß°¡
+	if ("EPILOGUE" == GetWorld()->GetName())
+	{
+		ImageRenderer->SetScale(WinScale * AScale);
+	}
 
 	CanActionCheck = false;
 
