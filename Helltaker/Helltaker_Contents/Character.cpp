@@ -20,6 +20,7 @@ void Character::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Angry.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jus_Idle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jus_Curious.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Az_Note.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Idle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Puzzled.png");

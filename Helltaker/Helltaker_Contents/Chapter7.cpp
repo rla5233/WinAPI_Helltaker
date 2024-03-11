@@ -30,7 +30,6 @@ void Chapter7::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_007.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jus_Curious.png");
 
 		AddChapterSet("Chapter7");
 		IsLoad = true;

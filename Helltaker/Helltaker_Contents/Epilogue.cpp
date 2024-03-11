@@ -26,6 +26,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake_002.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Unsure.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Talk.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Book.png");
@@ -257,7 +258,7 @@ void Epilogue::LucyCutScene2()
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.391f, 0.674f };
 		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -496,6 +497,33 @@ void Epilogue::JusCutScene()
 	case 0:
 		JusCutScene1();
 		break;
+	case 1:
+		JusCutScene2();
+		break;
+	case 2:
+		JusCutScene3();
+		break;
+	case 3:
+		JusCutScene4();
+		break;
+	case 4:
+		JusCutScene5();
+		break;
+	case 5:
+		JusCutScene6();
+		break;
+	case 6:
+		JusCutScene7();
+		break;
+	case 7:
+		JusCutScene8();
+		break;
+	case 8:
+		JusCutScene9();
+		break;
+	case 9:
+		GoBackChapter();
+		break;
 	}
 }
 
@@ -504,35 +532,149 @@ void Epilogue::JusCutScene1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector Scale = { 0.226f, 0.588f };
+		FVector Scale = { 0.291f, 0.59f };
 		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos , WinScale * Scale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
+		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mod_Script[1]);
+		C_BooperTextSet(Jus_Script[1]);
 
 		++OrderCount;
 	}
 }
 
 void Epilogue::JusCutScene2()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jus_Script[9]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JusCutScene3()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.291f, 0.59f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jus_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JusCutScene4()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jus_Script[10]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JusCutScene5()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.223f, 0.558f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jus_Blind.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jus_Script[3]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JusCutScene6()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.22f, 0.612f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jus_Idle.png", { WinScale * Pos , WinScale * Scale });
+
+		C_BooperTextSet(Jus_Script[4]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JusCutScene7()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake_002.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jus_Script[11]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::JusCutScene8()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.228f, 0.567f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jus_Curious.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jus_Script[5]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::JusCutScene9()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.291f, 0.59f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		
+		C_BooperTextSet(Jus_Script[6]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {
@@ -613,12 +755,12 @@ const std::vector<const char*> Epilogue::Jus_Script
 	/* 2  Script 2 */ "애들 말로는 네가 선글라스를 절대 안 벗는다던데. 왜 그래?",
 	/* 3  Script 3 */ "아, 나 말이야? 왜냐면 눈이 멀었거든.",
 	/* 4  Script 4 */ "내 얘기는 그럼 됐고. 너는?",
-	/* 5  Script 4 */ "에이. 애들이랑 내기까지 했는데.",
-	/* 6  Script 4 */ "네가 눈에서 레이저 못 쏘면 내 10달러를 잃는다고.",
+	/* 5  Script 5 */ "에이. 애들이랑 내기까지 했는데.",
+	/* 6  Script 6 */ "네가 눈에서 레이저 못 쏘면 내 10달러를 잃는다고.",
 
 	/* 7  Man	   */ "헬테이커",
 	/* 8  Script 1 */ "자 팬케이크.",
 	/* 9  Script 2 */ "말해 봐.",
-	/* 10 Script 3 */ "나도 너한테 똑같이 묻고 싶은데."
-	/* 11 Script 3 */ "언젠가 다음에..."
+	/* 10 Script 3 */ "나도 너한테 똑같이 묻고 싶은데.",
+	/* 11 Script 4 */ "언젠가 다음에..."
 };

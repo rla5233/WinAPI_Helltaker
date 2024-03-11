@@ -60,6 +60,8 @@ private:
 	void JusCutScene5();
 	void JusCutScene6();
 	void JusCutScene7();
+	void JusCutScene8();
+	void JusCutScene9();
 
 	void SpawnPolice();
 	void GoBackChapter();
