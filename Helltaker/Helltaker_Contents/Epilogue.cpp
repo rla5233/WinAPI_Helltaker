@@ -48,6 +48,8 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Az_Shock.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Bad.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_PanCake.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Police_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Police_002.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
@@ -204,6 +206,10 @@ void Epilogue::CutSceneStart()
 	else if (UEngineString::ToUpper("Judge") == DemonKeyName)
 	{
 		StateChange(EEpilogueState::JudCutScene);
+	}
+	else if (UEngineString::ToUpper("Police") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::PolCutScene);
 	}
 }
 
@@ -1547,6 +1553,42 @@ void Epilogue::JudCutScene3()
 	}
 }
 
+void Epilogue::PolCutSceneStart()
+{
+	AllCutSceneActorOn();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { 0.416f, 0.584f };
+	FVector Pos = { 0.0f, 0.0f };
+	C_ChangeCharactrer("Police_001.png", { WinScale * Pos , WinScale * Scale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[0]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Pol_Script[1]);
+}
+
+void Epilogue::PolCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		PolCutScene1();
+		break;
+	}
+}
+
+void Epilogue::PolCutScene1()
+{
+}
+
+void Epilogue::PolCutScene2()
+{
+}
+
+void Epilogue::PolCutScene3()
+{
+}
+
 void Epilogue::Tick(float _DeltaTime)
 {
 	HellTakerManager::Tick(_DeltaTime);
@@ -1585,6 +1627,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::JudCutScene:
 		JudCutScene();
 		break;
+	case EEpilogueState::PolCutScene:
+		PolCutScene();
+		break;
 	}
 }
 
@@ -1620,6 +1665,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::JudCutScene:
 			JudCutSceneStart();
+			break;
+		case EEpilogueState::PolCutScene:
+			PolCutSceneStart();
 			break;
 		}
 	}

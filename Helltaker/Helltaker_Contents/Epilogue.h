@@ -119,6 +119,12 @@ private:
 	void JudCutScene2();
 	void JudCutScene3();
 
+	void PolCutSceneStart();
+	void PolCutScene();
+	void PolCutScene1();
+	void PolCutScene2();
+	void PolCutScene3();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
