@@ -113,6 +113,14 @@ private:
 	void CerCutScene4();
 	void CerCutScene5();
 
+	void JudCutSceneStart();
+	void JudCutScene();
+	void JudCutScene1();
+	void JudCutScene2();
+	void JudCutScene3();
+	void JudCutScene4();
+
+
 	void SpawnPolice();
 	void GoBackChapter();
 

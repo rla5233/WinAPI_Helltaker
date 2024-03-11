@@ -200,6 +200,10 @@ void Epilogue::CutSceneStart()
 	{
 		StateChange(EEpilogueState::CerCutScene);
 	}
+	else if (UEngineString::ToUpper("Judge") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::JudCutScene);
+	}
 }
 
 void Epilogue::GoBackChapter()
@@ -1462,6 +1466,42 @@ void Epilogue::CerCutScene5()
 	}
 }
 
+void Epilogue::JudCutSceneStart()
+{
+
+}
+
+void Epilogue::JudCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		JudCutScene1();
+		break;
+	case 1:
+		JudCutScene2();
+		break;
+	case 2:
+		JudCutScene3();
+		break;
+	case 3:
+		JudCutScene4();
+		break;
+	}
+}
+
+void Epilogue::JudCutScene1()
+{}
+
+void Epilogue::JudCutScene2()
+{}
+
+void Epilogue::JudCutScene3()
+{}
+
+void Epilogue::JudCutScene4()
+{}
+
 void Epilogue::Tick(float _DeltaTime)
 {
 	HellTakerManager::Tick(_DeltaTime);
@@ -1497,6 +1537,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::CerCutScene:
 		CerCutScene();
 		break;
+	case EEpilogueState::JudCutScene:
+		JudCutScene();
+		break;
 	}
 }
 
@@ -1529,6 +1572,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::CerCutScene:
 			CerCutSceneStart();
+			break;
+		case EEpilogueState::JudCutScene:
+			JudCutSceneStart();
 			break;
 		}
 	}

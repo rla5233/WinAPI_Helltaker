@@ -177,6 +177,7 @@ enum class EEpilogueState
 	ZdCutScene,
 	AzCutScene,
 	CerCutScene,
+	JudCutScene,
 	Change
 };
 
