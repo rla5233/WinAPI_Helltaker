@@ -27,14 +27,7 @@ protected:
 	void CutSceneCheck() override;
 
 private:
-	void EnterStart();
-	void Enter();
-
-	void Enter1();
-	void EnterCutScene();
-
-	void IdleStart();
-	void Idle(float _DeltaTime);
+	void SpawnPolice();
 
 	void StateUpdate(float _DeltaTime);
 

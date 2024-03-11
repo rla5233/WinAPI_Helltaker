@@ -85,6 +85,11 @@ public:
 	Point M_GetHeroNextLocationPoint() const;
 	EHeroState M_GetHeroState() const;
 
+	std::list<Demon*>& M_RefAllChapterDemon()
+	{
+		return AllChapterDemon;
+	}
+
 	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const
 	{
@@ -157,7 +162,6 @@ private:
 
 	void HeroDeathStart();
 	void HeroDeath(float _DeltaTime);
-
 
 	void CutScene(float _DeltaTime);
 

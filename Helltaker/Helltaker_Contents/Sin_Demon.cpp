@@ -53,8 +53,6 @@ void Sin_Demon::VictoryStart()
 	ImageRenderer->CreateAnimation("Jud_Idle", "Judge", 0, 11, IdleInter, true);
 	ImageRenderer->ChangeAnimation("Jud_Idle");
 	ImageRenderer->SetTransform({ WinScale * Pos, WinScale * Scale });
-
-	
 }
 
 void Sin_Demon::CreateStarEffect()
