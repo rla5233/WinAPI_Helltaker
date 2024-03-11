@@ -99,6 +99,11 @@ public:
 	{
 		IsCameraPosUpdateOn = _Value;
 	}
+
+	void M_AddActorMap(AActor* const _Actor)
+	{
+		AllMapActors[reinterpret_cast<__int64>(_Actor)] = _Actor;
+	}
 	
 	static UEngineSoundPlayer GetChapterBGM();
 

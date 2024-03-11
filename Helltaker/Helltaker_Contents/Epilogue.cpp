@@ -9,7 +9,7 @@
 bool Epilogue::IsLoad = false;
 
 const FVector Epilogue::ManScale = { 0.391f, 0.674f };
-const FVector Epilogue::ManPos = { 0.0f, 0.0f };
+const FVector Epilogue::ManPos = { 0.0f, -0.032f };
 
 Epilogue::Epilogue()
 {
@@ -26,6 +26,7 @@ void Epilogue::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
+		ContentsHelper::LoadImg("Chapter\\Component", "PoliceCar.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
@@ -139,6 +140,16 @@ void Epilogue::SpawnPolice()
 	(*AllChapterDemon.rbegin())->SetName("Police");
 	(*AllChapterDemon.rbegin())->GetImageRenderer()->ActiveOff();
 	CanCutScene[UEngineString::ToUpper("Police")] = true;
+
+	Pos = { 0.135f, 0.873f };
+	Scale = { 0.14f, 0.148f };
+	RenderActor* PoliceCar = SpawnActor<RenderActor>(RenderOrder::RenderActor);
+	PoliceCar->SetName("PoliceCar");
+	PoliceCar->SetActorLocation(WinScale * Pos);
+	UImageRenderer* Pol_CarImgRenderer = PoliceCar->CreateImageRenderer(RenderOrder::RenderActor);
+	Pol_CarImgRenderer->SetImage("PoliceCar.png");
+	Pol_CarImgRenderer->SetScale({ WinScale * Scale });
+	M_AddActorMap(PoliceCar);
 }
 
 void Epilogue::CutSceneCheck()
@@ -256,7 +267,7 @@ void Epilogue::LucyCutSceneStart()
 	C_SpawnDialogue("DialogueBG_Home.png");
 	
 	FVector Scale = { 0.233f, 0.632f };
-	FVector Pos = { -0.015f, 0.0f };
+	FVector Pos = { -0.015f, -0.01f };
 	C_SpawnCharacter("Lu", "Lu_PanCake.png", Lucy_Script[0], Pos, Scale);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -304,7 +315,7 @@ void Epilogue::LucyCutScene1()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.247f, 0.626f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.022f, -0.008f };
 		C_ChangeCharactrer("Lu_Yum.png", { WinScale * Pos , WinScale * Scale });
 
 		C_BooperTextSet(Lucy_Script[2]);
@@ -334,7 +345,7 @@ void Epilogue::LucyCutScene3()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.258f, 0.642f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0177f, -0.007f };
 		C_ChangeCharactrer("Lu_Unsure.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -386,7 +397,7 @@ void Epilogue::LucyCutScene7()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.277f, 0.644f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.001f, -0.014f };
 		C_ChangeCharactrer("Lu_Talk.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
