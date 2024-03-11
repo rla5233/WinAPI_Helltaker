@@ -35,6 +35,7 @@ private:
 	void LucyCutSceneStart();
 	void LucyCutScene(float _DeltaTime);
 	void LucyCutScene1();
+	void LucyCutScene2();
 
 	void SpawnPolice();
 
@@ -48,7 +49,7 @@ private:
 	
 	EEpilogueState State = EEpilogueState::None;
 
-	static const std::vector<const char*> Epilogue_Script;
+	static const std::vector<const char*> Lucy_Script;
 	static bool IsLoad;
 };
 

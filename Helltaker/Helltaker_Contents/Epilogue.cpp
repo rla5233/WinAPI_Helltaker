@@ -6,11 +6,14 @@
 #include <EnginePlatform/EngineSound.h>
 
 bool Epilogue::IsLoad = false;
-const std::vector<const char*> Epilogue::Epilogue_Script =
+const std::vector<const char*> Epilogue::Lucy_Script =
 {
 	/* 0 Demon	  */ "지옥의 CEO 루시퍼",
 	/* 1 Script 1 */ "팬케이크 한 판 더 완성이다.",
 	/* 2 Script 2 */ "그리고 차아아암 맛있어...",
+
+	/* 3 Man	  */ "헬테이커",
+	/* 4 Script 1 */ "도와줘서 고마워",
 };
 
 Epilogue::Epilogue()
@@ -31,6 +34,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -166,11 +170,11 @@ void Epilogue::LucyCutSceneStart()
 	
 	FVector Scale = { 0.233f, 0.632f };
 	FVector Pos = { -0.015f, 0.0f };
-	C_SpawnCharacter("Lu", "Lu_PanCake.png", Epilogue_Script[0], Pos, Scale);
+	C_SpawnCharacter("Lu", "Lu_PanCake.png", Lucy_Script[0], Pos, Scale);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
 	C_SpawnBooper();
-	C_BooperTextSet(Epilogue_Script[1]);
+	C_BooperTextSet(Lucy_Script[1]);
 }
 
 void Epilogue::LucyCutScene(float _DeltaTime)
@@ -179,6 +183,9 @@ void Epilogue::LucyCutScene(float _DeltaTime)
 	{
 	case 0:
 		LucyCutScene1();
+		break;
+	case 1:
+		LucyCutScene2();
 		break;
 	}
 }
@@ -192,7 +199,24 @@ void Epilogue::LucyCutScene1()
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("Lu_Yum.png", { WinScale * Pos , WinScale * Scale });
 
-		C_BooperTextSet(Epilogue_Script[2]);
+		C_BooperTextSet(Lucy_Script[2]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::LucyCutScene2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[3]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Lucy_Script[4]);
 
 		++OrderCount;
 	}
