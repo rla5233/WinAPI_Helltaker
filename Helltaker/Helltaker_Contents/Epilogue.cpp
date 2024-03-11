@@ -11,9 +11,14 @@ const std::vector<const char*> Epilogue::Lucy_Script =
 	/* 0 Demon	  */ "지옥의 CEO 루시퍼",
 	/* 1 Script 1 */ "팬케이크 한 판 더 완성이다.",
 	/* 2 Script 2 */ "그리고 차아아암 맛있어...",
+	/* 3 Script 3 */ "새삼스럽게. 별 것도 아니었어.",
+	/* 4 Script 4 */ "그나저나 참, 네가 어떻게 매번 얇게 구워내는지 아직도\n모르겠어.",
+	/* 5 Script 5 */ "어떻게 팬케이크를 그렇게 공중으로 올려 뒤집는지도\n궁금하고. 무슨 마법이라도 쓰는 것 같아.",
+	/* 6 Script 6 */ "아 그러시겠어. 애들한테 팬케이크나 나눠줘.",
 
-	/* 3 Man	  */ "헬테이커",
-	/* 4 Script 1 */ "도와줘서 고마워",
+	/* 7 Man	  */ "헬테이커",
+	/* 8 Script 1 */ "도와줘서 고마워",
+	/* 9 Script 2 */ "경험이지"
 };
 
 Epilogue::Epilogue()
@@ -35,6 +40,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Unsure.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -213,13 +219,18 @@ void Epilogue::LucyCutScene2()
 		FVector Scale = { 0.391f, 0.674f };
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[3]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Lucy_Script[4]);
+		C_BooperTextSet(Lucy_Script[8]);
 
 		++OrderCount;
 	}
+}
+
+void Epilogue::LucyCutScene3()
+{
+
 }
 
 void Epilogue::Tick(float _DeltaTime)

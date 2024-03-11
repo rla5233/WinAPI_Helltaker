@@ -36,6 +36,7 @@ private:
 	void LucyCutScene(float _DeltaTime);
 	void LucyCutScene1();
 	void LucyCutScene2();
+	void LucyCutScene3();
 
 	void SpawnPolice();
 
