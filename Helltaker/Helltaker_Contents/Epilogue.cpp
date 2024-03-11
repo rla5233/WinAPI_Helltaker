@@ -46,6 +46,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Snap.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\Zd_Ignite", "Zd_Ignite_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Az_Shock.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Bad.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
@@ -1344,7 +1345,16 @@ void Epilogue::AzCutScene9()
 }
 
 void Epilogue::CerCutSceneStart()
-{}
+{
+	AllCutSceneActorOn();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[3]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Cer_Script[4]);
+}
 
 void Epilogue::CerCutScene()
 {
@@ -1365,23 +1375,92 @@ void Epilogue::CerCutScene()
 	case 4:
 		CerCutScene5();
 		break;
+	case 5:
+		GoBackChapter();
+		break;
 	}
 }
 
 void Epilogue::CerCutScene1()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.47f, 0.563f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Cer_Bad.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Cer_Script[1]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::CerCutScene2()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[3]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Cer_Script[5]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::CerCutScene3()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.47f, 0.563f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Cer_Bad.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Cer_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::CerCutScene4()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[3]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Cer_Script[6]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::CerCutScene5()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.47f, 0.563f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Cer_Bad.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Cer_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {
