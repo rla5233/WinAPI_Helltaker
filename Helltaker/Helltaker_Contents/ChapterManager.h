@@ -131,6 +131,8 @@ public:
 	void ReturnToChap(std::string_view _DemonName);
 
 	void CameraPosUpdate(const FVector& _Pos);
+	virtual void CutSceneCheck();
+	virtual void Epil_ResetPolCheck() {}
 	
 	// Debug
 	void ShowLocationPoint();
@@ -140,9 +142,10 @@ protected:
 
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
+	
+	virtual void Idle(float _DeltaTime);
 
 	virtual void CutSceneStart();
-	virtual void CutSceneCheck();
 	virtual void ChangeChapter() {};
 	
 	virtual void EndStart();
@@ -159,7 +162,6 @@ protected:
 
 private:
 	void IdleStart();
-	void Idle(float _DeltaTime);
 
 	void HeroDeathStart();
 	void HeroDeath(float _DeltaTime);

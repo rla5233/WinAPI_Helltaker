@@ -142,10 +142,23 @@ void Hero::Move(float _DeltaTime)
 		GetChapter()->CameraPosUpdate(Diff);
 	}
 
-	if (false == IsMove() && false == IsEpil)
+	if (false == IsMove() && false == IsEpil) 
 	{
 		GetChapter()->M_UpdateHeroActionPoint();
 	}
+}
+
+void Hero::MoveOneBlock(float _DeltaTime)
+{
+	if (true == IsMove() && 1.0f <= GetMoveTime() + _DeltaTime + MoveActor::GetMoveTimeWeight())
+	{
+		if (true == IsEpil)
+		{
+			GetChapter()->Epil_ResetPolCheck();
+		}
+	}
+
+	HeroBase::MoveOneBlock(_DeltaTime);
 }
 
 void Hero::KickStart()
@@ -176,3 +189,5 @@ void Hero::UpdateActionPoint()
 
 	--ActionPoint;
 }
+
+

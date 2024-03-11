@@ -25,15 +25,19 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
+	void Idle(float _DeltaTime) override;
+
 	void CutSceneCheck() override;
 	void CutSceneStart() override;
 
 	void Enter(float _DeltaTime) override;
 	void EnterStart() override;
 
+	void Epil_ResetPolCheck() override;
+
 private:
 	void LucyCutSceneStart();
-	void LucyCutScene( );
+	void LucyCutScene();
 	void LucyCutScene1();
 	void LucyCutScene2();
 	void LucyCutScene3();
@@ -141,6 +145,7 @@ private:
 
 	std::map<std::string, bool> CanCutScene;
 	std::string DemonKeyName = "";
+	bool Pol_Check = false;
 	
 	EEpilogueState State = EEpilogueState::None;
 

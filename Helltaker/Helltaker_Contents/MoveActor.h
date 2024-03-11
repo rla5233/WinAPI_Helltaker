@@ -14,7 +14,7 @@ public:
 	MoveActor& operator=(const MoveActor& _Other) = delete;
 	MoveActor& operator=(MoveActor&& _Other) noexcept = delete;
 
-	void MoveOneBlock(float _DeltaTime);
+	virtual void MoveOneBlock(float _DeltaTime);
 
 	void MoveDirChange(EMoveActorDir _Dir);
 	void MoveDirCheck();
@@ -36,6 +36,16 @@ public:
 	void MoveOff()
 	{
 		IsMoveValue = false;
+	}
+
+	float GetMoveTime() const
+	{
+		return MoveTime;
+	}
+
+	static float GetMoveTimeWeight()
+	{
+		return MoveTimeWeight;
 	}
 
 	Point GetLocationPoint() const

@@ -48,7 +48,7 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
+	
 	virtual void MoveStart() override;
 	virtual void Move(float _DeltaTime);
 	

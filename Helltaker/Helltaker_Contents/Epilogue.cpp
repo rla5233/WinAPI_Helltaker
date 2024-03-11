@@ -1,6 +1,7 @@
 #include "Epilogue.h"
 
 #include "Character.h"
+#include "Scene.h"
 #include "Demon.h"
 
 #include <EnginePlatform/EngineSound.h>
@@ -122,6 +123,25 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 #endif
 }
 
+void Epilogue::Idle(float _DeltaTime)
+{
+	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetTransitionActor()->GetImageRenderer()->ActiveOff();
+	}
+
+	HeroDelayTimeUpdate(_DeltaTime);
+	ResetCheck();
+
+	CutSceneCheck();
+
+	// Debug
+	if (UEngineInput::IsPress('P'))
+	{
+		M_StateChange(EChapterState::CutScene);
+	}
+}
+
 void Epilogue::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
 {
 	ChapterManager::M_SpawnDemon(_Point, _Name, _FTransform);
@@ -155,8 +175,15 @@ void Epilogue::CutSceneCheck()
 
 			if (true == CanCutScene[DemonKeyName])
 			{
-				M_StateChange(EChapterState::CutScene);
-				CanCutScene[DemonKeyName] = false;
+				if (false == Pol_Check)
+				{
+					M_StateChange(EChapterState::CutScene);
+				}
+
+				if (UEngineString::ToUpper("Police") != DemonKeyName)
+				{
+					CanCutScene[DemonKeyName] = false;
+				}
 			}
 		}
 	}
@@ -217,7 +244,7 @@ void Epilogue::GoBackChapter()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		StateChange(EEpilogueState::None);
+ 		StateChange(EEpilogueState::None);
 
 		AllCutSceneActorOff();
 		C_StateChange(ECutSceneState::None);
@@ -1574,6 +1601,7 @@ void Epilogue::PolCutSceneStart()
 	C_MenubarRenderActiveOff();
 
 	C_BooperTextSet(Pol_Script[1]);
+	Pol_Check = true;
 }
 
 void Epilogue::PolCutScene()
@@ -1638,6 +1666,11 @@ void Epilogue::PolGoBackChap()
 
 		OrderCount = -1;
 	}
+}
+
+void Epilogue::Epil_ResetPolCheck()
+{
+	Pol_Check = false;
 }
 
 void Epilogue::Tick(float _DeltaTime)
