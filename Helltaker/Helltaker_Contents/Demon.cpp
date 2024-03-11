@@ -72,6 +72,11 @@ void Demon::LoveSignAnimation(float _DeltaTime)
 {
 	FVector TileScale = ContentsHelper::GetTileScale();
 
+	if (nullptr == LoveSignRenderer)
+	{
+		return;
+	}
+
 	if (true == IsUp)
 	{
 		LoveSignMove -= LoveSignSpeed * _DeltaTime;
@@ -90,11 +95,6 @@ void Demon::LoveSignAnimation(float _DeltaTime)
 			IsUp = true;
 		}
 	}
-}
-
-void Demon::LoveSignOff()
-{
-	LoveSignRenderer->ActiveOff();
 }
 
 void Demon::IdleStart()

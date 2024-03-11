@@ -22,7 +22,12 @@ public:
 
 	virtual void SetDemon(std::string_view _Name, const FTransform& _FTransform);
 	void LoveSignAnimation(float _DeltaTime);
-	void LoveSignOff();
+
+	void LoveSignDestory()
+	{
+		LoveSignRenderer->Destroy();
+		LoveSignRenderer = nullptr;
+	}
 
 	void SetLocationPoint(Point _Point)
 	{

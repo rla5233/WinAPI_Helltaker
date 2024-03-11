@@ -732,7 +732,7 @@ void ChapterManager::ReturnToChap(std::string_view _DemonName)
 
 		if (_DemonName == Actor->GetName())
 		{
-			Actor->LoveSignOff();
+			Actor->LoveSignDestory();
 		}
 
 		if (UEngineString::ToUpper("Police") == Actor->GetName())

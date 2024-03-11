@@ -49,6 +49,7 @@ private:
 	void ModCutScene3();
 	void ModCutScene4();
 	void ModCutScene5();
+	void ModCutScene6();
 
 	void SpawnPolice();
 	void GoBackChapter();

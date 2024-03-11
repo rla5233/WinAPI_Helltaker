@@ -26,12 +26,12 @@ const std::vector<const char*> Epilogue::Mod_Script =
 	/* 1 Script 1 */ "...",
 	/* 2 Script 2 */ "로맨스라는걸 듣도 보도 못했어. 여지껏 본 것 중에 제일\n변태적이야.",
 	/* 3 Script 3 */ "어쩌면 내가 잘못 살아온 게 아닐까?",
-	/* 4 Script 3 */ "이런 이상성욕 변태일 줄 알았어.",
+	/* 4 Script 4 */ "이런 이상성욕 변태일 줄 알았어.",
 
 	/* 5 Man	  */ "헬테이커",
 	/* 6 Script 1 */ "자 팬케이크.",
-	/* 7 Script 2 */ "로맨틱 코미디를 읽어?"
-	/* 8 Script 2 */ "뭐, 데이트라도 갈까?"
+	/* 7 Script 2 */ "로맨틱 코미디를 읽어?",
+	/* 8 Script 3 */ "뭐, 데이트라도 갈까?"
 };
 
 Epilogue::Epilogue()
@@ -55,6 +55,9 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Unsure.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Talk.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Book.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Shy.png");
+		
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -359,17 +362,15 @@ void Epilogue::LucyCutScene7()
 void Epilogue::ModCutSceneStart()
 {
 	AllCutSceneActorOn();
-	//C_CreateSceneBG();
 	
-	//C_SpawnDialogue("DialogueBG_Home.png");
-	//
-	//FVector Scale = { 0.233f, 0.632f };
-	//FVector Pos = { -0.015f, 0.0f };
-	//C_SpawnCharacter("Lu", "Lu_PanCake.png", Lucy_Script[0], Pos, Scale);
-	//C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
-	//
-	//C_SpawnBooper();
-	//C_BooperTextSet(Lucy_Script[1]);
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { 0.391f, 0.674f };
+	FVector Pos = { 0.0f, 0.0f };
+	C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+	
+	C_BooperTextSet(Mod_Script[6]);
 }
 
 void Epilogue::ModCutScene()
@@ -391,23 +392,109 @@ void Epilogue::ModCutScene()
 	case 4:
 		ModCutScene5();
 		break;
+	case 5:
+		ModCutScene6();
+		break;
+	case 6:
+		GoBackChapter();
+		break;
 	}
 }
 
 void Epilogue::ModCutScene1()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.226f, 0.588f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mod_Script[1]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::ModCutScene2()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mod_Script[7]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::ModCutScene3()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.226f, 0.588f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mod_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::ModCutScene4()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Mod_Script[3]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::ModCutScene5()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.391f, 0.674f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mod_Script[8]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::ModCutScene6()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.215f, 0.693f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Mod_Shy.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mod_Script[4]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {
