@@ -66,6 +66,7 @@ private:
 
 	static const std::vector<const char*> Lucy_Script;
 	static const std::vector<const char*> Mod_Script;
+	static const std::vector<const char*> Jus_Script;
 	static bool IsLoad;
 };
 

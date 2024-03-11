@@ -6,33 +6,6 @@
 #include <EnginePlatform/EngineSound.h>
 
 bool Epilogue::IsLoad = false;
-const std::vector<const char*> Epilogue::Lucy_Script =
-{
-	/* 0 Demon	  */ "지옥의 CEO 루시퍼",
-	/* 1 Script 1 */ "팬케이크 한 판 더 완성이다.",
-	/* 2 Script 2 */ "그리고 차아아암 맛있어...",
-	/* 3 Script 3 */ "새삼스럽게. 별 것도 아니었어.",
-	/* 4 Script 4 */ "그나저나 참, 네가 어떻게 매번 얇게 구워내는지 아직도\n모르겠어.",
-	/* 5 Script 5 */ "어떻게 팬케이크를 그렇게 공중으로 올려 뒤집는지도\n궁금하고. 무슨 마법이라도 쓰는 것 같아.",
-	/* 6 Script 6 */ "아 그러시겠어. 애들한테 팬케이크나 나눠줘.",
-
-	/* 7 Man	  */ "헬테이커",
-	/* 8 Script 1 */ "도와줘서 고마워",
-	/* 9 Script 2 */ "경험이지"
-};
-const std::vector<const char*> Epilogue::Mod_Script =
-{
-	/* 0 Demon	  */ "음란한 악마 모데우스",
-	/* 1 Script 1 */ "...",
-	/* 2 Script 2 */ "로맨스라는걸 듣도 보도 못했어. 여지껏 본 것 중에 제일\n변태적이야.",
-	/* 3 Script 3 */ "어쩌면 내가 잘못 살아온 게 아닐까?",
-	/* 4 Script 4 */ "이런 이상성욕 변태일 줄 알았어.",
-
-	/* 5 Man	  */ "헬테이커",
-	/* 6 Script 1 */ "자 팬케이크.",
-	/* 7 Script 2 */ "로맨틱 코미디를 읽어?",
-	/* 8 Script 3 */ "뭐, 데이트라도 갈까?"
-};
 
 Epilogue::Epilogue()
 {
@@ -533,3 +506,48 @@ void Epilogue::StateChange(EEpilogueState _State)
 
 	State = _State;
 }
+
+const std::vector<const char*> Epilogue::Lucy_Script =
+{
+	/* 0 Demon	  */ "지옥의 CEO 루시퍼",
+	/* 1 Script 1 */ "팬케이크 한 판 더 완성이다.",
+	/* 2 Script 2 */ "그리고 차아아암 맛있어...",
+	/* 3 Script 3 */ "새삼스럽게. 별 것도 아니었어.",
+	/* 4 Script 4 */ "그나저나 참, 네가 어떻게 매번 얇게 구워내는지 아직도\n모르겠어.",
+	/* 5 Script 5 */ "어떻게 팬케이크를 그렇게 공중으로 올려 뒤집는지도\n궁금하고. 무슨 마법이라도 쓰는 것 같아.",
+	/* 6 Script 6 */ "아 그러시겠어. 애들한테 팬케이크나 나눠줘.",
+
+	/* 7 Man	  */ "헬테이커",
+	/* 8 Script 1 */ "도와줘서 고마워",
+	/* 9 Script 2 */ "경험이지"
+};
+const std::vector<const char*> Epilogue::Mod_Script =
+{
+	/* 0 Demon	  */ "음란한 악마 모데우스",
+	/* 1 Script 1 */ "...",
+	/* 2 Script 2 */ "로맨스라는걸 듣도 보도 못했어. 여지껏 본 것 중에 제일\n변태적이야.",
+	/* 3 Script 3 */ "어쩌면 내가 잘못 살아온 게 아닐까?",
+	/* 4 Script 4 */ "이런 이상성욕 변태일 줄 알았어.",
+
+	/* 5 Man	  */ "헬테이커",
+	/* 6 Script 1 */ "자 팬케이크.",
+	/* 7 Script 2 */ "로맨틱 코미디를 읽어?",
+	/* 8 Script 3 */ "뭐, 데이트라도 갈까?"
+};
+
+const std::vector<const char*> Jus_Script
+{
+	/* 0  Demon	   */ "끝내주는 악마 저스티스",
+	/* 1  Script 1 */ "끝내주네. 근데 궁금한 게 있는데 말야.",
+	/* 2  Script 2 */ "애들 말로는 네가 선글라스를 절대 안 벗는다던데. 왜 그래?",
+	/* 3  Script 3 */ "아, 나 말이야? 왜냐면 눈이 멀었거든.",
+	/* 4  Script 4 */ "내 얘기는 그럼 됐고. 너는?",
+	/* 5  Script 4 */ "에이. 애들이랑 내기까지 했는데.",
+	/* 6  Script 4 */ "네가 눈에서 레이저 못 쏘면 내 10달러를 잃는다고.",
+
+	/* 7  Man	   */ "헬테이커",
+	/* 8  Script 1 */ "자 팬케이크.",
+	/* 9  Script 2 */ "말해 봐.",
+	/* 10 Script 3 */ "나도 너한테 똑같이 묻고 싶은데."
+	/* 11 Script 3 */ "언젠가 다음에..."
+};
