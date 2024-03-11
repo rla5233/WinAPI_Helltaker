@@ -1170,10 +1170,10 @@ void Epilogue::AzCutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
-	C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[7]);
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-	C_BooperTextSet(Zd_Script[8]);
+	C_BooperTextSet(Az_Script[8]);
 }
 
 void Epilogue::AzCutScene()
@@ -1195,6 +1195,21 @@ void Epilogue::AzCutScene()
 	case 4:
 		AzCutScene5();
 		break;
+	case 5:
+		AzCutScene6();
+		break;
+	case 6:
+		AzCutScene7();
+		break;
+	case 7:
+		AzCutScene8();
+		break;
+	case 8:
+		AzCutScene9();
+		break;
+	case 9:
+		GoBackChapter();
+		break;
 	}
 }
 
@@ -1202,30 +1217,127 @@ void Epilogue::AzCutScene1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		//FVector WinScale = ContentsHelper::GetWindowScale();
-		//FVector Scale = { 0.193f, 0.551f };
-		//FVector Pos = { 0.0f, 0.0f };
-		//C_ChangeCharactrer("Mal_Phone.png", { WinScale * Pos , WinScale * Scale });
-		//C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
-		//C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
-		//
-		//C_BooperTextSet(Mal_Script[1]);
-		//
-		//++OrderCount;
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.158f, 0.609f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Az_Shock.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Az_Script[1]);
+		
+		++OrderCount;
 	}
 }
 
 void Epilogue::AzCutScene2()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Az_Script[9]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::AzCutScene3()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.158f, 0.609f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Az_Shock.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Az_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::AzCutScene4()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Az_Script[3]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::AzCutScene5()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Az_Script[4]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::AzCutScene6()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Az_Script[5]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::AzCutScene7()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Az_Script[10]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::AzCutScene8()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.211f, 0.534f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Az_Note.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Az_Script[6]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::AzCutScene9()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Az_Script[11]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {

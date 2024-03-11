@@ -100,6 +100,10 @@ private:
 	void AzCutScene3();
 	void AzCutScene4();
 	void AzCutScene5();
+	void AzCutScene6();
+	void AzCutScene7();
+	void AzCutScene8();
+	void AzCutScene9();
 
 	void SpawnPolice();
 	void GoBackChapter();
