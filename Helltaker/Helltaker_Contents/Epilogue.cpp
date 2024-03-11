@@ -1038,13 +1038,11 @@ void Epilogue::ZdCutScene1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector Scale = { 0.214f, 0.5935f };
+		FVector Scale = { 0.216f, 0.5935f };
 		FVector Pos = { 0.0f, 0.0f };
-		
-
-		C_CreateCharacterAnimation("Zd_Ignite", "Zd_Ignite", 0, 3, 0.04f, false);
-		C_CreateCharacterAnimation("Zd_Ignite_Double", "Zd_Ignite", 0, 7, 0.04f, false);
 		C_ChangeCharactrer("Zd_Ignite_001.png", { WinScale * Pos , WinScale * Scale });
+		C_CreateCharacterAnimation("Zd_Ignite", "Zd_Ignite", 0, 3, 0.06f, false);
+		C_CreateCharacterAnimation("Zd_Ignite_Double", "Zd_Ignite", 0, 7, 0.06f, false);
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
