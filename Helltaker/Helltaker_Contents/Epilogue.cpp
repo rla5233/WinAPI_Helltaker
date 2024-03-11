@@ -234,7 +234,8 @@ void Epilogue::CutSceneStart()
 
 void Epilogue::GoBackChapter()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
  		StateChange(EEpilogueState::None);
 
@@ -311,7 +312,8 @@ void Epilogue::LucyCutScene()
 
 void Epilogue::LucyCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.247f, 0.626f };
@@ -341,7 +343,8 @@ void Epilogue::LucyCutScene2()
 
 void Epilogue::LucyCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.258f, 0.642f };
@@ -358,7 +361,8 @@ void Epilogue::LucyCutScene3()
 
 void Epilogue::LucyCutScene4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_BooperTextSet(Lucy_Script[4]);
 
@@ -393,7 +397,8 @@ void Epilogue::LucyCutScene6()
 
 void Epilogue::LucyCutScene7()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.277f, 0.644f };
@@ -451,12 +456,13 @@ void Epilogue::ModCutScene()
 
 void Epilogue::ModCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.226f, 0.588f };
-		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos , WinScale * Scale });
+		FVector Pos = { 0.012f, 0.01f };
+  		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos, WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -468,7 +474,8 @@ void Epilogue::ModCutScene1()
 
 void Epilogue::ModCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -483,12 +490,13 @@ void Epilogue::ModCutScene2()
 
 void Epilogue::ModCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.226f, 0.588f };
-		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos , WinScale * Scale });
+		FVector Pos = { 0.012f, 0.01f };
+		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos, WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -500,7 +508,8 @@ void Epilogue::ModCutScene3()
 
 void Epilogue::ModCutScene4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_BooperTextSet(Mod_Script[3]);
 
@@ -525,11 +534,12 @@ void Epilogue::ModCutScene5()
 
 void Epilogue::ModCutScene6()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.215f, 0.693f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.01f, -0.038f };
 		C_ChangeCharactrer("Mod_Shy.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
