@@ -124,6 +124,8 @@ private:
 	void PolCutScene1();
 	void PolCutScene2();
 	void PolCutScene3();
+	void PolGoBackChap();
+	void SelectMenu() override;
 
 	void SpawnPolice();
 	void GoBackChapter();

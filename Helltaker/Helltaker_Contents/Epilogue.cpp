@@ -221,6 +221,12 @@ void Epilogue::GoBackChapter()
 
 		AllCutSceneActorOff();
 		C_StateChange(ECutSceneState::None);
+
+		if (UEngineString::ToUpper("Police") == DemonKeyName)
+		{
+			DemonKeyName = "";
+		}
+
 		ReturnToChap(DemonKeyName);
 		DemonKeyName = "";
 	}
@@ -1564,6 +1570,9 @@ void Epilogue::PolCutSceneStart()
 	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[0]);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
+	C_SpawnMenubar();
+	C_MenubarRenderActiveOff();
+
 	C_BooperTextSet(Pol_Script[1]);
 }
 
@@ -1571,22 +1580,64 @@ void Epilogue::PolCutScene()
 {
 	switch (OrderCount)
 	{
+	case -1:
+		GoBackChapter();
+		break;
 	case 0:
 		PolCutScene1();
+		break;
+	case 1:
+		PolCutScene2();
 		break;
 	}
 }
 
 void Epilogue::PolCutScene1()
 {
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_MenubarRenderActiveOn();
+		C_BooperImageRendererOff();
+		C_MenubarTextSet(0, Pol_Script[2]);
+		C_MenubarTextSet(1, Pol_Script[3]);
+
+		++OrderCount;
+	}
 }
 
 void Epilogue::PolCutScene2()
 {
+	FocusMenuBarCheck();
 }
 
 void Epilogue::PolCutScene3()
 {
+
+}
+
+void Epilogue::SelectMenu()
+{
+	switch (C_GetFocusMenuIndex())
+	{
+	case 0:
+		
+		break;
+	case 1:
+		PolGoBackChap();
+		break;
+	}
+}
+
+void Epilogue::PolGoBackChap()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_MenubarRenderActiveOff();
+		C_BooperImageRendererOn();
+		C_BooperTextSet(Pol_Script[5]);
+
+		OrderCount = -1;
+	}
 }
 
 void Epilogue::Tick(float _DeltaTime)
