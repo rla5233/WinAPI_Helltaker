@@ -105,6 +105,14 @@ private:
 	void AzCutScene8();
 	void AzCutScene9();
 
+	void CerCutSceneStart();
+	void CerCutScene();
+	void CerCutScene1();
+	void CerCutScene2();
+	void CerCutScene3();
+	void CerCutScene4();
+	void CerCutScene5();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
