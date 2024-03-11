@@ -1647,3 +1647,13 @@ const std::vector<const char*> Epilogue::Cer_Script =
 	/* 5 Script 2 */ "또 이웃집에 사고 쳤어? 뭘 했길래?",
 	/* 6 Script 3 */ "경찰은 문 앞에 왜 와 있고?",
 };
+const std::vector<const char*> Epilogue::Jud_Script =
+{
+	/* 0 Demon	  */ "고위 기소관 저지먼트",
+	/* 1 Script 1 */ "침입자가 우리의 영역을 침범하려 한다! 내가 처리할까?",
+	/* 2 Script 2 */ "그래, 재미나 봐.",
+
+	/* 3 Man	  */ "헬테이커",
+	/* 4 Script 1 */ "자 팬케이크.",
+	/* 5 Script 2 */ "그럴 필요 없어. 내가 할게.",
+};
