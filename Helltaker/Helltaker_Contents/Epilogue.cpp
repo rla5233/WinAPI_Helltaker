@@ -29,6 +29,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "PoliceCar.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
+		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene_Ending.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake_001.png");
@@ -1763,11 +1764,56 @@ void Epilogue::Ending()
 	case 0:
 		Ending1();
 		break;
+	case 10:
+		Ending3();
+		break;
+	case 11:
+		Ending4();
+		break;
+	default:
+		Ending2();
+		break;
 	}
 }
 
 void Epilogue::Ending1()
 {
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.67f, 0.6f };
+		FVector Pos = { 0.0f, -0.02f };
+		C_ChangeDialogue("CutScene_Ending.png", { WinScale * Pos, WinScale * Scale });
+
+		C_BooperTextSet(Ending_Script[0]);
+		++OrderCount;
+	}
+}
+
+void Epilogue::Ending2()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Ending_Script[OrderCount]);
+		++OrderCount;
+	}
+}
+
+void Epilogue::Ending3()
+{
+	TransitionOn();
+	C_BooperTextSet(Ending_Script[10]);
+
+	++OrderCount;
+}
+
+void Epilogue::Ending4()
+{
+	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetTransitionActor()->AllRenderersActiveOff();
+	}
+
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		int a = 0;
@@ -2018,14 +2064,15 @@ const std::vector<const char*> Epilogue::Pol_Script =
 };
 const std::vector<const char*> Epilogue::Ending_Script =
 {
-	/* 0 Script 1   */ "그리하여 헬테이커의 이야가는 끝이 났지.",
-	/* 1 Script 2   */ "오랜 친구 베엘제붑이 들려주었다네.",
-	/* 2 Script 3   */ "나도 바보같은 이야기인 건 알지만..",
-	/* 3 Script 4   */ "솔직히 말하자면... 사실 불쾌하고 혐오스러운 이야기지.",
-	/* 4 Script 5   */ "불쾌한 사람들에 대한 불쾌한 이야기.",
-	/* 5 Script 6   */ "하지만 어쩌면... 일말의 행복은 찾을 수 있지 않을까.",
-	/* 6 Script 7   */ "한 두번 정도는 웃을 수 있겠지?",
-	/* 7 Script 8   */ "그럼... 늙은 파리와 함께 해줘서 고마웠네.",
-	/* 8 Script 9   */ "그럼 다음에.",
-	/* 9 Script 10  */ "THE END"
+	/* 0  Script 1   */ "그리하여 헬테이커의 이야가는 끝이 났지.",
+	/* 1  Script 2   */ "오랜 친구 베엘제붑이 들려주었다네.",
+	/* 2  Script 3   */ "나도 바보같은 이야기인 건 알지만..",
+	/* 3  Script 4   */ "솔직히 말하자면... 사실 불쾌하고 혐오스러운 이야기지.",
+	/* 4  Script 5   */ "불쾌한 사람들에 대한 불쾌한 이야기.",
+	/* 5  Script 6   */ "하지만 어쩌면... 일말의 행복은 찾을 수 있지 않을까.",
+	/* 6  Script 7   */ "한 두번 정도는 웃을 수 있겠지?",
+	/* 7  Script 8   */ "그럼... 늙은 파리와 함께 해줘서 고마웠네.",
+	/* 8  Script 9   */ "그럼 다음에.",
+	/* 9  Script 10  */ "THE END",
+	/* 10 Script 11  */ "감사합니다!\n[모작자 - 김수원]"
 };

@@ -132,6 +132,9 @@ private:
 	void EndingStart();
 	void Ending();
 	void Ending1();
+	void Ending2();
+	void Ending3();
+	void Ending4();
 
 	void SpawnPolice();
 	void GoBackChapter();
