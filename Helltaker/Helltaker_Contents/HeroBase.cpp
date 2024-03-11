@@ -24,6 +24,7 @@ const float HeroBase::DeathInter = 0.05f;
 const FVector HeroBase::VictoryScale = { 0.052f, 0.111f };
 const float HeroBase::VictoryInter = 0.125f;
 
+const FVector HeroBase::AScale = { 0.052f, 0.083f };
 
 HeroBase::HeroBase()
 {}
@@ -47,6 +48,11 @@ void HeroBase::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Right_Victory");
 		ContentsHelper::LoadFolder("Chapter\\Hero", "Hero_Death");
 
+		ContentsHelper::LoadFolder("Chapter\\Hero", "AHero_Left_Idle");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "AHero_Left_Move");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "AHero_Right_Idle");
+		ContentsHelper::LoadFolder("Chapter\\Hero", "AHero_Right_Move");
+		
 		ContentsHelper::LoadSound("Sound\\Effect", "player_move.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "player_death.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "player_damage_001.wav");
@@ -56,19 +62,30 @@ void HeroBase::BeginPlay()
 	}
 
 	ImageRenderer = CreateImageRenderer(RenderOrder::Hero);
-
 	ImageRenderer->SetImage("Hero_Left_Idle");
-	ImageRenderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
-	ImageRenderer->CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);
-	ImageRenderer->CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);
-	ImageRenderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 31, VictoryInter, false);
 
-	ImageRenderer->CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);
-	ImageRenderer->CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);
-	ImageRenderer->CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);
-	ImageRenderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 31, VictoryInter, false);
+	if ("EPILOGUE" == GetWorld()->GetName())
+	{
+		ImageRenderer->CreateAnimation("Hero_LIdle", "AHero_Left_Idle", 0, 11, IdleInter, true);
+		ImageRenderer->CreateAnimation("Hero_LMove", "AHero_Left_Move", 0, 5, MoveInter, false);
 
-	ImageRenderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, DeathInter, false);
+		ImageRenderer->CreateAnimation("Hero_RIdle", "AHero_Right_Idle", 0, 11, IdleInter, true);
+		ImageRenderer->CreateAnimation("Hero_RMove", "AHero_Right_Move", 0, 5, MoveInter, false);
+	}
+	else
+	{
+		ImageRenderer->CreateAnimation("Hero_LIdle", "Hero_Left_Idle", 0, 11, IdleInter, true);
+		ImageRenderer->CreateAnimation("Hero_LMove", "Hero_Left_Move", 0, 5, MoveInter, false);
+		ImageRenderer->CreateAnimation("Hero_LKick", "Hero_Left_Kick", 0, 12, KickInter, false);
+		ImageRenderer->CreateAnimation("Hero_LVictory", "Hero_Left_Victory", 0, 31, VictoryInter, false);
+
+		ImageRenderer->CreateAnimation("Hero_RIdle", "Hero_Right_Idle", 0, 11, IdleInter, true);
+		ImageRenderer->CreateAnimation("Hero_RMove", "Hero_Right_Move", 0, 5, MoveInter, false);
+		ImageRenderer->CreateAnimation("Hero_RKick", "Hero_Right_Kick", 0, 12, KickInter, false);
+		ImageRenderer->CreateAnimation("Hero_RVictory", "Hero_Right_Victory", 0, 31, VictoryInter, false);
+
+		ImageRenderer->CreateAnimation("Hero_Death", "Hero_Death", 0, 17, DeathInter, false);
+	}
 
 	SeeDirChange(EActorSeeDir::Right);
 }
@@ -182,6 +199,9 @@ void HeroBase::MoveStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ { 0.0f, WinScale.Y * (-0.01f) }, { WinScale * MoveScale } });
+
+	// Ãß°¡
+
 	CanActionCheck = false;
 
 	switch (GetSeeDir())

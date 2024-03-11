@@ -97,6 +97,8 @@ private:
 	static const FVector VictoryScale;
 	static const float VictoryInter;
 
+	static const FVector AScale;
+
 	EHeroState State = EHeroState::None;
 
 	bool CheatMode = false;
