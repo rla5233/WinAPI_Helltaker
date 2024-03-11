@@ -175,6 +175,7 @@ enum class EEpilogueState
 	PandCutScene,
 	MalCutScene,
 	ZdCutScene,
+	AzCutScene,
 	Change
 };
 

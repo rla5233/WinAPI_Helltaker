@@ -45,6 +45,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Mal_PreBottle.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Zd_Snap.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\Zd_Ignite", "Zd_Ignite_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Az_Shock.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
@@ -189,6 +190,10 @@ void Epilogue::CutSceneStart()
 	else if (UEngineString::ToUpper("Zdrada") == DemonKeyName)
 	{
 		StateChange(EEpilogueState::ZdCutScene);
+	}
+	else if (UEngineString::ToUpper("Azazel") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::AzCutScene);
 	}
 }
 
@@ -1159,6 +1164,69 @@ void Epilogue::RepeatZdAnim(float _DeltaTime)
 	}
 }
 
+void Epilogue::AzCutSceneStart()
+{
+	AllCutSceneActorOn();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[7]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Zd_Script[8]);
+}
+
+void Epilogue::AzCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		AzCutScene1();
+		break;
+	case 1:
+		AzCutScene2();
+		break;
+	case 2:
+		AzCutScene3();
+		break;
+	case 3:
+		AzCutScene4();
+		break;
+	case 4:
+		AzCutScene5();
+		break;
+	}
+}
+
+void Epilogue::AzCutScene1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		//FVector WinScale = ContentsHelper::GetWindowScale();
+		//FVector Scale = { 0.193f, 0.551f };
+		//FVector Pos = { 0.0f, 0.0f };
+		//C_ChangeCharactrer("Mal_Phone.png", { WinScale * Pos , WinScale * Scale });
+		//C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
+		//C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+		//
+		//C_BooperTextSet(Mal_Script[1]);
+		//
+		//++OrderCount;
+	}
+}
+
+void Epilogue::AzCutScene2()
+{}
+
+void Epilogue::AzCutScene3()
+{}
+
+void Epilogue::AzCutScene4()
+{}
+
+void Epilogue::AzCutScene5()
+{}
+
 void Epilogue::Tick(float _DeltaTime)
 {
 	HellTakerManager::Tick(_DeltaTime);
@@ -1188,6 +1256,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::ZdCutScene:
 		ZdCutScene(_DeltaTime);
 		break;
+	case EEpilogueState::AzCutScene:
+		AzCutScene();
+		break;
 	}
 }
 
@@ -1214,6 +1285,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::ZdCutScene:
 			ZdCutSceneStart();
+			break;
+		case EEpilogueState::AzCutScene:
+			AzCutSceneStart();
 			break;
 		}
 	}

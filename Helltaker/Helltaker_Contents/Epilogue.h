@@ -93,6 +93,14 @@ private:
 	void ZdCutScene5();
 	void RepeatZdAnim(float _DeltaTime);
 
+	void AzCutSceneStart();
+	void AzCutScene();
+	void AzCutScene1();
+	void AzCutScene2();
+	void AzCutScene3();
+	void AzCutScene4();
+	void AzCutScene5();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
