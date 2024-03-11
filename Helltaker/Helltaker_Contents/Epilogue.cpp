@@ -602,11 +602,12 @@ void Epilogue::JusCutScene()
 
 void Epilogue::JusCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.291f, 0.59f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.008f };
 		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -619,7 +620,8 @@ void Epilogue::JusCutScene1()
 
 void Epilogue::JusCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -634,11 +636,12 @@ void Epilogue::JusCutScene2()
 
 void Epilogue::JusCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.291f, 0.59f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.008f };
 		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -651,7 +654,8 @@ void Epilogue::JusCutScene3()
 
 void Epilogue::JusCutScene4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -666,11 +670,12 @@ void Epilogue::JusCutScene4()
 
 void Epilogue::JusCutScene5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.223f, 0.558f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.026f, 0.022f };
 		C_ChangeCharactrer("Jus_Blind.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -683,7 +688,8 @@ void Epilogue::JusCutScene5()
 
 void Epilogue::JusCutScene6()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.22f, 0.612f };
@@ -713,11 +719,12 @@ void Epilogue::JusCutScene7()
 
 void Epilogue::JusCutScene8()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.228f, 0.567f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.005f, 0.02f };
 		C_ChangeCharactrer("Jus_Curious.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -730,11 +737,12 @@ void Epilogue::JusCutScene8()
 
 void Epilogue::JusCutScene9()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.291f, 0.59f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.008f };
 		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
 		
 		C_BooperTextSet(Jus_Script[6]);
