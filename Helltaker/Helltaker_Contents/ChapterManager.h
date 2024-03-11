@@ -143,7 +143,7 @@ protected:
 	virtual void LevelStart(ULevel* _PrevLevel) override;
 	virtual void LevelEnd(ULevel* _NextLevel) override;
 	
-	virtual void Idle(float _DeltaTime);
+	void Idle(float _DeltaTime);
 
 	virtual void CutSceneStart();
 	virtual void ChangeChapter() {};

@@ -25,8 +25,6 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
-	void Idle(float _DeltaTime) override;
-
 	void CutSceneCheck() override;
 	void CutSceneStart() override;
 

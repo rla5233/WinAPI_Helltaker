@@ -123,25 +123,6 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 #endif
 }
 
-void Epilogue::Idle(float _DeltaTime)
-{
-	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
-	{
-		GetTransitionActor()->GetImageRenderer()->ActiveOff();
-	}
-
-	HeroDelayTimeUpdate(_DeltaTime);
-	ResetCheck();
-
-	CutSceneCheck();
-
-	// Debug
-	if (UEngineInput::IsPress('P'))
-	{
-		M_StateChange(EChapterState::CutScene);
-	}
-}
-
 void Epilogue::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
 {
 	ChapterManager::M_SpawnDemon(_Point, _Name, _FTransform);
