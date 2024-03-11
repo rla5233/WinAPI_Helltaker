@@ -1697,7 +1697,7 @@ const std::vector<const char*> Epilogue::Mal_Script =
 
 	/* 5 Man	  */ "헬테이커",
 	/* 6 Script 1 */ "자 팬케이크.",
-	/* 7 Script 2 */ "그래도 난 할 것 같더라.",
+	/* 7 Script 2 */ "그래도 난 할 것 같더라."
 };
 const std::vector<const char*> Epilogue::Zd_Script =
 {
@@ -1709,7 +1709,7 @@ const std::vector<const char*> Epilogue::Zd_Script =
 	/* 4 Man	  */ "헬테이커",
 	/* 5 Script 1 */ "자 팬케이크.",
 	/* 6 Script 2 */ "실내에선 금연이야.",
-	/* 7 Script 3 */ "벌을 즐기는 거 아니야?",
+	/* 7 Script 3 */ "벌을 즐기는 거 아니야?"
 };
 const std::vector<const char*> Epilogue::Az_Script =
 {
@@ -1725,7 +1725,7 @@ const std::vector<const char*> Epilogue::Az_Script =
 	/* 8  Script 1 */ "자 팬케이크.",
 	/* 9  Script 2 */ "몇 주 정도.",
 	/* 10 Script 3 */ "아...",
-	/* 11 Script 4 */ "연구를 너무 많이 하잖아. 팬케이크나 좀 먹어.",
+	/* 11 Script 4 */ "연구를 너무 많이 하잖아. 팬케이크나 좀 먹어."
 };
 const std::vector<const char*> Epilogue::Cer_Script =
 {
@@ -1736,7 +1736,7 @@ const std::vector<const char*> Epilogue::Cer_Script =
 	/* 3 Man	  */ "헬테이커",
 	/* 4 Script 1 */ "자 팬케이크.",
 	/* 5 Script 2 */ "또 이웃집에 사고 쳤어? 뭘 했길래?",
-	/* 6 Script 3 */ "경찰은 문 앞에 왜 와 있고?",
+	/* 6 Script 3 */ "경찰은 문 앞에 왜 와 있고?"
 };
 const std::vector<const char*> Epilogue::Jud_Script =
 {
@@ -1746,5 +1746,19 @@ const std::vector<const char*> Epilogue::Jud_Script =
 
 	/* 3 Man	  */ "헬테이커",
 	/* 4 Script 1 */ "자 팬케이크.",
-	/* 5 Script 2 */ "그럴 필요 없어. 내가 할게.",
+	/* 5 Script 2 */ "그럴 필요 없어. 내가 할게."
+};
+const std::vector<const char*> Epilogue::Pol_Script =
+{
+	/* 0 Demon	   */ "경찰",
+	/* 1 Script 1  */ "경찰입니다! 문 여십시오.",
+	/* 2 Menubar 1 */ "연다. (게임을 끝낸다.)",
+	/* 3 Menubar 2 */ "열지 않는다.",
+
+	/* 4 Script 2  */ "아, 감사합니다. 몇 가지 물어볼 게 있습니다.",
+	/* 5 Script 3  */ "안에 계신 거 압니다! 빨리 문 여십시오!",
+
+	/* 6 Man	   */ "헬테이커",
+	/* 7 Script 1  */ "팬케이크라도 드시겠습니까?",
+	/* 8 Script 2  */ "그럴 필요 없어. 내가 할게."
 };
