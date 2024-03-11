@@ -1507,3 +1507,14 @@ const std::vector<const char*> Epilogue::Az_Script =
 	/* 10 Script 3 */ "아...",
 	/* 11 Script 4 */ "연구를 너무 많이 하잖아. 팬케이크나 좀 먹어.",
 };
+const std::vector<const char*> Epilogue::Cer_Script =
+{
+	/* 0 Demon	  */ "세 쌍둥이 악마 케르베로스",
+	/* 1 Script 1 */ "망했어.",
+	/* 2 Script 2 */ "...",
+
+	/* 3 Man	  */ "헬테이커",
+	/* 4 Script 1 */ "자 팬케이크.",
+	/* 5 Script 2 */ "또 이웃집에 사고 쳤어? 뭘 했길래?",
+	/* 6 Script 3 */ "경찰은 문 앞에 왜 와 있고?",
+};
