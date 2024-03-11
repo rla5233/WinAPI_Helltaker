@@ -76,6 +76,16 @@ private:
 	void PandCutScene9();
 	void PandCutScene10();
 
+	void MalCutSceneStart();
+	void MalCutScene();
+	void MalCutScene1();
+	void MalCutScene2();
+	void MalCutScene3();
+	void MalCutScene4();
+	void MalCutScene5();
+	void MalCutScene6();
+	void MalCutScene7();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
@@ -92,11 +102,11 @@ private:
 	static const FVector ManScale;
 	static const FVector ManPos;
 
-
 	static const std::vector<const char*> Lucy_Script;
 	static const std::vector<const char*> Mod_Script;
 	static const std::vector<const char*> Jus_Script;
 	static const std::vector<const char*> Pand_Script;
+	static const std::vector<const char*> Mal_Script;
 	static bool IsLoad;
 };
 

@@ -176,6 +176,10 @@ void Epilogue::CutSceneStart()
 	{
 		StateChange(EEpilogueState::PandCutScene);
 	}
+	else if (UEngineString::ToUpper("Malina") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::MalCutScene);
+	}
 }
 
 void Epilogue::GoBackChapter()
@@ -674,10 +678,10 @@ void Epilogue::PandCutSceneStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
-	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[7]);
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-	C_BooperTextSet(Pand_Script[8]);
+	C_BooperTextSet(Pand_Script[9]);
 }
 
 void Epilogue::PandCutScene()
@@ -731,7 +735,7 @@ void Epilogue::PandCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[1]);
+		C_BooperTextSet(Pand_Script[2]);
 
 		++OrderCount;
 	}
@@ -746,7 +750,7 @@ void Epilogue::PandCutScene2()
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("Pand_Drink.png", { WinScale * Pos , WinScale * Scale });
 
-		C_BooperTextSet(Pand_Script[1]);
+		C_BooperTextSet(Pand_Script[2]);
 
 		++OrderCount;
 	}
@@ -760,8 +764,9 @@ void Epilogue::PandCutScene3()
 		FVector Scale = { 0.218f, 0.597f };
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("PandS_Idle.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 
-		C_BooperTextSet(Pand_Script[2]);
+		C_BooperTextSet(Pand_Script[3]);
 			
 		++OrderCount;
 	}
@@ -773,10 +778,10 @@ void Epilogue::PandCutScene4()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[7]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[9]);
+		C_BooperTextSet(Pand_Script[10]);
 
 		++OrderCount;
 	}
@@ -790,10 +795,10 @@ void Epilogue::PandCutScene5()
 		FVector Scale = { 0.222f, 0.573f };
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("PandS_Cup.png", { WinScale * Pos , WinScale * Scale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[0]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[3]);
+		C_BooperTextSet(Pand_Script[4]);
 
 		++OrderCount;
 	}
@@ -803,7 +808,7 @@ void Epilogue::PandCutScene6()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(Pand_Script[4]);
+		C_BooperTextSet(Pand_Script[5]);
 
 		++OrderCount;
 	}
@@ -815,10 +820,10 @@ void Epilogue::PandCutScene7()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_002.png", { WinScale * ManPos , WinScale * ManScale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[7]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[10]);
+		C_BooperTextSet(Pand_Script[11]);
 
 		++OrderCount;
 	}
@@ -832,10 +837,10 @@ void Epilogue::PandCutScene8()
 		FVector Scale = { 0.218f, 0.597f };
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("PandS_Idle.png", { WinScale * Pos , WinScale * Scale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[0]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[5]);
+		C_BooperTextSet(Pand_Script[6]);
 
 		++OrderCount;
 	}
@@ -847,10 +852,10 @@ void Epilogue::PandCutScene9()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_002.png", { WinScale * ManPos , WinScale * ManScale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[7]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[11]);
+		C_BooperTextSet(Pand_Script[12]);
 
 		++OrderCount;
 	}
@@ -864,14 +869,89 @@ void Epilogue::PandCutScene10()
 		FVector Scale = { 0.223f, 0.607f };
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("Pand_Drink.png", { WinScale * Pos , WinScale * Scale });
-		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[0]);
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[6]);
+		C_BooperTextSet(Pand_Script[7]);
 
 		++OrderCount;
 	}
 }
+
+void Epilogue::MalCutSceneStart()
+{
+	AllCutSceneActorOn();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[5]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Mal_Script[6]);
+}
+
+void Epilogue::MalCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		MalCutScene1();
+		break;
+	case 1:
+		MalCutScene2();
+		break;
+	case 2:
+		MalCutScene3();
+		break;
+	case 3:
+		MalCutScene4();
+		break;
+	case 4:
+		MalCutScene5();
+		break;
+	case 5:
+		MalCutScene6();
+		break;
+	case 6:
+		MalCutScene7();
+		break;
+	}
+}
+
+void Epilogue::MalCutScene1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.222f, 0.518f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Pand_Cup.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mal_Script[2]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::MalCutScene2()
+{}
+
+void Epilogue::MalCutScene3()
+{}
+
+void Epilogue::MalCutScene4()
+{}
+
+void Epilogue::MalCutScene5()
+{}
+
+void Epilogue::MalCutScene6()
+{}
+
+void Epilogue::MalCutScene7()
+{}
 
 void Epilogue::Tick(float _DeltaTime)
 {
@@ -896,6 +976,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::PandCutScene:
 		PandCutScene();
 		break;
+	case EEpilogueState::MalCutScene:
+		MalCutScene();
+		break;
 	}
 }
 
@@ -916,6 +999,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::PandCutScene:
 			PandCutSceneStart();
+			break;
+		case EEpilogueState::MalCutScene:
+			MalCutSceneStart();
 			break;
 		}
 	}
@@ -966,20 +1052,32 @@ const std::vector<const char*> Epilogue::Jus_Script
 	/* 10 Script 3 */ "나도 너한테 똑같이 묻고 싶은데.",
 	/* 11 Script 4 */ "언젠가 다음에..."
 };
-
 const std::vector<const char*> Epilogue::Pand_Script =
 {
 	/* 0  Demon	   */ "피곤한 악마 판데모니카",
-	/* 1  Script 1 */ "...",
-	/* 2  Script 2 */ "아! 이제 피곤한 악마는 끝났어.",
-	/* 3  Script 3 */ "아니... 딱 적당해. 이번엔 여과도 잘 했고.",
-	/* 4  Script 4 */ "이대로만 한다면 손가락 멀쩡한 날까지 살아 있겠네.",
-	/* 5  Script 5 */ "그렇지만 망치고 싶으면 마음대로 해. 동네 병원이 꽤 용한 것\n같던데.",
-	/* 6  Script 6 */ "기억은 네가 하고 있어야지.",
+	/* 1  Demon	   */ "가학적인 악마 판데모니카",
+	/* 2  Script 1 */ "...",
+	/* 3  Script 2 */ "아! 이제 피곤한 악마는 끝났어.",
+	/* 4  Script 3 */ "아니... 딱 적당해. 이번엔 여과도 잘 했고.",
+	/* 5  Script 4 */ "이대로만 한다면 손가락 멀쩡한 날까지 살아 있겠네.",
+	/* 6  Script 5 */ "그렇지만 망치고 싶으면 마음대로 해. 동네 병원이 꽤 용한 것\n같던데.",
+	/* 7  Script 6 */ "기억은 네가 하고 있어야지.",
 
-	/* 7  Man	   */ "헬테이커",
-	/* 8  Script 1 */ "자 팬케이크랑 커피.",
-	/* 9  Script 2 */ "또 너무 진하게 뽑았나?",
-	/* 10 Script 3 */ "그래...",
-	/* 11 Script 4 */ "다음 건 오후 5시 15분에 더블 에스프레소 맞지?"
+	/* 8  Man	   */ "헬테이커",
+	/* 9  Script 1 */ "자 팬케이크랑 커피.",
+	/* 10 Script 2 */ "또 너무 진하게 뽑았나?",
+	/* 11 Script 3 */ "그래...",
+	/* 12 Script 4 */ "다음 건 오후 5시 15분에 더블 에스프레소 맞지?"
+};
+const std::vector<const char*> Epilogue::Mal_Script =
+{
+	/* 0 Demon	  */ "시큰둥한 악마 말리나",
+	/* 1 Script 1 */ "할 만한 신작 턴제 게임 찾기가 왜 이렇게 힘들어?",
+	/* 2 Script 2 */ "무슨 나오는 것들이 죄다 대충 찍어낸 후속작이나 표절작\n투성이야.",
+	/* 3 Script 3 */ "참 거지같게도, 나도 그렇긴 해.",
+	/* 4 Script 4 */ "술이 꽤 필요하겠지만.",
+
+	/* 5 Man	  */ "헬테이커",
+	/* 6 Script 1 */ "자 팬케이크.",
+	/* 7 Script 2 */ "그래도 난 할 것 같더라.",
 };

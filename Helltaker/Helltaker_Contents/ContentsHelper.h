@@ -173,6 +173,7 @@ enum class EEpilogueState
 	ModCutScene,
 	JusCutScene,
 	PandCutScene,
+	MalCutScene,
 	Change
 };
 
