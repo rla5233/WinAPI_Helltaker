@@ -1121,11 +1121,12 @@ void Epilogue::ZdCutScene(float _DeltaTime)
 
 void Epilogue::ZdCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.216f, 0.5935f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.005f };
 		C_ChangeCharactrer("Zd_Ignite_001.png", { WinScale * Pos , WinScale * Scale });
 		C_CreateCharacterAnimation("Zd_Ignite", "Zd_Ignite", 0, 3, 0.06f, false);
 		C_CreateCharacterAnimation("Zd_Ignite_Double", "Zd_Ignite", 0, 7, 0.06f, false);
@@ -1141,7 +1142,8 @@ void Epilogue::ZdCutScene1()
 void Epilogue::ZdCutScene2(float _DeltaTime)
 {
 	RepeatZdAnim(_DeltaTime);
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
@@ -1157,11 +1159,12 @@ void Epilogue::ZdCutScene2(float _DeltaTime)
 
 void Epilogue::ZdCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.216f, 0.5935f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.005f };
 		C_ChangeCharactrer("Zd_Ignite_001.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1175,7 +1178,8 @@ void Epilogue::ZdCutScene3()
 void Epilogue::ZdCutScene4(float _DeltaTime)
 {
 	RepeatZdAnim(_DeltaTime);
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_GetSceneCharacter()->GetImageRenderer()->AnimationReset();
@@ -1191,11 +1195,12 @@ void Epilogue::ZdCutScene4(float _DeltaTime)
 
 void Epilogue::ZdCutScene5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.207f, 0.596f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.0f, 0.01f };
 		C_ChangeCharactrer("Zd_Snap.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
