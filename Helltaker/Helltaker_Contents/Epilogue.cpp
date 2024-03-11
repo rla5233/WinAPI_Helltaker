@@ -992,6 +992,55 @@ void Epilogue::MalCutScene5()
 	}
 }
 
+void Epilogue::ZdCutSceneStart()
+{
+	AllCutSceneActorOn();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[4]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Zd_Script[5]);
+}
+
+void Epilogue::ZdCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		ZdCutScene1();
+		break;
+	case 1:
+		ZdCutScene2();
+		break;
+	case 2:
+		ZdCutScene3();
+		break;
+	case 3:
+		ZdCutScene4();
+		break;
+	case 4:
+		ZdCutScene5();
+		break;
+	}
+}
+
+void Epilogue::ZdCutScene1()
+{}
+
+void Epilogue::ZdCutScene2()
+{}
+
+void Epilogue::ZdCutScene3()
+{}
+
+void Epilogue::ZdCutScene4()
+{}
+
+void Epilogue::ZdCutScene5()
+{}
+
 void Epilogue::Tick(float _DeltaTime)
 {
 	HellTakerManager::Tick(_DeltaTime);
@@ -1018,6 +1067,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::MalCutScene:
 		MalCutScene();
 		break;
+	case EEpilogueState::ZdCutScene:
+		ZdCutScene();
+		break;
 	}
 }
 
@@ -1041,6 +1093,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::MalCutScene:
 			MalCutSceneStart();
+			break;
+		case EEpilogueState::ZdCutScene:
+			ZdCutSceneStart();
 			break;
 		}
 	}
@@ -1119,4 +1174,16 @@ const std::vector<const char*> Epilogue::Mal_Script =
 	/* 5 Man	  */ "헬테이커",
 	/* 6 Script 1 */ "자 팬케이크.",
 	/* 7 Script 2 */ "그래도 난 할 것 같더라.",
+};
+const std::vector<const char*> Epilogue::Zd_Script =
+{
+	/* 0 Demon	  */ "상스러운 악마 즈드라다",
+	/* 1 Script 1 */ "좋아. 근데 불 좀 썻으면 하는데.",
+	/* 2 Script 2 */ "그래서? 벌이라도 주려고? 해 봐, 나 완전 나쁜 여자인데.",
+	/* 3 Script 3 */ "확 꺼져.",
+
+	/* 4 Man	  */ "헬테이커",
+	/* 5 Script 1 */ "자 팬케이크.",
+	/* 6 Script 2 */ "실내에선 금연이야.",
+	/* 7 Script 3 */ "벌을 즐기는 거 아니야?",
 };

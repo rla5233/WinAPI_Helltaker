@@ -84,6 +84,14 @@ private:
 	void MalCutScene4();
 	void MalCutScene5();
 
+	void ZdCutSceneStart();
+	void ZdCutScene();
+	void ZdCutScene1();
+	void ZdCutScene2();
+	void ZdCutScene3();
+	void ZdCutScene4();
+	void ZdCutScene5();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
@@ -105,6 +113,7 @@ private:
 	static const std::vector<const char*> Jus_Script;
 	static const std::vector<const char*> Pand_Script;
 	static const std::vector<const char*> Mal_Script;
+	static const std::vector<const char*> Zd_Script;
 	static bool IsLoad;
 };
 
