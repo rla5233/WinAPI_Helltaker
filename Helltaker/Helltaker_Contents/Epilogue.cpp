@@ -69,7 +69,7 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	{// ¼öÁ¤
 		{ false, false, false, false, false, false, true, true , false, false, false, false, false, false, false },
 		{ true , true , true , true , true , true , true, true , true , true , true, true , true , true , true  },
-		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
+		{ false, true , true, true, true, true , true, true , true , true , false, false, true , false, false },
 		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
 		{ false, true , true , false, false, false, true, true , true , true , true , true , true , true , false },
 		{ false, true , true , true , false, false, true, true , false, false, false, false, true , true , false },
@@ -1299,11 +1299,12 @@ void Epilogue::AzCutScene()
 
 void Epilogue::AzCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.158f, 0.609f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.01f, 0.0f };
 		C_ChangeCharactrer("Az_Shock.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1316,7 +1317,8 @@ void Epilogue::AzCutScene1()
 
 void Epilogue::AzCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1331,11 +1333,12 @@ void Epilogue::AzCutScene2()
 
 void Epilogue::AzCutScene3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.158f, 0.609f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.01f, 0.0f };
 		C_ChangeCharactrer("Az_Shock.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1348,7 +1351,8 @@ void Epilogue::AzCutScene3()
 
 void Epilogue::AzCutScene4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_BooperTextSet(Az_Script[3]);
 
@@ -1393,11 +1397,12 @@ void Epilogue::AzCutScene7()
 
 void Epilogue::AzCutScene8()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.211f, 0.534f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.0064f, 0.04f };
 		C_ChangeCharactrer("Az_Note.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -1410,7 +1415,8 @@ void Epilogue::AzCutScene8()
 
 void Epilogue::AzCutScene9()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
