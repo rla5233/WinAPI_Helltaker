@@ -40,6 +40,9 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "Pand_Drink.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "PandS_Cup.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "PandS_Idle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Phone.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mal_Bottle.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Mal_PreBottle.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -910,10 +913,7 @@ void Epilogue::MalCutScene()
 		MalCutScene5();
 		break;
 	case 5:
-		MalCutScene6();
-		break;
-	case 6:
-		MalCutScene7();
+		GoBackChapter();
 		break;
 	}
 }
@@ -923,35 +923,74 @@ void Epilogue::MalCutScene1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector Scale = { 0.222f, 0.518f };
+		FVector Scale = { 0.193f, 0.551f };
 		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Pand_Cup.png", { WinScale * Pos , WinScale * Scale });
+		C_ChangeCharactrer("Mal_Phone.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mal_Script[2]);
+		C_BooperTextSet(Mal_Script[1]);	
 
 		++OrderCount;
 	}
 }
 
 void Epilogue::MalCutScene2()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		C_BooperTextSet(Mal_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::MalCutScene3()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[5]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mal_Script[7]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::MalCutScene4()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.1875f, 0.481f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Mal_PreBottle.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mal_Script[3]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::MalCutScene5()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.2292f, 0.481f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Mal_Bottle.png", { WinScale * Pos , WinScale * Scale });
 
-void Epilogue::MalCutScene6()
-{}
+		C_BooperTextSet(Mal_Script[4]);
 
-void Epilogue::MalCutScene7()
-{}
+		++OrderCount;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {

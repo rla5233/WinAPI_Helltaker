@@ -83,8 +83,6 @@ private:
 	void MalCutScene3();
 	void MalCutScene4();
 	void MalCutScene5();
-	void MalCutScene6();
-	void MalCutScene7();
 
 	void SpawnPolice();
 	void GoBackChapter();
