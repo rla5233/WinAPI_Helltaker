@@ -25,11 +25,13 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Man_PanCake_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Unsure.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Talk.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Book.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Mod_Shy.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jus_PanCake.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jus_Blind.png");
 		
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
@@ -158,6 +160,10 @@ void Epilogue::CutSceneStart()
 	else if (UEngineString::ToUpper("Modeus") == DemonKeyName)
 	{
 		StateChange(EEpilogueState::ModCutScene);
+	}
+	else if (UEngineString::ToUpper("Justice") == DemonKeyName)
+	{
+		StateChange(EEpilogueState::JusCutScene);
 	}
 }
 
@@ -305,7 +311,7 @@ void Epilogue::LucyCutScene6()
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.391f, 0.674f };
 		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -339,7 +345,7 @@ void Epilogue::ModCutSceneStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 0.391f, 0.674f };
 	FVector Pos = { 0.0f, 0.0f };
-	C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
 	C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 	
@@ -398,7 +404,7 @@ void Epilogue::ModCutScene2()
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.391f, 0.674f };
 		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -442,7 +448,7 @@ void Epilogue::ModCutScene5()
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.391f, 0.674f };
 		FVector Pos = { 0.0f, 0.0f };
-		C_ChangeCharactrer("Man_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
@@ -469,6 +475,65 @@ void Epilogue::ModCutScene6()
 	}
 }
 
+void Epilogue::JusCutSceneStart()
+{
+	AllCutSceneActorOn();
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { 0.391f, 0.674f };
+	FVector Pos = { 0.0f, 0.0f };
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * Pos , WinScale * Scale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Jus_Script[8]);
+}
+
+void Epilogue::JusCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		JusCutScene1();
+		break;
+	}
+}
+
+void Epilogue::JusCutScene1()
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.226f, 0.588f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Mod_Book.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Mod_Script[1]);
+
+		++OrderCount;
+	}
+}
+
+void Epilogue::JusCutScene2()
+{}
+
+void Epilogue::JusCutScene3()
+{}
+
+void Epilogue::JusCutScene4()
+{}
+
+void Epilogue::JusCutScene5()
+{}
+
+void Epilogue::JusCutScene6()
+{}
+
+void Epilogue::JusCutScene7()
+{}
+
 void Epilogue::Tick(float _DeltaTime)
 {
 	HellTakerManager::Tick(_DeltaTime);
@@ -486,6 +551,9 @@ void Epilogue::StateUpdate(float _DeltaTime)
 	case EEpilogueState::ModCutScene:
 		ModCutScene();
 		break;
+	case EEpilogueState::JusCutScene:
+		JusCutScene();
+		break;
 	}
 }
 
@@ -500,6 +568,9 @@ void Epilogue::StateChange(EEpilogueState _State)
 			break;
 		case EEpilogueState::ModCutScene:
 			ModCutSceneStart();
+			break;
+		case EEpilogueState::JusCutScene:
+			JusCutSceneStart();
 			break;
 		}
 	}
@@ -535,7 +606,7 @@ const std::vector<const char*> Epilogue::Mod_Script =
 	/* 8 Script 3 */ "뭐, 데이트라도 갈까?"
 };
 
-const std::vector<const char*> Jus_Script
+const std::vector<const char*> Epilogue::Jus_Script
 {
 	/* 0  Demon	   */ "끝내주는 악마 저스티스",
 	/* 1  Script 1 */ "끝내주네. 근데 궁금한 게 있는데 말야.",

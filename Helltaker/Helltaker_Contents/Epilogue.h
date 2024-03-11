@@ -51,6 +51,16 @@ private:
 	void ModCutScene5();
 	void ModCutScene6();
 
+	void JusCutSceneStart();
+	void JusCutScene();
+	void JusCutScene1();
+	void JusCutScene2();
+	void JusCutScene3();
+	void JusCutScene4();
+	void JusCutScene5();
+	void JusCutScene6();
+	void JusCutScene7();
+
 	void SpawnPolice();
 	void GoBackChapter();
 
