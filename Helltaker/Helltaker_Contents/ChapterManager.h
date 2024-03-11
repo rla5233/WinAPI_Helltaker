@@ -20,6 +20,8 @@ class Hero;
 class Text;
 class UI;
 
+class Epilogue;
+
 class TileInfo
 {
 public:
@@ -31,6 +33,8 @@ public:
 // Ό³Έν :
 class ChapterManager : public ULevel
 {
+	friend Epilogue;
+
 public:
 	// constructor destructor
 	ChapterManager();
@@ -65,7 +69,7 @@ public:
 	void M_CreateChapterUI(int _ChapterNumber);
 	void M_SpawnHero(Point _Point, int _ActionPoint);
 	void M_SpawnEpilHero(Point _Point);
-	void M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform);
+	virtual void M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform);
 	void M_SpawnSkeleton(Point _Point);
 	void M_SpawnStone(Point _Point, std::string_view _Name);
 	void M_SpawnThorn(Point _Point, EThornState _State);
@@ -84,11 +88,6 @@ public:
 	Point M_GetHeroLocationPoint() const;
 	Point M_GetHeroNextLocationPoint() const;
 	EHeroState M_GetHeroState() const;
-
-	std::list<Demon*>& M_RefAllChapterDemon()
-	{
-		return AllChapterDemon;
-	}
 
 	void M_SetChapterStartLocation(FVector _Value);
 	FVector M_GetChapterStartLocation() const

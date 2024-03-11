@@ -22,6 +22,7 @@ void Epilogue::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
+		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
 
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -59,6 +60,7 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 1, 0 }, "Azazel", { WinScale * Pos, WinScale * Scale });
 	M_SpawnDemon({ 7, 6 }, "PandeMonica", { WinScale * Pos, WinScale * Scale });
 
+
 	Scale = { 0.047f, 0.08f };
 	Pos = { 0.0f, -0.008f };
 	M_SpawnDemon({ 5, 0 }, "Zdrada", { WinScale * Pos, WinScale * Scale });
@@ -91,13 +93,11 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 #endif
 }
 
-void Epilogue::Tick(float _DeltaTime)
+void Epilogue::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
 {
-	HellTakerManager::Tick(_DeltaTime);
+	ChapterManager::M_SpawnDemon(_Point, _Name, _FTransform);
+	CanCutScene[UEngineString::ToUpper(_Name.data())] = true;
 }
-
-void Epilogue::CutSceneCheck()
-{}
 
 void Epilogue::SpawnPolice()
 {
@@ -105,18 +105,46 @@ void Epilogue::SpawnPolice()
 
 	FVector Scale = { 0.049f, 0.08f };
 	FVector Pos = { -0.002f, -0.007f };
-	M_SpawnDemon({ 1, 6 }, "Azazel", { WinScale * Pos, WinScale * Scale });
-	(*M_RefAllChapterDemon().rbegin())->SetName("Police");
-	(*M_RefAllChapterDemon().rbegin())->GetImageRenderer()->ActiveOff();
+	ChapterManager::M_SpawnDemon({ 1, 6 }, "Azazel", { WinScale * Pos, WinScale * Scale });
+	(*AllChapterDemon.rbegin())->SetName("Police");
+	(*AllChapterDemon.rbegin())->GetImageRenderer()->ActiveOff();
+	CanCutScene[UEngineString::ToUpper("Police")] = true;
 }
 
-void Epilogue::StateUpdate(float _DeltaTime)
+void Epilogue::CutSceneCheck()
 {
+	Point HeroCurPoint = M_GetHeroLocationPoint();
+	for (Demon* Demon : AllChapterDemon)	
+	{
+		Point DemonPoint = Demon->GetLocationPoint();
+		if (DemonPoint + Point::Left == HeroCurPoint ||
+			DemonPoint + Point::Right == HeroCurPoint ||
+			DemonPoint + Point::Up == HeroCurPoint ||
+			DemonPoint + Point::Down == HeroCurPoint)
+		{
+			DemonKeyName = Demon->GetName();
 
+			if (true == CanCutScene[DemonKeyName])
+			{
+				M_StateChange(EChapterState::CutScene);
+				CanCutScene[DemonKeyName] = false;
+			}
+		}
+	}
 }
 
-void Epilogue::StateChange(EEpilogueState _State)
+void Epilogue::CutSceneStart()
 {
+	CutSceneManager::CutSceneStart();
+
+	C_SpawnDialogue("DialogueBG_Home.png");
 
 }
+
+void Epilogue::Enter(float _DeltaTime)
+{}
+
+void Epilogue::EnterStart()
+{}
+
 
