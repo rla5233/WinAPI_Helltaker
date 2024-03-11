@@ -262,6 +262,9 @@ void Epilogue::LucyCutSceneStart()
 
 	C_SpawnBooper();
 	C_BooperTextSet(Lucy_Script[1]);
+
+	C_SpawnMenubar();
+	C_MenubarRenderActiveOff();
 }
 
 void Epilogue::LucyCutScene()
@@ -397,7 +400,8 @@ void Epilogue::LucyCutScene7()
 void Epilogue::ModCutSceneStart()
 {
 	AllCutSceneActorOn();
-	
+	C_MenubarRenderActiveOff();
+
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
 	C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
@@ -528,6 +532,7 @@ void Epilogue::ModCutScene6()
 void Epilogue::JusCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -720,6 +725,7 @@ void Epilogue::JusCutScene9()
 void Epilogue::PandCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -926,6 +932,7 @@ void Epilogue::PandCutScene10()
 void Epilogue::MalCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1037,6 +1044,7 @@ void Epilogue::MalCutScene5()
 void Epilogue::ZdCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1197,6 +1205,7 @@ void Epilogue::RepeatZdAnim(float _DeltaTime)
 void Epilogue::AzCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1372,6 +1381,7 @@ void Epilogue::AzCutScene9()
 void Epilogue::CerCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1490,6 +1500,7 @@ void Epilogue::CerCutScene5()
 void Epilogue::JudCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
@@ -1570,6 +1581,7 @@ void Epilogue::JudCutScene3()
 void Epilogue::PolCutSceneStart()
 {
 	AllCutSceneActorOn();
+	C_MenubarRenderActiveOff();
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 0.416f, 0.584f };
@@ -1577,9 +1589,6 @@ void Epilogue::PolCutSceneStart()
 	C_ChangeCharactrer("Police_001.png", { WinScale * Pos , WinScale * Scale });
 	C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[0]);
 	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
-
-	C_SpawnMenubar();
-	C_MenubarRenderActiveOff();
 
 	C_BooperTextSet(Pol_Script[1]);
 	Pol_Check = true;
