@@ -1305,3 +1305,19 @@ const std::vector<const char*> Epilogue::Zd_Script =
 	/* 6 Script 2 */ "실내에선 금연이야.",
 	/* 7 Script 3 */ "벌을 즐기는 거 아니야?",
 };
+const std::vector<const char*> Epilogue::Az_Script =
+{
+	/* 0  Demon	   */ "호기심 많은 천사 아자젤",
+	/* 1  Script 1 */ "제가 얼마동안 있었죠?",
+	/* 2  Script 2 */ "참 오랫동안 지낸 것 같아요.",
+	/* 3  Script 3 */ "내가 본 것들...",
+	/* 4  Script 4 */ "내가 한 것들...",
+	/* 5  Script 5 */ "이걸로 획기적인 논문을 쓸 수는 있겠지만, 아무도 안 믿겠죠.\n너무 초현실적이에요.",
+	/* 6  Script 6 */ "그리고 이건 겉핥기에 불과하죠. 오늘 연구를 같이 하실래요?",
+
+	/* 7  Man	   */ "헬테이커",
+	/* 8  Script 1 */ "자 팬케이크.",
+	/* 9  Script 2 */ "몇 주 정도.",
+	/* 10 Script 3 */ "아...",
+	/* 11 Script 4 */ "연구를 너무 많이 하잖아. 팬케이크나 좀 먹어.",
+};

@@ -119,6 +119,7 @@ private:
 	static const std::vector<const char*> Pand_Script;
 	static const std::vector<const char*> Mal_Script;
 	static const std::vector<const char*> Zd_Script;
+	static const std::vector<const char*> Az_Script;
 	static bool IsLoad;
 };
 
