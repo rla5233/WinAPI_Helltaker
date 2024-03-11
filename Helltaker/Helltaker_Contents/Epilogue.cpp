@@ -30,7 +30,8 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
-
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_Yum.png");
+		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
 		AddChapterSet("Epilogue");
@@ -142,9 +143,7 @@ void Epilogue::CutSceneCheck()
 
 void Epilogue::CutSceneStart()
 {
-	CutSceneManager::CutSceneStart();
-
-	C_SpawnDialogue("DialogueBG_Home.png");
+	CutSceneManager::CutSceneStart();	
 
 	if ("LUCY_EPIL" == DemonKeyName)
 	{
@@ -163,6 +162,8 @@ void Epilogue::EnterStart()
 
 void Epilogue::LucyCutSceneStart()
 {
+	C_SpawnDialogue("DialogueBG_Home.png");
+	
 	FVector Scale = { 0.233f, 0.632f };
 	FVector Pos = { -0.015f, 0.0f };
 	C_SpawnCharacter("Lu", "Lu_PanCake.png", Epilogue_Script[0], Pos, Scale);
@@ -186,11 +187,11 @@ void Epilogue::LucyCutScene1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		FVector Scale = { 0.233f, 0.632f };
-		FVector Pos = { -0.015f, 0.0f };
-		
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.247f, 0.626f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Lu_Yum.png", { WinScale * Pos , WinScale * Scale });
 
-		C_SpawnBooper();
 		C_BooperTextSet(Epilogue_Script[2]);
 
 		++OrderCount;
