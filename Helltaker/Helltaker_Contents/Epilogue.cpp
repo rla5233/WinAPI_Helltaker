@@ -66,9 +66,9 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	HellTakerManager::LevelStart(_PrevLevel);
 
 	std::vector<std::vector<bool>> Map =
-	{
+	{// ¼öÁ¤
 		{ false, false, false, false, false, false, true, true , false, false, false, false, false, false, false },
-		{ true , true , true , true , true , true , true, true , true , true , false, true , true , true , true  },
+		{ true , true , true , true , true , true , true, true , true , true , true, true , true , true , true  },
 		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
 		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
 		{ false, true , true , false, false, false, true, true , true , true , true , true , true , true , false },
@@ -806,11 +806,12 @@ void Epilogue::PandCutScene()
 
 void Epilogue::PandCutScene1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector Scale = { 0.222f, 0.518f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Scale = { 0.222f, 0.555f };
+		FVector Pos = { -0.001f, 0.028f };
 		C_ChangeCharactrer("Pand_Cup.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -823,11 +824,12 @@ void Epilogue::PandCutScene1()
 
 void Epilogue::PandCutScene2()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.223f, 0.607f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.008f, 0.002f };
 		C_ChangeCharactrer("Pand_Drink.png", { WinScale * Pos , WinScale * Scale });
 
 		C_BooperTextSet(Pand_Script[2]);
@@ -842,7 +844,7 @@ void Epilogue::PandCutScene3()
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.218f, 0.597f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.006f, 0.008f };
 		C_ChangeCharactrer("PandS_Idle.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 
@@ -869,11 +871,12 @@ void Epilogue::PandCutScene4()
 
 void Epilogue::PandCutScene5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.222f, 0.573f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.002f, 0.024f };
 		C_ChangeCharactrer("PandS_Cup.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -886,7 +889,8 @@ void Epilogue::PandCutScene5()
 
 void Epilogue::PandCutScene6()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_BooperTextSet(Pand_Script[5]);
 
@@ -911,11 +915,12 @@ void Epilogue::PandCutScene7()
 
 void Epilogue::PandCutScene8()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.218f, 0.597f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { -0.006f, 0.008f };
 		C_ChangeCharactrer("PandS_Idle.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
@@ -928,7 +933,8 @@ void Epilogue::PandCutScene8()
 
 void Epilogue::PandCutScene9()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_ChangeCharactrer("Man_PanCake_002.png", { WinScale * ManPos , WinScale * ManScale });
@@ -943,11 +949,12 @@ void Epilogue::PandCutScene9()
 
 void Epilogue::PandCutScene10()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.223f, 0.607f };
-		FVector Pos = { 0.0f, 0.0f };
+		FVector Pos = { 0.008f, 0.002f };
 		C_ChangeCharactrer("Pand_Drink.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
