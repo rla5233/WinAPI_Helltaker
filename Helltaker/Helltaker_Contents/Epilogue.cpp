@@ -1,11 +1,17 @@
 #include "Epilogue.h"
 
+#include "Character.h"
 #include "Demon.h"
 
 #include <EnginePlatform/EngineSound.h>
 
 bool Epilogue::IsLoad = false;
-const std::vector<const char*> Epilogue::Epilogue_Script;
+const std::vector<const char*> Epilogue::Epilogue_Script =
+{
+	/* 0 Demon	  */ "지옥의 CEO 루시퍼",
+	/* 1 Script 1 */ "팬케이크 한 판 더 완성이다.",
+	/* 2 Script 2 */ "그리고 차아아암 맛있어...",
+};
 
 Epilogue::Epilogue()
 {
@@ -23,6 +29,7 @@ void Epilogue::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Lu_PanCake.png");
 
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 
@@ -139,12 +146,73 @@ void Epilogue::CutSceneStart()
 
 	C_SpawnDialogue("DialogueBG_Home.png");
 
+	if ("LUCY_EPIL" == DemonKeyName)
+	{
+		StateChange(EEpilogueState::LucyCutScene);
+	}
 }
 
 void Epilogue::Enter(float _DeltaTime)
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		++OrderCount;
+	}
+}
 
 void Epilogue::EnterStart()
-{}
+{
+	OrderCount = 0;
+}
 
+void Epilogue::LucyCutSceneStart()
+{
+	FVector Scale = { 0.233f, 0.632f };
+	FVector Pos = { -0.015f, 0.0f };
+	C_SpawnCharacter("Lu", "Lu_PanCake.png", Epilogue_Script[0], Pos, Scale);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
+	C_SpawnBooper();
+	C_BooperTextSet(Epilogue_Script[1]);
+}
+
+void Epilogue::LucyCutScene(float _DeltaTime)
+{
+	switch (OrderCount)
+	{
+	default:
+		break;
+	}
+}
+
+void Epilogue::Tick(float _DeltaTime)
+{
+	HellTakerManager::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
+}
+
+void Epilogue::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case EEpilogueState::LucyCutScene:
+		LucyCutScene(_DeltaTime);
+		break;
+	}
+}
+
+void Epilogue::StateChange(EEpilogueState _State)
+{
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case EEpilogueState::LucyCutScene:
+			LucyCutSceneStart();
+			break;
+		}
+	}
+
+	State = _State;
+}

@@ -169,7 +169,8 @@ enum class EEpilogueState
 {
 	None,
 	Enter,
-	Change,
+	LucyCutScene,
+	Change
 };
 
 enum class EChapterState

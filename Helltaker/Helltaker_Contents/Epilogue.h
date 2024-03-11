@@ -18,8 +18,11 @@ public:
 
 	void M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform) override;
 
+	void StateChange(EEpilogueState _State);
+
 protected:
 	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* _PrevLevel) override;
 
 	void CutSceneCheck() override;
@@ -29,7 +32,12 @@ protected:
 	void EnterStart() override;
 
 private:
+	void LucyCutSceneStart();
+	void LucyCutScene(float _DeltaTime);
+
 	void SpawnPolice();
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	int OrderCount = -1;
