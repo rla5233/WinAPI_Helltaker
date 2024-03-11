@@ -38,7 +38,6 @@ void SinChapter1::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Intro", "Jud_Intro_004.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Back.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_Angry.png");
 
 		AddChapterSet("SinChapter1");
 		IsLoad = true;

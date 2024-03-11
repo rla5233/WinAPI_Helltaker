@@ -47,6 +47,7 @@ void Epilogue::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters\\Zd_Ignite", "Zd_Ignite_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Az_Shock.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Cer_Bad.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_PanCake.png");
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
@@ -1468,7 +1469,14 @@ void Epilogue::CerCutScene5()
 
 void Epilogue::JudCutSceneStart()
 {
+	AllCutSceneActorOn();
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+	C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[3]);
+	C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+	C_BooperTextSet(Jud_Script[4]);
 }
 
 void Epilogue::JudCutScene()
@@ -1485,22 +1493,59 @@ void Epilogue::JudCutScene()
 		JudCutScene3();
 		break;
 	case 3:
-		JudCutScene4();
+		GoBackChapter();
 		break;
 	}
 }
 
 void Epilogue::JudCutScene1()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.467f, 0.693f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jud_Angry.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jud_Script[1]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JudCutScene2()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeCharactrer("Man_PanCake_001.png", { WinScale * ManPos , WinScale * ManScale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[3]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(Jud_Script[5]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::JudCutScene3()
-{}
+{
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 0.415f, 0.682f };
+		FVector Pos = { 0.0f, 0.0f };
+		C_ChangeCharactrer("Jud_PanCake.png", { WinScale * Pos , WinScale * Scale });
+		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[0]);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-void Epilogue::JudCutScene4()
-{}
+		C_BooperTextSet(Jud_Script[2]);
+
+		++OrderCount;
+	}
+}
 
 void Epilogue::Tick(float _DeltaTime)
 {

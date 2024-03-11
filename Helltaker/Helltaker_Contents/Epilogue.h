@@ -118,8 +118,6 @@ private:
 	void JudCutScene1();
 	void JudCutScene2();
 	void JudCutScene3();
-	void JudCutScene4();
-
 
 	void SpawnPolice();
 	void GoBackChapter();
