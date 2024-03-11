@@ -163,6 +163,7 @@ private:
 	static const std::vector<const char*> Cer_Script;
 	static const std::vector<const char*> Jud_Script;
 	static const std::vector<const char*> Pol_Script;
+	static const std::vector<const char*> Ending_Script;
 	static bool IsLoad;
 };
 

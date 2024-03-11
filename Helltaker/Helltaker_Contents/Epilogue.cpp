@@ -1748,15 +1748,30 @@ void Epilogue::SelectMenu()
 
 void Epilogue::EndingStart()
 {
+	C_GetDialogue()->AllRenderersActiveOff();
+	C_GetSceneCharacter()->AllRenderersActiveOff();
+
+	C_BooperTextSet("...");
+
 	OrderCount = 0;
 }
 
 void Epilogue::Ending()
 {
+	switch (OrderCount)
+	{
+	case 0:
+		Ending1();
+		break;
+	}
 }
 
 void Epilogue::Ending1()
 {
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		int a = 0;
+	}
 }
 
 void Epilogue::PolGoBackChap()
@@ -2000,4 +2015,17 @@ const std::vector<const char*> Epilogue::Pol_Script =
 
 	/* 6 Man	   */ "헬테이커",
 	/* 7 Script 1  */ "팬케이크라도 드시겠습니까?"
+};
+const std::vector<const char*> Epilogue::Ending_Script =
+{
+	/* 0 Script 1   */ "그리하여 헬테이커의 이야가는 끝이 났지.",
+	/* 1 Script 2   */ "오랜 친구 베엘제붑이 들려주었다네.",
+	/* 2 Script 3   */ "나도 바보같은 이야기인 건 알지만..",
+	/* 3 Script 4   */ "솔직히 말하자면... 사실 불쾌하고 혐오스러운 이야기지.",
+	/* 4 Script 5   */ "불쾌한 사람들에 대한 불쾌한 이야기.",
+	/* 5 Script 6   */ "하지만 어쩌면... 일말의 행복은 찾을 수 있지 않을까.",
+	/* 6 Script 7   */ "한 두번 정도는 웃을 수 있겠지?",
+	/* 7 Script 8   */ "그럼... 늙은 파리와 함께 해줘서 고마웠네.",
+	/* 8 Script 9   */ "그럼 다음에.",
+	/* 9 Script 10  */ "THE END"
 };
