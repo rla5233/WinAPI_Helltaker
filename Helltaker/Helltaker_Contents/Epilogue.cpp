@@ -20,6 +20,19 @@ const std::vector<const char*> Epilogue::Lucy_Script =
 	/* 8 Script 1 */ "도와줘서 고마워",
 	/* 9 Script 2 */ "경험이지"
 };
+const std::vector<const char*> Epilogue::Mod_Script =
+{
+	/* 0 Demon	  */ "음란한 악마 모데우스",
+	/* 1 Script 1 */ "...",
+	/* 2 Script 2 */ "로맨스라는걸 듣도 보도 못했어. 여지껏 본 것 중에 제일\n변태적이야.",
+	/* 3 Script 3 */ "어쩌면 내가 잘못 살아온 게 아닐까?",
+	/* 4 Script 3 */ "이런 이상성욕 변태일 줄 알았어.",
+
+	/* 5 Man	  */ "헬테이커",
+	/* 6 Script 1 */ "자 팬케이크.",
+	/* 7 Script 2 */ "로맨틱 코미디를 읽어?"
+	/* 8 Script 2 */ "뭐, 데이트라도 갈까?"
+};
 
 Epilogue::Epilogue()
 {
@@ -338,9 +351,45 @@ void Epilogue::LucyCutScene7()
 }
 
 void Epilogue::ModCutSceneStart()
-{}
+{
+
+}
 
 void Epilogue::ModCutScene()
+{
+	switch (OrderCount)
+	{
+	case 0:
+		ModCutScene1();
+		break;
+	case 1:
+		ModCutScene2();
+		break;
+	case 2:
+		ModCutScene3();
+		break;
+	case 3:
+		ModCutScene4();
+		break;
+	case 4:
+		ModCutScene5();
+		break;
+	}
+}
+
+void Epilogue::ModCutScene1()
+{}
+
+void Epilogue::ModCutScene2()
+{}
+
+void Epilogue::ModCutScene3()
+{}
+
+void Epilogue::ModCutScene4()
+{}
+
+void Epilogue::ModCutScene5()
 {}
 
 void Epilogue::Tick(float _DeltaTime)

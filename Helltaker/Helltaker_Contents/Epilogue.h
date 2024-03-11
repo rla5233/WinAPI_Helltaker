@@ -44,6 +44,11 @@ private:
 
 	void ModCutSceneStart();
 	void ModCutScene();
+	void ModCutScene1();
+	void ModCutScene2();
+	void ModCutScene3();
+	void ModCutScene4();
+	void ModCutScene5();
 
 	void SpawnPolice();
 	void GoBackChapter();
@@ -59,6 +64,7 @@ private:
 	EEpilogueState State = EEpilogueState::None;
 
 	static const std::vector<const char*> Lucy_Script;
+	static const std::vector<const char*> Mod_Script;
 	static bool IsLoad;
 };
 
