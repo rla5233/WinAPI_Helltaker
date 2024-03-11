@@ -135,6 +135,7 @@ private:
 	void Ending2();
 	void Ending3();
 	void Ending4();
+	void Ending5();
 
 	void SpawnPolice();
 	void GoBackChapter();

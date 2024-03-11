@@ -27,6 +27,7 @@ void Epilogue::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadImg("BackGround", "ChapterBG_Epilogue.png");
+		ContentsHelper::LoadImg("BackGround", "EndingBG.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "PoliceCar.png");
 		ContentsHelper::LoadImg("Scene\\Dialogue", "DialogueBG_Home.png");
 		ContentsHelper::LoadImg("Scene\\CutScene", "CutScene_Ending.png");
@@ -1770,6 +1771,9 @@ void Epilogue::Ending()
 	case 11:
 		Ending4();
 		break;
+	case 12:
+		Ending5();
+		break;
 	default:
 		Ending2();
 		break;
@@ -1801,13 +1805,26 @@ void Epilogue::Ending2()
 
 void Epilogue::Ending3()
 {
-	TransitionOn();
-	C_BooperTextSet(Ending_Script[10]);
-
-	++OrderCount;
+	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	{
+		TransitionOn();
+		++OrderCount;
+	}
 }
 
 void Epilogue::Ending4()
+{
+	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		C_ChangeDialogue("EndingBG.png", { { 0.0f, 0.0f }, WinScale });
+		C_GetDialogue()->SetActorLocation(WinScale.Half2D());
+		C_BooperTextSet(Ending_Script[10]);
+		++OrderCount;
+	}
+}
+
+void Epilogue::Ending5()
 {
 	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
 	{
@@ -2074,5 +2091,5 @@ const std::vector<const char*> Epilogue::Ending_Script =
 	/* 7  Script 8   */ "그럼... 늙은 파리와 함께 해줘서 고마웠네.",
 	/* 8  Script 9   */ "그럼 다음에.",
 	/* 9  Script 10  */ "THE END",
-	/* 10 Script 11  */ "감사합니다!\n[모작자 - 김수원]"
+	/* 10 Script 11  */ "플레이 해주셔서 감사합니다!\n[모작자 - 김수원]"
 };
