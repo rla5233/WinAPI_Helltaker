@@ -31,12 +31,15 @@ SinOpening::~SinOpening()
 
 void SinOpening::BeginPlay()
 {
+	SinManager::BeginPlay();
+
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "L_Arm");
 		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "R_Arm");
 
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
+		ContentsHelper::LoadSound("Sound\\Effect", "judge_intro_start.wav");
 
 		AddChapterSet("SinOpening");
 		IsLoad = true;
@@ -51,6 +54,7 @@ void SinOpening::LevelStart(ULevel * _PrevLevel)
 	GetTransitionActor()->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
 	UEngineSound::SoundPlay("transition_off.wav");
 
+	UEngineSound::SoundPlay("judge_intro_start.wav");
 	M_StateChange(ESinState::CutScene);
 }
 
@@ -115,6 +119,7 @@ void SinOpening::Enter1()
 		// 수정 (캐릭터 추가)
 
 		C_BooperTextSet(SinOpening_Script[3]);
+		UEngineSound::SoundPlay("booper_click.wav");
 		++OrderCount;
 	}
 }
@@ -124,6 +129,7 @@ void SinOpening::Enter2()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		C_BooperTextSet(SinOpening_Script[4]);
+		UEngineSound::SoundPlay("booper_click.wav");
 		++OrderCount;
 	}
 }
@@ -135,6 +141,7 @@ void SinOpening::Enter3()
 		C_GetDialogue()->StateChange(ESinDialogueState::Lightning);
 		C_GetBooper()->AllRenderersActiveOff();
 		C_GetJudge()->GetNameRenderer()->ActiveOff();
+		UEngineSound::SoundPlay("booper_click.wav");
 		++OrderCount;
 	}
 }
@@ -148,6 +155,7 @@ void SinOpening::EndStart()
 	
 	C_BooperTextSet(SinOpening_Script[5]);
 	C_GetBooper()->AllRenderersActiveOn();
+	SinBGM_On();
 }
 
 void SinOpening::ChangeChapter()

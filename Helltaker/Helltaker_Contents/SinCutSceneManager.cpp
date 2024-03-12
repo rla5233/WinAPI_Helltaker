@@ -266,6 +266,7 @@ void SinCutSceneManager::End(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		M_StateChange(ESinState::SinChage);
 		C_StateChange(ESinSceneState::None);
 	}

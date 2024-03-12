@@ -138,6 +138,9 @@ public:
 	void CameraPosUpdate(const FVector& _Pos);
 	virtual void CutSceneCheck();
 	
+	void ChapterMainBGM_On();
+	void ChapterMainBGM_Off();
+
 	// Debug
 	void ShowLocationPoint();
 protected:

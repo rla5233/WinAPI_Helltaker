@@ -38,6 +38,8 @@ float SinChapterManager::SmallChainDelayTime = 0.0f;
 const float SinChapterManager::StartPosY = 0.388f;
 const float SinChapterManager::MaxSpeedY = -180.0f;
 
+UEngineSoundPlayer SinChapterManager::SinBGMPlayer;
+
 SinChapterManager::SinChapterManager()
 {
 }
@@ -54,6 +56,17 @@ void SinChapterManager::BeginPlay()
 	{
 		ContentsHelper::LoadImg("BackGround", "SinBG.png");
 		ContentsHelper::LoadImg("UI", "White_Bar.png");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_machine_start.wav");
+
+		ContentsHelper::LoadSound("Sound\\BGM", "Epitomize.wav");
+
+		SinBGMPlayer = UEngineSound::SoundPlay("Epitomize.wav");
+		SinBGMPlayer.SetVolume(0.8f);
+		SinBGMPlayer.Loop();
+		SinBGMPlayer.Off();
+
+		//UEngineSound::SoundPlay("boss_machine_start.wav");
 
 		IsLoad = true;
 	}
@@ -518,9 +531,9 @@ void SinChapterManager::TransitionCheck(float _DeltaTime)
 
 		if (0.0f > TimeCount)
 		{
+			UEngineSound::SoundPlay("boss_machine_start.wav");
 			UpPiston->StateChange(ESinPistonState::Move);
 			++OrderCount;
-
 			return;
 		}
 

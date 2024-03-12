@@ -51,6 +51,7 @@ void ChapterManager::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "transition_off.wav");
 		
 		ChapterBGMPlayer = UEngineSound::SoundPlay("Vitality.wav");
+		ChapterBGMPlayer.SetVolume(0.8f);
 		ChapterBGMPlayer.Loop();
 		ChapterBGMPlayer.Off();
 
@@ -744,6 +745,16 @@ void ChapterManager::ReturnToChap(std::string_view _DemonName)
 
 	PlayerHero->AllMoveEffectDestory();
 	State = EChapterState::Idle;
+}
+
+void ChapterManager::ChapterMainBGM_On()
+{
+	ChapterBGMPlayer.On();
+}
+
+void ChapterManager::ChapterMainBGM_Off()
+{
+	ChapterBGMPlayer.Off();
 }
 
 // 디버그용

@@ -2,9 +2,11 @@
 
 #include "ContentsHelper.h"
 
+#include <EnginePlatform/EngineSound.h>
 #include <EngineCore/Level.h>
 #include <set>
 
+class UEngineSoundPlayer;
 class SinComponent;
 class SmallChain;
 class HitChainHp;
@@ -165,6 +167,16 @@ public:
 		ChapterSet.insert(_Name);
 	}
 
+	void SinBGM_On()
+	{
+		SinBGMPlayer.On();
+	}
+
+	void SinBGM_Off()
+	{
+		SinBGMPlayer.Off();
+	}
+
 	void M_StateChange(ESinState _State);
 
 protected:
@@ -281,6 +293,8 @@ private:
 
 	Scene* TransitionActor = nullptr;
 	static const float TransitionInter;
+
+	static UEngineSoundPlayer SinBGMPlayer;
 
 	ESinState State = ESinState::None;
 	static bool IsLoad;

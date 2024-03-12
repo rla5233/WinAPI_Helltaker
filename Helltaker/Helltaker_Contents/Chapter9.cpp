@@ -189,6 +189,7 @@ void Chapter9::ChangeChapter()
 {
 	ChapterManager::ChangeChapter();
 
+	ChapterMainBGM_Off();
 	CreateChapter<SinOpening>("SinOpening");
 	GEngine->ChangeLevel("SinOpening");
 }
