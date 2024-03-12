@@ -467,6 +467,7 @@ void SinChapter4::ChangeChapter()
 {
 	SinManager::ChangeChapter();
 	
+	SinBGM_Off();
 	CreateChapter<EpilogueOpening>("EpilogueOpening");
 	GEngine->ChangeLevel("EpilogueOpening");
 }
