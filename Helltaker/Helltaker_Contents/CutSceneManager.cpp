@@ -234,10 +234,26 @@ void CutSceneManager::C_MenubarRenderActiveOff()
 
 void CutSceneManager::C_MenubarRenderActiveOn()
 {
-	for (UI* Menu : MenuBar)
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	for (size_t i = 0; i < MenuBar.size(); i++)
 	{
-		Menu->AllRenderersActiveOn();
+		if (0 == i)
+		{
+			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_Selected.png");
+			MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * FocusMenuScale });
+			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_WHITE);
+		}
+		else
+		{
+			MenuBar[i]->GetImageRenderer()->SetImage("MenuBar_UnSelected.png");
+			MenuBar[i]->GetImageRenderer()->SetTransform({ {0, 0}, WinScale * UnFocusMenuScale });
+			MenuBar[i]->GetTextRenderer()->SetTextColor(HELLTAKER_GRAY);
+		}
+
+		MenuBar[i]->AllRenderersActiveOn();
 	}
+
+	SetFocusMenuIndex(0);
 }
 
 void CutSceneManager::C_ChangeCharactrer(std::string_view _Name, const FTransform& _Trans)

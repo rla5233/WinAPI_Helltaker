@@ -71,8 +71,8 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	std::vector<std::vector<bool>> Map =
 	{// 수정
 		{ false, false, false, false, false, false, true, true , false, false, false, false, false, false, false },
-		{ true , true , true , true , true , true , true, true , true , true , true, true , true , true , true  },
-		{ false, true , true, true, true, true , true, true , true , true , false, false, true , false, false },
+		{ true , true , true , true , true , true , true, true , true , true , false, true , true , true , true  },
+		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
 		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
 		{ false, true , true , false, false, false, true, true , true , true , true , true , true , true , false },
 		{ false, true , true , true , false, false, true, true , false, false, false, false, true , true , false },
@@ -2100,7 +2100,7 @@ const std::vector<const char*> Epilogue::Pol_Script =
 };
 const std::vector<const char*> Epilogue::Ending_Script =
 {
-	/* 0  Script 1   */ "그리하여 헬테이커의 이야가는 끝이 났지.",
+	/* 0  Script 1   */ "그리하여 헬테이커의 이야기는 끝이 났지.",
 	/* 1  Script 2   */ "오랜 친구 베엘제붑이 들려주었다네.",
 	/* 2  Script 3   */ "나도 바보같은 이야기인 건 알지만..",
 	/* 3  Script 4   */ "솔직히 말하자면... 사실 불쾌하고 혐오스러운 이야기지.",
