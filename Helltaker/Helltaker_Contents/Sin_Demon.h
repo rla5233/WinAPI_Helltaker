@@ -30,6 +30,8 @@ protected:
 	void Sin_AppearStart() override;
 	void Sin_Appear(float _DeltaTime) override;
 	void CreateLandEffect();
+	void LandEffectRender();
+	void LandEffectEndCheck();
 
 	void VictoryStart() override;
 	void CreateStarEffect();
@@ -37,6 +39,10 @@ protected:
 
 private:
 	std::list<UImageRenderer*> LandEffect;
+	static const FVector LandEffectScale;
+	int RenderEndCount = 0;
+
+	int OrderCount = -1;
 
 	static const FVector Scale;
 	static const FVector AppearScale;
