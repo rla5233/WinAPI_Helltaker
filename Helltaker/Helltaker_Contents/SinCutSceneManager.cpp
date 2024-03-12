@@ -186,6 +186,12 @@ void SinCutSceneManager::C_BooperTextSet(std::string_view _Text)
 	C_BooperSetTextPosition(LineCount);
 }
 
+void SinCutSceneManager::C_BooperTextSet(std::string_view _Text, bool _SoundPlay)
+{
+	C_BooperTextSet(_Text);
+	UEngineSound::SoundPlay("booper_click.wav");
+}
+
 void SinCutSceneManager::C_BooperSetTextPosition(int _LineCount)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();

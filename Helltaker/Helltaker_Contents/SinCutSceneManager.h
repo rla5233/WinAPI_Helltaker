@@ -54,6 +54,7 @@ public:
 		const FVector& _Scale = { 0.255f, 0.611f });
 
 	void C_BooperTextSet(std::string_view _Text);
+	void C_BooperTextSet(std::string_view _Text, bool _SoundPlay);
 	void C_BooperSetTextPosition(int _LineCount);
 
 	void C_MenubarTextSet(int _Index, std::string_view _Text);
