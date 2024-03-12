@@ -93,6 +93,8 @@ private:
 	void ZdCutScene4(float _DeltaTime);
 	void ZdCutScene5();
 	void RepeatZdAnim(float _DeltaTime);
+	void ZdTapSound();
+	bool CanZdTapSound = false;
 
 	void AzCutSceneStart();
 	void AzCutScene();

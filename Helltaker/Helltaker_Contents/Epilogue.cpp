@@ -5,6 +5,7 @@
 #include "Demon.h"
 #include "Hero.h"
 
+#include <EngineBase/EngineRandom.h>
 #include <EnginePlatform/EngineSound.h>
 
 bool Epilogue::IsLoad = false;
@@ -64,6 +65,10 @@ void Epilogue::BeginPlay()
 
 		ContentsHelper::LoadSound("Sound\\BGM", "Luminescent.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "epilogue_dialogue_start.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "zdrada_cigarette_tap_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "zdrada_cigarette_tap_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "zdrada_cigarette_tap_003.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "zdrada_cigarette_tap_004.wav");
 
 		EpilBGMPlayer = UEngineSound::SoundPlay("Luminescent.wav");
 		EpilBGMPlayer.SetVolume(0.8f);
@@ -1241,6 +1246,8 @@ void Epilogue::RepeatZdAnim(float _DeltaTime)
 		return;
 	}
 
+	ZdTapSound();
+
 	if ((nullptr != C_GetSceneCharacter()->GetImageRenderer()->GetCurAnimation())
 		&& true == C_GetSceneCharacter()->GetImageRenderer()->IsCurAnimationEnd())
 	{
@@ -1263,6 +1270,46 @@ void Epilogue::RepeatZdAnim(float _DeltaTime)
 		}
 
 		TimeCount -= _DeltaTime;
+	}
+}
+
+void Epilogue::ZdTapSound()
+{
+	if (nullptr == C_GetSceneCharacter()->GetImageRenderer()->GetCurAnimation())
+	{
+		return;
+	}
+
+	if (2 == C_GetSceneCharacter()->GetImageRenderer()->GetCurAnimationFrame()
+	||  6 == C_GetSceneCharacter()->GetImageRenderer()->GetCurAnimationFrame())
+	{
+		if (false == CanZdTapSound)
+		{
+			return;
+		}
+
+		int RandomVaule = UEngineRandom::MainRandom.RandomInt(1, 4);
+		switch (RandomVaule)
+		{
+		case 1:
+			UEngineSound::SoundPlay("zdrada_cigarette_tap_001.wav").SetVolume(0.7f);
+			break;
+		case 2:
+			UEngineSound::SoundPlay("zdrada_cigarette_tap_002.wav").SetVolume(0.7f);
+			break;
+		case 3:
+			UEngineSound::SoundPlay("zdrada_cigarette_tap_003.wav").SetVolume(0.7f);
+			break;
+		case 4:
+			UEngineSound::SoundPlay("zdrada_cigarette_tap_004.wav").SetVolume(0.7f);
+			break;
+		}
+
+		CanZdTapSound = false;
+	}
+	else
+	{
+		CanZdTapSound = true;
 	}
 }
 
