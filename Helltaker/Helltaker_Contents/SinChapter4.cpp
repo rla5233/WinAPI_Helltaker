@@ -229,6 +229,7 @@ void SinChapter4::Enter(float _DeltaTime)
 
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		C_StateChange(ESinSceneState::Select);
 	}
 }
@@ -308,6 +309,7 @@ void SinChapter4::Success(float _DeltaTime)
 
 void SinChapter4::Select1()
 {
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 	C_MenubarRenderActiveOff();
 	C_BooperTextSet(SinChap4_Script[4]);
 	C_GetBooper()->GetImageRenderer()->ActiveOn();
@@ -317,6 +319,7 @@ void SinChapter4::Select1()
 
 void SinChapter4::Select2()
 {
+	UEngineSound::SoundPlay("booper_click.wav");
 	C_MenubarRenderActiveOn();
 	C_MenubarTextSet(0, SinChap4_Script[5]);
 	C_MenubarTextSet(1, SinChap4_Script[6]);
@@ -331,6 +334,7 @@ void SinChapter4::Select3()
 	FVector Pos = { 0.0f, -0.042f };
 	C_JudgeChange("Jud_Resign.png", Pos, Scale);
 
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 	C_MenubarRenderActiveOff();
 	C_BooperTextSet(SinChap4_Script[7]);
 	C_GetBooper()->GetImageRenderer()->ActiveOn();
@@ -340,13 +344,13 @@ void SinChapter4::Select3()
 
 void SinChapter4::Select4()
 {
-	C_BooperTextSet(SinChap4_Script[8]);
+	C_BooperTextSet(SinChap4_Script[8], true);
 	++OrderCount;
 }
 
 void SinChapter4::Select5()
 {
-	C_BooperTextSet(SinChap4_Script[9]);
+	C_BooperTextSet(SinChap4_Script[9], true);
 	++OrderCount;
 }
 
@@ -355,25 +359,25 @@ void SinChapter4::Select6()
 	FVector Scale = { 0.558f, 0.693f };
 	FVector Pos = { 0.0f, -0.0402f };
 	C_JudgeChange("Jud_Intro_004.png", Pos, Scale);
-	C_BooperTextSet(SinChap4_Script[10]);
+	C_BooperTextSet(SinChap4_Script[10], true);
 	++OrderCount;
 }
 
 void SinChapter4::Select7()
 {
-	C_BooperTextSet(SinChap4_Script[11]);
+	C_BooperTextSet(SinChap4_Script[11], true);
 	++OrderCount;
 }
 
 void SinChapter4::Select8()
 {
-	C_BooperTextSet(SinChap4_Script[12]);
+	C_BooperTextSet(SinChap4_Script[12], true);
 	++OrderCount;
 }
 
 void SinChapter4::Select9()
 {
-	C_BooperTextSet(SinChap4_Script[13]);
+	C_BooperTextSet(SinChap4_Script[13], true);
 	++OrderCount;
 }
 
@@ -383,13 +387,13 @@ void SinChapter4::Select10()
 	FVector Pos = { 0.0f, -0.042f };
 	C_JudgeChange("Jud_Angry.png", Pos, Scale);
 
-	C_BooperTextSet(SinChap4_Script[14]);
+	C_BooperTextSet(SinChap4_Script[14], true);
 	++OrderCount;
 }
 
 void SinChapter4::Select11()
 {
-	C_BooperTextSet(SinChap4_Script[15]);
+	C_BooperTextSet(SinChap4_Script[15], true);
 	++OrderCount;
 }
 
@@ -399,12 +403,13 @@ void SinChapter4::Select12()
 	FVector Pos = { 0.0f, -0.042f };
 	C_JudgeChange("Jud_Resign.png", Pos, Scale);
 
-	C_BooperTextSet(SinChap4_Script[16]);
+	C_BooperTextSet(SinChap4_Script[16], true);
 	++OrderCount;
 }
 
 void SinChapter4::Select13()
 {
+	UEngineSound::SoundPlay("booper_click.wav");
 	C_MenubarRenderActiveOn();
 	C_MenubarTextSet(0, SinChap4_Script[17]);
 	C_MenubarTextSet(1, SinChap4_Script[18]);
@@ -415,6 +420,7 @@ void SinChapter4::Select13()
 
 void SinChapter4::Select14()
 {
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 	FVector Scale = { 0.466f, 0.693f };
 	FVector Pos = { 0.0f, -0.042f };
 	C_JudgeChange("Jud_Shock.png", Pos, Scale);
@@ -430,7 +436,7 @@ void SinChapter4::Success1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		Skel->AllRenderersActiveOff();
-		C_BooperTextSet(SinChap4_Script[20]);
+		C_BooperTextSet(SinChap4_Script[20], true);
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		C_GetBooper()->GetImageRenderer()->ChangeAnimation("Booper_Idle");

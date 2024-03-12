@@ -64,7 +64,7 @@ void HeroBase::BeginPlay()
 	ImageRenderer = CreateImageRenderer(RenderOrder::Hero);
 	ImageRenderer->SetImage("Hero_Left_Idle");
 
-	if ("EPILOGUE" == GetWorld()->GetName())
+	if (UEngineString::ToUpper("Epilogue") == GetWorld()->GetName())
 	{
 		ImageRenderer->CreateAnimation("Hero_LIdle", "AHero_Left_Idle", 0, 11, IdleInter, true);
 		ImageRenderer->CreateAnimation("Hero_LMove", "AHero_Left_Move", 0, 5, MoveInter, false);

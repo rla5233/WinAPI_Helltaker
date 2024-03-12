@@ -25,6 +25,7 @@ void Sin_Demon::BeginPlay()
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Judge_Jump");
 
 		ContentsHelper::LoadSound("Sound\\Effect", "boss_judgement_land.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "demon_capture_002.wav");
 
 		IsLoad = true;
 	}

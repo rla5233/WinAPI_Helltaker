@@ -46,7 +46,7 @@ void Demon::BeginPlay()
 		ContentsHelper::LoadImg("Effect", "LoveSign.png");
 		ContentsHelper::LoadImg("Effect\\Particle", "LoveStar.png");
 		ContentsHelper::LoadFolder("Effect", "LovePlosion");
-		ContentsHelper::LoadSound("Sound\\Effect", "demon_capture.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "demon_capture_001.wav");
 
 		IsLoad = true; 
 	}
@@ -120,7 +120,15 @@ void Demon::VictoryStart()
 	EffectCount = StarEffectCount;
 	DelayTimeCount = StarEffectDelay;
 	VictoryOrder = 0;
-	UEngineSound::SoundPlay("demon_capture.wav");
+
+	if (UEngineString::ToUpper("SinChapter4") == GetWorld()->GetName())
+	{
+		UEngineSound::SoundPlay("demon_capture_002.wav");
+	}
+	else
+	{
+		UEngineSound::SoundPlay("demon_capture_001.wav");
+	}
 }
 
 void Demon::Victory(float _DeltaTime)
