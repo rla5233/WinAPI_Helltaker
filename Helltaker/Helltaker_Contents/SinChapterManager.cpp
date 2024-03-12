@@ -502,8 +502,9 @@ void SinChapterManager::Intro(float _DeltaTime)
 	}
 
 	// Debug
-	if (UEngineInput::IsDown(VK_SPACE))
+	if (UEngineInput::IsDown('P'))
 	{
+		TransitionActor->GetImageRenderer()->ActiveOff();
 		M_StateChange(ESinState::Phase1);
 	}
 }
@@ -580,8 +581,9 @@ void SinChapterManager::Phase1(float _DeltaTime)
 	}
 	
 	// Debug
-	if (UEngineInput::IsDown(VK_SPACE))
+	if (UEngineInput::IsDown('P'))
 	{
+		SpeedY = 0.0f;
 		M_StateChange(ESinState::Phase2);
 	}
 }
@@ -710,6 +712,28 @@ void SinChapterManager::Phase2(float _DeltaTime)
 	case 1:
 		JudgeAppear(_DeltaTime);
 		break;
+	}
+
+	// Debug
+	if (UEngineInput::IsDown('P'))
+	{
+		for (std::pair<const __int64, HitChain*>& Chain : AllHitChain)
+		{
+			if (nullptr == Chain.second)
+			{
+				MsgBoxAssert("Actor is nullptr");
+			}
+			
+			Chain.second->Destroy();
+			Chain.second = nullptr;
+		}
+
+		AllHitChain.clear();
+		SinHitChainHp->AllRenderersActiveOff();
+		
+		Judge->StateChange(EDemonState::Sin_Appear);
+		TimeCount = CutSceneDelayTime;
+		OrderCount = 1;
 	}
 }
 
@@ -1035,12 +1059,6 @@ void SinChapterManager::Tick(float _DeltaTime)
 
 	StateUpdate(_DeltaTime);
 	DebugMode();
-
-	// Debug
-	if (UEngineInput::IsPress('P'))
-	{
-		M_StateChange(ESinState::CutScene);
-	}
 }
 
 void SinChapterManager::StateUpdate(float _DeltaTime)
