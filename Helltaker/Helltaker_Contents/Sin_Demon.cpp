@@ -1,5 +1,7 @@
 #include "Sin_Demon.h"
 
+#include <EnginePlatform/EngineSound.h>
+
 bool Sin_Demon::IsLoad = false;
 
 const FVector Sin_Demon::Scale = { 0.0521f, 0.093f };
@@ -21,6 +23,8 @@ void Sin_Demon::BeginPlay()
 	if (false == IsLoad)
 	{
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Judge_Jump");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_judgement_land.wav");
 
 		IsLoad = true;
 	}
@@ -79,6 +83,8 @@ void Sin_Demon::Sin_AppearStart()
 	ImageRenderer->AnimationReset();
 	ImageRenderer->ChangeAnimation("Judge_Appear");
 	ImageRenderer->ActiveOn();
+
+	UEngineSound::SoundPlay("boss_judgement_land.wav");
 }
 
 void Sin_Demon::Sin_Appear(float _DeltaTime)
