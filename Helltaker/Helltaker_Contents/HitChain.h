@@ -59,6 +59,7 @@ private:
 
 	void HitStart();
 	void Hit(float _DeltaTime);
+	void HitSoundPlay();
 
 	void DeathStart();
 	void Death(float _DeltaTime);

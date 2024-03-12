@@ -33,6 +33,16 @@ void HitChain::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "boss_big_chain_show_001.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "boss_big_chain_show_002.wav");
 
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_break_L.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_break_R.wav");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_kick_L_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_kick_R_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_kick_L_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_kick_R_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_kick_L_003.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_kick_R_003.wav");
+
 		IsLoad = true;
 	}
 
@@ -127,6 +137,8 @@ void HitChain::HitStart()
 {
 	GetSinChapter()->GetHitChainHp()->StateChange(ESinHitChainHpState::Hit);
 	ImageRenderer->SetAlpha(1.0f);
+	HitSoundPlay();
+
 	--HitCount;
 	HitDelayTimeCount = HitDelayTime;
 	CanHit = false;
@@ -145,6 +157,43 @@ void HitChain::Hit(float _DeltaTime)
 	}
 
 	HitDelayCheck(_DeltaTime);
+}
+
+void HitChain::HitSoundPlay()
+{
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
+	
+	switch (Type)
+	{
+	case ESinHitChainType::Left:
+		switch (RandomValue)
+		{
+		case 1:
+			UEngineSound::SoundPlay("boss_chain_kick_L_001.wav").SetVolume(0.7f);
+			break;
+		case 2:
+			UEngineSound::SoundPlay("boss_chain_kick_L_002.wav").SetVolume(0.7f);
+			break;
+		case 3:
+			UEngineSound::SoundPlay("boss_chain_kick_L_003.wav").SetVolume(0.7f);
+			break;
+		}
+		break;
+	case ESinHitChainType::Right:
+		switch (RandomValue)
+		{
+		case 1:
+			UEngineSound::SoundPlay("boss_chain_kick_R_001.wav").SetVolume(0.7f);
+			break;
+		case 2:
+			UEngineSound::SoundPlay("boss_chain_kick_R_002.wav").SetVolume(0.7f);
+			break;
+		case 3:
+			UEngineSound::SoundPlay("boss_chain_kick_R_003.wav").SetVolume(0.7f);
+			break;
+		}
+		break;
+	}
 }
 
 void HitChain::HitDelayCheck(float _DeltaTime)
