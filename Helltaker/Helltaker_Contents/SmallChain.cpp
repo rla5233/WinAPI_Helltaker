@@ -7,7 +7,8 @@
 #include <EngineBase/EngineRandom.h>
 
 bool SmallChain::IsLoad = false;
-bool SmallChain::IsHitSound = false;
+bool SmallChain::IsHitSound = false; 
+bool SmallChain::IsHeroHit = false;
 
 const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
@@ -142,6 +143,7 @@ void SmallChain::VerShowAnimation(float _DeltaTime)
 		if (1.0f <= TimeCount)
 		{
 			TimeCount = HitStartDelay;
+			IsHeroHit = false;
 			IsShow = false;
 		}
 	}
@@ -160,6 +162,7 @@ void SmallChain::HorShowAnimation(float _DeltaTime)
 		if (1.0f <= TimeCount)
 		{
 			TimeCount = HitStartDelay;
+			IsHeroHit = false;
 			IsShow = false;
 		}
 	}
@@ -268,7 +271,7 @@ void SmallChain::HorHitAnimation(float _DeltaTime)
 
 void SmallChain::HeroHitCheck(float _DeltaTime)
 {
-	if (0.0f < HitTimeCount)
+	if (0.0f < HitTimeCount && false == IsHeroHit)
 	{
 		FVector HeroPos = GetSinChapter()->GetPlayerHero()->GetActorLocation();
 		FVector Pos = GetActorLocation();
@@ -278,6 +281,7 @@ void SmallChain::HeroHitCheck(float _DeltaTime)
 			if (25.0f > abs(HeroPos.X - Pos.X))
 			{
 				GetSinChapter()->GetPlayerHero()->SinHero_StateChange(ESinHeroState::Hit);
+				IsHeroHit = true;
 				HitTimeCount = 0.0f;
 			}
 			break;
@@ -285,6 +289,7 @@ void SmallChain::HeroHitCheck(float _DeltaTime)
 			if (25.0f > abs(HeroPos.Y - Pos.Y))
 			{
 				GetSinChapter()->GetPlayerHero()->SinHero_StateChange(ESinHeroState::Hit);
+				IsHeroHit = true;
 				HitTimeCount = 0.0f;
 			}
 			break;
