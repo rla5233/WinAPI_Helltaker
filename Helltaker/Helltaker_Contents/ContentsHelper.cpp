@@ -59,13 +59,6 @@ void ContentsHelper::LoadSound(std::string_view _Path, std::string_view _Name)
 	UEngineSound::Load(ResourcesPath.AppendPath(_Name), _Name);
 }
 
-void ContentsHelper::SoundPlay(std::string_view _Name)
-{
-	UEngineSound::SoundPlay(_Name);
-
-	//ContentsHelper::SoundPlay("Vitality.wav");
-}
-
 FVector ContentsHelper::RandomCirclePoint(FVector _Center, float _Radius)
 {
 	if (0 == _Radius)
