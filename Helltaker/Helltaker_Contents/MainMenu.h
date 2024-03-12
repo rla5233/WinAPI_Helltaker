@@ -53,6 +53,12 @@ private:
 	void EnterChapterStart();
 	void EnterChapter();
 
+	void ReturnStart();
+	void Return(float _DeltaTime);
+	void Return1();
+	void Return2();
+	bool SetReturn = false;
+
 	void ExitStart();
 	void Exit(float _DeltaTime);
 
@@ -70,7 +76,7 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
-	int NewGameOrder = -1;
+	int OrderCount = -1;
 	int SelectChapterNum = -1;
 	float DialogueMoveSum = 0.0f;
 	
@@ -82,6 +88,7 @@ private:
 
 	EMainMenuState State = EMainMenuState::None;
 
+	static bool ReturnMainMenu;
 	static const std::vector<const char*> MainMenu_Script;
 	static bool IsLoad;
 };

@@ -15,6 +15,7 @@
 #include "Chapter9.h"
 
 bool MainMenu::IsLoad = false;
+bool MainMenu::ReturnMainMenu = false;
 
 const std::vector<const char*> MainMenu::MainMenu_Script
 {
@@ -30,7 +31,8 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 	/* 9  NewGame4 */ "어느날 당신은 악마들로 가득찬 하렘을\n꿈꾸고 일어났네.",
 	/* 10 NewGame5 */ "하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.",
 	/* 11 NewGame6 */ "\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.",
-	/* 12 Exit     */ "나도 수 없이 시도 해봤지만 아직 제대로 성공한 적이 없지."
+	/* 12 Exit     */ "나도 수 없이 시도 해봤지만 아직 제대로 성공한 적이 없지.",
+	/* 13 Return   */ "다른 원하는 것이라도 있나?"
 };
 
 MainMenu::MainMenu()
@@ -105,12 +107,21 @@ void MainMenu::LevelStart(ULevel* _PrevLevel)
 	C_SpawnBooper();	
 
 	MainMenuBGMPlayer.On();
-	StateChange(EMainMenuState::Begin);
+
+	if (false == ReturnMainMenu)
+	{
+		StateChange(EMainMenuState::Begin);
+	}
+	else
+	{
+		StateChange(EMainMenuState::Return);
+	}
 }
 
 void MainMenu::BeginStart()
 {
 	C_BooperTextSet(MainMenu_Script[1]);
+	ReturnMainMenu = true;
 }
 
 void MainMenu::Begin(float _DeltaTime)
@@ -190,12 +201,12 @@ void MainMenu::NewGameStart()
 	C_BooperImageRendererOn();
 	C_BooperTextSet(MainMenu_Script[6]);
 
-	NewGameOrder = 0;
+	OrderCount = 0;
 }
 
 void MainMenu::NewGame(float _DeltaTime)
 {
-	switch (NewGameOrder)
+	switch (OrderCount)
 	{
 	case 0:
 		DialogueMoveUpdate(_DeltaTime);
@@ -224,9 +235,8 @@ void MainMenu::NewGameOrder1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(MainMenu_Script[7]);
-		UEngineSound::SoundPlay("booper_click.wav");
-		++NewGameOrder;
+		C_BooperTextSet(MainMenu_Script[7], true);
+		++OrderCount;
 	}
 }
 
@@ -236,9 +246,8 @@ void MainMenu::NewGameOrder2()
 	{
 		C_GetDialogue()->AllRenderersActiveOff();
 		C_GetSceneCharacter()->AllRenderersActiveOff();
-		C_BooperTextSet(MainMenu_Script[8]);
-		UEngineSound::SoundPlay("booper_click.wav");
-		++NewGameOrder;
+		C_BooperTextSet(MainMenu_Script[8], true);
+		++OrderCount;
 	}
 }
 
@@ -250,13 +259,12 @@ void MainMenu::NewGameLastOrder()
 		FVector Scale = { WinScale.X * 0.67f, WinScale.Y * 0.6f };
 		FVector Pos = { 0.0f, WinScale.Y * (-0.02f) };
 		std::string ImgName = "CutScene1_00";
-		ImgName += std::to_string(NewGameOrder - 1) + ".png";
+		ImgName += std::to_string(OrderCount - 1) + ".png";
 		C_ChangeDialogue(ImgName, { Pos, Scale });
 
-		C_BooperTextSet(MainMenu_Script[NewGameOrder + 7]);
+		C_BooperTextSet(MainMenu_Script[OrderCount + 7], true);
 		SelectChapterNum = 1;
-		UEngineSound::SoundPlay("booper_click.wav");
-		++NewGameOrder;
+		++OrderCount;
 	}
 }
 
@@ -502,6 +510,62 @@ void MainMenu::EnterChapter()
 	}
 }
 
+void MainMenu::ReturnStart()
+{
+	GetTransitionActor()->GetImageRenderer()->ActiveOn();
+	GetTransitionActor()->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
+	UEngineSound::SoundPlay("transition_off.wav");
+
+	OrderCount = 0;
+}
+
+void MainMenu::Return(float _DeltaTime)
+{
+	DialogueMoveUpdate(_DeltaTime);
+	switch (OrderCount)
+	{
+	case 0:
+		Return1();
+		break;
+	case 1:
+		Return2();
+		break;
+	}
+}
+
+void MainMenu::Return1()
+{
+	if (false == SetReturn
+	&&  26 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
+	{
+		FVector Scale = { 1.04f, 0.693f };
+		FVector Pos = { 0.0f, -0.0445f };
+		C_SpawnCharacter("Beel", "Beel_Fly.png", MainMenu_Script[0], Pos, Scale);
+		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
+
+		C_BooperTextSet(MainMenu_Script[13]);
+
+		SetReturn = true;
+	}
+
+	if (true == GetTransitionActor()->GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetTransitionActor()->GetImageRenderer()->ActiveOff();
+		SetReturn = true;
+		++OrderCount;
+	}
+}
+
+void MainMenu::Return2()
+{
+	if ((false == C_GetSceneCharacter()->IsImgMoveOn())
+		&& (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN)))
+	{
+		UEngineSound::SoundPlay("booper_click.wav");
+		StateChange(EMainMenuState::Select);
+	}
+}
+
 void MainMenu::Exit(float _DeltaTime)
 {
 	DialogueMoveUpdate(_DeltaTime);
@@ -569,6 +633,9 @@ void MainMenu::StateUpdate(float _DeltaTime)
 	case EMainMenuState::EnterChapter:
 		EnterChapter();
 		break;
+	case EMainMenuState::Return:
+		Return(_DeltaTime);
+		break;
 	case EMainMenuState::Exit:
 		Exit(_DeltaTime);
 		break;
@@ -598,6 +665,9 @@ void MainMenu::StateChange(EMainMenuState _State)
 			break;
 		case EMainMenuState::EnterChapter:
 			EnterChapterStart();
+			break;
+		case EMainMenuState::Return:
+			ReturnStart();
 			break;
 		case EMainMenuState::Exit:
 			ExitStart();

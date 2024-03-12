@@ -1910,8 +1910,8 @@ void Epilogue::Ending5()
 
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		//TransitionOn();
-		//++OrderCount;
+		TransitionOn();
+		++OrderCount;
 	}
 }
 
@@ -1919,7 +1919,7 @@ void Epilogue::GoBackMainMenu()
 {
 	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
 	{
-		//GEngine->ChangeLevel("MainMenu");
+		GEngine->ChangeLevel("MainMenu");
 	}
 }
 

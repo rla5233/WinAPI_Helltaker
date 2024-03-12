@@ -162,6 +162,7 @@ enum class EMainMenuState
 	SelectChapter,
 	NewGame,
 	EnterChapter,
+	Return,
 	Exit
 };
 
