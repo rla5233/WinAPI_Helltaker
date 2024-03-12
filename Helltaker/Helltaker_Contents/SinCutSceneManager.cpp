@@ -50,6 +50,7 @@ void SinCutSceneManager::CutSceneStart()
 {
 	SinChapterManager::CutSceneStart();
 
+	UEngineSound::SoundPlay("dialogue_start.wav");
 	C_CreateSceneBG();
 	C_SpawnBooper();
 

@@ -67,8 +67,6 @@ void SinChapterManager::BeginPlay()
 		SinBGMPlayer.Loop();
 		SinBGMPlayer.Off();
 
-		//UEngineSound::SoundPlay("boss_machine_off.wav");
-
 		IsLoad = true;
 	}
 }
