@@ -422,6 +422,7 @@ void ChapterManager::Idle(float _DeltaTime)
 	// Debug
 	if (UEngineInput::IsPress('P'))
 	{
+		TransitionActor->AllRenderersActiveOff();
 		M_StateChange(EChapterState::CutScene);
 	}
 }
