@@ -87,6 +87,7 @@ void Sin_Demon::Sin_AppearStart()
 	ImageRenderer->ActiveOn();
 	
 	CreateLandEffect();
+	ImageRenderer->SetOrder(static_cast<int>(SinRenderOrder::Top));
 	UEngineSound::SoundPlay("boss_judgement_land.wav");
 }
 
@@ -97,17 +98,19 @@ void Sin_Demon::CreateLandEffect()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	UImageRenderer* Renderer1 = CreateImageRenderer(SinRenderOrder::Top);
+	Renderer1->SetImage("Move");
 	Renderer1->CreateAnimation("Land_Effect", "Move", 0, 2, AppearInter);
 
 	LandEffect.push_back(Renderer1);
 
 	UImageRenderer* Renderer2 = CreateImageRenderer(SinRenderOrder::Top);
+	Renderer2->SetImage("Move");
 	Renderer2->CreateAnimation("Land_Effect", "Move", 3, 5, AppearInter);
 
 	LandEffect.push_back(Renderer2);
 
-
 	UImageRenderer* Renderer3 = CreateImageRenderer(SinRenderOrder::Top);
+	Renderer3->SetImage("Move");
 	Renderer3->CreateAnimation("Land_Effect", "Move", 6, 8, AppearInter);
 	
 	LandEffect.push_back(Renderer3);
