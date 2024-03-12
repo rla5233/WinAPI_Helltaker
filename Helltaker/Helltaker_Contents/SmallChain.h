@@ -65,6 +65,7 @@ private:
 	
 	bool IsShow = false;
 	bool IsHit = false;
+	static bool IsHitSound;
 	static const float HitStartDelay;
 	float TimeCount = 0.0f;
 

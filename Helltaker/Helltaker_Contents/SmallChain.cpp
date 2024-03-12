@@ -4,7 +4,10 @@
 #include "Sin_Thorn.h"	
 #include "Sin_Hero.h"
 
+#include <EngineBase/EngineRandom.h>
+
 bool SmallChain::IsLoad = false;
+bool SmallChain::IsHitSound = false;
 
 const FVector SmallChain::V_Scale = { 0.03f, 1.0f };
 const FVector SmallChain::H_Scale = { 1.0f, 0.052f };
@@ -27,6 +30,13 @@ void SmallChain::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_VChain.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_HChain.png");
+
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_blink_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_blink_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_blink_003.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_blink_004.wav");
+
+		//UEngineSound::SoundPlay("Vitality.wav");
 
 		IsLoad = true;
 	}
@@ -83,6 +93,7 @@ void SmallChain::ShowStart()
 	}
 
 	ImageRenderer->ActiveOn();
+	IsHitSound = false;
 	IsShow = true;
 	TimeCount = 0.0f;
 }
@@ -158,6 +169,28 @@ void SmallChain::HorShowAnimation(float _DeltaTime)
 
 void SmallChain::HitStart()
 {
+	if (false == IsHitSound)
+	{
+		int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 4);
+		switch (RandomValue)
+		{
+		case 1:
+			UEngineSound::SoundPlay("boss_chain_blink_001.wav");
+			break;
+		case 2:
+			UEngineSound::SoundPlay("boss_chain_blink_002.wav");
+			break;
+		case 3:
+			UEngineSound::SoundPlay("boss_chain_blink_003.wav");
+			break;
+		case 4:
+			UEngineSound::SoundPlay("boss_chain_blink_004.wav");
+			break;
+		}
+		
+		IsHitSound = true;
+	}
+
 	ImageRenderer->SetAlpha(1);
 	IsHit = true;
 	TimeCount = 0.0f;
