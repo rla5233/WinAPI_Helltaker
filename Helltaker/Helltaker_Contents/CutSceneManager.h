@@ -96,6 +96,11 @@ public:
 	void AllCutSceneActorOn();
 	void AllCutSceneActorOff();
 
+	void C_AddCutSceneActor(AActor* const _Actor)
+	{
+		AllCutSceneActors.push_back(_Actor);
+	}
+
 	void C_StateChange(ECutSceneState _State);
 
 protected:

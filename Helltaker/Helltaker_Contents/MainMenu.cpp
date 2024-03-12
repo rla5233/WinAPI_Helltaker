@@ -13,6 +13,7 @@
 #include "Chapter7.h"
 #include "Chapter8.h"
 #include "Chapter9.h"
+#include "EpilogueOpening.h"
 
 bool MainMenu::IsLoad = false;
 bool MainMenu::ReturnMainMenu = false;
@@ -326,6 +327,7 @@ void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 		
 		interval += WinScale.X * 0.0625f;
 		SC_MenuBar.push_back(MenuBar);
+		C_AddCutSceneActor(MenuBar);
 	}
 
 	for (int i = 0; i < 2; i++)
@@ -348,6 +350,7 @@ void MainMenu::SpawnSC_MenuBar(int _IndexCount)
 		}
 
 		SC_MenuBar.push_back(TopBottomBar);
+		C_AddCutSceneActor(TopBottomBar);
 	}
 
 	SetFocusSC_MenuIndex(0);
@@ -370,15 +373,28 @@ void MainMenu::SelectChapterMenu()
 
 void MainMenu::SC_MenuBarOn()
 {
-	for (UI* Menu : SC_MenuBar)
+	for (int i = 0; i < static_cast<int>(SC_MenuBar.size()); i++)
 	{
-		if (nullptr == Menu)
+		if (nullptr == SC_MenuBar[i])
 		{
 			MsgBoxAssert("Actor is nullptr");
 		}
 
-		Menu->AllRenderersActiveOn();
+		SetFocusSC_MenuIndex(i);
+
+		if (0 == i)
+		{
+			AutoSC_SelectMenuImage();
+		}
+		else if (i < 10)
+		{
+			AutoSC_UnSelectMenuImage();
+		}
+
+		SC_MenuBar[i]->AllRenderersActiveOn();
 	}
+
+	SetFocusSC_MenuIndex(0);
 }
 
 void MainMenu::SC_MenuBarOff()
@@ -504,6 +520,10 @@ void MainMenu::EnterChapter()
 		case 9:
 			CreateChapter<Chapter9>(Chapter);
 			break;
+		case 10:
+			Chapter = "EpilogueOpening";
+			CreateChapter<EpilogueOpening>(Chapter);
+			break;
 		}		
 
 		GEngine->ChangeLevel(Chapter);
@@ -515,6 +535,7 @@ void MainMenu::ReturnStart()
 	GetTransitionActor()->GetImageRenderer()->ActiveOn();
 	GetTransitionActor()->GetImageRenderer()->ChangeAnimation("Transition", false, 19);
 	UEngineSound::SoundPlay("transition_off.wav");
+	MainMenuBGMPlayer.Replay();
 
 	OrderCount = 0;
 }
@@ -683,4 +704,5 @@ void MainMenu::LevelEnd(ULevel* _NextLevel)
 	CutSceneManager::LevelEnd(_NextLevel);
 
 	MainMenuBGMPlayer.Off();
+	SC_MenuBar.clear();
 }
