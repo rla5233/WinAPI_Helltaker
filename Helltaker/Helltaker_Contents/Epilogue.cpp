@@ -12,6 +12,8 @@ bool Epilogue::IsLoad = false;
 const FVector Epilogue::ManScale = { 0.391f, 0.674f };
 const FVector Epilogue::ManPos = { 0.0f, -0.032f };
 
+UEngineSoundPlayer Epilogue::EpilBGMPlayer;
+
 Epilogue::Epilogue()
 {
 }
@@ -58,6 +60,13 @@ void Epilogue::BeginPlay()
 		
 		ContentsHelper::LoadFolder("Chapter\\Demon", "Lucy_Epil");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Zd_Ignite");
+
+
+		ContentsHelper::LoadSound("Sound\\BGM", "Luminescent.wav");
+
+		EpilBGMPlayer = UEngineSound::SoundPlay("Luminescent.wav");
+		EpilBGMPlayer.SetVolume(0.8f);
+		EpilBGMPlayer.Loop();
 
 		AddChapterSet("Epilogue");
 		IsLoad = true;

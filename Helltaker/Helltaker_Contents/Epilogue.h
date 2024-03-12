@@ -156,6 +156,8 @@ private:
 	
 	EEpilogueState State = EEpilogueState::None;
 
+	static UEngineSoundPlayer EpilBGMPlayer;
+
 	static const FVector ManScale;
 	static const FVector ManPos;
 
