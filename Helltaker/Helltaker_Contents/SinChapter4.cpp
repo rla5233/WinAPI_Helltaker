@@ -188,7 +188,7 @@ void SinChapter4::Phase2_Start()
 	M_CreateHitChain(ESinHitChainType::Left, 2);
 	M_CreateHitChain(ESinHitChainType::Right, 0);
 	M_CreateHitChain(ESinHitChainType::Right, 2);
-	M_CreateHitChainHp("절망의 사슬");
+	M_CreateHitChainHp("4. 절망의 사슬");
 
 	M_SetSmallChainVecSize(4, ESinPhase::Phase2);
 

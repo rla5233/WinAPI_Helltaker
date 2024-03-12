@@ -166,7 +166,7 @@ void SinChapter3::Phase2_Start()
 
 	M_CreateHitChain(ESinHitChainType::Left, 0);
 	M_CreateHitChain(ESinHitChainType::Right, 2);
-	M_CreateHitChainHp("욕정의 사슬");
+	M_CreateHitChainHp("3. 욕정의 사슬");
 
 	M_SetSmallChainVecSize(4, ESinPhase::Phase2);
 

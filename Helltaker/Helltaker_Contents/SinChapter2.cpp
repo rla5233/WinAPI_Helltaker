@@ -148,7 +148,7 @@ void SinChapter2::Phase2_Start()
 
 	M_CreateHitChain(ESinHitChainType::Left, 2);
 	M_CreateHitChain(ESinHitChainType::Right, 0);
-	M_CreateHitChainHp("Å½¿åÀÇ »ç½½");
+	M_CreateHitChainHp("2. Å½¿åÀÇ »ç½½");
 
 	M_SetSmallChainVecSize(3, ESinPhase::Phase2);
 
