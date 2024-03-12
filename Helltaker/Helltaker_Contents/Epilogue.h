@@ -24,6 +24,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* _PrevLevel) override;
+	void LevelEnd(ULevel* _NextLevel) override;
 
 	void CutSceneCheck() override;
 	void CutSceneStart() override;
@@ -136,6 +137,7 @@ private:
 	void Ending3();
 	void Ending4();
 	void Ending5();
+	void GoBackMainMenu();
 
 	void SpawnPolice();
 	void GoBackChapter();

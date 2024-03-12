@@ -127,6 +127,13 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 #endif
 }
 
+void Epilogue::LevelEnd(ULevel* _NextLevel)
+{
+	HellTakerManager::LevelEnd(_NextLevel);
+
+	CanCutScene.clear();
+}
+
 void Epilogue::M_SpawnDemon(Point _Point, std::string_view _Name, const FTransform& _FTransform)
 {
 	ChapterManager::M_SpawnDemon(_Point, _Name, _FTransform);
@@ -1774,6 +1781,9 @@ void Epilogue::Ending()
 	case 12:
 		Ending5();
 		break;
+	case 13:
+		GoBackMainMenu();
+		break;
 	default:
 		Ending2();
 		break;
@@ -1833,7 +1843,16 @@ void Epilogue::Ending5()
 
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		int a = 0;
+		//TransitionOn();
+		//++OrderCount;
+	}
+}
+
+void Epilogue::GoBackMainMenu()
+{
+	if (19 == GetTransitionActor()->GetImageRenderer()->GetCurAnimationFrame())
+	{
+		//GEngine->ChangeLevel("MainMenu");
 	}
 }
 

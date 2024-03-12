@@ -40,8 +40,6 @@ void Helltaker_ContentsCore::BeginPlay()
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	SetFrame(60);
 
-	//MainWindow.SetWindowScale({ 1280, 720 });
-
     CreateLevel<Opening>("Opening");
     ChangeLevel("Opening");
 
