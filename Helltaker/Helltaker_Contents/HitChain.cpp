@@ -3,8 +3,11 @@
 #include "SinChapterManager.h"
 #include "HitChainHp.h"
 
+#include <EngineBase/EngineRandom.h>
+
 const FVector HitChain::Scale = { 0.2656f, 0.898f };
 bool HitChain::IsLoad = false;
+bool HitChain::IsSound = false;
 
 const float HitChain::HitDelayTime = 0.19f;
 
@@ -27,10 +30,14 @@ void HitChain::BeginPlay()
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_LBrokenChain.png");
 		ContentsHelper::LoadImg("Chapter\\Component", "Sin_RBrokenChain.png");
 
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_big_chain_show_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_big_chain_show_002.wav");
+
 		IsLoad = true;
 	}
 
 	ImageRenderer = CreateImageRenderer(SinRenderOrder::Top);
+	IsSound = false;
 }
 
 void HitChain::IdleStart()
@@ -43,6 +50,22 @@ void HitChain::IdleStart()
 	case ESinHitChainType::Right:
 		ImageRenderer->SetImage("Sin_RHitChain.png");
 		break;
+	}
+
+	if (false == IsSound)
+	{
+		int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 4);
+		switch (RandomValue)
+		{
+		case 1:
+			UEngineSound::SoundPlay("boss_big_chain_show_001.wav");
+			break;
+		case 2:
+			UEngineSound::SoundPlay("boss_big_chain_show_002.wav");
+			break;
+		}
+
+		IsSound = true;
 	}
 
 	FVector WinScale = ContentsHelper::GetWindowScale();

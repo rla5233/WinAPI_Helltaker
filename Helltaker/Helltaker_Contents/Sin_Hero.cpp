@@ -7,12 +7,28 @@
 #include <EngineBase/EngineRandom.h>
 #include <EnginePlatform/EngineSound.h>
 
+bool Sin_Hero::IsLoad = false;
+
 Sin_Hero::Sin_Hero()
 {
 }
 
 Sin_Hero::~Sin_Hero()
 {
+}
+
+void Sin_Hero::BeginPlay()
+{
+	HeroBase::BeginPlay();
+
+	if (false == IsLoad)
+	{
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_damage_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_damage_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_damage_003.wav");
+
+		IsLoad = true;
+	}
 }
 
 void Sin_Hero::ActionCheck()
@@ -128,14 +144,17 @@ void Sin_Hero::HitStart()
 	CreateRandomHitEffect();
 	--Life;
 
-	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 2);
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
 	switch (RandomValue)
 	{
 	case 1:
-		UEngineSound::SoundPlay("player_damage_001.wav");
+		UEngineSound::SoundPlay("boss_chain_damage_001.wav").SetVolume(0.7f);
 		break;
 	case 2:
-		UEngineSound::SoundPlay("player_damage_002.wav");
+		UEngineSound::SoundPlay("boss_chain_damage_002.wav").SetVolume(0.7f);
+		break;
+	case 3:
+		UEngineSound::SoundPlay("boss_chain_damage_003.wav").SetVolume(0.7f);
 		break;
 	}
 

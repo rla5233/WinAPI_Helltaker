@@ -58,6 +58,7 @@ void SinChapterManager::BeginPlay()
 		ContentsHelper::LoadImg("UI", "White_Bar.png");
 
 		ContentsHelper::LoadSound("Sound\\Effect", "boss_machine_start.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "boss_machine_off.wav");
 
 		ContentsHelper::LoadSound("Sound\\BGM", "Epitomize.wav");
 
@@ -66,7 +67,7 @@ void SinChapterManager::BeginPlay()
 		SinBGMPlayer.Loop();
 		SinBGMPlayer.Off();
 
-		//UEngineSound::SoundPlay("boss_machine_start.wav");
+		//UEngineSound::SoundPlay("boss_machine_off.wav");
 
 		IsLoad = true;
 	}
@@ -689,6 +690,7 @@ void SinChapterManager::Phase2_Start()
 	SinChainLinkMoveOff();
 	AllThornMoveOff();
 
+	UEngineSound::SoundPlay("boss_machine_off.wav");
 	DownPiston->StateChange(ESinPistonState::Move);
 	SinGear->StateChange(ESinGearState::Stop);
 

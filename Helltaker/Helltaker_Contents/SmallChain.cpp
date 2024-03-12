@@ -36,8 +36,6 @@ void SmallChain::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_blink_003.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "boss_chain_blink_004.wav");
 
-		//UEngineSound::SoundPlay("Vitality.wav");
-
 		IsLoad = true;
 	}
 }

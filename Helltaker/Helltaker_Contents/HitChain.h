@@ -73,6 +73,7 @@ private:
 	static const FVector Scale;
 
 	int IdleOrder = -1;
+	static bool IsSound;
 
 	int HitCount = 6;
 	static const float HitDelayTime;

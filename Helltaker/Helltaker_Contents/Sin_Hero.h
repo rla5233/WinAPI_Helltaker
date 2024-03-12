@@ -41,7 +41,8 @@ public:
 	void SinHero_StateChange(ESinHeroState _State);
 
 protected:
-	void Tick(float _DeltaTime);
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 	void MoveStart() override;
 
@@ -74,5 +75,6 @@ private:
 	int Life = 4;
 
 	ESinHeroState State = ESinHeroState::None;
+	static bool IsLoad;
 };
 
