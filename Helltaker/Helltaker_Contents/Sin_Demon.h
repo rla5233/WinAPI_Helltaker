@@ -29,12 +29,15 @@ protected:
 
 	void Sin_AppearStart() override;
 	void Sin_Appear(float _DeltaTime) override;
+	void CreateLandEffect();
 
 	void VictoryStart() override;
 	void CreateStarEffect();
 	void CreateLovePlosion(float _DeltaTime);
 
 private:
+	std::list<UImageRenderer*> LandEffect;
+
 	static const FVector Scale;
 	static const FVector AppearScale;
 	static const float AppearInter;

@@ -1,5 +1,6 @@
 #include "Sin_Demon.h"
 
+#include <EngineBase/EngineRandom.h>
 #include <EnginePlatform/EngineSound.h>
 
 bool Sin_Demon::IsLoad = false;
@@ -84,9 +85,30 @@ void Sin_Demon::Sin_AppearStart()
 	ImageRenderer->AnimationReset();
 	ImageRenderer->ChangeAnimation("Judge_Appear");
 	ImageRenderer->ActiveOn();
-
+	
+	CreateLandEffect();
 	UEngineSound::SoundPlay("boss_judgement_land.wav");
 }
 
 void Sin_Demon::Sin_Appear(float _DeltaTime)
 {}
+
+void Sin_Demon::CreateLandEffect()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	UImageRenderer* Renderer1 = CreateImageRenderer(SinRenderOrder::Top);
+	Renderer1->CreateAnimation("Land_Effect", "Move", 0, 2, AppearInter);
+
+	LandEffect.push_back(Renderer1);
+
+	UImageRenderer* Renderer2 = CreateImageRenderer(SinRenderOrder::Top);
+	Renderer2->CreateAnimation("Land_Effect", "Move", 3, 5, AppearInter);
+
+	LandEffect.push_back(Renderer2);
+
+
+	UImageRenderer* Renderer3 = CreateImageRenderer(SinRenderOrder::Top);
+	Renderer3->CreateAnimation("Land_Effect", "Move", 6, 8, AppearInter);
+	
+	LandEffect.push_back(Renderer3);
+}
