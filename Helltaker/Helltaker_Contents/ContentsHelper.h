@@ -454,3 +454,10 @@ enum class ESinJudgeState
 	Intro_Appear,
 	Chap3_Fly
 };
+
+enum class ESinSkelState
+{
+	None,
+	Start,
+	Idle
+};

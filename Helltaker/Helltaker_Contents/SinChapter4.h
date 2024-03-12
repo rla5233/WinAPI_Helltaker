@@ -2,6 +2,8 @@
 
 #include "SinCutSceneManager.h"
 
+class SuccessSkel; 
+
 // Ό³Έν :
 class SinChapter4 : public SinCutSceneManager
 {
@@ -56,10 +58,13 @@ private:
 	void Success1();
 	void Success2();
 
+	void CraeteSuccessSkel();
+
 private:
 	int OrderCount = -1;
+
+	SuccessSkel* Skel = nullptr;
 
 	static const std::vector<const char*> SinChap4_Script;
 	static bool IsLoad;
 };
-

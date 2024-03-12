@@ -85,6 +85,11 @@ public:
 		return Booper;
 	}
 
+	void C_AddCutSceneActor(AActor* const _Actor)
+	{
+		AllCutSceneActors.push_back(_Actor);
+	}
+
 	void C_StateChange(ESinSceneState _State);
 
 protected:

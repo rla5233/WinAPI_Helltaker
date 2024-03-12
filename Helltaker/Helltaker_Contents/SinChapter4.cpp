@@ -1,5 +1,6 @@
 #include "SinChapter4.h"
 
+#include "SuccessSkel.h"
 #include "Sin_Judge.h"
 #include "UI.h"
 
@@ -420,6 +421,7 @@ void SinChapter4::Select14()
 	C_BooperTextSet(SinChap4_Script[19]);
 
 	OrderCount = 0;
+	CraeteSuccessSkel();
 	C_StateChange(ESinSceneState::Success);
 }
 
@@ -427,6 +429,7 @@ void SinChapter4::Success1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		Skel->AllRenderersActiveOff();
 		C_BooperTextSet(SinChap4_Script[20]);
 
 		FVector WinScale = ContentsHelper::GetWindowScale();
@@ -443,6 +446,15 @@ void SinChapter4::Success2()
 	{
 		SuccessEnd();
 	}
+}
+
+void SinChapter4::CraeteSuccessSkel()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	Skel = SpawnActor<SuccessSkel>(SinUpdateOrder::Top);
+	Skel->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.7f });
+	Skel->StateChange(ESinSkelState::Start);
+	C_AddCutSceneActor(Skel);
 }
 
 void SinChapter4::ChangeChapter()

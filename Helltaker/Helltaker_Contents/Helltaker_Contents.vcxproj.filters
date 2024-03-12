@@ -169,6 +169,9 @@
     <ClInclude Include="EpilogueOpening.h">
       <Filter>Object\Level\Ending</Filter>
     </ClInclude>
+    <ClInclude Include="SuccessSkel.h">
+      <Filter>Object\Actor\Sin\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helltaker_ContentsCore.cpp">
@@ -338,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="EpilogueOpening.cpp">
       <Filter>Object\Level\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="SuccessSkel.cpp">
+      <Filter>Object\Actor\Sin\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
