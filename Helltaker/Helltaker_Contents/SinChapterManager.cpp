@@ -99,6 +99,7 @@ void SinChapterManager::M_CreateSinMap(int _ChapterNum)
 	M_CreateSinBridge();
 	M_CreateThorn();
 	M_SpawnHero();
+	M_SpawnDemon();
 	
 	M_CreateSinHeroLife(_ChapterNum);
 }
@@ -312,7 +313,7 @@ void SinChapterManager::M_SpawnDemon()
 	Judge = SpawnActor<Sin_Demon>(static_cast<int>(SinUpdateOrder::Top));
 	Judge->SetActorLocation({ WinScale.hX(), PosY });
 	Judge->SetDemon("Judge", { { 0.0f, 0.0f }, WinScale * Sin_Demon::GetIdleScale() });
-	Judge->StateChange(EDemonState::Sin_Appear);
+	Judge->AllRenderersActiveOff();
 
 	AllMapRenderActors.push_back(Judge);
 }
@@ -752,7 +753,7 @@ void SinChapterManager::HitChainCheck()
 {
 	if (true == AllHitChain.empty())
 	{
-		M_SpawnDemon();
+		Judge->StateChange(EDemonState::Sin_Appear);
 		TimeCount = CutSceneDelayTime;
 		++OrderCount;
 	}
@@ -904,8 +905,6 @@ void SinChapterManager::SinEndStart()
 		SinHitChainHp->AllRenderersActiveOff();
 		SinHitChainHp->ActiveOff();
 	}
-
-
 
 	PlayerHero->StateChange(EHeroState::Victory);
 	Judge->StateChange(EDemonState::Victory);

@@ -54,6 +54,7 @@ private:
 	void MoveStart();
 	void Move(float _DeltaTime);
 	void MoveUpdate(float _DeltaTime);
+	void HeroHitCheck();
 
 	void UpStart();
 	void Up(float _DeltaTime);

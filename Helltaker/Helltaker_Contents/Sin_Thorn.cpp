@@ -1,6 +1,7 @@
 #include "Sin_Thorn.h"
 
 #include "SinChapterManager.h"
+#include "Sin_Hero.h"
 
 const int Sin_Thorn::ThornCount = 7;;
 const FVector Sin_Thorn::ThornScale = { 0.0479f, 0.0851f };
@@ -67,6 +68,7 @@ void Sin_Thorn::MoveStart()
 void Sin_Thorn::Move(float _DeltaTime)
 {
 	MoveUpdate(_DeltaTime);
+	HeroHitCheck();
 
 	if (DownPosY >= GetActorLocation().Y)
 	{
@@ -87,6 +89,16 @@ void Sin_Thorn::MoveUpdate(float _DeltaTime)
 			State = EThornState::Up;
 		}
 	}
+}
+
+void Sin_Thorn::HeroHitCheck()
+{
+	//float HeroY = GetSinChapter()->GetPlayerHero()->GetActorLocation().Y;
+	//
+	//if (20.0f >= abs(HeroY - GetActorLocation().Y))
+	//{
+	//	GetSinChapter()->GetPlayerHero()->StateChange(EHeroState::Death);
+	//}
 }
 
 void Sin_Thorn::UpStart()

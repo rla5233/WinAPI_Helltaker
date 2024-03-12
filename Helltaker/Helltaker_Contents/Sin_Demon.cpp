@@ -78,6 +78,7 @@ void Sin_Demon::Sin_AppearStart()
 	ImageRenderer->SetTransform({ { 0.0f, 0.0f }, WinScale * AppearScale });
 	ImageRenderer->AnimationReset();
 	ImageRenderer->ChangeAnimation("Judge_Appear");
+	ImageRenderer->ActiveOn();
 }
 
 void Sin_Demon::Sin_Appear(float _DeltaTime)
