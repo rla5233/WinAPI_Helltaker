@@ -212,7 +212,7 @@ void SinChapter2::Enter1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(SinChap2_Script[2]);
+		C_BooperTextSet(SinChap2_Script[2], true);
 		++OrderCount;
 	}
 }
@@ -229,7 +229,7 @@ void SinChapter2::Enter2()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap2_Script[5]);
+		C_BooperTextSet(SinChap2_Script[5], true);
 		++OrderCount;
 	}
 }
@@ -247,7 +247,7 @@ void SinChapter2::Enter3()
 		C_GetJudge()->Character::StateChange(ECharacterState::None);
 		C_GetJudge()->Character::StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap2_Script[3]);
+		C_BooperTextSet(SinChap2_Script[3], true);
 		++OrderCount;
 	}
 }
@@ -265,7 +265,7 @@ void SinChapter2::Enter4()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap2_Script[8]);
+		C_BooperTextSet(SinChap2_Script[8], true);
 		++OrderCount;
 	}
 }
@@ -281,7 +281,7 @@ void SinChapter2::Enter5()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap2_Script[10]);
+		C_BooperTextSet(SinChap2_Script[10], true);
 		++OrderCount;
 	}
 }
@@ -297,7 +297,7 @@ void SinChapter2::Enter6()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap2_Script[6]);
+		C_BooperTextSet(SinChap2_Script[6], true);
 		C_StateChange(ESinSceneState::End);
 	}
 }
