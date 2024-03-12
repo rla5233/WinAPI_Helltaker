@@ -4,7 +4,7 @@ bool SuccessSkel::IsLoad = false;
 const FVector SuccessSkel::Scale = { 0.3333f, 0.5074f };
 const float SuccessSkel::PosX = 0.334f;
 const float SuccessSkel::SuccessInter = 0.08f;
-const float SuccessSkel::IdleInter = 0.05f;
+const float SuccessSkel::IdleInter = 0.06f;
 
 SuccessSkel::SuccessSkel()
 {
@@ -44,10 +44,12 @@ void SuccessSkel::StartStart()
 	L_ImageRenderer->AnimationReset();
 	L_ImageRenderer->ChangeAnimation("L_Start");
 	L_ImageRenderer->SetTransform({ { WinScale.X * (-PosX), 0.0f }, WinScale * Scale});
+	L_ImageRenderer->ActiveOn();
 
 	R_ImageRenderer->AnimationReset();
 	R_ImageRenderer->ChangeAnimation("R_Start");
 	R_ImageRenderer->SetTransform({ { WinScale.X * PosX, 0.0f }, WinScale * Scale});
+	R_ImageRenderer->ActiveOn();
 }
 
 void SuccessSkel::Start()

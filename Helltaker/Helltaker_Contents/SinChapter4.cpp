@@ -214,6 +214,7 @@ void SinChapter4::CutSceneStart()
 	SinCutSceneManager::CutSceneStart();
 
 	C_SpawnDialogue(1);
+	CraeteSuccessSkel();
 
 	FVector Scale = { 0.558f, 0.693f };
 	FVector Pos = { 0.0f, -0.0402f };
@@ -288,21 +289,6 @@ void SinChapter4::SelectMenu()
 		break;
 	case 13:
 		Select14();
-		break;
-	}
-}
-
-void SinChapter4::Success(float _DeltaTime)
-{
-	SinCutSceneManager::Success(_DeltaTime);
-
-	switch (OrderCount)
-	{
-	case 0:
-		Success1();
-		break;
-	case 1:
-		Success2();
 		break;
 	}
 }
@@ -427,8 +413,23 @@ void SinChapter4::Select14()
 	C_BooperTextSet(SinChap4_Script[19]);
 
 	OrderCount = 0;
-	CraeteSuccessSkel();
+	Skel->StateChange(ESinSkelState::Start);
 	C_StateChange(ESinSceneState::Success);
+}
+
+void SinChapter4::Success(float _DeltaTime)
+{
+	SinCutSceneManager::Success(_DeltaTime);
+
+	switch (OrderCount)
+	{
+	case 0:
+		Success1();
+		break;
+	case 1:
+		Success2();
+		break;
+	}
 }
 
 void SinChapter4::Success1()
@@ -458,8 +459,8 @@ void SinChapter4::CraeteSuccessSkel()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	Skel = SpawnActor<SuccessSkel>(SinUpdateOrder::Top);
-	Skel->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.7f });
-	Skel->StateChange(ESinSkelState::Start);
+	Skel->SetActorLocation({ WinScale.hX(), WinScale.Y * 0.746f });
+	Skel->AllRenderersActiveOff();
 	C_AddCutSceneActor(Skel);
 }
 
