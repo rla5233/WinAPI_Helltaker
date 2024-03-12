@@ -35,11 +35,15 @@ void SinOpening::BeginPlay()
 
 	if (false == IsLoad)
 	{
+		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Arm\\L_Arm", "Jud_LArm_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Arm\\R_Arm", "Jud_RArm_001.png");
+
 		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "L_Arm");
 		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "R_Arm");
 
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
 		ContentsHelper::LoadSound("Sound\\Effect", "judge_intro_start.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "judgement_intro_anim.wav");
 
 		AddChapterSet("SinOpening");
 		IsLoad = true;
@@ -114,10 +118,7 @@ void SinOpening::Enter1()
 	{
 		C_CreateSceneBG();
 		C_SpawnDialogue(0);
-		
 		C_GetJudge()->GetNameRenderer()->SetText(SinOpening_Script[0]);
-		// 수정 (캐릭터 추가)
-
 		C_BooperTextSet(SinOpening_Script[3]);
 		UEngineSound::SoundPlay("booper_click.wav");
 		++OrderCount;
@@ -138,6 +139,7 @@ void SinOpening::Enter3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("judgement_intro_anim.wav");
 		C_GetDialogue()->StateChange(ESinDialogueState::Lightning);
 		C_GetBooper()->AllRenderersActiveOff();
 		C_GetJudge()->GetNameRenderer()->ActiveOff();
