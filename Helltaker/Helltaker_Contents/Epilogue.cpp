@@ -63,6 +63,7 @@ void Epilogue::BeginPlay()
 
 
 		ContentsHelper::LoadSound("Sound\\BGM", "Luminescent.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "epilogue_dialogue_start.wav");
 
 		EpilBGMPlayer = UEngineSound::SoundPlay("Luminescent.wav");
 		EpilBGMPlayer.SetVolume(0.8f);
@@ -204,7 +205,7 @@ void Epilogue::CutSceneStart()
 	C_StateChange(ECutSceneState::None);
 	C_StateChange(ECutSceneState::Enter);
 
-	UEngineSound::SoundPlay("dialogue_start.wav");
+	UEngineSound::SoundPlay("epilogue_dialogue_start.wav");
 
 	if (UEngineString::ToUpper("Lucy_Epil") == DemonKeyName)
 	{
@@ -253,7 +254,7 @@ void Epilogue::GoBackChapter()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
- 		StateChange(EEpilogueState::None);
+		StateChange(EEpilogueState::None);
 
 		AllCutSceneActorOff();
 		C_StateChange(ECutSceneState::None);
@@ -265,6 +266,8 @@ void Epilogue::GoBackChapter()
 
 		ReturnToChap(DemonKeyName);
 		DemonKeyName = "";
+
+		UEngineSound::SoundPlay("booper_click.wav");
 	}
 }
 
@@ -336,7 +339,7 @@ void Epilogue::LucyCutScene1()
 		FVector Pos = { 0.022f, -0.008f };
 		C_ChangeCharactrer("Lu_Yum.png", { WinScale * Pos , WinScale * Scale });
 
-		C_BooperTextSet(Lucy_Script[2]);
+		C_BooperTextSet(Lucy_Script[2], true);
 
 		++OrderCount;
 	}
@@ -351,7 +354,7 @@ void Epilogue::LucyCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Lucy_Script[8]);
+		C_BooperTextSet(Lucy_Script[8], true);
 
 		++OrderCount;
 	}
@@ -369,7 +372,7 @@ void Epilogue::LucyCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Lucy_Script[3]);
+		C_BooperTextSet(Lucy_Script[3], true);
 
 		++OrderCount;
 	}
@@ -380,7 +383,7 @@ void Epilogue::LucyCutScene4()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
-		C_BooperTextSet(Lucy_Script[4]);
+		C_BooperTextSet(Lucy_Script[4], true);
 
 		++OrderCount;
 	}
@@ -390,7 +393,7 @@ void Epilogue::LucyCutScene5()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(Lucy_Script[5]);
+		C_BooperTextSet(Lucy_Script[5], true);
 
 		++OrderCount;
 	}
@@ -405,7 +408,7 @@ void Epilogue::LucyCutScene6()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Lucy_Script[9]);
+		C_BooperTextSet(Lucy_Script[9], true);
 
 		++OrderCount;
 	}	
@@ -423,7 +426,7 @@ void Epilogue::LucyCutScene7()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Lucy_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Lucy_Script[6]);
+		C_BooperTextSet(Lucy_Script[6], true);
 
 		++OrderCount;
 	}
@@ -482,7 +485,7 @@ void Epilogue::ModCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mod_Script[1]);
+		C_BooperTextSet(Mod_Script[1], true);
 
 		++OrderCount;
 	}
@@ -498,7 +501,7 @@ void Epilogue::ModCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mod_Script[7]);
+		C_BooperTextSet(Mod_Script[7], true);
 
 		++OrderCount;
 	}
@@ -516,7 +519,7 @@ void Epilogue::ModCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mod_Script[2]);
+		C_BooperTextSet(Mod_Script[2], true);
 
 		++OrderCount;
 	}
@@ -527,7 +530,7 @@ void Epilogue::ModCutScene4()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
-		C_BooperTextSet(Mod_Script[3]);
+		C_BooperTextSet(Mod_Script[3], true);
 
 		++OrderCount;
 	}
@@ -542,7 +545,7 @@ void Epilogue::ModCutScene5()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[5]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mod_Script[8]);
+		C_BooperTextSet(Mod_Script[8], true);
 
 		++OrderCount;
 	}
@@ -560,7 +563,7 @@ void Epilogue::ModCutScene6()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mod_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mod_Script[4]);
+		C_BooperTextSet(Mod_Script[4], true);
 
 		++OrderCount;
 	}
@@ -628,7 +631,7 @@ void Epilogue::JusCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[1]);
+		C_BooperTextSet(Jus_Script[1], true);
 
 		++OrderCount;
 	}
@@ -644,7 +647,7 @@ void Epilogue::JusCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[9]);
+		C_BooperTextSet(Jus_Script[9], true);
 
 		++OrderCount;
 	}
@@ -662,7 +665,7 @@ void Epilogue::JusCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[2]);
+		C_BooperTextSet(Jus_Script[2], true);
 
 		++OrderCount;
 	}
@@ -678,7 +681,7 @@ void Epilogue::JusCutScene4()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[10]);
+		C_BooperTextSet(Jus_Script[10], true);
 
 		++OrderCount;
 	}
@@ -696,7 +699,7 @@ void Epilogue::JusCutScene5()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[3]);
+		C_BooperTextSet(Jus_Script[3], true);
 
 		++OrderCount;
 	}
@@ -712,7 +715,7 @@ void Epilogue::JusCutScene6()
 		FVector Pos = { 0.0f, 0.0f };
 		C_ChangeCharactrer("Jus_Idle.png", { WinScale * Pos , WinScale * Scale });
 
-		C_BooperTextSet(Jus_Script[4]);
+		C_BooperTextSet(Jus_Script[4], true);
 
 		++OrderCount;
 	}
@@ -727,7 +730,7 @@ void Epilogue::JusCutScene7()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[11]);
+		C_BooperTextSet(Jus_Script[11], true);
 
 		++OrderCount;
 	}
@@ -745,7 +748,7 @@ void Epilogue::JusCutScene8()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jus_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jus_Script[5]);
+		C_BooperTextSet(Jus_Script[5], true);
 
 		++OrderCount;
 	}
@@ -761,7 +764,7 @@ void Epilogue::JusCutScene9()
 		FVector Pos = { 0.0f, 0.008f };
 		C_ChangeCharactrer("Jus_PanCake.png", { WinScale * Pos , WinScale * Scale });
 		
-		C_BooperTextSet(Jus_Script[6]);
+		C_BooperTextSet(Jus_Script[6], true);
 
 		++OrderCount;
 	}
@@ -832,7 +835,7 @@ void Epilogue::PandCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[2]);
+		C_BooperTextSet(Pand_Script[2], true);
 
 		++OrderCount;
 	}
@@ -848,7 +851,7 @@ void Epilogue::PandCutScene2()
 		FVector Pos = { 0.008f, 0.002f };
 		C_ChangeCharactrer("Pand_Drink.png", { WinScale * Pos , WinScale * Scale });
 
-		C_BooperTextSet(Pand_Script[2]);
+		C_BooperTextSet(Pand_Script[2], true);
 
 		++OrderCount;
 	}
@@ -864,7 +867,7 @@ void Epilogue::PandCutScene3()
 		C_ChangeCharactrer("PandS_Idle.png", { WinScale * Pos , WinScale * Scale });
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 
-		C_BooperTextSet(Pand_Script[3]);
+		C_BooperTextSet(Pand_Script[3], true);
 			
 		++OrderCount;
 	}
@@ -879,7 +882,7 @@ void Epilogue::PandCutScene4()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[10]);
+		C_BooperTextSet(Pand_Script[10], true);
 
 		++OrderCount;
 	}
@@ -897,7 +900,7 @@ void Epilogue::PandCutScene5()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[4]);
+		C_BooperTextSet(Pand_Script[4], true);
 
 		++OrderCount;
 	}
@@ -908,7 +911,7 @@ void Epilogue::PandCutScene6()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
-		C_BooperTextSet(Pand_Script[5]);
+		C_BooperTextSet(Pand_Script[5], true);
 
 		++OrderCount;
 	}
@@ -923,7 +926,7 @@ void Epilogue::PandCutScene7()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[11]);
+		C_BooperTextSet(Pand_Script[11], true);
 
 		++OrderCount;
 	}
@@ -941,7 +944,7 @@ void Epilogue::PandCutScene8()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[6]);
+		C_BooperTextSet(Pand_Script[6], true);
 
 		++OrderCount;
 	}
@@ -957,7 +960,7 @@ void Epilogue::PandCutScene9()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[8]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[12]);
+		C_BooperTextSet(Pand_Script[12], true);
 
 		++OrderCount;
 	}
@@ -975,7 +978,7 @@ void Epilogue::PandCutScene10()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pand_Script[1]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pand_Script[7]);
+		C_BooperTextSet(Pand_Script[7], true);
 
 		++OrderCount;
 	}
@@ -1031,7 +1034,7 @@ void Epilogue::MalCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mal_Script[1]);	
+		C_BooperTextSet(Mal_Script[1], true);
 
 		++OrderCount;
 	}
@@ -1042,7 +1045,7 @@ void Epilogue::MalCutScene2()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
-		C_BooperTextSet(Mal_Script[2]);
+		C_BooperTextSet(Mal_Script[2], true);
 
 		++OrderCount;
 	}
@@ -1057,7 +1060,7 @@ void Epilogue::MalCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[5]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mal_Script[7]);
+		C_BooperTextSet(Mal_Script[7], true);
 
 		++OrderCount;
 	}
@@ -1075,7 +1078,7 @@ void Epilogue::MalCutScene4()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Mal_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Mal_Script[3]);
+		C_BooperTextSet(Mal_Script[3], true);
 
 		++OrderCount;
 	}
@@ -1091,7 +1094,7 @@ void Epilogue::MalCutScene5()
 		FVector Pos = { -0.001f, 0.064f };
 		C_ChangeCharactrer("Mal_Bottle.png", { WinScale * Pos , WinScale * Scale });
 
-		C_BooperTextSet(Mal_Script[4]);
+		C_BooperTextSet(Mal_Script[4], true);
 
 		++OrderCount;
 	}
@@ -1149,7 +1152,7 @@ void Epilogue::ZdCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Zd_Script[1]);
+		C_BooperTextSet(Zd_Script[1], true);
 
 		++OrderCount;
 	}
@@ -1167,7 +1170,7 @@ void Epilogue::ZdCutScene2(float _DeltaTime)
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[4]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Zd_Script[6]);
+		C_BooperTextSet(Zd_Script[6], true);
 
 		++OrderCount;
 	}
@@ -1185,7 +1188,7 @@ void Epilogue::ZdCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Zd_Script[2]);
+		C_BooperTextSet(Zd_Script[2], true);
 
 		++OrderCount;
 	}
@@ -1203,7 +1206,7 @@ void Epilogue::ZdCutScene4(float _DeltaTime)
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[4]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Zd_Script[7]);
+		C_BooperTextSet(Zd_Script[7], true);
 
 		++OrderCount;
 	}
@@ -1221,7 +1224,7 @@ void Epilogue::ZdCutScene5()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Zd_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Zd_Script[3]);
+		C_BooperTextSet(Zd_Script[3], true);
 
 		++OrderCount;
 	}
@@ -1325,7 +1328,7 @@ void Epilogue::AzCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Az_Script[1]);
+		C_BooperTextSet(Az_Script[1], true);
 		
 		++OrderCount;
 	}
@@ -1341,7 +1344,7 @@ void Epilogue::AzCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Az_Script[9]);
+		C_BooperTextSet(Az_Script[9], true);
 
 		++OrderCount;
 	}
@@ -1359,7 +1362,7 @@ void Epilogue::AzCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Az_Script[2]);
+		C_BooperTextSet(Az_Script[2], true);
 
 		++OrderCount;
 	}
@@ -1370,7 +1373,7 @@ void Epilogue::AzCutScene4()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
-		C_BooperTextSet(Az_Script[3]);
+		C_BooperTextSet(Az_Script[3], true);
 
 		++OrderCount;
 	}
@@ -1380,7 +1383,7 @@ void Epilogue::AzCutScene5()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(Az_Script[4]);
+		C_BooperTextSet(Az_Script[4], true);
 
 		++OrderCount;
 	}
@@ -1390,7 +1393,7 @@ void Epilogue::AzCutScene6()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(Az_Script[5]);
+		C_BooperTextSet(Az_Script[5], true);
 
 		++OrderCount;
 	}
@@ -1405,7 +1408,7 @@ void Epilogue::AzCutScene7()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Az_Script[10]);
+		C_BooperTextSet(Az_Script[10], true);
 
 		++OrderCount;
 	}
@@ -1423,7 +1426,7 @@ void Epilogue::AzCutScene8()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Az_Script[6]);
+		C_BooperTextSet(Az_Script[6], true);
 
 		++OrderCount;
 	}
@@ -1439,7 +1442,7 @@ void Epilogue::AzCutScene9()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Az_Script[7]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Az_Script[11]);
+		C_BooperTextSet(Az_Script[11], true);
 
 		++OrderCount;
 	}
@@ -1495,7 +1498,7 @@ void Epilogue::CerCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Cer_Script[1]);
+		C_BooperTextSet(Cer_Script[1], true);
 
 		++OrderCount;
 	}
@@ -1511,7 +1514,7 @@ void Epilogue::CerCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[3]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Cer_Script[5]);
+		C_BooperTextSet(Cer_Script[5], true);
 
 		++OrderCount;
 	}
@@ -1529,7 +1532,7 @@ void Epilogue::CerCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Cer_Script[2]);
+		C_BooperTextSet(Cer_Script[2], true);
 
 		++OrderCount;
 	}
@@ -1545,7 +1548,7 @@ void Epilogue::CerCutScene4()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[3]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Cer_Script[6]);
+		C_BooperTextSet(Cer_Script[6], true);
 
 		++OrderCount;
 	}
@@ -1563,7 +1566,7 @@ void Epilogue::CerCutScene5()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Cer_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Cer_Script[2]);
+		C_BooperTextSet(Cer_Script[2], true);
 
 		++OrderCount;
 	}
@@ -1613,7 +1616,7 @@ void Epilogue::JudCutScene1()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jud_Script[1]);
+		C_BooperTextSet(Jud_Script[1], true);
 
 		++OrderCount;
 	}
@@ -1629,7 +1632,7 @@ void Epilogue::JudCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[3]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jud_Script[5]);
+		C_BooperTextSet(Jud_Script[5], true);
 
 		++OrderCount;
 	}
@@ -1647,7 +1650,7 @@ void Epilogue::JudCutScene3()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Jud_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Jud_Script[2]);
+		C_BooperTextSet(Jud_Script[2], true);
 
 		++OrderCount;
 	}
@@ -1695,6 +1698,8 @@ void Epilogue::PolCutScene1()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
+
 		C_MenubarRenderActiveOn();
 		C_BooperImageRendererOff();
 		C_MenubarTextSet(0, Pol_Script[2]);
@@ -1731,7 +1736,7 @@ void Epilogue::PolEndCutScene2()
 		C_GetSceneCharacter()->GetNameRenderer()->SetText(Pol_Script[0]);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(Pol_Script[4]);
+		C_BooperTextSet(Pol_Script[4], true);
 
 		++OrderCount;
 	}
@@ -1748,11 +1753,16 @@ void Epilogue::PolEndCutScene3()
 
 void Epilogue::PolCutScene2()
 {
-	FocusMenuBarCheck();
+	if (true == FocusMenuBarCheck())
+	{
+		UEngineSound::SoundPlay("dialogue_button_focus.wav");
+	}
 }
 
 void Epilogue::SelectMenu()
 {
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
+
 	switch (C_GetFocusMenuIndex())
 	{
 	case 0:
@@ -1769,7 +1779,7 @@ void Epilogue::EndingStart()
 	C_GetDialogue()->AllRenderersActiveOff();
 	C_GetSceneCharacter()->AllRenderersActiveOff();
 
-	C_BooperTextSet("...");
+	C_BooperTextSet("...", true);
 
 	OrderCount = 0;
 }
@@ -1808,7 +1818,7 @@ void Epilogue::Ending1()
 		FVector Pos = { 0.0f, -0.02f };
 		C_ChangeDialogue("CutScene_Ending.png", { WinScale * Pos, WinScale * Scale });
 
-		C_BooperTextSet(Ending_Script[0]);
+		C_BooperTextSet(Ending_Script[0], true);
 		++OrderCount;
 	}
 }
@@ -1817,7 +1827,7 @@ void Epilogue::Ending2()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		C_BooperTextSet(Ending_Script[OrderCount]);
+		C_BooperTextSet(Ending_Script[OrderCount], true);
 		++OrderCount;
 	}
 }
@@ -1839,6 +1849,7 @@ void Epilogue::Ending4()
 		C_ChangeDialogue("EndingBG.png", { { 0.0f, 0.0f }, WinScale });
 		C_GetDialogue()->SetActorLocation(WinScale.Half2D());
 		C_BooperTextSet(Ending_Script[10]);
+		EpilBGMPlayer.Off();
 		++OrderCount;
 	}
 }
@@ -1871,7 +1882,7 @@ void Epilogue::PolGoBackChap()
 	{
 		C_MenubarRenderActiveOff();
 		C_BooperImageRendererOn();
-		C_BooperTextSet(Pol_Script[5]);
+		C_BooperTextSet(Pol_Script[5], true);
 
 		FVector TileScale = ContentsHelper::GetTileScale();
 		PlayerHero->SetLocationPoint(PlayerHero->GetLocationPoint() + Point::Up);

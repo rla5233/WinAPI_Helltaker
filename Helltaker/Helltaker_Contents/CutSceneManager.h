@@ -38,6 +38,7 @@ public:
 	void C_SpawnMenubar(FVector _Pos = { 0.5f, 0.86f }, int _MenuBarCount = 2);
 
 	void C_BooperTextSet(std::string_view _Text);
+	void C_BooperTextSet(std::string_view _Text, bool _SoundPlay);
 	void C_BooperChangeAnimation(std::string_view _AnimationName);
 	void C_BooperSetTransform(const FTransform& _Trans);
 	void C_BooperSetTextPosition(int _LineCount);

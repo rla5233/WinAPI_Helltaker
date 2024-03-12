@@ -185,6 +185,12 @@ void CutSceneManager::C_BooperTextSet(std::string_view _Text)
 	C_BooperSetTextPosition(LineCount);
 }
 
+void CutSceneManager::C_BooperTextSet(std::string_view _Text, bool _SoundPlay)
+{
+	C_BooperTextSet(_Text);
+	UEngineSound::SoundPlay("booper_click.wav");
+}
+
 void CutSceneManager::C_BooperChangeAnimation(std::string_view _AnimationName)
 {
 	Booper->GetImageRenderer()->ChangeAnimation(_AnimationName);
