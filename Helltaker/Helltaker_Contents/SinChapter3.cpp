@@ -239,7 +239,7 @@ void SinChapter3::Enter1()
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
 		// 수정 (jud 애니메이션 추가)
-		C_BooperTextSet(SinChap3_Script[2]);
+		C_BooperTextSet(SinChap3_Script[2], true);
 		++OrderCount;
 	}
 }
@@ -252,7 +252,7 @@ void SinChapter3::Enter2()
 		FVector Pos = { 0.015f, 0.02f };
 		// 수정 (jud 애니메이션 추가)
 
-		C_BooperTextSet(SinChap3_Script[3]);
+		C_BooperTextSet(SinChap3_Script[3], true);
 		++OrderCount;
 	}
 }
@@ -269,7 +269,7 @@ void SinChapter3::Enter3()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap3_Script[13]);
+		C_BooperTextSet(SinChap3_Script[13], true);
 		++OrderCount;
 	}
 }
@@ -284,7 +284,7 @@ void SinChapter3::Enter4()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap3_Script[15]);
+		C_BooperTextSet(SinChap3_Script[15], true);
 		++OrderCount;
 	}
 }
@@ -299,7 +299,7 @@ void SinChapter3::Enter5()
 		C_GetSceneCharacter()->StateChange(ECharacterState::None);
 		C_GetSceneCharacter()->StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap3_Script[17]);
+		C_BooperTextSet(SinChap3_Script[17], true);
 		++OrderCount;
 	}
 }
@@ -317,7 +317,7 @@ void SinChapter3::Enter6()
 		C_GetJudge()->Character::StateChange(ECharacterState::None);
 		C_GetJudge()->Character::StateChange(ECharacterState::Appear);
 
-		C_BooperTextSet(SinChap3_Script[4]);
+		C_BooperTextSet(SinChap3_Script[4], true);
 		++OrderCount;
 	}
 }
@@ -326,6 +326,7 @@ void SinChapter3::Enter7()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("booper_click.wav");
 		C_StateChange(ESinSceneState::Select);
 	}
 }
@@ -361,6 +362,7 @@ void SinChapter3::SelectMenu()
 
 void SinChapter3::Select1()
 {
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 	C_MenubarRenderActiveOff();
 	C_BooperTextSet(SinChap3_Script[7]);
 	C_GetBooper()->AllRenderersActiveOn();
@@ -369,6 +371,7 @@ void SinChapter3::Select1()
 
 void SinChapter3::Select2()
 {
+	UEngineSound::SoundPlay("booper_click.wav");
 	C_GetBooper()->GetImageRenderer()->ActiveOff();
 	C_MenubarTextSet(0, SinChap3_Script[8]);
 	C_MenubarTextSet(1, SinChap3_Script[9]);
@@ -378,6 +381,7 @@ void SinChapter3::Select2()
 
 void SinChapter3::Select3()
 {
+	UEngineSound::SoundPlay("dialogue_button_confirm.wav");
 	C_GetBooper()->GetImageRenderer()->ActiveOn();
 
 	FVector Scale = { 0.39f, 0.693f };
@@ -390,7 +394,7 @@ void SinChapter3::Select3()
 
 void SinChapter3::Select4()
 {
-	C_BooperTextSet(SinChap3_Script[11]);
+	C_BooperTextSet(SinChap3_Script[11], true);
 	C_GetJudge()->StateChange(ESinJudgeState::Chap3_Fly);
 	C_StateChange(ESinSceneState::End);
 }
