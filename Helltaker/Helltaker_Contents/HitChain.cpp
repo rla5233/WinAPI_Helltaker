@@ -162,7 +162,6 @@ void HitChain::Hit(float _DeltaTime)
 void HitChain::HitSoundPlay()
 {
 	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
-	
 	switch (Type)
 	{
 	case ESinHitChainType::Left:
@@ -221,6 +220,7 @@ void HitChain::DeathStart()
 		break;
 	}
 
+	DeathSoundPlay();
 	FadeOutOn();
 }
 
@@ -232,6 +232,19 @@ void HitChain::Death(float _DeltaTime)
 	{
 		GetSinChapter()->HitChainDeathUpdate(CurPoint);
 		Destroy();
+	}
+}
+
+void HitChain::DeathSoundPlay()
+{
+	switch (Type)
+	{
+	case ESinHitChainType::Left:
+		UEngineSound::SoundPlay("boss_chain_break_L.wav").SetVolume(0.7f);
+		break;
+	case ESinHitChainType::Right:
+		UEngineSound::SoundPlay("boss_chain_break_R.wav").SetVolume(0.7f);
+		break;
 	}
 }
 

@@ -63,6 +63,7 @@ private:
 
 	void DeathStart();
 	void Death(float _DeltaTime);
+	void DeathSoundPlay();
 
 	void HitDelayCheck(float _DeltaTime);
 
