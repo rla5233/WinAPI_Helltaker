@@ -35,7 +35,11 @@ private:
 	void ChainFadeInUpdate(float _DeltaTime);
 
 	void Chap3_BindStart();
-	void Chap3_Bind();
+	void Chap3_Bind(float _DeltaTime);
+	void Chap3_Bind1(float _DeltaTime);
+	void Chap3_Bind2(float _DeltaTime);
+	void Chap3_Bind3(float _DeltaTime);
+	void Chap3_Bind4(float _DeltaTime);
 
 	void ChainRendererRemove();
 	void ArmRendererRemove();
@@ -51,6 +55,8 @@ private:
 	UImageRenderer* ArmRenderer = nullptr;
 	static const float FadeOutDelayTime;
 	float TimeCount = 0.0f;
+
+	static const float BindDelayTime;
 
 	UImageRenderer* PentaRenderer = nullptr;
 

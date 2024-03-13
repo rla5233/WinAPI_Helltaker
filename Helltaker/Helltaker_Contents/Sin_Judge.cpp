@@ -5,6 +5,7 @@
 #include "BackGround.h"
 
 const float Sin_Judge::FadeOutDelayTime = 0.2f;
+const float Sin_Judge::BindDelayTime = 1.0f;
 
 Sin_Judge::Sin_Judge()
 {
@@ -207,20 +208,110 @@ void Sin_Judge::Chap3_BindStart()
 	ChainRendererRemove();
 	ArmRendererRemove();
 
-
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 0.554f, 0.693f };
 	FVector Pos = { 0.0f, 0.0f };
-	GetImageRenderer()->CreateAnimation("Bind_Start", "Jud_BindAnim", 0, 7, 0.1f, false);
+	GetImageRenderer()->CreateAnimation(
+		"Bind_Start", 
+		"Jud_BindAnim", 
+		{ 0, 1, 2, 3, 4, 5 },
+		{ 0.1f, 0.8f, 0.1f, 0.1f, 0.1f, 0.1f },
+		false);
+
+	GetImageRenderer()->CreateAnimation(
+		"SingleBind",	
+		"Jud_BindAnim",
+		{ 5, 6, 7, 6, 5 },
+		{ 0.1f, 0.8f, 0.1f, 0.1f, 0.1f },
+		false);
+
+	GetImageRenderer()->CreateAnimation(
+		"DoubleBind",
+		"Jud_BindAnim",
+		{ 5, 6, 7, 6, 7, 6, 5 },
+		{ 0.1f, 0.1f, 0.1f, 0.6f, 0.1f, 0.1f, 0.1f },
+		false);
+
 	GetImageRenderer()->AnimationReset();
 	GetImageRenderer()->ChangeAnimation("Bind_Start");
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
 
+	TimeCount = 0.7f;
+	OrderCount = 0;
 }
 
-void Sin_Judge::Chap3_Bind()
+void Sin_Judge::Chap3_Bind(float _DeltaTime)
 {
+	switch (OrderCount)
+	{
+	case 0:
+		Chap3_Bind1(_DeltaTime);
+		break;
+	case 1:
+		Chap3_Bind2(_DeltaTime);
+		break;
+	case 2:
+		Chap3_Bind3(_DeltaTime);
+		break;
+	case 3:
+		Chap3_Bind4(_DeltaTime);
+		break;
+	}
+}
 
+void Sin_Judge::Chap3_Bind1(float _DeltaTime)
+{
+	if (0.0f <= TimeCount)
+	{
+		TimeCount -= _DeltaTime;
+		return;
+	}
+
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetImageRenderer()->AnimationReset();
+		GetImageRenderer()->ChangeAnimation("DoubleBind");
+
+		TimeCount = BindDelayTime;
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::Chap3_Bind2(float _DeltaTime)
+{
+	if (0.0f <= TimeCount)
+	{
+		TimeCount -= _DeltaTime;
+		return;
+	}
+
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetImageRenderer()->AnimationReset();
+		GetImageRenderer()->ChangeAnimation("SingleBind");
+
+		TimeCount = BindDelayTime;
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::Chap3_Bind3(float _DeltaTime)
+{
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		GetImageRenderer()->AnimationReset();
+		GetImageRenderer()->ChangeAnimation("DoubleBind");
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::Chap3_Bind4(float _DeltaTime)
+{
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		TimeCount = BindDelayTime;
+		OrderCount = 1;
+	}
 }
 
 void Sin_Judge::ChainRendererRemove()
@@ -302,7 +393,7 @@ void Sin_Judge::StateUpdate(float _DeltaTime)
 		Chap3_Chain(_DeltaTime);
 		break;
 	case ESinJudgeState::Chap3_Bind:
-		Chap3_Bind();
+		Chap3_Bind(_DeltaTime);
 		break;
 	case ESinJudgeState::Chap3_Fly:
 		Chap3_Fly();
