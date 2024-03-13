@@ -30,7 +30,7 @@ void Sin_Judge::Intro_AppearStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 1.0f, 0.692f };
-	FVector Pos = { 0.0f, (-0.0402f) };
+	FVector Pos = { 0.0f, -0.0402f };
 	GetImageRenderer()->AnimationReset();
 	GetImageRenderer()->ChangeAnimation("Jud_Intro");
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });

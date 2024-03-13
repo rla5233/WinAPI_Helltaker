@@ -139,7 +139,7 @@ void SinOpening::Enter3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		UEngineSound::SoundPlay("judgement_intro_anim.wav");
+		//UEngineSound::SoundPlay("judgement_intro_anim.wav");
 		C_GetDialogue()->StateChange(ESinDialogueState::Lightning);
 		C_GetBooper()->AllRenderersActiveOff();
 		C_GetJudge()->GetNameRenderer()->ActiveOff();
