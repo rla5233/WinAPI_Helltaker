@@ -44,6 +44,10 @@ private:
 
 	void ChainRendererRemove();
 	void ArmRendererRemove();
+	void SingleChainSound();
+	void DoubleChainSound();
+	void RandChainASound();
+	void RandChainBSound();
 
 	void Chap3_FlyStart();
 	void Chap3_Fly();
@@ -58,6 +62,7 @@ private:
 	float TimeCount = 0.0f;
 
 	static const float BindDelayTime;
+	bool BindBSoundPlay = false;
 
 	UImageRenderer* PentaRenderer = nullptr;
 

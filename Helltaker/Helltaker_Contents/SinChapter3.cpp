@@ -58,6 +58,15 @@ void SinChapter3::BeginPlay()
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Pose");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Fly");
 
+		ContentsHelper::LoadSound("Sound\\Effect", "judge_chain_summon.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "judge_chain_bind.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveA_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveA_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveB_001.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveB_002.wav");
+
+		//UEngineSound::SoundPlay("chainMoveB_001.wav");
+
 		AddChapterSet("SinChapter3");
 
 		IsLoad = true;
@@ -241,6 +250,7 @@ void SinChapter3::Enter1()
 	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 		&& (false == C_GetJudge()->IsImgMoveOn()))
 	{
+		UEngineSound::SoundPlay("judge_chain_summon.wav");
 		C_GetJudge()->StateChange(ESinJudgeState::Chap3_Chain);
 		C_BooperTextSet(SinChap3_Script[2], true);
 		++OrderCount;
@@ -251,6 +261,7 @@ void SinChapter3::Enter2()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		UEngineSound::SoundPlay("judge_chain_bind.wav");
 		C_GetJudge()->StateChange(ESinJudgeState::Chap3_Bind);
 		C_BooperTextSet(SinChap3_Script[3], true);
 		++OrderCount;

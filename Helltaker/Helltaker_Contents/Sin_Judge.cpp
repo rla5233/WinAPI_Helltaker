@@ -4,6 +4,8 @@
 #include "Sin_Dialogue.h"
 #include "BackGround.h"
 
+#include <EngineBase/EngineRandom.h>
+
 const float Sin_Judge::FadeOutDelayTime = 0.2f;
 const float Sin_Judge::BindDelayTime = 1.0f;
 
@@ -229,13 +231,14 @@ void Sin_Judge::Chap3_BindStart()
 		"DoubleBind",
 		"Jud_BindAnim",
 		{ 5, 6, 7, 6, 7, 6, 5 },
-		{ 0.08f, 0.08f, 0.08f, 0.6f, 0.08f, 0.08f, 0.08f },
+		{ 0.08f, 0.1f, 0.1f, 0.6f, 0.08f, 0.08f, 0.08f },
 		false);
 
 	GetImageRenderer()->AnimationReset();
 	GetImageRenderer()->ChangeAnimation("Bind_Start");
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
 
+	BindBSoundPlay = true;
 	TimeCount = 0.7f;
 	OrderCount = 0;
 }
@@ -270,16 +273,35 @@ void Sin_Judge::Chap3_Bind1(float _DeltaTime)
 		return;
 	}
 
+	if (3 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindBSoundPlay)
+	{
+		UEngineSound::SoundPlay("chainMoveB_001.wav");
+		BindBSoundPlay = false;
+	}
+
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		GetImageRenderer()->AnimationReset();
 		GetImageRenderer()->ChangeAnimation("DoubleBind");
+		BindBSoundPlay = true;
 		++OrderCount;
 	}
 }
 
 void Sin_Judge::Chap3_Bind2(float _DeltaTime)
 {
+	if (5 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindBSoundPlay)
+	{
+		UEngineSound::SoundPlay("chainMoveB_001.wav");
+		BindBSoundPlay = false;
+	}
+	else
+	{
+		BindBSoundPlay = true;
+	}
+
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		TimeCount = BindDelayTime;
@@ -295,6 +317,8 @@ void Sin_Judge::Chap3_Bind3(float _DeltaTime)
 		return;
 	}
 
+	DoubleChainSound();
+
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		GetImageRenderer()->AnimationReset();
@@ -307,6 +331,8 @@ void Sin_Judge::Chap3_Bind3(float _DeltaTime)
 
 void Sin_Judge::Chap3_Bind4(float _DeltaTime)
 {
+	SingleChainSound();
+
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		GetImageRenderer()->AnimationReset();
@@ -317,6 +343,8 @@ void Sin_Judge::Chap3_Bind4(float _DeltaTime)
 
 void Sin_Judge::Chap3_Bind5(float _DeltaTime)
 {
+	DoubleChainSound();
+
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		TimeCount = BindDelayTime;
@@ -344,6 +372,62 @@ void Sin_Judge::ArmRendererRemove()
 	ArmRenderer->ActiveOff();
 	ArmRenderer->Destroy();
 	ArmRenderer = nullptr;
+}
+
+void Sin_Judge::SingleChainSound()
+{
+	if (3 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindBSoundPlay)
+	{	
+		RandChainBSound();
+		BindBSoundPlay = false;
+	}
+	else
+	{
+		BindBSoundPlay = true;
+	}
+}
+
+void Sin_Judge::DoubleChainSound()
+{
+	if (5 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindBSoundPlay)
+	{
+		RandChainBSound();
+		BindBSoundPlay = false;
+	}
+	else
+	{
+		BindBSoundPlay = true;
+	}
+}
+
+void Sin_Judge::RandChainBSound()
+{
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 2);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("chainMoveB_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("chainMoveB_002.wav");
+		break;
+	}
+}
+
+void Sin_Judge::RandChainASound()
+{
+	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 2);
+	switch (RandomValue)
+	{
+	case 1:
+		UEngineSound::SoundPlay("chainMoveA_001.wav");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("chainMoveA_002.wav");
+		break;
+	}
 }
 
 void Sin_Judge::Chap3_FlyStart()
