@@ -138,7 +138,7 @@ void Sin_Dialogue::MoveUpdate(float _DeltaTime)
 {
 	if (true == IsMove)
 	{
-		MoveTime += 5.0f * _DeltaTime;
+		MoveTime += 6.0f * _DeltaTime;
 
 		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
 		SetActorLocation(NextPos);

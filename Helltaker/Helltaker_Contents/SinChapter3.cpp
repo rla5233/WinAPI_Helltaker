@@ -64,6 +64,7 @@ void SinChapter3::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveA_002.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveB_001.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveB_002.wav");
+		ContentsHelper::LoadSound("Sound\\Effect", "judge_spell_cast.wav");
 
 		AddChapterSet("SinChapter3");
 
@@ -407,6 +408,7 @@ void SinChapter3::Select3()
 
 void SinChapter3::Select4()
 {
+	UEngineSound::SoundPlay("judge_spell_cast.wav");
 	C_BooperTextSet(SinChap3_Script[11], true);
 	C_GetJudge()->StateChange(ESinJudgeState::Chap3_Fly);
 	C_StateChange(ESinSceneState::End);

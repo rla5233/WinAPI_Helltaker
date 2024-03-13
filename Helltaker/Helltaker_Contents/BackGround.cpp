@@ -110,7 +110,7 @@ void BackGround::MoveUpdate(float _DeltaTime)
 {
 	if (true == IsMove)
 	{
-		MoveTime += 3.0f * _DeltaTime;
+		MoveTime += 6.0f * _DeltaTime;
 
 		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
 		SetActorLocation(NextPos);
