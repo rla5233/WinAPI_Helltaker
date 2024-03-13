@@ -93,7 +93,7 @@ void Opening::LevelStart(ULevel* _PrevLevel)
 	UnityLogo->SetName("UnityLogo");
 	UnityLogo->CreateImageRenderer(RenderOrder::Scene);
 	UnityLogo->GetImageRenderer()->SetImage(UnityLogo->GetName() + ".png");
-	UnityLogo->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.25f, WinScale.Y * 0.225f } });
+	UnityLogo->GetImageRenderer()->SetTransform({ { 0, 0 }, { WinScale.X * 0.25f, WinScale.Y * 0.222f } });
 	UnityLogo->GetImageRenderer()->SetAlpha(0.0f);
 	UnityLogo->FadeInOn();
 
