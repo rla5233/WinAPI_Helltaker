@@ -485,8 +485,8 @@ void Sin_Judge::Chap3_Fly1()
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
-		FVector Scale = { 0.265f, 0.626f};
-		FVector Pos = { 0.0f, -0.05f };
+		FVector Scale = { 0.212f, 0.502f };
+		FVector Pos = { 0.0f, -0.048f };
 		GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
 		GetImageRenderer()->AnimationReset();
 		GetImageRenderer()->ChangeAnimation("Jud_Fly");

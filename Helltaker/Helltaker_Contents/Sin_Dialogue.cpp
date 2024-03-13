@@ -112,7 +112,7 @@ void Sin_Dialogue::MoveStart()
 		break;
 	case 1:
 		StartPos = GetActorLocation();
- 		TargetPos = GetActorLocation() - FVector(0.0f, WinScale.Y * (PosType_1 + 0.12f));
+ 		TargetPos = GetActorLocation() - FVector(0.0f, WinScale.Y * (PosType_1 + 0.1f));
 		LitHell_Renderer->ActiveOn();
 		FadeOutOn();
 		break;
