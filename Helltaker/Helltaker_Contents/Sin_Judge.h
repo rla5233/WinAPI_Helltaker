@@ -65,7 +65,8 @@ private:
 	bool BindASoundPlay = false;
 	bool BindBSoundPlay = false;
 
-	UImageRenderer* PentaRenderer = nullptr;
+	UImageRenderer* S_PentaRenderer = nullptr;
+	UImageRenderer* B_PentaRenderer = nullptr;
 
 	int OrderCount = -1;
 

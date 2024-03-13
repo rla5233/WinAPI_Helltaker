@@ -491,10 +491,17 @@ void Sin_Judge::Chap3_Fly1()
 		GetImageRenderer()->AnimationReset();
 		GetImageRenderer()->ChangeAnimation("Jud_Fly");
 
-		FVector EffectScale = { 0.885f, 1.574f };
-		PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
-		PentaRenderer->SetImage("PentaGraphic.png");
-		PentaRenderer->SetTransform({ WinScale * Pos, WinScale * EffectScale });
+		FVector S_PentaScale = { 0.573f, 1.02f };
+		FVector S_PentaPos = { 0.0f, -0.068f };
+		S_PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
+		S_PentaRenderer->SetImage("S_PentaGraphic.png");
+		S_PentaRenderer->SetTransform({ WinScale * S_PentaPos, WinScale * S_PentaScale });
+
+		FVector B_PentaScale = { 0.885f, 1.574f };
+		FVector B_PentaPos = { 0.0f, -0.068f };
+		B_PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
+		B_PentaRenderer->SetImage("PentaGraphic.png");
+		B_PentaRenderer->SetTransform({ WinScale * B_PentaPos, WinScale * B_PentaScale });
 
 		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
 		GetSinCutSceneChapter()->C_GetUpBG()->StateChange(EBGState::MoveOut_Y);
