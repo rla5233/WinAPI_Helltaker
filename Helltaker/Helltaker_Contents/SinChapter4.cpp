@@ -228,7 +228,8 @@ void SinChapter4::Enter(float _DeltaTime)
 {
 	SinCutSceneManager::Enter(_DeltaTime);
 
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetJudge()->IsImgMoveOn()))
 	{
 		UEngineSound::SoundPlay("booper_click.wav");
 		C_StateChange(ESinSceneState::Select);
