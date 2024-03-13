@@ -62,6 +62,7 @@ private:
 	float TimeCount = 0.0f;
 
 	static const float BindDelayTime;
+	bool BindASoundPlay = false;
 	bool BindBSoundPlay = false;
 
 	UImageRenderer* PentaRenderer = nullptr;

@@ -239,6 +239,7 @@ void Sin_Judge::Chap3_BindStart()
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
 
 	BindBSoundPlay = true;
+	BindASoundPlay = true;
 	TimeCount = 0.7f;
 	OrderCount = 0;
 }
@@ -291,16 +292,7 @@ void Sin_Judge::Chap3_Bind1(float _DeltaTime)
 
 void Sin_Judge::Chap3_Bind2(float _DeltaTime)
 {
-	if (5 == GetImageRenderer()->GetCurAnimationFrame()
-		&& true == BindBSoundPlay)
-	{
-		UEngineSound::SoundPlay("chainMoveB_001.wav");
-		BindBSoundPlay = false;
-	}
-	else
-	{
-		BindBSoundPlay = true;
-	}
+	DoubleChainSound();
 
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
@@ -376,13 +368,26 @@ void Sin_Judge::ArmRendererRemove()
 
 void Sin_Judge::SingleChainSound()
 {
+	if (1 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindASoundPlay)
+	{
+		RandChainASound();
+		BindASoundPlay = false;
+	}
+
+	if (1 != GetImageRenderer()->GetCurAnimationFrame())
+	{
+		BindASoundPlay = true;
+	}
+
 	if (3 == GetImageRenderer()->GetCurAnimationFrame()
 		&& true == BindBSoundPlay)
 	{	
 		RandChainBSound();
 		BindBSoundPlay = false;
 	}
-	else
+
+	if (3 != GetImageRenderer()->GetCurAnimationFrame())
 	{
 		BindBSoundPlay = true;
 	}
@@ -390,13 +395,34 @@ void Sin_Judge::SingleChainSound()
 
 void Sin_Judge::DoubleChainSound()
 {
+	if (1 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindASoundPlay)
+	{
+		RandChainASound();
+		BindASoundPlay = false;
+	}
+
+	if (4 == GetImageRenderer()->GetCurAnimationFrame()
+		&& true == BindASoundPlay)
+	{
+		RandChainASound();
+		BindASoundPlay = false;
+	}
+
+	if (1 != GetImageRenderer()->GetCurAnimationFrame()
+	 && 4 != GetImageRenderer()->GetCurAnimationFrame())
+	{
+		BindASoundPlay = true;
+	}
+
 	if (5 == GetImageRenderer()->GetCurAnimationFrame()
 		&& true == BindBSoundPlay)
 	{
 		RandChainBSound();
 		BindBSoundPlay = false;
 	}
-	else
+	
+	if (5 != GetImageRenderer()->GetCurAnimationFrame())
 	{
 		BindBSoundPlay = true;
 	}
