@@ -212,7 +212,7 @@ void Sin_Judge::Chap3_BindStart()
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	FVector Scale = { 0.554f, 0.693f };
-	FVector Pos = { 0.0f, 0.0f };
+	FVector Pos = { 0.0f, -0.04f };
 	GetImageRenderer()->CreateAnimation(
 		"Bind_Start", 
 		"Jud_BindAnim", 
