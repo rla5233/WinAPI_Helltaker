@@ -40,6 +40,7 @@ private:
 	void Chap3_Bind2(float _DeltaTime);
 	void Chap3_Bind3(float _DeltaTime);
 	void Chap3_Bind4(float _DeltaTime);
+	void Chap3_Bind5(float _DeltaTime);
 
 	void ChainRendererRemove();
 	void ArmRendererRemove();

@@ -222,14 +222,14 @@ void Sin_Judge::Chap3_BindStart()
 		"SingleBind",	
 		"Jud_BindAnim",
 		{ 5, 6, 7, 6, 5 },
-		{ 0.1f, 0.8f, 0.1f, 0.1f, 0.1f },
+		{ 0.08f, 0.8f, 0.08f, 0.08f, 0.08f },
 		false);
 
 	GetImageRenderer()->CreateAnimation(
 		"DoubleBind",
 		"Jud_BindAnim",
 		{ 5, 6, 7, 6, 7, 6, 5 },
-		{ 0.1f, 0.1f, 0.1f, 0.6f, 0.1f, 0.1f, 0.1f },
+		{ 0.08f, 0.08f, 0.08f, 0.6f, 0.08f, 0.08f, 0.08f },
 		false);
 
 	GetImageRenderer()->AnimationReset();
@@ -256,6 +256,9 @@ void Sin_Judge::Chap3_Bind(float _DeltaTime)
 	case 3:
 		Chap3_Bind4(_DeltaTime);
 		break;
+	case 4:
+		Chap3_Bind5(_DeltaTime);
+		break;
 	}
 }
 
@@ -271,13 +274,20 @@ void Sin_Judge::Chap3_Bind1(float _DeltaTime)
 	{
 		GetImageRenderer()->AnimationReset();
 		GetImageRenderer()->ChangeAnimation("DoubleBind");
-
-		TimeCount = BindDelayTime;
 		++OrderCount;
 	}
 }
 
 void Sin_Judge::Chap3_Bind2(float _DeltaTime)
+{
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		TimeCount = BindDelayTime;
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::Chap3_Bind3(float _DeltaTime)
 {
 	if (0.0f <= TimeCount)
 	{
@@ -295,7 +305,7 @@ void Sin_Judge::Chap3_Bind2(float _DeltaTime)
 	}
 }
 
-void Sin_Judge::Chap3_Bind3(float _DeltaTime)
+void Sin_Judge::Chap3_Bind4(float _DeltaTime)
 {
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
@@ -305,12 +315,12 @@ void Sin_Judge::Chap3_Bind3(float _DeltaTime)
 	}
 }
 
-void Sin_Judge::Chap3_Bind4(float _DeltaTime)
+void Sin_Judge::Chap3_Bind5(float _DeltaTime)
 {
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		TimeCount = BindDelayTime;
-		OrderCount = 1;
+		OrderCount = 2;
 	}
 }
 
