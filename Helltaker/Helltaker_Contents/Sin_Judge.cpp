@@ -497,7 +497,7 @@ void Sin_Judge::Chap3_Fly1()
 		PentaRenderer->SetTransform({ WinScale * Pos, WinScale * EffectScale });
 
 		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
-		GetSinCutSceneChapter()->C_GetUpBG()->AllRenderersActiveOff();
+		GetSinCutSceneChapter()->C_GetUpBG()->StateChange(EBGState::MoveOut_Y);
 
 		++OrderCount;
 	}

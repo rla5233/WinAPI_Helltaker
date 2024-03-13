@@ -292,6 +292,15 @@ enum class EKeyComponentType
 	LockBox
 };
 
+enum class EBGState
+{
+	None,
+	ScaleChange,
+	Move,
+	MoveOut_Y,
+	ScaleZeroY
+};
+
 enum class EActorSeeDir
 {
 	None,

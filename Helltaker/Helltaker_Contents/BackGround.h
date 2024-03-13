@@ -22,10 +22,18 @@ public:
 	void CreateSceneBackGround(std::string_view _Name);
 	void BackGroundChange(std::string_view _Name);
 
-	void ScaleChangeUpdate(const FVector& _TargetScale, float _DeltaTime, float _TimeWeight = 1.0f);
+	void SetStartScale(const FVector& _StartScale)
+	{
+		StartScale = _StartScale;
+	}
+
+	void SetTargetScale(const FVector& _TargetScale)
+	{
+		TargetScale = _TargetScale;
+	}
+
 	void ScaleChangeOn()
 	{
-		StartScale = ImageRenderer->GetTransform().GetScale();
 		IsScaleChange = true;
 	}
 
@@ -34,13 +42,42 @@ public:
 		return ImageRenderer;
 	}
 
+	void StateChange(EBGState _State);
+
 protected:
+	void Tick(float _DeltaTime) override;
+
+private:
+	void ScaleChangeStart();
+	void ScaleChange(float _DeltaTime);
+
+	void ScaleChangeUpdate(float _DeltaTime);
+
+	void MoveStart();
+	void Move(float _DeltaTime);
+
+	void MoveUpdate(float _DeltaTime);
+
+	void MoveOut_YStart();
+	void MoveOut_Y();
+
+	void ScaleZeroY_Start();
+	void ScaleZeroY();
+
+	void StateUpdate(float _DeltaTime);
 
 private:
 	UImageRenderer* ImageRenderer = nullptr;
 
-
 	FVector StartScale = FVector::Zero;
+	FVector TargetScale = FVector::Zero;
 	float ScaleChangeTime = 0.0f;
 	bool IsScaleChange = false;
+
+	FVector StartPos = FVector::Zero;
+	FVector TargetPos = FVector::Zero;
+	float MoveTime = 0.0f;
+	bool IsMove = false;
+
+	EBGState State = EBGState::None;
 };

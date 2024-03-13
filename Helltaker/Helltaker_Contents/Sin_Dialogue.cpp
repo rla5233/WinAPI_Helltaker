@@ -129,6 +129,7 @@ void Sin_Dialogue::Move(float _DeltaTime)
 
 	if (false == IsMove && false == IsFadeOutOn())
 	{
+		LitHell_Renderer->ActiveOff();
 		StateChange(ESinDialogueState::Idle);
 	}
 }
