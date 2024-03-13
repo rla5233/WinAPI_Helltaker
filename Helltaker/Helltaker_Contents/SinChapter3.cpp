@@ -49,6 +49,8 @@ void SinChapter3::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindAnim_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindAnim_002.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainB.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainF.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Pose", "Jud_PoseAnim_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\", "PentaGraphic.png");
 
@@ -238,7 +240,7 @@ void SinChapter3::Enter1()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		// 수정 (jud 애니메이션 추가)
+		C_GetJudge()->StateChange(ESinJudgeState::Chap3_Chain);
 		C_BooperTextSet(SinChap3_Script[2], true);
 		++OrderCount;
 	}

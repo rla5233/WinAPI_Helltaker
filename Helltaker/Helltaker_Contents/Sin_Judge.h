@@ -28,15 +28,26 @@ private:
 	void Intro_Appear1();
 	void Intro_Appear2();
 
+	void Chap3_ChainStart();
+	void Chap3_Chain(float _DeltaTime);
+	void ChainFadeAppear(float _DeltaTime);
+	void ChainFadeOutUpdate(float _DeltaTime);
+	void ChainFadeInUpdate(float _DeltaTime);
+
 	void Chap3_FlyStart();
 	void Chap3_Fly();
 	void Chap3_Fly1();
-	
 
 	void StateUpdate(float _DeltaTime);
 
 private:
-	UImageRenderer* EffectRenderer = nullptr;
+	std::list<UImageRenderer*> ChainRenderer;
+	UImageRenderer* ArmRenderer = nullptr;
+	static const float FadeOutDelayTime;
+	float TimeCount = 0.0f;
+
+	UImageRenderer* PentaRenderer = nullptr;
+
 	int OrderCount = -1;
 
 	ESinJudgeState State = ESinJudgeState::None;
