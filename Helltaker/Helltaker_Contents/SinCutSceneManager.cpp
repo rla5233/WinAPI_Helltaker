@@ -150,6 +150,7 @@ void SinCutSceneManager::C_JudgeChange(
 	const FVector& _Scale)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
+	Judge->GetImageRenderer()->AnimationReset();
 	Judge->GetImageRenderer()->SetImage(_ImgName);
 	Judge->GetImageRenderer()->SetTransform({ WinScale * _Pos, WinScale * _Scale });
 }

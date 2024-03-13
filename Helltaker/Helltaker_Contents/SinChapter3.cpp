@@ -270,6 +270,7 @@ void SinChapter3::Enter3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
+		C_GetJudge()->StateChange(ESinJudgeState::None);
 		C_GetJudge()->AllRenderersActiveOff();
 
 		FVector Scale = { 0.256f, 0.567f };
