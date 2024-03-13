@@ -493,23 +493,26 @@ void Sin_Judge::Chap3_Fly1()
 		GetImageRenderer()->AnimationReset();
 		GetImageRenderer()->ChangeAnimation("Jud_Fly");
 
-		FVector S_PentaScale = { 0.573f, 1.02f };
+		FVector S_PentaScale = { 0.5729f, 1.018f };
 		FVector S_PentaPos = { 0.0f, -0.068f };
 		S_PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
 		S_PentaRenderer->SetImage("S_PentaGraphic.png");
 		S_PentaRenderer->SetAlpha(0.0f);
-		S_PentaRenderer->SetTransform({ WinScale * S_PentaPos, WinScale * S_PentaScale });
+		S_PentaRenderer->SetTransform({ WinScale * S_PentaPos, { 0.0f, 0.0f } });
+		S_PentaTargetScale = WinScale * S_PentaScale;
 
 		FVector B_PentaScale = { 0.885f, 1.574f };
 		FVector B_PentaPos = { 0.0f, -0.068f };
 		B_PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
 		B_PentaRenderer->SetImage("PentaGraphic.png");
 		B_PentaRenderer->SetAlpha(0.0f);
-		B_PentaRenderer->SetTransform({ WinScale * B_PentaPos, WinScale * B_PentaScale });
+		B_PentaRenderer->SetTransform({ WinScale * B_PentaPos, { 0.0f, 0.0f } });
+		B_PentaTargetScale = WinScale * B_PentaScale;
 
 		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
 		GetSinCutSceneChapter()->C_GetUpBG()->StateChange(EBGState::MoveOut_Y);
 
+		ScaleUpOn();
 		FadeInOn();
 		++OrderCount;
 	}
@@ -517,10 +520,13 @@ void Sin_Judge::Chap3_Fly1()
 
 void Sin_Judge::Chap3_Fly2(float _DeltaTime)
 {
-	FadeInUpdate(S_PentaRenderer, _DeltaTime, 2.5f);
-	FadeInUpdate(B_PentaRenderer, _DeltaTime, 2.5f);
+	FadeInUpdate(S_PentaRenderer, _DeltaTime, 3.0f);
+	FadeInUpdate(B_PentaRenderer, _DeltaTime, 3.0f);
 
-	if (false == IsFadeInOn())
+	ScaleUp_Update(S_PentaRenderer, { 0.0f, 0.0f }, S_PentaTargetScale, _DeltaTime, 3.0f);
+	ScaleUp_Update(B_PentaRenderer, { 0.0f, 0.0f }, B_PentaTargetScale, _DeltaTime, 3.0f);
+
+	if (false == IsFadeInOn() && false == IsScaleUpOn())
 	{
 		StateChange(ESinJudgeState::None);
 	}

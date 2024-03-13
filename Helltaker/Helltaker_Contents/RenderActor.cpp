@@ -146,3 +146,25 @@ void RenderActor::ImgMoveUpdate(
 		}
 	}
 }
+
+void RenderActor::ScaleUp_Update(
+	UImageRenderer* const _Renderer, 
+	const FVector& _StartScale, 
+	const FVector& _TargetScale, 
+	float _DeltaTime, 
+	float _TimeWeight)
+{
+	if (true == IsScaleUp)
+	{
+		ScaleUpTimeCount += _DeltaTime * _TimeWeight;
+
+		FVector NextScale = FVector::LerpClamp(_StartScale, _TargetScale, ScaleUpTimeCount);
+		_Renderer->SetScale(NextScale);
+
+		if (1.0f <= ScaleUpTimeCount)
+		{
+			ScaleUpTimeCount = 0.0f;
+			IsScaleUp = false;
+		}
+	}
+}

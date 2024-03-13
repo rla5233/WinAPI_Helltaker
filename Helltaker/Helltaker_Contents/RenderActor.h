@@ -87,6 +87,24 @@ public:
 		return IsImgMove;
 	}
 
+	void ScaleUp_Update(
+		UImageRenderer* const _Renderer,
+		const FVector& _StartScale,
+		const FVector& _TargetScale,
+		float _DeltaTime,
+		float _TimeWeight = 1.0f
+	);
+
+	void ScaleUpOn()
+	{
+		IsScaleUp = true;
+	}
+
+	bool IsScaleUpOn() const
+	{
+		return IsScaleUp;
+	}
+
 protected:
 	void BeginPlay() override;
 	
@@ -94,9 +112,11 @@ private:
 	bool IsFadeIn = false;
 	bool IsFadeOut = false;
 	bool IsImgMove = false;
+	bool IsScaleUp = false;
 
 	float FadeTimeCount = 0.0f;
 	float MoveTimeCount = 0.0f;
+	float ScaleUpTimeCount = 0.0f;
 
 	static bool IsLoad;
 };

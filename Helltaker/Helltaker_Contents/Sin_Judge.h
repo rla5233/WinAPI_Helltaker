@@ -68,6 +68,8 @@ private:
 
 	UImageRenderer* S_PentaRenderer = nullptr;
 	UImageRenderer* B_PentaRenderer = nullptr;
+	FVector S_PentaTargetScale = FVector::Zero;
+	FVector B_PentaTargetScale = FVector::Zero;
 
 	int OrderCount = -1;
 
