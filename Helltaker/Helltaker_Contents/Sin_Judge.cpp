@@ -86,30 +86,30 @@ void Sin_Judge::Intro_Appear2()
 void Sin_Judge::Chap3_ChainStart()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Chain1Scale = { 0.448f * 0.9f, 0.278f * 0.9f };
+	FVector Chain1Scale = { 0.403f, 0.25f };
 	FVector Chain1Pos = { 0.0f, 0.14f };
 	UImageRenderer* Renderer1 = AActor::CreateImageRenderer(SinRenderOrder::Mid);
-	Renderer1->SetImage("Jud_BindChainF.png");
+	Renderer1->SetImage("Jud_BindChainF_001.png");
 	Renderer1->SetTransform({ WinScale * Chain1Pos, WinScale * Chain1Scale });
 	Renderer1->SetAlpha(0.0f);
 	ChainRenderer.push_back(Renderer1);
 
 	UImageRenderer* Renderer2 = AActor::CreateImageRenderer(SinRenderOrder::Bottom);
-	Renderer2->SetImage("Jud_BindChainB.png");
+	Renderer2->SetImage("Jud_BindChainB_001.png");
 	Renderer2->SetTransform({ WinScale * Chain1Pos, WinScale * Chain1Scale });
 	Renderer2->SetAlpha(0.0f);
 	ChainRenderer.push_back(Renderer2);
 
-	FVector Chain2Scale = { 0.448f * 0.8f, 0.278f * 0.8f };
+	FVector Chain2Scale = { 0.358f, 0.222f };
 	FVector Chain2Pos = { 0.0f, 0.06f };
 	UImageRenderer* Renderer3 = AActor::CreateImageRenderer(SinRenderOrder::Mid);
-	Renderer3->SetImage("Jud_BindChainF.png");
+	Renderer3->SetImage("Jud_BindChainF_002.png");
 	Renderer3->SetTransform({ WinScale * Chain2Pos, WinScale * Chain2Scale });
 	Renderer3->SetAlpha(0.0f);
 	ChainRenderer.push_back(Renderer3);
 
 	UImageRenderer* Renderer4 = AActor::CreateImageRenderer(SinRenderOrder::Bottom);
-	Renderer4->SetImage("Jud_BindChainB.png");
+	Renderer4->SetImage("Jud_BindChainB_002.png");
 	Renderer4->SetTransform({ WinScale * Chain2Pos, WinScale * Chain2Scale });
 	Renderer4->SetAlpha(0.0f);
 	ChainRenderer.push_back(Renderer4);

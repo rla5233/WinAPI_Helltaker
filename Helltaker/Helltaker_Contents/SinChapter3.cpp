@@ -49,8 +49,10 @@ void SinChapter3::BeginPlay()
 	{
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindAnim_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindAnim_002.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainB.png");
-		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainF.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainB_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainF_001.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainB_002.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "Jud_BindChainF_002.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Pose", "Jud_PoseAnim_001.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\", "PentaGraphic.png");
 		ContentsHelper::LoadImg("Scene\\Characters\\", "S_PentaGraphic.png");
