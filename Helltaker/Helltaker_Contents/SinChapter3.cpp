@@ -65,8 +65,6 @@ void SinChapter3::BeginPlay()
 		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveB_001.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "chainMoveB_002.wav");
 
-		//UEngineSound::SoundPlay("chainMoveB_001.wav");
-
 		AddChapterSet("SinChapter3");
 
 		IsLoad = true;

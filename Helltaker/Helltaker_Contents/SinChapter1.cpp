@@ -171,7 +171,8 @@ void SinChapter1::Enter(float _DeltaTime)
 
 void SinChapter1::Enter1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetJudge()->IsImgMoveOn()))
 	{
 		C_BooperTextSet(SinChap1_Script[2], true);
 		++OrderCount;
@@ -197,7 +198,8 @@ void SinChapter1::Enter2()
 
 void SinChapter1::Enter3()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector Scale = { 0.255f, 0.611f };
 		FVector Pos = { -0.009f, 0.0f };
@@ -212,7 +214,8 @@ void SinChapter1::Enter3()
 
 void SinChapter1::Enter4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_GetSceneCharacter()->AllRenderersActiveOff();
 
@@ -230,7 +233,8 @@ void SinChapter1::Enter4()
 
 void SinChapter1::Enter5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetJudge()->IsImgMoveOn()))
 	{
 		C_GetJudge()->AllRenderersActiveOff();
 
@@ -248,7 +252,8 @@ void SinChapter1::Enter5()
 
 void SinChapter1::Enter6()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_GetSceneCharacter()->AllRenderersActiveOff();
 
