@@ -256,7 +256,7 @@ void UImageRenderer::TextRender(float _DeltaTime)
 		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
 		break;
 	default:
-		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, SortOption1, SortOption1, TextColor);
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, SortOption1, SortOption2, TextColor);
 		break;
 	}
 }
