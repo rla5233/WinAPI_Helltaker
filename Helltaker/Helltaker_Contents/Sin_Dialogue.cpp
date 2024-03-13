@@ -97,7 +97,6 @@ void Sin_Dialogue::Lightning(float _DeltaTime)
 		LitHell_Renderer->ActiveOff();
  		
 		GetSinCutSceneChapter()->C_GetJudge()->StateChange(ESinJudgeState::Intro_Appear);
- 		StateChange(ESinDialogueState::Move);
 	}
 }
 

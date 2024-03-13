@@ -7,6 +7,7 @@
 #include <EngineBase/EngineRandom.h>
 
 const float Sin_Judge::FadeOutDelayTime = 0.2f;
+const float Sin_Judge::IntroDelayTime = 0.8f;
 const float Sin_Judge::BindDelayTime = 1.0f;
 
 Sin_Judge::Sin_Judge()
@@ -31,37 +32,92 @@ void Sin_Judge::Tick(float _DeltaTime)
 
 void Sin_Judge::Intro_AppearStart()
 {
-	GetImageRenderer()->CreateAnimation("Jud_Intro", "Jud_Intro", { 0, 1, 2, 3 }, { 0.08f, 0.08f, 0.32f, 0.0f }, false);
+	GetImageRenderer()->CreateAnimation(
+		"Jud_Arm1", 
+		"Jud_Arm", 
+		{ 0, 1, 2, 3, 4, 5, 6, 7, 8 },
+		{ 0.015f, 0.015f, 0.015f, 0.015f, 0.015f, 0.015f, 0.03f, 0.03f, 0.03f },
+		false);
 
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { 1.0f, 0.692f };
-	FVector Pos = { 0.0f, -0.0402f };
-	GetImageRenderer()->AnimationReset();
-	GetImageRenderer()->ChangeAnimation("Jud_Intro");
-	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
+	GetImageRenderer()->CreateAnimation("Jud_Arm2",	"Jud_Arm", 9, 14, 0.02f, false);
+	
+	GetImageRenderer()->CreateAnimation(
+		"Jud_Intro", 
+		"Jud_Intro", 
+		{ 0, 1, 2, 3 }, 
+		{ 0.08f, 0.08f, 0.32f, 0.0f }, 
+		false);
 
+	TimeCount = IntroDelayTime;
 	OrderCount = 0;
 }
 
-void Sin_Judge::Intro_Appear()
+void Sin_Judge::Intro_Appear(float _DeltaTime)
 {
 	switch (OrderCount)
 	{
 	case 0:
-		Intro_Appear1();
+		Intro_Appear1(_DeltaTime);
 		break;
 	case 1:
-		Intro_Appear2();
+		Intro_Appear2(_DeltaTime);
+		break;
+	case 2:
+		Intro_Appear3();
+		break;
+	case 3:
+		Intro_Appear4();
 		break;
 	}
 }
 
-void Sin_Judge::Intro_Appear1()
+void Sin_Judge::Intro_Appear1(float _DeltaTime)
 {
+	if (0.0f <= TimeCount)
+	{
+		TimeCount -= _DeltaTime;
+		return;
+	}
+
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { 1.021f, 0.504f };
+	FVector Pos = { 0.0f, 0.022f };
+	GetImageRenderer()->AnimationReset();
+	GetImageRenderer()->ChangeAnimation("Jud_Arm1");
+	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
+	TimeCount = 1.0f;
 	++OrderCount;
 }
 
-void Sin_Judge::Intro_Appear2()
+void Sin_Judge::Intro_Appear2(float _DeltaTime)
+{
+	if (0.0f <= TimeCount)
+	{
+		TimeCount -= _DeltaTime;
+		return;
+	}
+
+	GetImageRenderer()->AnimationReset();
+	GetImageRenderer()->ChangeAnimation("Jud_Arm2");
+	++OrderCount;
+}
+
+void Sin_Judge::Intro_Appear3()
+{
+	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	{
+		FVector WinScale = ContentsHelper::GetWindowScale();
+		FVector Scale = { 1.0f, 0.692f };
+		FVector Pos = { 0.0f, -0.0402f };
+		GetImageRenderer()->AnimationReset();
+		GetImageRenderer()->ChangeAnimation("Jud_Intro");
+		GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
+		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::Intro_Appear4()
 {
 	if (1 == GetImageRenderer()->GetCurAnimationFrame())
 	{
@@ -70,18 +126,12 @@ void Sin_Judge::Intro_Appear2()
 		GetImageRenderer()->SetScale(WinScale * Scale);
 		GetSinCutSceneChapter()->C_StateChange(ESinSceneState::End);
 	}
-
-	if (3 == GetImageRenderer()->GetCurAnimationFrame())
-	{
-		GetSinCutSceneChapter()->C_StateChange(ESinSceneState::End);
-	}
-
+	
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
 		StateChange(ESinJudgeState::None);
 	}
 }
-
 
 void Sin_Judge::Chap3_ChainStart()
 {
@@ -537,7 +587,7 @@ void Sin_Judge::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case ESinJudgeState::Intro_Appear:
-		Intro_Appear();
+		Intro_Appear(_DeltaTime);
 		break;
 	case ESinJudgeState::Chap3_Chain:
 		Chap3_Chain(_DeltaTime);

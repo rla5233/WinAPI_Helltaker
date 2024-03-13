@@ -24,9 +24,11 @@ protected:
 
 private:
 	void Intro_AppearStart();
-	void Intro_Appear();
-	void Intro_Appear1();
-	void Intro_Appear2();
+	void Intro_Appear(float _DeltaTime);
+	void Intro_Appear1(float _DeltaTime);
+	void Intro_Appear2(float _DeltaTime);
+	void Intro_Appear3();
+	void Intro_Appear4();
 
 	void Chap3_ChainStart();
 	void Chap3_Chain(float _DeltaTime);
@@ -61,6 +63,8 @@ private:
 	UImageRenderer* ArmRenderer = nullptr;
 	static const float FadeOutDelayTime;
 	float TimeCount = 0.0f;
+
+	static const float IntroDelayTime;
 
 	static const float BindDelayTime;
 	bool BindASoundPlay = false;

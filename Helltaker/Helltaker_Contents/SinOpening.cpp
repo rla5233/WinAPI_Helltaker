@@ -35,13 +35,9 @@ void SinOpening::BeginPlay()
 
 	if (false == IsLoad)
 	{
-		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Arm\\L_Arm", "Jud_LArm_001.png");
-		ContentsHelper::LoadImg("Scene\\Characters\\Jud_Arm\\R_Arm", "Jud_RArm_001.png");
-
-		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "L_Arm");
-		ContentsHelper::LoadFolder("Scene\\Characters\\Jud_Arm", "R_Arm");
-
+		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Arm");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
+
 		ContentsHelper::LoadSound("Sound\\Effect", "judge_intro_start.wav");
 		ContentsHelper::LoadSound("Sound\\Effect", "judgement_intro_anim.wav");
 
@@ -139,7 +135,7 @@ void SinOpening::Enter3()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		//UEngineSound::SoundPlay("judgement_intro_anim.wav");
+		UEngineSound::SoundPlay("judgement_intro_anim.wav");
 		C_GetDialogue()->StateChange(ESinDialogueState::Lightning);
 		C_GetBooper()->AllRenderersActiveOff();
 		C_GetJudge()->GetNameRenderer()->ActiveOff();
