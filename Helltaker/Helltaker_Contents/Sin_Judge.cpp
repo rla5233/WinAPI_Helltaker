@@ -458,7 +458,6 @@ void Sin_Judge::RandChainASound()
 
 void Sin_Judge::Chap3_FlyStart()
 {	
-
 	GetImageRenderer()->CreateAnimation("Jud_Pose", "Jud_Pose", 0, 2, 0.04f, false);
 	GetImageRenderer()->CreateAnimation("Jud_Fly", "Jud_Fly", 0, 4, 0.04f, false);
 
@@ -467,15 +466,15 @@ void Sin_Judge::Chap3_FlyStart()
 	OrderCount = 0;
 }
 
-void Sin_Judge::Chap3_Fly()
+void Sin_Judge::Chap3_Fly(float _DeltaTime)
 {
 	switch (OrderCount)
 	{
 	case 0:
 		Chap3_Fly1();
 		break;
-	case 1 :
-		StateChange(ESinJudgeState::None);
+	case 1:
+		Chap3_Fly2(_DeltaTime);
 		break;
 	}
 }
@@ -484,6 +483,9 @@ void Sin_Judge::Chap3_Fly1()
 {
 	if (true == GetImageRenderer()->IsCurAnimationEnd())
 	{
+		GetSinCutSceneChapter()->C_GetUpBG()->GetImageRenderer()
+			->SetOrder(static_cast<int>(SinRenderOrder::UnderBackGround));
+
 		FVector WinScale = ContentsHelper::GetWindowScale();
 		FVector Scale = { 0.212f, 0.502f };
 		FVector Pos = { 0.0f, -0.048f };
@@ -495,18 +497,32 @@ void Sin_Judge::Chap3_Fly1()
 		FVector S_PentaPos = { 0.0f, -0.068f };
 		S_PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
 		S_PentaRenderer->SetImage("S_PentaGraphic.png");
+		S_PentaRenderer->SetAlpha(0.0f);
 		S_PentaRenderer->SetTransform({ WinScale * S_PentaPos, WinScale * S_PentaScale });
 
 		FVector B_PentaScale = { 0.885f, 1.574f };
 		FVector B_PentaPos = { 0.0f, -0.068f };
 		B_PentaRenderer = RenderActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
 		B_PentaRenderer->SetImage("PentaGraphic.png");
+		B_PentaRenderer->SetAlpha(0.0f);
 		B_PentaRenderer->SetTransform({ WinScale * B_PentaPos, WinScale * B_PentaScale });
 
 		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
 		GetSinCutSceneChapter()->C_GetUpBG()->StateChange(EBGState::MoveOut_Y);
 
+		FadeInOn();
 		++OrderCount;
+	}
+}
+
+void Sin_Judge::Chap3_Fly2(float _DeltaTime)
+{
+	FadeInUpdate(S_PentaRenderer, _DeltaTime, 2.5f);
+	FadeInUpdate(B_PentaRenderer, _DeltaTime, 2.5f);
+
+	if (false == IsFadeInOn())
+	{
+		StateChange(ESinJudgeState::None);
 	}
 }
 
@@ -524,7 +540,7 @@ void Sin_Judge::StateUpdate(float _DeltaTime)
 		Chap3_Bind(_DeltaTime);
 		break;
 	case ESinJudgeState::Chap3_Fly:
-		Chap3_Fly();
+		Chap3_Fly(_DeltaTime);
 		break;
 	}
 }

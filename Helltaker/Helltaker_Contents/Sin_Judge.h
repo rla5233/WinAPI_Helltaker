@@ -50,8 +50,9 @@ private:
 	void RandChainBSound();
 
 	void Chap3_FlyStart();
-	void Chap3_Fly();
+	void Chap3_Fly(float _DeltaTime);
 	void Chap3_Fly1();
+	void Chap3_Fly2(float _DeltaTime);
 
 	void StateUpdate(float _DeltaTime);
 
