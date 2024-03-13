@@ -238,7 +238,8 @@ void SinChapter3::Enter(float _DeltaTime)
 
 void SinChapter3::Enter1()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetJudge()->IsImgMoveOn()))
 	{
 		C_GetJudge()->StateChange(ESinJudgeState::Chap3_Chain);
 		C_BooperTextSet(SinChap3_Script[2], true);
@@ -275,7 +276,8 @@ void SinChapter3::Enter3()
 
 void SinChapter3::Enter4()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector Scale = { 0.21f, 0.576f };
 		FVector Pos = { 0.0f, 0.017f };
@@ -290,7 +292,8 @@ void SinChapter3::Enter4()
 
 void SinChapter3::Enter5()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		FVector Scale = { 0.194f,  0.605f };
 		FVector Pos = { 0.0f, 0.0f };
@@ -305,7 +308,8 @@ void SinChapter3::Enter5()
 
 void SinChapter3::Enter6()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetSceneCharacter()->IsImgMoveOn()))
 	{
 		C_GetSceneCharacter()->AllRenderersActiveOff();
 
@@ -323,7 +327,8 @@ void SinChapter3::Enter6()
 
 void SinChapter3::Enter7()
 {
-	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+	if ((UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
+		&& (false == C_GetJudge()->IsImgMoveOn()))
 	{
 		UEngineSound::SoundPlay("booper_click.wav");
 		C_StateChange(ESinSceneState::Select);

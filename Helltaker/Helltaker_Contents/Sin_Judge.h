@@ -37,7 +37,8 @@ private:
 	void Chap3_BindStart();
 	void Chap3_Bind();
 
-	void ChainRendererOff();
+	void ChainRendererRemove();
+	void ArmRendererRemove();
 
 	void Chap3_FlyStart();
 	void Chap3_Fly();

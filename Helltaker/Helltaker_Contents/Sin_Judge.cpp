@@ -204,12 +204,14 @@ void Sin_Judge::ChainFadeInUpdate(float _DeltaTime)
 
 void Sin_Judge::Chap3_BindStart()
 {
-	ChainRendererOff();
-	
+	ChainRendererRemove();
+	ArmRendererRemove();
+
+
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { 0.0f, 0.0f };
+	FVector Scale = { 0.554f, 0.693f };
 	FVector Pos = { 0.0f, 0.0f };
-	GetImageRenderer()->CreateAnimation("Bind_Start", "Jud_BindAnim", 0, 7, 0.02f, false);
+	GetImageRenderer()->CreateAnimation("Bind_Start", "Jud_BindAnim", 0, 7, 0.1f, false);
 	GetImageRenderer()->AnimationReset();
 	GetImageRenderer()->ChangeAnimation("Bind_Start");
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
@@ -221,7 +223,7 @@ void Sin_Judge::Chap3_Bind()
 
 }
 
-void Sin_Judge::ChainRendererOff()
+void Sin_Judge::ChainRendererRemove()
 {
 	for (UImageRenderer* Chain : ChainRenderer)
 	{
@@ -234,6 +236,13 @@ void Sin_Judge::ChainRendererOff()
 		Chain->Destroy();
 		Chain = nullptr;
 	}
+}
+
+void Sin_Judge::ArmRendererRemove()
+{
+	ArmRenderer->ActiveOff();
+	ArmRenderer->Destroy();
+	ArmRenderer = nullptr;
 }
 
 void Sin_Judge::Chap3_FlyStart()
