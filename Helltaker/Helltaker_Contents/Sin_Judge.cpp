@@ -458,6 +458,7 @@ void Sin_Judge::RandChainASound()
 
 void Sin_Judge::Chap3_FlyStart()
 {	
+
 	GetImageRenderer()->CreateAnimation("Jud_Pose", "Jud_Pose", 0, 2, 0.04f, false);
 	GetImageRenderer()->CreateAnimation("Jud_Fly", "Jud_Fly", 0, 4, 0.04f, false);
 

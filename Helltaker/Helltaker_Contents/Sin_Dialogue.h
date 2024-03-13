@@ -32,8 +32,7 @@ private:
 
 	void MoveStart();
 	void Move(float _DeltaTime);
-
-	void SetImageRendererMove();
+	void MoveUpdate(float _DeltaTime);
 
 	void SetHell();
 	
@@ -49,6 +48,8 @@ private:
 
 	FVector StartPos = FVector::Zero;
 	FVector TargetPos = FVector::Zero;
+	float MoveTime = 0.0f;
+	bool IsMove = false;
 
 	UImageRenderer* DarkHell_Renderer = nullptr;
 	UImageRenderer* LitHell_Renderer = nullptr;

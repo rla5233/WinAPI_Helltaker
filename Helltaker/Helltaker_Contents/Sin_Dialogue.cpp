@@ -9,7 +9,7 @@ const FVector Sin_Dialogue::HellScale = { 1.021f, 0.7592f };
 const FVector Sin_Dialogue::DownSinScale = { 1.021f, 0.504f };
 const FVector Sin_Dialogue::UpSinScale = { 1.021f, 0.626f };
 const float Sin_Dialogue::PosType_0 = -0.034f;
-const float Sin_Dialogue::PosType_1 = -0.654f;
+const float Sin_Dialogue::PosType_1 = -0.6218f;
 
 
 Sin_Dialogue::Sin_Dialogue()
@@ -57,17 +57,13 @@ void Sin_Dialogue::SetHell()
 void Sin_Dialogue::SetSin(int _PosType)
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	float UpPosY = 0.0f;
+	float UpPosY = WinScale.Y * PosType_0;
 
 	PosType = _PosType;
-	switch (PosType)
+
+	if (1 == PosType)
 	{
-	case 1:
-		UpPosY = WinScale.Y * PosType_1;
-		break;
-	default:
-		UpPosY = WinScale.Y * PosType_0;
-		break;
+		AddActorLocation({ 0.0f, WinScale.Y * PosType_1 });
 	}
 
 	Up_ImageRenderer->SetImage("DialogueBG_Sin_001.png");
@@ -107,57 +103,48 @@ void Sin_Dialogue::Lightning(float _DeltaTime)
 
 void Sin_Dialogue::MoveStart()
 {
-	SetImageRendererMove();
-}
-
-void Sin_Dialogue::Move(float _DeltaTime)
-{
 	FVector WinScale = ContentsHelper::GetWindowScale();
-
-	float TimeWeight = 1.0f;
 	switch (PosType)
 	{
-	case 1:
-		TimeWeight = 4.0f;
+	case 0:
+		StartPos = GetActorLocation();
+		TargetPos = GetActorLocation() + FVector(0.0f, WinScale.Y * PosType_1);
 		break;
-	default:
-		TimeWeight = 8.0f;
+	case 1:
+		StartPos = GetActorLocation();
+ 		TargetPos = GetActorLocation() - FVector(0.0f, WinScale.Y * (PosType_1 + 0.13f));
 		break;
 	}
 
-	ImgMoveUpdate(	
-		{ Up_ImageRenderer , Down_ImageRenderer }, 
-		{ StartPos, {StartPos.X, StartPos.Y + WinScale.Y * (0.564f)} },
-		{ TargetPos, {TargetPos.X, TargetPos.Y + WinScale.Y * (0.564f)} },
-		_DeltaTime, 
-		TimeWeight);
+	MoveTime = 0.0f;
+	IsMove = true;
+}
 
-	if (false == IsImgMoveOn())
+void Sin_Dialogue::Move(float _DeltaTime)
+{	
+	MoveUpdate(_DeltaTime);
+
+	if (false == IsMove)
 	{
 		StateChange(ESinDialogueState::Idle);
 	}
 }
 
-void Sin_Dialogue::SetImageRendererMove()
+void Sin_Dialogue::MoveUpdate(float _DeltaTime)
 {
-	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector CurPos = Up_ImageRenderer->GetPosition();
-
-	StartPos = CurPos;
-
-	switch (PosType)
+	if (true == IsMove)
 	{
-	case 1:
-		TargetPos = { CurPos.X,  WinScale.Y * PosType_0 };
-		PosType = 0;
-		break;
-	default:
-		TargetPos = { CurPos.X,  WinScale.Y * PosType_1 };
-		PosType = 1;
-		break;
-	}
+		MoveTime += 5.0f * _DeltaTime;
 
-	ImgMoveOn();
+		FVector NextPos = FVector::LerpClamp(StartPos, TargetPos, MoveTime);
+		SetActorLocation(NextPos);
+
+		if (1.0f <= MoveTime)
+		{
+			MoveTime = 0.0f;
+			IsMove = false;
+		}
+	}
 }
 
 void Sin_Dialogue::Tick(float _DeltaTime)

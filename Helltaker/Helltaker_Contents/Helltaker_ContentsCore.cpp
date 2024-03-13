@@ -36,7 +36,7 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 void Helltaker_ContentsCore::BeginPlay()
 {
 	UEngineCore::BeginPlay();
-	MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
+	//MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	SetFrame(60);
 
@@ -76,14 +76,14 @@ void Helltaker_ContentsCore::BeginPlay()
 	CreateLevel<SinOpening>("SinOpening");
 	ChangeLevel("SinOpening");
 	
-	CreateLevel<SinChapter1>("SinChapter1");
-    ChangeLevel("SinChapter1");
+	//CreateLevel<SinChapter1>("SinChapter1");
+   // ChangeLevel("SinChapter1");
 	
-	CreateLevel<SinChapter2>("SinChapter2");
-	ChangeLevel("SinChapter2");
+	//CreateLevel<SinChapter2>("SinChapter2");
+	//ChangeLevel("SinChapter2");
 	
-	CreateLevel<SinChapter3>("SinChapter3");
-    ChangeLevel("SinChapter3");
+	//CreateLevel<SinChapter3>("SinChapter3");
+   // ChangeLevel("SinChapter3");
 	
 	//CreateLevel<SinChapter4>("SinChapter4");
 	//ChangeLevel("SinChapter4");
