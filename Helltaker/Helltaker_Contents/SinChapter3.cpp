@@ -373,7 +373,6 @@ void SinChapter3::SelectMenu()
 	}
 }
 
-
 void SinChapter3::Select1()
 {
 	UEngineSound::SoundPlay("dialogue_button_confirm.wav");

@@ -31,8 +31,6 @@ public:
 
 	void CoreInit(HINSTANCE _Init);
 
-	void Exit();
-
 	virtual void BeginPlay();
 	virtual void Tick(float _DeltaTime);
 	virtual void End();
@@ -66,7 +64,8 @@ public:
 	{
 		return IsDebugValue;
 	}
-	static void EngineDebugSwitch() {
+	static void EngineDebugSwitch()
+	{
 		IsDebugValue = !IsDebugValue;
 	}
 
