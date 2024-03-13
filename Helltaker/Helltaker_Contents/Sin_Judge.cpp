@@ -202,6 +202,39 @@ void Sin_Judge::ChainFadeInUpdate(float _DeltaTime)
 	}
 }
 
+void Sin_Judge::Chap3_BindStart()
+{
+	ChainRendererOff();
+	
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Scale = { 0.0f, 0.0f };
+	FVector Pos = { 0.0f, 0.0f };
+	GetImageRenderer()->CreateAnimation("Bind_Start", "Jud_BindAnim", 0, 7, 0.02f, false);
+	GetImageRenderer()->AnimationReset();
+	GetImageRenderer()->ChangeAnimation("Bind_Start");
+	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
+
+}
+
+void Sin_Judge::Chap3_Bind()
+{
+
+}
+
+void Sin_Judge::ChainRendererOff()
+{
+	for (UImageRenderer* Chain : ChainRenderer)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		Chain->ActiveOff();
+		Chain->Destroy();
+		Chain = nullptr;
+	}
+}
 
 void Sin_Judge::Chap3_FlyStart()
 {	
@@ -259,6 +292,9 @@ void Sin_Judge::StateUpdate(float _DeltaTime)
 	case ESinJudgeState::Chap3_Chain:
 		Chap3_Chain(_DeltaTime);
 		break;
+	case ESinJudgeState::Chap3_Bind:
+		Chap3_Bind();
+		break;
 	case ESinJudgeState::Chap3_Fly:
 		Chap3_Fly();
 		break;
@@ -276,6 +312,9 @@ void Sin_Judge::StateChange(ESinJudgeState _State)
 			break;
 		case ESinJudgeState::Chap3_Chain:
 			Chap3_ChainStart();
+			break;
+		case ESinJudgeState::Chap3_Bind:
+			Chap3_BindStart();
 			break;
 		case ESinJudgeState::Chap3_Fly:
 			Chap3_FlyStart();

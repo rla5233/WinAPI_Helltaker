@@ -250,10 +250,7 @@ void SinChapter3::Enter2()
 {
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		FVector Scale = { 0.247f, 0.561f };
-		FVector Pos = { 0.015f, 0.02f };
-		// 수정 (jud 애니메이션 추가)
-
+		C_GetJudge()->StateChange(ESinJudgeState::Chap3_Bind);
 		C_BooperTextSet(SinChap3_Script[3], true);
 		++OrderCount;
 	}

@@ -453,6 +453,7 @@ enum class ESinJudgeState
 	None,
 	Intro_Appear,
 	Chap3_Chain,
+	Chap3_Bind,
 	Chap3_Fly
 };
 

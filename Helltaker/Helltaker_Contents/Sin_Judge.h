@@ -34,6 +34,11 @@ private:
 	void ChainFadeOutUpdate(float _DeltaTime);
 	void ChainFadeInUpdate(float _DeltaTime);
 
+	void Chap3_BindStart();
+	void Chap3_Bind();
+
+	void ChainRendererOff();
+
 	void Chap3_FlyStart();
 	void Chap3_Fly();
 	void Chap3_Fly1();
