@@ -112,7 +112,9 @@ void Sin_Dialogue::MoveStart()
 		break;
 	case 1:
 		StartPos = GetActorLocation();
- 		TargetPos = GetActorLocation() - FVector(0.0f, WinScale.Y * (PosType_1 + 0.13f));
+ 		TargetPos = GetActorLocation() - FVector(0.0f, WinScale.Y * (PosType_1 + 0.12f));
+		LitHell_Renderer->ActiveOn();
+		FadeOutOn();
 		break;
 	}
 
@@ -123,8 +125,9 @@ void Sin_Dialogue::MoveStart()
 void Sin_Dialogue::Move(float _DeltaTime)
 {	
 	MoveUpdate(_DeltaTime);
+	FadeOutUpdate(LitHell_Renderer, _DeltaTime, 2.0f);
 
-	if (false == IsMove)
+	if (false == IsMove && false == IsFadeOutOn())
 	{
 		StateChange(ESinDialogueState::Idle);
 	}
