@@ -592,7 +592,7 @@ void MainMenu::Exit(float _DeltaTime)
 	DialogueMoveUpdate(_DeltaTime);
 	if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
 	{
-		GEngine->MainWindow.Off();;
+		GEngine->MainWindow.Off();
 	}
 }
 

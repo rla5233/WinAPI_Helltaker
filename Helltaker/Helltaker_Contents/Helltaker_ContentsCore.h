@@ -17,6 +17,7 @@ public:
 
 protected:
 	void BeginPlay() override;
+	void WindowOpen(std::string& _OutWindowTitle, std::string& _SmallIconPath) override;
 
 private:
 

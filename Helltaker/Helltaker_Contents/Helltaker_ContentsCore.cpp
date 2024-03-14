@@ -2,7 +2,7 @@
 
 #include "Opening.h"
 
-#include <time.h>
+#include <EngineBase/EngineDirectory.h>
 
 // Test
 #include "MainMenu.h"
@@ -32,10 +32,10 @@ Helltaker_ContentsCore::~Helltaker_ContentsCore()
 {
 }
 
-// 게임시작
 void Helltaker_ContentsCore::BeginPlay()
 {
 	UEngineCore::BeginPlay();
+
 	MainWindow.SetClearColor(Color8Bit(2, 2, 27, 255));
 	MainWindow.SetWindowScale({ 1920, 1080 });
 	SetFrame(60);
@@ -93,4 +93,16 @@ void Helltaker_ContentsCore::BeginPlay()
 	
 	//CreateLevel<Epilogue>("Epilogue");
 	//ChangeLevel("Epilogue");
+}
+
+void Helltaker_ContentsCore::WindowOpen(std::string& _OutWindowTitle, std::string& _SmallIconPath)
+{
+	_OutWindowTitle = "HellTaker";
+
+	UEngineDirectory ResourcesPath = UEngineDirectory();
+	ResourcesPath.MoveParent();
+	ResourcesPath.Move("Resources");
+	ResourcesPath.Move("UI");
+	std::string IconPath = ResourcesPath.AppendPath("Icon.ico");
+	_SmallIconPath = IconPath;
 }
