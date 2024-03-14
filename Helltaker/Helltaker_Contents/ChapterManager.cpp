@@ -757,6 +757,11 @@ void ChapterManager::ChapterMainBGM_Off()
 	ChapterBGMPlayer.Off();
 }
 
+void ChapterManager::ChapterMainBGM_SetVolume(float _Volume)
+{
+	ChapterBGMPlayer.SetVolume(_Volume);
+}
+
 // 디버그용
 void ChapterManager::ShowLocationPoint()
 {

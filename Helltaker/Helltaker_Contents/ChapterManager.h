@@ -140,6 +140,7 @@ public:
 	
 	void ChapterMainBGM_On();
 	void ChapterMainBGM_Off();
+	void ChapterMainBGM_SetVolume(float _Volume);
 
 	// Debug
 	void ShowLocationPoint();

@@ -115,6 +115,7 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 	M_SpawnDemon({ 4, 0 }, "Lucy", { Pos, Scale });
 	EndPoint = { 4, 2 };
 
+	ChapterMainBGM_SetVolume(1.0f);
 	M_StateChange(EChapterState::Idle);
 
 #ifdef DEBUG
@@ -154,6 +155,7 @@ void Chapter8::CutSceneCheck()
 
 void Chapter8::CutSceneStart()
 {
+	ChapterMainBGM_SetVolume(0.5f);
 	M_DefaultBackGround->ActiveOff();
 	M_DefaultBackGround->AllRenderersActiveOff();
 
@@ -481,6 +483,7 @@ void Chapter8::SuccessEnd()
 		Skeleton->AllRenderersActiveOff();
 	}
 
+	ChapterMainBGM_SetVolume(1.0f);
 	CutSceneManager::SuccessEnd();
 }
 
