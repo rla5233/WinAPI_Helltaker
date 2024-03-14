@@ -93,12 +93,20 @@ void Sin_Thorn::MoveUpdate(float _DeltaTime)
 
 void Sin_Thorn::HeroHitCheck()
 {
-	//float HeroY = GetSinChapter()->GetPlayerHero()->GetActorLocation().Y;
-	//
-	//if (20.0f >= abs(HeroY - GetActorLocation().Y))
-	//{
-	//	GetSinChapter()->GetPlayerHero()->StateChange(EHeroState::Death);
-	//}
+	if (nullptr != ImageRenderer[0]->GetCurAnimation()
+	&&	false == ImageRenderer[0]->IsCurAnimationEnd())
+	{
+		return;
+	}
+
+	float HeroY = GetSinChapter()->GetPlayerHero()->GetActorLocation().Y;
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float Arrange = WinScale.Y * ThornScale.Y * 0.2f;
+	float a = abs(HeroY - GetActorLocation().Y);
+	if (Arrange >= abs(HeroY - GetActorLocation().Y))
+	{
+		GetSinChapter()->GetPlayerHero()->StateChange(EHeroState::Death);
+	}
 }
 
 void Sin_Thorn::UpStart()

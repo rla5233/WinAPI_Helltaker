@@ -128,7 +128,12 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 	if (true == IsMoveY)
 	{ 
 		float SpeedY = GetSinChapter()->M_GetSpeedY();
-		AddTargetPos({ 0.0f, SpeedY * _DeltaTime });
+		if (true == IsMove())
+		{
+			AddTargetPos({ 0.0f, SpeedY * _DeltaTime });
+			AddStartPos({ 0.0f, SpeedY * _DeltaTime });
+		}
+	
 		AddActorLocation({ 0.0f, SpeedY * _DeltaTime });
 	}
 }
@@ -160,11 +165,11 @@ void Sin_Hero::HitStart()
 
 	if (0 >= Life)
 	{
-		StateChange(EHeroState::Death);
+		//StateChange(EHeroState::Death);
 		return;
 	}
 
-	GetSinChapter()->GetSinHeroLife()->StateChange(ESinHeroLifeState::HeroHit);
+	//GetSinChapter()->GetSinHeroLife()->StateChange(ESinHeroLifeState::HeroHit);
 }
 
 void Sin_Hero::Hit(float _DeltaTime)

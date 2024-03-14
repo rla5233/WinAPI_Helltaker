@@ -93,6 +93,11 @@ public:
 		TargetPos += _Pos;
 	}
 
+	void AddStartPos(const FVector& _Pos)
+	{
+		StartPos += _Pos;
+	}
+
 	const FVector& GetStartPos() const
 	{
 		return StartPos;
