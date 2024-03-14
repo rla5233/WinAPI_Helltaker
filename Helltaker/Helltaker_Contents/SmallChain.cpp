@@ -3,6 +3,7 @@
 #include "SinChapterManager.h"
 #include "Sin_Thorn.h"	
 #include "Sin_Hero.h"
+#include "HitChainHp.h"
 
 #include <EngineBase/EngineRandom.h>
 
@@ -273,6 +274,12 @@ void SmallChain::HeroHitCheck(float _DeltaTime)
 {
 	if (0.0f < HitTimeCount && false == IsHeroHit)
 	{
+		if (ESinPhase::Phase2 == Phase 
+		&&  0 == GetSinChapter()->GetHitChainHp()->GetHitCount())
+		{
+			return;
+		}
+
 		FVector HeroPos = GetSinChapter()->GetPlayerHero()->GetActorLocation();
 		FVector Pos = GetActorLocation();
 		switch (Type)

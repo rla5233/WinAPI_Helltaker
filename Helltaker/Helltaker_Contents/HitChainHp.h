@@ -22,6 +22,11 @@ public:
 		HitCount = TotalHitCount;
 	}
 
+	int GetHitCount() const
+	{
+		return HitCount;
+	}
+
 	UImageRenderer* GetTextRenderer() const
 	{
 		return TextRenderer;
