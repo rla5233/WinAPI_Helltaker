@@ -140,14 +140,7 @@ void Sin_Hero::MoveY_Update(float _DeltaTime)
 
 void Sin_Hero::HitStart()
 {
-	// Cheat
-	if (true == IsCheatOn())
-	{
-		return;
-	}
-
 	CreateRandomHitEffect();
-	--Life;
 
 	int RandomValue = UEngineRandom::MainRandom.RandomInt(1, 3);
 	switch (RandomValue)
@@ -163,17 +156,27 @@ void Sin_Hero::HitStart()
 		break;
 	}
 
-	if (0 >= Life)
+	// Cheat
+	if (true == IsCheatOn())
 	{
-		//StateChange(EHeroState::Death);
 		return;
 	}
 
-	//GetSinChapter()->GetSinHeroLife()->StateChange(ESinHeroLifeState::HeroHit);
+	--Life;
+
+	if (0 >= Life)
+	{
+		StateChange(EHeroState::Death);
+		return;
+	}
+
+	GetSinChapter()->GetSinHeroLife()->StateChange(ESinHeroLifeState::HeroHit);
 }
 
 void Sin_Hero::Hit(float _DeltaTime)
 {
+	MoveY_Update(_DeltaTime);
+
 	if (true == IsMoveY)
 	{
 		SinHero_StateChange(ESinHeroState::MoveY);
