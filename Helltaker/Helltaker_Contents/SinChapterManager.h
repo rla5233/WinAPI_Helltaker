@@ -148,6 +148,11 @@ public:
 		return TransitionActor;
 	}
 
+	ESinState GetSinState() const
+	{
+		return State;
+	}
+
 	template<typename Chapter>
 	void CreateChapter(std::string_view _Name)
 	{

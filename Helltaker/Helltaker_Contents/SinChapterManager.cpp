@@ -729,6 +729,7 @@ void SinChapterManager::Phase2(float _DeltaTime)
 {
 	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
+	HeroThornCheck();
 	
 	switch (OrderCount)
 	{
