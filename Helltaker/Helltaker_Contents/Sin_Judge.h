@@ -28,7 +28,13 @@ private:
 	void Intro_Appear1(float _DeltaTime);
 	void Intro_Appear2(float _DeltaTime);
 	void Intro_Appear3();
-	void Intro_Appear4();
+	void Intro_Appear4(float _DeltaTime);
+	void Intro_Appear5(float _DeltaTime);
+	void Intro_Appear6(float _DeltaTime);
+	void CreateBigChain();
+	void BigChainFadeAppear(float _DeltaTime);
+	void BigChainFadeOutUpdate(float _DeltaTime);
+	void BigChainFadeInUpdate(float _DeltaTime);
 
 	void Chap3_ChainStart();
 	void Chap3_Chain(float _DeltaTime);
@@ -59,6 +65,7 @@ private:
 	void StateUpdate(float _DeltaTime);
 
 private:
+	std::list<UImageRenderer*> BigChainRenderer;
 	std::list<UImageRenderer*> ChainRenderer;
 	UImageRenderer* ArmRenderer = nullptr;
 	static const float FadeOutDelayTime;

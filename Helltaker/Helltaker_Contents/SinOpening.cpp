@@ -35,6 +35,13 @@ void SinOpening::BeginPlay()
 
 	if (false == IsLoad)
 	{
+		ContentsHelper::LoadImg("Scene\\Characters", "L_HugeChain_40.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "R_HugeChain_40.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "L_HugeChain_60.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "R_HugeChain_60.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "L_HugeChain_20.png");
+		ContentsHelper::LoadImg("Scene\\Characters", "R_HugeChain_20.png");
+
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Arm");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
 

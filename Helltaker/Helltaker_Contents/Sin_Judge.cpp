@@ -32,6 +32,7 @@ void Sin_Judge::Tick(float _DeltaTime)
 
 void Sin_Judge::Intro_AppearStart()
 {
+	CreateBigChain();
 	GetImageRenderer()->CreateAnimation(
 		"Jud_Arm1", 
 		"Jud_Arm", 
@@ -66,7 +67,13 @@ void Sin_Judge::Intro_Appear(float _DeltaTime)
 		Intro_Appear3();
 		break;
 	case 3:
-		Intro_Appear4();
+		Intro_Appear4(_DeltaTime);
+		break;
+	case 4:
+		Intro_Appear5(_DeltaTime);
+		break;
+	case 5:
+		Intro_Appear6(_DeltaTime);
 		break;
 	}
 }
@@ -113,12 +120,15 @@ void Sin_Judge::Intro_Appear3()
 		GetImageRenderer()->ChangeAnimation("Jud_Intro");
 		GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
 		GetSinCutSceneChapter()->C_GetDialogue()->StateChange(ESinDialogueState::Move);
+		FadeInOn();
 		++OrderCount;
 	}
 }
 
-void Sin_Judge::Intro_Appear4()
+void Sin_Judge::Intro_Appear4(float _DeltaTime)
 {
+	BigChainFadeAppear(_DeltaTime);
+
 	if (1 == GetImageRenderer()->GetCurAnimationFrame())
 	{
 		FVector WinScale = ContentsHelper::GetWindowScale();
@@ -127,9 +137,130 @@ void Sin_Judge::Intro_Appear4()
 		GetSinCutSceneChapter()->C_StateChange(ESinSceneState::End);
 	}
 	
-	if (true == GetImageRenderer()->IsCurAnimationEnd())
+	if (true == GetImageRenderer()->IsCurAnimationEnd()
+	&&  false == IsFadeInOn())
 	{
-		StateChange(ESinJudgeState::None);
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::Intro_Appear5(float _DeltaTime)
+{
+	BigChainFadeOutUpdate(_DeltaTime);
+}
+
+void Sin_Judge::Intro_Appear6(float _DeltaTime)
+{
+	BigChainFadeInUpdate(_DeltaTime);
+}
+
+void Sin_Judge::CreateBigChain()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	FVector Chain1Scale = { 0.41f, 1.28f };
+	FVector Chain1Pos = { 0.475f, 0.2f };
+	UImageRenderer* Renderer1 = AActor::CreateImageRenderer(SinRenderOrder::Top);
+	Renderer1->SetImage("L_HugeChain_40.png");
+	Renderer1->SetTransform({ { WinScale.X * (-Chain1Pos.X), WinScale.Y * Chain1Pos.Y}, WinScale * Chain1Scale});
+	Renderer1->SetAlpha(0.0f);
+	BigChainRenderer.push_back(Renderer1);
+
+	UImageRenderer* Renderer2 = AActor::CreateImageRenderer(SinRenderOrder::Top);
+	Renderer2->SetImage("R_HugeChain_40.png");
+	Renderer2->SetTransform({ { WinScale.X * Chain1Pos.X, WinScale.Y * Chain1Pos.Y }, WinScale * Chain1Scale });
+	Renderer2->SetAlpha(0.0f);
+	BigChainRenderer.push_back(Renderer2);
+
+	FVector Chain2Scale = { 0.458f, 0.94f };
+	FVector Chain2Pos = { 0.55f, 0.0f };
+	UImageRenderer* Renderer3 = AActor::CreateImageRenderer(SinRenderOrder::Top);
+	Renderer3->SetImage("L_HugeChain_60.png");
+	Renderer3->SetTransform({ { WinScale.X * (-Chain2Pos.X), WinScale.Y * Chain2Pos.Y}, WinScale * Chain2Scale});
+	Renderer3->SetAlpha(0.0f);
+	BigChainRenderer.push_back(Renderer3);
+
+	UImageRenderer* Renderer4 = AActor::CreateImageRenderer(SinRenderOrder::Top);
+	Renderer4->SetImage("R_HugeChain_60.png");
+	Renderer4->SetTransform({ { WinScale.X * Chain2Pos.X, WinScale.Y * Chain2Pos.Y }, WinScale * Chain2Scale });
+	Renderer4->SetAlpha(0.0f);
+	BigChainRenderer.push_back(Renderer4);
+
+	FVector Chain3Scale = { 0.109f, 0.616f };
+	FVector Chain3Pos = { 0.3f, 0.0f };
+	UImageRenderer* Renderer5 = AActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
+	Renderer5->SetImage("L_HugeChain_20.png");
+	Renderer5->SetTransform({ { WinScale.X * (-Chain3Pos.X), WinScale.Y * Chain3Pos.Y}, WinScale * Chain3Scale });
+	Renderer5->SetAlpha(0.0f);
+	BigChainRenderer.push_back(Renderer5);
+
+	UImageRenderer* Renderer6 = AActor::CreateImageRenderer(SinRenderOrder::UnderBackGround);
+	Renderer6->SetImage("R_HugeChain_20.png");
+	Renderer6->SetTransform({ { WinScale.X * Chain3Pos.X, WinScale.Y * Chain3Pos.Y }, WinScale * Chain3Scale });
+	Renderer6->SetAlpha(0.0f);
+	BigChainRenderer.push_back(Renderer6);
+}
+
+void Sin_Judge::BigChainFadeAppear(float _DeltaTime)
+{
+	for (UImageRenderer* Chain : BigChainRenderer)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		FadeInUpdate(Chain, _DeltaTime, 0.5f);
+	}
+
+	if (false == IsFadeInOn())
+	{
+		FadeOutOn();
+		TimeCount = FadeOutDelayTime;
+	}
+}
+
+void Sin_Judge::BigChainFadeOutUpdate(float _DeltaTime)
+{
+	if (0.0f <= TimeCount)
+	{
+		TimeCount -= _DeltaTime;
+		return;
+	}
+
+	for (UImageRenderer* Chain : BigChainRenderer)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		FadeOutUpdate(Chain, _DeltaTime, 0.2f, 1.0f, 0.5f);
+	}
+
+	if (false == IsFadeOutOn())
+	{
+		FadeInOn();
+		++OrderCount;
+	}
+}
+
+void Sin_Judge::BigChainFadeInUpdate(float _DeltaTime)
+{
+	for (UImageRenderer* Chain : BigChainRenderer)
+	{
+		if (nullptr == Chain)
+		{
+			MsgBoxAssert("Renderer is nullptr");
+		}
+
+		FadeInUpdate(Chain, _DeltaTime, 0.2f, 0.5f, 1.0f);
+	}
+
+	if (false == IsFadeInOn())
+	{
+		FadeOutOn();
+		TimeCount = FadeOutDelayTime;
+		--OrderCount;
 	}
 }
 
@@ -244,7 +375,7 @@ void Sin_Judge::ChainFadeInUpdate(float _DeltaTime)
 			MsgBoxAssert("Renderer is nullptr");
 		}
 
-		FadeInUpdate(Chain, _DeltaTime, 0.3f, 0.5, 1.0f);
+		FadeInUpdate(Chain, _DeltaTime, 0.3f, 0.5f, 1.0f);
 	}
 
 	if (false == IsFadeInOn())
