@@ -502,6 +502,7 @@ void SinChapterManager::IntroStart()
 void SinChapterManager::Intro(float _DeltaTime)
 {
 	HeroDelayTimeUpdate(_DeltaTime);
+	HeroThornCheck();
 
 	switch (OrderCount)
 	{
@@ -547,6 +548,19 @@ void SinChapterManager::Phase1_Check()
 		ESinPistonState::Move == UpPiston->GetState())
 	{
 		M_StateChange(ESinState::Phase1);
+	}
+}
+
+void SinChapterManager::HeroThornCheck()
+{
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float UpPos = WinScale.Y * 0.31f;
+	float DownPos = WinScale.Y * 0.84f;
+	
+	float HeroY = PlayerHero->GetActorLocation().Y;
+	if (UpPos >= HeroY || DownPos <= HeroY)
+	{
+		PlayerHero->StateChange(EHeroState::Death);
 	}
 }
 

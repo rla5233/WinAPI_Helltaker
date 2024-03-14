@@ -201,6 +201,7 @@ private:
 	void Intro(float _DeltaTime);
 	void TransitionCheck(float _DeltaTime);
 	void Phase1_Check();
+	void HeroThornCheck();
 
 	void Phase1(float _DeltaTime);
 	void Phase1_SmallChainUpdate(float _DeltaTime);
