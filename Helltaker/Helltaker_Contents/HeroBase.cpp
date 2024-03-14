@@ -128,6 +128,15 @@ void HeroBase::InputCheck(float _DeltaTime)
 	else if (UEngineInput::IsDown('C'))
 	{
 		CheatMode = !CheatMode;
+		
+		if (true == CheatMode)
+		{
+			ImageRenderer->SetAlpha(0.5f);
+		}
+		else
+		{
+			ImageRenderer->SetAlpha(1.0f);
+		}
 	}
 }
 
@@ -313,6 +322,7 @@ void HeroBase::DeathStart()
 	FVector WinScale = ContentsHelper::GetWindowScale();
 	ImageRenderer->SetTransform({ {0.0f, (WinScale.Y * 1.15f) * (-0.25f)}, {WinScale.X * 0.375f, WinScale.Y * 1.15f} });
 	ImageRenderer->ChangeAnimation("Hero_Death");
+	ImageRenderer->SetAlpha(1.0f);
 	AllEffectActiveOff();
 	UEngineSound::SoundPlay("player_death.wav");
 }
