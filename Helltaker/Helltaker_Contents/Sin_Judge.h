@@ -27,7 +27,7 @@ private:
 	void Intro_Appear(float _DeltaTime);
 	void Intro_Appear1(float _DeltaTime);
 	void Intro_Appear2(float _DeltaTime);
-	void Intro_Appear3();
+	void Intro_Appear3(float _DeltaTime);
 	void Intro_Appear4(float _DeltaTime);
 	void Intro_Appear5(float _DeltaTime);
 	void Intro_Appear6(float _DeltaTime);
