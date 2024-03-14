@@ -18,7 +18,7 @@ public:
 	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
 	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
 
-	void Open(std::string_view _Title = "Title");
+	void Open(std::string_view _Title = "Title", std::string_view _IconPath = "");
 
 	static void Init(HINSTANCE _hInst);
 	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
@@ -50,6 +50,12 @@ public:
 		ClearColor = _Color;
 	}
 
+	void SetWindowTitle(std::string_view _Text)
+	{
+		SetWindowTextA(hWnd, _Text.data());
+	}
+
+	void SetWindowSmallIcon();
 
 	FVector GetMousePosition();
 
@@ -57,6 +63,8 @@ public:
 	{
 		WindowLive = false;
 	}
+
+	void CursorOff();
 
 protected:
 
@@ -80,6 +88,5 @@ private:
 	// 이미지가 2개다 이미지는 버퍼라는 개념으로도 부른다. => 더블버퍼링이라는 이름인 겁니다.
 	FVector Scale;
 	FVector Position;
-
 };
 
