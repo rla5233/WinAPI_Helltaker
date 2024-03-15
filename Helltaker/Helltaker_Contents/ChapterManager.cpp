@@ -447,7 +447,6 @@ void ChapterManager::HeroDeath(float _DeltaTime)
 	}
 }
 
-// 수정 (Hero 이펙트 제거 가능?)
 void ChapterManager::HeroDeathStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
@@ -460,8 +459,7 @@ void ChapterManager::HeroDeathStart()
 		MapActors.second->AllRenderersActiveOff();
 	}
 
-	PlayerHero->AllRenderersActiveOn();
-	PlayerHero->AllEffectActiveOff();
+	PlayerHero->GetImageRenderer()->ActiveOn();
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
@@ -762,7 +760,7 @@ void ChapterManager::ChapterMainBGM_SetVolume(float _Volume)
 	ChapterBGMPlayer.SetVolume(_Volume);
 }
 
-// 디버그용
+// Debug
 void ChapterManager::ShowLocationPoint()
 {
 	std::vector<std::vector<UI*>> GreenPoint;
