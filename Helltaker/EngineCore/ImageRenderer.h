@@ -57,6 +57,11 @@ public:
 		InfoIndex = _InfoIndex;
 	}
 
+	int GetImageIndex()
+	{
+		return InfoIndex;
+	}
+
 	void SetTransform(const FTransform& _Value)
 	{
 		USceneComponent::SetTransform(_Value);
