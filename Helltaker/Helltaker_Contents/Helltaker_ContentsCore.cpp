@@ -23,7 +23,6 @@
 #include "Epilogue.h"
 #include "EpilogueOpening.h"
 
-// 수정 (매개 변수 안쓰는거 정리)
 Helltaker_ContentsCore::Helltaker_ContentsCore()
 {
 }
