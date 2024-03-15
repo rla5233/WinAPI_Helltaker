@@ -23,7 +23,7 @@
 #include "Epilogue.h"
 #include "EpilogueOpening.h"
 
-// 수정 (스크립트 문자 재확인), (매개 변수 안쓰는거 정리)
+// 수정 (매개 변수 안쓰는거 정리)
 Helltaker_ContentsCore::Helltaker_ContentsCore()
 {
 }
@@ -73,11 +73,11 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<Chapter9>("Chapter9");
 	//ChangeLevel("Chapter9");
 
-	//CreateLevel<SinOpening>("SinOpening");
-	//ChangeLevel("SinOpening");
+	CreateLevel<SinOpening>("SinOpening");
+	ChangeLevel("SinOpening");
 	
-	//CreateLevel<SinChapter1>("SinChapter1");
-    //ChangeLevel("SinChapter1");
+	CreateLevel<SinChapter1>("SinChapter1");
+    ChangeLevel("SinChapter1");
 	
 	//CreateLevel<SinChapter2>("SinChapter2");
 	//ChangeLevel("SinChapter2");
@@ -85,8 +85,8 @@ void Helltaker_ContentsCore::BeginPlay()
 	//CreateLevel<SinChapter3>("SinChapter3");
     //ChangeLevel("SinChapter3");
 	
-	//CreateLevel<SinChapter4>("SinChapter4");
-	//ChangeLevel("SinChapter4");
+	CreateLevel<SinChapter4>("SinChapter4");
+	ChangeLevel("SinChapter4");
 	
 	//CreateLevel<EpilogueOpening>("EpilogueOpening");
 	//ChangeLevel("EpilogueOpening");
