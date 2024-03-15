@@ -94,10 +94,6 @@ void Chapter6::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 5, 7 }, "Azazel", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter6::CutSceneStart()

@@ -142,8 +142,6 @@ public:
 	void ChapterMainBGM_Off();
 	void ChapterMainBGM_SetVolume(float _Volume);
 
-	// Debug
-	void ShowLocationPoint();
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
@@ -178,6 +176,12 @@ private:
 
 	void ResetStart();
 	void Reset(float _DeltaTime);
+
+	// Debug
+	void DebugMode();
+	void CreateDebugPoint();
+	void DebugPointOn();
+	void DebugPointOff();
 
 	void M_StateUpdate(float _DeltaTime);
 
@@ -217,4 +221,6 @@ private:
 
 	static bool IsLoad;
 	static std::set<std::string> ChapterSet;
+
+	std::vector<std::vector<UI*>> DebugPoint;
 };

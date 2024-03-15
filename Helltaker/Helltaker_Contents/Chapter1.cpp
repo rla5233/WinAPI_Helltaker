@@ -78,10 +78,6 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 6, 5 }, "PandeMonica", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);	
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter1::CutSceneStart()

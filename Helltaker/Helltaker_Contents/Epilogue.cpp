@@ -135,11 +135,8 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 
 	M_StateChange(EChapterState::Idle);
 	GetChapterBGM().Off();
+	EpilBGMPlayer.On();
 	State = EEpilogueState::None;
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Epilogue::LevelEnd(ULevel* _NextLevel)

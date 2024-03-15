@@ -83,10 +83,6 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 4, 5 }, "Modeus", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter2::CutSceneStart()

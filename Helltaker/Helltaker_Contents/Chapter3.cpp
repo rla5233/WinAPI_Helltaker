@@ -86,10 +86,6 @@ void Chapter3::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 5, 0 }, "Cerberus", { Pos, Scale });
 	
 	M_StateChange(EChapterState::Idle);
-	
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter3::CutSceneStart()

@@ -1,8 +1,6 @@
 #pragma once
 #include <EngineCore\EngineCore.h>
 
-//#define DEBUG
-
 const Color8Bit HELLTAKER_WHITE = Color8Bit(255, 255, 255, 0);
 const Color8Bit HELLTAKER_GRAY = Color8Bit(125, 125, 125, 0);
 const Color8Bit HELLTAKER_RED1 = Color8Bit(230, 77, 81, 255);

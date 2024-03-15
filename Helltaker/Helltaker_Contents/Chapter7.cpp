@@ -87,10 +87,6 @@ void Chapter7::LevelStart(ULevel * _PrevLevel)
 	M_SpawnDemon({ 3, 0 }, "Justice", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter7::CutSceneStart()

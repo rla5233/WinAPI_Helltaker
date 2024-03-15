@@ -88,10 +88,6 @@ void Chapter5::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 4, 0 }, "Zdrada", { Pos, Scale });
 	
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter5::CutSceneStart()
