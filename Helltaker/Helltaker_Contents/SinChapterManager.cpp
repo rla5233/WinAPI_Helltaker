@@ -1211,7 +1211,6 @@ void SinChapterManager::SinChainLinkMoveOn()
 	}
 }
 
-// 수정 (리팩토링 가능?)
 void SinChapterManager::AllThornMoveOn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();

@@ -164,17 +164,10 @@ void Chapter6::BadEndStart()
 
 void Chapter6::BadEndSetting1()
 {
-	for (AActor* Actor : AllCutSceneActors)
-	{
-		if (nullptr != dynamic_cast<BackGround*>(Actor))
-		{
-			continue;
-		}
+	AllCutSceneActorOff();
 
-		Actor->AllRenderersActiveOff();
-	}
-
-	Booper->AllRenderersActiveOn();
+	C_GetSceneBG()->AllRenderersActiveOn();
+	C_GetBooper()->AllRenderersActiveOn();
 	C_BooperTextSet(Chap6_Script[5]);
 	UEngineSound::SoundPlay("booper_click.wav");
 	C_AddFailOrder(1);
