@@ -405,11 +405,19 @@ void ChapterManager::LevelEnd(ULevel* _NextLevel)
 		Actor.second = nullptr;
 	}
 
+	for (size_t i = 0; i < DebugPoint.size(); i++)
+	{
+		DebugPoint[i].clear();
+	}
+	DebugPoint.clear();
+
 	AllMapActors.clear();
 }
 
 void ChapterManager::Idle(float _DeltaTime)
 {
+	DebugMode();
+
 	if (true == TransitionActor->GetImageRenderer()->IsCurAnimationEnd())
 	{
 		TransitionActor->GetImageRenderer()->ActiveOff();
@@ -417,7 +425,6 @@ void ChapterManager::Idle(float _DeltaTime)
 
 	HeroDelayTimeUpdate(_DeltaTime);
 	ResetCheck();
-
 	CutSceneCheck();
 
 	// Debug
@@ -426,6 +433,7 @@ void ChapterManager::Idle(float _DeltaTime)
 		TransitionActor->AllRenderersActiveOff();
 		M_StateChange(EChapterState::CutScene);
 	}
+
 }
 
 void ChapterManager::IdleStart()
@@ -447,7 +455,6 @@ void ChapterManager::HeroDeath(float _DeltaTime)
 	}
 }
 
-// 수정 (Hero 이펙트 제거 가능?)
 void ChapterManager::HeroDeathStart()
 {
 	for (std::pair<const __int64, AActor*> MapActors : AllMapActors)
@@ -460,8 +467,7 @@ void ChapterManager::HeroDeathStart()
 		MapActors.second->AllRenderersActiveOff();
 	}
 
-	PlayerHero->AllRenderersActiveOn();
-	PlayerHero->AllEffectActiveOff();
+	PlayerHero->GetImageRenderer()->ActiveOn();
 	ChapterBG->AllRenderersActiveOn();
 	ChapterBG->BackGroundChange("DefaultBG.png");
 }
@@ -762,36 +768,76 @@ void ChapterManager::ChapterMainBGM_SetVolume(float _Volume)
 	ChapterBGMPlayer.SetVolume(_Volume);
 }
 
-// 디버그용
-void ChapterManager::ShowLocationPoint()
+void ChapterManager::DebugMode()
 {
-	std::vector<std::vector<UI*>> GreenPoint;
-
-	GreenPoint.resize(ChapterHeight);
-	for (int i = 0; i < ChapterHeight; i++)
+	if (UEngineInput::IsDown('B'))
 	{
-		GreenPoint[i].resize(ChapterWidth);
+		GEngine->EngineDebugSwitch();
 	}
 
+	if (GEngine->IsDebug())
+	{
+		CreateDebugPoint();
+		DebugPointOn();
+	}
+	else
+	{
+		DebugPointOff();
+	}
+}
+
+// Debug
+void ChapterManager::CreateDebugPoint()
+{
+	if (false == DebugPoint.empty())
+	{
+		return;
+	}
+
+	DebugPoint.resize(ChapterHeight);
 	for (int Y = 0; Y < ChapterHeight; Y++)
 	{
+		DebugPoint[Y].reserve(ChapterWidth);
 		for (int X = 0; X < ChapterWidth; X++)
 		{
-			GreenPoint[Y][X] = SpawnActor<UI>(static_cast<int>(UpdateOrder::UI));
-			GreenPoint[Y][X]->SetActorLocation(ChapterPointToLocation(Point(X, Y)));
-			GreenPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
+			DebugPoint[Y].push_back(SpawnActor<UI>(static_cast<int>(UpdateOrder::UI)));
+			DebugPoint[Y][X]->SetActorLocation(ChapterPointToLocation(Point(X, Y)));
+			DebugPoint[Y][X]->CreateImageRenderer(RenderOrder::UI);
 
 			if (true == TileInfoVec[Y][X].IsVaild)
 			{
-				GreenPoint[Y][X]->GetImageRenderer()->SetImage("GreenPoint.png");
+				DebugPoint[Y][X]->GetImageRenderer()->SetImage("GreenPoint.png");
 			}
 			else
 			{
-				GreenPoint[Y][X]->GetImageRenderer()->SetImage("RedPoint.png");
+				DebugPoint[Y][X]->GetImageRenderer()->SetImage("RedPoint.png");
 			}
 
-			GreenPoint[Y][X]->GetImageRenderer()->SetTransform({ { 0,0 }, {2, 2} });
-			AllMapActors[reinterpret_cast<__int64>(GreenPoint[Y][X])] = GreenPoint[Y][X];
+			DebugPoint[Y][X]->GetImageRenderer()->SetTransform({ { 0,0 }, {2, 2} });
+			AllMapActors[reinterpret_cast<__int64>(DebugPoint[Y][X])] = DebugPoint[Y][X];
+		}
+	}
+}
+
+void ChapterManager::DebugPointOn()
+{
+	for (size_t y = 0; y < DebugPoint.size(); y++)
+	{
+		for (size_t x = 0; x < DebugPoint[y].size(); x++)
+		{
+			DebugPoint[y][x]->AllRenderersActiveOn();
+		}
+	}
+}
+
+
+void ChapterManager::DebugPointOff()
+{
+	for (size_t y = 0; y < DebugPoint.size(); y++)
+	{
+		for (size_t x = 0; x < DebugPoint[y].size(); x++)
+		{
+			DebugPoint[y][x]->AllRenderersActiveOff();
 		}
 	}
 }

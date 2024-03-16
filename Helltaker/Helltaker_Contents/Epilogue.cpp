@@ -84,7 +84,7 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 	HellTakerManager::LevelStart(_PrevLevel);
 
 	std::vector<std::vector<bool>> Map =
-	{// ¼öÁ¤
+	{
 		{ false, false, false, false, false, false, true, true , false, false, false, false, false, false, false },
 		{ true , true , true , true , true , true , true, true , true , true , false, true , true , true , true  },
 		{ false, true , false, false, false, true , true, true , true , true , false, false, true , false, false },
@@ -135,11 +135,8 @@ void Epilogue::LevelStart(ULevel* _PrevLevel)
 
 	M_StateChange(EChapterState::Idle);
 	GetChapterBGM().Off();
+	EpilBGMPlayer.On();
 	State = EEpilogueState::None;
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Epilogue::LevelEnd(ULevel* _NextLevel)

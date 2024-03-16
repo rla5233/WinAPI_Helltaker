@@ -117,10 +117,6 @@ void Chapter8::LevelStart(ULevel * _PrevLevel)
 
 	ChapterMainBGM_SetVolume(1.0f);
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter8::CreateDefaultBG()

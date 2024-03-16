@@ -19,7 +19,7 @@ const std::vector<const char*> SinChapter1::SinChap1_Script =
 	/* 8  Script 1  */ "그리고 커피도 타 주셔야죠.",
 
 	/* 9  Demon	    */ "지옥의 CEO 루시퍼",
-	/* 10 Script 1  */ "이런, 저지먼트. 이 녀석은 모르고 있겠지만, 내 거야. 그냥\n내버려 둘 수는 없어?",
+	/* 10 Script 1  */ "이런, 저지먼트. 이 녀석은 모르고 있겠지만, 내 꺼야. 그냥\n내버려 둘 수는 없어?",
 };
 
 SinChapter1::SinChapter1()

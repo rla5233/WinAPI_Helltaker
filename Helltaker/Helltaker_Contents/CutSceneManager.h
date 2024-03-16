@@ -9,9 +9,6 @@ class Chapter6;
 // 설명 :
 class CutSceneManager : public ChapterManager
 {
-	// 수정 (friend 제거 가능?)
-	friend Chapter6;
-
 public:
 	// constructor destructor
 	CutSceneManager();
@@ -83,6 +80,11 @@ public:
 		return FailOrder;
 	}
 
+	BackGround* C_GetSceneBG() const
+	{
+		return SceneBG;
+	}
+
 	Character* C_GetSceneCharacter() const
 	{
 		return SceneCharacter;
@@ -91,6 +93,11 @@ public:
 	Scene* C_GetDialogue() const
 	{
 		return Dialogue;
+	}
+
+	UI* C_GetBooper() const
+	{
+		return Booper;
 	}
 
 	void AllCutSceneActorOn();
@@ -141,6 +148,7 @@ private:
 	// Manager
 	std::list<AActor*> AllCutSceneActors;
 	
+	BackGround* SceneBG = nullptr;
 	Character* SceneCharacter = nullptr;
 	Scene* Dialogue = nullptr;
 	UI* Booper = nullptr;

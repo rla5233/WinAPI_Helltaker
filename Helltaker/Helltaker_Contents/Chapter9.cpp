@@ -82,10 +82,6 @@ void Chapter9::LevelStart(ULevel * _PrevLevel)
 	EndPoint = { 4, 0 };
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter9::CutSceneCheck()

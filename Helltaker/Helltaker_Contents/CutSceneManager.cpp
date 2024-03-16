@@ -58,7 +58,7 @@ void CutSceneManager::BeginPlay()
 void CutSceneManager::C_CreateSceneBG()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	BackGround* SceneBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::SceneBackGround));
+	SceneBG = SpawnActor<BackGround>(static_cast<int>(UpdateOrder::SceneBackGround));
 	SceneBG->CreateSceneBackGround("DefaultBG");
 	SceneBG->GetImageRenderer()->CameraEffectOff();
 		

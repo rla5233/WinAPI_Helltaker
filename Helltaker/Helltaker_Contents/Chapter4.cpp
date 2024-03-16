@@ -87,10 +87,6 @@ void Chapter4::LevelStart(ULevel * _PrevLevel)
 	M_SpawnDemon({ 7, 2 }, "Malina", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter4::CutSceneStart()

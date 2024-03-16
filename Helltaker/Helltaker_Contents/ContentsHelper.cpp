@@ -3,7 +3,6 @@
 #include <EngineBase/EngineRandom.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
-#include <EngineCore/EngineResourcesManager.h>
 #include <EnginePlatform/EngineSound.h>
 
 const Point Point::Zero	 = {  0,  0  };

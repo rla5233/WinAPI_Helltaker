@@ -42,7 +42,6 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 {
 	HellTakerManager::LevelStart(_PrevLevel);
 
-	// 수정 (한번만 생성되도 되는것 구분가능?)
 	// 스테이지 생성
 	std::vector<std::vector<bool>> Map =
 	{
@@ -79,10 +78,6 @@ void Chapter1::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 6, 5 }, "PandeMonica", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);	
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter1::CutSceneStart()

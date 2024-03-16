@@ -452,7 +452,7 @@ void SinChapterManager::M_CreateHitChainHp(std::string_view _Name /* = " " */)
 	SinHitChainHp = SpawnActor<HitChainHp>(static_cast<int>(SinUpdateOrder::Top));
 	SinHitChainHp->SetActorLocation({ WinScale.hX(), PosY });
 	SinHitChainHp->GetTextRenderer()->SetText(_Name);
-	SinHitChainHp->GetTextRenderer()->SetTextSize(40);
+	SinHitChainHp->GetTextRenderer()->SetTextSize(50);
 	SinHitChainHp->GetTextRenderer()->SetTextColor(Color8Bit::White);
 	SinHitChainHp->GetTextRenderer()->SetFont("¸¼Àº °íµñ");
 	SinHitChainHp->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * (-0.06f) });
@@ -501,6 +501,7 @@ void SinChapterManager::IntroStart()
 
 void SinChapterManager::Intro(float _DeltaTime)
 {
+	DebugMode();
 	HeroDelayTimeUpdate(_DeltaTime);
 	HeroThornCheck();
 
@@ -589,6 +590,7 @@ void SinChapterManager::Phase1_Start()
 
 void SinChapterManager::Phase1(float _DeltaTime)
 {
+	DebugMode();
 	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
 	MoveYSum += SpeedY * _DeltaTime;
@@ -727,6 +729,7 @@ void SinChapterManager::ResetCheck()
 
 void SinChapterManager::Phase2(float _DeltaTime)
 {
+	DebugMode();
 	ResetCheck();
 	HeroDelayTimeUpdate(_DeltaTime);
 	HeroThornCheck();
@@ -1064,7 +1067,6 @@ void SinChapterManager::LevelEnd(ULevel* _NextLevel)
 		}
 	}
 
-
 	AllMapRenderActors.clear();
 	AllHitChain.clear();
 
@@ -1086,7 +1088,6 @@ void SinChapterManager::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
-	DebugMode();
 }
 
 void SinChapterManager::StateUpdate(float _DeltaTime)
@@ -1211,7 +1212,6 @@ void SinChapterManager::SinChainLinkMoveOn()
 	}
 }
 
-// ¼öÁ¤ (¸®ÆÑÅä¸µ °¡´É?)
 void SinChapterManager::AllThornMoveOn()
 {
 	FVector WinScale = ContentsHelper::GetWindowScale();
@@ -1320,6 +1320,11 @@ void SinChapterManager::DebugMode()
 
 	if (GEngine->IsDebug())
 	{
+		if (nullptr == PlayerHero)
+		{
+			return;
+		}
+
 		FVector CurPos = PlayerHero->GetActorLocation();
 		SinTile CurPoint = PlayerHero->GetCurPoint();
 		std::string CPoint = "[ ";

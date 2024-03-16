@@ -94,10 +94,6 @@ void Chapter6::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 5, 7 }, "Azazel", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter6::CutSceneStart()
@@ -164,17 +160,10 @@ void Chapter6::BadEndStart()
 
 void Chapter6::BadEndSetting1()
 {
-	for (AActor* Actor : AllCutSceneActors)
-	{
-		if (nullptr != dynamic_cast<BackGround*>(Actor))
-		{
-			continue;
-		}
+	AllCutSceneActorOff();
 
-		Actor->AllRenderersActiveOff();
-	}
-
-	Booper->AllRenderersActiveOn();
+	C_GetSceneBG()->AllRenderersActiveOn();
+	C_GetBooper()->AllRenderersActiveOn();
 	C_BooperTextSet(Chap6_Script[5]);
 	UEngineSound::SoundPlay("booper_click.wav");
 	C_AddFailOrder(1);

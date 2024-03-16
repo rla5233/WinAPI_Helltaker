@@ -8,9 +8,9 @@ bool Chapter2::IsLoad = false;
 const std::vector<const char*> Chapter2::Chap2_Script
 {
 	/* 0 Demon	  */ "음란한 악마 모데우스",
-	/* 1 Script 1 */ "너랑 나랑.지금 바로.",
+	/* 1 Script 1 */ "너랑 나랑. 지금 바로.",
 	/* 2 MenuBar1 */ "좋아. 이의 없어.",
-	/* 3 MenuBar2 */ "시간 없어.여자애들 모으기 바빠",
+	/* 3 MenuBar2 */ "시간 없어. 여자애들 모으기 바빠",
 	/* 4 Failed	  */ "다들 그렇게 말하곤... 나중에 도망가려 하더라.\n 혹시 모르니 무릎을 부숴 놔야지.",
 	/* 5 Bad End  */ "모데우스는 커다란 망치를 꺼냈다. 좋은 꼴은 못 볼 것 같다.",
 	/* 6 Success  */ "악마 하렘? 불쌍한 멍청이... 악마들이 너를 갈가리 찢어 버릴 텐데,\n그걸 놓칠 수 없지."
@@ -83,10 +83,6 @@ void Chapter2::LevelStart(ULevel* _PrevLevel)
 	M_SpawnDemon({ 4, 5 }, "Modeus", { Pos, Scale });
 
 	M_StateChange(EChapterState::Idle);
-
-#ifdef DEBUG
-	ShowLocationPoint();
-#endif
 }
 
 void Chapter2::CutSceneStart()
