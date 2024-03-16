@@ -5,10 +5,12 @@
 #include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
-{}
+{
+}
 
 UImageRenderer::~UImageRenderer()
-{}
+{
+}
 
 void UImageRenderer::SetOrder(int _Order)
 {
@@ -81,8 +83,7 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else
-	{
+	else {
 		ImageRender(_DeltaTime);
 	}
 

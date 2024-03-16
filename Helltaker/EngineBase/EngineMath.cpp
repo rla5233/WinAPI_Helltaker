@@ -33,8 +33,10 @@ const Color8Bit Color8Bit::OrangeA = { 255, 170, 46, 0 };
 const Color8Bit Color8Bit::CyanA = { 0, 255, 255, 0 };
 
 UEngineMath::UEngineMath()
-{}
+{
+}
 
 UEngineMath::~UEngineMath()
-{}
+{
+}
 

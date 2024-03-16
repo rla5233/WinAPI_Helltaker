@@ -35,7 +35,8 @@ void UEngineWindow::Init(HINSTANCE _hInst)
 
 
 UEngineWindow::UEngineWindow()
-{}
+{
+}
 
 UEngineWindow::~UEngineWindow()
 {

@@ -18,7 +18,8 @@
 #pragma comment(lib, "Gdiplus.lib")
 
 UWindowImage::UWindowImage()
-{}
+{
+}
 
 UWindowImage::~UWindowImage()
 {
