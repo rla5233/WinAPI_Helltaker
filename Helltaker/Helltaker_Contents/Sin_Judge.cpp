@@ -34,22 +34,22 @@ void Sin_Judge::Intro_AppearStart()
 {
 	CreateBigChain();
 
-	std::vector<int> Idx(16, 0);
-	for (int i = 0; i < 16; i++)
+	std::vector<int> Idx(14, 0);
+	for (int i = 0; i < 14; i++)
 	{
 		Idx[i] = i;
 	}
-
-	std::vector<float> Inter(16, 0.0f);
-	for (int i = 0; i < 16; i++)
+	
+	std::vector<float> Inter(14, 0.0f);
+	for (int i = 0; i < 14; i++)
 	{
-		if (10 > i)
+		if (8 > i)
 		{
 			Inter[i] = 0.001f * (i + 1);
 		}
 		else
 		{
-			Inter[i] = 0.0015f * (i + 1);
+			Inter[i] = 0.002f * (i + 1);
 		}
 	}
 	
@@ -102,12 +102,12 @@ void Sin_Judge::Intro_Appear1(float _DeltaTime)
 	}
 
 	FVector WinScale = ContentsHelper::GetWindowScale();
-	FVector Scale = { 1.021f, 0.537f };
-	FVector Pos = { 0.0f, 0.0042f };
+	FVector Scale = { 1.021f, 0.504f };
+	FVector Pos = { 0.0f, 0.022f };
 	GetImageRenderer()->AnimationReset();
 	GetImageRenderer()->ChangeAnimation("Jud_Arm1");
 	GetImageRenderer()->SetTransform({ WinScale * Pos, WinScale * Scale });
-	TimeCount = 1.0f;
+	TimeCount = 1.1f;
 	++OrderCount;
 }
 
