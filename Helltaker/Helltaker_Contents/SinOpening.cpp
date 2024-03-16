@@ -42,8 +42,7 @@ void SinOpening::BeginPlay()
 		ContentsHelper::LoadImg("Scene\\Characters", "L_HugeChain_20.png");
 		ContentsHelper::LoadImg("Scene\\Characters", "R_HugeChain_20.png");
 
-		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Arm_001");
-		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Arm_002");
+		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Arm");
 		ContentsHelper::LoadFolder("Scene\\Characters", "Jud_Intro");
 
 		ContentsHelper::LoadSound("Sound\\Effect", "judge_intro_start.wav");

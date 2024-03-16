@@ -53,9 +53,9 @@ void Sin_Judge::Intro_AppearStart()
 		}
 	}
 	
-	GetImageRenderer()->CreateAnimation("Jud_Arm1",	"Jud_Arm_001", Idx, Inter, false);
+	GetImageRenderer()->CreateAnimation("Jud_Arm1",	"Jud_Arm", Idx, Inter, false);
 
-	GetImageRenderer()->CreateAnimation("Jud_Arm2",	"Jud_Arm_002", 0, 5, 0.02f, false);
+	GetImageRenderer()->CreateAnimation("Jud_Arm2",	"Jud_Arm", 14, 19, 0.02f, false);
 	
 	GetImageRenderer()->CreateAnimation(
 		"Jud_Intro", 
