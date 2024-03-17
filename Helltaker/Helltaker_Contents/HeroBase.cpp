@@ -121,11 +121,17 @@ void HeroBase::InputCheck(float _DeltaTime)
 	}
 
 	// Debug
-	if (UEngineInput::IsPress('K'))
+	if (UEngineInput::IsDown('K'))
 	{
+		if (UEngineString::ToUpper("Epilogue") == GetWorld()->GetName())
+		{
+			return;
+		}
+
 		StateChange(EHeroState::Death);
 	}
-	else if (UEngineInput::IsDown('C'))
+	
+	if (UEngineInput::IsDown('C'))
 	{
 		CheatMode = !CheatMode;
 		

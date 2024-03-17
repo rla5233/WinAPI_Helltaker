@@ -33,7 +33,17 @@ const std::vector<const char*> MainMenu::MainMenu_Script
 	/* 10 NewGame5 */ "하지만 결코 이루기 쉽지 않은 꿈이지.\n어쩌면 네 목숨을 앗아갈지도 모르고.",
 	/* 11 NewGame6 */ "\"악마 하렘이 달렸다면, 그 어떤 대가도 싸지.\"\n그리하여 당신은 지옥으로 모험을 떠났네.",
 	/* 12 Exit     */ "나도 수 없이 시도 해봤지만 아직 제대로 성공한 적이 없지.",
-	/* 13 Return   */ "다른 원하는 것이라도 있나?"
+	/* 13 Return   */ "다른 원하는 것이라도 있나?",
+	/* 14 Chap1    */ "Chapter 1 - 피곤한 악마",
+	/* 15 Chap2    */ "Chapter 2 - 음란한 악마",
+	/* 16 Chap3    */ "Chapter 3 - 세 쌍둥이 악마",
+	/* 17 Chap4    */ "Chapter 4 - 시큰둥한 악마",
+	/* 18 Chap5    */ "Chapter 5 - 상스러운 악마",
+	/* 19 Chap6    */ "Chapter 6 - 호기심 많은 천사",
+	/* 20 Chap7    */ "Chapter 7 - 끝내주는 악마 저스티스",
+	/* 21 Chap8    */ "Chapter 8 - 지옥의 CEO",
+	/* 22 Chap9    */ "Chapter 9 - 저지먼트",
+	/* 23 Chap10   */ "Chapter 10 - 에필로그"
 };
 
 MainMenu::MainMenu()
@@ -274,6 +284,11 @@ void MainMenu::SelectChapterStart()
 	C_MenubarRenderActiveOff();
 	C_GetSceneCharacter()->GetNameRenderer()->ActiveOff();
 
+	FVector WinScale = ContentsHelper::GetWindowScale();
+	float PosY = 0.04f;
+	C_BooperTextSet(MainMenu_Script[14]);
+	C_GetBooper()->GetTextRenderer()->SetPosition({ 0.0f, WinScale.Y * PosY });
+
 	SC_MenuBarOn();
 }
 
@@ -417,6 +432,7 @@ void MainMenu::FocusSC_MenuBarCheck()
 		AutoSC_UnSelectMenuImage();
 		SetFocusSC_MenuIndex(FocusSC_MenuIndex - 1);
 		AutoSC_SelectMenuImage();
+		C_GetBooper()->GetTextRenderer()->SetText(MainMenu_Script[14 + FocusSC_MenuIndex]);
 		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 	else if (UEngineInput::IsDown('D') || UEngineInput::IsDown(VK_RIGHT))
@@ -424,6 +440,7 @@ void MainMenu::FocusSC_MenuBarCheck()
 		AutoSC_UnSelectMenuImage();
 		SetFocusSC_MenuIndex(FocusSC_MenuIndex + 1);
 		AutoSC_SelectMenuImage();
+		C_GetBooper()->GetTextRenderer()->SetText(MainMenu_Script[14 + FocusSC_MenuIndex]);
 		UEngineSound::SoundPlay("menu_button_focus.wav");
 	}
 	else if (UEngineInput::IsDown(VK_SPACE) || UEngineInput::IsDown(VK_RETURN))
@@ -475,6 +492,7 @@ void MainMenu::SetFocusSC_MenuIndex(int _Index)
 void MainMenu::ReturnSelect()
 {
 	SC_MenuBarOff();
+	C_BooperTextSet(" ");
 	C_MenubarRenderActiveOn();
 	C_GetSceneCharacter()->GetNameRenderer()->ActiveOn();
 	State = EMainMenuState::Select;

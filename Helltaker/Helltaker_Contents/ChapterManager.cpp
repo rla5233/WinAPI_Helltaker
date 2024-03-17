@@ -430,6 +430,11 @@ void ChapterManager::Idle(float _DeltaTime)
 	// Debug
 	if (UEngineInput::IsPress('P'))
 	{
+		if (UEngineString::ToUpper("Epilogue") == GetName())
+		{
+			return;
+		}
+
 		TransitionActor->AllRenderersActiveOff();
 		M_StateChange(EChapterState::CutScene);
 	}
