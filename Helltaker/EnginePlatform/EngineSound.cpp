@@ -4,12 +4,13 @@
 
 // lib를 사용하는법
 
-// Debug 일때는
-// #pragma comment(lib, "ThirdParty\\FMOD\\inc\\fmodL_vc.lib")
-#pragma comment(lib, "fmodL_vc.lib")
-
-// Release 일때는 
-// #pragma comment(lib, "fmod_vc.lib")
+#ifdef _DEBUG
+	// Debug 일때는
+	#pragma comment(lib, "fmodL_vc.lib")
+#else
+	// Release 일때는 
+	#pragma comment(lib, "fmod_vc.lib")
+#endif
 
 std::map<std::string, UEngineSound*> UEngineSound::Resources;
 float UEngineSound::GlobalVolume = 1.0f;
