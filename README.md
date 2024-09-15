@@ -9,7 +9,7 @@ git clone https://github.com/rla5233/WinAPI_Helltaker.git
 ```
 
 #### 솔루션 실행
-Helltaker.sln 실행해 주세요.   
+Helltaker.sln 을 실행해 주세요.   
 ![image](https://github.com/user-attachments/assets/1e8b449d-9aa1-4355-865c-584fedb19b23)
 
 #### 시작프로젝트 설정
