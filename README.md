@@ -23,8 +23,8 @@ Level4의 Helltaker 프로젝트를 시작 프로젝트로 설정해 주세요.
 
 ## 조작키
 이동 : W,A,S,D 또는 방향키   
+선택 : Spacebar 또는 Enter   
 재시작 : R   
-선택 : Spacebar 또는 Enter
 
 치트모드 : C   
 즉시사망 : K   
