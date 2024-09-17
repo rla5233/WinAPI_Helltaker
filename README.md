@@ -13,7 +13,7 @@ Helltaker.sln 을 실행해 주세요.
 ![image](https://github.com/user-attachments/assets/1e8b449d-9aa1-4355-865c-584fedb19b23)
 
 #### 시작프로젝트 설정
-Level4의 Helltaker 프로젝트를 시작 프로젝트로 설정해 주세요.   
+Level4 의 Helltaker 프로젝트를 시작 프로젝트로 설정해 주세요.   
 ![image](https://github.com/user-attachments/assets/6738df5c-748e-4793-aadf-20caefc37540)
 <br/><br/>
 
