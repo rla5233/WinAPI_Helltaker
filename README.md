@@ -1,4 +1,4 @@
-## HellTaker(헬테이커) 모작
+## HellTaker (헬테이커) 모작
 C++, WinAPI, VisualStudio2022 를 이용한 [HellTaker](https://store.steampowered.com/app/1289310/Helltaker/) 모작입니다.
 <br/><br/>
 
